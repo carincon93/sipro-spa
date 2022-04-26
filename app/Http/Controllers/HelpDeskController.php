@@ -26,35 +26,22 @@ class HelpDeskController extends Controller
     {
         $request->validate([
             'email'         => 'required|email',
-            'archivo'       => 'required|file|max:5000',
+            'archivo'       => 'required|url|max:191',
             'descripcion'   => 'required'
         ]);
 
-        $descripcion   = $request->get('descripcion');
-        $email  = $request->get('email');
-        $file   = $request->file('archivo');
-
-        $filename = $file->getClientOriginalName();
+        $descripcion    = $request->get('descripcion');
+        $email          = $request->get('email');
+        $file           = $request->get('archivo');
 
         $cardResponse = Http::post('https://api.trello.com/1/cards', [
             'key'       => 'eebbb4b8a1d8302e70dd02a4a7f9d81d',
             'token'     => '3b75378981e2a5dea40fbc2296ec9e99468efef3980e896e14b483f564ddefcb',
             'idList'    => '603a99d2b6ddfb7a2f801d03',
             'name'      => 'Reporte de fallo ' . date('Y-m-d H:i:s'),
-            'desc'      => $descripcion . " - Correo electrónico {$email}",
+            'desc'      => $descripcion . " - Correo electrónico {$email} - Archivo {$file}",
             'pos'       => 'top',
             'due'       => date("Y-m-d H:i:s", strtotime("+1 hours"))
-        ]);
-
-        $fileResponse = Http::withHeaders([
-            'Content-Length' => 1,
-        ])->attach(
-            'file',
-            fopen($file, 'r'),
-            $filename
-        )->post("https://api.trello.com/1/cards/{$cardResponse->json()['id']}/attachments", [
-            'key'       => 'eebbb4b8a1d8302e70dd02a4a7f9d81d',
-            'token'     => '3b75378981e2a5dea40fbc2296ec9e99468efef3980e896e14b483f564ddefcb',
         ]);
 
         Http::post('https://discord.com/api/webhooks/815068465903697940/mwMaxy7lHPvD3j7KPi0itjaLOrKEC8sbl9_6IISCIlCTwNhHpvQh7QHgYQ9k9JglxrKy', [
@@ -62,7 +49,7 @@ class HelpDeskController extends Controller
             'content'   => "¡Hola! Han reportado un nuevo requerimiento o fallo, por favor revísalo en el siguiente enlace {$cardResponse->json()['shortUrl']}",
         ]);
 
-        if ($cardResponse->ok() && $fileResponse->ok()) {
+        if ($cardResponse->ok()) {
             $message = 'El área de sistemas ha sido notificado del error. En breve recibirá una respuesta al correo.';
         }
 

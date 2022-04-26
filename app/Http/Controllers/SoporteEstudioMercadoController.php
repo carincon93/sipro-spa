@@ -80,14 +80,7 @@ class SoporteEstudioMercadoController extends Controller
         }
 
         $soporte = new SoporteEstudioMercado();
-
-        $nombreArchivo = $this->cleanFileName($proyecto->codigo, $request->empresa, $request->soporte);
-        $archivo = $request->soporte->storeAs(
-            'soportes',
-            $nombreArchivo
-        );
-
-        $soporte->soporte = $archivo;
+        $soporte->soporte = $request->soporte;
         $soporte->empresa = $request->empresa;
         $soporte->ProyectoPresupuesto()->associate($presupuesto->id);
 
@@ -143,16 +136,7 @@ class SoporteEstudioMercadoController extends Controller
     {
         $this->authorize('modificar-proyecto-autor', $proyecto);
 
-        if ($request->hasFile('soporte')) {
-            Storage::delete($soporte->soporte);
-            $nombreArchivo     = $this->cleanFileName($proyecto->codigo, $request->empresa, $request->soporte);
-            $archivo = $request->soporte->storeAs(
-                'soportes',
-                $nombreArchivo
-            );
-
-            $soporte->soporte = $archivo;
-        }
+        $soporte->soporte = $request->soporte;
         $soporte->empresa = $request->empresa;
         $soporte->save();
 

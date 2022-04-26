@@ -11,7 +11,6 @@
     import Select from '@/Shared/Select'
     import Input from '@/Shared/Input'
     import Label from '@/Shared/Label'
-    import File from '@/Shared/File'
     import InfoMessage from '@/Shared/InfoMessage'
 
     export let errors
@@ -41,7 +40,7 @@
             value: estadosProductos.find((item) => item.value == producto.estado)?.value,
             label: estadosProductos.find((item) => item.value == producto.estado)?.label,
         },
-        soporte: null,
+        soporte: producto.soporte,
         link: producto.link,
         lugar: producto.lugar,
         fecha_realizacion: producto.fecha_realizacion,
@@ -132,12 +131,12 @@
                     </div>
                 {/if}
                 <div class="mt-8">
-                    <Label class="mb-4" labelFor="soporte" value="Adjuntar soportes" />
-                    <File id="soporte" type="file" accept="application/pdf" maxSize="10000" class="mt-1" bind:value={$form.soporte} error={errors.soporte} />
+                    <Label class="mb-4" labelFor="soporte" value="Url del soporte" />
+                    <Input label="Url" id="soporte" type="url" class="mt-1" error={errors.soporte} placeholder="Url https://www.google.com.co" bind:value={$form.soporte} />
                     <InfoMessage>
                         Si son varios archivos PDF por favor unirlos en <a href="https://www.ilovepdf.com/" target="_blank">https://www.ilovepdf.com/</a>
                         <br />
-                        <a href={route('proyectos-idi-tecnoacademia.productos.download', [proyectoIdiTecnoacademia.id, producto.id])} class="underline font-black" target="_blank">De clic aquí para descargar los soportes</a>
+                        <a href={producto.soporte} class="underline font-black" target="_blank" download>De clic aquí para descargar los soportes</a>
                     </InfoMessage>
                 </div>
                 {#if $form.tipo_producto_idi_id?.value == 1 || $form.tipo_producto_idi_id?.value == 6 || $form.tipo_producto_idi_id?.value == 8 || $form.tipo_producto_idi_id?.value == 9}

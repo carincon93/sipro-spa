@@ -47,8 +47,8 @@ class ProyectoIdiTecnoacademiaRequest extends FormRequest
                 'poblacion_beneficiada'                     => ['required', 'string'],
                 'otra_poblacion_beneficiada'                => ['nullable', 'string'],
                 'nombre_centro_programa'                    => ['required', 'string', 'max:255'],
-                'pdf_proyecto'                              => ['nullable', 'max:10000000', 'file', 'mimetypes:application/pdf'],
-                'documentos_resultados'                     => ['nullable', 'max:10000000', 'file', 'mimetypes:application/pdf'],
+                'pdf_proyecto'                              => ['nullable', 'max:191', 'url'],
+                'documentos_resultados'                     => ['nullable', 'max:191', 'url'],
                 'municipios*'                               => ['required', 'integer', 'exists:municipios,id'],
                 'beneficiados'                              => ['required', 'array'],
             ];
@@ -76,8 +76,8 @@ class ProyectoIdiTecnoacademiaRequest extends FormRequest
                 'poblacion_beneficiada'                     => ['required', 'string'],
                 'otra_poblacion_beneficiada'                => ['nullable', 'string'],
                 'nombre_centro_programa'                    => ['required', 'string', 'max:255'],
-                'pdf_proyecto'                              => ['required', 'max:10000000', 'file', 'mimetypes:application/pdf'],
-                'documentos_resultados'                     => ['nullable', 'max:10000000', 'file', 'mimetypes:application/pdf'],
+                'pdf_proyecto'                              => ['required', 'max:191', 'url'],
+                'documentos_resultados'                     => ['nullable', 'max:191', 'url'],
                 'municipios*'                               => ['required', 'integer', 'exists:municipios,id'],
                 'beneficiados'                              => ['required', 'array'],
             ];

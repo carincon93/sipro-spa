@@ -8,7 +8,6 @@
     import LoadingButton from '@/Shared/LoadingButton'
     import Textarea from '@/Shared/Textarea'
     import Input from '@/Shared/Input'
-    import File from '@/Shared/File'
     import Dialog from '@/Shared/Dialog'
     import Button from '@/Shared/Button'
 
@@ -30,7 +29,7 @@
         _method: 'put',
         nombre: entidadAliada.nombre,
         nit: entidadAliada.nit,
-        documento: null,
+        documento: entidadAliada.documento,
     })
 
     function submit() {
@@ -83,8 +82,8 @@
                 </div>
 
                 <div class="mt-8">
-                    <Label class="mb-4" labelFor="documento" value="Adjuntar documento" />
-                    <File id="documento" type="file" accept="application/pdf" maxSize="10000" class="mt-1" bind:value={$form.documento} error={errors.documento} />
+                    <Label class="mb-4" labelFor="documento" value="Url del documento" />
+                    <Input label="Url" id="documento" type="url" class="mt-1" error={errors?.documento} placeholder="Url https://www.google.com.co" bind:value={$form.documento} />
                 </div>
 
                 {#if $form.progress}

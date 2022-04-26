@@ -46,10 +46,10 @@
         descripcion_recursos_especie: entidadAliada.entidad_aliada_idi?.descripcion_recursos_especie,
         recursos_dinero: entidadAliada.entidad_aliada_idi?.recursos_dinero,
         descripcion_recursos_dinero: entidadAliada.entidad_aliada_idi?.descripcion_recursos_dinero,
-        carta_intencion: null,
-        carta_propiedad_intelectual: null,
+        carta_intencion: entidadAliada.entidad_aliada_idi?.carta_intencion,
+        carta_propiedad_intelectual: entidadAliada.entidad_aliada_idi?.carta_propiedad_intelectual,
         actividad_id: actividadesRelacionadas,
-        soporte_convenio: null,
+        soporte_convenio: entidadAliada.entidad_aliada_ta?.soporte_convenio,
         fecha_inicio_convenio: entidadAliada.entidad_aliada_ta?.fecha_inicio_convenio,
         fecha_fin_convenio: entidadAliada.entidad_aliada_ta?.fecha_fin_convenio,
     }
@@ -214,33 +214,33 @@
                 {#if proyecto.codigo_linea_programatica == 70}
                     <tr class="hover:bg-gray-100 focus-within:bg-gray-100">
                         <td class="border-t px-6 pt-6 pb-4">
-                            <a target="_blank" class="text-indigo-400 underline inline-block mb-4 flex" download href={route('convocatorias.proyectos.entidades-aliadas.download', [convocatoria.id, proyecto.id, entidadAliada.id, 'soporte_convenio'])}>
+                            <a target="_blank" class="text-green-600 underline mb-4 flex" download href={entidadAliada.entidad_aliada_ta?.soporte_convenio}>
                                 <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 mr-2" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4" />
                                 </svg>
-                                Descargar soporte del convenio
+                                Archivo cargado correctamente. Descargar dando clic en este enlace.
                             </a>
                         </td>
                     </tr>
                 {:else}
                     <tr class="hover:bg-gray-100 focus-within:bg-gray-100">
                         <td class="border-t px-6 pt-6 pb-4">
-                            <a target="_blank" class="text-indigo-400 underline inline-block mb-4 flex" download href={route('convocatorias.proyectos.entidades-aliadas.download', [convocatoria.id, proyecto.id, entidadAliada.id, 'carta_intencion'])}>
+                            <a target="_blank" class="text-green-600 underline mb-4 flex" download href={entidadAliada.entidad_aliada_idi?.carta_intencion}>
                                 <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 mr-2" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4" />
                                 </svg>
-                                Descargar carta de intención
+                                Archivo cargado correctamente. Descargar dando clic en este enlace.
                             </a>
                         </td>
                     </tr>
 
                     <tr class="hover:bg-gray-100 focus-within:bg-gray-100">
                         <td class="border-t px-6 pt-6 pb-4">
-                            <a target="_blank" class="text-indigo-400 underline inline-block mb-4 flex" download href={route('convocatorias.proyectos.entidades-aliadas.download', [convocatoria.id, proyecto.id, entidadAliada.id, 'carta_propiedad_intelectual'])}>
+                            <a target="_blank" class="text-green-600 underline mb-4 flex" download href={entidadAliada.entidad_aliada_idi?.carta_propiedad_intelectual}>
                                 <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 mr-2" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4" />
                                 </svg>
-                                Descargar carta de propiedad intelectual
+                                Archivo cargado correctamente. Descargar dando clic en este enlace.
                             </a>
                         </td>
                     </tr>

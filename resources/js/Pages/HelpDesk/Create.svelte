@@ -5,7 +5,6 @@
     import { _ } from 'svelte-i18n'
 
     import Input from '@/Shared/Input'
-    import File from '@/Shared/File'
     import Textarea from '@/Shared/Textarea'
     import LoadingButton from '@/Shared/LoadingButton'
     import InfoMessage from '@/Shared/InfoMessage'
@@ -66,8 +65,8 @@
                     <Textarea label="Descripción detallada del problema" maxlength="40000" id="descripcion" error={errors.descripcion} bind:value={$form.descripcion} required />
                 </div>
                 <div class="mt-4">
-                    <p>Por favor cargue una captura de pantalla (si son varias capturas de pantalla adjunte un pdf). Se recomienda usar la herramienta de recortes de Windows y por favor asegúrese que las capturas sean de buena calidad.</p>
-                    <File type="file" accept="image/*,application/pdf" maxSize="5000" class="mt-1" bind:value={$form.archivo} error={errors?.archivo} required />
+                    <p>Url del archivo donde se observen capturas de pantallas con los errores (El archivo puede ser formato Pdf o Word). Se recomienda usar la herramienta de recortes de Windows y por favor asegúrese que las capturas sean de buena calidad.</p>
+                    <Input label="Url" id="archivo" type="url" class="mt-1" error={errors?.archivo} placeholder="Url https://www.google.com.co" bind:value={$form.archivo} />
                     {#if $form.progress}
                         <progress value={$form.progress.percentage} max="100" class="mt-4">
                             {$form.progress.percentage}%

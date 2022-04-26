@@ -240,7 +240,7 @@
         <div slot="content">
             <div>
                 <h1 class="text-center mt-4 mb-4">Por favor descargue el anexo y los soportes/cotizaciones</h1>
-                <a target="_blank" class="flex text-white underline block mb-4" download href={route('convocatorias.proyectos.presupuesto.download', [convocatoria.id, proyecto.id, proyectoPresupuesto.id])}>
+                <a target="_blank" class="flex text-white underline mb-4" download href={proyectoPresupuesto.formato_estudio_mercado}>
                     <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 mr-2" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4" />
                     </svg>
@@ -250,7 +250,7 @@
                 <div>
                     {#each proyectoPresupuesto.soportes_estudio_mercado as soporte}
                         {soporte.empresa}
-                        <a target="_blank" class="flex text-white underline block mb-4" download href={route('convocatorias.proyectos.presupuesto.soportes.download', [convocatoria.id, proyecto.id, proyectoPresupuesto.id, soporte.id])}>
+                        <a target="_blank" class="flex text-white underline mb-4" download href={soporte.soporte}>
                             <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 mr-2" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4" />
                             </svg>

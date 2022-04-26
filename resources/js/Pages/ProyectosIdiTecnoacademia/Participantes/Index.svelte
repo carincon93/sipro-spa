@@ -371,7 +371,7 @@
             </form>
         </div>
 
-        <div slot="actions" class="block flex w-full">
+        <div slot="actions" class="flex w-full">
             <Button on:click={closeDialog} type="button" variant={null}>
                 {$_('Cancel')}
             </Button>
@@ -456,7 +456,7 @@
             </form>
         </div>
 
-        <div slot="actions" class="block flex w-full">
+        <div slot="actions" class="flex w-full">
             <Button on:click={closeDialog} type="button" variant={null}>
                 {$_('Cancel')}
             </Button>

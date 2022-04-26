@@ -66,19 +66,19 @@
         </InfoMessage>
         <div class="grid grid-cols-3 gap-10">
             {#if isSuperAdmin}
-                <a use:inertia class="bg-white overflow-hidden shadow-sm sm:rounded-lg block px-6 py-2 hover:bg-indigo-500 hover:text-white h-52 flex justify-around items-center flex-col" href={route('primer-grupo-presupuestal.index')}>Primer grupo presupuestal</a>
+                <a use:inertia class="bg-white overflow-hidden shadow-sm sm:rounded-lg px-6 py-2 hover:bg-indigo-500 hover:text-white h-52 flex justify-around items-center flex-col" href={route('primer-grupo-presupuestal.index')}>Primer grupo presupuestal</a>
             {/if}
             {#if isSuperAdmin}
-                <a use:inertia class="bg-white overflow-hidden shadow-sm sm:rounded-lg block px-6 py-2 hover:bg-indigo-500 hover:text-white h-52 flex justify-around items-center flex-col" href={route('segundo-grupo-presupuestal.index')}>Segundo grupo presupuestal</a>
+                <a use:inertia class="bg-white overflow-hidden shadow-sm sm:rounded-lg px-6 py-2 hover:bg-indigo-500 hover:text-white h-52 flex justify-around items-center flex-col" href={route('segundo-grupo-presupuestal.index')}>Segundo grupo presupuestal</a>
             {/if}
             {#if isSuperAdmin}
-                <a use:inertia class="bg-white overflow-hidden shadow-sm sm:rounded-lg block px-6 py-2 hover:bg-indigo-500 hover:text-white h-52 flex justify-around items-center flex-col" href={route('tercer-grupo-presupuestal.index')}>Tercer grupo presupuestal</a>
+                <a use:inertia class="bg-white overflow-hidden shadow-sm sm:rounded-lg px-6 py-2 hover:bg-indigo-500 hover:text-white h-52 flex justify-around items-center flex-col" href={route('tercer-grupo-presupuestal.index')}>Tercer grupo presupuestal</a>
             {/if}
             {#if isSuperAdmin}
-                <a use:inertia class="bg-white overflow-hidden shadow-sm sm:rounded-lg block px-6 py-2 hover:bg-indigo-500 hover:text-white h-52 flex justify-around items-center flex-col" href={route('usos-presupuestales.index')}>Usos presupuestales</a>
+                <a use:inertia class="bg-white overflow-hidden shadow-sm sm:rounded-lg px-6 py-2 hover:bg-indigo-500 hover:text-white h-52 flex justify-around items-center flex-col" href={route('usos-presupuestales.index')}>Usos presupuestales</a>
             {/if}
             {#if isSuperAdmin}
-                <a use:inertia class="bg-white overflow-hidden shadow-sm sm:rounded-lg block px-6 py-2 hover:bg-indigo-500 hover:text-white h-52 flex justify-around items-center flex-col" href={route('presupuesto-sennova.index')}>Rubros presupuestales SENNOVA</a>
+                <a use:inertia class="bg-white overflow-hidden shadow-sm sm:rounded-lg px-6 py-2 hover:bg-indigo-500 hover:text-white h-52 flex justify-around items-center flex-col" href={route('presupuesto-sennova.index')}>Rubros presupuestales SENNOVA</a>
             {/if}
         </div>
     </div>

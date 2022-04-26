@@ -16,7 +16,6 @@
     import FormField from '@smui/form-field'
     import SelectMulti from '@/Shared/SelectMulti'
     import Tags from '@/Shared/Tags'
-    import File from '@/Shared/File'
     import Dialog from '@/Shared/Dialog'
     import Button from '@/Shared/Button'
     import { onMount } from 'svelte'
@@ -120,7 +119,7 @@
         cursos_complementarios: ambienteModernizacion.cursos_complementarios,
         coordenada_latitud_ambiente: ambienteModernizacion.coordenada_latitud_ambiente,
         coordenada_longitud_ambiente: ambienteModernizacion.coordenada_longitud_ambiente,
-        soporte_fotos_ambiente: null,
+        soporte_fotos_ambiente: ambienteModernizacion.soporte_fotos_ambiente,
         impacto_procesos_formacion: ambienteModernizacion.impacto_procesos_formacion,
         pertinencia_sector_productivo: ambienteModernizacion.pertinencia_sector_productivo,
         palabras_clave_ambiente: ambienteModernizacion.palabras_clave_ambiente,
@@ -571,15 +570,15 @@
             </div>
 
             <div class="mt-20">
-                <Label class="mb-4" labelFor="soporte_fotos_ambiente" value="Adjunte un archivo formato (.pdf) con fotos del ambiente modernizado con el proyecto Sennova" />
-                <a target="_blank" class="text-indigo-400 underline inline-block mb-4 font-black flex" download href={route('ambientes-modernizacion.download', [ambienteModernizacion])}>
+                <Label class="mb-4" labelFor="soporte_fotos_ambiente" value="Url del archivo formato (.pdf) con fotos del ambiente modernizado con el proyecto Sennova" />
+                <a target="_blank" class="text-green-600 underline mb-4 font-black flex" download href={ambienteModernizacion.soporte_fotos_ambiente}>
                     <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 mr-2" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4" />
                     </svg>
-                    Descargar la versión actual del archivo
-                </a>
+                    Archivo cargado correctamente. Descargar dando clic en este enlace.
 
-                <File id="soporte_fotos_ambiente" type="file" accept="application/pdf" maxSize="10000" class="mt-10" bind:value={$form.soporte_fotos_ambiente} error={errors.soporte_fotos_ambiente} />
+                    <Input label="Url" id="soporte_fotos_ambiente" type="url" class="mt-1" error={errors.soporte_fotos_ambiente} placeholder="Url https://www.google.com.co" bind:value={$form.soporte_fotos_ambiente} required />
+                </a>
             </div>
         </fieldset>
         <div class="px-8 py-4 bg-gray-100 border-t border-gray-200 flex items-center sticky bottom-0">

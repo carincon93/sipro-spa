@@ -11,7 +11,6 @@
     import Textarea from '@/Shared/Textarea'
     import InputError from '@/Shared/InputError'
     import Select from '@/Shared/Select'
-    import File from '@/Shared/File'
     import InfoMessage from '@/Shared/InfoMessage'
 
     export let convocatoria
@@ -135,8 +134,8 @@
                         <InfoMessage message="Por favor indique el valor total que arrojó el Estudio de mercado - Convocatoria Sennova 2021" />
 
                         <div class="mt-4">
-                            <Label class="mb-4" labelFor="formato_estudio_mercado" value="Estudio de mercado - Convocatoria Sennova 2021" />
-                            <File id="formato_estudio_mercado" type="file" accept="application/pdf,application/vnd.openxmlformats-officedocument.spreadsheetml.sheet,application/vnd.ms-excel" maxSize="15000" class="mt-1" bind:value={$form.formato_estudio_mercado} error={errors.formato_estudio_mercado} />
+                            <Label class="mb-4" labelFor="formato_estudio_mercado" value="Url del estudio de mercado - Convocatoria Sennova 2021" />
+                            <Input label="Url" id="formato_estudio_mercado" type="url" class="mt-1" error={errors.formato_estudio_mercado} placeholder="Url https://www.google.com.co" bind:value={$form.formato_estudio_mercado} />
                         </div>
                     {/if}
 

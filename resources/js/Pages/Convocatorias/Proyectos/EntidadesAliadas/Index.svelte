@@ -132,6 +132,10 @@
                                 <Item on:SMUI:action={() => Inertia.visit(route('convocatorias.proyectos.entidades-aliadas.edit', [convocatoria.id, proyecto.id, entidadAliada.id]))}>
                                     <Text>Ver detalles</Text>
                                 </Item>
+
+                                <Item on:SMUI:action={() => Inertia.visit(route('convocatorias.proyectos.entidades-aliadas.miembros-entidad-aliada.index', [convocatoria.id, proyecto.id, entidadAliada.id]))}>
+                                    <Text>Miembros</Text>
+                                </Item>
                             {:else}
                                 <Item>
                                     <Text>No tiene permisos</Text>

@@ -4,11 +4,8 @@
     import { route, checkRole, checkPermission } from '@/Utils'
     import { _ } from 'svelte-i18n'
 
-    import Label from '@/Shared/Label'
     import LoadingButton from '@/Shared/LoadingButton'
     import Textarea from '@/Shared/Textarea'
-    import Input from '@/Shared/Input'
-    import File from '@/Shared/File'
     import Dialog from '@/Shared/Dialog'
     import Button from '@/Shared/Button'
 

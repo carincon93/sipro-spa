@@ -84,22 +84,8 @@ class ProyectoIdiTecnoacademiaController extends Controller
         $proyectoIdiTecnoacademia->poblacion_beneficiada                = $request->poblacion_beneficiada;
         $proyectoIdiTecnoacademia->otra_poblacion_beneficiada           = $request->otra_poblacion_beneficiada;
         $proyectoIdiTecnoacademia->nombre_centro_programa               = $request->nombre_centro_programa;
-
-        $nombrePdf = $this->cleanFileName($request->titulo, $request->pdf_proyecto);
-        $rutaPdf   = $request->pdf_proyecto->storeAs(
-            'pdf-proyecto-idi-tecnoacademia',
-            $nombrePdf
-        );
-        $proyectoIdiTecnoacademia->pdf_proyecto = $rutaPdf;
-
-        if ($request->hasFile('documentos_resultados')) {
-            $nombreDocumento = $this->cleanFileName($request->titulo, $request->documentos_resultados);
-            $rutaDocumento   = $request->documentos_resultados->storeAs(
-                'documentos-resultados-proyecto-idi-tecnoacademia',
-                $nombreDocumento
-            );
-            $proyectoIdiTecnoacademia->documentos_resultados = $rutaDocumento;
-        }
+        $proyectoIdiTecnoacademia->pdf_proyecto                         = $request->pdf_proyecto;
+        $proyectoIdiTecnoacademia->documentos_resultados                = $request->documentos_resultados;
 
         $proyectoIdiTecnoacademia->tecnoacademia()->associate($request->tecnoacademia_id);
         $proyectoIdiTecnoacademia->semilleroInvestigacion()->associate($request->semillero_investigacion_id);
@@ -182,24 +168,8 @@ class ProyectoIdiTecnoacademiaController extends Controller
         $proyectoIdiTecnoacademia->poblacion_beneficiada                = $request->poblacion_beneficiada;
         $proyectoIdiTecnoacademia->otra_poblacion_beneficiada           = $request->otra_poblacion_beneficiada;
         $proyectoIdiTecnoacademia->nombre_centro_programa               = $request->nombre_centro_programa;
-
-        if ($request->hasFile('pdf_proyecto')) {
-            $nombrePdf = $this->cleanFileName($request->titulo, $request->pdf_proyecto);
-            $rutaPdf   = $request->pdf_proyecto->storeAs(
-                'pdf-proyecto-idi-tecnoacademia',
-                $nombrePdf
-            );
-            $proyectoIdiTecnoacademia->pdf_proyecto = $rutaPdf;
-        }
-
-        if ($request->hasFile('documentos_resultados')) {
-            $nombreDocumento = $this->cleanFileName($request->titulo, $request->documentos_resultados);
-            $rutaDocumento   = $request->documentos_resultados->storeAs(
-                'documentos-resultados-proyecto-idi-tecnoacademia',
-                $nombreDocumento
-            );
-            $proyectoIdiTecnoacademia->documentos_resultados = $rutaDocumento;
-        }
+        $proyectoIdiTecnoacademia->pdf_proyecto                         = $request->pdf_proyecto;
+        $proyectoIdiTecnoacademia->documentos_resultados                = $request->documentos_resultados;
 
         $proyectoIdiTecnoacademia->tecnoacademia()->associate($request->tecnoacademia_id);
         $proyectoIdiTecnoacademia->semilleroInvestigacion()->associate($request->semillero_investigacion_id);
@@ -416,14 +386,7 @@ class ProyectoIdiTecnoacademiaController extends Controller
 
         $producto->descripcion          = $request->descripcion;
         $producto->estado               = $request->estado;
-
-        $nombreSoporte = $this->cleanFileName($request->descripcion, $request->soporte);
-        $rutaSoporte   = $request->soporte->storeAs(
-            'soportes-productos-proyecto-idi-tecnoacademia',
-            $nombreSoporte
-        );
-        $producto->soporte = $rutaSoporte;
-
+        $producto->soporte              = $request->soporte;
         $producto->link                 = $request->link;
         $producto->lugar                = $request->lugar;
         $producto->fecha_realizacion    = $request->fecha_realizacion;
@@ -455,16 +418,7 @@ class ProyectoIdiTecnoacademiaController extends Controller
 
         $producto->descripcion          = $request->descripcion;
         $producto->estado               = $request->estado;
-
-        if ($request->hasFile('soporte')) {
-            Storage::delete($request->soporte);
-            $nombreSoporte = $this->cleanFileName($request->descripcion, $request->soporte);
-            $rutaSoporte   = $request->soporte->storeAs(
-                'soportes-productos-proyecto-idi-tecnoacademia',
-                $nombreSoporte
-            );
-            $producto->soporte = $rutaSoporte;
-        }
+        $producto->soporte              = $request->soporte;
 
         $producto->link                 = $request->link;
         $producto->lugar                = $request->lugar;

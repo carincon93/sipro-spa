@@ -8,7 +8,6 @@
     import Label from '@/Shared/Label'
     import Button from '@/Shared/Button'
     import LoadingButton from '@/Shared/LoadingButton'
-    import File from '@/Shared/File'
     import Dialog from '@/Shared/Dialog'
     import PercentageProgress from '@/Shared/PercentageProgress'
 
@@ -30,7 +29,7 @@
     let sending = false
     let form = useForm({
         _method: 'put',
-        soporte: '',
+        soporte: soporteEstudioMercado.soporte,
         empresa: soporteEstudioMercado.empresa,
     })
 
@@ -87,8 +86,8 @@
                 </div>
 
                 <div class="mt-4">
-                    <Label class="mb-4" labelFor="soporte" value="Soporte/Cotización" />
-                    <File id="soporte" type="file" accept="application/pdf,application/vnd.openxmlformats-officedocument.spreadsheetml.sheet,application/vnd.ms-excel" maxSize="10000" class="mt-1" bind:value={$form.soporte} error={errors.soporte} />
+                    <Label class="mb-4" labelFor="soporte" value="Url del soporte/cotización" />
+                    <Input label="Url" id="soporte" type="url" class="mt-1" error={errors.soporte} placeholder="Url https://www.google.com.co" bind:value={$form.soporte} />
                 </div>
             </fieldset>
             <div class="px-8 py-4 bg-gray-100 border-t border-gray-200 flex items-center sticky bottom-0">

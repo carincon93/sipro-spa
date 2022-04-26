@@ -389,7 +389,7 @@
                             </td>
                             <td class="border-t">
                                 <p class="px-6 py-4 focus:text-indigo-500">
-                                    <a target="_blank" class="text-indigo-400 underline inline-block mt-4 mb-4 flex" download href={route('proyectos-capacidad-instalada.entidades-aliadas.download', [proyectoCapacidadInstalada.id, entidadAliada.id])}>
+                                    <a target="_blank" class="text-indigo-400 underline mt-4 mb-4 flex" download href={entidadAliada.documento}>
                                         <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 mr-2" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                                             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4" />
                                         </svg>
@@ -453,7 +453,7 @@
             </form>
         </div>
 
-        <div slot="actions" class="block flex w-full">
+        <div slot="actions" class="flex w-full">
             <Button on:click={closeDialog} type="button" variant={null}>
                 {$_('Cancel')}
             </Button>
@@ -538,7 +538,7 @@
             </form>
         </div>
 
-        <div slot="actions" class="block flex w-full">
+        <div slot="actions" class="flex w-full">
             <Button on:click={closeDialog} type="button" variant={null}>
                 {$_('Cancel')}
             </Button>
