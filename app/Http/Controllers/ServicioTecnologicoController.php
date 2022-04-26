@@ -258,7 +258,7 @@ class ServicioTecnologicoController extends Controller
         $request->validate([
             'especificaciones_area'     => 'required|string|max:40000',
             'infraestructura_adecuada'  => 'required|boolean',
-            'video'                     => 'nullable|max:255|url',
+            'video'                     => 'nullable|string|url',
         ]);
 
         $servicioTecnologico->update([

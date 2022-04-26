@@ -108,10 +108,10 @@ class EntidadAliadaController extends Controller
                 'descripcion_convenio'                      => 'nullable|string',
                 'grupo_investigacion'                       => 'nullable|max:191',
                 'codigo_gruplac'                            => 'nullable|max:191',
-                'enlace_gruplac'                            => 'nullable|url|max:191',
+                'enlace_gruplac'                            => 'nullable|url|string',
                 'actividades_transferencia_conocimiento'    => 'required|max:10000',
-                'carta_intencion'                           => 'required_if:tipo_convocatoria,1|nullable|max:191|url',
-                'carta_propiedad_intelectual'               => 'required_if:tipo_convocatoria,1|nullable|max:191|url',
+                'carta_intencion'                           => 'required_if:tipo_convocatoria,1|nullable|string|url',
+                'carta_propiedad_intelectual'               => 'required_if:tipo_convocatoria,1|nullable|string|url',
                 'recursos_especie'                          => 'required|numeric',
                 'descripcion_recursos_especie'              => 'required|string',
                 'recursos_dinero'                           => 'required|numeric',
@@ -139,7 +139,7 @@ class EntidadAliadaController extends Controller
             return redirect()->route('convocatorias.proyectos.entidades-aliadas.miembros-entidad-aliada.index', [$convocatoria, $proyecto, $entidadAliada])->with('success', 'El recurso se ha creado correctamente.');
         } elseif ($proyecto->ta()->exists()) {
             $request->validate([
-                'soporte_convenio'              => 'required|max:191|url',
+                'soporte_convenio'              => 'required|string|url',
                 'fecha_inicio_convenio'         => 'required|date|date_format:Y-m-d|before:fecha_fin_convenio',
                 'fecha_fin_convenio'            => 'required|date|date_format:Y-m-d|after:fecha_inicio_convenio',
             ]);
@@ -224,10 +224,10 @@ class EntidadAliadaController extends Controller
                 'descripcion_convenio'                      => 'nullable|string',
                 'grupo_investigacion'                       => 'nullable|max:191',
                 'codigo_gruplac'                            => 'nullable|max:191',
-                'enlace_gruplac'                            => 'nullable|url|max:191',
+                'enlace_gruplac'                            => 'nullable|url|string',
                 'actividades_transferencia_conocimiento'    => 'required|max:10000',
-                'carta_intencion'                           => 'nullable|max:191|url',
-                'carta_propiedad_intelectual'               => 'nullable|max:191|url',
+                'carta_intencion'                           => 'nullable|string|url',
+                'carta_propiedad_intelectual'               => 'nullable|string|url',
                 'recursos_especie'                          => 'required|numeric',
                 'descripcion_recursos_especie'              => 'required|string',
                 'recursos_dinero'                           => 'required|numeric',
@@ -261,10 +261,10 @@ class EntidadAliadaController extends Controller
                 'descripcion_convenio'                      => 'nullable|string',
                 'grupo_investigacion'                       => 'nullable|max:191',
                 'codigo_gruplac'                            => 'nullable|max:191',
-                'enlace_gruplac'                            => 'nullable|url|max:191',
+                'enlace_gruplac'                            => 'nullable|url|string',
                 'actividades_transferencia_conocimiento'    => 'required|max:10000',
-                'carta_intencion'                           => 'required|max:191|url',
-                'carta_propiedad_intelectual'               => 'required|max:191|url',
+                'carta_intencion'                           => 'required|string|url',
+                'carta_propiedad_intelectual'               => 'required|string|url',
                 'recursos_especie'                          => 'required|numeric',
                 'descripcion_recursos_especie'              => 'required|string',
                 'recursos_dinero'                           => 'required|numeric',
@@ -290,7 +290,7 @@ class EntidadAliadaController extends Controller
             $entidadAliada->entidadAliadaIdi()->save($entidadAliadaIdi);
         } elseif ($proyecto->ta()->exists() || $proyecto->tp()->exists()) {
             $request->validate([
-                'soporte_convenio'              => 'nullable|max:191|url',
+                'soporte_convenio'              => 'nullable|string|url',
                 'fecha_inicio_convenio'         => 'required|date|date_format:Y-m-d|before:fecha_fin_convenio',
                 'fecha_fin_convenio'            => 'required|date|date_format:Y-m-d|after:fecha_inicio_convenio',
             ]);
