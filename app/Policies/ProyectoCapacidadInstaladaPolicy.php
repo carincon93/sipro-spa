@@ -38,7 +38,7 @@ class ProyectoCapacidadInstaladaPolicy
             return true;
         }
 
-        if ($proyectoCapacidadInstalada->integrantes()->where('proyecto_capacidad_instalada_integrante.autor_principal', $user->id,)->exists()) {
+        if ($proyectoCapacidadInstalada->integrantes()->where('proyecto_capacidad_instalada_integrante.user_id', $user->id)->where('proyecto_capacidad_instalada_integrante.autor_principal', true)->exists()) {
             return true;
         }
 
@@ -73,7 +73,7 @@ class ProyectoCapacidadInstaladaPolicy
             return true;
         }
 
-        if ($proyectoCapacidadInstalada->integrantes()->where('proyecto_capacidad_instalada_integrante.autor_principal', $user->id,)->exists()) {
+        if ($proyectoCapacidadInstalada->integrantes()->where('proyecto_capacidad_instalada_integrante.user_id', $user->id)->where('proyecto_capacidad_instalada_integrante.autor_principal', true)->exists()) {
             return true;
         }
 
@@ -93,7 +93,7 @@ class ProyectoCapacidadInstaladaPolicy
             return true;
         }
 
-        if ($proyectoCapacidadInstalada->integrantes()->where('proyecto_capacidad_instalada_integrante.autor_principal', $user->id,)->exists()) {
+        if ($proyectoCapacidadInstalada->integrantes()->where('proyecto_capacidad_instalada_integrante.user_id', $user->id)->where('proyecto_capacidad_instalada_integrante.autor_principal', true)->exists()) {
             return true;
         }
 
