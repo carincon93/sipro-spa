@@ -86,13 +86,13 @@ class AuthServiceProvider extends ServiceProvider
             return false;
         });
 
-        Gate::define('modificar-proyecto-capacidad-instalada', function (User $user, ProyectoCapacidadInstalada $proyectoCapacidadInstalada) {
-            if ($proyectoCapacidadInstalada->integrantes()->where('user_id', $user->id)->exists()) {
-                return true;
-            }
+        // Gate::define('modificar-proyecto-capacidad-instalada', function (User $user, ProyectoCapacidadInstalada $proyectoCapacidadInstalada) {
+        //     if ($proyectoCapacidadInstalada->integrantes()->where('user_id', $user->id)->exists()) {
+        //         return true;
+        //     }
 
-            return false;
-        });
+        //     return false;
+        // });
 
         Gate::define('crear-proyecto-idi-tecnoacademia', function (User $user) {
             if ($user->hasRole([5, 12, 22])) {

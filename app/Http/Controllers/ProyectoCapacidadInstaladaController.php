@@ -43,6 +43,8 @@ class ProyectoCapacidadInstaladaController extends Controller
      */
     public function create()
     {
+        $this->authorize('create', [ProyectoCapacidadInstalada::class]);
+
         $centrosFormacion = CentroFormacion::selectRaw('centros_formacion.id as value, concat(centros_formacion.nombre, chr(10), \'∙ Código: \', centros_formacion.codigo) as label')->orderBy('centros_formacion.nombre', 'ASC')->get();
 
         return Inertia::render('ProyectosCapacidadInstalada/Create', [
@@ -60,6 +62,8 @@ class ProyectoCapacidadInstaladaController extends Controller
      */
     public function store(ProyectoCapacidadInstaladaRequest $request)
     {
+        $this->authorize('create', [ProyectoCapacidadInstalada::class]);
+
         $proyectoCapacidadInstalada = new ProyectoCapacidadInstalada();
 
         $proyectoCapacidadInstalada->titulo             = $request->titulo;
@@ -88,7 +92,7 @@ class ProyectoCapacidadInstaladaController extends Controller
      */
     public function show(ProyectoCapacidadInstalada $proyectoCapacidadInstalada)
     {
-        $this->authorize('modificar-proyecto-capacidad-instalada', [$proyectoCapacidadInstalada]);
+        $this->authorize('update', [ProyectoCapacidadInstalada::class, $proyectoCapacidadInstalada]);
     }
 
     /**
@@ -99,7 +103,7 @@ class ProyectoCapacidadInstaladaController extends Controller
      */
     public function edit(ProyectoCapacidadInstalada $proyectoCapacidadInstalada)
     {
-        $this->authorize('modificar-proyecto-capacidad-instalada', [$proyectoCapacidadInstalada]);
+        $this->authorize('update', [ProyectoCapacidadInstalada::class, $proyectoCapacidadInstalada]);
 
         $centrosFormacion = CentroFormacion::selectRaw('centros_formacion.id as value, concat(centros_formacion.nombre, chr(10), \'∙ Código: \', centros_formacion.codigo) as label')->orderBy('centros_formacion.nombre', 'ASC')->get();
         $proyectoCapacidadInstalada->semilleroInvestigacion;
@@ -128,7 +132,7 @@ class ProyectoCapacidadInstaladaController extends Controller
      */
     public function update(ProyectoCapacidadInstaladaRequest $request, ProyectoCapacidadInstalada $proyectoCapacidadInstalada)
     {
-        $this->authorize('modificar-proyecto-capacidad-instalada', [$proyectoCapacidadInstalada]);
+        $this->authorize('update', [ProyectoCapacidadInstalada::class, $proyectoCapacidadInstalada]);
 
         $proyectoCapacidadInstalada->titulo             = $request->titulo;
         $proyectoCapacidadInstalada->fecha_inicio       = $request->fecha_inicio;
@@ -169,7 +173,7 @@ class ProyectoCapacidadInstaladaController extends Controller
      */
     public function destroy(ProyectoCapacidadInstalada $proyectoCapacidadInstalada)
     {
-        $this->authorize('modificar-proyecto-capacidad-instalada', [$proyectoCapacidadInstalada]);
+        $this->authorize('delete', [ProyectoCapacidadInstalada::class, $proyectoCapacidadInstalada]);
 
         $proyectoCapacidadInstalada->delete();
 
@@ -184,7 +188,7 @@ class ProyectoCapacidadInstaladaController extends Controller
      */
     public function indexIntegrantes(ProyectoCapacidadInstalada $proyectoCapacidadInstalada)
     {
-        $this->authorize('modificar-proyecto-capacidad-instalada', [$proyectoCapacidadInstalada]);
+        $this->authorize('update', [ProyectoCapacidadInstalada::class, $proyectoCapacidadInstalada]);
 
         $proyectoCapacidadInstalada->integrantes;
         $proyectoCapacidadInstalada->entidadesAliadas;
@@ -233,7 +237,7 @@ class ProyectoCapacidadInstaladaController extends Controller
      */
     public function linkIntegrante(Request $request, ProyectoCapacidadInstalada $proyectoCapacidadInstalada)
     {
-        $this->authorize('modificar-proyecto-capacidad-instalada', [$proyectoCapacidadInstalada]);
+        $this->authorize('update', [ProyectoCapacidadInstalada::class, $proyectoCapacidadInstalada]);
 
         if ($proyectoCapacidadInstalada->integrantes()->where('proyecto_capacidad_instalada_integrante.id', $request->user_id)->exists()) {
             return back()->with('error', 'El recurso ya está vinculado.');
@@ -252,7 +256,7 @@ class ProyectoCapacidadInstaladaController extends Controller
      */
     public function unlinkIntegrante(Request $request,  ProyectoCapacidadInstalada $proyectoCapacidadInstalada)
     {
-        $this->authorize('modificar-proyecto-capacidad-instalada', [$proyectoCapacidadInstalada]);
+        $this->authorize('update', [ProyectoCapacidadInstalada::class, $proyectoCapacidadInstalada]);
 
         $request->validate(['user_id' => 'required']);
 
@@ -265,7 +269,7 @@ class ProyectoCapacidadInstaladaController extends Controller
 
     public function updateParticipante(Request $request, ProyectoCapacidadInstalada $proyectoCapacidadInstalada)
     {
-        $this->authorize('modificar-proyecto-capacidad-instalada', [$proyectoCapacidadInstalada]);
+        $this->authorize('update', [ProyectoCapacidadInstalada::class, $proyectoCapacidadInstalada]);
 
         if ($proyectoCapacidadInstalada->integrantes()->where('users.id', $request->user_id)->exists()) {
             $proyectoCapacidadInstalada->integrantes()->updateExistingPivot($request->user_id, ['rol_sennova' => is_array($request->rol_sennova) ? $request->rol_sennova['value'] : $request->rol_sennova, 'cantidad_meses' => $request->cantidad_meses, 'cantidad_horas' => $request->cantidad_horas]);
@@ -283,7 +287,7 @@ class ProyectoCapacidadInstaladaController extends Controller
      */
     public function registerIntegrante(NuevoProponenteRequest $request, ProyectoCapacidadInstalada $proyectoCapacidadInstalada)
     {
-        $this->authorize('modificar-proyecto-capacidad-instalada', [$proyectoCapacidadInstalada]);
+        $this->authorize('update', [ProyectoCapacidadInstalada::class, $proyectoCapacidadInstalada]);
 
         $user = new User();
 
@@ -313,7 +317,7 @@ class ProyectoCapacidadInstaladaController extends Controller
 
     public function createEntidadAliada(ProyectoCapacidadInstalada $proyectoCapacidadInstalada)
     {
-        $this->authorize('modificar-proyecto-capacidad-instalada', [$proyectoCapacidadInstalada]);
+        $this->authorize('update', [ProyectoCapacidadInstalada::class, $proyectoCapacidadInstalada]);
 
         return Inertia::render('ProyectosCapacidadInstalada/Integrantes/EntidadesAliadas/Create', [
             'proyectoCapacidadInstalada' => $proyectoCapacidadInstalada,
@@ -322,7 +326,7 @@ class ProyectoCapacidadInstaladaController extends Controller
 
     public function storeEntidadAliada(ProyectoCapacidadInstaladaEntidadAliadaRequest $request, ProyectoCapacidadInstalada $proyectoCapacidadInstalada)
     {
-        $this->authorize('modificar-proyecto-capacidad-instalada', [$proyectoCapacidadInstalada]);
+        $this->authorize('update', [ProyectoCapacidadInstalada::class, $proyectoCapacidadInstalada]);
 
         $entidadAliada = new ProyectoCapacidadInstaladaEntidadAliada();
         $entidadAliada->nombre      = $request->nombre;
@@ -337,7 +341,7 @@ class ProyectoCapacidadInstaladaController extends Controller
 
     public function editEntidadAliada(ProyectoCapacidadInstalada $proyectoCapacidadInstalada, ProyectoCapacidadInstaladaEntidadAliada $entidadAliada)
     {
-        $this->authorize('modificar-proyecto-capacidad-instalada', [$proyectoCapacidadInstalada]);
+        $this->authorize('update', [ProyectoCapacidadInstalada::class, $proyectoCapacidadInstalada]);
 
         return Inertia::render('ProyectosCapacidadInstalada/Integrantes/EntidadesAliadas/Edit', [
             'proyectoCapacidadInstalada' => $proyectoCapacidadInstalada,
@@ -347,7 +351,7 @@ class ProyectoCapacidadInstaladaController extends Controller
 
     public function updateEntidadAliada(ProyectoCapacidadInstaladaEntidadAliadaRequest $request, ProyectoCapacidadInstalada $proyectoCapacidadInstalada, ProyectoCapacidadInstaladaEntidadAliada $entidadAliada)
     {
-        $this->authorize('modificar-proyecto-capacidad-instalada', [$proyectoCapacidadInstalada]);
+        $this->authorize('update', [ProyectoCapacidadInstalada::class, $proyectoCapacidadInstalada]);
 
         $entidadAliada->nombre      = $request->nombre;
         $entidadAliada->nit         = $request->nit;
@@ -360,7 +364,7 @@ class ProyectoCapacidadInstaladaController extends Controller
 
     public function destroyEntidadAliada(ProyectoCapacidadInstalada $proyectoCapacidadInstalada, ProyectoCapacidadInstaladaEntidadAliada $entidadAliada)
     {
-        $this->authorize('modificar-proyecto-capacidad-instalada', [$proyectoCapacidadInstalada]);
+        $this->authorize('update', [ProyectoCapacidadInstalada::class, $proyectoCapacidadInstalada]);
 
         $entidadAliada->delete();
 
@@ -369,7 +373,7 @@ class ProyectoCapacidadInstaladaController extends Controller
 
     public function download(ProyectoCapacidadInstalada $proyectoCapacidadInstalada, ProyectoCapacidadInstaladaEntidadAliada $entidadAliada)
     {
-        $this->authorize('modificar-proyecto-capacidad-instalada', [$proyectoCapacidadInstalada]);
+        $this->authorize('update', [ProyectoCapacidadInstalada::class, $proyectoCapacidadInstalada]);
 
         return response()->download(storage_path("app/$entidadAliada->documento"));
     }
@@ -382,7 +386,7 @@ class ProyectoCapacidadInstaladaController extends Controller
      */
     public function indexObjetivosEspecificos(ProyectoCapacidadInstalada $proyectoCapacidadInstalada)
     {
-        $this->authorize('modificar-proyecto-capacidad-instalada', [$proyectoCapacidadInstalada]);
+        $this->authorize('update', [ProyectoCapacidadInstalada::class, $proyectoCapacidadInstalada]);
 
         return Inertia::render('ProyectosCapacidadInstalada/ObjetivosEspecificos/Index', [
             'proyectoCapacidadInstalada'    => $proyectoCapacidadInstalada,
@@ -392,7 +396,7 @@ class ProyectoCapacidadInstaladaController extends Controller
 
     public function createObjetivoEspecifico(ProyectoCapacidadInstalada $proyectoCapacidadInstalada)
     {
-        $this->authorize('modificar-proyecto-capacidad-instalada', [$proyectoCapacidadInstalada]);
+        $this->authorize('update', [ProyectoCapacidadInstalada::class, $proyectoCapacidadInstalada]);
 
         return Inertia::render('ProyectosCapacidadInstalada/ObjetivosEspecificos/Create', [
             'proyectoCapacidadInstalada' => $proyectoCapacidadInstalada,
@@ -401,7 +405,7 @@ class ProyectoCapacidadInstaladaController extends Controller
 
     public function storeObjetivoEspecifico(ProyectoCapacidadInstaladaObjetivoEspecificoRequest $request, ProyectoCapacidadInstalada $proyectoCapacidadInstalada)
     {
-        $this->authorize('modificar-proyecto-capacidad-instalada', [$proyectoCapacidadInstalada]);
+        $this->authorize('update', [ProyectoCapacidadInstalada::class, $proyectoCapacidadInstalada]);
 
         $totalObjetivosEspecificos = ProyectoCapacidadInstaladaObjetivoEspecifico::where('proyecto_capacidad_instalada_id', $proyectoCapacidadInstalada->id)->count();
 
@@ -428,7 +432,7 @@ class ProyectoCapacidadInstaladaController extends Controller
 
     public function editObjetivoEspecifico(ProyectoCapacidadInstalada $proyectoCapacidadInstalada, ProyectoCapacidadInstaladaObjetivoEspecifico $objetivoEspecifico)
     {
-        $this->authorize('modificar-proyecto-capacidad-instalada', [$proyectoCapacidadInstalada]);
+        $this->authorize('update', [ProyectoCapacidadInstalada::class, $proyectoCapacidadInstalada]);
 
         $objetivoEspecifico->resultado;
 
@@ -440,7 +444,7 @@ class ProyectoCapacidadInstaladaController extends Controller
 
     public function updateObjetivoEspecifico(ProyectoCapacidadInstaladaObjetivoEspecificoRequest $request, ProyectoCapacidadInstalada $proyectoCapacidadInstalada, ProyectoCapacidadInstaladaObjetivoEspecifico $objetivoEspecifico)
     {
-        $this->authorize('modificar-proyecto-capacidad-instalada', [$proyectoCapacidadInstalada]);
+        $this->authorize('update', [ProyectoCapacidadInstalada::class, $proyectoCapacidadInstalada]);
 
         $objetivoEspecifico->descripcion = $request->descripcion;
         $objetivoEspecifico->save();
@@ -452,7 +456,7 @@ class ProyectoCapacidadInstaladaController extends Controller
 
     public function destroyObjetivoEspecifico(ProyectoCapacidadInstalada $proyectoCapacidadInstalada, ProyectoCapacidadInstaladaObjetivoEspecifico $objetivoEspecifico)
     {
-        $this->authorize('modificar-proyecto-capacidad-instalada', [$proyectoCapacidadInstalada]);
+        $this->authorize('update', [ProyectoCapacidadInstalada::class, $proyectoCapacidadInstalada]);
 
         $objetivoEspecifico->delete();
 
@@ -467,7 +471,7 @@ class ProyectoCapacidadInstaladaController extends Controller
      */
     public function indexProductos(ProyectoCapacidadInstalada $proyectoCapacidadInstalada)
     {
-        $this->authorize('modificar-proyecto-capacidad-instalada', [$proyectoCapacidadInstalada]);
+        $this->authorize('update', [ProyectoCapacidadInstalada::class, $proyectoCapacidadInstalada]);
 
         return Inertia::render('ProyectosCapacidadInstalada/Productos/Index', [
             'proyectoCapacidadInstalada'    => $proyectoCapacidadInstalada,
@@ -477,7 +481,7 @@ class ProyectoCapacidadInstaladaController extends Controller
 
     public function createProducto(ProyectoCapacidadInstalada $proyectoCapacidadInstalada)
     {
-        $this->authorize('modificar-proyecto-capacidad-instalada', [$proyectoCapacidadInstalada]);
+        $this->authorize('update', [ProyectoCapacidadInstalada::class, $proyectoCapacidadInstalada]);
 
         return Inertia::render('ProyectosCapacidadInstalada/Productos/Create', [
             'proyectoCapacidadInstalada' => $proyectoCapacidadInstalada,
@@ -490,7 +494,7 @@ class ProyectoCapacidadInstaladaController extends Controller
 
     public function storeProducto(ProyectoCapacidadInstaladaProductoRequest $request, ProyectoCapacidadInstalada $proyectoCapacidadInstalada)
     {
-        $this->authorize('modificar-proyecto-capacidad-instalada', [$proyectoCapacidadInstalada]);
+        $this->authorize('update', [ProyectoCapacidadInstalada::class, $proyectoCapacidadInstalada]);
 
         $producto = new ProyectoCapacidadInstaladaProducto();
         $producto->descripcion = $request->descripcion;
@@ -504,7 +508,7 @@ class ProyectoCapacidadInstaladaController extends Controller
 
     public function editProducto(ProyectoCapacidadInstalada $proyectoCapacidadInstalada, ProyectoCapacidadInstaladaProducto $producto)
     {
-        $this->authorize('modificar-proyecto-capacidad-instalada', [$proyectoCapacidadInstalada]);
+        $this->authorize('update', [ProyectoCapacidadInstalada::class, $proyectoCapacidadInstalada]);
 
         $producto->resultado;
 
@@ -520,7 +524,7 @@ class ProyectoCapacidadInstaladaController extends Controller
 
     public function updateProducto(ProyectoCapacidadInstaladaProductoRequest $request, ProyectoCapacidadInstalada $proyectoCapacidadInstalada, ProyectoCapacidadInstaladaProducto $producto)
     {
-        $this->authorize('modificar-proyecto-capacidad-instalada', [$proyectoCapacidadInstalada]);
+        $this->authorize('update', [ProyectoCapacidadInstalada::class, $proyectoCapacidadInstalada]);
 
         $producto->descripcion = $request->descripcion;
         $producto->tipologia_minciencias = $request->tipologia_minciencias;
@@ -532,7 +536,7 @@ class ProyectoCapacidadInstaladaController extends Controller
 
     public function destroyProducto(ProyectoCapacidadInstalada $proyectoCapacidadInstalada, ProyectoCapacidadInstaladaProducto $producto)
     {
-        $this->authorize('modificar-proyecto-capacidad-instalada', [$proyectoCapacidadInstalada]);
+        $this->authorize('update', [ProyectoCapacidadInstalada::class, $proyectoCapacidadInstalada]);
 
         $producto->delete();
 
@@ -541,7 +545,7 @@ class ProyectoCapacidadInstaladaController extends Controller
 
     public function finalizar(ProyectoCapacidadInstalada $proyectoCapacidadInstalada)
     {
-        $this->authorize('modificar-proyecto-capacidad-instalada', [$proyectoCapacidadInstalada]);
+        $this->authorize('update', [ProyectoCapacidadInstalada::class, $proyectoCapacidadInstalada]);
 
         return Inertia::render('ProyectosCapacidadInstalada/FinalizarProyecto', [
             'proyectoCapacidadInstalada'        => $proyectoCapacidadInstalada,
@@ -552,7 +556,7 @@ class ProyectoCapacidadInstaladaController extends Controller
 
     public function storeFinalizar(Request $request, ProyectoCapacidadInstalada $proyectoCapacidadInstalada)
     {
-        $this->authorize('modificar-proyecto-capacidad-instalada', [$proyectoCapacidadInstalada]);
+        $this->authorize('update', [ProyectoCapacidadInstalada::class, $proyectoCapacidadInstalada]);
 
         $proyectoCapacidadInstalada->update(['estado_proyecto' => $request->estado_proyecto['value']]);
 
