@@ -17,9 +17,13 @@
     <title>SGPS-SIPRO - Error {status}</title>
 </svelte:head>
 
-<div class="{status == 500 || status == 503 ? 'bg-red-700' : 'bg-indigo-700'} flex flex-col items-center justify-center min-h-screen text-white">
+<div class="{status >= 500 || status == 403 ? 'bg-red-500' : 'bg-indigo-700'}  flex flex-col items-center justify-center min-h-screen text-white">
     <figure>
-        <img src={window.basePath + '/images/error.png'} alt="Error" class="w-2/3 m-auto mb-10" />
+        {#if status >= 500 || status == 403}
+            <img src="/images/error.png" alt="Error" class="w-2/3 m-auto mb-10" />
+        {:else if status == 404}
+            <img src="/images/error404.png" alt="Error" class="w-2/3 m-auto mb-10" />
+        {/if}
     </figure>
 
     <div>
@@ -43,15 +47,17 @@
 
         {#if status != 503}
             <div class="mt-10">
-                <p>Puede notificar a la mesa de ayuda realizando los siguientes pasos:</p>
+                <p>Puede notificar a la mesa de ayuda realice los siguientes pasos:</p>
                 <ul class="list-disc mt-5">
-                    <li>Tome un pantallazo del error.</li>
+                    <li>Tome un pantallazo del error desde Windows o Mac.</li>
                     <li>Copie la URL.</li>
-                    <li>De clic en <strong>Solicitar soporte</strong> y en el campo <strong>Descripción</strong> pegue esa información. Sea lo más descriptivo, de un paso a paso de como ocurrió el error.</li>
+                    <li>Envie un correo detallando el error.</li>
                 </ul>
 
                 <div class="flex items-center mt-10">
-                    <Button on:click={() => Inertia.visit(route('reportar-problemas.create'))} variant="raised" type="button" class="mr-4">Solicitar soporte</Button> o <Button on:click={() => Inertia.visit(route('login'))} variant="raised" class="ml-4">Regresar a la aplicación</Button>
+                    <Button on:click={() => Inertia.visit(route('reportar-problemas.create'))} variant="raised" type="button" class="mr-4" style="background-color: white !important; color: black !important;">Solicitar soporte</Button> o <Button on:click={() => Inertia.visit(route('login'))} variant="raised" class="ml-4" style="background-color: white !important; color: black !important;">
+                        Regresar a la aplicación
+                    </Button>
                 </div>
             </div>
         {/if}
