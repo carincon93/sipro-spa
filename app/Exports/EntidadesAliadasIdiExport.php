@@ -63,7 +63,6 @@ class EntidadesAliadasIdiExport implements FromCollection, WithHeadings, WithMap
         ];
     }
 
-
     public function headings(): array
     {
         return [

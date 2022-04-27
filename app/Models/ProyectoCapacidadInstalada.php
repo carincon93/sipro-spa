@@ -236,6 +236,25 @@ class ProyectoCapacidadInstalada extends Model
                 ->distinct('proyectos_capacidad_instalada.id')
                 ->orderBy('proyectos_capacidad_instalada.id', 'ASC')
                 ->filterProyectoCapacidadInstalada(request()->only('search'))->paginate();
+        } else if ($authUser->hasRole(4) && $authUser->dinamizadorCentroFormacion || $authUser->hasRole(3) && $authUser->subdirectorCentroFormacion || $authUser->hasRole(21)) { // Dinamizador SENNOVA o Subdirector de centro
+            $centroFormacionId = null;
+            if ($authUser->hasRole(4)) {
+                $centroFormacionId = $authUser->dinamizadorCentroFormacion->id;
+            } else if ($authUser->hasRole(21)) {
+                $centroFormacionId = $authUser->centroFormacion->id;
+            } else if ($authUser->hasRole(3)) {
+                $centroFormacionId = $authUser->subdirectorCentroFormacion->id;
+            }
+
+            $proyectoCapacidadInstalada = ProyectoCapacidadInstalada::select('proyectos_capacidad_instalada.*')
+                ->join('semilleros_investigacion', 'proyectos_capacidad_instalada.semillero_investigacion_id', 'semilleros_investigacion.id')
+                ->join('lineas_investigacion', 'semilleros_investigacion.linea_investigacion_id', 'lineas_investigacion.id')
+                ->join('grupos_investigacion', 'lineas_investigacion.grupo_investigacion_id', 'grupos_investigacion.id')
+                ->join('centros_formacion', 'grupos_investigacion.centro_formacion_id', 'centros_formacion.id')
+                ->where('centros_formacion.id', $centroFormacionId)
+                ->distinct('proyectos_capacidad_instalada.id')
+                ->orderBy('proyectos_capacidad_instalada.id', 'ASC')
+                ->filterProyectoCapacidadInstalada(request()->only('search'))->paginate();
         } else {
             $proyectoCapacidadInstalada = ProyectoCapacidadInstalada::select('proyectos_capacidad_instalada.*')
                 ->join('proyecto_capacidad_instalada_integrante', 'proyectos_capacidad_instalada.id', 'proyecto_capacidad_instalada_integrante.proyecto_capacidad_instalada_id')

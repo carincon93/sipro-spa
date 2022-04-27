@@ -34,7 +34,11 @@ class ProyectoCapacidadInstaladaPolicy
      */
     public function view(User $user, ProyectoCapacidadInstalada $proyectoCapacidadInstalada)
     {
-        if ($user->hasRole([4, 6]) && $proyectoCapacidadInstalada->integrantes()->where('proyecto_capacidad_instalada_integrante.autor_principal', $user->id,)->exists()) {
+        if ($user->hasRole([4]) && $user->dinamizadorCentroFormacion && $proyectoCapacidadInstalada->semilleroInvestigacion->lineaInvestigacion->grupoInvestigacion->centroFormacion->id == $user->dinamizadorCentroFormacion->id) {
+            return true;
+        }
+
+        if ($proyectoCapacidadInstalada->integrantes()->where('proyecto_capacidad_instalada_integrante.autor_principal', $user->id,)->exists()) {
             return true;
         }
 
@@ -65,7 +69,11 @@ class ProyectoCapacidadInstaladaPolicy
      */
     public function update(User $user, ProyectoCapacidadInstalada $proyectoCapacidadInstalada)
     {
-        if ($user->hasRole([4, 6]) && $proyectoCapacidadInstalada->integrantes()->where('proyecto_capacidad_instalada_integrante.autor_principal', $user->id,)->exists()) {
+        if ($user->hasRole([4]) && $user->dinamizadorCentroFormacion && $proyectoCapacidadInstalada->semilleroInvestigacion->lineaInvestigacion->grupoInvestigacion->centroFormacion->id == $user->dinamizadorCentroFormacion->id) {
+            return true;
+        }
+
+        if ($proyectoCapacidadInstalada->integrantes()->where('proyecto_capacidad_instalada_integrante.autor_principal', $user->id,)->exists()) {
             return true;
         }
 
@@ -81,7 +89,11 @@ class ProyectoCapacidadInstaladaPolicy
      */
     public function delete(User $user, ProyectoCapacidadInstalada $proyectoCapacidadInstalada)
     {
-        if ($user->hasRole([4, 6]) && $proyectoCapacidadInstalada->integrantes()->where('proyecto_capacidad_instalada_integrante.autor_principal', $user->id,)->exists()) {
+        if ($user->hasRole([4]) && $user->dinamizadorCentroFormacion && $proyectoCapacidadInstalada->semilleroInvestigacion->lineaInvestigacion->grupoInvestigacion->centroFormacion->id == $user->dinamizadorCentroFormacion->id) {
+            return true;
+        }
+
+        if ($proyectoCapacidadInstalada->integrantes()->where('proyecto_capacidad_instalada_integrante.autor_principal', $user->id,)->exists()) {
             return true;
         }
 
