@@ -39,9 +39,7 @@
 
         {#if isSuperAdmin || (checkRole(authUser, [11, 5, 20, 19, 18]) && convocatoria.tipo_convocatoria == 1) || (checkRole(authUser, [11, 5, 20, 19, 18]) && convocatoria.tipo_convocatoria == 3)}
             <hr class="mt-20 mb-20" />
-            <h1 class="text-4xl text-center" id="evaluacion">
-                A continuación, se listan las líneas programáticas de la vigencia {convocatoria.year} para realizar las respectivas evaluaciones.
-            </h1>
+            <h1 class="text-4xl text-center" id="evaluacion">A continuación, se listan las líneas programáticas dónde puede realizar las respectivas evaluaciones.</h1>
             <div class="flex justify-around mt-24 gap-4">
                 {#if isSuperAdmin || checkRole(authUser, [11, 5])}
                     <a use:inertia href={route('convocatorias.ta-evaluaciones.index', convocatoria.id)} class="bg-white overflow-hidden text-center shadow-sm sm:rounded-lg  px-6 py-2 hover:bg-indigo-500 hover:text-white flex justify-around items-center flex-col w-80 h-96">
