@@ -119,7 +119,7 @@
 
                 <div class="mt-4 ">
                     <Label required labelFor="fecha_creacion_semillero" value="Fecha creación del semillero" />
-                    <Input id="fecha_creacion_semillero" type="date" class="mt-1" bind:value={$form.fecha_creacion_semillero} required />
+                    <input id="fecha_creacion_semillero" type="date" class="mt-1 p-2" bind:value={$form.fecha_creacion_semillero} required />
                 </div>
 
                 <div class="mt-4">

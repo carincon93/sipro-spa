@@ -158,7 +158,7 @@
                         <Textarea label="Metodología o actividades de transferencia al centro de formación" maxlength="2500" id="actividades_transferencia_conocimiento" error={errors.actividades_transferencia_conocimiento} bind:value={$form.actividades_transferencia_conocimiento} required />
                     </div>
 
-                    {#if convocatoria.tipo_convocatoria == 1}
+                    {#if convocatoria.tipo_convocatoria == 1 || convocatoria.tipo_convocatoria == 3}
                         <div class="mt-8">
                             <Label required class="mb-4" labelFor="carta_intencion" value="ANEXO 7. Carta de intención o acta que soporta el trabajo articulado con entidades aliadas (diferentes al SENA)" />
                             <Input label="Url" id="carta_intencion" type="url" class="mt-1" error={errors.carta_intencion} placeholder="Url https://www.google.com.co" bind:value={$form.carta_intencion} required />

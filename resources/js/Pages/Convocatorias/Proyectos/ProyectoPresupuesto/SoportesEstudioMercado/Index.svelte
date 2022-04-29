@@ -48,7 +48,7 @@
 
     <h1 class="mt-24 mb-8 text-center text-3xl">Soportes</h1>
 
-    {#if convocatoria.tipo_convocatoria == 1}
+    {#if convocatoria.tipo_convocatoria == 1 || convocatoria.tipo_convocatoria == 3}
         <InfoMessage class="mb-8">
             <strong>Importante:</strong>
             <p class="mt-4">
