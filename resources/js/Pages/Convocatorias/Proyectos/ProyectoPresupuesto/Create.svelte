@@ -130,7 +130,7 @@
                     <div class="mt-4">
                         <Input label="Valor total" id="valor_total" type="number" input$min="0" class="mt-1" bind:value={$form.valor_total} error={errors.valor_total} required />
                     </div>
-                    {#if (presupuestoSennova?.requiere_estudio_mercado && convocatoria.tipo_convocatoria == 1) || ($form.codigo_uso_presupuestal == '020202008005096' && convocatoria.tipo_convocatoria == 1)}
+                    {#if (presupuestoSennova?.requiere_estudio_mercado && convocatoria.tipo_convocatoria == 1) || (presupuestoSennova?.requiere_estudio_mercado && convocatoria.tipo_convocatoria == 3) || ($form.codigo_uso_presupuestal == '020202008005096' && convocatoria.tipo_convocatoria == 1) || ($form.codigo_uso_presupuestal == '020202008005096' && convocatoria.tipo_convocatoria == 3)}
                         <InfoMessage message="Por favor indique el valor total que arrojó el Estudio de mercado - Convocatoria Sennova 2021" />
 
                         <div class="mt-4">

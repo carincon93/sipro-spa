@@ -57,32 +57,34 @@
         <div class="grid grid-cols-3 gap-4">
             {#if isSuperAdmin || checkRole(authUser, [11]) || checkPermission(authUser, [1, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 17, 18, 19, 14, 15, 16, 20, 21])}
                 {#each convocatorias.data as convocatoria (convocatoria.id)}
-                    <div>
-                        <a use:inertia href={route('convocatorias.dashboard', convocatoria.id)} class="bg-white overflow-hidden shadow-sm sm:rounded-tr-lg sm:rounded-tl-lg px-6 py-2 hover:bg-indigo-500 hover:text-white h-72 flex justify-center items-center flex-col">
-                            <span class="mb-5">{convocatoria.tipo_convocatoria == 1 ? 'Proyectos de convocatoria' : 'Proyectos de ejercicio (DEMO)'}</span>
-                            {#if convocatoria.tipo_convocatoria == 1}
-                                <h1 class="text-4xl text-center mt-6">
-                                    {convocatoria.year}
-                                </h1>
+                    {#if convocatoria.tipo_convocatoria != 3 || isSuperAdmin}
+                        <div>
+                            <a use:inertia href={route('convocatorias.dashboard', convocatoria.id)} class="bg-white overflow-hidden shadow-sm sm:rounded-tr-lg sm:rounded-tl-lg px-6 py-2 hover:bg-indigo-500 hover:text-white h-72 flex justify-center items-center flex-col">
+                                <span class="mb-5 text-center">{convocatoria.tipo_convocatoria == 1 ? 'Proyectos de convocatoria' : convocatoria.tipo_convocatoria == 2 ? 'Proyectos de ejercicio (DEMO)' : 'Nuevas TecnoAcademias - Nuevos Tecnoparques'}</span>
+                                {#if convocatoria.tipo_convocatoria == 1}
+                                    <h1 class="text-4xl text-center mt-6">
+                                        {convocatoria.year}
+                                    </h1>
+                                {/if}
+                                <p>
+                                    {convocatoria.descripcion}
+                                </p>
+                                {#if convocatoria.esta_activa}
+                                    <small class="mt-3">
+                                        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" class="w-5" style="transform: translateX(-24px); position: absolute;">
+                                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
+                                        </svg>
+                                        Convocatoria activa
+                                    </small>
+                                {/if}
+                            </a>
+                            {#if isSuperAdmin}
+                                <div class="bg-white p-2 flex justify-center rounded-bl-lg rounded-br-lg">
+                                    <Button on:click={() => Inertia.visit(route('convocatorias.edit', convocatoria.id))} variant="raised">Editar</Button>
+                                </div>
                             {/if}
-                            <p>
-                                {convocatoria.descripcion}
-                            </p>
-                            {#if convocatoria.esta_activa}
-                                <small class="mt-3">
-                                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" class="w-5" style="transform: translateX(-24px); position: absolute;">
-                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
-                                    </svg>
-                                    Convocatoria activa
-                                </small>
-                            {/if}
-                        </a>
-                        {#if isSuperAdmin}
-                            <div class="bg-white p-2 flex justify-center rounded-bl-lg rounded-br-lg">
-                                <Button on:click={() => Inertia.visit(route('convocatorias.edit', convocatoria.id))} variant="raised">Editar</Button>
-                            </div>
-                        {/if}
-                    </div>
+                        </div>
+                    {/if}
                 {/each}
             {/if}
         </div>

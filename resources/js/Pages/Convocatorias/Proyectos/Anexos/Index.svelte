@@ -77,7 +77,7 @@
         </form>
     {/if}
 
-    {#if convocatoria.tipo_convocatoria == 1}
+    {#if convocatoria.tipo_convocatoria == 1 || convocatoria.tipo_convocatoria == 3}
         <InfoMessage class="mt-20">
             <h1 class="mb-10 font-black">Importante:</h1>
             <ul>

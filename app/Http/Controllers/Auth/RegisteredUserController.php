@@ -46,7 +46,7 @@ class RegisteredUserController extends Controller
      */
     public function store(UserRegisterRequest $request)
     {
-        $habilitado = false;
+        $habilitado = true;
 
         Auth::login($user = User::create([
             'nombre'                => $request->nombre,

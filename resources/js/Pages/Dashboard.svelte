@@ -90,6 +90,10 @@
                 <a use:inertia class="bg-white overflow-hidden shadow-sm sm:rounded-lg px-6 py-2 hover:bg-indigo-500 hover:text-white h-52 flex justify-around items-center flex-col" href={route('mesas-tecnicas.index')}>Mesas técnicas</a>
             {/if}
 
+            {#if isSuperAdmin || checkRole(authUser, [4]) || checkPermission(authUser, [8, 17])}
+                <a use:inertia class="bg-white overflow-hidden shadow-sm sm:rounded-lg px-6 py-2 hover:bg-indigo-500 hover:text-white h-52 flex justify-around items-center flex-col text-center" href={route('nuevos-proyectos-ta-tp')}>Nuevos proyectos TecnoAcademia - Tecnoparque</a>
+            {/if}
+
             {#if isSuperAdmin}
                 <a use:inertia class="bg-white overflow-hidden shadow-sm sm:rounded-lg px-6 py-2 hover:bg-indigo-500 hover:text-white h-52 flex justify-around items-center flex-col" href={route('configuracion-presupuesto-sennova')}>Presupuesto SENNOVA</a>
             {/if}

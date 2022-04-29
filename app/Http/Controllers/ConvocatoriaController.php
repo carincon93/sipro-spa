@@ -20,6 +20,10 @@ class ConvocatoriaController extends Controller
      */
     public function dashboard(Convocatoria $convocatoria)
     {
+        if ($convocatoria->tipo_convocatoria == 3) {
+            return redirect()->route('nuevos-proyectos-ta-tp', $convocatoria);
+        }
+
         return Inertia::render('Convocatorias/Dashboard', [
             'convocatoria' => $convocatoria
         ]);
@@ -96,6 +100,12 @@ class ConvocatoriaController extends Controller
             $convocatoriaDemoActiva->save();
         }
 
+        $convocatoriaTaTpActiva = Convocatoria::where('esta_activa', true)->where('tipo_convocatoria', 3)->first();
+        if ($convocatoriaTaTpActiva && $convocatoriaTaTpActiva->id != $convocatoria->id && $convocatoria->tipo_convocatoria == 3) {
+            $convocatoriaTaTpActiva->esta_activa = false;
+            $convocatoriaTaTpActiva->save();
+        }
+
         $convocatoria->esta_activa = $request->esta_activa;
 
         $convocatoria->save();
@@ -169,6 +179,12 @@ class ConvocatoriaController extends Controller
             if ($convocatoriaDemoActiva && $convocatoriaDemoActiva->id != $convocatoria->id && $convocatoria->tipo_convocatoria == 2) {
                 $convocatoriaDemoActiva->esta_activa = false;
                 $convocatoriaDemoActiva->save();
+            }
+
+            $convocatoriaTaTpActiva = Convocatoria::where('esta_activa', true)->where('tipo_convocatoria', 3)->first();
+            if ($convocatoriaTaTpActiva && $convocatoriaTaTpActiva->id != $convocatoria->id && $convocatoria->tipo_convocatoria == 3) {
+                $convocatoriaTaTpActiva->esta_activa = false;
+                $convocatoriaTaTpActiva->save();
             }
         }
 
@@ -323,5 +339,18 @@ class ConvocatoriaController extends Controller
         $convocatoria->evaluaciones()->where('estado', 'LIKE', 'Sin evaluar')->update(['habilitado' => false]);
 
         return back()->with('success', 'El recurso se ha actualizado correctamente.');
+    }
+
+    public function nuevosProyectosTaTp()
+    {
+        $convocatoria = Convocatoria::where('esta_activa', true)->where('tipo_convocatoria', 3)->first();
+
+        if ($convocatoria) {
+            return Inertia::render('NuevasTecnoAcademiasTecnoparques/Index', [
+                'convocatoria' => $convocatoria,
+            ]);
+        } else {
+            return back()->with('error', 'No es posible ingresar a este módulo.');
+        }
     }
 }

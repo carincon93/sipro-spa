@@ -85,7 +85,7 @@
                         </p>
                     </td>
                     <td class="border-t">
-                        {#if (isSuperAdmin && convocatoria.tipo_convocatoria == 1) || (checkRole(authUser, [4]) && proyecto.mostrar_recomendaciones && convocatoria.tipo_convocatoria == 1) || (convocatoria.fase == 5 && proyecto.mostrar_recomendaciones && convocatoria.tipo_convocatoria == 1)}
+                        {#if isSuperAdmin || (checkRole( authUser, [4], ) && proyecto.mostrar_recomendaciones && convocatoria.tipo_convocatoria == 1) || (checkRole( authUser, [4], ) && proyecto.mostrar_recomendaciones && convocatoria.tipo_convocatoria == 3) || (convocatoria.fase == 5 && proyecto.mostrar_recomendaciones && convocatoria.tipo_convocatoria == 1) || (convocatoria.fase == 5 && proyecto.mostrar_recomendaciones && convocatoria.tipo_convocatoria == 3)}
                             <p class="px-6 py-4">
                                 {proyecto.estado_evaluacion_idi.estado}
                                 {#if isSuperAdmin}

@@ -98,8 +98,7 @@
                     {/if}
                     <span class="text-indigo-400 font-medium">/</span>
                     <a use:inertia href={route('convocatorias.dashboard', convocatoria.id)} class="text-indigo-400 hover:text-indigo-600">
-                        Convocatoria
-                        {convocatoria.year}
+                        {convocatoria.descripcion}
                     </a>
                 </h1>
             </div>
@@ -109,20 +108,20 @@
     {#if isSuperAdmin}
         <InfoMessage class="max-w-3xl">
             <div class="px-4">
-                <h1 class="mb-4 text-2xl">¿Desea configurar nuevos roles SENNOVA para la convocatoria {convocatoria.year}?</h1>
+                <h1 class="mb-4 text-2xl">¿Desea configurar nuevos roles SENNOVA?</h1>
                 <Button on:click={() => Inertia.visit(route('convocatorias.convocatoria-rol-sennova.index', convocatoria.id))} variant="raised">Configurar roles SENNOVA</Button>
             </div>
         </InfoMessage>
 
         <InfoMessage class="max-w-3xl mt-10">
             <div class="px-4">
-                <h1 class="mb-4 text-2xl">¿Desea configurar nuevos rubros del presupuesto SENNOVA para la convocatoria {convocatoria.year}?</h1>
+                <h1 class="mb-4 text-2xl">¿Desea configurar nuevos rubros del presupuesto SENNOVA?</h1>
                 <Button on:click={() => Inertia.visit(route('convocatorias.convocatoria-presupuesto.index', convocatoria.id))} variant="raised">Configurar rubros presupuesto SENNOVA</Button>
             </div>
         </InfoMessage>
     {/if}
 
-    {#if convocatoria.tipo_convocatoria == 1}
+    {#if convocatoria.tipo_convocatoria == 1 || convocatoria.tipo_convocatoria == 3}
         <div class="bg-white rounded shadow max-w-3xl mt-20">
             <form on:submit|preventDefault={submitFase}>
                 <fieldset class="p-8" disabled={isSuperAdmin ? undefined : true}>
@@ -167,7 +166,7 @@
                     <div class="mt-4 mb-20">
                         <div class="mt-4 ">
                             <Label required labelFor="fecha_finalizacion_fase" value="Fecha de finalización de la fase: {$formFase.fase?.label.toLowerCase()}" />
-                            <Input id="fecha_finalizacion_fase" type="date" class="mt-1" bind:value={$form.fecha_finalizacion_fase} required />
+                            <input id="fecha_finalizacion_fase" type="date" class="mt-1 p-2" bind:value={$form.fecha_finalizacion_fase} required />
                         </div>
                     </div>
                     {#if errors.fecha_finalizacion_fase}
@@ -178,7 +177,7 @@
                 <div class="mt-4 mb-20">
                     <div class="mt-4 ">
                         <Label required labelFor="hora_finalizacion_fase" value="Hora límite" />
-                        <Input id="hora_finalizacion_fase" type="time" input$step="1" class="mt-1" bind:value={$form.hora_finalizacion_fase} required />
+                        <input id="hora_finalizacion_fase" type="time" step="1" class="mt-1 p-2 border rounded border-gray-300" bind:value={$form.hora_finalizacion_fase} required />
                         <InputError message={errors.hora_finalizacion_fase} />
                     </div>
                 </div>
@@ -194,7 +193,7 @@
                     <InputError message={errors.esta_activa} />
                 </div>
 
-                {#if convocatoria.tipo_convocatoria == 1}
+                {#if convocatoria.tipo_convocatoria == 1 || convocatoria.tipo_convocatoria == 3}
                     <div class="mt-4 mb-20">
                         <Label required labelFor="mostrar_recomendaciones" value="¿Desea que el formulador visualice las recomendaciones?" class="inline-block mb-4" />
                         <br />
@@ -203,25 +202,27 @@
                     </div>
                 {/if}
 
-                <div class="mt-20">
-                    <p class="text-center">Fechas máximas de ejecución de proyectos I+D+i</p>
-                    <div class="mt-4 flex items-start justify-around">
-                        <div class="mt-4 flex {errors.min_fecha_inicio_proyectos_idi ? '' : 'items-center'}">
-                            <Label required labelFor="min_fecha_inicio_proyectos_idi" class={errors.min_fecha_inicio_proyectos_idi ? 'top-3.5 relative' : ''} value="Del" />
-                            <div class="ml-4">
-                                <Input id="min_fecha_inicio_proyectos_idi" type="date" class="mt-1" bind:value={$form.min_fecha_inicio_proyectos_idi} required />
+                {#if convocatoria.tipo_convocatoria == 1}
+                    <div class="mt-20">
+                        <p class="text-center">Fechas máximas de ejecución de proyectos I+D+i</p>
+                        <div class="mt-4 flex items-start justify-around">
+                            <div class="mt-4 flex {errors.min_fecha_inicio_proyectos_idi ? '' : 'items-center'}">
+                                <Label required labelFor="min_fecha_inicio_proyectos_idi" class={errors.min_fecha_inicio_proyectos_idi ? 'top-3.5 relative' : ''} value="Del" />
+                                <div class="ml-4">
+                                    <input id="min_fecha_inicio_proyectos_idi" type="date" class="mt-1 p-2" bind:value={$form.min_fecha_inicio_proyectos_idi} required />
+                                </div>
                             </div>
-                        </div>
-                        <div class="mt-4 flex {errors.max_fecha_finalizacion_proyectos_idi ? '' : 'items-center'}">
-                            <Label required labelFor="max_fecha_finalizacion_proyectos" class={errors.max_fecha_finalizacion_proyectos_idi ? 'top-3.5 relative' : ''} value="hasta" />
-                            <div class="ml-4">
-                                <Input id="max_fecha_finalizacion_proyectos" type="date" class="mt-1" bind:value={$form.max_fecha_finalizacion_proyectos_idi} required />
+                            <div class="mt-4 flex {errors.max_fecha_finalizacion_proyectos_idi ? '' : 'items-center'}">
+                                <Label required labelFor="max_fecha_finalizacion_proyectos" class={errors.max_fecha_finalizacion_proyectos_idi ? 'top-3.5 relative' : ''} value="hasta" />
+                                <div class="ml-4">
+                                    <input id="max_fecha_finalizacion_proyectos" type="date" class="mt-1 p-2" bind:value={$form.max_fecha_finalizacion_proyectos_idi} required />
+                                </div>
                             </div>
                         </div>
                     </div>
-                </div>
-                {#if errors.min_fecha_inicio_proyectos_idi || errors.max_fecha_finalizacion_proyectos_idi}
-                    <InputError message={errors.min_fecha_inicio_proyectos_idi || errors.max_fecha_finalizacion_proyectos_idi} />
+                    {#if errors.min_fecha_inicio_proyectos_idi || errors.max_fecha_finalizacion_proyectos_idi}
+                        <InputError message={errors.min_fecha_inicio_proyectos_idi || errors.max_fecha_finalizacion_proyectos_idi} />
+                    {/if}
                 {/if}
 
                 {#if convocatoria.tipo_convocatoria == 1}
@@ -231,13 +232,13 @@
                             <div class="mt-4 flex {errors.min_fecha_inicio_proyectos_cultura ? '' : 'items-center'}">
                                 <Label required labelFor="min_fecha_inicio_proyectos_cultura" class={errors.min_fecha_inicio_proyectos_cultura ? 'top-3.5 relative' : ''} value="Del" />
                                 <div class="ml-4">
-                                    <Input id="min_fecha_inicio_proyectos_cultura" type="date" class="mt-1" bind:value={$form.min_fecha_inicio_proyectos_cultura} required />
+                                    <input id="min_fecha_inicio_proyectos_cultura" type="date" class="mt-1 p-2" bind:value={$form.min_fecha_inicio_proyectos_cultura} required />
                                 </div>
                             </div>
                             <div class="mt-4 flex {errors.max_fecha_finalizacion_proyectos_cultura ? '' : 'items-center'}">
                                 <Label required labelFor="max_fecha_finalizacion_proyectos_cultura" class={errors.max_fecha_finalizacion_proyectos_cultura ? 'top-3.5 relative' : ''} value="hasta" />
                                 <div class="ml-4">
-                                    <Input id="max_fecha_finalizacion_proyectos_cultura" type="date" class="mt-1" bind:value={$form.max_fecha_finalizacion_proyectos_cultura} required />
+                                    <input id="max_fecha_finalizacion_proyectos_cultura" type="date" class="mt-1 p-2" bind:value={$form.max_fecha_finalizacion_proyectos_cultura} required />
                                 </div>
                             </div>
                         </div>
@@ -245,20 +246,22 @@
                     {#if errors.min_fecha_inicio_proyectos_cultura || errors.max_fecha_finalizacion_proyectos_cultura}
                         <InputError message={errors.min_fecha_inicio_proyectos_cultura || errors.max_fecha_finalizacion_proyectos_cultura} />
                     {/if}
+                {/if}
 
+                {#if convocatoria.tipo_convocatoria == 1 || convocatoria.tipo_convocatoria == 3}
                     <div class="mt-20">
                         <p class="text-center">Fechas máximas de ejecución de proyectos Tecnoacademia</p>
                         <div class="mt-4 flex items-start justify-around">
                             <div class="mt-4 flex {errors.min_fecha_inicio_proyectos_ta ? '' : 'items-center'}">
                                 <Label required labelFor="min_fecha_inicio_proyectos_ta" class={errors.min_fecha_inicio_proyectos_ta ? 'top-3.5 relative' : ''} value="Del" />
                                 <div class="ml-4">
-                                    <Input id="min_fecha_inicio_proyectos_ta" type="date" class="mt-1" bind:value={$form.min_fecha_inicio_proyectos_ta} required />
+                                    <input id="min_fecha_inicio_proyectos_ta" type="date" class="mt-1 p-2" bind:value={$form.min_fecha_inicio_proyectos_ta} required />
                                 </div>
                             </div>
                             <div class="mt-4 flex {errors.max_fecha_finalizacion_proyectos_ta ? '' : 'items-center'}">
                                 <Label required labelFor="max_fecha_finalizacion_proyectos_ta" class={errors.max_fecha_finalizacion_proyectos_ta ? 'top-3.5 relative' : ''} value="hasta" />
                                 <div class="ml-4">
-                                    <Input id="max_fecha_finalizacion_proyectos_ta" type="date" class="mt-1" bind:value={$form.max_fecha_finalizacion_proyectos_ta} required />
+                                    <input id="max_fecha_finalizacion_proyectos_ta" type="date" class="mt-1 p-2" bind:value={$form.max_fecha_finalizacion_proyectos_ta} required />
                                 </div>
                             </div>
                         </div>
@@ -266,20 +269,22 @@
                     {#if errors.min_fecha_inicio_proyectos_ta || errors.max_fecha_finalizacion_proyectos_ta}
                         <InputError message={errors.min_fecha_inicio_proyectos_ta || errors.max_fecha_finalizacion_proyectos_ta} />
                     {/if}
+                {/if}
 
+                {#if convocatoria.tipo_convocatoria == 1 || convocatoria.tipo_convocatoria == 3}
                     <div class="mt-20">
                         <p class="text-center">Fechas máximas de ejecución de proyectos Tecnoparque</p>
                         <div class="mt-4 flex items-start justify-around">
                             <div class="mt-4 flex {errors.min_fecha_inicio_proyectos_tp ? '' : 'items-center'}">
                                 <Label required labelFor="min_fecha_inicio_proyectos_tp" class={errors.min_fecha_inicio_proyectos_tp ? 'top-3.5 relative' : ''} value="Del" />
                                 <div class="ml-4">
-                                    <Input id="min_fecha_inicio_proyectos_tp" type="date" class="mt-1" bind:value={$form.min_fecha_inicio_proyectos_tp} required />
+                                    <input id="min_fecha_inicio_proyectos_tp" type="date" class="mt-1 p-2" bind:value={$form.min_fecha_inicio_proyectos_tp} required />
                                 </div>
                             </div>
                             <div class="mt-4 flex {errors.max_fecha_finalizacion_proyectos_tp ? '' : 'items-center'}">
                                 <Label required labelFor="max_fecha_finalizacion_proyectos_tp" class={errors.max_fecha_finalizacion_proyectos_tp ? 'top-3.5 relative' : ''} value="hasta" />
                                 <div class="ml-4">
-                                    <Input id="max_fecha_finalizacion_proyectos_tp" type="date" class="mt-1" bind:value={$form.max_fecha_finalizacion_proyectos_tp} required />
+                                    <input id="max_fecha_finalizacion_proyectos_tp" type="date" class="mt-1 p-2" bind:value={$form.max_fecha_finalizacion_proyectos_tp} required />
                                 </div>
                             </div>
                         </div>
@@ -287,20 +292,22 @@
                     {#if errors.min_fecha_inicio_proyectos_tp || errors.max_fecha_finalizacion_proyectos_tp}
                         <InputError message={errors.min_fecha_inicio_proyectos_tp || errors.max_fecha_finalizacion_proyectos_tp} />
                     {/if}
+                {/if}
 
+                {#if convocatoria.tipo_convocatoria == 1}
                     <div class="mt-20">
                         <p class="text-center">Fechas máximas de ejecución de proyectos Servicios tecnológicos</p>
                         <div class="mt-4 flex items-start justify-around">
                             <div class="mt-4 flex {errors.min_fecha_inicio_proyectos_st ? '' : 'items-center'}">
                                 <Label required labelFor="min_fecha_inicio_proyectos_st" class={errors.min_fecha_inicio_proyectos_st ? 'top-3.5 relative' : ''} value="Del" />
                                 <div class="ml-4">
-                                    <Input id="min_fecha_inicio_proyectos_st" type="date" class="mt-1" bind:value={$form.min_fecha_inicio_proyectos_st} required />
+                                    <input id="min_fecha_inicio_proyectos_st" type="date" class="mt-1 p-2" bind:value={$form.min_fecha_inicio_proyectos_st} required />
                                 </div>
                             </div>
                             <div class="mt-4 flex {errors.max_fecha_finalizacion_proyectos_st ? '' : 'items-center'}">
                                 <Label required labelFor="max_fecha_finalizacion_proyectos_st" class={errors.max_fecha_finalizacion_proyectos_st ? 'top-3.5 relative' : ''} value="hasta" />
                                 <div class="ml-4">
-                                    <Input id="max_fecha_finalizacion_proyectos_st" type="date" class="mt-1" bind:value={$form.max_fecha_finalizacion_proyectos_st} required />
+                                    <input id="max_fecha_finalizacion_proyectos_st" type="date" class="mt-1 p-2" bind:value={$form.max_fecha_finalizacion_proyectos_st} required />
                                 </div>
                             </div>
                         </div>
