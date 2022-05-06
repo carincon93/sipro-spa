@@ -49,7 +49,7 @@
     let sending = false
     let sended = false
     function search() {
-        if (isSuperAdmin || (proyectoCapacidadInstalada.estado_proyecto != 'Finalizado' && checkRole(authUser, [4, 6]))) {
+        if (isSuperAdmin || (proyectoCapacidadInstalada.estado_proyecto != 'Finalizado' && checkRole(authUser, [4, 6]) && proyectoCapacidadInstalada.integrantes.find((item) => item.id == authUser.id))) {
             sending = true
             sended = false
             axios
@@ -66,7 +66,7 @@
     }
 
     function removeParticipante(id) {
-        if (isSuperAdmin || (proyectoCapacidadInstalada.estado_proyecto != 'Finalizado' && checkRole(authUser, [4, 6]))) {
+        if (isSuperAdmin || (proyectoCapacidadInstalada.estado_proyecto != 'Finalizado' && checkRole(authUser, [4, 6]) && proyectoCapacidadInstalada.integrantes.find((item) => item.id == authUser.id))) {
             Inertia.post(route('proyectos-capacidad-instalada.integrantes.users.unlink', proyectoCapacidadInstalada.id), { user_id: id, _method: 'DELETE' }, { preserveScroll: true })
         }
     }
@@ -100,7 +100,7 @@
     }
 
     function submitParticipante() {
-        if (isSuperAdmin || (proyectoCapacidadInstalada.estado_proyecto != 'Finalizado' && checkRole(authUser, [4, 6]))) {
+        if (isSuperAdmin || (proyectoCapacidadInstalada.estado_proyecto != 'Finalizado' && checkRole(authUser, [4, 6]) && proyectoCapacidadInstalada.integrantes.find((item) => item.id == authUser.id))) {
             $formParticipante.post(route('proyectos-capacidad-instalada.integrantes.users.link', proyectoCapacidadInstalada.id), {
                 onStart: () => {
                     sending = true
@@ -142,7 +142,7 @@
     }
 
     function submitRegister() {
-        if (isSuperAdmin || (proyectoCapacidadInstalada.estado_proyecto != 'Finalizado' && checkRole(authUser, [4, 6]))) {
+        if (isSuperAdmin || (proyectoCapacidadInstalada.estado_proyecto != 'Finalizado' && checkRole(authUser, [4, 6]) && proyectoCapacidadInstalada.integrantes.find((item) => item.id == authUser.id))) {
             $formNuevoIntegrante.post(route('proyectos-capacidad-instalada.integrantes.users.register', proyectoCapacidadInstalada.id), {
                 onStart: () => {
                     sending = true
@@ -187,7 +187,7 @@
                     <a use:inertia href={route('proyectos-capacidad-instalada.objetivos-especificos.index', proyectoCapacidadInstalada.id)} class="text-indigo-400 hover:text-indigo-600">Objetivos específicos y resultados</a>
                     <span class="text-indigo-400 font-medium">/</span>
                     <a use:inertia href={route('proyectos-capacidad-instalada.productos.index', proyectoCapacidadInstalada.id)} class="text-indigo-400 hover:text-indigo-600">Productos</a>
-                    {#if isSuperAdmin || checkRole(authUser, [4, 6])}
+                    {#if isSuperAdmin || (checkRole(authUser, [4, 6]) && proyectoCapacidadInstalada.integrantes.find((item) => item.id == authUser.id))}
                         <span class="text-indigo-400 font-medium">/</span>
                         <a use:inertia href={route('proyectos-capacidad-instalada.finalizar', proyectoCapacidadInstalada.id)} class="text-indigo-400 hover:text-indigo-600">Finalizar</a>
                     {/if}
@@ -203,7 +203,7 @@
         Ir a los objetivos específicos y resultados
     </a>
 
-    {#if isSuperAdmin || (proyectoCapacidadInstalada.estado_proyecto != 'Finalizado' && checkRole(authUser, [4, 6]))}
+    {#if isSuperAdmin || (proyectoCapacidadInstalada.estado_proyecto != 'Finalizado' && checkRole(authUser, [4, 6]) && proyectoCapacidadInstalada.integrantes.find((item) => item.id == authUser.id))}
         <div class="bg-indigo-100 p-4">
             <h1 class="text-4xl text-center">Integrantes</h1>
             <p class="text-center m-auto mt-8">Realiza la búsqueda de integrantes por nombre, número de documento o por el correo electrónico institucional</p>
@@ -325,7 +325,7 @@
                         </td>
                         <td class="border-t td-actions">
                             <DataTableMenu class={proyectoCapacidadInstalada.integrantes.length < 4 ? 'z-50' : ''}>
-                                {#if isSuperAdmin || (proyectoCapacidadInstalada.estado_proyecto != 'Finalizado' && checkRole(authUser, [4, 6]))}
+                                {#if isSuperAdmin || (proyectoCapacidadInstalada.estado_proyecto != 'Finalizado' && checkRole(authUser, [4, 6]) && proyectoCapacidadInstalada.integrantes.find((item) => item.id == authUser.id))}
                                     <Item on:SMUI:action={() => showParticipante(integrante)}>
                                         <Text>Editar</Text>
                                     </Item>
@@ -359,11 +359,11 @@
 
     <InfoMessage>
         <p>¿Existen documentos tipo contrato, convenio o acuerdos que hagan parte del proyecto con entidades aliadas u otros centros de formación SENA?</p>
-        <Switch bind:checked={existenciaDocumentos} />
+        <Switch bind:checked={existenciaDocumentos} disabled={proyectoCapacidadInstalada.integrantes.find((item) => item.id == authUser.id) ? undefined : true} />
     </InfoMessage>
 
     {#if existenciaDocumentos}
-        {#if isSuperAdmin || (proyectoCapacidadInstalada.estado_proyecto != 'Finalizado' && checkRole(authUser, [4, 6]))}
+        {#if isSuperAdmin || (proyectoCapacidadInstalada.estado_proyecto != 'Finalizado' && checkRole(authUser, [4, 6]) && proyectoCapacidadInstalada.integrantes.find((item) => item.id == authUser.id))}
             <div class="mb-6 flex justify-between items-center mt-4">
                 <Button on:click={() => Inertia.visit(route('proyectos-capacidad-instalada.entidades-aliadas.create', [proyectoCapacidadInstalada.id]))} variant="raised">Crear entidad aliada</Button>
             </div>
@@ -403,7 +403,7 @@
                             </td>
                             <td class="border-t td-actions">
                                 <DataTableMenu class={proyectoCapacidadInstalada.entidades_aliadas.length < 4 ? 'z-50' : ''}>
-                                    {#if isSuperAdmin || (proyectoCapacidadInstalada.estado_proyecto != 'Finalizado' && checkRole(authUser, [4, 6])) || checkPermission(authUser, [22])}
+                                    {#if isSuperAdmin || (proyectoCapacidadInstalada.estado_proyecto != 'Finalizado' && checkRole(authUser, [4, 6]) && proyectoCapacidadInstalada.integrantes.find((item) => item.id == authUser.id)) || checkPermission(authUser, [22])}
                                         <Item on:SMUI:action={() => Inertia.visit(route('proyectos-capacidad-instalada.entidades-aliadas.edit', [proyectoCapacidadInstalada.id, entidadAliada.id]))}>
                                             <Text>Ver detalles</Text>
                                         </Item>
@@ -442,7 +442,7 @@
         </div>
         <div slot="content">
             <form on:submit|preventDefault={submitParticipante} id="integrante-form">
-                <fieldset disabled={isSuperAdmin || (proyectoCapacidadInstalada.estado_proyecto != 'Finalizado' && checkRole(authUser, [4, 6])) ? undefined : true}>
+                <fieldset disabled={isSuperAdmin || (proyectoCapacidadInstalada.estado_proyecto != 'Finalizado' && checkRole(authUser, [4, 6]) && proyectoCapacidadInstalada.integrantes.find((item) => item.id == authUser.id)) ? undefined : true}>
                     <div class="mt-8">
                         <Label required class="mb-4" labelFor="rol_sennova" value="Rol SENNOVA" />
                         <Select id="rol_sennova" items={roles} bind:selectedValue={$formParticipante.rol_sennova} error={errors.rol_sennova} autocomplete="off" placeholder="Seleccione un rol SENNOVA" required />
