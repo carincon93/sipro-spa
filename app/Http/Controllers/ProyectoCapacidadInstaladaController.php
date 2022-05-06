@@ -15,7 +15,6 @@ use App\Models\ProyectoCapacidadInstaladaObjetivoEspecifico;
 use App\Models\ProyectoCapacidadInstaladaProducto;
 use App\Models\ProyectoCapacidadInstaladaResultado;
 use App\Models\User;
-use App\Rules\Email;
 use Illuminate\Http\Request;
 use Illuminate\Support\Str;
 use Illuminate\Support\Facades\Storage;
@@ -92,7 +91,7 @@ class ProyectoCapacidadInstaladaController extends Controller
      */
     public function show(ProyectoCapacidadInstalada $proyectoCapacidadInstalada)
     {
-        $this->authorize('view', [ProyectoCapacidadInstalada::class, $proyectoCapacidadInstalada]);
+        $this->authorize('update', [ProyectoCapacidadInstalada::class, $proyectoCapacidadInstalada]);
     }
 
     /**
@@ -111,6 +110,7 @@ class ProyectoCapacidadInstaladaController extends Controller
         $proyectoCapacidadInstalada->semilleroInvestigacion->lineaInvestigacion->grupoInvestigacion;
         $proyectoCapacidadInstalada->disciplinaSubareaConocimiento->subareaConocimiento->areaConocimiento;
         $proyectoCapacidadInstalada->subtipoProyectoCapacidadInstalada;
+        $proyectoCapacidadInstalada->integrantes;
 
         return Inertia::render('ProyectosCapacidadInstalada/Edit', [
             'proyectoCapacidadInstalada'            => $proyectoCapacidadInstalada,
@@ -319,6 +319,8 @@ class ProyectoCapacidadInstaladaController extends Controller
     {
         $this->authorize('update', [ProyectoCapacidadInstalada::class, $proyectoCapacidadInstalada]);
 
+        $proyectoCapacidadInstalada->integrantes;
+
         return Inertia::render('ProyectosCapacidadInstalada/Integrantes/EntidadesAliadas/Create', [
             'proyectoCapacidadInstalada' => $proyectoCapacidadInstalada,
         ]);
@@ -342,6 +344,8 @@ class ProyectoCapacidadInstaladaController extends Controller
     public function editEntidadAliada(ProyectoCapacidadInstalada $proyectoCapacidadInstalada, ProyectoCapacidadInstaladaEntidadAliada $entidadAliada)
     {
         $this->authorize('update', [ProyectoCapacidadInstalada::class, $proyectoCapacidadInstalada]);
+
+        $proyectoCapacidadInstalada->integrantes;
 
         return Inertia::render('ProyectosCapacidadInstalada/Integrantes/EntidadesAliadas/Edit', [
             'proyectoCapacidadInstalada' => $proyectoCapacidadInstalada,
@@ -388,6 +392,8 @@ class ProyectoCapacidadInstaladaController extends Controller
     {
         $this->authorize('update', [ProyectoCapacidadInstalada::class, $proyectoCapacidadInstalada]);
 
+        $proyectoCapacidadInstalada->integrantes;
+
         return Inertia::render('ProyectosCapacidadInstalada/ObjetivosEspecificos/Index', [
             'proyectoCapacidadInstalada'    => $proyectoCapacidadInstalada,
             'objetivosEspecificos'          => ProyectoCapacidadInstaladaObjetivoEspecifico::where('proyecto_capacidad_instalada_id', $proyectoCapacidadInstalada->id)->with('resultado')->orderBy('numero', 'ASC')->paginate(15)
@@ -397,6 +403,8 @@ class ProyectoCapacidadInstaladaController extends Controller
     public function createObjetivoEspecifico(ProyectoCapacidadInstalada $proyectoCapacidadInstalada)
     {
         $this->authorize('update', [ProyectoCapacidadInstalada::class, $proyectoCapacidadInstalada]);
+
+        $proyectoCapacidadInstalada->integrantes;
 
         return Inertia::render('ProyectosCapacidadInstalada/ObjetivosEspecificos/Create', [
             'proyectoCapacidadInstalada' => $proyectoCapacidadInstalada,
@@ -435,6 +443,7 @@ class ProyectoCapacidadInstaladaController extends Controller
         $this->authorize('update', [ProyectoCapacidadInstalada::class, $proyectoCapacidadInstalada]);
 
         $objetivoEspecifico->resultado;
+        $proyectoCapacidadInstalada->integrantes;
 
         return Inertia::render('ProyectosCapacidadInstalada/ObjetivosEspecificos/Edit', [
             'proyectoCapacidadInstalada'    => $proyectoCapacidadInstalada,
@@ -473,6 +482,8 @@ class ProyectoCapacidadInstaladaController extends Controller
     {
         $this->authorize('update', [ProyectoCapacidadInstalada::class, $proyectoCapacidadInstalada]);
 
+        $proyectoCapacidadInstalada->integrantes;
+
         return Inertia::render('ProyectosCapacidadInstalada/Productos/Index', [
             'proyectoCapacidadInstalada'    => $proyectoCapacidadInstalada,
             'productos'                     => ProyectoCapacidadInstaladaProducto::select('proyectos_capacidad_producto.*')->join('proyectos_capacidad_resultado', 'proyectos_capacidad_producto.proyecto_capacidad_resultado_id', 'proyectos_capacidad_resultado.id')->with('resultado')->paginate(15)
@@ -482,6 +493,8 @@ class ProyectoCapacidadInstaladaController extends Controller
     public function createProducto(ProyectoCapacidadInstalada $proyectoCapacidadInstalada)
     {
         $this->authorize('update', [ProyectoCapacidadInstalada::class, $proyectoCapacidadInstalada]);
+
+        $proyectoCapacidadInstalada->integrantes;
 
         return Inertia::render('ProyectosCapacidadInstalada/Productos/Create', [
             'proyectoCapacidadInstalada' => $proyectoCapacidadInstalada,
@@ -509,6 +522,8 @@ class ProyectoCapacidadInstaladaController extends Controller
     public function editProducto(ProyectoCapacidadInstalada $proyectoCapacidadInstalada, ProyectoCapacidadInstaladaProducto $producto)
     {
         $this->authorize('update', [ProyectoCapacidadInstalada::class, $proyectoCapacidadInstalada]);
+
+        $proyectoCapacidadInstalada->integrantes;
 
         $producto->resultado;
 
@@ -546,6 +561,8 @@ class ProyectoCapacidadInstaladaController extends Controller
     public function finalizar(ProyectoCapacidadInstalada $proyectoCapacidadInstalada)
     {
         $this->authorize('update', [ProyectoCapacidadInstalada::class, $proyectoCapacidadInstalada]);
+
+        $proyectoCapacidadInstalada->integrantes;
 
         return Inertia::render('ProyectosCapacidadInstalada/FinalizarProyecto', [
             'proyectoCapacidadInstalada'        => $proyectoCapacidadInstalada,
