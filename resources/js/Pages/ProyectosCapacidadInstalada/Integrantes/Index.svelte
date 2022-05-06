@@ -187,8 +187,10 @@
                     <a use:inertia href={route('proyectos-capacidad-instalada.objetivos-especificos.index', proyectoCapacidadInstalada.id)} class="text-indigo-400 hover:text-indigo-600">Objetivos específicos y resultados</a>
                     <span class="text-indigo-400 font-medium">/</span>
                     <a use:inertia href={route('proyectos-capacidad-instalada.productos.index', proyectoCapacidadInstalada.id)} class="text-indigo-400 hover:text-indigo-600">Productos</a>
-                    <span class="text-indigo-400 font-medium">/</span>
-                    <a use:inertia href={route('proyectos-capacidad-instalada.finalizar', proyectoCapacidadInstalada.id)} class="text-indigo-400 hover:text-indigo-600">Finalizar</a>
+                    {#if isSuperAdmin || checkRole(authUser, [4, 6])}
+                        <span class="text-indigo-400 font-medium">/</span>
+                        <a use:inertia href={route('proyectos-capacidad-instalada.finalizar', proyectoCapacidadInstalada.id)} class="text-indigo-400 hover:text-indigo-600">Finalizar</a>
+                    {/if}
                 </h1>
             </div>
         </div>
@@ -201,78 +203,80 @@
         Ir a los objetivos específicos y resultados
     </a>
 
-    <div class="bg-indigo-100 p-4">
-        <h1 class="text-4xl text-center">Integrantes</h1>
-        <p class="text-center m-auto mt-8">Realiza la búsqueda de integrantes por nombre, número de documento o por el correo electrónico institucional</p>
-        <form on:submit|preventDefault={search} on:input={() => (sended = false)}>
-            <fieldset>
-                <div class="mt-4 flex flex-row">
-                    <Input label="Escriba el nombre, número de documento o el correo electrónico instiucional" id="search_integrante" type="search" class="mt-1 m-auto block flex-1" bind:value={$form.search_integrante} input$minLength="4" autocomplete="off" required />
-                    <LoadingButton loading={sending} class="btn-indigo m-auto ml-1" type="submit">Buscar</LoadingButton>
+    {#if isSuperAdmin || (proyectoCapacidadInstalada.estado_proyecto != 'Finalizado' && checkRole(authUser, [4, 6]))}
+        <div class="bg-indigo-100 p-4">
+            <h1 class="text-4xl text-center">Integrantes</h1>
+            <p class="text-center m-auto mt-8">Realiza la búsqueda de integrantes por nombre, número de documento o por el correo electrónico institucional</p>
+            <form on:submit|preventDefault={search} on:input={() => (sended = false)}>
+                <fieldset>
+                    <div class="mt-4 flex flex-row">
+                        <Input label="Escriba el nombre, número de documento o el correo electrónico instiucional" id="search_integrante" type="search" class="mt-1 m-auto block flex-1" bind:value={$form.search_integrante} input$minLength="4" autocomplete="off" required />
+                        <LoadingButton loading={sending} class="btn-indigo m-auto ml-1" type="submit">Buscar</LoadingButton>
+                    </div>
+                </fieldset>
+            </form>
+
+            {#if sended}
+                <h1 class="mt-24 mb-8 text-center text-3xl">Resultados de la búsqueda de integrantes</h1>
+                <InfoMessage message="Una vez arroje los resultados de clic en los tres puntos y seleccione la opción <strong>Vincular</strong>" />
+                <div class="bg-white rounded shadow">
+                    <table class="w-full whitespace-no-wrap table-fixed data-table">
+                        <thead>
+                            <tr class="text-left font-bold">
+                                <th class="px-6 pt-6 pb-4 sticky top-0 z-10 bg-white shadow-xl w-full">Nombre</th>
+                                <th class="px-6 pt-6 pb-4 sticky top-0 z-10 bg-white shadow-xl w-full">Correo electrónico</th>
+                                <th class="px-6 pt-6 pb-4 sticky top-0 z-10 bg-white shadow-xl w-full">Centro de formación</th>
+                                <th class="px-6 pt-6 pb-4 sticky top-0 z-10 bg-white shadow-xl w-full">Regional</th>
+                                <th class="px-6 pt-6 pb-4 sticky top-0 z-10 bg-white shadow-xl text-center th-actions">Acciones</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            {#each resultados as resultado (resultado.id)}
+                                <tr class="hover:bg-gray-100 focus-within:bg-gray-100">
+                                    <td class="border-t">
+                                        <p class="px-6 py-4 focus:text-indigo-500">
+                                            {resultado.nombre}
+                                        </p>
+                                    </td>
+                                    <td class="border-t">
+                                        <p class="px-6 py-4">
+                                            {resultado.email}
+                                        </p>
+                                    </td>
+                                    <td class="border-t">
+                                        <p class="px-6 py-4">
+                                            {resultado.centro_formacion ? resultado.centro_formacion.nombre : ''}
+                                        </p>
+                                    </td>
+                                    <td class="border-t">
+                                        <p class="px-6 py-4">
+                                            {resultado.centro_formacion ? resultado.centro_formacion.regional.nombre : ''}
+                                        </p>
+                                    </td>
+                                    <td class="border-t td-actions">
+                                        <DataTableMenu class={resultados.length < 4 ? 'z-50' : ''}>
+                                            <Item on:SMUI:action={() => showParticipante(resultado)}>
+                                                <Text>Vincular</Text>
+                                            </Item>
+                                        </DataTableMenu>
+                                    </td>
+                                </tr>
+                            {/each}
+
+                            {#if resultados.length === 0}
+                                <tr>
+                                    <td class="border-t px-6 py-4" colspan="5">
+                                        {$_('No data recorded')}
+                                        <Button on:click={() => showRegister()} type="button" variant={null}>Crear integrante</Button>
+                                    </td>
+                                </tr>
+                            {/if}
+                        </tbody>
+                    </table>
                 </div>
-            </fieldset>
-        </form>
-
-        {#if sended}
-            <h1 class="mt-24 mb-8 text-center text-3xl">Resultados de la búsqueda de integrantes</h1>
-            <InfoMessage message="Una vez arroje los resultados de clic en los tres puntos y seleccione la opción <strong>Vincular</strong>" />
-            <div class="bg-white rounded shadow">
-                <table class="w-full whitespace-no-wrap table-fixed data-table">
-                    <thead>
-                        <tr class="text-left font-bold">
-                            <th class="px-6 pt-6 pb-4 sticky top-0 z-10 bg-white shadow-xl w-full">Nombre</th>
-                            <th class="px-6 pt-6 pb-4 sticky top-0 z-10 bg-white shadow-xl w-full">Correo electrónico</th>
-                            <th class="px-6 pt-6 pb-4 sticky top-0 z-10 bg-white shadow-xl w-full">Centro de formación</th>
-                            <th class="px-6 pt-6 pb-4 sticky top-0 z-10 bg-white shadow-xl w-full">Regional</th>
-                            <th class="px-6 pt-6 pb-4 sticky top-0 z-10 bg-white shadow-xl text-center th-actions">Acciones</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        {#each resultados as resultado (resultado.id)}
-                            <tr class="hover:bg-gray-100 focus-within:bg-gray-100">
-                                <td class="border-t">
-                                    <p class="px-6 py-4 focus:text-indigo-500">
-                                        {resultado.nombre}
-                                    </p>
-                                </td>
-                                <td class="border-t">
-                                    <p class="px-6 py-4">
-                                        {resultado.email}
-                                    </p>
-                                </td>
-                                <td class="border-t">
-                                    <p class="px-6 py-4">
-                                        {resultado.centro_formacion ? resultado.centro_formacion.nombre : ''}
-                                    </p>
-                                </td>
-                                <td class="border-t">
-                                    <p class="px-6 py-4">
-                                        {resultado.centro_formacion ? resultado.centro_formacion.regional.nombre : ''}
-                                    </p>
-                                </td>
-                                <td class="border-t td-actions">
-                                    <DataTableMenu class={resultados.length < 4 ? 'z-50' : ''}>
-                                        <Item on:SMUI:action={() => showParticipante(resultado)}>
-                                            <Text>Vincular</Text>
-                                        </Item>
-                                    </DataTableMenu>
-                                </td>
-                            </tr>
-                        {/each}
-
-                        {#if resultados.length === 0}
-                            <tr>
-                                <td class="border-t px-6 py-4" colspan="5">
-                                    {$_('No data recorded')}
-                                    <Button on:click={() => showRegister()} type="button" variant={null}>Crear integrante</Button>
-                                </td>
-                            </tr>
-                        {/if}
-                    </tbody>
-                </table>
-            </div>
-        {/if}
-    </div>
+            {/if}
+        </div>
+    {/if}
 
     <h1 class="mt-24 mb-8 text-center text-3xl">Integrantes vinculados</h1>
     <div class="bg-white rounded shadow">
@@ -399,7 +403,7 @@
                             </td>
                             <td class="border-t td-actions">
                                 <DataTableMenu class={proyectoCapacidadInstalada.entidades_aliadas.length < 4 ? 'z-50' : ''}>
-                                    {#if isSuperAdmin || (proyectoCapacidadInstalada.estado_proyecto != 'Finalizado' && checkRole(authUser, [4, 6]))}
+                                    {#if isSuperAdmin || (proyectoCapacidadInstalada.estado_proyecto != 'Finalizado' && checkRole(authUser, [4, 6])) || checkPermission(authUser, [22])}
                                         <Item on:SMUI:action={() => Inertia.visit(route('proyectos-capacidad-instalada.entidades-aliadas.edit', [proyectoCapacidadInstalada.id, entidadAliada.id]))}>
                                             <Text>Ver detalles</Text>
                                         </Item>

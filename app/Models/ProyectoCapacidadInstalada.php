@@ -231,7 +231,7 @@ class ProyectoCapacidadInstalada extends Model
     public static function getProyectosPorRol()
     {
         $authUser = Auth::user();
-        if ($authUser->hasRole(1)) { // Admin
+        if ($authUser->hasRole(1) || $authUser->getAllPermissions()->where('id', 22)->first() ? $authUser->getAllPermissions()->where('id', 22)->first()->exists() : null) { // Admin
             $proyectoCapacidadInstalada = ProyectoCapacidadInstalada::select('proyectos_capacidad_instalada.*')
                 ->distinct('proyectos_capacidad_instalada.id')
                 ->orderBy('proyectos_capacidad_instalada.id', 'ASC')

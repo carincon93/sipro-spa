@@ -92,7 +92,7 @@ class ProyectoCapacidadInstaladaController extends Controller
      */
     public function show(ProyectoCapacidadInstalada $proyectoCapacidadInstalada)
     {
-        $this->authorize('update', [ProyectoCapacidadInstalada::class, $proyectoCapacidadInstalada]);
+        $this->authorize('view', [ProyectoCapacidadInstalada::class, $proyectoCapacidadInstalada]);
     }
 
     /**
@@ -475,7 +475,7 @@ class ProyectoCapacidadInstaladaController extends Controller
 
         return Inertia::render('ProyectosCapacidadInstalada/Productos/Index', [
             'proyectoCapacidadInstalada'    => $proyectoCapacidadInstalada,
-            'productos'                     => ProyectoCapacidadInstaladaProducto::join('proyectos_capacidad_resultado', 'proyectos_capacidad_producto.proyecto_capacidad_resultado_id', 'proyectos_capacidad_resultado.id')->with('resultado')->paginate(15)
+            'productos'                     => ProyectoCapacidadInstaladaProducto::select('proyectos_capacidad_producto.*')->join('proyectos_capacidad_resultado', 'proyectos_capacidad_producto.proyecto_capacidad_resultado_id', 'proyectos_capacidad_resultado.id')->with('resultado')->paginate(15)
         ]);
     }
 

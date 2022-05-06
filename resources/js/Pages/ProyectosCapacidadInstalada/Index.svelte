@@ -66,7 +66,7 @@
 
                     <td class="border-t td-actions">
                         <DataTableMenu class={proyectosCapacidadInstalada.data.length < 4 ? 'z-50' : ''}>
-                            {#if isSuperAdmin || (estado_proyecto != 3 && checkRole(authUser, [4, 6]))}
+                            {#if isSuperAdmin || (estado_proyecto != 3 && checkRole(authUser, [4, 6])) || checkPermission(authUser, [22])}
                                 <Item on:SMUI:action={() => Inertia.visit(route('proyectos-capacidad-instalada.edit', [id]))}>
                                     <Text>Ver detalles</Text>
                                 </Item>
