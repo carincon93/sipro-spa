@@ -225,7 +225,7 @@
                 <Button on:click={() => Inertia.visit(route('proyectos.index'))} variant={route().current('proyectos.*') ? 'raised' : 'outlined'} class="p-2">Proyectos</Button>
             {/if}
 
-            {#if isSuperAdmin || checkRole(authUser, [4, 6])}
+            {#if isSuperAdmin || checkRole(authUser, [4, 6]) || checkPermission(authUser, [22])}
                 <Button on:click={() => Inertia.visit(route('proyectos-capacidad-instalada.index'))} variant={route().current('proyectos-capacidad-instalada.*') ? 'raised' : 'outlined'} class="p-2">Proyectos de capacidad instalada</Button>
             {/if}
 

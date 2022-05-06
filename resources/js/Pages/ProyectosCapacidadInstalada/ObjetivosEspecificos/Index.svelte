@@ -36,8 +36,10 @@
                     <a use:inertia href={route('proyectos-capacidad-instalada.objetivos-especificos.index', proyectoCapacidadInstalada.id)} class="text-indigo-400 hover:text-indigo-600 font-extrabold underline">Objetivos específicos y resultados</a>
                     <span class="text-indigo-400 font-medium">/</span>
                     <a use:inertia href={route('proyectos-capacidad-instalada.productos.index', proyectoCapacidadInstalada.id)} class="text-indigo-400 hover:text-indigo-600">Productos</a>
-                    <span class="text-indigo-400 font-medium">/</span>
-                    <a use:inertia href={route('proyectos-capacidad-instalada.finalizar', proyectoCapacidadInstalada.id)} class="text-indigo-400 hover:text-indigo-600">Finalizar</a>
+                    {#if isSuperAdmin || checkRole(authUser, [4, 6])}
+                        <span class="text-indigo-400 font-medium">/</span>
+                        <a use:inertia href={route('proyectos-capacidad-instalada.finalizar', proyectoCapacidadInstalada.id)} class="text-indigo-400 hover:text-indigo-600">Finalizar</a>
+                    {/if}
                 </h1>
             </div>
         </div>
@@ -87,7 +89,7 @@
                         </td>
                         <td class="border-t td-actions">
                             <DataTableMenu class={objetivosEspecificos.data.length < 4 ? 'z-50' : ''}>
-                                {#if isSuperAdmin || (proyectoCapacidadInstalada.estado_proyecto != 'Finalizado' && checkRole(authUser, [4, 6]))}
+                                {#if isSuperAdmin || (proyectoCapacidadInstalada.estado_proyecto != 'Finalizado' && checkRole(authUser, [4, 6])) || checkPermission(authUser, [22])}
                                     <Item on:SMUI:action={() => Inertia.visit(route('proyectos-capacidad-instalada.objetivos-especificos.edit', [proyectoCapacidadInstalada.id, objetivoEspecifico.id]))}>
                                         <Text>Ver detalles</Text>
                                     </Item>

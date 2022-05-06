@@ -174,8 +174,10 @@
                     <a use:inertia href={route('proyectos-capacidad-instalada.objetivos-especificos.index', proyectoCapacidadInstalada.id)} class="text-indigo-400 hover:text-indigo-600">Objetivos específicos y resultados</a>
                     <span class="text-indigo-400 font-medium">/</span>
                     <a use:inertia href={route('proyectos-capacidad-instalada.productos.index', proyectoCapacidadInstalada.id)} class="text-indigo-400 hover:text-indigo-600">Productos</a>
-                    <span class="text-indigo-400 font-medium">/</span>
-                    <a use:inertia href={route('proyectos-capacidad-instalada.finalizar', proyectoCapacidadInstalada.id)} class="text-indigo-400 hover:text-indigo-600">Finalizar</a>
+                    {#if isSuperAdmin || checkRole(authUser, [4, 6])}
+                        <span class="text-indigo-400 font-medium">/</span>
+                        <a use:inertia href={route('proyectos-capacidad-instalada.finalizar', proyectoCapacidadInstalada.id)} class="text-indigo-400 hover:text-indigo-600">Finalizar</a>
+                    {/if}
                 </h1>
             </div>
         </div>
@@ -476,61 +478,63 @@
             {/if}
         </div>
     </form>
-    <Dialog bind:open={dialogOpen}>
-        <div slot="title" class="flex items-center">
-            <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 mr-2 text-red-500" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-3L13.732 4c-.77-1.333-2.694-1.333-3.464 0L3.34 16c-.77 1.333.192 3 1.732 3z" />
-            </svg>
-            Eliminar recurso
-        </div>
-        <div slot="content">
-            <p>
-                ¿Está seguro(a) que desea eliminar este recurso?
-                <br />
-                Todos los datos se eliminarán de forma permanente.
-                <br />
-                Está acción no se puede deshacer.
-            </p>
-        </div>
-        <div slot="actions">
-            <div class="p-4">
-                <Button on:click={(event) => (dialogOpen = false)} variant={null}>Cancelar</Button>
-                <Button variant="raised" on:click={destroy}>Confirmar</Button>
+    {#if isSuperAdmin || checkRole(authUser, [4, 6])}
+        <Dialog bind:open={dialogOpen}>
+            <div slot="title" class="flex items-center">
+                <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 mr-2 text-red-500" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-3L13.732 4c-.77-1.333-2.694-1.333-3.464 0L3.34 16c-.77 1.333.192 3 1.732 3z" />
+                </svg>
+                Eliminar recurso
             </div>
-        </div>
-    </Dialog>
+            <div slot="content">
+                <p>
+                    ¿Está seguro(a) que desea eliminar este recurso?
+                    <br />
+                    Todos los datos se eliminarán de forma permanente.
+                    <br />
+                    Está acción no se puede deshacer.
+                </p>
+            </div>
+            <div slot="actions">
+                <div class="p-4">
+                    <Button on:click={(event) => (dialogOpen = false)} variant={null}>Cancelar</Button>
+                    <Button variant="raised" on:click={destroy}>Confirmar</Button>
+                </div>
+            </div>
+        </Dialog>
 
-    <Dialog bind:open={proyectoDialogOpen} id="informacion">
-        <div slot="title" class="flex items-center flex-col mt-4">
-            <figure>
-                <img src={window.basePath + '/images/proyecto.png'} alt="Proyecto" class="h-32 mb-6" />
-            </figure>
-            Código del proyecto: {proyectoCapacidadInstalada.codigo}
-        </div>
-        <div slot="content">
-            <div>
-                <h1 class="text-center mt-4 mb-4">Para terminar el numeral de <strong>Información básica</strong> por favor continue diligenciando los siguientes campos:</h1>
-                <p class="text-center mb-4">Si ya están completos omita esta información.</p>
-                <ul class="list-disc">
-                    <li>Justificación</li>
-                    <li>Plan tecnológico</li>
-                    <li>Objetivo general</li>
-                    <li>Metodología</li>
-                    <li>Infraestructura para el desarrollo del proyecto</li>
-                    <li>Materiales de formación a utilizar</li>
-                    <li>Planteamiento del problema</li>
-                    <li>Conclusiones</li>
-                    <li>Bibliografía</li>
-                </ul>
+        <Dialog bind:open={proyectoDialogOpen} id="informacion">
+            <div slot="title" class="flex items-center flex-col mt-4">
+                <figure>
+                    <img src={window.basePath + '/images/proyecto.png'} alt="Proyecto" class="h-32 mb-6" />
+                </figure>
+                Código del proyecto: {proyectoCapacidadInstalada.codigo}
             </div>
-        </div>
-        <div slot="actions">
-            <div class="p-4">
-                <Button on:click={(event) => (proyectoDialogOpen = false)} variant={null}>Omitir</Button>
-                {#if proyectoCapacidadInstalada.estado_proyecto != 'Finalizado'}
-                    <Button variant="raised" on:click={(event) => (proyectoDialogOpen = false)} on:click={() => Inertia.visit('#beneficia_a')}>Continuar diligenciando</Button>
-                {/if}
+            <div slot="content">
+                <div>
+                    <h1 class="text-center mt-4 mb-4">Para terminar el numeral de <strong>Información básica</strong> por favor continue diligenciando los siguientes campos:</h1>
+                    <p class="text-center mb-4">Si ya están completos omita esta información.</p>
+                    <ul class="list-disc">
+                        <li>Justificación</li>
+                        <li>Plan tecnológico</li>
+                        <li>Objetivo general</li>
+                        <li>Metodología</li>
+                        <li>Infraestructura para el desarrollo del proyecto</li>
+                        <li>Materiales de formación a utilizar</li>
+                        <li>Planteamiento del problema</li>
+                        <li>Conclusiones</li>
+                        <li>Bibliografía</li>
+                    </ul>
+                </div>
             </div>
-        </div>
-    </Dialog>
+            <div slot="actions">
+                <div class="p-4">
+                    <Button on:click={(event) => (proyectoDialogOpen = false)} variant={null}>Omitir</Button>
+                    {#if proyectoCapacidadInstalada.estado_proyecto != 'Finalizado'}
+                        <Button variant="raised" on:click={(event) => (proyectoDialogOpen = false)} on:click={() => Inertia.visit('#beneficia_a')}>Continuar diligenciando</Button>
+                    {/if}
+                </div>
+            </div>
+        </Dialog>
+    {/if}
 </AuthenticatedLayout>
