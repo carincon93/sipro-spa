@@ -486,7 +486,7 @@ class ProyectoCapacidadInstaladaController extends Controller
 
         return Inertia::render('ProyectosCapacidadInstalada/Productos/Index', [
             'proyectoCapacidadInstalada'    => $proyectoCapacidadInstalada,
-            'productos'                     => ProyectoCapacidadInstaladaProducto::select('proyectos_capacidad_producto.*')->join('proyectos_capacidad_resultado', 'proyectos_capacidad_producto.proyecto_capacidad_resultado_id', 'proyectos_capacidad_resultado.id')->with('resultado')->paginate(15)
+            'productos'                     => ProyectoCapacidadInstaladaProducto::select('proyectos_capacidad_producto.*', 'proyecto_capacidad_objetivo_especifico.proyecto_capacidad_instalada_id')->join('proyectos_capacidad_resultado', 'proyectos_capacidad_producto.proyecto_capacidad_resultado_id', 'proyectos_capacidad_resultado.id')->join('proyecto_capacidad_objetivo_especifico', 'proyectos_capacidad_resultado.proyecto_capacidad_objetivo_especifico_id', 'proyecto_capacidad_objetivo_especifico.id')->where('proyecto_capacidad_objetivo_especifico.proyecto_capacidad_instalada_id', $proyectoCapacidadInstalada->id)->with('resultado')->paginate(15)
         ]);
     }
 
