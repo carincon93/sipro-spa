@@ -34,7 +34,7 @@ class ProyectoCapacidadInstaladaPolicy
      */
     public function view(User $user, ProyectoCapacidadInstalada $proyectoCapacidadInstalada)
     {
-        if ($user->getAllPermissions()->where('id', 22)->first() ? $user->getAllPermissions()->where('id', 22)->first()->exists() : null || $user->hasRole([4]) && $user->dinamizadorCentroFormacion && $proyectoCapacidadInstalada->semilleroInvestigacion->lineaInvestigacion->grupoInvestigacion->centroFormacion->id == $user->dinamizadorCentroFormacion->id) {
+        if ($user->getAllPermissions()->where('id', 22)->first() || $user->hasRole([4]) && $user->dinamizadorCentroFormacion && $proyectoCapacidadInstalada->semilleroInvestigacion->lineaInvestigacion->grupoInvestigacion->centroFormacion->id == $user->dinamizadorCentroFormacion->id) {
             return true;
         }
 
@@ -69,7 +69,7 @@ class ProyectoCapacidadInstaladaPolicy
      */
     public function update(User $user, ProyectoCapacidadInstalada $proyectoCapacidadInstalada)
     {
-        if ($user->getAllPermissions()->where('id', 22)->first() ? $user->getAllPermissions()->where('id', 22)->first()->exists() : null || $user->hasRole([4]) && $user->dinamizadorCentroFormacion && $proyectoCapacidadInstalada->semilleroInvestigacion->lineaInvestigacion->grupoInvestigacion->centroFormacion->id == $user->dinamizadorCentroFormacion->id) {
+        if ($user->getAllPermissions()->where('id', 22)->first() || $user->hasRole([4]) && $user->dinamizadorCentroFormacion && $proyectoCapacidadInstalada->semilleroInvestigacion->lineaInvestigacion->grupoInvestigacion->centroFormacion->id == $user->dinamizadorCentroFormacion->id) {
             return true;
         }
 
