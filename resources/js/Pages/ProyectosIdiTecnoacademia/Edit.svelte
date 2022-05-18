@@ -32,6 +32,7 @@
     export let municipiosRelacionados
     export let roles
     export let autorPrincipal
+    export let proyectos
 
     let hayEntidadesVinculadas = proyectoIdiTecnoacademia.entidades_vinculadas ? true : false
     let existenDocumentos = proyectoIdiTecnoacademia.documentos_resultados ? true : false
@@ -57,11 +58,22 @@
             value: proyectoIdiTecnoacademia.semillero_investigacion_id,
             label: semillerosInvestigacion.find((item) => item.value == proyectoIdiTecnoacademia.semillero_investigacion_id)?.label,
         },
+        proyecto_id: {
+            value: proyectoIdiTecnoacademia.proyecto_id,
+            label: proyectos.find((item) => item.value == proyectoIdiTecnoacademia.proyecto_id)?.label,
+        },
         tecnoacademia_linea_tecnoacademia_id: lineasRelacionadas,
         titulo: proyectoIdiTecnoacademia.titulo,
         fecha_inicio: proyectoIdiTecnoacademia.fecha_inicio,
         fecha_finalizacion: proyectoIdiTecnoacademia.fecha_finalizacion,
         resumen: proyectoIdiTecnoacademia.resumen,
+        palabras_clave: proyectoIdiTecnoacademia.palabras_clave,
+        especies: proyectoIdiTecnoacademia.especies,
+        tiene_linea_investigacion: proyectoIdiTecnoacademia.tiene_linea_investigacion,
+        lineas_investigacion: proyectoIdiTecnoacademia.lineas_investigacion,
+        proyecto_nuevo: proyectoIdiTecnoacademia.proyecto_nuevo,
+        proyecto_con_continuidad: proyectoIdiTecnoacademia.proyecto_con_continuidad,
+        productos_premios: proyectoIdiTecnoacademia.productos_premios,
         texto_exposicion: proyectoIdiTecnoacademia.texto_exposicion,
         pdf_proyecto: proyectoIdiTecnoacademia.pdf_proyecto,
         resultados_obtenidos: proyectoIdiTecnoacademia.resultados_obtenidos,
@@ -225,6 +237,82 @@
                 </div>
             </div>
 
+            <div class="mt-44 grid grid-cols-2">
+                <div>
+                    <Label required class="mb-4" labelFor="palabras_clave" value="Palabras claves relacionadas con el proyecto (Separados por coma)" />
+                </div>
+                <div>
+                    <Tags id="palabras_clave" class="mt-4" enforceWhitelist={false} bind:tags={$form.palabras_clave} placeholder="Palabras clave" error={errors.palabras_clave} required />
+                </div>
+            </div>
+
+            <div class="mt-44 grid grid-cols-2">
+                <div>
+                    <Label class="mb-4" labelFor="especies" value="En caso de aplicar, por favor incluir las especies (nombre científico) que hacen parte del proyecto" />
+                </div>
+                <div>
+                    <Tags id="especies" class="mt-4" enforceWhitelist={false} bind:tags={$form.especies} placeholder="Especies" error={errors.especies} />
+                </div>
+            </div>
+
+            <div class="mt-44 grid grid-cols-2">
+                <div>
+                    <Label class="mb-4" value="¿El proyecto hace parte de una línea de investigación de la TecnoAcademia?" />
+                </div>
+                <div>
+                    <Switch bind:checked={$form.tiene_linea_investigacion} />
+                </div>
+            </div>
+
+            {#if $form.tiene_linea_investigacion}
+                <div class="mt-44 grid grid-cols-2">
+                    <div>
+                        <Label required class="mb-4" labelFor="lineas_investigacion" value="¿Cuáles líneas de investigación hacen parte del proyecto? (Separar por coma)" />
+                    </div>
+                    <div>
+                        <Tags id="lineas_investigacion" class="mt-4" enforceWhitelist={false} bind:tags={$form.lineas_investigacion} placeholder="Líneas de investigación" error={errors.lineas_investigacion} required />
+                    </div>
+                </div>
+            {/if}
+
+            <div class="mt-44 grid grid-cols-2">
+                <div>
+                    <Label class="mb-4" value="¿Es un proyecto nuevo?" />
+                </div>
+                <div>
+                    <Switch bind:checked={$form.proyecto_nuevo} />
+                </div>
+            </div>
+
+            <div class="mt-44 grid grid-cols-2">
+                <div>
+                    <Label class="mb-4" value="¿Es un proyecto que genera continuidad de uno anterior?" />
+                </div>
+                <div>
+                    <Switch bind:checked={$form.proyecto_con_continuidad} />
+                </div>
+            </div>
+
+            {#if $form.proyecto_con_continuidad}
+                <div class="mt-44 grid grid-cols-1">
+                    <div>
+                        <Label required class="mb-4" labelFor="productos_premios" value="Si es un proyecto que ha tenido continuidad, por favor relacione los productos obtenidos previamente y los reconocimientos o premios" />
+                    </div>
+                    <div>
+                        <Textarea maxlength="40000" id="productos_premios" error={errors.productos_premios} bind:value={$form.productos_premios} required />
+                    </div>
+                </div>
+
+                <div class="mt-44 grid grid-cols-2">
+                    <div>
+                        <Label required class="mb-4" labelFor="proyecto_id" value="Seleccione el código SGPS del proyecto" />
+                    </div>
+                    <div>
+                        <Select id="proyecto_id" items={proyectos} bind:selectedValue={$form.proyecto_id} error={errors.proyecto_id} autocomplete="off" placeholder="Busque por el código SGPS" required />
+                    </div>
+                </div>
+            {/if}
+
             <div class="mt-44 grid grid-cols-1">
                 <div>
                     <Label required class="mb-4" labelFor="texto_exposicion" value="Texto para exposición: Un texto corto que resuma la experiencia y que pueda ser publicado en espacios como el MUSEO SENA para introducir la iniciativa y los resultados." />
@@ -236,11 +324,10 @@
 
             <div class="mt-44 grid grid-cols-2">
                 <div>
-                    <Label class="mb-4" labelFor="pdf_proyecto" value="Url del proyecto en documento pdf" />
+                    <Label required class="mb-4" labelFor="pdf_proyecto" value="Url del proyecto en documento pdf" />
                 </div>
                 <div>
                     <Input label="Url" id="pdf_proyecto" type="url" class="mt-1" error={errors.pdf_proyecto} placeholder="Url https://www.google.com.co" bind:value={$form.pdf_proyecto} />
-                    <InfoMessage><a href={proyectoIdiTecnoacademia.pdf_proyecto} class="underline font-black" target="_blank" download>De clic aquí para descargar pdf</a></InfoMessage>
                 </div>
             </div>
 
@@ -413,11 +500,10 @@
             {#if existenDocumentos}
                 <div class="mt-44 grid grid-cols-2">
                     <div>
-                        <Label class="mb-4" labelFor="documentos_resultados" value="Si, sí, por favor cargar la url del documento" />
+                        <Label required class="mb-4" labelFor="documentos_resultados" value="Si, sí, por favor cargar la url del documento" />
                     </div>
                     <div>
-                        <Input label="Url" id="documentos_resultados" type="url" class="mt-1" error={errors.documentos_resultados} placeholder="Url https://www.google.com.co" bind:value={$form.documentos_resultados} />
-                        <InfoMessage><a href={proyectoIdiTecnoacademia.documentos_resultados} class="underline font-black" target="_blank" download>De clic aquí para descargar los archivos</a></InfoMessage>
+                        <Input label="Url" id="documentos_resultados" type="url" class="mt-1" error={errors.documentos_resultados} placeholder="Url https://www.google.com.co" bind:value={$form.documentos_resultados} required />
                     </div>
                 </div>
             {/if}
@@ -433,7 +519,7 @@
 
             <div class="mt-44 grid grid-cols-2">
                 <div>
-                    <Label required class="mb-4" labelFor="rol_sennova" value="Rol SENNOVA" />
+                    <Label required class="mb-4" labelFor="rol_sennova" value="Rol" />
                 </div>
 
                 <div>

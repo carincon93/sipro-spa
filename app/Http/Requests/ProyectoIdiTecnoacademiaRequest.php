@@ -28,10 +28,18 @@ class ProyectoIdiTecnoacademiaRequest extends FormRequest
                 'tecnoacademia_linea_tecnoacademia_id'      => ['required', 'array', 'exists:tecnoacademia_linea_tecnoacademia,id'],
                 'tecnoacademia_id'                          => ['required', 'min:0', 'max:2147483647', 'integer', 'exists:tecnoacademias,id'],
                 'semillero_investigacion_id'                => ['required', 'min:0', 'max:2147483647', 'integer', 'exists:semilleros_investigacion,id'],
+                'proyecto_id'                               => ['required', 'min:0', 'max:2147483647', 'integer', 'exists:proyectos,id'],
                 'titulo'                                    => ['required', 'string'],
                 'fecha_inicio'                              => ['required', 'date', 'date_format:Y-m-d', 'before:fecha_finalizacion'],
                 'fecha_finalizacion'                        => ['required', 'date', 'date_format:Y-m-d', 'after:fecha_inicio'],
                 'resumen'                                   => ['required', 'string'],
+                'palabras_clave'                            => ['required', 'json'],
+                'especies'                                  => ['nullable', 'json'],
+                'tiene_linea_investigacion'                 => ['required', 'boolean'],
+                'lineas_investigacion'                      => ['required_if:tiene_linea_investigacion,1', 'nullable', 'json'],
+                'proyecto_nuevo'                            => ['required', 'boolean'],
+                'proyecto_con_continuidad'                  => ['required', 'boolean'],
+                'productos_premios'                         => ['nullable', 'string'],
                 'texto_exposicion'                          => ['required', 'string'],
                 'resultados_obtenidos'                      => ['required', 'string'],
                 'observaciones_resultados'                  => ['required', 'string'],
@@ -57,10 +65,18 @@ class ProyectoIdiTecnoacademiaRequest extends FormRequest
                 'tecnoacademia_linea_tecnoacademia_id'      => ['required', 'array', 'exists:tecnoacademia_linea_tecnoacademia,id'],
                 'tecnoacademia_id'                          => ['required', 'min:0', 'max:2147483647', 'integer', 'exists:tecnoacademias,id'],
                 'semillero_investigacion_id'                => ['nullable', 'min:0', 'max:2147483647', 'integer', 'exists:semilleros_investigacion,id'],
+                'proyecto_id'                               => ['nullable', 'min:0', 'max:2147483647', 'integer', 'exists:proyectos,id'],
                 'titulo'                                    => ['required', 'string'],
                 'fecha_inicio'                              => ['required', 'date', 'date_format:Y-m-d', 'before:fecha_finalizacion'],
                 'fecha_finalizacion'                        => ['required', 'date', 'date_format:Y-m-d', 'after:fecha_inicio'],
                 'resumen'                                   => ['required', 'string'],
+                'palabras_clave'                            => ['required', 'json'],
+                'especies'                                  => ['nullable', 'json'],
+                'tiene_linea_investigacion'                 => ['required', 'boolean'],
+                'lineas_investigacion'                      => ['required_if:tiene_linea_investigacion,1', 'nullable', 'json'],
+                'proyecto_nuevo'                            => ['required', 'boolean'],
+                'proyecto_con_continuidad'                  => ['required', 'boolean'],
+                'productos_premios'                         => ['nullable', 'string'],
                 'texto_exposicion'                          => ['required', 'string'],
                 'resultados_obtenidos'                      => ['required', 'string'],
                 'observaciones_resultados'                  => ['required', 'string'],
@@ -100,6 +116,12 @@ class ProyectoIdiTecnoacademiaRequest extends FormRequest
         if (is_array($this->semillero_investigacion_id)) {
             $this->merge([
                 'semillero_investigacion_id' => $this->semillero_investigacion_id['value'],
+            ]);
+        }
+
+        if (is_array($this->proyecto_id)) {
+            $this->merge([
+                'proyecto_id' => $this->proyecto_id['value'],
             ]);
         }
 

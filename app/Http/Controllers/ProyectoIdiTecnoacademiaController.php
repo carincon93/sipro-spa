@@ -7,6 +7,7 @@ use App\Http\Controllers\Controller;
 use App\Http\Requests\ProyectoIdiTecnoacademiaProductoRequest;
 use App\Http\Requests\ProyectoIdiTecnoacademiaRequest;
 use App\Models\ProgramaSennova;
+use App\Models\Proyecto;
 use App\Models\ProyectoIdiTecnoacademiaProducto;
 use App\Models\SemilleroInvestigacion;
 use App\Models\Tecnoacademia;
@@ -52,6 +53,7 @@ class ProyectoIdiTecnoacademiaController extends Controller
             'estadosProyectoIdiTecnoacademia'   => json_decode(Storage::get('json/estados-proyecto-idi-tecnoacademia.json'), true),
             'beneficiados'                      => TipoBeneficiadoTa::select('id as value', 'nombre as label')->orderBy('nombre', 'ASC')->get(),
             'roles'                             => json_decode(Storage::get('json/roles-sennova-ta.json'), true),
+            'proyectos'                         => Proyecto::selectRaw("id as value, id + 8000 as label")->orderBy('id', 'ASC')->get(),
         ]);
     }
 
@@ -70,6 +72,13 @@ class ProyectoIdiTecnoacademiaController extends Controller
         $proyectoIdiTecnoacademia->fecha_inicio                         = $request->fecha_inicio;
         $proyectoIdiTecnoacademia->fecha_finalizacion                   = $request->fecha_finalizacion;
         $proyectoIdiTecnoacademia->resumen                              = $request->resumen;
+        $proyectoIdiTecnoacademia->palabras_clave                       = $request->palabras_clave;
+        $proyectoIdiTecnoacademia->especies                             = $request->especies;
+        $proyectoIdiTecnoacademia->tiene_linea_investigacion            = $request->tiene_linea_investigacion;
+        $proyectoIdiTecnoacademia->lineas_investigacion                 = $request->lineas_investigacion;
+        $proyectoIdiTecnoacademia->proyecto_nuevo                       = $request->proyecto_nuevo;
+        $proyectoIdiTecnoacademia->proyecto_con_continuidad             = $request->proyecto_con_continuidad;
+        $proyectoIdiTecnoacademia->productos_premios                    = $request->productos_premios;
         $proyectoIdiTecnoacademia->texto_exposicion                     = $request->texto_exposicion;
         $proyectoIdiTecnoacademia->resultados_obtenidos                 = $request->resultados_obtenidos;
         $proyectoIdiTecnoacademia->observaciones_resultados             = $request->observaciones_resultados;
@@ -87,6 +96,9 @@ class ProyectoIdiTecnoacademiaController extends Controller
         $proyectoIdiTecnoacademia->pdf_proyecto                         = $request->pdf_proyecto;
         $proyectoIdiTecnoacademia->documentos_resultados                = $request->documentos_resultados;
 
+        if ($request->proyecto_id) {
+            $proyectoIdiTecnoacademia->proyecto()->associate($request->proyecto_id);
+        }
         $proyectoIdiTecnoacademia->tecnoacademia()->associate($request->tecnoacademia_id);
         $proyectoIdiTecnoacademia->semilleroInvestigacion()->associate($request->semillero_investigacion_id);
 
@@ -136,6 +148,7 @@ class ProyectoIdiTecnoacademiaController extends Controller
             'municipiosRelacionados'            => $proyectoIdiTecnoacademia->municipios()->select('municipios.id as value', 'municipios.nombre as label', 'regionales.nombre as group', 'regionales.codigo')->join('regionales', 'regionales.id', 'municipios.regional_id')->get(),
             'roles'                             => json_decode(Storage::get('json/roles-sennova-ta.json'), true),
             'autorPrincipal'                    => $proyectoIdiTecnoacademia->participantes()->where('proyecto_idi_tecnoacademia_participante.autor_principal', true)->first(),
+            'proyectos'                         => Proyecto::selectRaw("id as value, id + 8000 as label")->orderBy('id', 'ASC')->get(),
         ]);
     }
 
@@ -154,6 +167,13 @@ class ProyectoIdiTecnoacademiaController extends Controller
         $proyectoIdiTecnoacademia->fecha_inicio                         = $request->fecha_inicio;
         $proyectoIdiTecnoacademia->fecha_finalizacion                   = $request->fecha_finalizacion;
         $proyectoIdiTecnoacademia->resumen                              = $request->resumen;
+        $proyectoIdiTecnoacademia->palabras_clave                       = $request->palabras_clave;
+        $proyectoIdiTecnoacademia->especies                             = $request->especies;
+        $proyectoIdiTecnoacademia->tiene_linea_investigacion            = $request->tiene_linea_investigacion;
+        $proyectoIdiTecnoacademia->lineas_investigacion                 = $request->lineas_investigacion;
+        $proyectoIdiTecnoacademia->proyecto_nuevo                       = $request->proyecto_nuevo;
+        $proyectoIdiTecnoacademia->proyecto_con_continuidad             = $request->proyecto_con_continuidad;
+        $proyectoIdiTecnoacademia->productos_premios                    = $request->productos_premios;
         $proyectoIdiTecnoacademia->texto_exposicion                     = $request->texto_exposicion;
         $proyectoIdiTecnoacademia->resultados_obtenidos                 = $request->resultados_obtenidos;
         $proyectoIdiTecnoacademia->observaciones_resultados             = $request->observaciones_resultados;
@@ -170,6 +190,10 @@ class ProyectoIdiTecnoacademiaController extends Controller
         $proyectoIdiTecnoacademia->nombre_centro_programa               = $request->nombre_centro_programa;
         $proyectoIdiTecnoacademia->pdf_proyecto                         = $request->pdf_proyecto;
         $proyectoIdiTecnoacademia->documentos_resultados                = $request->documentos_resultados;
+
+        if ($request->proyecto_id) {
+            $proyectoIdiTecnoacademia->proyecto()->associate($request->proyecto_id);
+        }
 
         $proyectoIdiTecnoacademia->tecnoacademia()->associate($request->tecnoacademia_id);
         $proyectoIdiTecnoacademia->semilleroInvestigacion()->associate($request->semillero_investigacion_id);

@@ -24,6 +24,7 @@
     export let semillerosInvestigacion
     export let estadosProyectoIdiTecnoacademia
     export let beneficiados
+    export let proyectos
 
     let hayEntidadesVinculadas = false
     let existenDocumentos = false
@@ -41,11 +42,19 @@
     let form = useForm({
         tecnoacademia_id: null,
         semillero_investigacion_id: null,
+        proyecto_id: null,
         tecnoacademia_linea_tecnoacademia_id: null,
         titulo: '',
         fecha_inicio: '',
         fecha_finalizacion: '',
         resumen: '',
+        palabras_clave: '',
+        especies: '',
+        tiene_linea_investigacion: false,
+        lineas_investigacion: '',
+        proyecto_nuevo: false,
+        proyecto_con_continuidad: false,
+        productos_premios: '',
         texto_exposicion: '',
         pdf_proyecto: null,
         resultados_obtenidos: '',
@@ -193,6 +202,82 @@
                     <Textarea maxlength="40000" id="resumen" error={errors.resumen} bind:value={$form.resumen} required />
                 </div>
             </div>
+
+            <div class="mt-44 grid grid-cols-2">
+                <div>
+                    <Label required class="mb-4" labelFor="palabras_clave" value="Palabras claves relacionadas con el proyecto (Separados por coma)" />
+                </div>
+                <div>
+                    <Tags id="palabras_clave" class="mt-4" enforceWhitelist={false} bind:tags={$form.palabras_clave} placeholder="Palabras clave" error={errors.palabras_clave} required />
+                </div>
+            </div>
+
+            <div class="mt-44 grid grid-cols-2">
+                <div>
+                    <Label class="mb-4" labelFor="especies" value="En caso de aplicar, por favor incluir las especies (nombre científico) que hacen parte del proyecto" />
+                </div>
+                <div>
+                    <Tags id="especies" class="mt-4" enforceWhitelist={false} bind:tags={$form.especies} placeholder="Especies" error={errors.especies} />
+                </div>
+            </div>
+
+            <div class="mt-44 grid grid-cols-2">
+                <div>
+                    <Label class="mb-4" value="¿El proyecto hace parte de una línea de investigación de la TecnoAcademia?" />
+                </div>
+                <div>
+                    <Switch bind:checked={$form.tiene_linea_investigacion} />
+                </div>
+            </div>
+
+            {#if $form.tiene_linea_investigacion}
+                <div class="mt-44 grid grid-cols-2">
+                    <div>
+                        <Label required class="mb-4" labelFor="lineas_investigacion" value="¿Cuáles líneas de investigación hacen parte del proyecto? (Separar por coma)" />
+                    </div>
+                    <div>
+                        <Tags id="lineas_investigacion" class="mt-4" enforceWhitelist={false} bind:tags={$form.lineas_investigacion} placeholder="Líneas de investigación" error={errors.lineas_investigacion} required />
+                    </div>
+                </div>
+            {/if}
+
+            <div class="mt-44 grid grid-cols-2">
+                <div>
+                    <Label class="mb-4" value="¿Es un proyecto nuevo?" />
+                </div>
+                <div>
+                    <Switch bind:checked={$form.proyecto_nuevo} />
+                </div>
+            </div>
+
+            <div class="mt-44 grid grid-cols-2">
+                <div>
+                    <Label class="mb-4" value="¿Es un proyecto que genera continuidad de uno anterior?" />
+                </div>
+                <div>
+                    <Switch bind:checked={$form.proyecto_con_continuidad} />
+                </div>
+            </div>
+
+            {#if $form.proyecto_con_continuidad}
+                <div class="mt-44 grid grid-cols-1">
+                    <div>
+                        <Label required class="mb-4" labelFor="productos_premios" value="Si es un proyecto que ha tenido continuidad, por favor relacione los productos obtenidos previamente y los reconocimientos o premios" />
+                    </div>
+                    <div>
+                        <Textarea maxlength="40000" id="productos_premios" error={errors.productos_premios} bind:value={$form.productos_premios} required />
+                    </div>
+                </div>
+
+                <div class="mt-44 grid grid-cols-2">
+                    <div>
+                        <Label required class="mb-4" labelFor="proyecto_id" value="Seleccione el código SGPS del proyecto" />
+                    </div>
+                    <div>
+                        <Select id="proyecto_id" items={proyectos} bind:selectedValue={$form.proyecto_id} error={errors.proyecto_id} autocomplete="off" placeholder="Busque por el código SGPS" required />
+                    </div>
+                </div>
+            {/if}
 
             <div class="mt-44 grid grid-cols-1">
                 <div>
