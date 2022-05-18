@@ -34,6 +34,7 @@ class ProyectoIdiTecnoacademia extends Model
     protected $fillable = [
         'tecnoacademia_id',
         'semillero_investigacion_id',
+        'proyecto_id',
         'resultados_obtenidos',
         'documentos_resultados',
         'observaciones_resultados',
@@ -41,6 +42,13 @@ class ProyectoIdiTecnoacademia extends Model
         'fecha_inicio',
         'fecha_finalizacion',
         'resumen',
+        'palabras_clave',
+        'especies',
+        'tiene_linea_investigacion',
+        'lineas_investigacion',
+        'proyecto_nuevo',
+        'proyecto_con_continuidad',
+        'productos_premios',
         'texto_exposicion',
         'pdf_proyecto',
         'nombre_aprendices_vinculados',
@@ -93,6 +101,16 @@ class ProyectoIdiTecnoacademia extends Model
     public function semilleroInvestigacion()
     {
         return $this->belongsTo(SemilleroInvestigacion::class);
+    }
+
+    /**
+     * Relationship with Proyecto
+     *
+     * @return object
+     */
+    public function proyecto()
+    {
+        return $this->belongsTo(Proyecto::class);
     }
 
     /**

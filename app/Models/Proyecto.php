@@ -255,6 +255,16 @@ class Proyecto extends Model
     }
 
     /**
+     * Relationship with ProyectoIdiTecnoacademia
+     *
+     * @return object
+     */
+    public function proyectosIdiTecnoacademia()
+    {
+        return $this->hasMany(ProyectoIdiTecnoacademia::class);
+    }
+
+    /**
      * Relationship with Evaluacion
      *
      * @return object
