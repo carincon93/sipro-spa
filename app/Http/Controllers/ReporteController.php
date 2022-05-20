@@ -10,6 +10,7 @@ use App\Exports\PresupuestoRolesSennovaExport;
 use App\Exports\EvaluacionesExport;
 use App\Exports\EvaluacionesProyectosPresupuestoExport;
 use App\Exports\InfoGruposLineasSemillerosExport;
+use App\Exports\InfoProyectosCapacidadInstaladaExport;
 use App\Exports\InfoProyectosExport;
 use App\Exports\InfoProyectosIdiExport;
 use App\Exports\InfoProyectosStExport;
@@ -157,5 +158,14 @@ class ReporteController extends Controller
     public function gruposLineasSemillerosExport()
     {
         return Excel::download(new InfoGruposLineasSemillerosExport(), 'gruposLineasSemilleros' . time() . '.xlsx');
+    }
+
+    /** proyectosCapacidadInstaladaExport
+     *
+     * @return void
+     */
+    public function proyectosCapacidadInstaladaExport()
+    {
+        return Excel::download(new InfoProyectosCapacidadInstaladaExport(), 'proyectosCapacidadInstalada' . time() . '.xlsx');
     }
 }

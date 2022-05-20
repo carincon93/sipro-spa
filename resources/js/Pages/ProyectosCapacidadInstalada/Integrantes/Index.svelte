@@ -359,7 +359,7 @@
 
     <InfoMessage>
         <p>¿Existen documentos tipo contrato, convenio o acuerdos que hagan parte del proyecto con entidades aliadas u otros centros de formación SENA?</p>
-        <Switch bind:checked={existenciaDocumentos} disabled={proyectoCapacidadInstalada.integrantes.find((item) => item.id == authUser.id) ? undefined : true} />
+        <Switch bind:checked={existenciaDocumentos} disabled={isSuperAdmin || proyectoCapacidadInstalada.integrantes.find((item) => item.id == authUser.id) ? undefined : true} />
     </InfoMessage>
 
     {#if existenciaDocumentos}

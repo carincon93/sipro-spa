@@ -23,7 +23,7 @@ class ProyectoCapacidadInstalada extends Model
      *
      * @var array
      */
-    protected $appends = ['fecha_ejecucion', 'codigo'];
+    protected $appends = ['fecha_ejecucion', 'codigo', 'beneficiados_text'];
 
     /**
      * The attributes that are mass assignable.
@@ -44,10 +44,6 @@ class ProyectoCapacidadInstalada extends Model
         'planteamiento_problema',
         'justificacion',
         'objetivo_general',
-        'primer_objetivo_especifico',
-        'segundo_objetivo_especifico',
-        'tercer_objetivo_especifico',
-        'cuarto_objetivo_especifico',
         'metodologia',
         'infraestructura_desarrollo_proyecto',
         'materiales_formacion_a_usar',
@@ -278,5 +274,55 @@ class ProyectoCapacidadInstalada extends Model
         $codigo = 'CAP-' . $numeroConsecutivo;
 
         return $codigo;
+    }
+
+    /**
+     *
+     * @return string
+     */
+    public function getBeneficiadosTextAttribute()
+    {
+        $beneficiado = '';
+
+        switch ($this->beneficia_a) {
+            case 1:
+                $beneficiado = 'Centro de formación';
+                break;
+            case 2:
+                $beneficiado = 'Empresas';
+                break;
+            case 3:
+                $beneficiado = 'Emprendedores';
+                break;
+            case 4:
+                $beneficiado = 'Comunidades desplazadas';
+                break;
+            case 5:
+                $beneficiado = 'Comunidades vulnerables';
+                break;
+            case 6:
+                $beneficiado = 'Dirigido a mujeres';
+                break;
+            case 7:
+                $beneficiado = 'Población con habilidades diversas';
+                break;
+            case 8:
+                $beneficiado = 'Población indígena';
+                break;
+            case 9:
+                $beneficiado = 'Víctimas del conflicto armado';
+                break;
+            case 10:
+                $beneficiado = 'Ninguna';
+                break;
+            case 11:
+                $beneficiado = 'Otra';
+                break;
+
+            default:
+                break;
+        }
+
+        return $beneficiado;
     }
 }

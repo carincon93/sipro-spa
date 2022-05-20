@@ -98,11 +98,11 @@
         programas_formacion: proyectoProgramasFormacion.length > 0 ? proyectoProgramasFormacion : null,
         programas_formacion_articulados: proyectoProgramasFormacionArticulados.length > 0 ? proyectoProgramasFormacionArticulados : null,
         rol_sennova: {
-            value: roles.find((item) => item.value == autorPrincipal.pivot.rol_sennova)?.value,
-            label: roles.find((item) => item.value == autorPrincipal.pivot.rol_sennova)?.label,
+            value: autorPrincipal ? roles.find((item) => item.value == autorPrincipal.pivot.rol_sennova)?.value : null,
+            label: autorPrincipal ? roles.find((item) => item.value == autorPrincipal.pivot.rol_sennova)?.label : null,
         },
-        cantidad_meses: autorPrincipal.pivot.cantidad_meses,
-        cantidad_horas: autorPrincipal.pivot.cantidad_horas,
+        cantidad_meses: autorPrincipal ? autorPrincipal.pivot.cantidad_meses : null,
+        cantidad_horas: autorPrincipal ? autorPrincipal.pivot.cantidad_horas : null,
     })
 
     function submit() {
