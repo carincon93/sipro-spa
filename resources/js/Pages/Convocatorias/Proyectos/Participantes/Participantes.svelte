@@ -185,7 +185,7 @@
 
 <div class="bg-indigo-100 p-4">
     <h1 class="text-4xl text-center">Participantes</h1>
-    <p class="text-center m-auto mt-8">Realiza la búsqueda de participantes por nombre, número de documento o por el correo electrónico institucional</p>
+    <p class="text-center m-auto mt-8">Realice la búsqueda de participantes por nombre, número de documento o por el correo electrónico institucional</p>
     <form on:submit|preventDefault={submit} on:input={() => (sended = false)}>
         <fieldset disabled={isSuperAdmin || (checkPermission(authUser, [1, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 17, 18, 19]) && proyecto.modificable == true) ? undefined : true}>
             <div class="mt-4 flex flex-row">
