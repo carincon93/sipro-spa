@@ -80,7 +80,7 @@
 
 <div class="bg-indigo-100 p-4">
     <h1 class="text-4xl text-center title">Programas de formación</h1>
-    <p class="text-center w-1/3 m-auto mt-8">Realiza la búsqueda de programas de formación</p>
+    <p class="text-center w-1/3 m-auto mt-8">Realice la búsqueda de programas de formación</p>
 
     <form on:submit|preventDefault={submit} on:input={() => (sended = false)}>
         <fieldset disabled={isSuperAdmin || (checkPermission(authUser, [1, 3, 4, 11, 12, 13]) && proyecto.modificable == true) ? undefined : true}>

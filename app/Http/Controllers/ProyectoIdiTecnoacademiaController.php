@@ -9,6 +9,7 @@ use App\Http\Requests\ProyectoIdiTecnoacademiaRequest;
 use App\Models\ProgramaSennova;
 use App\Models\Proyecto;
 use App\Models\ProyectoIdiTecnoacademiaProducto;
+use App\Models\Regional;
 use App\Models\SemilleroInvestigacion;
 use App\Models\Tecnoacademia;
 use App\Models\TipoBeneficiadoTa;
@@ -54,6 +55,7 @@ class ProyectoIdiTecnoacademiaController extends Controller
             'beneficiados'                      => TipoBeneficiadoTa::select('id as value', 'nombre as label')->orderBy('nombre', 'ASC')->get(),
             'roles'                             => json_decode(Storage::get('json/roles-sennova-ta.json'), true),
             'proyectos'                         => Proyecto::selectRaw("id as value, id + 8000 as label")->orderBy('id', 'ASC')->get(),
+            'regionales'                        => Regional::select('id as value', 'nombre as label', 'codigo')->orderBy('nombre')->get(),
         ]);
     }
 
@@ -84,6 +86,7 @@ class ProyectoIdiTecnoacademiaController extends Controller
         $proyectoIdiTecnoacademia->observaciones_resultados             = $request->observaciones_resultados;
         $proyectoIdiTecnoacademia->nombre_aprendices_vinculados         = $request->nombre_aprendices_vinculados;
         $proyectoIdiTecnoacademia->nombre_instituciones_educativas      = $request->nombre_instituciones_educativas;
+        $proyectoIdiTecnoacademia->nuevas_instituciones_educativas      = $request->nuevas_instituciones_educativas;
         $proyectoIdiTecnoacademia->programa_formacion_articulado_media  = $request->programa_formacion_articulado_media;
         $proyectoIdiTecnoacademia->entidades_vinculadas                 = $request->entidades_vinculadas;
         $proyectoIdiTecnoacademia->fuente_recursos                      = $request->fuente_recursos;
@@ -149,6 +152,7 @@ class ProyectoIdiTecnoacademiaController extends Controller
             'roles'                             => json_decode(Storage::get('json/roles-sennova-ta.json'), true),
             'autorPrincipal'                    => $proyectoIdiTecnoacademia->participantes()->where('proyecto_idi_tecnoacademia_participante.autor_principal', true)->first(),
             'proyectos'                         => Proyecto::selectRaw("id as value, id + 8000 as label")->orderBy('id', 'ASC')->get(),
+            'regionales'                        => Regional::select('id as value', 'nombre as label', 'codigo')->orderBy('nombre')->get(),
         ]);
     }
 
@@ -179,6 +183,7 @@ class ProyectoIdiTecnoacademiaController extends Controller
         $proyectoIdiTecnoacademia->observaciones_resultados             = $request->observaciones_resultados;
         $proyectoIdiTecnoacademia->nombre_aprendices_vinculados         = $request->nombre_aprendices_vinculados;
         $proyectoIdiTecnoacademia->nombre_instituciones_educativas      = $request->nombre_instituciones_educativas;
+        $proyectoIdiTecnoacademia->nuevas_instituciones_educativas      = $request->nuevas_instituciones_educativas;
         $proyectoIdiTecnoacademia->programa_formacion_articulado_media  = $request->programa_formacion_articulado_media;
         $proyectoIdiTecnoacademia->entidades_vinculadas                 = $request->entidades_vinculadas;
         $proyectoIdiTecnoacademia->fuente_recursos                      = $request->fuente_recursos;

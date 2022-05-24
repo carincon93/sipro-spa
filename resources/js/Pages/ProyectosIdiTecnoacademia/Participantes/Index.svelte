@@ -197,7 +197,7 @@
 
     <div class="bg-indigo-100 p-4">
         <h1 class="text-4xl text-center">Participantes</h1>
-        <p class="text-center m-auto mt-8">Realiza la búsqueda de participantes por nombre, número de documento o por el correo electrónico institucional</p>
+        <p class="text-center m-auto mt-8">Realice la búsqueda de participantes por nombre, número de documento o por el correo electrónico institucional</p>
         <form on:submit|preventDefault={search} on:input={() => (sended = false)}>
             <fieldset>
                 <div class="mt-4 flex flex-row">

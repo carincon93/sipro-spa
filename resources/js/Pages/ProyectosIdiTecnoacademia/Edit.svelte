@@ -33,6 +33,7 @@
     export let roles
     export let autorPrincipal
     export let proyectos
+    export let regionales
 
     let hayEntidadesVinculadas = proyectoIdiTecnoacademia.entidades_vinculadas ? true : false
     let existenDocumentos = proyectoIdiTecnoacademia.documentos_resultados ? true : false
@@ -81,6 +82,7 @@
         observaciones_resultados: proyectoIdiTecnoacademia.observaciones_resultados,
         nombre_aprendices_vinculados: proyectoIdiTecnoacademia.nombre_aprendices_vinculados,
         nombre_instituciones_educativas: proyectoIdiTecnoacademia.nombre_instituciones_educativas,
+        nuevas_instituciones_educativas: proyectoIdiTecnoacademia.nuevas_instituciones_educativas,
         programa_sennova_participante: programasRelacionados,
         programa_formacion_articulado_media: proyectoIdiTecnoacademia.programa_formacion_articulado_media,
         entidades_vinculadas: proyectoIdiTecnoacademia.entidades_vinculadas,
@@ -145,6 +147,26 @@
         if (res.status == '200') {
             municipios = res.data
         }
+    }
+
+    let departamentoIE
+    $: whitelistInstitucionesEducativas = []
+    $: if (departamentoIE) {
+        axios
+            .get('https://www.datos.gov.co/resource/cfw5-qzt5.json?cod_dane_departamento=' + departamentoIE?.codigo)
+            .then(function (response) {
+                // handle success
+                response.data.map((item) => {
+                    whitelistInstitucionesEducativas.push(item.nombre_establecimiento)
+                })
+            })
+            .catch(function (error) {
+                // handle error
+                console.log(error)
+            })
+            .then(function () {
+                // always executed
+            })
     }
 </script>
 
@@ -342,10 +364,16 @@
 
             <div class="mt-44 grid grid-cols-2">
                 <div>
-                    <Label required class="mb-4" labelFor="nombre_instituciones_educativas" value="Nombre de las instituciones educativas de los aprendices vinculados al proyecto (Por favor separar los nombres por coma- ,)" />
+                    <Label required={$form.nombre_instituciones_educativas ? undefined : true} class="mb-4" labelFor="nombre_instituciones_educativas" value="Nombre de las instituciones educativas de los aprendices vinculados al proyecto" />
                 </div>
                 <div>
-                    <Tags id="nombre_instituciones_educativas" class="mt-4" enforceWhitelist={false} bind:tags={$form.nombre_instituciones_educativas} placeholder="Instituciones educativas" />
+                    <Select id="departamento" bind:selectedValue={departamentoIE} items={regionales} placeholder="Seleccione un departamento" />
+
+                    <Tags id="nombre_instituciones_educativas" class="mt-4" whitelist={whitelistInstitucionesEducativas} bind:tags={$form.nombre_instituciones_educativas} placeholder="Nombre(s) de la(s) IE" error={errors.nombre_instituciones_educativas} required={$form.nombre_instituciones_educativas ? undefined : true} />
+                    <div class="mt-10">
+                        <InfoMessage>Si no encuentra alguna institución educativa en la anterior lista por favor escriba el nombre en el siguiente campo de texto (Separadas por coma)</InfoMessage>
+                        <Tags id="nuevas_instituciones_educativas" class="mt-4" enforceWhitelist={false} bind:tags={$form.nuevas_instituciones_educativas} placeholder="Instituciones educativas (Separadas por coma)" error={errors.nuevas_instituciones_educativas} />
+                    </div>
                 </div>
             </div>
 
