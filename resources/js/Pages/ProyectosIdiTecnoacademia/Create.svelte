@@ -335,7 +335,7 @@
                 <div>
                     <Select id="departamento" bind:selectedValue={departamentoIE} items={regionales} placeholder="Seleccione un departamento" />
 
-                    <Tags id="nombre_instituciones_educativas" class="mt-4" whitelist={whitelistInstitucionesEducativas} bind:tags={$form.nombre_instituciones_educativas} placeholder="Nombre(s) de la(s) IE" error={errors.nombre_instituciones_educativas} required={$form.nombre_instituciones_educativas ? undefined : true} />
+                    <Tags id="nombre_instituciones_educativas" class="mt-4" whitelist={whitelistInstitucionesEducativas} bind:tags={$form.nombre_instituciones_educativas} placeholder="Nombre(s) de la(s) IE" error={errors.nombre_instituciones_educativas} required={$form.nuevas_instituciones_educativas ? undefined : true} />
                     <div class="mt-10">
                         <InfoMessage>Si no encuentra alguna institución educativa en la anterior lista por favor escriba el nombre en el siguiente campo de texto (Separadas por coma)</InfoMessage>
                         <Tags id="nuevas_instituciones_educativas" class="mt-4" enforceWhitelist={false} bind:tags={$form.nuevas_instituciones_educativas} placeholder="Instituciones educativas (Separadas por coma)" error={errors.nuevas_instituciones_educativas} />
