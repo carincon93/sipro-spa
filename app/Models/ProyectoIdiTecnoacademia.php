@@ -245,7 +245,7 @@ class ProyectoIdiTecnoacademia extends Model
                 ->orderBy('proyectos_idi_tecnoacademia.id', 'ASC')
                 ->filterProyectoIdiTecnoacademia(request()->only('search'))->paginate();
         } else {
-            $proyectoIdiTecnoacademia = ProyectoIdiTecnoacademia::join('proyecto_idi_tecnoacademia_participante', 'proyectos_idi_tecnoacademia.id', 'proyecto_idi_tecnoacademia_participante.proyecto_idi_tecnoacademia_id')
+            $proyectoIdiTecnoacademia = ProyectoIdiTecnoacademia::select('proyectos_idi_tecnoacademia.*')->join('proyecto_idi_tecnoacademia_participante', 'proyectos_idi_tecnoacademia.id', 'proyecto_idi_tecnoacademia_participante.proyecto_idi_tecnoacademia_id')
                 ->where('proyecto_idi_tecnoacademia_participante.user_id', $authUser->id)
                 ->distinct('proyectos_idi_tecnoacademia.id')
                 ->orderBy('proyectos_idi_tecnoacademia.id', 'ASC')
