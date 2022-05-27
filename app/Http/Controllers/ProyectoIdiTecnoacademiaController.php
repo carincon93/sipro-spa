@@ -429,7 +429,7 @@ class ProyectoIdiTecnoacademiaController extends Controller
 
     public function editProducto(ProyectoIdiTecnoacademia $proyectoIdiTecnoacademia, ProyectoIdiTecnoacademiaProducto $producto)
     {
-        $this->authorize('modificar-proyecto-idi-tecnoacademia', [$proyectoIdiTecnoacademia]);
+        $this->authorize('modificar-producto-idi-tecnoacademia', [$proyectoIdiTecnoacademia, $producto]);
 
         $producto->resultado;
 
@@ -443,7 +443,7 @@ class ProyectoIdiTecnoacademiaController extends Controller
 
     public function updateProducto(ProyectoIdiTecnoacademiaProductoRequest $request, ProyectoIdiTecnoacademia $proyectoIdiTecnoacademia, ProyectoIdiTecnoacademiaProducto $producto)
     {
-        $this->authorize('modificar-proyecto-idi-tecnoacademia', [$proyectoIdiTecnoacademia]);
+        $this->authorize('modificar-producto-idi-tecnoacademia', [$proyectoIdiTecnoacademia, $producto]);
 
         $producto->descripcion          = $request->descripcion;
         $producto->estado               = $request->estado;
@@ -461,7 +461,7 @@ class ProyectoIdiTecnoacademiaController extends Controller
 
     public function destroyProducto(ProyectoIdiTecnoacademia $proyectoIdiTecnoacademia, ProyectoIdiTecnoacademiaProducto $producto)
     {
-        $this->authorize('modificar-proyecto-idi-tecnoacademia', [$proyectoIdiTecnoacademia]);
+        $this->authorize('modificar-producto-idi-tecnoacademia', [$proyectoIdiTecnoacademia, $producto]);
 
         $producto->delete();
 
