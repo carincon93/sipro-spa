@@ -28,9 +28,9 @@ class Kernel extends ConsoleKernel
     {
         // Run every Minute...
         $schedule->command('versioning:project')
-                  ->everyMinute()
-                  ->timezone('America/Bogota')
-                  ->withoutOverlapping();
+            ->everyMinute()
+            ->timezone('America/Bogota')
+            ->withoutOverlapping();
     }
 
     /**
@@ -40,7 +40,7 @@ class Kernel extends ConsoleKernel
      */
     protected function commands()
     {
-        $this->load(__DIR__.'/Commands');
+        $this->load(__DIR__ . '/Commands');
 
         require base_path('routes/console.php');
     }
