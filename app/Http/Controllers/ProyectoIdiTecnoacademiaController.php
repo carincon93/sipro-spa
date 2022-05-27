@@ -392,7 +392,7 @@ class ProyectoIdiTecnoacademiaController extends Controller
 
         return Inertia::render('ProyectosIdiTecnoacademia/Productos/Index', [
             'proyectoIdiTecnoacademia'    => $proyectoIdiTecnoacademia,
-            'productos'                   => ProyectoIdiTecnoacademiaProducto::with('tipoProductoIdi')->paginate(15)
+            'productos'                   => ProyectoIdiTecnoacademiaProducto::where('proyecto_idi_tecnoacademia_id', $proyectoIdiTecnoacademia->id)->with('tipoProductoIdi')->paginate(15)
         ]);
     }
 
