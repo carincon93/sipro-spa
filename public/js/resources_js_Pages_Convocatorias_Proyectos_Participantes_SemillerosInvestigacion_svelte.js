@@ -39863,6 +39863,50 @@ __webpack_require__.r(__webpack_exports__);
 
 
 
+function create_if_block_2(ctx) {
+	let infomessage;
+	let current;
+
+	infomessage = new _InfoMessage__WEBPACK_IMPORTED_MODULE_3__.default({
+			props: {
+				$$slots: { default: [create_default_slot_1] },
+				$$scope: { ctx }
+			}
+		});
+
+	return {
+		c() {
+			(0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.create_component)(infomessage.$$.fragment);
+		},
+		m(target, anchor) {
+			(0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.mount_component)(infomessage, target, anchor);
+			current = true;
+		},
+		p(ctx, dirty) {
+			const infomessage_changes = {};
+
+			if (dirty & /*$$scope*/ 65536) {
+				infomessage_changes.$$scope = { dirty, ctx };
+			}
+
+			infomessage.$set(infomessage_changes);
+		},
+		i(local) {
+			if (current) return;
+			(0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.transition_in)(infomessage.$$.fragment, local);
+			current = true;
+		},
+		o(local) {
+			(0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.transition_out)(infomessage.$$.fragment, local);
+			current = false;
+		},
+		d(detaching) {
+			(0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.destroy_component)(infomessage, detaching);
+		}
+	};
+}
+
+// (40:4) {#if type == 'url' && message != ''}
 function create_if_block_1(ctx) {
 	let infomessage;
 	let current;
@@ -39882,6 +39926,15 @@ function create_if_block_1(ctx) {
 			(0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.mount_component)(infomessage, target, anchor);
 			current = true;
 		},
+		p(ctx, dirty) {
+			const infomessage_changes = {};
+
+			if (dirty & /*$$scope, message*/ 65600) {
+				infomessage_changes.$$scope = { dirty, ctx };
+			}
+
+			infomessage.$set(infomessage_changes);
+		},
 		i(local) {
 			if (current) return;
 			(0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.transition_in)(infomessage.$$.fragment, local);
@@ -39897,8 +39950,8 @@ function create_if_block_1(ctx) {
 	};
 }
 
-// (40:8) <InfoMessage>
-function create_default_slot(ctx) {
+// (45:8) <InfoMessage>
+function create_default_slot_1(ctx) {
 	let strong;
 	let t1;
 	let ul;
@@ -39927,7 +39980,27 @@ function create_default_slot(ctx) {
 	};
 }
 
-// (49:4) {#if error}
+// (41:8) <InfoMessage>
+function create_default_slot(ctx) {
+	let t;
+
+	return {
+		c() {
+			t = (0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.text)(/*message*/ ctx[6]);
+		},
+		m(target, anchor) {
+			(0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.insert)(target, t, anchor);
+		},
+		p(ctx, dirty) {
+			if (dirty & /*message*/ 64) (0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.set_data)(t, /*message*/ ctx[6]);
+		},
+		d(detaching) {
+			if (detaching) (0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.detach)(t);
+		}
+	};
+}
+
+// (54:4) {#if error}
 function create_if_block(ctx) {
 	let inputerror;
 	let current;
@@ -39967,6 +40040,8 @@ function create_fragment(ctx) {
 	let t0;
 	let textfield;
 	let t1;
+	let current_block_type_index;
+	let if_block0;
 	let t2;
 	let div_class_value;
 	let current;
@@ -39981,7 +40056,7 @@ function create_fragment(ctx) {
 	const textfield_spread_levels = [
 		{ disabled: /*disabled*/ ctx[5] },
 		{ variant: "outlined" },
-		/*props*/ ctx[8],
+		/*props*/ ctx[9],
 		{ type: /*type*/ ctx[4] },
 		{ value: /*value*/ ctx[0] },
 		{ label: /*label*/ ctx[2] }
@@ -39994,9 +40069,21 @@ function create_fragment(ctx) {
 	}
 
 	textfield = new _smui_textfield__WEBPACK_IMPORTED_MODULE_4__.default({ props: textfield_props });
-	/*textfield_binding*/ ctx[13](textfield);
-	textfield.$on("input", /*update*/ ctx[9]);
-	let if_block0 = /*type*/ ctx[4] == "url" && create_if_block_1(ctx);
+	/*textfield_binding*/ ctx[14](textfield);
+	textfield.$on("input", /*update*/ ctx[10]);
+	const if_block_creators = [create_if_block_1, create_if_block_2];
+	const if_blocks = [];
+
+	function select_block_type(ctx, dirty) {
+		if (/*type*/ ctx[4] == "url" && /*message*/ ctx[6] != "") return 0;
+		if (/*type*/ ctx[4] == "url" && /*message*/ ctx[6] == "") return 1;
+		return -1;
+	}
+
+	if (~(current_block_type_index = select_block_type(ctx, -1))) {
+		if_block0 = if_blocks[current_block_type_index] = if_block_creators[current_block_type_index](ctx);
+	}
+
 	let if_block1 = /*error*/ ctx[3] && create_if_block(ctx);
 
 	return {
@@ -40009,7 +40096,7 @@ function create_fragment(ctx) {
 			if (if_block0) if_block0.c();
 			t2 = (0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.space)();
 			if (if_block1) if_block1.c();
-			(0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.attr)(div, "class", div_class_value = /*$$restProps*/ ctx[10].class);
+			(0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.attr)(div, "class", div_class_value = /*$$restProps*/ ctx[11].class);
 		},
 		m(target, anchor) {
 			(0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.insert)(target, div, anchor);
@@ -40017,10 +40104,14 @@ function create_fragment(ctx) {
 			(0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.append)(div, t0);
 			(0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.mount_component)(textfield, div, null);
 			(0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.append)(div, t1);
-			if (if_block0) if_block0.m(div, null);
+
+			if (~current_block_type_index) {
+				if_blocks[current_block_type_index].m(div, null);
+			}
+
 			(0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.append)(div, t2);
 			if (if_block1) if_block1.m(div, null);
-			/*div_binding*/ ctx[14](div);
+			/*div_binding*/ ctx[15](div);
 			current = true;
 		},
 		p(ctx, [dirty]) {
@@ -40029,11 +40120,11 @@ function create_fragment(ctx) {
 			if (dirty & /*id*/ 2) label_1_changes.id = /*id*/ ctx[1];
 			label_1.$set(label_1_changes);
 
-			const textfield_changes = (dirty & /*disabled, props, type, value, label*/ 309)
+			const textfield_changes = (dirty & /*disabled, props, type, value, label*/ 565)
 			? (0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.get_spread_update)(textfield_spread_levels, [
 					dirty & /*disabled*/ 32 && { disabled: /*disabled*/ ctx[5] },
 					textfield_spread_levels[1],
-					dirty & /*props*/ 256 && (0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.get_spread_object)(/*props*/ ctx[8]),
+					dirty & /*props*/ 512 && (0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.get_spread_object)(/*props*/ ctx[9]),
 					dirty & /*type*/ 16 && { type: /*type*/ ctx[4] },
 					dirty & /*value*/ 1 && { value: /*value*/ ctx[0] },
 					dirty & /*label*/ 4 && { label: /*label*/ ctx[2] }
@@ -40041,26 +40132,39 @@ function create_fragment(ctx) {
 			: {};
 
 			textfield.$set(textfield_changes);
+			let previous_block_index = current_block_type_index;
+			current_block_type_index = select_block_type(ctx, dirty);
 
-			if (/*type*/ ctx[4] == "url") {
+			if (current_block_type_index === previous_block_index) {
+				if (~current_block_type_index) {
+					if_blocks[current_block_type_index].p(ctx, dirty);
+				}
+			} else {
 				if (if_block0) {
-					if (dirty & /*type*/ 16) {
-						(0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.transition_in)(if_block0, 1);
+					(0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.group_outros)();
+
+					(0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.transition_out)(if_blocks[previous_block_index], 1, 1, () => {
+						if_blocks[previous_block_index] = null;
+					});
+
+					(0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.check_outros)();
+				}
+
+				if (~current_block_type_index) {
+					if_block0 = if_blocks[current_block_type_index];
+
+					if (!if_block0) {
+						if_block0 = if_blocks[current_block_type_index] = if_block_creators[current_block_type_index](ctx);
+						if_block0.c();
+					} else {
+						if_block0.p(ctx, dirty);
 					}
-				} else {
-					if_block0 = create_if_block_1(ctx);
-					if_block0.c();
+
 					(0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.transition_in)(if_block0, 1);
 					if_block0.m(div, t2);
-				}
-			} else if (if_block0) {
-				(0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.group_outros)();
-
-				(0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.transition_out)(if_block0, 1, 1, () => {
+				} else {
 					if_block0 = null;
-				});
-
-				(0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.check_outros)();
+				}
 			}
 
 			if (/*error*/ ctx[3]) {
@@ -40086,7 +40190,7 @@ function create_fragment(ctx) {
 				(0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.check_outros)();
 			}
 
-			if (!current || dirty & /*$$restProps*/ 1024 && div_class_value !== (div_class_value = /*$$restProps*/ ctx[10].class)) {
+			if (!current || dirty & /*$$restProps*/ 2048 && div_class_value !== (div_class_value = /*$$restProps*/ ctx[11].class)) {
 				(0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.attr)(div, "class", div_class_value);
 			}
 		},
@@ -40108,18 +40212,22 @@ function create_fragment(ctx) {
 		d(detaching) {
 			if (detaching) (0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.detach)(div);
 			(0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.destroy_component)(label_1);
-			/*textfield_binding*/ ctx[13](null);
+			/*textfield_binding*/ ctx[14](null);
 			(0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.destroy_component)(textfield);
-			if (if_block0) if_block0.d();
+
+			if (~current_block_type_index) {
+				if_blocks[current_block_type_index].d();
+			}
+
 			if (if_block1) if_block1.d();
-			/*div_binding*/ ctx[14](null);
+			/*div_binding*/ ctx[15](null);
 		}
 	};
 }
 
 function instance($$self, $$props, $$invalidate) {
 	let props;
-	const omit_props_names = ["id","value","label","error","type","disabled","focus","select"];
+	const omit_props_names = ["id","value","label","error","type","disabled","message","focus","select"];
 	let $$restProps = (0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.compute_rest_props)($$props, omit_props_names);
 	let { id } = $$props;
 	let { value } = $$props;
@@ -40127,6 +40235,7 @@ function instance($$self, $$props, $$invalidate) {
 	let { error } = $$props;
 	let { type } = $$props;
 	let { disabled } = $$props;
+	let { message = "" } = $$props;
 	let input;
 	let container;
 	const focus = () => input.focus();
@@ -40143,30 +40252,31 @@ function instance($$self, $$props, $$invalidate) {
 	function textfield_binding($$value) {
 		svelte_internal__WEBPACK_IMPORTED_MODULE_0__.binding_callbacks[$$value ? "unshift" : "push"](() => {
 			input = $$value;
-			$$invalidate(6, input);
+			$$invalidate(7, input);
 		});
 	}
 
 	function div_binding($$value) {
 		svelte_internal__WEBPACK_IMPORTED_MODULE_0__.binding_callbacks[$$value ? "unshift" : "push"](() => {
 			container = $$value;
-			$$invalidate(7, container);
+			$$invalidate(8, container);
 		});
 	}
 
 	$$self.$$set = $$new_props => {
 		$$props = (0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.assign)((0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.assign)({}, $$props), (0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.exclude_internal_props)($$new_props));
-		$$invalidate(10, $$restProps = (0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.compute_rest_props)($$props, omit_props_names));
+		$$invalidate(11, $$restProps = (0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.compute_rest_props)($$props, omit_props_names));
 		if ("id" in $$new_props) $$invalidate(1, id = $$new_props.id);
 		if ("value" in $$new_props) $$invalidate(0, value = $$new_props.value);
 		if ("label" in $$new_props) $$invalidate(2, label = $$new_props.label);
 		if ("error" in $$new_props) $$invalidate(3, error = $$new_props.error);
 		if ("type" in $$new_props) $$invalidate(4, type = $$new_props.type);
 		if ("disabled" in $$new_props) $$invalidate(5, disabled = $$new_props.disabled);
+		if ("message" in $$new_props) $$invalidate(6, message = $$new_props.message);
 	};
 
 	$$self.$$.update = () => {
-		$: $$invalidate(8, props = {
+		$: $$invalidate(9, props = {
 			...$$restProps,
 			class: "w-full block bg-white"
 		});
@@ -40179,6 +40289,7 @@ function instance($$self, $$props, $$invalidate) {
 		error,
 		type,
 		disabled,
+		message,
 		input,
 		container,
 		props,
@@ -40202,17 +40313,18 @@ class Input extends svelte_internal__WEBPACK_IMPORTED_MODULE_0__.SvelteComponent
 			error: 3,
 			type: 4,
 			disabled: 5,
-			focus: 11,
-			select: 12
+			message: 6,
+			focus: 12,
+			select: 13
 		});
 	}
 
 	get focus() {
-		return this.$$.ctx[11];
+		return this.$$.ctx[12];
 	}
 
 	get select() {
-		return this.$$.ctx[12];
+		return this.$$.ctx[13];
 	}
 }
 

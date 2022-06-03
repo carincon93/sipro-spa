@@ -177,9 +177,6 @@
     <div slot="content">
         <div class="grid grid-cols-3 gap-5 p-8">
             {#if isSuperAdmin}
-                <Button on:click={() => Inertia.visit(route('ambientes-modernizacion.index'))} variant={route().current('ambientes-modernizacion.*') ? 'raised' : 'outlined'} class="p-2">Ambientes de modernización</Button>
-            {/if}
-            {#if isSuperAdmin}
                 <Button on:click={() => Inertia.visit(route('anexos.index'))} variant={route().current('anexos.*') ? 'raised' : 'outlined'} class="p-2">Anexos</Button>
             {/if}
 
@@ -253,6 +250,10 @@
                 <Button on:click={() => Inertia.visit(route('roles.index'))} variant={route().current('roles.*') ? 'raised' : 'outlined'} class="p-2">Roles de sistema</Button>
             {/if}
 
+            {#if isSuperAdmin}
+                <Button on:click={() => Inertia.visit(route('ambientes-modernizacion.index'))} variant={route().current('ambientes-modernizacion.*') ? 'raised' : 'outlined'} class="p-2">Seguimiento post cierre - Ambientes de modernización SENNOVA</Button>
+            {/if}
+
             {#if isSuperAdmin || checkRole(authUser, [5])}
                 <Button on:click={() => Inertia.visit(route('tecnoacademias.index'))} variant={route().current('tecnoacademias.*') ? 'raised' : 'outlined'} class="p-2">Tecnoacademias</Button>
             {/if}
@@ -274,7 +275,7 @@
 </Dialog>
 
 <style>
-    :global(#main-menu-dialog .mdc-dialog__surface) {
+    /* :global(#main-menu-dialog .mdc-dialog__surface) {
         width: 750px;
         max-width: calc(100vw - 32px) !important;
     }
@@ -294,5 +295,5 @@
 
     :global(#main-menu-dialog .mdc-button--raised) {
         height: auto;
-    }
+    } */
 </style>

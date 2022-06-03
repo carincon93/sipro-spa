@@ -17,13 +17,19 @@ class AmbienteModernizacion extends Model
     protected $table = 'ambientes_modernizacion';
 
     /**
+     * appends
+     *
+     * @var array
+     */
+    protected $appends = ['year_modernizacion'];
+
+    /**
      * The attributes that are mass assignable.
      *
      * @var array
      */
     protected $fillable = [
-        'centro_formacion_id',
-        'codigo_proyecto_id',
+        'seguimiento_ambiente_modernizacion_id',
         'tipologia_ambiente_id',
         'linea_investigacion_id',
         'nombre_ambiente',
@@ -51,6 +57,18 @@ class AmbienteModernizacion extends Model
         'palabras_clave_ambiente',
         'observaciones_generales_ambiente',
         'soporte_fotos_ambiente',
+        'numero_tecnicas_tecnologias',
+        'numero_personas_certificadas',
+        'numero_publicaciones',
+        'numero_aprendices_beneficiados',
+        'productividad_beneficiarios',
+        'generacion_empleo',
+        'creacion_empresas',
+        'incorporacion_nuevos_conocimientos',
+        'valor_agregado_entidades',
+        'fortalecimiento_programas_formacion',
+        'transferencia_tecnologias',
+        'cobertura_perntinencia_formacion',
         'dinamizador_sennova_id'
     ];
 
@@ -73,23 +91,13 @@ class AmbienteModernizacion extends Model
     ];
 
     /**
-     * Relationship with centroFormacion
+     * Relationship with SeguimientoAmbienteModernizacion
      *
      * @return object
      */
-    public function centroFormacion()
+    public function seguimientoAmbienteModernizacion()
     {
-        return $this->belongsTo(CentroFormacion::class);
-    }
-
-    /**
-     * Relationship with CodigoProyectoSgps
-     *
-     * @return object
-     */
-    public function codigoProyectoSgps()
-    {
-        return $this->belongsTo(CodigoProyectoSgps::class);
+        return $this->belongsTo(SeguimientoAmbienteModernizacion::class);
     }
 
     /**
@@ -160,6 +168,16 @@ class AmbienteModernizacion extends Model
     public function dinamizadorSennova()
     {
         return $this->belongsTo(User::class, 'dinamizador_sennova_id');
+    }
+
+    /**
+     * Relationship with EquipoAmbienteModernizacion
+     *
+     * @return object
+     */
+    public function equiposAmbienteModernizacion()
+    {
+        return $this->hasMany(EquipoAmbienteModernizacion::class);
     }
 
     /**
@@ -234,5 +252,10 @@ class AmbienteModernizacion extends Model
         $query->when($filters['search'] ?? null, function ($query, $search) {
             $query->where('nombre_ambiente', 'ilike', '%' . $search . '%');
         });
+    }
+
+    public function getYearModernizacionAttribute()
+    {
+        return date('Y', strtotime($this->created_at));
     }
 }

@@ -19,14 +19,10 @@
     import Tags from '@/Shared/Tags'
 
     export let errors
-    export let centrosFormacion
     export let codigosSgps
     export let mesasSectoriales
     export let tipologiasAmbientes
-    export let semillerosInvestigacion
-
-    let programasFormacion
-    let programasFormacionArticular
+    export let centroFormacionId
 
     $: $title = 'Crear ambiente de modernización'
 
@@ -38,41 +34,18 @@
 
     let sending = false
     let form = useForm({
-        nombre_ambiente: '',
         codigo_proyecto_sgps_id: null,
+        nombre_ambiente: '',
         tipologia_ambiente_id: null,
         red_conocimiento_id: null,
         linea_investigacion_id: null,
         actividad_economica_id: null,
-        centro_formacion_id: null,
         disciplina_subarea_conocimiento_id: null,
         tematica_estrategica_id: null,
         alineado_mesas_sectoriales: false,
         financiado_anteriormente: false,
         mesa_sectorial_id: [],
         codigos_proyectos_id: null,
-        semilleros_investigacion_id: null,
-        estado_general_maquinaria: null,
-        razon_estado_general: '',
-        ambiente_activo: null,
-        programas_formacion_calificados: null,
-        programas_formacion: null,
-        justificacion_ambiente_inactivo: '',
-        ambiente_activo_procesos_idi: null,
-        numero_proyectos_beneficiados: 0,
-        cod_proyectos_beneficiados_id: null,
-        ambiente_formacion_complementaria: null,
-        numero_total_cursos_comp: 0,
-        numero_cursos_empresas: 0,
-        datos_empresa: null,
-        cursos_complementarios: null,
-        coordenada_latitud_ambiente: '',
-        coordenada_longitud_ambiente: '',
-        soporte_fotos_ambiente: null,
-        impacto_procesos_formacion: '',
-        pertinencia_sector_productivo: '',
-        palabras_clave_ambiente: '',
-        observaciones_generales_ambiente: '',
     })
 
     function submit() {
@@ -84,42 +57,10 @@
         }
     }
 
-    onMount(() => {
-        getProgramasFormacionArticular()
-    })
-
     let opcionesSiNo = [
         { value: 1, label: 'Si' },
         { value: 2, label: 'No' },
     ]
-
-    let estados = [
-        { value: 1, label: 'Buena' },
-        { value: 2, label: 'Regular' },
-        { value: 3, label: 'Malo' },
-    ]
-
-    let oldCentroFormacionValue = null
-    $: if ($form.centro_formacion_id?.value) {
-        if (oldCentroFormacionValue != $form.centro_formacion_id?.value) {
-            getProgramasFormacion($form.centro_formacion_id?.value)
-        }
-    }
-
-    async function getProgramasFormacion(centro_formacion_id) {
-        let res = await axios.get(route('web-api.programas-formacion', centro_formacion_id))
-        if (res.status == '200') {
-            programasFormacion = res.data
-            oldCentroFormacionValue = $form.centro_formacion_id.value
-        }
-    }
-
-    async function getProgramasFormacionArticular() {
-        let res = await axios.get(route('web-api.programas-formacion-articulados'))
-        if (res.status == '200') {
-            programasFormacionArticular = res.data
-        }
-    }
 </script>
 
 <AuthenticatedLayout>
@@ -141,15 +82,6 @@
         <fieldset class="p-8">
             <div class="mt-44 grid grid-cols-2">
                 <div>
-                    <Label required class="mb-4" labelFor="centro_formacion_id" value="Centro de formación" />
-                </div>
-                <div>
-                    <Select id="centro_formacion_id" items={centrosFormacion} bind:selectedValue={$form.centro_formacion_id} error={errors.centro_formacion_id} autocomplete="off" placeholder="Busque por el nombre del centro de formación" required />
-                </div>
-            </div>
-
-            <div class="mt-44 grid grid-cols-2">
-                <div>
                     <Label required class="mb-4" labelFor="codigo_proyecto_sgps_id" value="Código proyecto SGPS" />
                 </div>
                 <div>
@@ -165,6 +97,7 @@
             <div class="mt-44 grid grid-cols-2">
                 <div>
                     <Label required class="mb-4" labelFor="tipologia_ambiente_id" value="Tipologías de los ambientes (Circular 3-2018- 143)" />
+                    <a href={window.basePath + '/storage/documentos-descarga/Circular-3-2018-143.pdf'} target="_blank" class="underline text-indigo-500">Ver Circular 3-2018-143</a>
                 </div>
                 <div>
                     <Select id="tipologia_ambiente_id" items={tipologiasAmbientes} bind:selectedValue={$form.tipologia_ambiente_id} error={errors.tipologia_ambiente_id} autocomplete="off" placeholder="Seleccione una tipología" required />
@@ -227,16 +160,14 @@
                 </div>
             </div>
 
-            {#if $form.centro_formacion_id?.value}
-                <div class="mt-44 grid grid-cols-2">
-                    <div>
-                        <Label required class="mb-4" labelFor="linea_investigacion_id" value="Línea investigación relacionada con el ambiente modernizado por Sennova" />
-                    </div>
-                    <div>
-                        <DynamicList id="linea_investigacion_id" bind:value={$form.linea_investigacion_id} routeWebApi={route('web-api.lineas-investigacion', $form.centro_formacion_id?.value)} classes="min-h" placeholder="Busque por el nombre de la línea de investigación, centro de formación, grupo de investigación o regional" message={errors.linea_investigacion_id} required />
-                    </div>
+            <div class="mt-44 grid grid-cols-2">
+                <div>
+                    <Label required class="mb-4" labelFor="linea_investigacion_id" value="Línea investigación relacionada con el ambiente modernizado por Sennova" />
                 </div>
-            {/if}
+                <div>
+                    <DynamicList id="linea_investigacion_id" bind:value={$form.linea_investigacion_id} routeWebApi={route('web-api.lineas-investigacion', centroFormacionId)} classes="min-h" placeholder="Busque por el nombre de la línea de investigación, centro de formación, grupo de investigación o regional" message={errors.linea_investigacion_id} required />
+                </div>
+            </div>
 
             <div class="mt-44 grid grid-cols-2">
                 <div>
@@ -280,256 +211,17 @@
             {#if $form.financiado_anteriormente?.value == 1}
                 <div class="mt-44 grid grid-cols-2">
                     <div>
-                        <Label required class="mb-4" labelFor="codigos_proyectos_id" value="Si la respuesta anterior fue afirmativa, relacione únicamente los códigos de los proyectos SGPS relacionados" />
+                        <Label required class="mb-4" labelFor="codigos_proyectos_id" value="Si la respuesta anterior fue afirmativa, relacione los códigos y nombres de los proyectos beneficiados y/o ejecutados en el ambiente modernizado por Sennova de convocatoria (SGPS) o de capacidad instalada (CAP)" />
                     </div>
                     <div>
                         <SelectMulti id="codigos_proyectos_id" bind:selectedValue={$form.codigos_proyectos_id} items={codigosSgps} isMulti={true} error={errors.codigos_proyectos_id} placeholder="Buscar por el código/título del proyecto" required />
                     </div>
                 </div>
             {/if}
-
-            <div class="mt-44 grid grid-cols-2">
-                <div>
-                    <Label required class="mb-4" labelFor="estado_general_maquinaria" value="Estado general de maquinaria y equipo instalados en el ambiente de aprendizaje, modernizado por SENNOVA." />
-                </div>
-                <div>
-                    <Select items={estados} id="estado_general_maquinaria" bind:selectedValue={$form.estado_general_maquinaria} error={errors.estado_general_maquinaria} autocomplete="off" placeholder="Seleccione una opción" required />
-                </div>
-            </div>
-
-            {#if $form.estado_general_maquinaria?.value == 2 || $form.estado_general_maquinaria?.value == 3}
-                <div class="mt-44 grid grid-cols-2">
-                    <div>
-                        <Label required class="mb-4" labelFor="razon_estado_general" value="Si la respuesta anterior fue regular o malo, describa la razón. Para mayor especificidad listar máquina por máquina para identificación a partir del tiempo de vida útil." />
-                    </div>
-                    <div>
-                        <Textarea label="Razón" maxlength="40000" id="razon_estado_general" error={errors.razon_estado_general} bind:value={$form.razon_estado_general} required />
-                    </div>
-                </div>
-            {/if}
-
-            <div class="mt-44 grid grid-cols-2">
-                <div>
-                    <Label required class="mb-4" labelFor="ambiente_activo" value="¿A la fecha el ambiente modernizado por Sennova está activo para realizar procesos de formación?" />
-                </div>
-                <div>
-                    <Select items={opcionesSiNo} id="ambiente_activo" bind:selectedValue={$form.ambiente_activo} error={errors.ambiente_activo} autocomplete="off" placeholder="Seleccione una opción" required />
-                </div>
-            </div>
-
-            {#if $form.ambiente_activo?.value == 1}
-                <div class="mt-44 grid grid-cols-2">
-                    <div>
-                        <Label required class="mb-4" labelFor="programas_formacion_calificados" value="Si la respuesta anterior fue afirmativa, seleccione los programas de formación con registro calificado beneficiados." />
-                    </div>
-                    <div>
-                        {#if $form.centro_formacion_id?.value}
-                            <SelectMulti id="programas_formacion_calificados" bind:selectedValue={$form.programas_formacion_calificados} items={programasFormacion} isMulti={true} error={errors.programas_formacion_calificados} placeholder="Buscar por el nombre del programa de formación" required />
-                            {#if programasFormacion?.length == 0}
-                                <div>
-                                    <p>Parece que no se han encontrado elementos, por favor haga clic en <strong>Refrescar</strong></p>
-                                    <button on:click={getProgramasFormacion} type="button" class="flex underline">
-                                        <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 mr-2" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 4v5h.582m15.356 2A8.001 8.001 0 004.582 9m0 0H9m11 11v-5h-.581m0 0a8.003 8.003 0 01-15.357-2m15.357 2H15" />
-                                        </svg>
-                                        Refrescar
-                                    </button>
-                                </div>
-                            {/if}
-                        {:else}
-                            <span class="text-red-500">Debe seleccionar un centro de formación</span>
-                        {/if}
-                    </div>
-                </div>
-
-                <div class="mt-44 grid grid-cols-2">
-                    <div>
-                        <Label required class="mb-4" labelFor="programas_formacion" value="Si la respuesta anterior fue afirmativa, seleccione los programas de formación beneficiados." />
-                    </div>
-                    <div>
-                        <SelectMulti id="programas_formacion" bind:selectedValue={$form.programas_formacion} items={programasFormacionArticular} isMulti={true} error={errors.programas_formacion} placeholder="Buscar por el nombre del programa de formación" required />
-                        {#if programasFormacionArticular?.length == 0}
-                            <div>
-                                <p>Parece que no se han encontrado elementos, por favor haga clic en <strong>Refrescar</strong></p>
-                                <button on:click={getProgramasFormacionArticular} type="button" class="flex underline">
-                                    <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 mr-2" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 4v5h.582m15.356 2A8.001 8.001 0 004.582 9m0 0H9m11 11v-5h-.581m0 0a8.003 8.003 0 01-15.357-2m15.357 2H15" />
-                                    </svg>
-                                    Refrescar
-                                </button>
-                            </div>
-                        {/if}
-                    </div>
-                </div>
-            {:else if $form.ambiente_activo?.value == 2}
-                <div class="mt-44 grid grid-cols-2">
-                    <div>
-                        <Label required class="mb-4" labelFor="justificacion_ambiente_inactivo" value="Si la respuesta anterior fue negativa, justifique la respuesta" />
-                    </div>
-                    <div>
-                        <Textarea label="Justificación" maxlength="4000" id="justificacion_ambiente_inactivo" error={errors.justificacion_ambiente_inactivo} bind:value={$form.justificacion_ambiente_inactivo} required />
-                    </div>
-                </div>
-            {/if}
-
-            <div class="mt-44 grid grid-cols-2">
-                <div>
-                    <Label required class="mb-4" labelFor="ambiente_activo_procesos_idi" value="¿A la fecha el ambiente modernizado por Sennova está activo para realizar procesos de investigación, desarrollo tecnológico y/o innovación con semilleros o programas de formación?" />
-                </div>
-                <div>
-                    <Select items={opcionesSiNo} id="ambiente_activo_procesos_idi" bind:selectedValue={$form.ambiente_activo_procesos_idi} error={errors.ambiente_activo_procesos_idi} autocomplete="off" placeholder="Seleccione una opción" required />
-                </div>
-            </div>
-
-            {#if $form.ambiente_activo_procesos_idi?.value == 1}
-                <div class="mt-44 grid grid-cols-2">
-                    <div>
-                        <Label required class="mb-4" labelFor="numero_proyectos_beneficiados" value="Si la respuesta anterior fue afirmativa, relacione el número de proyectos beneficiados y/o ejecutados en el ambiente modernizado por Sennova" />
-                    </div>
-                    <div>
-                        <Input label="Número de proyectos" id="numero_proyectos_beneficiados" type="number" input$min="0" input$max="9999" class="mt-1" error={errors.numero_proyectos_beneficiados} placeholder="Escriba el número de proyectos" bind:value={$form.numero_proyectos_beneficiados} required />
-                    </div>
-                </div>
-
-                <div class="mt-44 grid grid-cols-2">
-                    <div>
-                        <Label required class="mb-4" labelFor="cod_proyectos_beneficiados_id" value="Si la respuesta anterior fue afirmativa, relacione los códigos y nombres de los proyectos beneficiados y/o ejecutados en el ambiente modernizado por Sennova" />
-                    </div>
-                    <div>
-                        <SelectMulti id="cod_proyectos_beneficiados_id" bind:selectedValue={$form.cod_proyectos_beneficiados_id} items={codigosSgps} isMulti={true} error={errors.cod_proyectos_beneficiados_id} placeholder="Buscar por el código/título de los proyectos" required />
-                        {#if programasFormacion?.length == 0}
-                            <div>
-                                <p>Parece que no se han encontrado elementos, por favor haga clic en <strong>Refrescar</strong></p>
-                                <button on:click={getProgramasFormacion} type="button" class="flex underline">
-                                    <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 mr-2" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 4v5h.582m15.356 2A8.001 8.001 0 004.582 9m0 0H9m11 11v-5h-.581m0 0a8.003 8.003 0 01-15.357-2m15.357 2H15" />
-                                    </svg>
-                                    Refrescar
-                                </button>
-                            </div>
-                        {/if}
-                    </div>
-                </div>
-
-                <div class="mt-44 grid grid-cols-2">
-                    <div>
-                        <Label required class="mb-4" labelFor="semilleros_investigacion_id" value="Si la respuesta anterior fue afirmativa, relacione los semilleros de investigación beneficiados con el ambiente modernizado por Sennova" />
-                    </div>
-                    <div>
-                        <SelectMulti id="semilleros_investigacion_id" bind:selectedValue={$form.semilleros_investigacion_id} items={semillerosInvestigacion} isMulti={true} error={errors.semilleros_investigacion_id} placeholder="Buscar por el nombre del semillero de investigación" required />
-                    </div>
-                </div>
-            {/if}
-
-            <div class="mt-44 grid grid-cols-2">
-                <div>
-                    <Label required class="mb-4" labelFor="ambiente_formacion_complementaria" value="¿El ambiente de formación ha generado formación complementaria después de la modernización con Sennova?" />
-                </div>
-                <div>
-                    <Select items={opcionesSiNo} id="ambiente_formacion_complementaria" bind:selectedValue={$form.ambiente_formacion_complementaria} error={errors.ambiente_formacion_complementaria} autocomplete="off" placeholder="Seleccione una opción" required />
-                </div>
-            </div>
-
-            {#if $form.ambiente_formacion_complementaria?.value == 1}
-                <div class="mt-44 grid grid-cols-2">
-                    <div>
-                        <Label required class="mb-4" labelFor="numero_total_cursos_comp" value="Si la respuesta anterior fue afirmativa, relacione el número total de cursos complementarios que se ha brindado formación complementaria" />
-                    </div>
-                    <div>
-                        <Input label="Número total" id="numero_total_cursos_comp" type="number" input$min="0" input$max="9999" class="mt-1" error={errors.numero_total_cursos_comp} placeholder="Escriba el número de proyectos" bind:value={$form.numero_total_cursos_comp} required />
-                    </div>
-                </div>
-
-                <div class="mt-44 grid grid-cols-2">
-                    <div>
-                        <Label required class="mb-4" labelFor="numero_cursos_empresas" value="Si la respuesta anterior fue afirmativa, relacione el número de cursos complementarios a empresas que se ha brindado formación complementaria" />
-                    </div>
-                    <div>
-                        <Input label="Número de cursos" id="numero_cursos_empresas" type="number" input$min="0" input$max="9999" class="mt-1" error={errors.numero_cursos_empresas} placeholder="Escriba el número de proyectos" bind:value={$form.numero_cursos_empresas} required />
-                    </div>
-                </div>
-
-                <div class="mt-44 grid grid-cols-2">
-                    <div>
-                        <Label required class="mb-4" labelFor="datos_empresa" value="Si la respuesta anterior fue afirmativa, relacione el NIT y nombre de las empresas (cuando aplique) que se ha brindada formación complementaria (Separados por coma)" />
-                    </div>
-                    <div>
-                        <Tags id="datos_empresa" class="mt-4" enforceWhitelist={false} bind:tags={$form.datos_empresa} placeholder="Empresas" error={errors.datos_empresa} />
-                    </div>
-                </div>
-
-                <div class="mt-44 grid grid-cols-2">
-                    <div>
-                        <Label required class="mb-4" labelFor="cursos_complementarios" value="Si la respuesta anterior fue afirmativa, relacione los códigos y nombres Sena de cada curso de formación complementario (Separados por coma)" />
-                    </div>
-                    <div>
-                        <Tags id="cursos_complementarios" class="mt-4" enforceWhitelist={false} bind:tags={$form.cursos_complementarios} placeholder="Cursos de formación complementarios" error={errors.cursos_complementarios} />
-                    </div>
-                </div>
-            {/if}
-
-            <div class="mt-44 grid grid-cols-2">
-                <div>
-                    <Label required class="mb-4" labelFor="coordenada_latitud_ambiente" value="Diligencie la coordenada latitud (W) del ambiente de formación modernizado por Sennova (generado en Google maps). Ejemplo: -74.062916" />
-                </div>
-                <div>
-                    <Input label="Latitud" id="coordenada_latitud_ambiente" type="text" class="mt-1" error={errors.coordenada_latitud_ambiente} placeholder="Escriba la latitud" bind:value={$form.coordenada_latitud_ambiente} required />
-                </div>
-            </div>
-
-            <div class="mt-44 grid grid-cols-2">
-                <div>
-                    <Label required class="mb-4" labelFor="coordenada_longitud_ambiente" value="Diligencie la coordenada longitud (N) del ambiente de formación modernizado por Sennova (generado en Google maps). Ejemplo: 4.643244" />
-                </div>
-                <div>
-                    <Input label="Longitud" id="coordenada_longitud_ambiente" type="text" class="mt-1" error={errors.coordenada_longitud_ambiente} placeholder="Escriba la latitud" bind:value={$form.coordenada_longitud_ambiente} required />
-                </div>
-            </div>
-
-            <div class="mt-44 grid grid-cols-2">
-                <div>
-                    <Label required class="mb-4" labelFor="impacto_procesos_formacion" value="Describa el impacto generado en los procesos de formación" />
-                </div>
-                <div>
-                    <Textarea label="Impacto" maxlength="4000" id="impacto_procesos_formacion" error={errors.impacto_procesos_formacion} bind:value={$form.impacto_procesos_formacion} required />
-                </div>
-            </div>
-
-            <div class="mt-44 grid grid-cols-2">
-                <div>
-                    <Label required class="mb-4" labelFor="pertinencia_sector_productivo" value="Describa la pertinencia obtenida con el sector productivo" />
-                </div>
-                <div>
-                    <Textarea label="Pertinencia" maxlength="4000" id="pertinencia_sector_productivo" error={errors.pertinencia_sector_productivo} bind:value={$form.pertinencia_sector_productivo} required />
-                </div>
-            </div>
-
-            <div class="mt-44 grid grid-cols-2">
-                <div>
-                    <Label class="mb-4" labelFor="palabras_clave_ambiente" value="Palabras claves relacionadas con el ambiente de formación modernizado por Sennova (Separados por coma)" />
-                </div>
-                <div>
-                    <Tags id="palabras_clave_ambiente" class="mt-4" enforceWhitelist={false} bind:tags={$form.palabras_clave_ambiente} placeholder="Palabras clave" error={errors.palabras_clave_ambiente} />
-                </div>
-            </div>
-
-            <div class="mt-44 grid grid-cols-2">
-                <div>
-                    <Label required class="mb-4" labelFor="observaciones_generales_ambiente" value="Observaciones generales del ambiente modernizado por Sennova" />
-                </div>
-                <div>
-                    <Textarea label="Observaciones" maxlength="4000" id="observaciones_generales_ambiente" error={errors.observaciones_generales_ambiente} bind:value={$form.observaciones_generales_ambiente} />
-                </div>
-            </div>
-
-            <div class="mt-8">
-                <Label class="mb-4" required labelFor="soporte_fotos_ambiente" value="Url del archivo en formato (.pdf) con fotos del ambiente modernizado con el proyecto Sennova" />
-                <Input label="Url" id="soporte_fotos_ambiente" type="url" class="mt-1" error={errors.soporte_fotos_ambiente} placeholder="Url https://www.google.com.co" bind:value={$form.soporte_fotos_ambiente} required />
-            </div>
         </fieldset>
         <div class="px-8 py-4 bg-gray-100 border-t border-gray-200 flex items-center sticky bottom-0">
             {#if isSuperAdmin || checkRole(authUser, [4])}
-                <LoadingButton loading={sending} class="btn-indigo ml-auto" type="submit">Crear ambiente de modernización</LoadingButton>
+                <LoadingButton loading={sending} class="btn-indigo ml-auto" type="submit">Guardar y continuar diligenciando</LoadingButton>
             {/if}
         </div>
     </form>
