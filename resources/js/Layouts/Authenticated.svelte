@@ -116,16 +116,6 @@
                             </Dropdown>
                         </div>
                     </div>
-
-                    <!-- Hamburger -->
-                    <!-- <div class="-mr-2 flex items-center sm:hidden">
-                        <button on:click={showingNavigationDropdown = ! showingNavigationDropdown} class="inline-flex items-center justify-center p-2 rounded-md text-gray-400 hover:text-gray-500 hover:bg-gray-100 focus:outline-none focus:bg-gray-100 focus:text-gray-500 transition duration-150 ease-in-out">
-                            <svg class="h-6 w-6" stroke="currentColor" fill="none" viewBox="0 0 24 24">
-                                <path class="{showingNavigationDropdown ? 'hidden': '', ! showingNavigationDropdown ? 'inline-flex': ''}" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16" />
-                                <path class="{! showingNavigationDropdown ? 'hidden': '', showingNavigationDropdown ? 'inline-flex': ''}" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" />
-                            </svg>
-                        </button>
-                    </div> -->
                 </div>
             </div>
 
@@ -176,9 +166,6 @@
     </div>
     <div slot="content">
         <div class="grid grid-cols-3 gap-5 p-8">
-            {#if isSuperAdmin}
-                <Button on:click={() => Inertia.visit(route('ambientes-modernizacion.index'))} variant={route().current('ambientes-modernizacion.*') ? 'raised' : 'outlined'} class="p-2">Ambientes de modernización</Button>
-            {/if}
             {#if isSuperAdmin}
                 <Button on:click={() => Inertia.visit(route('anexos.index'))} variant={route().current('anexos.*') ? 'raised' : 'outlined'} class="p-2">Anexos</Button>
             {/if}
@@ -253,6 +240,10 @@
                 <Button on:click={() => Inertia.visit(route('roles.index'))} variant={route().current('roles.*') ? 'raised' : 'outlined'} class="p-2">Roles de sistema</Button>
             {/if}
 
+            {#if isSuperAdmin}
+                <Button on:click={() => Inertia.visit(route('ambientes-modernizacion.index'))} variant={route().current('ambientes-modernizacion.*') ? 'raised' : 'outlined'} class="p-2">Seguimiento post cierre - Ambientes de modernización SENNOVA</Button>
+            {/if}
+
             {#if isSuperAdmin || checkRole(authUser, [5])}
                 <Button on:click={() => Inertia.visit(route('tecnoacademias.index'))} variant={route().current('tecnoacademias.*') ? 'raised' : 'outlined'} class="p-2">Tecnoacademias</Button>
             {/if}
@@ -272,27 +263,3 @@
         </div>
     </div>
 </Dialog>
-
-<style>
-    :global(#main-menu-dialog .mdc-dialog__surface) {
-        width: 750px;
-        max-width: calc(100vw - 32px) !important;
-    }
-
-    :global(#main-menu-dialog .mdc-dialog__content) {
-        padding-top: 40px !important;
-    }
-
-    :global(#main-menu-dialog .mdc-dialog__title) {
-        border-bottom: 1px solid rgba(0, 0, 0, 0.12);
-        margin-bottom: 0;
-    }
-
-    :global(#main-menu-dialog .mdc-button--outlined) {
-        height: auto;
-    }
-
-    :global(#main-menu-dialog .mdc-button--raised) {
-        height: auto;
-    }
-</style>

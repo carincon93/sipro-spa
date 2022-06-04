@@ -26,7 +26,7 @@
 
 <AuthenticatedLayout>
     <DataTable class="mt-20">
-        <div slot="title">Ambientes de modernización</div>
+        <div slot="title">Seguimiento post cierre - Ambientes de modernización SENNOVA</div>
 
         <div slot="actions">
             {#if isSuperAdmin || checkRole(authUser, [4])}
@@ -36,7 +36,10 @@
 
         <thead slot="thead">
             <tr class="text-left font-bold">
+                <th class="px-6 pt-6 pb-4 sticky top-0 z-10 bg-white shadow-xl w-full"> Código </th>
+                <th class="px-6 pt-6 pb-4 sticky top-0 z-10 bg-white shadow-xl w-full"> Regional </th>
                 <th class="px-6 pt-6 pb-4 sticky top-0 z-10 bg-white shadow-xl w-full"> Nombre </th>
+                <th class="px-6 pt-6 pb-4 sticky top-0 z-10 bg-white shadow-xl w-full"> Estado </th>
                 <th class="px-6 pt-6 pb-4 sticky top-0 z-10 bg-white shadow-xl text-center th-actions"> Acciones </th>
             </tr>
         </thead>
@@ -45,15 +48,29 @@
                 <tr class="hover:bg-gray-100 focus-within:bg-gray-100">
                     <td class="border-t">
                         <p class="px-6 py-4 focus:text-indigo-500">
+                            {ambienteModernizacion.seguimiento_ambiente_modernizacion.codigo}
+                        </p>
+                    </td>
+                    <td class="border-t">
+                        <p class="px-6 py-4 focus:text-indigo-500">
+                            {ambienteModernizacion.seguimiento_ambiente_modernizacion.centro_formacion.regional.nombre}
+                        </p>
+                    </td>
+                    <td class="border-t">
+                        <p class="px-6 py-4 focus:text-indigo-500">
                             {ambienteModernizacion.nombre_ambiente}
                         </p>
+                    </td>
+
+                    <td class="border-t">
+                        <p class="px-6 py-4 focus:text-indigo-500">NA</p>
                     </td>
 
                     <td class="border-t td-actions">
                         <DataTableMenu class={ambientesModernizacion.data.length < 4 ? 'z-50' : ''}>
                             {#if isSuperAdmin || checkRole(authUser, [4])}
-                                <Item on:SMUI:action={() => Inertia.visit(route('ambientes-modernizacion.edit', ambienteModernizacion.id))}>
-                                    <Text>Ver detalles</Text>
+                                <Item>
+                                    <Text>Revisar seguimientos</Text>
                                 </Item>
                             {:else}
                                 <Item>

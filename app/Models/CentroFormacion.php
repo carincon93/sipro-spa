@@ -88,13 +88,13 @@ class CentroFormacion extends Model
     }
 
     /**
-     * Relationship with AmbienteModernizacion
+     * Relationship with SeguimientoAmbienteModernizacion
      *
      * @return object
      */
-    public function ambientesModernizacion()
+    public function seguimientosAmbienteModernizacion()
     {
-        return $this->hasMany(AmbienteModernizacion::class);
+        return $this->hasMany(SeguimientoAmbienteModernizacion::class);
     }
 
     /**

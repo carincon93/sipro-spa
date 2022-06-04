@@ -11,6 +11,7 @@
     export let error
     export let type
     export let disabled
+    export let message = ''
 
     let input
     let container
@@ -36,7 +37,11 @@
     <Label {label} {id} />
 
     <Textfield {disabled} variant="outlined" {...props} bind:this={input} {type} {value} on:input={update} {label} />
-    {#if type == 'url'}
+    {#if type == 'url' && message != ''}
+        <InfoMessage>
+            {message}
+        </InfoMessage>
+    {:else if type == 'url' && message == ''}
         <InfoMessage>
             <strong>Si va a cargar un archivo/documento/soporte tenga en cuenta lo siguiente:</strong>
             <ul>

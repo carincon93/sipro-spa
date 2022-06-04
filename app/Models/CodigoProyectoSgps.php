@@ -68,13 +68,13 @@ class CodigoProyectoSgps extends Model
     }
 
     /**
-     * Relationship with AmbienteModernizacion
+     * Relationship with SeguimientoAmbienteModernizacion
      *
-     * @return void
+     * @return object
      */
-    public function ambientesModernizacion()
+    public function seguimientosAmbienteModernizacion()
     {
-        return $this->hasMany(AmbienteModernizacion::class);
+        return $this->hasMany(SeguimientoAmbienteModernizacion::class);
     }
 
     /**
