@@ -12,7 +12,6 @@
     export let disabled
     export let sinContador = false
     export let maxlength = 2000
-    export let count = 0
 
     let container
 
