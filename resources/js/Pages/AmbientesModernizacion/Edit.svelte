@@ -68,9 +68,10 @@
     let authUser = $page.props.auth.user
     let isSuperAdmin = checkRole(authUser, [1])
 
-    let destroyDialogOpen = false
-    let proyectoDialogOpen = true
-    let equipoDialogOpen = false
+    let destroyAmbienteModernizacionDialog = false
+    let infoDialog = true
+    let equipoFormDialog = false
+    let destroyEquipoDialog = false
     let sending = false
     let form = useForm({
         _method: 'put',
@@ -159,6 +160,7 @@
     }
 
     let formEquipo = useForm({
+        id: 0,
         numero_inventario_equipo: '',
         nombre_equipo: '',
         descripcion_tecnica_equipo: '',
@@ -167,19 +169,45 @@
         observaciones_generales: '',
     })
 
+    function configurarDialogoEquipo(equipoAmbienteModernizacion) {
+        $formEquipo.id = equipoAmbienteModernizacion.id
+        $formEquipo.numero_inventario_equipo = equipoAmbienteModernizacion.numero_inventario_equipo
+        $formEquipo.nombre_equipo = equipoAmbienteModernizacion.nombre_equipo
+        $formEquipo.descripcion_tecnica_equipo = equipoAmbienteModernizacion.descripcion_tecnica_equipo
+        $formEquipo.estado_equipo = {
+            value: equipoAmbienteModernizacion.estado_equipo,
+            label: estadosEquipo.find((item) => item.value == equipoAmbienteModernizacion.estado_equipo)?.label,
+        }
+        $formEquipo.equipo_en_funcionamiento = {
+            value: equipoAmbienteModernizacion.equipo_en_funcionamiento,
+            label: opcionesSiNo.find((item) => item.value == equipoAmbienteModernizacion.equipo_en_funcionamiento)?.label,
+        }
+        $formEquipo.observaciones_generales = equipoAmbienteModernizacion.observaciones_generales
+        equipoFormDialog = true
+    }
+
     function submitEquipo() {
         if (isSuperAdmin || checkRole(authUser, [4])) {
             $formEquipo.post(route('equipos-ambiente-modernizacion.store', ambienteModernizacion.id), {
                 onStart: () => (sending = true),
-                onFinish: () => (sending = false),
+                onFinish: () => ((sending = false), (equipoFormDialog = false)),
                 preserveScroll: true,
             })
         }
     }
 
-    function destroyEquipo(equipoId) {
+    let equipoAmbienteModernizacionId
+    function configurarDialogoEquipoDestroy(equipoAmbienteModernizacion) {
+        equipoAmbienteModernizacionId = equipoAmbienteModernizacion.id
+        destroyEquipoDialog = true
+    }
+
+    function destroyEquipo() {
         if (isSuperAdmin || checkRole(authUser, [4])) {
-            $formEquipo.delete(route('equipos-ambiente-modernizacion.destroy', equipoId))
+            $formEquipo.delete(route('equipos-ambiente-modernizacion.destroy', equipoAmbienteModernizacionId), {
+                onFinish: () => ((equipoAmbienteModernizacionId = null), (destroyEquipoDialog = false)),
+                preserveScroll: true,
+            })
         }
     }
 
@@ -755,7 +783,7 @@
         </fieldset>
         <div class="px-8 py-4 bg-gray-100 border-t border-gray-200 flex items-center sticky bottom-0">
             {#if isSuperAdmin || checkRole(authUser, [4])}
-                <button class="text-red-600 hover:underline text-left" tabindex="-1" type="button" on:click={(event) => (destroyDialogOpen = true)}> Eliminar ambiente de modernización </button>
+                <button class="text-red-600 hover:underline text-left" tabindex="-1" type="button" on:click={(event) => (destroyAmbienteModernizacionDialog = true)}> Eliminar ambiente de modernización </button>
             {/if}
             {#if isSuperAdmin || checkRole(authUser, [4])}
                 <LoadingButton loading={sending} class="btn-indigo ml-auto" type="submit">Editar ambiente de modernización</LoadingButton>
@@ -767,40 +795,59 @@
 
     <div>
         <h1 class="text-center text-2xl">Relacione únicamente los equipos y maquinaría adquirida con la ejecución del proyecto de modernización SENNOVA:</h1>
-        <Button on:click={() => (equipoDialogOpen = true)} variant="raised">Crear equipo</Button>
+        <div class="flex justify-end mt-10">
+            <Button on:click={() => ((equipoFormDialog = true), $formEquipo.reset())} variant="raised">Crear equipo</Button>
+        </div>
 
         <table class="w-full bg-white whitespace-no-wrap table-fixed data-table mt-10">
             <thead>
                 <tr class="text-left font-bold">
-                    <th class="px-6 pt-6 pb-4 sticky top-0 z-10 bg-white shadow-xl w-full">Archivo</th>
+                    <th class="px-6 pt-6 pb-4 sticky top-0 z-10 bg-white shadow-xl w-full">Número de inventario del equipo o maquina</th>
+                    <th class="px-6 pt-6 pb-4 sticky top-0 z-10 bg-white shadow-xl w-full">Nombre del equipo o maquina</th>
+                    <th class="px-6 pt-6 pb-4 sticky top-0 z-10 bg-white shadow-xl w-full">Descripción general técnica del equipo o maquina</th>
+                    <th class="px-6 pt-6 pb-4 sticky top-0 z-10 bg-white shadow-xl w-full">Estado del equipo o maquina</th>
+                    <th class="px-6 pt-6 pb-4 sticky top-0 z-10 bg-white shadow-xl w-full">¿El equipo o maquina está funcionamiento?</th>
+                    <th class="px-6 pt-6 pb-4 sticky top-0 z-10 bg-white shadow-xl w-full">Observaciones generales</th>
                     <th class="px-6 pt-6 pb-4 sticky top-0 z-10 bg-white shadow-xl w-full">Acciones</th>
                 </tr>
             </thead>
             <tbody>
                 {#each equiposAmbienteModernizacion as equipoAmbienteModernizacion}
                     <tr class="hover:bg-gray-100 focus-within:bg-gray-100">
+                        <td class="border-t px-6 pt-6 pb-4">{equipoAmbienteModernizacion.numero_inventario_equipo}</td>
+                        <td class="border-t px-6 pt-6 pb-4">{equipoAmbienteModernizacion.nombre_equipo}</td>
                         <td class="border-t px-6 pt-6 pb-4">{equipoAmbienteModernizacion.descripcion_tecnica_equipo}</td>
+                        <td class="border-t px-6 pt-6 pb-4">{equipoAmbienteModernizacion.estado_equipo}</td>
+                        <td class="border-t px-6 pt-6 pb-4">{equipoAmbienteModernizacion.equipo_en_funcionamiento_text}</td>
+                        <td class="border-t px-6 pt-6 pb-4">
+                            <p class="paragraph-ellipsis">
+                                {equipoAmbienteModernizacion.observaciones_generales}
+                            </p>
+                        </td>
+                        <td class="border-t px-6 pt-6 pb-4">
+                            <DataTableMenu>
+                                {#if isSuperAdmin || checkRole(authUser, [4])}
+                                    <Item on:SMUI:action={() => configurarDialogoEquipo(equipoAmbienteModernizacion)}>
+                                        <Text>Editar</Text>
+                                    </Item>
+                                    <Item on:SMUI:action={() => configurarDialogoEquipoDestroy(equipoAmbienteModernizacion)}>
+                                        <Text>Eliminar</Text>
+                                    </Item>
+                                {/if}
+                            </DataTableMenu>
+                        </td>
                     </tr>
-                    <td class="border-t td-actions">
-                        <DataTableMenu>
-                            {#if isSuperAdmin || checkRole(authUser, [4])}
-                                <Item>
-                                    <Text>Editar</Text>
-                                </Item>
-                            {/if}
-                        </DataTableMenu>
-                    </td>
                 {/each}
                 {#if equiposAmbienteModernizacion.length === 0}
                     <tr class="hover:bg-gray-100 focus-within:bg-gray-100">
-                        <td class="border-t px-6 pt-6 pb-4" colspan="4"> Sin información registrada </td>
+                        <td class="border-t px-6 pt-6 pb-4" colspan="7"> Sin información registrada </td>
                     </tr>
                 {/if}
             </tbody>
         </table>
     </div>
 
-    <Dialog bind:open={equipoDialogOpen}>
+    <Dialog bind:open={equipoFormDialog} fullscreen>
         <div slot="title" class="flex items-center flex-col mt-4">Registrar equipo</div>
         <div slot="content">
             <form on:submit|preventDefault={submitEquipo} id="equipo-ambiente-modernizacion">
@@ -821,12 +868,12 @@
                     </div>
 
                     <div class="mt-4">
-                        <Label required class="mb-4" labelFor="estado_equipo" value="Estado del equipo o maquina (Bueno, Regular, Malo)" />
+                        <Label required class="mb-4" labelFor="estado_equipo" value="Estado del equipo o máquina (Bueno, Regular, Malo)" />
                         <Select items={estadosEquipo} id="estado_equipo" bind:selectedValue={$formEquipo.estado_equipo} error={errors.estado_equipo} autocomplete="off" placeholder="Seleccione una opción" required />
                     </div>
 
                     <div class="mt-4">
-                        <Label required class="mb-4" labelFor="equipo_en_funcionamiento" value="¿El equipo o maquina está funcionamiento? SI/NO" />
+                        <Label required class="mb-4" labelFor="equipo_en_funcionamiento" value="¿El equipo o máquina está funcionamiento? SI/NO" />
                         <Select items={opcionesSiNo} id="equipo_en_funcionamiento" bind:selectedValue={$formEquipo.equipo_en_funcionamiento} error={errors.equipo_en_funcionamiento} autocomplete="off" placeholder="Seleccione una opción" required />
                     </div>
 
@@ -839,33 +886,13 @@
         </div>
         <div slot="actions">
             <div class="p-4">
-                <Button on:click={(event) => (equipoDialogOpen = false)} variant={null}>Omitir</Button>
+                <Button on:click={(event) => (equipoFormDialog = false)} variant={null}>Cancelar</Button>
                 <Button variant="raised" type="submit" form="equipo-ambiente-modernizacion">Guardar</Button>
             </div>
         </div>
     </Dialog>
 
-    <Dialog bind:open={proyectoDialogOpen} id="informacion">
-        <div slot="title" class="flex items-center flex-col mt-4">
-            <figure>
-                <img src={window.basePath + '/images/proyecto.png'} alt="Proyecto" class="h-32 mb-6" />
-            </figure>
-            Código del proyecto: {ambienteModernizacion.seguimiento_ambiente_modernizacion.codigo}
-        </div>
-        <div slot="content">
-            <div>
-                <h1 class="text-center mt-4 mb-4">Para terminar de diligenciar toda la información del seguimiento post cierre del ambiente de modernización por favor de clic en <strong>Continuar diligenciando</strong>, si ya actualizó todos los campos de clic en <strong>Omitir</strong></h1>
-            </div>
-        </div>
-        <div slot="actions">
-            <div class="p-4">
-                <Button on:click={(event) => (proyectoDialogOpen = false)} variant={null}>Omitir</Button>
-                <Button variant="raised" on:click={(event) => (proyectoDialogOpen = false)} on:click={() => Inertia.visit('#financiado_anteriormente')}>Continuar diligenciando</Button>
-            </div>
-        </div>
-    </Dialog>
-
-    <Dialog bind:open={destroyDialogOpen}>
+    <Dialog bind:open={destroyEquipoDialog}>
         <div slot="title" class="flex items-center">
             <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 mr-2 text-red-500" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-3L13.732 4c-.77-1.333-2.694-1.333-3.464 0L3.34 16c-.77 1.333.192 3 1.732 3z" />
@@ -883,7 +910,51 @@
         </div>
         <div slot="actions">
             <div class="p-4">
-                <Button on:click={(event) => (destroyDialogOpen = false)} variant={null}>Cancelar</Button>
+                <Button on:click={(event) => ((destroyEquipoDialog = false), (equipoAmbienteModernizacionId = null))} variant={null}>Cancelar</Button>
+                <Button variant="raised" on:click={destroyEquipo}>Confirmar</Button>
+            </div>
+        </div>
+    </Dialog>
+
+    <Dialog bind:open={infoDialog} id="informacion">
+        <div slot="title" class="flex items-center flex-col mt-4">
+            <figure>
+                <img src={window.basePath + '/images/proyecto.png'} alt="Proyecto" class="h-32 mb-6" />
+            </figure>
+            Código del proyecto: {ambienteModernizacion.seguimiento_ambiente_modernizacion.codigo}
+        </div>
+        <div slot="content">
+            <div>
+                <h1 class="text-center mt-4 mb-4">Para terminar de diligenciar toda la información del seguimiento post cierre del ambiente de modernización por favor de clic en <strong>Continuar diligenciando</strong>, si ya actualizó todos los campos de clic en <strong>Omitir</strong></h1>
+            </div>
+        </div>
+        <div slot="actions">
+            <div class="p-4">
+                <Button on:click={(event) => (infoDialog = false)} variant={null}>Omitir</Button>
+                <Button variant="raised" on:click={(event) => (infoDialog = false)} on:click={() => Inertia.visit('#financiado_anteriormente')}>Continuar diligenciando</Button>
+            </div>
+        </div>
+    </Dialog>
+
+    <Dialog bind:open={destroyAmbienteModernizacionDialog}>
+        <div slot="title" class="flex items-center">
+            <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 mr-2 text-red-500" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-3L13.732 4c-.77-1.333-2.694-1.333-3.464 0L3.34 16c-.77 1.333.192 3 1.732 3z" />
+            </svg>
+            Eliminar recurso
+        </div>
+        <div slot="content">
+            <p>
+                ¿Está seguro(a) que desea eliminar este recurso?
+                <br />
+                Todos los datos se eliminarán de forma permanente.
+                <br />
+                Está acción no se puede deshacer.
+            </p>
+        </div>
+        <div slot="actions">
+            <div class="p-4">
+                <Button on:click={(event) => (destroyAmbienteModernizacionDialog = false)} variant={null}>Cancelar</Button>
                 <Button variant="raised" on:click={destroy}>Confirmar</Button>
             </div>
         </div>

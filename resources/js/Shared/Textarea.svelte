@@ -2,7 +2,7 @@
     import fitTextarea from 'fit-textarea'
     import InputError from '@/Shared/InputError'
     import Textarea from '@smui/textfield'
-    import CharacterCounter from '@smui/textfield/character-counter/index'
+    import CharacterCounter from '@smui/textfield/character-counter'
     import { onMount } from 'svelte'
     import { writable } from 'svelte/store'
 

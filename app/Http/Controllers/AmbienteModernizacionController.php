@@ -269,4 +269,47 @@ class AmbienteModernizacionController extends Controller
 
         return response()->download(storage_path("app/$path"));
     }
+
+    public function equiposStore(Request $request, AmbienteModernizacion $ambienteModernizacion)
+    {
+        $message = '';
+
+        if ($request->id) {
+            $equipoAmbienteModernizacion = EquipoAmbienteModernizacion::find($request->id);
+            $equipoAmbienteModernizacion->numero_inventario_equipo      = $request->numero_inventario_equipo;
+            $equipoAmbienteModernizacion->nombre_equipo                 = $request->nombre_equipo;
+            $equipoAmbienteModernizacion->descripcion_tecnica_equipo    = $request->descripcion_tecnica_equipo;
+            $equipoAmbienteModernizacion->estado_equipo                 = $request->estado_equipo['value'];
+            $equipoAmbienteModernizacion->equipo_en_funcionamiento      = $request->equipo_en_funcionamiento['value'];
+            $equipoAmbienteModernizacion->observaciones_generales       = $request->observaciones_generales;
+
+            $equipoAmbienteModernizacion->save();
+
+            $message = 'El recurso se ha modificado correctamente.';
+        } else {
+            $equipoAmbienteModernizacion = new EquipoAmbienteModernizacion();
+            $equipoAmbienteModernizacion->numero_inventario_equipo      = $request->numero_inventario_equipo;
+            $equipoAmbienteModernizacion->nombre_equipo                 = $request->nombre_equipo;
+            $equipoAmbienteModernizacion->descripcion_tecnica_equipo    = $request->descripcion_tecnica_equipo;
+            $equipoAmbienteModernizacion->estado_equipo                 = $request->estado_equipo['value'];
+            $equipoAmbienteModernizacion->equipo_en_funcionamiento      = $request->equipo_en_funcionamiento['value'];
+            $equipoAmbienteModernizacion->observaciones_generales       = $request->observaciones_generales;
+            $equipoAmbienteModernizacion->ambienteModernizacion()->associate($ambienteModernizacion);
+
+            $equipoAmbienteModernizacion->save();
+
+            $message = 'El recurso se ha creado correctamente.';
+        }
+
+        return back()->with('success', $message);
+    }
+
+    public function destroyEquipo(EquipoAmbienteModernizacion $equipoAmbienteModernizacion)
+    {
+        $this->authorize('delete', [EquipoAmbienteModernizacion::class, $equipoAmbienteModernizacion]);
+
+        $equipoAmbienteModernizacion->delete();
+
+        return back()->with('success', 'El recurso se ha eliminado correctamente.');
+    }
 }
