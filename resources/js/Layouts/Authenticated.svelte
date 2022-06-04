@@ -9,6 +9,7 @@
     import { inertia, page } from '@inertiajs/inertia-svelte'
     import { route, checkRole, checkPermission } from '@/Utils'
     import { _ } from 'svelte-i18n'
+    import { onMount } from 'svelte'
 
     import ApplicationLogo from '@/Shared/ApplicationLogo'
     import Dropdown from '@/Shared/Dropdown'
@@ -31,6 +32,11 @@
     })
     Inertia.on('finish', () => {
         loading = true
+    })
+
+    let body = document.getElementById('body')
+    onMount(() => {
+        body.classList.remove('mdc-dialog-scroll-lock')
     })
 </script>
 
@@ -160,7 +166,7 @@
 </div>
 
 <!-- Dialog -->
-<Dialog bind:open={dialogOpen} id="main-menu">
+<Dialog bind:open={dialogOpen} id="main-menu" fullscreen>
     <div slot="title" class="mb-6 text-center text-primary">
         <div class="">Menú de navegación</div>
     </div>

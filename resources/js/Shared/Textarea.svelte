@@ -1,7 +1,7 @@
 <script>
     import fitTextarea from 'fit-textarea'
     import InputError from '@/Shared/InputError'
-    import Textfield from '@smui/textfield'
+    import Textarea from '@smui/textfield'
     import CharacterCounter from '@smui/textfield/character-counter'
     import { onMount } from 'svelte'
 
@@ -12,6 +12,7 @@
     export let disabled
     export let sinContador = false
     export let maxlength = 2000
+    export let count = 0
 
     let container
 
@@ -28,11 +29,11 @@
 
 <div bind:this={container}>
     {#if sinContador == true}
-        <Textfield {disabled} textarea bind:value {label} {...props} />
+        <Textarea {disabled} textarea bind:value {label} {...props} on:input />
     {:else}
-        <Textfield {disabled} textarea input$maxlength={maxlength} bind:value {label} {...props}>
+        <Textarea {disabled} textarea input$maxlength={maxlength} bind:value {label} {...props} on:input>
             <CharacterCounter slot="internalCounter">0 / {maxlength}</CharacterCounter>
-        </Textfield>
+        </Textarea>
     {/if}
 </div>
 
