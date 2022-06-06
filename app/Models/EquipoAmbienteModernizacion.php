@@ -30,6 +30,7 @@ class EquipoAmbienteModernizacion extends Model
      */
     protected $fillable = [
         'ambiente_modernizacion_id',
+        'nombre_equipo',
         'numero_inventario_equipo',
         'descripcion_tecnica_equipo',
         'estado_equipo',

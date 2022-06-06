@@ -4,6 +4,7 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Carbon\Carbon;
 
 class AmbienteModernizacion extends Model
 {
@@ -21,7 +22,7 @@ class AmbienteModernizacion extends Model
      *
      * @var array
      */
-    protected $appends = ['year_modernizacion'];
+    protected $appends = ['year_modernizacion', 'fecha_seguimiento'];
 
     /**
      * The attributes that are mass assignable.
@@ -257,5 +258,52 @@ class AmbienteModernizacion extends Model
     public function getYearModernizacionAttribute()
     {
         return date('Y', strtotime($this->created_at));
+    }
+
+    /**
+     * getFechaSeguimientoAttribute
+     *
+     * @return void
+     */
+    public function getFechaSeguimientoAttribute()
+    {
+        return Carbon::parse($this->created_at, 'UTC')->locale('es')->isoFormat('DD [de] MMMM [de] YYYY');
+    }
+
+    /**
+     * 
+     */
+    public function replicateRow($method)
+    {
+        if ($method == 'create') {
+            $clone = $this->replicate();
+            $clone->push();
+
+            foreach ($this->equiposAmbienteModernizacion as $equipo) {
+                $clone->equiposAmbienteModernizacion()->create($equipo->toArray());
+            }
+
+            //reset relations on EXISTING MODEL (this way you can control which ones will be loaded
+            $this->relations = [];
+
+            //load relations on EXISTING MODEL
+            $this->load(
+                'mesasSectoriales',
+                'codigosProyectosSgps',
+                'codigosProyectosSgpsBeneficiados',
+                'programasFormacionCalificados',
+                'programasFormacionNoCalificados',
+                'semilerosInvestigacion'
+            );
+
+            //re-sync everything
+            foreach ($this->relations as $relationName => $values) {
+                $clone->{$relationName}()->sync($values);
+            }
+
+            $clone->save();
+
+            return $clone;
+        }
     }
 }

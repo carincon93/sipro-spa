@@ -847,7 +847,7 @@
         </table>
     </div>
 
-    <Dialog bind:open={equipoFormDialog} fullscreen>
+    <Dialog bind:open={equipoFormDialog} size="950px">
         <div slot="title" class="flex items-center flex-col mt-4">Registrar equipo</div>
         <div slot="content">
             <form on:submit|preventDefault={submitEquipo} id="equipo-ambiente-modernizacion">

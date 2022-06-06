@@ -14,6 +14,7 @@ use App\Models\TipologiaAmbiente;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Storage;
 use Inertia\Inertia;
+use Illuminate\Support\Facades\DB;
 
 class AmbienteModernizacionController extends Controller
 {
@@ -28,7 +29,7 @@ class AmbienteModernizacionController extends Controller
 
         return Inertia::render('AmbientesModernizacion/Index', [
             'filters'                   => request()->all('search'),
-            'ambientesModernizacion'    => AmbienteModernizacion::with('seguimientoAmbienteModernizacion.centroFormacion.regional')->orderBy('nombre_ambiente', 'ASC')
+            'ambientesModernizacion'    => AmbienteModernizacion::distinct('seguimiento_ambiente_modernizacion_id')->with('seguimientoAmbienteModernizacion.ambientesModernizacion', 'seguimientoAmbienteModernizacion.centroFormacion.regional')->orderBy('seguimiento_ambiente_modernizacion_id', 'ASC')
                 ->filterAmbienteModernizacion(request()->only('search'))->paginate(),
         ]);
     }
@@ -38,9 +39,18 @@ class AmbienteModernizacionController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function create()
+    public function create(Request $request)
     {
         $this->authorize('create', [AmbienteModernizacion::class]);
+
+        $seguimientoId = str_replace('=', '', $request->seguimiento_id);
+        $ambienteModernizacion = $seguimientoId ? AmbienteModernizacion::where('seguimiento_ambiente_modernizacion_id', $seguimientoId)->orderBy('created_at', 'DESC')->first() : null;
+        if ($ambienteModernizacion) {
+            // Se hace el clonado y se redirige al edit
+            $nuevoSeguimientoAmbiente = $ambienteModernizacion->replicateRow('create');
+
+            return redirect()->route('ambientes-modernizacion.edit', $nuevoSeguimientoAmbiente)->with('success', 'Se ha generado un nuevo seguimiento.');
+        }
 
         $authUser = auth()->user();
         if ($authUser->hasRole([4])) {
@@ -51,6 +61,7 @@ class AmbienteModernizacionController extends Controller
 
         return Inertia::render('AmbientesModernizacion/Create', [
             'centroFormacionId'         => $authUser->centro_formacion_id,
+            'seguimientoId'             => $seguimientoId,
             'codigosSgps'               => $codigosSgps,
             'tipologiasAmbientes'       => TipologiaAmbiente::select('tipologias_ambientes.id as value', 'tipologias_ambientes.tipo as label')->orderBy('tipologias_ambientes.tipo', 'ASC')->get(),
             'mesasSectoriales'          => MesaSectorial::select('id', 'nombre')->get('id'),

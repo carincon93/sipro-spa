@@ -1,12 +1,9 @@
 <script>
     import AuthenticatedLayout, { title } from '@/Layouts/Authenticated'
     import { inertia, useForm, page } from '@inertiajs/inertia-svelte'
-    import { onMount } from 'svelte'
     import { route, checkRole, checkPermission } from '@/Utils'
-    import axios from 'axios'
     import { _ } from 'svelte-i18n'
 
-    import Input from '@/Shared/Input'
     import Label from '@/Shared/Label'
     import LoadingButton from '@/Shared/LoadingButton'
     import Select from '@/Shared/Select'
@@ -16,13 +13,13 @@
     import Checkbox from '@smui/checkbox'
     import FormField from '@smui/form-field'
     import SelectMulti from '@/Shared/SelectMulti'
-    import Tags from '@/Shared/Tags'
-
+    
     export let errors
     export let codigosSgps
     export let mesasSectoriales
     export let tipologiasAmbientes
     export let centroFormacionId
+    export let seguimientoId
 
     $: $title = 'Crear ambiente de modernización'
 
@@ -34,6 +31,7 @@
 
     let sending = false
     let form = useForm({
+        seguimiento_ambiente_modernizacion_id: seguimientoId,
         codigo_proyecto_sgps_id: null,
         nombre_ambiente: '',
         tipologia_ambiente_id: null,
@@ -44,7 +42,7 @@
         tematica_estrategica_id: null,
         alineado_mesas_sectoriales: false,
         financiado_anteriormente: false,
-        mesa_sectorial_id: [],
+        mesa_sectorial_id: null,
         codigos_proyectos_id: null,
     })
 

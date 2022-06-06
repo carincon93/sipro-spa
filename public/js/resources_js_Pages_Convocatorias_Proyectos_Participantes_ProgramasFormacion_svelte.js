@@ -38881,7 +38881,7 @@ function create_fragment(ctx) {
 
 	menu_1 = new _smui_menu__WEBPACK_IMPORTED_MODULE_2__["default"]({ props: menu_1_props });
 	/*menu_1_binding*/ ctx[5](menu_1);
-	let div_levels = [{ style: "min-width: 100px;" }, /*props*/ ctx[2], { class: "relative" }];
+	let div_levels = [{ style: "min-width: 100px;" }, /*props*/ ctx[2], { class: "relative z-10" }];
 	let div_data = {};
 
 	for (let i = 0; i < div_levels.length; i += 1) {
@@ -38923,7 +38923,7 @@ function create_fragment(ctx) {
 			(0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.set_attributes)(div, div_data = (0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.get_spread_update)(div_levels, [
 				{ style: "min-width: 100px;" },
 				dirty & /*props*/ 4 && /*props*/ ctx[2],
-				{ class: "relative" }
+				{ class: "relative z-10" }
 			]));
 		},
 		i(local) {
