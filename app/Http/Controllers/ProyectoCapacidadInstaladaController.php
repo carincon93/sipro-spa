@@ -306,11 +306,10 @@ class ProyectoCapacidadInstaladaController extends Controller
 
         $user->assignRole(14);
 
-        $data['user_id'] = $user->id;
+        $data['user_id']        = $user->id;
         $data['rol_sennova']    = $request->rol_sennova;
         $data['cantidad_meses'] = $request->cantidad_meses;
         $data['cantidad_horas'] = $request->cantidad_horas;
-        $data['autor_principal'] = true;
 
         return $this->linkIntegrante(new Request($data), $proyectoCapacidadInstalada);
     }

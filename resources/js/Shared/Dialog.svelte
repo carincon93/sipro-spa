@@ -3,7 +3,8 @@
 
     export let open = false
     export let id
-    export let size = 'mandatory'
+    export let size = '850px'
+    export let hexBgColor = '#fff'
 
     $: props = {
         ...$$restProps,
@@ -11,11 +12,11 @@
     }
 </script>
 
-<Dialog bind:open scrimClickAction="" {...props} escapeKeyAction="" aria-labelledby="{size}-title" aria-describedby="{size}-content" id="{id}-dialog">
-    <Title id="{size}-title">
+<Dialog surface$style="width: {size}; max-width: calc(100vw - 32px); background-color: {hexBgColor}" bind:open scrimClickAction="" {...props} escapeKeyAction="" aria-labelledby="mandatory-title" aria-describedby="mandatory-content" id="{id}-dialog">
+    <Title id="mandatory-title">
         <slot name="title" />
     </Title>
-    <Content id="{size}-content">
+    <Content id="mandatory-content">
         <slot name="content" />
     </Content>
     <Actions>

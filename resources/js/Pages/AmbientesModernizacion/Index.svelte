@@ -5,6 +5,7 @@
     import { _ } from 'svelte-i18n'
     import { Inertia } from '@inertiajs/inertia'
 
+    import Dialog from '@/Shared/Dialog'
     import Button from '@/Shared/Button'
     import Pagination from '@/Shared/Pagination'
     import DataTable from '@/Shared/DataTable'
@@ -12,6 +13,8 @@
     import { Item, Text } from '@smui/list'
 
     export let ambientesModernizacion
+
+    let seguimientosDialog = false
 
     $title = 'Ambientes de modernización'
 
@@ -22,6 +25,14 @@
     let isSuperAdmin = checkRole(authUser, [1])
 
     let filters = {}
+
+    let seguimientos = []
+    let seguimientoId
+    function configurarDialogoSeguimiento(ambienteModernizacion) {
+        seguimientos = ambienteModernizacion.seguimiento_ambiente_modernizacion.ambientes_modernizacion
+        seguimientoId = ambienteModernizacion.seguimiento_ambiente_modernizacion.id
+        seguimientosDialog = true
+    }
 </script>
 
 <AuthenticatedLayout>
@@ -30,7 +41,7 @@
 
         <div slot="actions">
             {#if isSuperAdmin || checkRole(authUser, [4])}
-                <Button on:click={() => Inertia.visit(route('ambientes-modernizacion.create'))} variant="raised">Crear ambiente de modernización</Button>
+                <Button on:click={() => Inertia.visit(route('ambientes-modernizacion.create'))} variant="raised">Crear seguimiento ambiente de modernización</Button>
             {/if}
         </div>
 
@@ -69,7 +80,7 @@
                     <td class="border-t td-actions">
                         <DataTableMenu class={ambientesModernizacion.data.length < 4 ? 'z-50' : ''}>
                             {#if isSuperAdmin || checkRole(authUser, [4])}
-                                <Item>
+                                <Item on:SMUI:action={() => configurarDialogoSeguimiento(ambienteModernizacion)}>
                                     <Text>Revisar seguimientos</Text>
                                 </Item>
                             {:else}
@@ -90,4 +101,21 @@
         </tbody>
     </DataTable>
     <Pagination links={ambientesModernizacion.links} />
+
+    <Dialog bind:open={seguimientosDialog}>
+        <div slot="title" class="flex items-center flex-col mt-4">Seleccione una fecha de realización de seguimiento:</div>
+        <div slot="content">
+            <div class="grid grid-cols-3 gap-2">
+                {#each seguimientos as seguimiento}
+                    <Button on:click={() => Inertia.visit(route('ambientes-modernizacion.edit', seguimiento.id))} variant="outlined">{seguimiento.fecha_seguimiento}</Button>
+                {/each}
+            </div>
+        </div>
+        <div slot="actions">
+            <div class="p-4">
+                <Button on:click={(event) => ((seguimientosDialog = false), (seguimientoId = null))} variant={null}>Cancelar</Button>
+                <Button on:click={() => Inertia.visit(route('ambientes-modernizacion.create', 'seguimiento_id=' + seguimientoId))} variant="raised">Asociar seguimiento ambiente de modernización</Button>
+            </div>
+        </div>
+    </Dialog>
 </AuthenticatedLayout>

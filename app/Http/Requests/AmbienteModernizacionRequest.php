@@ -23,6 +23,7 @@ class AmbienteModernizacionRequest extends FormRequest
      */
     public function rules()
     {
+        dd($this);
         if ($this->isMethod('PUT')) {
             return [
                 'codigo_proyecto_sgps_id'               => ['required', 'min:0', 'max:2147483647999', 'integer', 'exists:codigos_proyectos_sgps,id'],
