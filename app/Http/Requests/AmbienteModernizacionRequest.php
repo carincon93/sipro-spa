@@ -23,7 +23,6 @@ class AmbienteModernizacionRequest extends FormRequest
      */
     public function rules()
     {
-        dd($this);
         if ($this->isMethod('PUT')) {
             return [
                 'codigo_proyecto_sgps_id'               => ['required', 'min:0', 'max:2147483647999', 'integer', 'exists:codigos_proyectos_sgps,id'],
@@ -33,28 +32,28 @@ class AmbienteModernizacionRequest extends FormRequest
                 'tematica_estrategica_id'               => ['required', 'min:0', 'max:2147483647999', 'integer', 'exists:tematicas_estrategicas,id'],
                 'mesa_sectorial_id*'                    => ['nullable', 'min:0', 'max:2147483647999', 'exists:mesas_sectoriales,id'],
                 'tipologia_ambiente_id'                 => ['required', 'min:0', 'max:2147483647999', 'integer', 'exists:tipologias_ambientes,id'],
-                'codigos_proyectos_id'                  => ['required_if:financiado_anteriormente,1'],
-                'programas_formacion_calificados'       => ['required_if:ambiente_activo,1', 'min:0', 'max:2147483647999', 'integer', 'exists:programas_formacion,id'],
-                'programas_formacion'                   => ['required_if:ambiente_activo,1', 'min:0', 'max:2147483647999', 'integer', 'exists:programas_formacion_articulados,id'],
-                'cod_proyectos_beneficiados_id'         => ['required_if:ambiente_activo_procesos_idi,1'],
-                'semilleros_investigacion_id'           => ['required_if:ambiente_activo_procesos_idi,1'],
+                'codigos_proyectos_id'                  => ['required_if:financiado_anteriormente,1', 'nullable'],
+                'programas_formacion_calificados'       => ['required_if:ambiente_activo,1', 'nullable', 'min:0', 'max:2147483647999', 'integer', 'exists:programas_formacion,id'],
+                'programas_formacion'                   => ['required_if:ambiente_activo,1', 'nullable', 'min:0', 'max:2147483647999', 'integer', 'exists:programas_formacion_articulados,id'],
+                'cod_proyectos_beneficiados_id'         => ['required_if:ambiente_activo_procesos_idi,1', 'nullable'],
+                'semilleros_investigacion_id'           => ['required_if:ambiente_activo_procesos_idi,1', 'nullable'],
 
                 'nombre_ambiente'                       => ['required', 'string'],
                 'alineado_mesas_sectoriales'            => ['required', 'boolean'],
                 'financiado_anteriormente'              => ['required', 'boolean'],
                 'estado_general_maquinaria'             => ['required', 'integer'],
-                'razon_estado_general'                  => ['required_if:estado_general_maquinaria,2,3', 'string'],
+                'razon_estado_general'                  => ['required_if:estado_general_maquinaria,2,3', 'nullable', 'string'],
                 'ambiente_activo'                       => ['required', 'boolean'],
-                'programas_formacion_calificados'       => ['required_if:ambiente_activo,1'],
-                'programas_formacion'                   => ['required_if:ambiente_activo,1'],
-                'justificacion_ambiente_inactivo'       => ['required_if:ambiente_activo,0'],
+                'programas_formacion_calificados'       => ['required_if:ambiente_activo,1', 'nullable'],
+                'programas_formacion'                   => ['required_if:ambiente_activo,1', 'nullable'],
+                'justificacion_ambiente_inactivo'       => ['required_if:ambiente_activo,0', 'nullable'],
                 'ambiente_activo_procesos_idi'          => ['required', 'boolean'],
-                'numero_proyectos_beneficiados'         => ['required_if:ambiente_activo_procesos_idi,1', 'integer', 'min:0', 'max:32767'],
+                'numero_proyectos_beneficiados'         => ['required_if:ambiente_activo_procesos_idi,1', 'nullable', 'integer', 'min:0', 'max:32767'],
                 'ambiente_formacion_complementaria'     => ['required', 'boolean'],
-                'numero_total_cursos_comp'              => ['required_if:ambiente_formacion_complementaria,1', 'integer', 'min:0', 'max:32767'],
-                'numero_cursos_empresas'                => ['required_if:ambiente_formacion_complementaria,1', 'integer', 'min:0', 'max:32767'],
-                'datos_empresa'                         => ['required_if:ambiente_formacion_complementaria,1', 'json'],
-                'cursos_complementarios'                => ['required_if:ambiente_formacion_complementaria,1', 'json'],
+                'numero_total_cursos_comp'              => ['required_if:ambiente_formacion_complementaria,1', 'nullable', 'integer', 'min:0', 'max:32767'],
+                'numero_cursos_empresas'                => ['required_if:ambiente_formacion_complementaria,1', 'nullable', 'integer', 'min:0', 'max:32767'],
+                'datos_empresa'                         => ['required_if:ambiente_formacion_complementaria,1', 'nullable', 'json'],
+                'cursos_complementarios'                => ['required_if:ambiente_formacion_complementaria,1', 'nullable', 'json'],
                 'coordenada_latitud_ambiente'           => ['required', 'string'],
                 'coordenada_longitud_ambiente'          => ['required', 'string'],
                 'soporte_fotos_ambiente'                => ['nullable', 'max:191'],
@@ -63,7 +62,7 @@ class AmbienteModernizacionRequest extends FormRequest
                 'palabras_clave_ambiente'               => ['required', 'json'],
                 'observaciones_generales_ambiente'      => ['nullable', 'string'],
 
-                'numero_personas_certificadas'          => ['required_if:ambiente_formacion_complementaria,1', 'integer', 'min:0', 'max:2147483647999'],
+                'numero_personas_certificadas'          => ['required_if:ambiente_formacion_complementaria,1', 'nullable', 'integer', 'min:0', 'max:2147483647999'],
                 'numero_tecnicas_tecnologias'           => ['required', 'integer', 'min:0', 'max:2147483647999'],
                 'numero_publicaciones'                  => ['required', 'integer', 'min:0', 'max:2147483647999'],
                 'numero_aprendices_beneficiados'        => ['required', 'integer', 'min:0', 'max:2147483647999'],
@@ -142,6 +141,12 @@ class AmbienteModernizacionRequest extends FormRequest
         if (is_array($this->alineado_mesas_sectoriales)) {
             $this->merge([
                 'alineado_mesas_sectoriales' => $this->alineado_mesas_sectoriales['value'] == '1' ? 1 : 0,
+            ]);
+        }
+
+        if ($this->alineado_mesas_sectoriales == 0) {
+            $this->merge([
+                'mesa_sectorial_id' => $this->mesa_sectorial_id = null,
             ]);
         }
 

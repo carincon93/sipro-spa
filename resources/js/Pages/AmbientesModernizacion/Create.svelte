@@ -13,7 +13,7 @@
     import Checkbox from '@smui/checkbox'
     import FormField from '@smui/form-field'
     import SelectMulti from '@/Shared/SelectMulti'
-    
+
     export let errors
     export let codigosSgps
     export let mesasSectoriales
@@ -42,7 +42,7 @@
         tematica_estrategica_id: null,
         alineado_mesas_sectoriales: false,
         financiado_anteriormente: false,
-        mesa_sectorial_id: null,
+        mesa_sectorial_id: [],
         codigos_proyectos_id: null,
     })
 
