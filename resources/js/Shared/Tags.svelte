@@ -61,6 +61,10 @@
         tags = inputElm.value
     }
 
+    function onTagEdit(e) {
+        tags = inputElm.value
+    }
+
     // on character(s) added/removed (user is typing/deleting)
     function onInput(e) {
         // console.log('onInput: ', e.detail)
@@ -78,10 +82,6 @@
             // render the suggestions dropdown.
             tagify.loading(false).dropdown.show.call(tagify, e.detail.value)
         })
-    }
-
-    function onTagEdit(e) {
-        tags = inputElm.value
     }
 
     $: props = {
