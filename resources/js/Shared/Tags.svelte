@@ -54,7 +54,6 @@
     // tag added callback
     function onAddTag(e) {
         tags = inputElm.value
-        console.log(tags)
     }
 
     // tag remvoed callback
@@ -62,13 +61,9 @@
         tags = inputElm.value
     }
 
-    function onTagEdit(e) {
-        tags = inputElm.value
-    }
-
     // on character(s) added/removed (user is typing/deleting)
     function onInput(e) {
-        console.log('onInput: ', e.detail)
+        // console.log('onInput: ', e.detail)
         tagify.settings.whitelist.length = 0 // reset current whitelist
         tagify.loading(true).dropdown.hide.call(tagify) // show the loader animation
 
@@ -83,6 +78,10 @@
             // render the suggestions dropdown.
             tagify.loading(false).dropdown.show.call(tagify, e.detail.value)
         })
+    }
+
+    function onTagEdit(e) {
+        tags = inputElm.value
     }
 
     $: props = {

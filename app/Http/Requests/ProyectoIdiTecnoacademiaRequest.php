@@ -27,8 +27,8 @@ class ProyectoIdiTecnoacademiaRequest extends FormRequest
             return [
                 'tecnoacademia_linea_tecnoacademia_id'      => ['required', 'array', 'exists:tecnoacademia_linea_tecnoacademia,id'],
                 'tecnoacademia_id'                          => ['required', 'min:0', 'max:2147483647', 'integer', 'exists:tecnoacademias,id'],
-                'semillero_investigacion_id'                => ['required', 'min:0', 'max:2147483647', 'integer', 'exists:semilleros_investigacion,id'],
-                'proyecto_id'                               => ['required', 'min:0', 'max:2147483647', 'integer', 'exists:proyectos,id'],
+                'semillero_investigacion_id'                => ['nullable', 'min:0', 'max:2147483647', 'integer', 'exists:semilleros_investigacion,id'],
+                'proyecto_id'                               => ['nullable', 'min:0', 'max:2147483647', 'integer', 'exists:proyectos,id'],
                 'titulo'                                    => ['required', 'string'],
                 'fecha_inicio'                              => ['required', 'date', 'date_format:Y-m-d', 'before:fecha_finalizacion'],
                 'fecha_finalizacion'                        => ['required', 'date', 'date_format:Y-m-d', 'after:fecha_inicio'],
