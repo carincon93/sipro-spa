@@ -14,8 +14,8 @@ class Kernel extends ConsoleKernel
      */
     protected $commands = [
         Commands\CrudGenerator::class,
-        Commands\GeneratePdfProject::class,
-        Commands\GeneratePdfProjectAll::class,
+        Commands\GenerateProyectoPdf::class,
+        Commands\GenerateTodosProyectosPdf::class,
     ];
 
     /**

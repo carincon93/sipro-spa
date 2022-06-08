@@ -47,7 +47,7 @@
     let sending = false
     let sended = false
     function search() {
-        if (isSuperAdmin || checkRole(authUser, [5, 12, 22])) {
+        if (isSuperAdmin || checkRole(authUser, [5, 10, 12, 22])) {
             sending = true
             sended = false
             axios
@@ -64,7 +64,7 @@
     }
 
     function removeParticipante(id) {
-        if (isSuperAdmin || checkRole(authUser, [5, 12, 22])) {
+        if (isSuperAdmin || checkRole(authUser, [5, 10, 12, 22])) {
             Inertia.post(route('proyectos-idi-tecnoacademia.participantes.users.unlink', proyectoIdiTecnoacademia.id), { user_id: id, _method: 'DELETE' }, { preserveScroll: true })
         }
     }
@@ -98,7 +98,7 @@
     }
 
     function submitParticipante() {
-        if (isSuperAdmin || checkRole(authUser, [5, 12, 22])) {
+        if (isSuperAdmin || checkRole(authUser, [5, 10, 12, 22])) {
             $formParticipante.post(route('proyectos-idi-tecnoacademia.participantes.users.link', proyectoIdiTecnoacademia.id), {
                 onStart: () => {
                     sending = true
@@ -140,7 +140,7 @@
     }
 
     function submitRegister() {
-        if (isSuperAdmin || checkRole(authUser, [5, 12, 22])) {
+        if (isSuperAdmin || checkRole(authUser, [5, 10, 12, 22])) {
             $formNuevoIntegrante.post(route('proyectos-idi-tecnoacademia.participantes.users.register', proyectoIdiTecnoacademia.id), {
                 onStart: () => {
                     sending = true
@@ -169,6 +169,8 @@
         openNuevoParticipanteDialog = false
         sending = false
     }
+
+    console.log(proyectoIdiTecnoacademia.participantes)
 </script>
 
 <AuthenticatedLayout>
@@ -313,11 +315,11 @@
                         </td>
                         <td class="border-t td-actions">
                             <DataTableMenu class={proyectoIdiTecnoacademia.participantes.length < 4 ? 'z-50' : ''}>
-                                {#if isSuperAdmin || checkRole(authUser, [5, 12, 22])}
+                                {#if isSuperAdmin || checkRole(authUser, [5, 10, 12, 22])}
                                     <Item on:SMUI:action={() => showParticipante(participante)}>
                                         <Text>Editar</Text>
                                     </Item>
-                                    {#if authUser.id != participante.id || !participante.formulador}
+                                    {#if authUser.id != participante.pivot.user_id}
                                         <Item on:SMUI:action={() => removeParticipante(participante.id)}>
                                             <Text>Quitar</Text>
                                         </Item>
@@ -356,7 +358,7 @@
         </div>
         <div slot="content">
             <form on:submit|preventDefault={submitParticipante} id="participante-form">
-                <fieldset disabled={isSuperAdmin || checkRole(authUser, [5, 12, 22]) ? undefined : true}>
+                <fieldset disabled={isSuperAdmin || checkRole(authUser, [5, 10, 12, 22]) ? undefined : true}>
                     <div class="mt-8">
                         <Label required class="mb-4" labelFor="rol_sennova" value="Rol SENNOVA" />
                         <Select id="rol_sennova" items={roles} bind:selectedValue={$formParticipante.rol_sennova} error={errors.rol_sennova} autocomplete="off" placeholder="Seleccione un rol SENNOVA" required />

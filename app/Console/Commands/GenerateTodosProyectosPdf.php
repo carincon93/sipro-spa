@@ -6,7 +6,7 @@ use Illuminate\Console\Command;
 use App\Models\ProyectoPdfVersion;
 use App\Models\Proyecto;
 
-class GeneratePdfProjectAll extends Command
+class GenerateTodosProyectosPdf extends Command
 {
     /**
      * The name and signature of the console command.
