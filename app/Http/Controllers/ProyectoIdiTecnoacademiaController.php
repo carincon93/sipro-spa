@@ -54,7 +54,7 @@ class ProyectoIdiTecnoacademiaController extends Controller
             'estadosProyectoIdiTecnoacademia'   => json_decode(Storage::get('json/estados-proyecto-idi-tecnoacademia.json'), true),
             'beneficiados'                      => TipoBeneficiadoTa::select('id as value', 'nombre as label')->orderBy('nombre', 'ASC')->get(),
             'roles'                             => json_decode(Storage::get('json/roles-sennova-ta.json'), true),
-            'proyectos'                         => Proyecto::selectRaw("id as value, id + 8000 as label")->orderBy('id', 'ASC')->get(),
+            'proyectos'                         => Proyecto::selectRaw("id as value, CONCAT('SGPS-', id + 8000) as label")->orderBy('id', 'ASC')->get(),
             'regionales'                        => Regional::select('id as value', 'nombre as label', 'codigo')->orderBy('nombre')->get(),
         ]);
     }

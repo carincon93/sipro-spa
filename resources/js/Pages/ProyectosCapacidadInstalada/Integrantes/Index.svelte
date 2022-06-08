@@ -329,7 +329,7 @@
                                     <Item on:SMUI:action={() => showParticipante(integrante)}>
                                         <Text>Editar</Text>
                                     </Item>
-                                    {#if authUser.id != integrante.pivot.autor_principal}
+                                    {#if authUser.id != integrante.pivot.user_id}
                                         <Item on:SMUI:action={() => removeParticipante(integrante.id)}>
                                             <Text>Quitar</Text>
                                         </Item>

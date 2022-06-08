@@ -8,7 +8,7 @@ use App\Http\Controllers\PdfController;
 use App\Models\ProyectoPdfVersion;
 use App\Notifications\ProjectoVersion;
 
-class GeneratePdfProject extends Command
+class GenerateProyectoPdf extends Command
 {
     /**
      * The name and signature of the console command.
@@ -44,9 +44,9 @@ class GeneratePdfProject extends Command
         $pdfVersion = ProyectoPdfVersion::where('estado', 0)->orderBy('created_at', 'asc')->first();
 
         if (!empty($pdfVersion)) {
-            PdfController::generateProjectSumary($pdfVersion->proyecto->convocatoria, $pdfVersion->proyecto, $pdfVersion->version);
+            PdfController::generateResumenProyecto($pdfVersion->proyecto->convocatoria, $pdfVersion->proyecto, $pdfVersion->version);
             $same = ProyectoPdfVersion::find($pdfVersion->id);
-            if (!empty($same) && $same->estado==1) {
+            if (!empty($same) && $same->estado == 1) {
                 $user = $pdfVersion->proyecto->participantes()->where('es_formulador', true)->first();
                 if (!empty($user)) {
                     $user->notify(new ProjectoVersion($same));
