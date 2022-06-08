@@ -5,6 +5,7 @@
     import { _ } from 'svelte-i18n'
     import { Inertia } from '@inertiajs/inertia'
 
+    import InfoMessage from '@/Shared/InfoMessage'
     import Dialog from '@/Shared/Dialog'
     import Button from '@/Shared/Button'
     import Pagination from '@/Shared/Pagination'
@@ -13,6 +14,7 @@
     import { Item, Text } from '@smui/list'
 
     export let ambientesModernizacion
+    export let codigosSgpsFaltantes
 
     let seguimientosDialog = false
 
@@ -36,9 +38,21 @@
 </script>
 
 <AuthenticatedLayout>
-    <DataTable class="mt-20">
-        <div slot="title">Seguimiento post cierre - Ambientes de modernización SENNOVA</div>
+    <h1 class="text-2xl text-center">Seguimiento post cierre - Ambientes de modernización SENNOVA</h1>
 
+    <InfoMessage class="mt-10">
+        <h1 class="font-black text-center mb-10">Proyectos sin seguimiento</h1>
+        <ul class="pl-4 list-disc">
+            {#each codigosSgpsFaltantes as codigo}
+                <li>
+                    <strong>Título: </strong>{codigo.titulo}
+                    <br />
+                    <strong>Código: </strong>SGPS-{codigo.codigo_sgps + '-' + codigo.year_ejecucion}
+                </li>
+            {/each}
+        </ul>
+    </InfoMessage>
+    <DataTable class="mt-20">
         <div slot="actions">
             {#if isSuperAdmin || checkRole(authUser, [4])}
                 <Button on:click={() => Inertia.visit(route('ambientes-modernizacion.create'))} variant="raised">Crear seguimiento ambiente de modernización</Button>
@@ -74,7 +88,7 @@
                     </td>
 
                     <td class="border-t">
-                        <p class="px-6 py-4 focus:text-indigo-500">NA</p>
+                        <p class="px-6 py-4 focus:text-indigo-500">{ambienteModernizacion.estado}</p>
                     </td>
 
                     <td class="border-t td-actions">
@@ -95,7 +109,7 @@
 
             {#if ambientesModernizacion.data.length === 0}
                 <tr>
-                    <td class="border-t px-6 py-4" colspan="4"> Sin información registrada </td>
+                    <td class="border-t px-6 py-4" colspan="5"> Sin información registrada </td>
                 </tr>
             {/if}
         </tbody>

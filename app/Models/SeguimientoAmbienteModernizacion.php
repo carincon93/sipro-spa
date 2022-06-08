@@ -108,4 +108,11 @@ class SeguimientoAmbienteModernizacion extends Model
 
         return $codigo;
     }
+
+    public function getNumeroSeguimientos()
+    {
+        $count = $this->ambientesModernizacion()->where('finalizado', true)->count();
+
+        return $count == 0 ? 'Registro en borrador' : 'Registro número ' . $count . ' finalizado';
+    }
 }

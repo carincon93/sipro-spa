@@ -150,7 +150,7 @@
     })
 
     function submit() {
-        if (isSuperAdmin || checkRole(authUser, [4])) {
+        if (isSuperAdmin || (checkRole(authUser, [4]) && ambienteModernizacion.estado == false)) {
             $form.post(route('ambientes-modernizacion.update', ambienteModernizacion.id), {
                 onStart: () => (sending = true),
                 onFinish: () => (sending = false),
@@ -187,7 +187,7 @@
     }
 
     function submitEquipo() {
-        if (isSuperAdmin || checkRole(authUser, [4])) {
+        if (isSuperAdmin || (checkRole(authUser, [4]) && ambienteModernizacion.estado == false)) {
             $formEquipo.post(route('equipos-ambiente-modernizacion.store', ambienteModernizacion.id), {
                 onStart: () => (sending = true),
                 onFinish: () => ((sending = false), (equipoFormDialog = false)),
@@ -203,7 +203,7 @@
     }
 
     function destroyEquipo() {
-        if (isSuperAdmin || checkRole(authUser, [4])) {
+        if (isSuperAdmin || (checkRole(authUser, [4]) && ambienteModernizacion.estado == false)) {
             $formEquipo.delete(route('equipos-ambiente-modernizacion.destroy', equipoAmbienteModernizacionId), {
                 onFinish: () => ((equipoAmbienteModernizacionId = null), (destroyEquipoDialog = false)),
                 preserveScroll: true,
@@ -212,7 +212,7 @@
     }
 
     function destroy() {
-        if (isSuperAdmin || checkRole(authUser, [4])) {
+        if (isSuperAdmin || (checkRole(authUser, [4]) && ambienteModernizacion.estado == false)) {
             $form.delete(route('ambientes-modernizacion.destroy', ambienteModernizacion.id))
         }
     }
@@ -253,7 +253,7 @@
     </header>
 
     <form on:submit|preventDefault={submit}>
-        <fieldset class="p-8">
+        <fieldset class="p-8" disabled={isSuperAdmin || ambienteModernizacion.estado == false ? undefined : true}>
             <div class="mt-44 grid grid-cols-2">
                 <div><p class="block font-medium text-sm text-gray-700 mb-4">Regional:</p></div>
                 <div>
@@ -782,10 +782,10 @@
             </div>
         </fieldset>
         <div class="px-8 py-4 bg-gray-100 border-t border-gray-200 flex items-center sticky bottom-0">
-            {#if isSuperAdmin || checkRole(authUser, [4])}
+            {#if isSuperAdmin || (checkRole(authUser, [4]) && ambienteModernizacion.estado == false)}
                 <button class="text-red-600 hover:underline text-left" tabindex="-1" type="button" on:click={(event) => (destroyAmbienteModernizacionDialog = true)}> Eliminar ambiente de modernización </button>
             {/if}
-            {#if isSuperAdmin || checkRole(authUser, [4])}
+            {#if isSuperAdmin || (checkRole(authUser, [4]) && ambienteModernizacion.estado == false)}
                 <LoadingButton loading={sending} class="btn-indigo ml-auto" type="submit">Editar ambiente de modernización</LoadingButton>
             {/if}
         </div>
@@ -793,11 +793,13 @@
 
     <hr class="w-full block my-20" />
 
-    <div>
+    <div class="mb-20">
         <h1 class="text-center text-2xl">Relacione únicamente los equipos y maquinaría adquirida con la ejecución del proyecto de modernización SENNOVA:</h1>
-        <div class="flex justify-end mt-10">
-            <Button on:click={() => ((equipoFormDialog = true), $formEquipo.reset())} variant="raised">Crear equipo</Button>
-        </div>
+        {#if isSuperAdmin || ambienteModernizacion.estado == false}
+            <div class="flex justify-end mt-10">
+                <Button on:click={() => ((equipoFormDialog = true), $formEquipo.reset())} variant="raised">Crear equipo</Button>
+            </div>
+        {/if}
 
         <table class="w-full bg-white whitespace-no-wrap table-fixed data-table mt-10">
             <thead>
@@ -851,7 +853,7 @@
         <div slot="title" class="flex items-center flex-col mt-4">Registrar equipo</div>
         <div slot="content">
             <form on:submit|preventDefault={submitEquipo} id="equipo-ambiente-modernizacion">
-                <fieldset class="p-8">
+                <fieldset class="p-8" disabled={isSuperAdmin || ambienteModernizacion.estado == false ? undefined : true}>
                     <div class="mt-4">
                         <Label required class="mb-4" labelFor="numero_inventario_equipo" value="Número de inventario del equipo o máquina" />
                         <Input id="numero_inventario_equipo" type="text" class="mt-1" error={errors.numero_inventario_equipo} placeholder="Escriba el número de inventario del equipo/maquina" bind:value={$formEquipo.numero_inventario_equipo} required />
@@ -887,7 +889,9 @@
         <div slot="actions">
             <div class="p-4">
                 <Button on:click={(event) => (equipoFormDialog = false)} variant={null}>Cancelar</Button>
-                <Button variant="raised" type="submit" form="equipo-ambiente-modernizacion">Guardar</Button>
+                {#if isSuperAdmin || ambienteModernizacion.estado == false}
+                    <Button variant="raised" type="submit" form="equipo-ambiente-modernizacion">Guardar</Button>
+                {/if}
             </div>
         </div>
     </Dialog>

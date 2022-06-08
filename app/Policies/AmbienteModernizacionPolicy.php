@@ -67,7 +67,7 @@ class AmbienteModernizacionPolicy
     {
         return false;
 
-        if ($user->hasRole(4) && $user->id == $ambienteModernizacion->dinamizador_sennova_id) {
+        if ($user->hasRole(4) && $user->id == $ambienteModernizacion->dinamizador_sennova_id && $ambienteModernizacion->finalizado == false) {
             return true;
         }
     }
@@ -83,7 +83,7 @@ class AmbienteModernizacionPolicy
     {
         return false;
 
-        if ($user->hasRole(4) && $user->id == $ambienteModernizacion->dinamizador_sennova_id) {
+        if ($user->hasRole(4) && $user->id == $ambienteModernizacion->dinamizador_sennova_id && $ambienteModernizacion->finalizado == false) {
             return true;
         }
     }

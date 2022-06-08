@@ -22,7 +22,7 @@ class AmbienteModernizacion extends Model
      *
      * @var array
      */
-    protected $appends = ['year_modernizacion', 'fecha_seguimiento'];
+    protected $appends = ['year_modernizacion', 'fecha_seguimiento', 'estado'];
 
     /**
      * The attributes that are mass assignable.
@@ -70,7 +70,8 @@ class AmbienteModernizacion extends Model
         'fortalecimiento_programas_formacion',
         'transferencia_tecnologias',
         'cobertura_perntinencia_formacion',
-        'dinamizador_sennova_id'
+        'dinamizador_sennova_id',
+        'finalizado'
     ];
 
     /**
@@ -270,40 +271,8 @@ class AmbienteModernizacion extends Model
         return Carbon::parse($this->created_at, 'UTC')->locale('es')->isoFormat('DD [de] MMMM [de] YYYY');
     }
 
-    /**
-     * 
-     */
-    public function replicateRow($method)
+    public function getEstadoAttribute()
     {
-        if ($method == 'create') {
-            $clone = $this->replicate();
-            $clone->push();
-
-            foreach ($this->equiposAmbienteModernizacion as $equipo) {
-                $clone->equiposAmbienteModernizacion()->create($equipo->toArray());
-            }
-
-            //reset relations on EXISTING MODEL (this way you can control which ones will be loaded
-            $this->relations = [];
-
-            //load relations on EXISTING MODEL
-            $this->load(
-                'mesasSectoriales',
-                'codigosProyectosSgps',
-                'codigosProyectosSgpsBeneficiados',
-                'programasFormacionCalificados',
-                'programasFormacionNoCalificados',
-                'semilerosInvestigacion'
-            );
-
-            //re-sync everything
-            foreach ($this->relations as $relationName => $values) {
-                $clone->{$relationName}()->sync($values);
-            }
-
-            $clone->save();
-
-            return $clone;
-        }
+        return $this->seguimientoAmbienteModernizacion->getNumeroSeguimientos();
     }
 }
