@@ -98,12 +98,12 @@
                                     <Icon name="cheveron-down" class="w-5 h-5 group-hover:fill-indigo-600 fill-gray-700 focus:fill-indigo-600" />
                                 </div>
                                 <div slot="dropdown" class="mt-2 py-2 shadow-xl bg-white rounded text-sm">
-                                    <a use:inertia href={route('reportar-problemas.create')} class="flex items-center px-6 py-2 hover:bg-indigo-500 hover:text-white">
+                                    <div class="flex items-center px-6 py-2 hover:bg-indigo-500 hover:text-white">
                                         <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" style="flex-basis: 20px;" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                                             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M18.364 5.636l-3.536 3.536m0 5.656l3.536 3.536M9.172 9.172L5.636 5.636m3.536 9.192l-3.536 3.536M21 12a9 9 0 11-18 0 9 9 0 0118 0zm-5 0a4 4 0 11-8 0 4 4 0 018 0z" />
                                         </svg>
-                                        <span class="ml-1.5">Soporte</span>
-                                    </a>
+                                        <span class="ml-1.5"><a href="mailto:sgpssipro@sena.edu.co">sgpssipro@sena.edu.co</a></span>
+                                    </div>
 
                                     <a use:inertia href={route('users.change-password')} class="flex items-center px-6 py-2 hover:bg-indigo-500 hover:text-white">
                                         <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" style="flex-basis: 20px;" fill="none" viewBox="0 0 24 24" stroke="currentColor">
@@ -222,7 +222,7 @@
                 <Button on:click={() => Inertia.visit(route('proyectos-capacidad-instalada.index'))} variant={route().current('proyectos-capacidad-instalada.*') ? 'raised' : 'outlined'} class="p-2">Proyectos de capacidad instalada</Button>
             {/if}
 
-            {#if isSuperAdmin || checkRole(authUser, [5, 12, 22])}
+            {#if isSuperAdmin || checkRole(authUser, [5, 10, 12, 22])}
                 <Button on:click={() => Inertia.visit(route('proyectos-idi-tecnoacademia.index'))} variant={route().current('proyectos-idi-tecnoacademia.*') ? 'raised' : 'outlined'} class="p-2">Proyectos e iniciativas I+D+i TecnoAcademias</Button>
             {/if}
 

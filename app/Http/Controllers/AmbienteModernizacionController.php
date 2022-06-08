@@ -27,10 +27,19 @@ class AmbienteModernizacionController extends Controller
     {
         $this->authorize('viewAny', [AmbienteModernizacion::class]);
 
+        $authUser = auth()->user();
+        $codigosSgps = CodigoProyectoSgps::select('seguimientos_ambiente_modernizacion.codigo_proyecto_sgps_id', 'codigos_proyectos_sgps.codigo_sgps', 'codigos_proyectos_sgps.titulo', 'codigos_proyectos_sgps.year_ejecucion')->leftJoin('seguimientos_ambiente_modernizacion', 'codigos_proyectos_sgps.id', 'seguimientos_ambiente_modernizacion.codigo_proyecto_sgps_id')
+            ->join('lineas_programaticas', 'codigos_proyectos_sgps.linea_programatica_id', 'lineas_programaticas.id')
+            ->where('lineas_programaticas.codigo', 23)
+            ->where('codigos_proyectos_sgps.centro_formacion_id', $authUser->centro_formacion_id)
+            ->where('seguimientos_ambiente_modernizacion.codigo_proyecto_sgps_id', NULL)
+            ->get();
+
         return Inertia::render('AmbientesModernizacion/Index', [
             'filters'                   => request()->all('search'),
             'ambientesModernizacion'    => AmbienteModernizacion::distinct('seguimiento_ambiente_modernizacion_id')->with('seguimientoAmbienteModernizacion.ambientesModernizacion', 'seguimientoAmbienteModernizacion.centroFormacion.regional')->orderBy('seguimiento_ambiente_modernizacion_id', 'ASC')
                 ->filterAmbienteModernizacion(request()->only('search'))->paginate(),
+            'codigosSgpsFaltantes'      => $codigosSgps
         ]);
     }
 
@@ -47,17 +56,20 @@ class AmbienteModernizacionController extends Controller
         $ambienteModernizacion = $seguimientoId ? AmbienteModernizacion::where('seguimiento_ambiente_modernizacion_id', $seguimientoId)->orderBy('created_at', 'DESC')->first() : null;
         if ($ambienteModernizacion) {
             // Se hace el clonado y se redirige al edit
-            $nuevoSeguimientoAmbiente = $ambienteModernizacion->replicateRow('create');
+            DB::table('ambientes_modernizacion')->where('seguimiento_ambiente_modernizacion_id', $seguimientoId)->update(['finalizado' => true]);
+            $nuevoSeguimientoAmbiente = $this->replicateRow($ambienteModernizacion);
+            $nuevoSeguimientoAmbiente->update(['finalizado' => false]);
 
             return redirect()->route('ambientes-modernizacion.edit', $nuevoSeguimientoAmbiente)->with('success', 'Se ha generado un nuevo seguimiento.');
         }
 
         $authUser = auth()->user();
-        if ($authUser->hasRole([4])) {
-            $codigosSgps = CodigoProyectoSgps::selectRaw('codigos_proyectos_sgps.id as value, concat(codigos_proyectos_sgps.titulo, chr(10), \'∙ Código: SGPS-\', codigos_proyectos_sgps.codigo_sgps, chr(10), \'∙ Año: \', codigos_proyectos_sgps.year_ejecucion) as label')->join('lineas_programaticas', 'codigos_proyectos_sgps.linea_programatica_id', 'lineas_programaticas.id')->where('lineas_programaticas.codigo', 23)->where('codigos_proyectos_sgps.centro_formacion_id', $authUser->centro_formacion_id)->orderBy('codigos_proyectos_sgps.codigo_sgps', 'ASC')->get();
-        } else {
-            $codigosSgps = CodigoProyectoSgps::selectRaw('codigos_proyectos_sgps.id as value, concat(codigos_proyectos_sgps.titulo, chr(10), \'∙ Código: SGPS-\', codigos_proyectos_sgps.codigo_sgps, chr(10), \'∙ Año: \', codigos_proyectos_sgps.year_ejecucion) as label')->join('lineas_programaticas', 'codigos_proyectos_sgps.linea_programatica_id', 'lineas_programaticas.id')->where('lineas_programaticas.codigo', 23)->orderBy('codigos_proyectos_sgps.codigo_sgps', 'ASC')->get();
-        }
+        $codigosSgps = CodigoProyectoSgps::selectRaw('codigos_proyectos_sgps.id as value, concat(codigos_proyectos_sgps.titulo, chr(10), \'∙ Código: SGPS-\', codigos_proyectos_sgps.codigo_sgps, chr(10), \'∙ Año: \', codigos_proyectos_sgps.year_ejecucion) as label')->leftJoin('seguimientos_ambiente_modernizacion', 'codigos_proyectos_sgps.id', 'seguimientos_ambiente_modernizacion.codigo_proyecto_sgps_id')
+            ->join('lineas_programaticas', 'codigos_proyectos_sgps.linea_programatica_id', 'lineas_programaticas.id')
+            ->where('lineas_programaticas.codigo', 23)
+            ->where('codigos_proyectos_sgps.centro_formacion_id', $authUser->centro_formacion_id)
+            ->where('seguimientos_ambiente_modernizacion.codigo_proyecto_sgps_id', NULL)
+            ->get();
 
         return Inertia::render('AmbientesModernizacion/Create', [
             'centroFormacionId'         => $authUser->centro_formacion_id,
@@ -322,5 +334,39 @@ class AmbienteModernizacionController extends Controller
         $equipoAmbienteModernizacion->delete();
 
         return back()->with('success', 'El recurso se ha eliminado correctamente.');
+    }
+
+    /**
+     * 
+     */
+    public function replicateRow($ambienteModernizacion)
+    {
+        $clone = $ambienteModernizacion->replicate();
+        $clone->push();
+
+        //load relations on EXISTING MODEL
+        $ambienteModernizacion->load(
+            'mesasSectoriales',
+            'codigosProyectosSgps',
+            'codigosProyectosSgpsBeneficiados',
+            'programasFormacionCalificados',
+            'programasFormacionNoCalificados',
+            'semilerosInvestigacion'
+        );
+
+        //re-sync everything
+        foreach ($ambienteModernizacion->getRelations() as $relationName => $values) {
+            if ($relationName != 'equiposAmbienteModernizacion') {
+                $clone->{$relationName}()->sync($values);
+            }
+        }
+
+        foreach ($ambienteModernizacion->equiposAmbienteModernizacion as $equipo) {
+            $clone->equiposAmbienteModernizacion()->create($equipo->toArray());
+        }
+
+        $clone->save();
+
+        return $clone;
     }
 }

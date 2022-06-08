@@ -71,8 +71,12 @@
     </div>
 </form>
 
-<p class="text-xs mt-6">
-    Si aún no tiene cuenta puede crear una diligenciando el siguiente <a use:inertia href={route('register')} class="text-indigo-500 underline">formulario</a>
+<p class="text-xs mt-10">Si aún no tiene cuenta puede crearla diligenciando el siguiente formulario</p>
+
+<a use:inertia href={route('register')} class="bg-indigo-500 block mt-1 mx-auto p-2 rounded text-center text-white text-xs w-1/4">Registro</a>
+
+<p class="text-xs mt-6 text-indigo-500">
+    Problemas con la plataforma. Envíe un correo a la dirección <a class="underline" href="mailto:sgpssipro@sena.edu.co">sgpssipro@sena.edu.co</a> (Se debe enviar desde una cuenta @sena.edu.co)
 </p>
 
 <div class="flex mt-20">

@@ -106,7 +106,7 @@
                 <a use:inertia class="bg-white overflow-hidden shadow-sm sm:rounded-lg px-6 py-2 hover:bg-indigo-500 hover:text-white h-52 flex justify-around items-center flex-col" href={route('proyectos-capacidad-instalada.index')}>Proyectos de capacidad instalada</a>
             {/if}
 
-            {#if isSuperAdmin || checkRole(authUser, [5, 12, 22])}
+            {#if isSuperAdmin || checkRole(authUser, [5, 10, 12, 22])}
                 <a use:inertia class="bg-white overflow-hidden shadow-sm sm:rounded-lg px-6 py-2 hover:bg-indigo-500 hover:text-white h-52 flex justify-around items-center flex-col" href={route('proyectos-idi-tecnoacademia.index')}>Proyectos e iniciativas I+D+i TecnoAcademias</a>
             {/if}
 
@@ -142,7 +142,7 @@
                 <a use:inertia class="bg-white overflow-hidden shadow-sm sm:rounded-lg px-6 py-2 hover:bg-indigo-500 hover:text-white h-52 flex justify-around items-center flex-col" href={route('tematicas-estrategicas.index')}>Temáticas estratégicas SENA</a>
             {/if}
 
-            {#if isSuperAdmin || checkRole(authUser, [4, 21, 18, 19, 5, 17])}
+            {#if isSuperAdmin || checkRole(authUser, [4, 5, 17, 18, 19, 21])}
                 <a use:inertia class="bg-white overflow-hidden shadow-sm sm:rounded-lg px-6 py-2 hover:bg-indigo-500 hover:text-white h-52 flex justify-around items-center flex-col" href={route('users.index')}>Usuarios</a>
             {/if}
         </div>

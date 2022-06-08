@@ -51,14 +51,14 @@
                 <ul class="list-disc mt-5">
                     <li>Tome un pantallazo del error desde Windows o Mac.</li>
                     <li>Copie la URL.</li>
-                    <li>Envie un correo detallando el error.</li>
+                    <li>Envie las evidencias al correo <a class="underline" href="mailto:sgpssipro@sena.edu.co">sgpssipro@sena.edu.co</a> detallando el error. (Se debe enviar desde una cuenta @sena.edu.co)</li>
                 </ul>
 
-                <div class="flex items-center mt-10">
+                <!-- <div class="flex items-center mt-10">
                     <Button on:click={() => Inertia.visit(route('reportar-problemas.create'))} variant="raised" type="button" class="mr-4" style="background-color: white !important; color: black !important;">Solicitar soporte</Button> o <Button on:click={() => Inertia.visit(route('login'))} variant="raised" class="ml-4" style="background-color: white !important; color: black !important;">
                         Regresar a la aplicación
                     </Button>
-                </div>
+                </div> -->
             </div>
         {/if}
     </div>

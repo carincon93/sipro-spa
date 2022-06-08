@@ -96,7 +96,7 @@ class AuthServiceProvider extends ServiceProvider
         // });
 
         Gate::define('crear-proyecto-idi-tecnoacademia', function (User $user) {
-            if ($user->hasRole([5, 12, 22])) {
+            if ($user->hasRole([5, 10, 12, 22])) {
                 return true;
             }
 
