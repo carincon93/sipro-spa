@@ -25293,7 +25293,7 @@ __webpack_require__.r(__webpack_exports__);
 
 
 
-function create_if_block_6(ctx) {
+function create_if_block_7(ctx) {
 	let img;
 	let img_src_value;
 
@@ -25313,8 +25313,8 @@ function create_if_block_6(ctx) {
 	};
 }
 
-// (22:8) {#if status >= 500 || status == 403}
-function create_if_block_5(ctx) {
+// (22:8) {#if status >= 500 || status == 403 || status == 405}
+function create_if_block_6(ctx) {
 	let img;
 	let img_src_value;
 
@@ -25334,8 +25334,8 @@ function create_if_block_5(ctx) {
 	};
 }
 
-// (44:32) 
-function create_if_block_4(ctx) {
+// (46:32) 
+function create_if_block_5(ctx) {
 	let h1;
 
 	return {
@@ -25353,8 +25353,8 @@ function create_if_block_4(ctx) {
 	};
 }
 
-// (42:32) 
-function create_if_block_3(ctx) {
+// (44:32) 
+function create_if_block_4(ctx) {
 	let h1;
 
 	return {
@@ -25372,8 +25372,8 @@ function create_if_block_3(ctx) {
 	};
 }
 
-// (32:32) 
-function create_if_block_2(ctx) {
+// (34:32) 
+function create_if_block_3(ctx) {
 	let h1;
 	let t1;
 	let div;
@@ -25405,6 +25405,25 @@ function create_if_block_2(ctx) {
 	};
 }
 
+// (32:32) 
+function create_if_block_2(ctx) {
+	let h1;
+
+	return {
+		c() {
+			h1 = (0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.element)("h1");
+			h1.innerHTML = `Su sesión ha finalizado previamente y no puede realizar está acción. Por favor vuelva a iniciar sesión (En el formulario de Inisio de sesión se recomienda que active la casilla de <strong>Mantener sesión activa</strong>)`;
+			(0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.attr)(h1, "class", "text-2xl text-center");
+		},
+		m(target, anchor) {
+			(0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.insert)(target, h1, anchor);
+		},
+		d(detaching) {
+			if (detaching) (0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.detach)(h1);
+		}
+	};
+}
+
 // (30:8) {#if status == 403}
 function create_if_block_1(ctx) {
 	let h1;
@@ -25424,7 +25443,7 @@ function create_if_block_1(ctx) {
 	};
 }
 
-// (48:8) {#if status != 503}
+// (50:8) {#if status != 503 && status != 405 && status == 403}
 function create_if_block(ctx) {
 	let div;
 
@@ -25434,7 +25453,7 @@ function create_if_block(ctx) {
 
 			div.innerHTML = `<p>Puede notificar a la mesa de ayuda realice los siguientes pasos:</p> 
                 <ul class="list-disc mt-5"><li>Tome un pantallazo del error desde Windows o Mac.</li> 
-                    <li>Copie la URL.</li> 
+                    <li>Copie la URL donde surgió el error.</li> 
                     <li>Envie las evidencias al correo <a class="underline" href="mailto:sgpssipro@sena.edu.co">sgpssipro@sena.edu.co</a> detallando el error. (Se debe enviar desde una cuenta @sena.edu.co)</li></ul>`;
 
 			(0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.attr)(div, "class", "mt-10");
@@ -25448,20 +25467,41 @@ function create_if_block(ctx) {
 	};
 }
 
+// (61:12) <Button on:click={() => Inertia.visit(route('login'))} variant="raised" type="button" class="mr-4" style="background-color: white !important; color: black !important;">
+function create_default_slot(ctx) {
+	let t;
+
+	return {
+		c() {
+			t = (0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.text)("Solicitar soporte");
+		},
+		m(target, anchor) {
+			(0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.insert)(target, t, anchor);
+		},
+		d(detaching) {
+			if (detaching) (0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.detach)(t);
+		}
+	};
+}
+
 function create_fragment(ctx) {
 	let title_value;
 	let t0;
-	let div1;
+	let div2;
 	let figure;
 	let t1;
-	let div0;
+	let div1;
 	let t2;
-	let div1_class_value;
+	let t3;
+	let div0;
+	let button;
+	let div2_class_value;
+	let current;
 	document.title = title_value = "SGPS-SIPRO - Error " + /*status*/ ctx[0];
 
 	function select_block_type(ctx, dirty) {
-		if (/*status*/ ctx[0] >= 500 || /*status*/ ctx[0] == 403) return create_if_block_5;
-		if (/*status*/ ctx[0] == 404) return create_if_block_6;
+		if (/*status*/ ctx[0] >= 500 || /*status*/ ctx[0] == 403 || /*status*/ ctx[0] == 405) return create_if_block_6;
+		if (/*status*/ ctx[0] == 404) return create_if_block_7;
 	}
 
 	let current_block_type = select_block_type(ctx, -1);
@@ -25469,44 +25509,67 @@ function create_fragment(ctx) {
 
 	function select_block_type_1(ctx, dirty) {
 		if (/*status*/ ctx[0] == 403) return create_if_block_1;
-		if (/*status*/ ctx[0] == 404) return create_if_block_2;
-		if (/*status*/ ctx[0] == 500) return create_if_block_3;
-		if (/*status*/ ctx[0] == 503) return create_if_block_4;
+		if (/*status*/ ctx[0] == 405) return create_if_block_2;
+		if (/*status*/ ctx[0] == 404) return create_if_block_3;
+		if (/*status*/ ctx[0] == 500) return create_if_block_4;
+		if (/*status*/ ctx[0] == 503) return create_if_block_5;
 	}
 
 	let current_block_type_1 = select_block_type_1(ctx, -1);
 	let if_block1 = current_block_type_1 && current_block_type_1(ctx);
-	let if_block2 = /*status*/ ctx[0] != 503 && create_if_block(ctx);
+	let if_block2 = /*status*/ ctx[0] != 503 && /*status*/ ctx[0] != 405 && /*status*/ ctx[0] == 403 && create_if_block(ctx);
+
+	button = new _Shared_Button__WEBPACK_IMPORTED_MODULE_4__["default"]({
+			props: {
+				variant: "raised",
+				type: "button",
+				class: "mr-4",
+				style: "background-color: white !important; color: black !important;",
+				$$slots: { default: [create_default_slot] },
+				$$scope: { ctx }
+			}
+		});
+
+	button.$on("click", /*click_handler*/ ctx[1]);
 
 	return {
 		c() {
 			t0 = (0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.space)();
-			div1 = (0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.element)("div");
+			div2 = (0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.element)("div");
 			figure = (0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.element)("figure");
 			if (if_block0) if_block0.c();
 			t1 = (0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.space)();
-			div0 = (0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.element)("div");
+			div1 = (0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.element)("div");
 			if (if_block1) if_block1.c();
 			t2 = (0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.space)();
 			if (if_block2) if_block2.c();
+			t3 = (0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.space)();
+			div0 = (0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.element)("div");
+			(0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.create_component)(button.$$.fragment);
+			(0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.attr)(div0, "class", "flex items-center justify-center mt-10");
+			(0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.attr)(div1, "class", "px-20");
 
-			(0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.attr)(div1, "class", div1_class_value = "" + ((/*status*/ ctx[0] >= 500 || /*status*/ ctx[0] == 403
+			(0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.attr)(div2, "class", div2_class_value = "" + ((/*status*/ ctx[0] >= 500 || /*status*/ ctx[0] == 403 || /*status*/ ctx[0] == 405
 			? 'bg-red-500'
 			: 'bg-indigo-700') + " flex flex-col items-center justify-center min-h-screen text-white"));
 		},
 		m(target, anchor) {
 			(0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.insert)(target, t0, anchor);
-			(0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.insert)(target, div1, anchor);
-			(0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.append)(div1, figure);
+			(0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.insert)(target, div2, anchor);
+			(0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.append)(div2, figure);
 			if (if_block0) if_block0.m(figure, null);
-			(0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.append)(div1, t1);
+			(0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.append)(div2, t1);
+			(0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.append)(div2, div1);
+			if (if_block1) if_block1.m(div1, null);
+			(0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.append)(div1, t2);
+			if (if_block2) if_block2.m(div1, null);
+			(0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.append)(div1, t3);
 			(0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.append)(div1, div0);
-			if (if_block1) if_block1.m(div0, null);
-			(0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.append)(div0, t2);
-			if (if_block2) if_block2.m(div0, null);
+			(0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.mount_component)(button, div0, null);
+			current = true;
 		},
 		p(ctx, [dirty]) {
-			if (dirty & /*status*/ 1 && title_value !== (title_value = "SGPS-SIPRO - Error " + /*status*/ ctx[0])) {
+			if ((!current || dirty & /*status*/ 1) && title_value !== (title_value = "SGPS-SIPRO - Error " + /*status*/ ctx[0])) {
 				document.title = title_value;
 			}
 
@@ -25526,34 +25589,49 @@ function create_fragment(ctx) {
 
 				if (if_block1) {
 					if_block1.c();
-					if_block1.m(div0, t2);
+					if_block1.m(div1, t2);
 				}
 			}
 
-			if (/*status*/ ctx[0] != 503) {
+			if (/*status*/ ctx[0] != 503 && /*status*/ ctx[0] != 405 && /*status*/ ctx[0] == 403) {
 				if (if_block2) {
 					
 				} else {
 					if_block2 = create_if_block(ctx);
 					if_block2.c();
-					if_block2.m(div0, null);
+					if_block2.m(div1, t3);
 				}
 			} else if (if_block2) {
 				if_block2.d(1);
 				if_block2 = null;
 			}
 
-			if (dirty & /*status*/ 1 && div1_class_value !== (div1_class_value = "" + ((/*status*/ ctx[0] >= 500 || /*status*/ ctx[0] == 403
+			const button_changes = {};
+
+			if (dirty & /*$$scope*/ 8) {
+				button_changes.$$scope = { dirty, ctx };
+			}
+
+			button.$set(button_changes);
+
+			if (!current || dirty & /*status*/ 1 && div2_class_value !== (div2_class_value = "" + ((/*status*/ ctx[0] >= 500 || /*status*/ ctx[0] == 403 || /*status*/ ctx[0] == 405
 			? 'bg-red-500'
 			: 'bg-indigo-700') + " flex flex-col items-center justify-center min-h-screen text-white"))) {
-				(0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.attr)(div1, "class", div1_class_value);
+				(0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.attr)(div2, "class", div2_class_value);
 			}
 		},
-		i: svelte_internal__WEBPACK_IMPORTED_MODULE_0__.noop,
-		o: svelte_internal__WEBPACK_IMPORTED_MODULE_0__.noop,
+		i(local) {
+			if (current) return;
+			(0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.transition_in)(button.$$.fragment, local);
+			current = true;
+		},
+		o(local) {
+			(0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.transition_out)(button.$$.fragment, local);
+			current = false;
+		},
 		d(detaching) {
 			if (detaching) (0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.detach)(t0);
-			if (detaching) (0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.detach)(div1);
+			if (detaching) (0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.detach)(div2);
 
 			if (if_block0) {
 				if_block0.d();
@@ -25564,6 +25642,7 @@ function create_fragment(ctx) {
 			}
 
 			if (if_block2) if_block2.d();
+			(0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.destroy_component)(button);
 		}
 	};
 }
@@ -25573,18 +25652,19 @@ const title = (0,svelte_store__WEBPACK_IMPORTED_MODULE_1__.writable)(null);
 function instance($$self, $$props, $$invalidate) {
 	let $title,
 		$$unsubscribe_title = svelte_internal__WEBPACK_IMPORTED_MODULE_0__.noop,
-		$$subscribe_title = () => ($$unsubscribe_title(), $$unsubscribe_title = (0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.subscribe)(title, $$value => $$invalidate(1, $title = $$value)), title);
+		$$subscribe_title = () => ($$unsubscribe_title(), $$unsubscribe_title = (0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.subscribe)(title, $$value => $$invalidate(2, $title = $$value)), title);
 
-	(0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.component_subscribe)($$self, title, $$value => $$invalidate(1, $title = $$value));
+	(0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.component_subscribe)($$self, title, $$value => $$invalidate(2, $title = $$value));
 	$$self.$$.on_destroy.push(() => $$unsubscribe_title());
 	let { status } = $$props;
 	(0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.set_store_value)(title, $title = 'SGPS-SIPRO - Error ' + status, $title);
+	const click_handler = () => _inertiajs_inertia__WEBPACK_IMPORTED_MODULE_2__.Inertia.visit((0,_Utils__WEBPACK_IMPORTED_MODULE_3__.route)('login'));
 
 	$$self.$$set = $$props => {
 		if ('status' in $$props) $$invalidate(0, status = $$props.status);
 	};
 
-	return [status];
+	return [status, click_handler];
 }
 
 class Error extends svelte_internal__WEBPACK_IMPORTED_MODULE_0__.SvelteComponent {

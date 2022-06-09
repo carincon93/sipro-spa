@@ -17,18 +17,20 @@
     <title>SGPS-SIPRO - Error {status}</title>
 </svelte:head>
 
-<div class="{status >= 500 || status == 403 ? 'bg-red-500' : 'bg-indigo-700'}  flex flex-col items-center justify-center min-h-screen text-white">
+<div class="{status >= 500 || status == 403 || status == 405 ? 'bg-red-500' : 'bg-indigo-700'} flex flex-col items-center justify-center min-h-screen text-white">
     <figure>
-        {#if status >= 500 || status == 403}
+        {#if status >= 500 || status == 403 || status == 405}
             <img src="/images/error.png" alt="Error" class="w-2/3 m-auto mb-10" />
         {:else if status == 404}
             <img src="/images/error404.png" alt="Error" class="w-2/3 m-auto mb-10" />
         {/if}
     </figure>
 
-    <div>
+    <div class="px-20">
         {#if status == 403}
             <h1 class="text-2xl text-center">Está acción no está autorizada para su rol.</h1>
+        {:else if status == 405}
+            <h1 class="text-2xl text-center">Su sesión ha finalizado previamente y no puede realizar está acción. Por favor vuelva a iniciar sesión (En el formulario de Inisio de sesión se recomienda que active la casilla de <strong>Mantener sesión activa</strong>)</h1>
         {:else if status == 404}
             <h1 class="text-2xl text-center">La página que busca no existe.</h1>
 
@@ -45,21 +47,18 @@
             <h1 class="text-2xl text-center">La aplicación está en mantenimiento. Por favor intenta de nuevo en unos minutos.</h1>
         {/if}
 
-        {#if status != 503}
+        {#if status != 503 && status != 405 && status == 403}
             <div class="mt-10">
                 <p>Puede notificar a la mesa de ayuda realice los siguientes pasos:</p>
                 <ul class="list-disc mt-5">
                     <li>Tome un pantallazo del error desde Windows o Mac.</li>
-                    <li>Copie la URL.</li>
+                    <li>Copie la URL donde surgió el error.</li>
                     <li>Envie las evidencias al correo <a class="underline" href="mailto:sgpssipro@sena.edu.co">sgpssipro@sena.edu.co</a> detallando el error. (Se debe enviar desde una cuenta @sena.edu.co)</li>
                 </ul>
-
-                <!-- <div class="flex items-center mt-10">
-                    <Button on:click={() => Inertia.visit(route('reportar-problemas.create'))} variant="raised" type="button" class="mr-4" style="background-color: white !important; color: black !important;">Solicitar soporte</Button> o <Button on:click={() => Inertia.visit(route('login'))} variant="raised" class="ml-4" style="background-color: white !important; color: black !important;">
-                        Regresar a la aplicación
-                    </Button>
-                </div> -->
             </div>
         {/if}
+        <div class="flex items-center justify-center mt-10">
+            <Button on:click={() => Inertia.visit(route('login'))} variant="raised" type="button" class="mr-4" style="background-color: white !important; color: black !important;">Solicitar soporte</Button>
+        </div>
     </div>
 </div>
