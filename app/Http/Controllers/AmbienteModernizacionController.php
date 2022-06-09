@@ -15,6 +15,8 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Storage;
 use Inertia\Inertia;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Str;
+use PDF;
 
 class AmbienteModernizacionController extends Controller
 {
@@ -59,6 +61,7 @@ class AmbienteModernizacionController extends Controller
             DB::table('ambientes_modernizacion')->where('seguimiento_ambiente_modernizacion_id', $seguimientoId)->update(['finalizado' => true]);
             $nuevoSeguimientoAmbiente = $this->replicateRow($ambienteModernizacion);
             $nuevoSeguimientoAmbiente->update(['finalizado' => false]);
+            $this->generatePdfAmbienteModernizacion($ambienteModernizacion);
 
             return redirect()->route('ambientes-modernizacion.edit', $nuevoSeguimientoAmbiente)->with('success', 'Se ha generado un nuevo seguimiento.');
         }
@@ -368,5 +371,40 @@ class AmbienteModernizacionController extends Controller
         $clone->save();
 
         return $clone;
+    }
+
+    /**
+     * generatePdfAmbienteModernizacion
+     *
+     * @param  mixed $proyecto
+     * @return void
+     */
+    function generatePdfAmbienteModernizacion(AmbienteModernizacion $ambienteModernizacion)
+    {
+        ini_set('max_execution_time', 0);
+        ini_set('memory_limit', -1);
+
+        $pdf = PDF::loadView('AmbienteModernizacionPdf', [
+            'ambienteModernizacion' => $ambienteModernizacion,
+        ]);
+
+        $output = $pdf->setWarnings(false)->output();
+        $random    = Str::random(10);
+        $fileName = $ambienteModernizacion->seguimientoAmbienteModernizacion->codigo . $random;
+        $path = 'ambientes-modernizacion/' . $fileName . '.pdf';
+        Storage::put($path, $output);
+
+        $ambienteModernizacion->update(['pdf_path' => $path]);
+    }
+
+    /**
+     * descargarPdfAmbienteModernizacion
+     *
+     * @param  mixed $ambienteModernizacion
+     * @return void
+     */
+    function descargarPdfAmbienteModernizacion(AmbienteModernizacion $ambienteModernizacion)
+    {
+        return Storage::download($ambienteModernizacion->pdf_path);
     }
 }

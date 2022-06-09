@@ -71,7 +71,8 @@ class AmbienteModernizacion extends Model
         'transferencia_tecnologias',
         'cobertura_perntinencia_formacion',
         'dinamizador_sennova_id',
-        'finalizado'
+        'finalizado',
+        'pdf_path'
     ];
 
     /**
