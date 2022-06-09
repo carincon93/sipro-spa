@@ -58,7 +58,7 @@
             </div>
         {/if}
         <div class="flex items-center justify-center mt-10">
-            <Button on:click={() => Inertia.visit(route('login'))} variant="raised" type="button" class="mr-4" style="background-color: white !important; color: black !important;">Solicitar soporte</Button>
+            <Button on:click={() => Inertia.visit(route('login'))} variant="raised" type="button" class="mr-4" style="background-color: white !important; color: black !important;">Regresar a la aplicación</Button>
         </div>
     </div>
 </div>
