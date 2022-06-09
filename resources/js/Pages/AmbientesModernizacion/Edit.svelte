@@ -928,6 +928,13 @@
             Código del proyecto: {ambienteModernizacion.seguimiento_ambiente_modernizacion.codigo}
         </div>
         <div slot="content">
+            <ul>
+                <li class="flex items-center">
+                    {#if ambienteModernizacion.finalizado}
+                        <a class="bg-indigo-500 mx-auto p-2 rounded text-white text-xs" href={route('ambientes-modernizacion.descargar-pdf', [ambienteModernizacion.id])}>Descargar PDF</a>
+                    {/if}
+                </li>
+            </ul>
             <div>
                 <h1 class="text-center mt-4 mb-4">Para terminar de diligenciar toda la información del seguimiento post cierre del ambiente de modernización por favor de clic en <strong>Continuar diligenciando</strong>, si ya actualizó todos los campos de clic en <strong>Omitir</strong></h1>
             </div>

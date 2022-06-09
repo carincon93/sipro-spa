@@ -63,7 +63,6 @@
         .page_break {
             page-break-before: always;
         }
-
     </style>
 </head>
 
@@ -270,15 +269,15 @@
                             <td align="left">
                                 <p>Separación de las unidades funcionales y no funcionales del ADN y el ARN, en todas las formas que se encuentran en la naturaleza.</p>
                             </td>
-                        @elseif($datos->actividades_muestreo=="1.1.2")
+                        @elseif($datos->actividades_muestreo == '1.1.2')
                             <td align="left">
                                 <p>Aislamiento de una o varias moléculas, entendidas estas como micro y macromoléculas, producidas por el metabolismo de un organismo.</p>
                             </td>
-                        @elseif($datos->actividades_muestreo=="1.1.3")
+                        @elseif($datos->actividades_muestreo == '1.1.3')
                             <td align="left">
                                 <p>Solicitar patente sobre una función o propiedad identificada de una molécula, que se ha aislado y purificado.</p>
                             </td>
-                        @elseif($datos->actividades_muestreo=="1.1.4")
+                        @elseif($datos->actividades_muestreo == '1.1.4')
                             <td align="left">
                                 <p>No logro identificar la actividad a desarrollar con la especie nativa</p>
                             </td>
@@ -287,41 +286,41 @@
                             <td align="left">
                                 <p>Investigación básica sin fines comerciales.</p>
                             </td>
-                        @elseif($datos->objetivo_muestreo=="1.2.2")
+                        @elseif($datos->objetivo_muestreo == '1.2.2')
                             <td align="left">
                                 <p>Bioprospección en cualquiera de sus fases.</p>
                             </td>
-                        @elseif($datos->objetivo_muestreo=="1.2.3")
+                        @elseif($datos->objetivo_muestreo == '1.2.3')
                             <td align="left">
                                 <p>Comercial o Industrial.</p>
                             </td>
                         @endif
                     </tr>
-                @elseif($datos->muestreo==2)
+                @elseif($datos->muestreo == 2)
                     <tr>
                         <td colspan="2">
                             <p>Especies Introducidas. (son aquellas que no son nativas de Colombia y que ingresaron al país por intervención humana)</p>
                         </td>
                     </tr>
-                @elseif($datos->muestreo==3)
+                @elseif($datos->muestreo == 3)
                     <tr>
                         <td colspan="2">
                             <p>Recursos genéticos humanos y sus productos derivados</p>
                         </td>
                     </tr>
-                @elseif($datos->muestreo==4)
+                @elseif($datos->muestreo == 4)
                     <tr>
                         <td colspan="2">
                             <p>Intercambio de recursos genéticos y sus productos derivados, recursos biológicos que los contienen o los componentes asociados a estos. (son aquellas que realizan las comunidades indígenas, afroamericanas y locales de los Países Miembros de la Comunidad Andina entre sí y para su propio consumo, basadas en sus prácticas consuetudinarias)</p>
                         </td>
                     </tr>
-                @elseif($datos->muestreo==5)
+                @elseif($datos->muestreo == 5)
                     <tr>
                         <td colspan="2">
                             <p>Recurso biológico que involucren actividades de sistemática molecular, ecología molecular, evolución y biogeografía molecular (siempre que el recurso biológico se haya colectado en el marco de un permiso de recolección de especímenes de especies silvestres de la diversidad biológica con fines de investigación científica no comercial o provenga de una colección registrada ante el Instituto Alexander van Humboldt)</p>
                         </td>
                     </tr>
-                @elseif($datos->muestreo==6)
+                @elseif($datos->muestreo == 6)
                     <tr>
                         <td colspan="2">
                             <p>No aplica</p>
@@ -377,9 +376,9 @@
                             <br>Modalidad:
                             @if ($proyecto->tecnoacademiaLineasTecnoacademia()->first()->tecnoacademia->modalidad == 1)
                                 itinerante
-                            @elseif($proyecto->tecnoacademiaLineasTecnoacademia()->first()->tecnoacademia->modalidad==2)
+                            @elseif($proyecto->tecnoacademiaLineasTecnoacademia()->first()->tecnoacademia->modalidad == 2)
                                 itinerante - vehículo
-                            @elseif($proyecto->tecnoacademiaLineasTecnoacademia()->first()->tecnoacademia->modalidad==3)
+                            @elseif($proyecto->tecnoacademiaLineasTecnoacademia()->first()->tecnoacademia->modalidad == 3)
                                 fija con extensión
                             @endif
                             <br>Lineas Tecnologicas:
@@ -453,11 +452,11 @@
                 <tr>
                     <td width="100%">
                         <p class="title">Instituciones donde se están ejecutando los programas y que se espera continuar con el proyecto de TecnoAcademias</p>
-                        @if(json_decode($datos->nombre_instituciones_programas))
-                        @php 
-                            $nombre_instituciones_programas = collect(json_decode($datos->nombre_instituciones_programas));
-                        @endphp
-                        <p>{{ $nombre_instituciones_programas->implode('value', ', ') }}</p>
+                        @if (json_decode($datos->nombre_instituciones_programas))
+                            @php
+                                $nombre_instituciones_programas = collect(json_decode($datos->nombre_instituciones_programas));
+                            @endphp
+                            <p>{{ $nombre_instituciones_programas->implode('value', ', ') }}</p>
                         @endif
                     </td>
                 </tr>
@@ -466,11 +465,11 @@
                 <tr>
                     <td width="100%">
                         <p class="title">Nuevas instituciones educativas que se vincularán con el proyecto de TecnoAcademia</p>
-                        @if(json_decode($datos->nuevas_instituciones))
-                        @php 
-                            $nuevas_instituciones = collect(json_decode($datos->nuevas_instituciones));
-                        @endphp
-                        <p>{{ $nuevas_instituciones->implode('value', ', ') }}</p>
+                        @if (json_decode($datos->nuevas_instituciones))
+                            @php
+                                $nuevas_instituciones = collect(json_decode($datos->nuevas_instituciones));
+                            @endphp
+                            <p>{{ $nuevas_instituciones->implode('value', ', ') }}</p>
                         @endif
                     </td>
                 </tr>
@@ -479,11 +478,11 @@
                 <tr>
                     <td width="100%">
                         <p class="title">Instituciones donde se implementará el programa que tienen <b>articulación con la Media</b></p>
-                        @if(json_decode($datos->nombre_instituciones))
-                        @php 
-                            $nombre_instituciones = collect(json_decode($datos->nombre_instituciones));
-                        @endphp
-                        <p>{{ $nombre_instituciones->implode('value', ', ') }}</p>
+                        @if (json_decode($datos->nombre_instituciones))
+                            @php
+                                $nombre_instituciones = collect(json_decode($datos->nombre_instituciones));
+                            @endphp
+                            <p>{{ $nombre_instituciones->implode('value', ', ') }}</p>
                         @endif
                     </td>
                 </tr>
@@ -642,14 +641,14 @@
                     </td>
                 </tr>
                 @if (!empty($datos->impacto_centro_formacion))
-                <tr>
-                    <td width="100%" class="title">Impacto en el centro de formación</td>
-                </tr>
-                <tr>
-                    <td width="100%">
-                        <p>{{ $datos->impacto_centro_formacion }}</p>
-                    </td>
-                </tr>
+                    <tr>
+                        <td width="100%" class="title">Impacto en el centro de formación</td>
+                    </tr>
+                    <tr>
+                        <td width="100%">
+                            <p>{{ $datos->impacto_centro_formacion }}</p>
+                        </td>
+                    </tr>
                 @endif
             </table>
         @endif
@@ -862,30 +861,39 @@
                                         @case(1)
                                             técnico
                                         @break
+
                                         @case(2)
                                             tecnólogo
                                         @break
+
                                         @case(3)
                                             pregrado
                                         @break
+
                                         @case(4)
                                             especalización
                                         @break
+
                                         @case(5)
                                             maestría
                                         @break
+
                                         @case(6)
                                             doctorado
                                         @break
+
                                         @case(7)
                                             ninguno
                                         @break
+
                                         @case(8)
                                             técnico con especialización
                                         @break
+
                                         @case(9)
                                             tecnólogo con especialización
                                         @break
+
                                         @default
                                             ''
                                     @endswitch
@@ -956,13 +964,13 @@
                     <td>{{ $cauDir->descripcion }}</td>
                 </tr>
                 @foreach ($cauDir->causasindirectas as $cauind)
-                    @if(!empty($cauind->descripcion) && strlen(trim($cauind->descripcion))>0)
-                    <tr>
-                        <td width="35%" valign="top">
-                            <span class="title">Causa indirecta CAU-{{ $cauDir->id }}-IND-{{ $cauind->id }}:</span>
-                        </td>
-                        <td>{{ $cauind->descripcion }}</td>
-                    </tr>
+                    @if (!empty($cauind->descripcion) && strlen(trim($cauind->descripcion)) > 0)
+                        <tr>
+                            <td width="35%" valign="top">
+                                <span class="title">Causa indirecta CAU-{{ $cauDir->id }}-IND-{{ $cauind->id }}:</span>
+                            </td>
+                            <td>{{ $cauind->descripcion }}</td>
+                        </tr>
                     @endif
                 @endforeach
             </table>
@@ -1371,7 +1379,6 @@
                                     </td>
                                 </tr>
                             @endif
-
                         @endforeach
                     </tbody>
                 </table>
