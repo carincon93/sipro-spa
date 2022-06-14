@@ -254,9 +254,11 @@
                     </td>
                     <td width="60%">
                         <ul>
-                            @foreach ($ambienteModernizacion->mesasSectoriales as $mesaSectorial)
+                            @forelse ($ambienteModernizacion->mesasSectoriales as $mesaSectorial)
                                 <li>{{ $mesaSectorial->nombre }}</li>
-                            @endforeach
+                            @empty
+                                <li>Sin información registrada</li>
+                            @endforelse
                         </ul>
                     </td>
                 </tr>
@@ -292,7 +294,7 @@
                     </td>
                     <td width="60%">
                         <ul>
-                            @foreach ($ambienteModernizacion->codigosProyectosSgps as $codigoSgps)
+                            @forelse ($ambienteModernizacion->codigosProyectosSgps as $codigoSgps)
                                 <li>
                                     {{ $codigoSgps->titulo }}
                                     <br>
@@ -300,7 +302,9 @@
                                     <br>
                                     Año: {{ $codigoSgps->year_ejecucion }}
                                 </li>
-                            @endforeach
+                            @empty
+                                <li>Sin información registrada</li>
+                            @endforelse
                         </ul>
                     </td>
                 </tr>
@@ -356,6 +360,44 @@
                         </p>
                     </td>
                 </tr>
+            @else
+                <tr>
+                    <td width="40%">
+                        <p><small>Si la respuesta anterior fue afirmativa, seleccione los programas de formación con registro calificado beneficiados</small></p>
+                    </td>
+                    <td width="60%">
+                        <ul>
+                            @forelse ($ambienteModernizacion->programasFormacionCalificados as $programaFormacion)
+                                <li>
+                                    {{ $programaFormacion->nombre }}
+                                    <br>
+                                    Código: {{ $programaFormacion->codigo }}
+                                </li>
+                            @empty
+                                <li>Sin información registrada</li>
+                            @endforelse
+                        </ul>
+                    </td>
+                </tr>
+
+                <tr>
+                    <td width="40%">
+                        <p><small>Si la respuesta anterior fue afirmativa, seleccione los programas de formación beneficiados</small></p>
+                    </td>
+                    <td width="60%">
+                        <ul>
+                            @forelse ($ambienteModernizacion->programasFormacionNoCalificados as $programaFormacion)
+                                <li>
+                                    {{ $programaFormacion->nombre }}
+                                    <br>
+                                    Código: {{ $programaFormacion->codigo }}
+                                </li>
+                            @empty
+                                <li>Sin información registrada</li>
+                            @endforelse
+                        </ul>
+                    </td>
+                </tr>
             @endif
             <tr>
                 <td width="40%">
@@ -369,6 +411,58 @@
                     </p>
                 </td>
             </tr>
+            @if ($ambienteModernizacion->ambiente_activo_procesos_idi)
+                <tr>
+                    <td width="40%">
+                        <p><small>Si la respuesta anterior fue afirmativa, relacione el número de proyectos beneficiados y/o ejecutados en el ambiente modernizado por Sennova</small></p>
+                    </td>
+                    <td width="60%">
+                        <p>
+                            <small>
+                                {{ $ambienteModernizacion->numero_proyectos_beneficiados }}
+                            </small>
+                        </p>
+                    </td>
+                </tr>
+
+                <tr>
+                    <td width="40%">
+                        <p><small>Si la respuesta anterior fue afirmativa, relacione los códigos y nombres de los proyectos beneficiados y/o ejecutados en el ambiente modernizado por Sennova</small></p>
+                    </td>
+                    <td width="60%">
+                        <ul>
+                            @forelse ($ambienteModernizacion->programasFormacionCalificados as $programaFormacion)
+                                <li>
+                                    {{ $programaFormacion->nombre }}
+                                    <br>
+                                    {{ $programaFormacion->codigo }}
+                                </li>
+                            @empty
+                                <li>Sin información registrada</li>
+                            @endforelse
+                        </ul>
+                    </td>
+                </tr>
+
+                <tr>
+                    <td width="40%">
+                        <p><small>Si la respuesta anterior fue afirmativa, relacione los semilleros de investigación beneficiados con el ambiente modernizado por Sennova</small></p>
+                    </td>
+                    <td width="60%">
+                        <ul>
+                            @forelse ($ambienteModernizacion->semillerosInvestigacion as $semilleroInvestigacion)
+                                <li>
+                                    {{ $semilleroInvestigacion->nombre }}
+                                    <br>
+                                    Centro de formación: {{ $semilleroInvestigacion->lineaInvestigacion->grupoInvestigacion->centroFormacion->nombre }}
+                                </li>
+                            @empty
+                                <li>Sin información registrada</li>
+                            @endforelse
+                        </ul>
+                    </td>
+                </tr>
+            @endif
             <tr>
                 <td width="40%">
                     <p><small>¿El ambiente de formación ha generado formación complementaria después de la modernización con Sennova?</small></p>
@@ -381,6 +475,81 @@
                     </p>
                 </td>
             </tr>
+
+            @if ($ambienteModernizacion->ambiente_formacion_complementaria)
+                <tr>
+                    <td width="40%">
+                        <p><small>Si la respuesta anterior fue afirmativa, relacione el número total de cursos complementarios que se ha brindado formación complementaria</small></p>
+                    </td>
+                    <td width="60%">
+                        <p>
+                            <small>
+                                {{ $ambienteModernizacion->numero_total_cursos_comp }}
+                            </small>
+                        </p>
+                    </td>
+                </tr>
+
+                <tr>
+                    <td width="40%">
+                        <p><small>Si la respuesta anterior fue afirmativa, relacione el número de cursos complementarios a empresas que se ha brindado formación complementaria</small></p>
+                    </td>
+                    <td width="60%">
+                        <p>
+                            <small>
+                                {{ $ambienteModernizacion->numero_cursos_empresas }}
+                            </small>
+                        </p>
+                    </td>
+                </tr>
+
+                <tr>
+                    <td width="40%">
+                        <p><small>Si la respuesta anterior fue afirmativa, relacione el NIT y nombre de las empresas (cuando aplique) que se ha brindada formación complementaria</small></p>
+                    </td>
+                    <td width="60%">
+                        <ul>
+                            @forelse (json_decode($ambienteModernizacion->datos_empresa) as $empresa)
+                                <li>
+                                    {{ $empresa->value }}
+                                </li>
+                            @empty
+                                <li>Sin información registrada</li>
+                            @endforelse
+                        </ul>
+                    </td>
+                </tr>
+                <tr>
+                    <td width="40%">
+                        <p><small>Si la respuesta anterior fue afirmativa, relacione el número total de personas certificadas de las empresas que se ha brindado formación complementaria</small></p>
+                    </td>
+                    <td width="60%">
+                        <p>
+                            <small>
+                                {{ $ambienteModernizacion->numero_personas_certificadas }}
+                            </small>
+                        </p>
+                    </td>
+                </tr>
+
+                <tr>
+                    <td width="40%">
+                        <p><small>Si la respuesta anterior fue afirmativa, relacione los códigos y nombres Sena de cada curso de formación complementario</small></p>
+                    </td>
+                    <td width="60%">
+                        <ul>
+                            @forelse (json_decode($ambienteModernizacion->cursos_complementarios) as $curso)
+                                <li>
+                                    {{ $curso->value }}
+                                </li>
+                            @empty
+                                <li>Sin información registrada</li>
+                            @endforelse
+                        </ul>
+                    </td>
+                </tr>
+            @endif
+
             <tr>
                 <td width="40%">
                     <p><small>Diligencie la coordenada latitud (W) del ambiente de formación modernizado por Sennova (generado en Google maps). Ejemplo: -74.062916</small></p>
@@ -543,11 +712,13 @@
                 </td>
                 <td width="60%">
                     <ul>
-                        @foreach (json_decode($ambienteModernizacion->palabras_clave_ambiente) as $palabraClave)
+                        @forelse (json_decode($ambienteModernizacion->palabras_clave_ambiente) as $palabraClave)
                             <li>
                                 {{ $palabraClave->value }}
                             </li>
-                        @endforeach
+                        @empty
+                            <li>Sin información registrada</li>
+                        @endforelse
                     </ul>
                 </td>
             </tr>
@@ -582,7 +753,7 @@
             </tr>
         </table>
 
-        @foreach ($ambienteModernizacion->equiposAmbienteModernizacion as $equipo)
+        @forelse ($ambienteModernizacion->equiposAmbienteModernizacion as $equipo)
             <table width="100%" border="1" cellspacing="0" cellpadding="10" style="margin-top: 10px;">
                 <tr>
                     <td width="33.33%">
@@ -619,7 +790,9 @@
                     </td>
                 </tr>
             </table>
-        @endforeach
+        @empty
+            <p>Sin información registrada</p>
+        @endforelse
     </main>
 </body>
 

@@ -78,7 +78,7 @@ class SeguimientoAmbienteModernizacion extends Model
      */
     public function ambientesModernizacion()
     {
-        return $this->hasMany(AmbienteModernizacion::class);
+        return $this->hasMany(AmbienteModernizacion::class)->orderBy('created_at', 'DESC');
     }
 
     /**

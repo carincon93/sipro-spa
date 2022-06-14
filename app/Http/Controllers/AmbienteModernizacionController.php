@@ -139,10 +139,9 @@ class AmbienteModernizacionController extends Controller
 
         $ambienteModernizacion->mesasSectoriales()->sync($request->mesa_sectorial_id);
         $ambienteModernizacion->codigosProyectosSgps()->sync($request->codigos_proyectos_id);
-        $ambienteModernizacion->codigosProyectosSgpsBeneficiados()->sync($request->cod_proyectos_beneficiados_id);
         $ambienteModernizacion->programasFormacionCalificados()->sync($request->programas_formacion_calificados);
         $ambienteModernizacion->programasFormacionNoCalificados()->sync($request->programas_formacion);
-        $ambienteModernizacion->semilerosInvestigacion()->sync($request->semilleros_investigacion_id);
+        $ambienteModernizacion->semillerosInvestigacion()->sync($request->semilleros_investigacion_id);
 
         return redirect()->route('ambientes-modernizacion.edit', $ambienteModernizacion)->with('success', 'El recurso se ha creado correctamente.');
     }
@@ -191,8 +190,7 @@ class AmbienteModernizacionController extends Controller
             'codigosProyectosRelacionados'                  => $ambienteModernizacion->codigosProyectosSgps()->selectRaw('codigos_proyectos_sgps.id as value, concat(codigos_proyectos_sgps.titulo, chr(10), \'∙ Código: \', codigos_proyectos_sgps.codigo_sgps) as label')->get(),
             'programasFormacionCalificadosRelacionados'     => $ambienteModernizacion->programasFormacionCalificados()->selectRaw('programas_formacion.id as value, concat(programas_formacion.nombre, chr(10), \'∙ Código: \', programas_formacion.codigo) as label')->get(),
             'programasFormacionNoCalificadosRelacionados'   => $ambienteModernizacion->programasFormacionNoCalificados()->selectRaw('programas_formacion_articulados.id as value, concat(programas_formacion_articulados.nombre, chr(10), \'∙ Código: \', programas_formacion_articulados.codigo) as label')->get(),
-            'codProyectosBeneficiadosRelacionados'          => $ambienteModernizacion->codigosProyectosSgpsBeneficiados()->selectRaw('codigos_proyectos_sgps.id as value, concat(codigos_proyectos_sgps.titulo, chr(10), \'∙ Código: \', codigos_proyectos_sgps.codigo_sgps) as label')->get(),
-            'semillerosRelacionados'                        => $ambienteModernizacion->semilerosInvestigacion()->select('semilleros_investigacion.nombre as label', 'semilleros_investigacion.id as value')->get(),
+            'semillerosRelacionados'                        => $ambienteModernizacion->semillerosInvestigacion()->select('semilleros_investigacion.nombre as label', 'semilleros_investigacion.id as value')->get(),
             'mesasSectorialesRelacionadas'                  => $ambienteModernizacion->mesasSectoriales()->pluck('id'),
             'equiposAmbienteModernizacion'                  => EquipoAmbienteModernizacion::where('ambiente_modernizacion_id', $ambienteModernizacion->id)->get(),
         ]);
@@ -209,7 +207,6 @@ class AmbienteModernizacionController extends Controller
     {
         $this->authorize('update', [AmbienteModernizacion::class, $ambienteModernizacion]);
 
-        $ambienteModernizacion->nombre_ambiente                     = $request->nombre_ambiente;
         $ambienteModernizacion->alineado_mesas_sectoriales          = $request->alineado_mesas_sectoriales;
         $ambienteModernizacion->financiado_anteriormente            = $request->financiado_anteriormente;
         $ambienteModernizacion->estado_general_maquinaria           = $request->estado_general_maquinaria;
@@ -225,24 +222,15 @@ class AmbienteModernizacionController extends Controller
         $ambienteModernizacion->cursos_complementarios              = $request->ambiente_formacion_complementaria == 1 ? $request->cursos_complementarios : null;
         $ambienteModernizacion->coordenada_latitud_ambiente         = $request->coordenada_latitud_ambiente;
         $ambienteModernizacion->coordenada_longitud_ambiente        = $request->coordenada_longitud_ambiente;
-        $ambienteModernizacion->impacto_procesos_formacion          = $request->impacto_procesos_formacion;
-        $ambienteModernizacion->pertinencia_sector_productivo       = $request->pertinencia_sector_productivo;
         $ambienteModernizacion->palabras_clave_ambiente             = $request->palabras_clave_ambiente;
-        $ambienteModernizacion->observaciones_generales_ambiente    = $request->observaciones_generales_ambiente;
         $ambienteModernizacion->soporte_fotos_ambiente              = $request->soporte_fotos_ambiente;
 
         $ambienteModernizacion->numero_personas_certificadas        = $request->numero_personas_certificadas;
         $ambienteModernizacion->numero_tecnicas_tecnologias         = $request->numero_tecnicas_tecnologias;
         $ambienteModernizacion->numero_publicaciones                = $request->numero_publicaciones;
         $ambienteModernizacion->numero_aprendices_beneficiados      = $request->numero_aprendices_beneficiados;
-        $ambienteModernizacion->productividad_beneficiarios         = $request->productividad_beneficiarios;
-        $ambienteModernizacion->generacion_empleo                   = $request->generacion_empleo;
-        $ambienteModernizacion->creacion_empresas                   = $request->creacion_empresas;
-        $ambienteModernizacion->incorporacion_nuevos_conocimientos  = $request->incorporacion_nuevos_conocimientos;
-        $ambienteModernizacion->valor_agregado_entidades            = $request->valor_agregado_entidades;
-        $ambienteModernizacion->fortalecimiento_programas_formacion = $request->fortalecimiento_programas_formacion;
-        $ambienteModernizacion->transferencia_tecnologias           = $request->transferencia_tecnologias;
-        $ambienteModernizacion->cobertura_perntinencia_formacion    = $request->cobertura_perntinencia_formacion;
+
+        $ambienteModernizacion->cod_proyectos_beneficiados          = $request->cod_proyectos_beneficiados;
 
         $ambienteModernizacion->redConocimiento()->associate($request->red_conocimiento_id);
         $ambienteModernizacion->lineaInvestigacion()->associate($request->linea_investigacion_id);
@@ -258,10 +246,9 @@ class AmbienteModernizacionController extends Controller
 
         $request->alineado_mesas_sectoriales == 1 ? $ambienteModernizacion->mesasSectoriales()->sync($request->mesa_sectorial_id) : $ambienteModernizacion->mesasSectoriales()->detach();
         $request->financiado_anteriormente == 1 ? $ambienteModernizacion->codigosProyectosSgps()->sync($request->codigos_proyectos_id) : $ambienteModernizacion->codigosProyectosSgps()->detach();
-        $request->ambiente_activo_procesos_idi == 1 ? $ambienteModernizacion->codigosProyectosSgpsBeneficiados()->sync($request->cod_proyectos_beneficiados_id) : $ambienteModernizacion->codigosProyectosSgpsBeneficiados()->detach();
         $request->ambiente_activo == 1 ? $ambienteModernizacion->programasFormacionCalificados()->sync($request->programas_formacion_calificados) : $ambienteModernizacion->programasFormacionCalificados()->detach();
         $request->ambiente_activo == 1 ? $ambienteModernizacion->programasFormacionNoCalificados()->sync($request->programas_formacion) : $ambienteModernizacion->programasFormacionNoCalificados()->detach();
-        $request->ambiente_activo_procesos_idi == 1 ? $ambienteModernizacion->semilerosInvestigacion()->sync($request->semilleros_investigacion_id) : $ambienteModernizacion->semilerosInvestigacion()->detach();
+        $request->ambiente_activo_procesos_idi == 1 ? $ambienteModernizacion->semillerosInvestigacion()->sync($request->semilleros_investigacion_id) : $ambienteModernizacion->semillerosInvestigacion()->detach();
 
         return redirect()->back()->with('success', 'El recurso se ha actualizado correctamente.');
     }
@@ -351,10 +338,9 @@ class AmbienteModernizacionController extends Controller
         $ambienteModernizacion->load(
             'mesasSectoriales',
             'codigosProyectosSgps',
-            'codigosProyectosSgpsBeneficiados',
             'programasFormacionCalificados',
             'programasFormacionNoCalificados',
-            'semilerosInvestigacion'
+            'semillerosInvestigacion'
         );
 
         //re-sync everything
@@ -406,5 +392,12 @@ class AmbienteModernizacionController extends Controller
     function descargarPdfAmbienteModernizacion(AmbienteModernizacion $ambienteModernizacion)
     {
         return Storage::download($ambienteModernizacion->pdf_path);
+    }
+
+    public function updateLongColumn(Request $request, AmbienteModernizacion $ambienteModernizacion, $column)
+    {
+        $ambienteModernizacion->update($request->only($column));
+
+        return back();
     }
 }
