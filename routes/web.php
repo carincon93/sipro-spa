@@ -697,6 +697,7 @@ Route::middleware(['auth', 'verified'])->group(function () {
      * Proyectos modernización
      * 
      */
+    Route::put('ambientes-modernizacion/{ambiente_modernizacion}/column/{column}', [AmbienteModernizacionController::class, 'updateLongColumn'])->name('ambientes-modernizacion.updateLongColumn');
     Route::get('ambientes-modernizacion/{ambiente_modernizacion}/download', [AmbienteModernizacionController::class, 'download'])->name('ambientes-modernizacion.download');
     Route::post('ambientes-modernizacion/{ambiente_modernizacion}/equipos-ambiente-modernizacion/store', [AmbienteModernizacionController::class, 'equiposStore'])->name('equipos-ambiente-modernizacion.store');
     Route::delete('ambientes-modernizacion/equipos-ambiente-modernizacion/{equipo_ambiente_modernizacion}/destroy', [AmbienteModernizacionController::class, 'destroyEquipo'])->name('equipos-ambiente-modernizacion.destroy');

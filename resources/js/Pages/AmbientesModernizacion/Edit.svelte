@@ -34,7 +34,6 @@
     export let codigosProyectosRelacionados
     export let programasFormacionCalificadosRelacionados
     export let programasFormacionNoCalificadosRelacionados
-    export let codProyectosBeneficiadosRelacionados
     export let semillerosRelacionados
     export let mesasSectorialesRelacionadas
     export let equiposAmbienteModernizacion
@@ -68,6 +67,49 @@
     let authUser = $page.props.auth.user
     let isSuperAdmin = checkRole(authUser, [1])
 
+    let formNombreAmbiente = useForm({
+        nombre_ambiente: ambienteModernizacion.nombre_ambiente,
+    })
+    let formRazonEstadoGeneral = useForm({
+        razon_estado_general: ambienteModernizacion.razon_estado_general,
+    })
+    let formJustificacionAmbienteInactivo = useForm({
+        justificacion_ambiente_inactivo: ambienteModernizacion.justificacion_ambiente_inactivo,
+    })
+    let formImpactoProcesosFormacion = useForm({
+        impacto_procesos_formacion: ambienteModernizacion.impacto_procesos_formacion,
+    })
+    let formPertinenciaSectorProductivo = useForm({
+        pertinencia_sector_productivo: ambienteModernizacion.pertinencia_sector_productivo,
+    })
+    let formProductividadBeneficiarios = useForm({
+        productividad_beneficiarios: ambienteModernizacion.productividad_beneficiarios,
+    })
+    let formGeneracionEmpleo = useForm({
+        generacion_empleo: ambienteModernizacion.generacion_empleo,
+    })
+    let formCreacionEmpresas = useForm({
+        creacion_empresas: ambienteModernizacion.creacion_empresas,
+    })
+    let formIncorporacionNuevosConocimientos = useForm({
+        incorporacion_nuevos_conocimientos: ambienteModernizacion.incorporacion_nuevos_conocimientos,
+    })
+    let formValorAgregadoEntidades = useForm({
+        valor_agregado_entidades: ambienteModernizacion.valor_agregado_entidades,
+    })
+    let formFortalecimientoProgramasFormacion = useForm({
+        fortalecimiento_programas_formacion: ambienteModernizacion.fortalecimiento_programas_formacion,
+    })
+    let formTransferenciaTecnologias = useForm({
+        transferencia_tecnologias: ambienteModernizacion.transferencia_tecnologias,
+    })
+    let formCoberturaPerntinenciaFormacion = useForm({
+        cobertura_perntinencia_formacion: ambienteModernizacion.cobertura_perntinencia_formacion,
+    })
+    let formObservacionesGeneralesAmbiente = useForm({
+        observaciones_generales_ambiente: ambienteModernizacion.observaciones_generales_ambiente,
+    })
+
     let destroyAmbienteModernizacionDialog = false
     let infoDialog = true
     let equipoFormDialog = false
@@ -79,7 +121,6 @@
             value: ambienteModernizacion.seguimiento_ambiente_modernizacion.codigo_proyecto_sgps_id,
             label: codigosSgps.find((item) => item.value == ambienteModernizacion.seguimiento_ambiente_modernizacion.codigo_proyecto_sgps_id)?.label,
         },
-        nombre_ambiente: ambienteModernizacion.nombre_ambiente,
         tipologia_ambiente_id: {
             value: ambienteModernizacion.tipologia_ambiente_id,
             label: tipologiasAmbientes.find((item) => item.value == ambienteModernizacion.tipologia_ambiente_id)?.label,
@@ -107,20 +148,18 @@
             value: ambienteModernizacion.estado_general_maquinaria,
             label: estados.find((item) => item.value == ambienteModernizacion.estado_general_maquinaria)?.label,
         },
-        razon_estado_general: ambienteModernizacion.razon_estado_general,
         ambiente_activo: {
             value: ambienteModernizacion.ambiente_activo == 1 ? 1 : 2,
             label: opcionesSiNo.find((item) => item.value == (ambienteModernizacion.ambiente_activo == 1 ? 1 : 2))?.label,
         },
         programas_formacion_calificados: programasFormacionCalificadosRelacionados.length > 0 ? programasFormacionCalificadosRelacionados : null,
         programas_formacion: programasFormacionNoCalificadosRelacionados.length > 0 ? programasFormacionNoCalificadosRelacionados : null,
-        justificacion_ambiente_inactivo: ambienteModernizacion.justificacion_ambiente_inactivo,
         ambiente_activo_procesos_idi: {
             value: ambienteModernizacion.ambiente_activo_procesos_idi == 1 ? 1 : 2,
             label: opcionesSiNo.find((item) => item.value == (ambienteModernizacion.ambiente_activo_procesos_idi == 1 ? 1 : 2))?.label,
         },
         numero_proyectos_beneficiados: ambienteModernizacion.numero_proyectos_beneficiados,
-        cod_proyectos_beneficiados_id: codProyectosBeneficiadosRelacionados.length > 0 ? codProyectosBeneficiadosRelacionados : null,
+        cod_proyectos_beneficiados: ambienteModernizacion.cod_proyectos_beneficiados,
         ambiente_formacion_complementaria: {
             value: ambienteModernizacion.ambiente_formacion_complementaria == 1 ? 1 : 2,
             label: opcionesSiNo.find((item) => item.value == (ambienteModernizacion.ambiente_formacion_complementaria == 1 ? 1 : 2))?.label,
@@ -133,20 +172,9 @@
         coordenada_latitud_ambiente: ambienteModernizacion.coordenada_latitud_ambiente,
         coordenada_longitud_ambiente: ambienteModernizacion.coordenada_longitud_ambiente,
         soporte_fotos_ambiente: ambienteModernizacion.soporte_fotos_ambiente,
-        impacto_procesos_formacion: ambienteModernizacion.impacto_procesos_formacion,
-        pertinencia_sector_productivo: ambienteModernizacion.pertinencia_sector_productivo,
         numero_publicaciones: ambienteModernizacion.numero_publicaciones,
         numero_aprendices_beneficiados: ambienteModernizacion.numero_aprendices_beneficiados,
-        productividad_beneficiarios: ambienteModernizacion.productividad_beneficiarios,
-        generacion_empleo: ambienteModernizacion.generacion_empleo,
-        creacion_empresas: ambienteModernizacion.creacion_empresas,
-        incorporacion_nuevos_conocimientos: ambienteModernizacion.incorporacion_nuevos_conocimientos,
-        valor_agregado_entidades: ambienteModernizacion.valor_agregado_entidades,
-        fortalecimiento_programas_formacion: ambienteModernizacion.fortalecimiento_programas_formacion,
-        transferencia_tecnologias: ambienteModernizacion.transferencia_tecnologias,
-        cobertura_perntinencia_formacion: ambienteModernizacion.cobertura_perntinencia_formacion,
         palabras_clave_ambiente: ambienteModernizacion.palabras_clave_ambiente,
-        observaciones_generales_ambiente: ambienteModernizacion.observaciones_generales_ambiente,
     })
 
     function submit() {
@@ -235,6 +263,25 @@
             programasFormacionArticular = res.data
         }
     }
+
+    async function syncColumnLong(column, form) {
+        return new Promise((resolve) => {
+            if ((typeof column !== 'undefined' && typeof form !== 'undefined' && isSuperAdmin) || (typeof column !== 'undefined' && typeof form !== 'undefined' && ambienteModernizacion.dinamizado_id == authUser.id)) {
+                Inertia.put(
+                    route('ambientes-modernizacion.updateLongColumn', [ambienteModernizacion.id, column]),
+                    { [column]: form[column] },
+                    {
+                        onStart: () => (sending = true),
+                        onError: (resp) => ((sending = false), resolve(resp)),
+                        onFinish: () => ((sending = false), resolve({})),
+                        preserveScroll: true,
+                    },
+                )
+            } else {
+                resolve({})
+            }
+        })
+    }
 </script>
 
 <AuthenticatedLayout>
@@ -287,7 +334,7 @@
 
             <div class="mt-28">
                 <Label required labelFor="nombre_ambiente" class="font-medium inline-block mb-10 text-center text-gray-700 text-sm w-full" value="2. Nombre del ambiente(s) de formación modernizado por Sennova. Ejemplo: Ambiente de soldadura - Ambiente de confecciones" />
-                <Textarea label="Nombre" id="nombre_ambiente" sinContador={true} error={errors.nombre_ambiente} bind:value={$form.nombre_ambiente} classes="bg-transparent block border-0 {errors.nombre_ambiente ? '' : 'outline-none-important'} mt-1 outline-none text-4xl text-center w-full" required />
+                <Textarea label="Nombre" id="nombre_ambiente" sinContador={true} error={errors.nombre_ambiente} bind:value={$formNombreAmbiente.nombre_ambiente} classes="bg-transparent block border-0 {errors.nombre_ambiente ? '' : 'outline-none-important'} mt-1 outline-none text-4xl text-center w-full" required on:input={() => syncColumnLong('nombre_ambiente', $formNombreAmbiente)} />
             </div>
 
             <div class="mt-44 grid grid-cols-2">
@@ -439,7 +486,7 @@
                         <Label required class="mb-4" labelFor="razon_estado_general" value="14. Si la respuesta anterior fue regular o malo, describa la razón. Para mayor especificidad listar máquina por máquina para identificación a partir del tiempo de vida útil." />
                     </div>
                     <div>
-                        <Textarea label="Razón" maxlength="40000" id="razon_estado_general" error={errors.razon_estado_general} bind:value={$form.razon_estado_general} required />
+                        <Textarea label="Razón" maxlength="40000" id="razon_estado_general" error={errors.razon_estado_general} bind:value={$formRazonEstadoGeneral.razon_estado_general} required on:input={() => syncColumnLong('razon_estado_general', $formRazonEstadoGeneral)} />
                     </div>
                 </div>
             {/if}
@@ -499,7 +546,7 @@
                         <Label required class="mb-4" labelFor="justificacion_ambiente_inactivo" value="Si la respuesta anterior fue negativa, justifique la respuesta" />
                     </div>
                     <div>
-                        <Textarea label="Justificación" maxlength="4000" id="justificacion_ambiente_inactivo" error={errors.justificacion_ambiente_inactivo} bind:value={$form.justificacion_ambiente_inactivo} required />
+                        <Textarea label="Justificación" maxlength="4000" id="justificacion_ambiente_inactivo" error={errors.justificacion_ambiente_inactivo} bind:value={$formJustificacionAmbienteInactivo.justificacion_ambiente_inactivo} required on:input={() => syncColumnLong('justificacion_ambiente_inactivo', $formJustificacionAmbienteInactivo)} />
                     </div>
                 </div>
             {/if}
@@ -525,21 +572,11 @@
 
                 <div class="mt-44 grid grid-cols-2 pl-4">
                     <div>
-                        <Label required class="mb-4" labelFor="cod_proyectos_beneficiados_id" value="Si la respuesta anterior fue afirmativa, relacione los códigos y nombres de los proyectos beneficiados y/o ejecutados en el ambiente modernizado por Sennova" />
+                        <Label required class="mb-4" labelFor="cod_proyectos_beneficiados" value="Si la respuesta anterior fue afirmativa, relacione los códigos y nombres de los proyectos beneficiados y/o ejecutados en el ambiente modernizado por Sennova" />
                     </div>
                     <div>
-                        <SelectMulti id="cod_proyectos_beneficiados_id" bind:selectedValue={$form.cod_proyectos_beneficiados_id} items={codigosSgps} isMulti={true} error={errors.cod_proyectos_beneficiados_id} placeholder="Buscar por el código/título de los proyectos" required />
-                        {#if programasFormacion?.length == 0}
-                            <div>
-                                <p>Parece que no se han encontrado elementos, por favor haga clic en <strong>Refrescar</strong></p>
-                                <button on:click={getProgramasFormacion} type="button" class="flex underline">
-                                    <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 mr-2" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 4v5h.582m15.356 2A8.001 8.001 0 004.582 9m0 0H9m11 11v-5h-.581m0 0a8.003 8.003 0 01-15.357-2m15.357 2H15" />
-                                    </svg>
-                                    Refrescar
-                                </button>
-                            </div>
-                        {/if}
+                        <Tags id="cod_proyectos_beneficiados" class="mt-4" enforceWhitelist={false} bind:tags={$form.cod_proyectos_beneficiados} placeholder="Códigos SGPS" error={errors.cod_proyectos_beneficiados} required />
+                        <InfoMessage>Separar códigos por coma o dar Enter una vez finalice de escribir</InfoMessage>
                     </div>
                 </div>
 
@@ -583,7 +620,7 @@
 
                 <div class="mt-44 grid grid-cols-2 pl-4">
                     <div>
-                        <Label required={$form.numero_cursos_empresas > 0 ? 'required' : undefined} class="mb-4" labelFor="datos_empresa" value="Si la respuesta anterior fue afirmativa, relacione el NIT y nombre de las empresas (cuando aplique) que se ha brindada formación complementaria (Separados por coma)" />
+                        <Label required={$form.numero_cursos_empresas > 0 ? 'required' : undefined} class="mb-4" labelFor="datos_empresa" value="Si la respuesta anterior fue afirmativa, relacione el NIT y nombre de las empresas (cuando aplique) que se ha brindada formación complementaria" />
                     </div>
                     <div>
                         <Tags id="datos_empresa" class="mt-4" enforceWhitelist={false} bind:tags={$form.datos_empresa} placeholder="Empresas" error={errors.datos_empresa} required={$form.numero_cursos_empresas > 0 ? 'required' : undefined} />
@@ -602,7 +639,7 @@
 
                 <div class="mt-44 grid grid-cols-2 pl-4">
                     <div>
-                        <Label class="mb-4" labelFor="cursos_complementarios" value="Si la respuesta anterior fue afirmativa, relacione los códigos y nombres Sena de cada curso de formación complementario (Separados por coma)" />
+                        <Label class="mb-4" labelFor="cursos_complementarios" value="Si la respuesta anterior fue afirmativa, relacione los códigos y nombres Sena de cada curso de formación complementario" />
                     </div>
                     <div>
                         <Tags id="cursos_complementarios" class="mt-4" enforceWhitelist={false} bind:tags={$form.cursos_complementarios} placeholder="Cursos de formación complementarios" error={errors.cursos_complementarios} />
@@ -636,7 +673,7 @@
                     <Label required class="mb-4" labelFor="impacto_procesos_formacion" value="20. Describa el impacto generado en los procesos de formación" />
                 </div>
                 <div>
-                    <Textarea label="Impacto" maxlength="4000" id="impacto_procesos_formacion" error={errors.impacto_procesos_formacion} bind:value={$form.impacto_procesos_formacion} required />
+                    <Textarea label="Impacto" maxlength="4000" id="impacto_procesos_formacion" error={errors.impacto_procesos_formacion} bind:value={$formImpactoProcesosFormacion.impacto_procesos_formacion} required on:input={() => syncColumnLong('impacto_procesos_formacion', $formImpactoProcesosFormacion)} />
                 </div>
             </div>
 
@@ -645,7 +682,7 @@
                     <Label required class="mb-4" labelFor="pertinencia_sector_productivo" value="21. Describa la pertinencia obtenida con el sector productivo" />
                 </div>
                 <div>
-                    <Textarea label="Pertinencia" maxlength="4000" id="pertinencia_sector_productivo" error={errors.pertinencia_sector_productivo} bind:value={$form.pertinencia_sector_productivo} required />
+                    <Textarea label="Pertinencia" maxlength="4000" id="pertinencia_sector_productivo" error={errors.pertinencia_sector_productivo} bind:value={$formPertinenciaSectorProductivo.pertinencia_sector_productivo} required on:input={() => syncColumnLong('pertinencia_sector_productivo', $formPertinenciaSectorProductivo)} />
                 </div>
             </div>
 
@@ -667,12 +704,14 @@
                 </div>
             </div>
 
+            <h1 class="mt-24 text-center">Describa de forma general (en los que aplique) el aporte del proyecto ejecutado de modernización SENNOVA a los indicadores de los proyectos relacionados en el artículo 5 del acuerdo 003 del 02 de febrero de 2012.</h1>
+
             <div class="mt-44 grid grid-cols-2">
                 <div>
                     <Label class="mb-4" labelFor="productividad_beneficiarios" value="24. Productividad y competitividad del (los) beneficiario(s) final(es) del proyecto." />
                 </div>
                 <div>
-                    <Textarea label="Descripción" maxlength="4000" id="productividad_beneficiarios" error={errors.productividad_beneficiarios} bind:value={$form.productividad_beneficiarios} />
+                    <Textarea label="Descripción" maxlength="4000" id="productividad_beneficiarios" error={errors.productividad_beneficiarios} bind:value={$formProductividadBeneficiarios.productividad_beneficiarios} on:input={() => syncColumnLong('productividad_beneficiarios', $formProductividadBeneficiarios)} />
                 </div>
             </div>
 
@@ -681,7 +720,7 @@
                     <Label class="mb-4" labelFor="generacion_empleo" value="25. Generación o mantenimiento de empleo por parte del (los) beneficiario(s) del proyecto." />
                 </div>
                 <div>
-                    <Textarea label="Descripción" maxlength="4000" id="generacion_empleo" error={errors.generacion_empleo} bind:value={$form.generacion_empleo} />
+                    <Textarea label="Descripción" maxlength="4000" id="generacion_empleo" error={errors.generacion_empleo} bind:value={$formGeneracionEmpleo.generacion_empleo} on:input={() => syncColumnLong('generacion_empleo', $formGeneracionEmpleo)} />
                 </div>
             </div>
 
@@ -690,7 +729,7 @@
                     <Label class="mb-4" labelFor="creacion_empresas" value="26. Creación de nuevas empresas y diseño y desarrollo de nuevos productos, procesos o servicios" />
                 </div>
                 <div>
-                    <Textarea label="Descripción" maxlength="4000" id="creacion_empresas" error={errors.creacion_empresas} bind:value={$form.creacion_empresas} />
+                    <Textarea label="Descripción" maxlength="4000" id="creacion_empresas" error={errors.creacion_empresas} bind:value={$formCreacionEmpresas.creacion_empresas} on:input={() => syncColumnLong('creacion_empresas', $formCreacionEmpresas)} />
                 </div>
             </div>
 
@@ -699,7 +738,7 @@
                     <Label class="mb-4" labelFor="incorporacion_nuevos_conocimientos" value="27. Incorporación de nuevos conocimientos y competencias laborales en el talento humano en la(s) empresa(s) beneficiaria(s) del proyecto" />
                 </div>
                 <div>
-                    <Textarea label="Descripción" maxlength="4000" id="incorporacion_nuevos_conocimientos" error={errors.incorporacion_nuevos_conocimientos} bind:value={$form.incorporacion_nuevos_conocimientos} />
+                    <Textarea label="Descripción" maxlength="4000" id="incorporacion_nuevos_conocimientos" error={errors.incorporacion_nuevos_conocimientos} bind:value={$formIncorporacionNuevosConocimientos.incorporacion_nuevos_conocimientos} on:input={() => syncColumnLong('incorporacion_nuevos_conocimientos', $formIncorporacionNuevosConocimientos)} />
                 </div>
             </div>
 
@@ -708,7 +747,7 @@
                     <Label class="mb-4" labelFor="valor_agregado_entidades" value="28. Generación de valor agregado en la(s) entidad(es) beneficiaria(s) del proyecto" />
                 </div>
                 <div>
-                    <Textarea label="Descripción" maxlength="4000" id="valor_agregado_entidades" error={errors.valor_agregado_entidades} bind:value={$form.valor_agregado_entidades} />
+                    <Textarea label="Descripción" maxlength="4000" id="valor_agregado_entidades" error={errors.valor_agregado_entidades} bind:value={$formValorAgregadoEntidades.valor_agregado_entidades} on:input={() => syncColumnLong('valor_agregado_entidades', $formValorAgregadoEntidades)} />
                 </div>
             </div>
 
@@ -717,7 +756,7 @@
                     <Label class="mb-4" labelFor="fortalecimiento_programas_formacion" value="29. Fortalecimiento de programas de formación del Sena" />
                 </div>
                 <div>
-                    <Textarea label="Descripción" maxlength="4000" id="fortalecimiento_programas_formacion" error={errors.fortalecimiento_programas_formacion} bind:value={$form.fortalecimiento_programas_formacion} />
+                    <Textarea label="Descripción" maxlength="4000" id="fortalecimiento_programas_formacion" error={errors.fortalecimiento_programas_formacion} bind:value={$formFortalecimientoProgramasFormacion.fortalecimiento_programas_formacion} on:input={() => syncColumnLong('fortalecimiento_programas_formacion', $formFortalecimientoProgramasFormacion)} />
                 </div>
             </div>
 
@@ -726,7 +765,7 @@
                     <Label class="mb-4" labelFor="transferencia_tecnologias" value="30. Transferencia de tecnologías al Sena y a los sectores productivos relacionados" />
                 </div>
                 <div>
-                    <Textarea label="Descripción" maxlength="4000" id="transferencia_tecnologias" error={errors.transferencia_tecnologias} bind:value={$form.transferencia_tecnologias} />
+                    <Textarea label="Descripción" maxlength="4000" id="transferencia_tecnologias" error={errors.transferencia_tecnologias} bind:value={$formTransferenciaTecnologias.transferencia_tecnologias} on:input={() => syncColumnLong('transferencia_tecnologias', $formTransferenciaTecnologias)} />
                 </div>
             </div>
 
@@ -735,13 +774,13 @@
                     <Label class="mb-4" labelFor="cobertura_perntinencia_formacion" value="31. Cobertura, calidad y pertinencia de la formación" />
                 </div>
                 <div>
-                    <Textarea label="Descripción" maxlength="4000" id="cobertura_perntinencia_formacion" error={errors.cobertura_perntinencia_formacion} bind:value={$form.cobertura_perntinencia_formacion} />
+                    <Textarea label="Descripción" maxlength="4000" id="cobertura_perntinencia_formacion" error={errors.cobertura_perntinencia_formacion} bind:value={$formCoberturaPerntinenciaFormacion.cobertura_perntinencia_formacion} on:input={() => syncColumnLong('cobertura_perntinencia_formacion', $formCoberturaPerntinenciaFormacion)} />
                 </div>
             </div>
 
             <div class="mt-44 grid grid-cols-2">
                 <div>
-                    <Label class="mb-4" labelFor="palabras_clave_ambiente" value="32. Palabras claves relacionadas con el ambiente de formación modernizado por Sennova (Separados por coma)" />
+                    <Label class="mb-4" labelFor="palabras_clave_ambiente" value="32. Palabras claves relacionadas con el ambiente de formación modernizado por Sennova" />
                 </div>
                 <div>
                     <Tags id="palabras_clave_ambiente" class="mt-4" enforceWhitelist={false} bind:tags={$form.palabras_clave_ambiente} placeholder="Palabras clave" error={errors.palabras_clave_ambiente} />
@@ -754,7 +793,7 @@
                     <Label class="mb-4" labelFor="observaciones_generales_ambiente" value="33. Observaciones generales del ambiente modernizado por Sennova" />
                 </div>
                 <div>
-                    <Textarea label="Observaciones" maxlength="4000" id="observaciones_generales_ambiente" error={errors.observaciones_generales_ambiente} bind:value={$form.observaciones_generales_ambiente} />
+                    <Textarea label="Observaciones" maxlength="4000" id="observaciones_generales_ambiente" error={errors.observaciones_generales_ambiente} bind:value={$formObservacionesGeneralesAmbiente.observaciones_generales_ambiente} on:input={() => syncColumnLong('observaciones_generales_ambiente', $formObservacionesGeneralesAmbiente)} />
                 </div>
             </div>
 
@@ -786,7 +825,7 @@
                 <button class="text-red-600 hover:underline text-left" tabindex="-1" type="button" on:click={(event) => (destroyAmbienteModernizacionDialog = true)}> Eliminar ambiente de modernización </button>
             {/if}
             {#if isSuperAdmin || (checkRole(authUser, [4]) && ambienteModernizacion.estado == false)}
-                <LoadingButton loading={sending} class="btn-indigo ml-auto" type="submit">Editar ambiente de modernización</LoadingButton>
+                <LoadingButton loading={sending} class="btn-indigo ml-auto" type="submit">Guardar</LoadingButton>
             {/if}
         </div>
     </form>

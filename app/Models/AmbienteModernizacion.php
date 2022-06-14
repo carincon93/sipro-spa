@@ -204,16 +204,6 @@ class AmbienteModernizacion extends Model
     }
 
     /**
-     * Relationship with CodigoProyectoSgps
-     *
-     * @return object
-     */
-    public function codigosProyectosSgpsBeneficiados()
-    {
-        return $this->belongsToMany(CodigoProyectoSgps::class, 'ambiente_modernizacion_cod_proyectos_beneficiados', 'ambiente_modernizacion_id', 'codigo_proyecto_sgps_id');
-    }
-
-    /**
      * Relationship with ProgramaFormacion
      *
      * @return object
@@ -238,7 +228,7 @@ class AmbienteModernizacion extends Model
      *
      * @return object
      */
-    public function semilerosInvestigacion()
+    public function semillerosInvestigacion()
     {
         return $this->belongsToMany(SemilleroInvestigacion::class, 'ambiente_modernizacion_semillero_investigacion', 'ambiente_modernizacion_id', 'semillero_investigacion_id');
     }

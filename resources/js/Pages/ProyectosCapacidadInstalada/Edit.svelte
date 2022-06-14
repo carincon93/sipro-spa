@@ -121,7 +121,6 @@
     }
 
     async function syncColumnLong(column, form) {
-        console.log('test')
         return new Promise((resolve) => {
             if ((typeof column !== 'undefined' && typeof form !== 'undefined' && isSuperAdmin) || (typeof column !== 'undefined' && typeof form !== 'undefined' && checkRole(authUser, [4, 6]) && proyectoCapacidadInstalada.integrantes.find((item) => item.id == authUser.id))) {
                 Inertia.put(

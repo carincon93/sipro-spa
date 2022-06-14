@@ -7,11 +7,14 @@
     import { inertia, useForm } from '@inertiajs/inertia-svelte'
     import { route, checkRole, checkPermission } from '@/Utils'
     import { _ } from 'svelte-i18n'
+
     import Input from '@/Shared/Input'
     import LoadingButton from '@/Shared/LoadingButton'
     import Checkbox from '@smui/checkbox'
     import FormField from '@smui/form-field'
     import Password from '@/Shared/Password'
+    import Button from '@/Shared/Button'
+    import Dialog from '@/Shared/Dialog'
 
     export let status
     export let errors
@@ -21,6 +24,7 @@
     let canResetPassword
     let selection = []
     let sending = false
+    let cacheDialog = false
 
     let form = useForm({
         email: '',
@@ -73,10 +77,12 @@
 
 <p class="text-xs mt-10">Si aún no tiene cuenta puede crearla diligenciando el siguiente formulario</p>
 
-<a use:inertia href={route('register')} class="bg-indigo-500 block mt-1 mx-auto p-2 rounded text-center text-white text-xs w-1/4">Registro</a>
+<a use:inertia href={route('register')} class="bg-gray-800 hover:bg-gray-700 block mt-1 mx-auto p-2 rounded text-center text-white text-xs w-44">Formulario de registro</a>
 
-<p class="text-xs mt-6 text-indigo-500">
-    Problemas con la plataforma. Envíe un correo a la dirección <a class="underline" href="mailto:sgpssipro@sena.edu.co">sgpssipro@sena.edu.co</a> (Se debe enviar desde una cuenta @sena.edu.co)
+<hr class="block my-6" />
+
+<p class="text-xs">
+    ¿Problemas con la plataforma?. Realice la siguiente configuración en su navegador <a href="/images/borrar-cache.gif" class="bg-gray-800 hover:bg-gray-700 inline-block px-2 py-1 rounded-sm text-white text-xs" target="_blank">Ver configuración</a> o envíe un correo a la dirección <a class="underline" href="mailto:sgpssipro@sena.edu.co">sgpssipro@sena.edu.co</a> (Se debe enviar desde una cuenta @sena.edu.co)
 </p>
 
 <div class="flex mt-20">
