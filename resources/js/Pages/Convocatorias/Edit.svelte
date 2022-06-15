@@ -50,6 +50,7 @@
     let form = useForm({
         descripcion: convocatoria.descripcion,
         esta_activa: convocatoria.esta_activa,
+        visible: convocatoria.visible,
         fecha_finalizacion_fase: convocatoria.fecha_finalizacion_fase,
         hora_finalizacion_fase: convocatoria.hora_finalizacion_fase,
         min_fecha_inicio_proyectos_idi: convocatoria.min_fecha_inicio_proyectos_idi,
@@ -104,22 +105,6 @@
             </div>
         </div>
     </header>
-
-    {#if isSuperAdmin}
-        <InfoMessage class="max-w-3xl">
-            <div class="px-4">
-                <h1 class="mb-4 text-2xl">¿Desea configurar nuevos roles SENNOVA?</h1>
-                <Button on:click={() => Inertia.visit(route('convocatorias.convocatoria-rol-sennova.index', convocatoria.id))} variant="raised">Configurar roles SENNOVA</Button>
-            </div>
-        </InfoMessage>
-
-        <InfoMessage class="max-w-3xl mt-10">
-            <div class="px-4">
-                <h1 class="mb-4 text-2xl">¿Desea configurar nuevos rubros del presupuesto SENNOVA?</h1>
-                <Button on:click={() => Inertia.visit(route('convocatorias.convocatoria-presupuesto.index', convocatoria.id))} variant="raised">Configurar rubros presupuesto SENNOVA</Button>
-            </div>
-        </InfoMessage>
-    {/if}
 
     {#if convocatoria.tipo_convocatoria == 1 || convocatoria.tipo_convocatoria == 3}
         <div class="bg-white rounded shadow max-w-3xl mt-20">
@@ -187,15 +172,22 @@
                 </div>
 
                 <div class="mt-10 mb-20">
-                    <Label required labelFor="esta_activa" value="¿Desea activar esta convocatoria? (Solo puede activar una convocatoria por tipo --Proyectos de convocatoria - Proyectos de ejecicio DEMO)" class="inline-block mb-4" />
+                    <Label required labelFor="esta_activa" value="¿Desea activar esta convocatoria? (Si la opción está habilitada permite a los usuarios formular proyectos. Tenga en cuenta que solo puede activar una convocatoria por tipo --Proyectos de convocatoria - Proyectos de ejecicio DEMO)" class="inline-block mb-4" />
                     <br />
                     <Switch bind:checked={$form.esta_activa} />
                     <InputError message={errors.esta_activa} />
                 </div>
 
+                <div class="mt-10 mb-20">
+                    <Label required labelFor="visible" value="Defina la visibilidad de la convocatoria. (Si la opción está habilitada permite a los usuarios visualizar la convocatoria)" class="inline-block mb-4" />
+                    <br />
+                    <Switch bind:checked={$form.visible} onMessage="Visible" offMessage="Oculta" />
+                    <InputError message={errors.visible} />
+                </div>
+
                 {#if convocatoria.tipo_convocatoria == 1 || convocatoria.tipo_convocatoria == 3}
                     <div class="mt-4 mb-20">
-                        <Label required labelFor="mostrar_recomendaciones" value="¿Desea que el formulador visualice las recomendaciones?" class="inline-block mb-4" />
+                        <Label required labelFor="mostrar_recomendaciones" value="¿Desea que el formulador visualice las recomendaciones hechas por los evaluadores?" class="inline-block mb-4" />
                         <br />
                         <Switch bind:checked={$form.mostrar_recomendaciones} />
                         <InputError message={errors.mostrar_recomendaciones} />

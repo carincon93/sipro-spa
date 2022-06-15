@@ -40,7 +40,7 @@ class ConvocatoriaController extends Controller
 
         return Inertia::render('Convocatorias/Index', [
             'filters'               => request()->all('search'),
-            'convocatorias'         => Convocatoria::orderBy('id', 'ASC')->filterConvocatoria(request()->only('search'))->paginate()->appends(['search' => request()->search]),
+            'convocatorias'         => Convocatoria::orderBy('id', 'DESC')->filterConvocatoria(request()->only('search'))->paginate()->appends(['search' => request()->search]),
             'convocatoriaActiva'    => Convocatoria::where('esta_activa', 1)->first(),
         ]);
     }
@@ -85,6 +85,7 @@ class ConvocatoriaController extends Controller
         $convocatoria->max_fecha_finalizacion_proyectos_tp      = $request->max_fecha_finalizacion_proyectos_tp;
         $convocatoria->fecha_finalizacion_fase                  = $request->fecha_finalizacion_fase;
         $convocatoria->hora_finalizacion_fase                   = $request->hora_finalizacion_fase;
+        $convocatoria->visible                                  = $request->visible;
         $convocatoria->tipo_convocatoria                        = $request->tipo_convocatoria;
         $convocatoria->fase                                     = 1;
 
@@ -167,6 +168,7 @@ class ConvocatoriaController extends Controller
         $convocatoria->max_fecha_finalizacion_proyectos_tp      = $request->max_fecha_finalizacion_proyectos_tp;
         $convocatoria->fecha_finalizacion_fase                  = $request->fecha_finalizacion_fase;
         $convocatoria->hora_finalizacion_fase                   = $request->hora_finalizacion_fase;
+        $convocatoria->visible                                  = $request->visible;
 
         if ($request->esta_activa) {
             $convocatoriaFormulacionActiva = Convocatoria::where('esta_activa', true)->where('tipo_convocatoria', 1)->first();
