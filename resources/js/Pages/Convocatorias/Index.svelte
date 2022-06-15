@@ -6,6 +6,8 @@
     import { _ } from 'svelte-i18n'
 
     import Button from '@/Shared/Button'
+    import DataTableMenu from '@/Shared/DataTableMenu'
+    import { Item, Text } from '@smui/list'
 
     export let convocatorias
     export let convocatoriaActiva
@@ -57,32 +59,43 @@
         <div class="grid grid-cols-3 gap-4">
             {#if isSuperAdmin || checkRole(authUser, [11]) || checkPermission(authUser, [1, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 17, 18, 19, 14, 15, 16, 20, 21])}
                 {#each convocatorias.data as convocatoria (convocatoria.id)}
-                    {#if convocatoria.tipo_convocatoria != 3 || isSuperAdmin}
+                    {#if (convocatoria.tipo_convocatoria != 3 && convocatoria.visible) || isSuperAdmin}
                         <div>
-                            <a use:inertia href={route('convocatorias.dashboard', convocatoria.id)} class="bg-white overflow-hidden shadow-sm sm:rounded-tr-lg sm:rounded-tl-lg px-6 py-2 hover:bg-indigo-500 hover:text-white h-72 flex justify-center items-center flex-col">
+                            {#if isSuperAdmin}
+                                <div class="bg-white flex w-full justify-end">
+                                    <DataTableMenu class="min-w-0">
+                                        <Item on:SMUI:action={() => Inertia.visit(route('convocatorias.edit', convocatoria.id))}>
+                                            <Text>Editar</Text>
+                                        </Item>
+
+                                        <Item on:SMUI:action={() => Inertia.visit(route('convocatorias.convocatoria-rol-sennova.index', convocatoria.id))}>
+                                            <Text>Roles SENNOVA</Text>
+                                        </Item>
+
+                                        <Item on:SMUI:action={() => Inertia.visit(route('convocatorias.convocatoria-presupuesto.index', convocatoria.id))}>
+                                            <Text>Rúbrica presupuestal SENNOVA</Text>
+                                        </Item>
+                                    </DataTableMenu>
+                                </div>
+                            {/if}
+                            <a use:inertia href={route('convocatorias.dashboard', convocatoria.id)} class="bg-white overflow-hidden shadow-sm px-6 py-2 hover:bg-indigo-500 hover:text-white h-72 flex justify-center items-center flex-col">
                                 <span class="mb-5 text-center">{convocatoria.tipo_convocatoria == 1 ? 'Proyectos de convocatoria' : convocatoria.tipo_convocatoria == 2 ? 'Proyectos de ejercicio (DEMO)' : 'Nuevas TecnoAcademias - Nuevos Tecnoparques'}</span>
                                 {#if convocatoria.tipo_convocatoria == 1}
-                                    <h1 class="text-4xl text-center mt-6">
+                                    <h1 class="text-4xl text-center my-4">
                                         {convocatoria.year}
                                     </h1>
                                 {/if}
-                                <p>
+                                <p class="text-xs">
                                     {convocatoria.descripcion}
                                 </p>
-                                {#if convocatoria.esta_activa}
-                                    <small class="mt-3">
-                                        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" class="w-5" style="transform: translateX(-24px); position: absolute;">
-                                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
-                                        </svg>
-                                        Convocatoria activa
-                                    </small>
-                                {/if}
-                            </a>
-                            {#if isSuperAdmin}
-                                <div class="bg-white p-2 flex justify-center rounded-bl-lg rounded-br-lg">
-                                    <Button on:click={() => Inertia.visit(route('convocatorias.edit', convocatoria.id))} variant="raised">Editar</Button>
+                                <div class="bg-gray-700 text-white p-2 rounded-sm mt-4 flex">
+                                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" class="w-5 mr-2">
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
+                                    </svg>
+
+                                    <small> Convocatoria {convocatoria.esta_activa ? 'activa' : 'inactiva'} {convocatoria.visible && isSuperAdmin ? ' y visible' : convocatoria.visible == false && isSuperAdmin ? 'y oculta' : ''}</small>
                                 </div>
-                            {/if}
+                            </a>
                         </div>
                     {/if}
                 {/each}

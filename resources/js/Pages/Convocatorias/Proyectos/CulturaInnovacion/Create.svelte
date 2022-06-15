@@ -48,7 +48,7 @@
     }
 
     function submit() {
-        if (isSuperAdmin || checkPermissionByUser(authUser, [11]) || (checkPermission(authUser, [11]) && convocatoria.esta_activa == true)) {
+        if (isSuperAdmin || checkPermissionByUser(authUser, [11]) || checkPermission(authUser, [11])) {
             $form.post(route('convocatorias.cultura-innovacion.store', [convocatoria.id]), {
                 onStart: () => (sending = true),
                 onFinish: () => (sending = false),
@@ -201,7 +201,7 @@
         </fieldset>
 
         <div class="px-8 py-4 bg-gray-100 border-t border-gray-200 flex items-center sticky bottom-0">
-            {#if isSuperAdmin || checkPermissionByUser(authUser, [11]) || (checkPermission(authUser, [11]) && convocatoria.esta_activa == true)}
+            {#if isSuperAdmin || checkPermissionByUser(authUser, [11]) || checkPermission(authUser, [11])}
                 <LoadingButton loading={sending} class="btn-indigo ml-auto" type="submit">
                     {$_('Continue')}
                 </LoadingButton>
