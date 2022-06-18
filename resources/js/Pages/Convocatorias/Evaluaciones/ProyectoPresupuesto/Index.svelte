@@ -271,7 +271,7 @@
                         </p>
                     </td>
                     <td class="border-t">
-                        <div class="flex flex-col focus:text-indigo-500 px-6 py-4">
+                        <div class="flex flex-col focus:text-cyan-500 px-6 py-4">
                             <div class="mt-3">
                                 <small>Concepto interno SENA</small>
                                 <p>
@@ -302,7 +302,7 @@
                     </td>
                     <td class="border-t">
                         <div class="flex items-center">
-                            <p class="px-6 py-4 focus:text-indigo-500">
+                            <p class="px-6 py-4 focus:text-cyan-500">
                                 {presupuesto.proyecto_presupuestos_evaluaciones?.find((item) => item.evaluacion_id == evaluacion.id) ? 'Evaluado' : 'Sin evaluar'}
                             </p>
                             {#if convocatoria.fase == 4}

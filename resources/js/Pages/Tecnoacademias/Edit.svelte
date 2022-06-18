@@ -74,9 +74,9 @@
             <div>
                 <h1 class="overflow-ellipsis overflow-hidden w-breadcrumb-ellipsis whitespace-nowrap">
                     {#if isSuperAdmin || checkRole(authUser, [5])}
-                        <a use:inertia href={route('tecnoacademias.index')} class="text-indigo-400 hover:text-indigo-600"> Tecnoacademias </a>
+                        <a use:inertia href={route('tecnoacademias.index')} class="text-cyan-400 hover:text-cyan-600"> Tecnoacademias </a>
                     {/if}
-                    <span class="text-indigo-400 font-medium">/</span>
+                    <span class="text-cyan-400 font-medium">/</span>
                     {tecnoacademia.nombre}
                 </h1>
             </div>

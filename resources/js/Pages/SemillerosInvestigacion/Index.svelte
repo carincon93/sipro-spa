@@ -30,7 +30,7 @@
         <div class="flex items-center justify-between lg:px-8 max-w-7xl mx-auto px-4 py-6 sm:px-6">
             <div>
                 <h1>
-                    <a use:inertia href={route('grupos-investigacion.index')} class="text-indigo-400 hover:text-indigo-600"> Grupos de investigación </a>
+                    <a use:inertia href={route('grupos-investigacion.index')} class="text-cyan-400 hover:text-cyan-600"> Grupos de investigación </a>
                 </h1>
             </div>
         </div>
@@ -56,17 +56,17 @@
             {#each semillerosInvestigacion.data as semilleroInvestigacion (semilleroInvestigacion.id)}
                 <tr class="hover:bg-gray-100 focus-within:bg-gray-100">
                     <td class="border-t">
-                        <p class="px-6 py-4 focus:text-indigo-500">
+                        <p class="px-6 py-4 focus:text-cyan-500">
                             {semilleroInvestigacion.nombre}
                         </p>
                     </td>
                     <td class="border-t">
-                        <p class="px-6 py-4 focus:text-indigo-500">
+                        <p class="px-6 py-4 focus:text-cyan-500">
                             {semilleroInvestigacion.nombre_linea_principal}
                         </p>
                     </td>
                     <td class="border-t">
-                        <p class="px-6 py-4 focus:text-indigo-500">
+                        <p class="px-6 py-4 focus:text-cyan-500">
                             {semilleroInvestigacion.codigo}
                         </p>
                     </td>

@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Helpers\AppHelper;
 use App\Models\ProyectoIdiTecnoacademia;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\ProyectoIdiTecnoacademiaProductoRequest;
@@ -96,8 +97,8 @@ class ProyectoIdiTecnoacademiaController extends Controller
         $proyectoIdiTecnoacademia->poblacion_beneficiada                = $request->poblacion_beneficiada;
         $proyectoIdiTecnoacademia->otra_poblacion_beneficiada           = $request->otra_poblacion_beneficiada;
         $proyectoIdiTecnoacademia->nombre_centro_programa               = $request->nombre_centro_programa;
-        $proyectoIdiTecnoacademia->pdf_proyecto                         = $request->pdf_proyecto;
-        $proyectoIdiTecnoacademia->documentos_resultados                = $request->documentos_resultados;
+        $proyectoIdiTecnoacademia->documentos_resultados                = '';
+        $proyectoIdiTecnoacademia->pdf_proyecto                         = '';
 
         if ($request->proyecto_id) {
             $proyectoIdiTecnoacademia->proyecto()->associate($request->proyecto_id);
@@ -105,14 +106,42 @@ class ProyectoIdiTecnoacademiaController extends Controller
         $proyectoIdiTecnoacademia->tecnoacademia()->associate($request->tecnoacademia_id);
         $proyectoIdiTecnoacademia->semilleroInvestigacion()->associate($request->semillero_investigacion_id);
 
-        $proyectoIdiTecnoacademia->save();
+        if ($proyectoIdiTecnoacademia->save()) {
 
-        $proyectoIdiTecnoacademia->municipios()->attach($request->municipios);
-        $proyectoIdiTecnoacademia->programasSennova()->attach($request->programa_sennova_participante);
-        $proyectoIdiTecnoacademia->beneficiados()->attach($request->beneficiados);
-        $proyectoIdiTecnoacademia->lineas()->attach($request->tecnoacademia_linea_tecnoacademia_id);
+            // Crear las carpetas y subcarpetas del proyecto | CALDAS - 9220 CENTRO DE PROCESOS INDUSTRIALES Y CONSTRUCCION/TECNOACADEMIA CALDAS/IDITA-00022
+            AppHelper::createFolder($proyectoIdiTecnoacademia->tecnoacademia->centroFormacion->nombre_carpeta_sharepoint); // ! Eliminar cuando ya este creada la carpeta
+            AppHelper::createFolder($proyectoIdiTecnoacademia->tecnoacademia->centroFormacion->nombre_carpeta_sharepoint . '/' . mb_strtoupper($proyectoIdiTecnoacademia->tecnoacademia->nombre)); // ! Eliminar cuando ya este creada la carpeta
+            AppHelper::createFolder($proyectoIdiTecnoacademia->tecnoacademia->centroFormacion->nombre_carpeta_sharepoint . '/' . mb_strtoupper($proyectoIdiTecnoacademia->tecnoacademia->nombre) . '/' . $proyectoIdiTecnoacademia->codigo);
 
-        $proyectoIdiTecnoacademia->participantes()->attach(auth()->user()->id, ['rol_sennova' => $request->rol_sennova['value'], 'cantidad_meses' => $request->cantidad_meses, 'cantidad_horas' => $request->cantidad_horas, 'autor_principal' => true]);
+            if ($request->hasFile('pdf_proyecto')) {
+                // Nombre del archivo
+                $fileName = $this->cleanFileName($proyectoIdiTecnoacademia->codigo . '-pdf-proyecto', $request->pdf_proyecto);
+
+                // Subir el archvio a la carpeta anteriormente creada - Ej: CALDAS - 9220 CENTRO DE PROCESOS INDUSTRIALES Y CONSTRUCCION/TECNOACADEMIA CALDAS/IDITA-00022/proyectoIDITA-00022sGhff.pdf
+                $fileName = AppHelper::uploadFile($proyectoIdiTecnoacademia->tecnoacademia->centroFormacion->nombre_carpeta_sharepoint . '/' . mb_strtoupper($proyectoIdiTecnoacademia->tecnoacademia->nombre) . '/' . $proyectoIdiTecnoacademia->codigo, $request->pdf_proyecto, $fileName);
+
+                // Actualiza la ruta del pdf en la db
+                $proyectoIdiTecnoacademia->update(['pdf_proyecto' => $fileName]);
+            }
+
+            if ($request->hasFile('documentos_resultados')) {
+                // Nombre del archivo
+                $fileName = $this->cleanFileName($proyectoIdiTecnoacademia->codigo . '-pdf-proyecto', $request->documentos_resultados);
+
+                // Subir el archvio a la carpeta anteriormente creada - Ej: CALDAS - 9220 CENTRO DE PROCESOS INDUSTRIALES Y CONSTRUCCION/TECNOACADEMIA CALDAS/IDITA-00022/proyectoIDITA-00022sGhff.pdf
+                $fileName = AppHelper::uploadFile($proyectoIdiTecnoacademia->tecnoacademia->centroFormacion->nombre_carpeta_sharepoint . '/' . mb_strtoupper($proyectoIdiTecnoacademia->tecnoacademia->nombre) . '/' . $proyectoIdiTecnoacademia->codigo, $request->documentos_resultados, $fileName);
+
+                // Actualiza la ruta del pdf en la db
+                $proyectoIdiTecnoacademia->update(['documentos_resultados' => $fileName]);
+            }
+
+            $proyectoIdiTecnoacademia->municipios()->attach($request->municipios);
+            $proyectoIdiTecnoacademia->programasSennova()->attach($request->programa_sennova_participante);
+            $proyectoIdiTecnoacademia->beneficiados()->attach($request->beneficiados);
+            $proyectoIdiTecnoacademia->lineas()->attach($request->tecnoacademia_linea_tecnoacademia_id);
+
+            $proyectoIdiTecnoacademia->participantes()->attach(auth()->user()->id, ['rol_sennova' => $request->rol_sennova['value'], 'cantidad_meses' => $request->cantidad_meses, 'cantidad_horas' => $request->cantidad_horas, 'autor_principal' => true]);
+        }
 
         return redirect()->route('proyectos-idi-tecnoacademia.participantes.index', $proyectoIdiTecnoacademia)->with('success', 'El recurso se ha creado correctamente.');
     }
@@ -193,8 +222,20 @@ class ProyectoIdiTecnoacademiaController extends Controller
         $proyectoIdiTecnoacademia->poblacion_beneficiada                = $request->poblacion_beneficiada;
         $proyectoIdiTecnoacademia->otra_poblacion_beneficiada           = $request->otra_poblacion_beneficiada;
         $proyectoIdiTecnoacademia->nombre_centro_programa               = $request->nombre_centro_programa;
-        $proyectoIdiTecnoacademia->pdf_proyecto                         = $request->pdf_proyecto;
-        $proyectoIdiTecnoacademia->documentos_resultados                = $request->documentos_resultados;
+
+        if ($request->hasFile('pdf_proyecto')) {
+            $fileNamePdfProyecto = $this->cleanFileName($proyectoIdiTecnoacademia->codigo . '-pdf-proyecto', $request->pdf_proyecto);
+            AppHelper::deleteFile($proyectoIdiTecnoacademia->pdf_proyecto);
+            $fileNamePdfProyecto = AppHelper::uploadFile($proyectoIdiTecnoacademia->tecnoacademia->centroFormacion->nombre_carpeta_sharepoint . '/' . mb_strtoupper($proyectoIdiTecnoacademia->tecnoacademia->nombre) . '/' . $proyectoIdiTecnoacademia->codigo, $request->pdf_proyecto, $fileNamePdfProyecto);
+            $proyectoIdiTecnoacademia->pdf_proyecto = $fileNamePdfProyecto;
+        }
+
+        if ($request->hasFile('documentos_resultados')) {
+            $fileNameDocumentoResultados = $this->cleanFileName($proyectoIdiTecnoacademia->codigo . '-documento-resultados', $request->documentos_resultados);
+            AppHelper::deleteFile($proyectoIdiTecnoacademia->documentos_resultados);
+            $fileNameDocumentoResultados = AppHelper::uploadFile($proyectoIdiTecnoacademia->tecnoacademia->centroFormacion->nombre_carpeta_sharepoint . '/' . mb_strtoupper($proyectoIdiTecnoacademia->tecnoacademia->nombre) . '/' . $proyectoIdiTecnoacademia->codigo, $request->documentos_resultados, $fileNameDocumentoResultados);
+            $proyectoIdiTecnoacademia->documentos_resultados = $fileNameDocumentoResultados;
+        }
 
         if ($request->proyecto_id) {
             $proyectoIdiTecnoacademia->proyecto()->associate($request->proyecto_id);
@@ -468,18 +509,6 @@ class ProyectoIdiTecnoacademiaController extends Controller
         return redirect()->route('proyectos-idi-tecnoacademia.productos.index', $proyectoIdiTecnoacademia)->with('success', 'El recurso se ha eliminado correctamente.');
     }
 
-    public function descargarPdf(ProyectoIdiTecnoacademia $proyectoIdiTecnoacademia, $archivo)
-    {
-        $rutaArchivo = null;
-        if ($archivo == 'resultados') {
-            $rutaArchivo = $proyectoIdiTecnoacademia->documentos_resultados;
-        } else if ($archivo == 'pdf') {
-            $rutaArchivo = $proyectoIdiTecnoacademia->pdf_proyecto;
-        }
-
-        return response()->download(storage_path("app/" . $rutaArchivo));
-    }
-
     public function descargarSoportesProducto(ProyectoIdiTecnoacademia $proyectoIdiTecnoacademia, ProyectoIdiTecnoacademiaProducto $producto)
     {
         return response()->download(storage_path("app/" . $producto->soporte));
@@ -499,5 +528,19 @@ class ProyectoIdiTecnoacademiaController extends Controller
         $random    = Str::random(10);
 
         return str_replace(array("\r", "\n"), '', str_replace(array("\r", "\n"), '', "{$cleanName}cod{$random}." . $archivo->extension()));
+    }
+
+
+    public function downloadFiles(ProyectoIdiTecnoacademia $proyectoIdiTecnoacademia, $tipoArchivo)
+    {
+        $fileName = '';
+
+        $fileName = $proyectoIdiTecnoacademia->filename($tipoArchivo);
+
+        if ($fileName) {
+            AppHelper::downloadFile($proyectoIdiTecnoacademia->tecnoacademia->centroFormacion->nombre_carpeta_sharepoint . '/' . mb_strtoupper($proyectoIdiTecnoacademia->tecnoacademia->nombre) . '/' . $proyectoIdiTecnoacademia->codigo, $fileName);
+        } else {
+            return back();
+        }
     }
 }

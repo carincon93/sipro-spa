@@ -56,8 +56,8 @@
         data.addColumn('string', 'ToolTip')
 
         var options = {
-            nodeClass: 'bg-indigo-500 text-white shadow',
-            selectedNodeClass: 'bg-indigo-700',
+            nodeClass: 'bg-cyan-500 text-white shadow',
+            selectedNodeClass: 'bg-cyan-700',
             allowHtml: true,
             size: 'small',
         }
@@ -200,13 +200,15 @@
         {/if}
 
         {#if productos.length == 0}
-            <InfoMessage message="No ha generado productos por lo tanto tiene la cadena de valor incompleta.<br />Por favor realice los siguientes pasos:<div>1. Diríjase a <strong>Productos</strong> y genere los productos correspondientes</div><div>2. Luego diríjase a <strong>Actividades</strong> y asocie los productos y rubros correspondientes. De esta manera completa la cadena de valor.</div>" />
+            <InfoMessage
+                message="No ha generado productos por lo tanto tiene la cadena de valor incompleta.<br />Por favor realice los siguientes pasos:<div>1. Diríjase a <strong>Productos</strong> y genere los productos correspondientes</div><div>2. Luego diríjase a <strong>Actividades</strong> y asocie los productos y rubros correspondientes. De esta manera completa la cadena de valor.</div>"
+            />
         {/if}
         <div class="mt-10">
             <div id="orgchart_div" class="overflow-x-scroll" style="margin: 0 -100px;" />
         </div>
     {:else}
-    <div id="orgchart_div" style="width: 100%;" />
+        <div id="orgchart_div" style="width: 100%;" />
     {/if}
 </AuthenticatedLayout>
 
@@ -216,7 +218,7 @@
             margin: 0 !important;
             padding: 0 !important;
             width: 100%;
-            height:  100vh;
+            height: 100vh;
         }
         nav,
         button.absolute.bottom-1\.5,
@@ -229,8 +231,8 @@
         div#orgchart_div {
             overflow: unset;
         }
-        .bg-gray-200.p-4.rounded.border-orangered.border.mb-5{
-            display:  none;
+        .bg-gray-200.p-4.rounded.border-orangered.border.mb-5 {
+            display: none;
         }
     </style>
 {/if}

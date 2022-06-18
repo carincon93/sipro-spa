@@ -31978,7 +31978,7 @@ function instance($$self, $$props, $$invalidate) {
 			...$$restProps,
 			class: `relative ${alertMsg
 			? 'bg-red-100 text-red-600'
-			: 'bg-indigo-100 text-indigo-600'} p-5 ${$$restProps.class || ''}`
+			: 'bg-cyan-100 text-cyan-600'} p-5 ${$$restProps.class || ''}`
 		});
 	};
 
@@ -32801,7 +32801,7 @@ function create_fragment(ctx) {
 			span = (0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.element)("span");
 			t0 = (0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.text)(/*percentage*/ ctx[0]);
 			t1 = (0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.text)("%");
-			(0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.attr)(span, "class", "fixed bottom-4 right-20 text-indigo-600");
+			(0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.attr)(span, "class", "fixed bottom-4 right-20 text-cyan-600");
 		},
 		m(target, anchor) {
 			(0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.insert)(target, span, anchor);

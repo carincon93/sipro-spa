@@ -17,6 +17,13 @@ class CentroFormacion extends Model
     protected $table = 'centros_formacion';
 
     /**
+     * appends
+     *
+     * @var array
+     */
+    protected $appends = ['nombre_carpeta_sharepoint'];
+
+    /**
      * The attributes that are mass assignable.
      *
      * @var array
@@ -195,5 +202,10 @@ class CentroFormacion extends Model
             $query->orWhere('centros_formacion.codigo', 'ilike', '%' . $search . '%');
             $query->orWhereRaw("unaccent(regionales.nombre) ilike unaccent('%" . $search . "%')");
         });
+    }
+
+    public function getNombreCarpetaSharepointAttribute()
+    {
+        return mb_strtoupper($this->regional ? $this->regional->nombre : '') . ' - ' . $this->codigo . ' ' . mb_strtoupper($this->nombre);
     }
 }

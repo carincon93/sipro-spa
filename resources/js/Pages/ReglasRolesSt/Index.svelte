@@ -46,22 +46,22 @@
             {#each reglasRolesSt.data as reglaRolSt (reglaRolSt.id)}
                 <tr class="hover:bg-gray-100 focus-within:bg-gray-100">
                     <td class="border-t">
-                        <p class="px-6 py-4 focus:text-indigo-500">
+                        <p class="px-6 py-4 focus:text-cyan-500">
                             {reglaRolSt.nombre_rol}
                         </p>
                     </td>
                     <td class="border-t">
-                        <p class="px-6 py-4 focus:text-indigo-500">
+                        <p class="px-6 py-4 focus:text-cyan-500">
                             {reglaRolSt.nombre_centro}
                         </p>
                     </td>
                     <td class="border-t">
-                        <p class="px-6 py-4 focus:text-indigo-500">
+                        <p class="px-6 py-4 focus:text-cyan-500">
                             {reglaRolSt.tipo_proyecto}
                         </p>
                     </td>
                     <td class="border-t">
-                        <p class="px-6 py-4 focus:text-indigo-500">
+                        <p class="px-6 py-4 focus:text-cyan-500">
                             {reglaRolSt.maximo}
                         </p>
                     </td>

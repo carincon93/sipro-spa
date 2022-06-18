@@ -92,9 +92,9 @@
             <div>
                 <h1 class="overflow-ellipsis overflow-hidden w-breadcrumb-ellipsis whitespace-nowrap">
                     {#if isSuperAdmin || checkPermission(authUser, [3, 4, 6, 7, 9, 10, 12, 13, 18, 19, 21, 14, 16, 15, 20])}
-                        <a use:inertia href={route('convocatorias.proyectos.productos.index', [convocatoria.id, proyecto.id])} class="text-indigo-400 hover:text-indigo-600"> Productos </a>
+                        <a use:inertia href={route('convocatorias.proyectos.productos.index', [convocatoria.id, proyecto.id])} class="text-cyan-400 hover:text-cyan-600"> Productos </a>
                     {/if}
-                    <span class="text-indigo-400 font-medium">/</span>
+                    <span class="text-cyan-400 font-medium">/</span>
                     {producto.nombre}
                 </h1>
             </div>
@@ -234,7 +234,7 @@
                                 <Label class="p-3 border-t border-b flex items-center text-sm" labelFor={'linea-tecnologica-' + id} value={descripcion} />
 
                                 <div class="border-b border-t flex items-center justify-center">
-                                    <input type="checkbox" bind:group={$form.actividad_id} id={'linea-tecnologica-' + id} value={id} class="rounded text-indigo-500" />
+                                    <input type="checkbox" bind:group={$form.actividad_id} id={'linea-tecnologica-' + id} value={id} class="rounded text-cyan-500" />
                                 </div>
                             {/each}
                         {:else}

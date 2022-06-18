@@ -27,4 +27,4 @@
     }
 </script>
 
-<input type="checkbox" {id} bind:checked {value} class="rounded border-gray-300 text-indigo-600 shadow-sm focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50 bg-gray-200" />
+<input type="checkbox" {id} bind:checked {value} class="rounded border-gray-300 text-cyan-600 shadow-sm focus:border-cyan-300 focus:ring focus:ring-cyan-200 focus:ring-opacity-50 bg-gray-200" />

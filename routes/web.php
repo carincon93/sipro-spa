@@ -82,7 +82,6 @@ use App\Http\Controllers\ReporteController;
 Route::get('web-api/centros-formacion', [WebController::class, 'centrosFormacion'])->name('web-api.centros-formacion');
 
 Route::middleware(['auth', 'verified'])->group(function () {
-
     Route::get('manual-usuario/download', [ProyectoController::class, 'downloadManualUsuario'])->name('manual-usuario.download');
 
     Route::get('/', [WebController::class, 'dashboard'])->name('dashboard');
@@ -315,7 +314,8 @@ Route::middleware(['auth', 'verified'])->group(function () {
      * Proyectos I+D+i de Tecnoacademias
      * 
      */
-    Route::get('proyectos-idi-tecnoacademia/{proyecto_idi_tecnoacademia}/download/{archivo}', [ProyectoIdiTecnoacademiaController::class, 'descargarPdf'])->name('proyectos-idi-tecnoacademia.download');
+    Route::get('proyectos-idi-tecnoacademia/{proyecto_idi_tecnoacademia}/download/{tipo_archivo}', [ProyectoIdiTecnoacademiaController::class, 'downloadFiles'])->name('proyectos-idi-tecnoacademia.download-pdf');
+    // Route::get('proyectos-idi-tecnoacademia/{proyecto_idi_tecnoacademia}/download/{archivo}', [ProyectoIdiTecnoacademiaController::class, 'descargarPdf'])->name('proyectos-idi-tecnoacademia.download');
     Route::get('proyectos-idi-tecnoacademia/{proyecto_idi_tecnoacademia}/productos/{producto}/download', [ProyectoIdiTecnoacademiaController::class, 'descargarSoportesProducto'])->name('proyectos-idi-tecnoacademia.productos.download');
 
     Route::get('proyectos-idi-tecnoacademia/{proyecto_idi_tecnoacademia}/productos', [ProyectoIdiTecnoacademiaController::class, 'indexProductos'])->name('proyectos-idi-tecnoacademia.productos.index');

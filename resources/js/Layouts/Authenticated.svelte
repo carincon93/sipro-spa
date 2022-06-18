@@ -45,7 +45,7 @@
 </svelte:head>
 
 <div>
-    <div class="min-h-screen bg-gray-100">
+    <div class="min-h-screen app-wrapper">
         <nav class="bg-white border-b border-gray-100">
             <!-- Primary Navigation Menu -->
             <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
@@ -66,7 +66,7 @@
 
                     <div class="hidden sm:flex sm:items-center sm:ml-6">
                         {#if $page.props.convocatoria}
-                            <div class="bg-indigo-500 text-white py-2 px-4 shadow border-b-2 flex">
+                            <div class="bg-cyan-500 text-white py-2 px-4 shadow border-b-2 flex">
                                 {@html $page.props.convocatoria.fase_formateada}
                                 {#if isSuperAdmin}
                                     <Button on:click={() => Inertia.visit(route('convocatorias.edit', [$page.props.convocatoria.id]))} class="ml-4 mb-2" variant="raised">
@@ -80,39 +80,39 @@
 
                         <!-- Settings Dropdown -->
                         <div class="mr-5 ml-5 relative">
-                            <a use:inertia href={route('notificaciones.index')} class="flex items-center hover:text-indigo-700">
+                            <a use:inertia href={route('notificaciones.index')} class="flex items-center hover:text-cyan-700">
                                 <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 17h5l-1.405-1.405A2.032 2.032 0 0118 14.158V11a6.002 6.002 0 00-4-5.659V5a2 2 0 10-4 0v.341C7.67 6.165 6 8.388 6 11v3.159c0 .538-.214 1.055-.595 1.436L4 17h5m6 0v1a3 3 0 11-6 0v-1m6 0H9" />
                                 </svg>
                                 {#if $page.props.auth.numeroNotificaciones > 0}
-                                    <span class="absolute bg-indigo-700 flex h-5/6 items-center justify-center rounded-full text-center text-white text-xs w-5/6" style="top: -10px; left: 10px;">{$page.props.auth.numeroNotificaciones}</span>
+                                    <span class="absolute bg-cyan-700 flex h-5/6 items-center justify-center rounded-full text-center text-white text-xs w-5/6" style="top: -10px; left: 10px;">{$page.props.auth.numeroNotificaciones}</span>
                                 {/if}
                             </a>
                         </div>
                         <div class="ml-3 relative">
                             <Dropdown class="mt-1" placement="bottom-end">
                                 <div class="flex items-center cursor-pointer select-none group">
-                                    <div class="text-gray-700 group-hover:text-indigo-600 focus:text-indigo-600 mr-1 whitespace-no-wrap">
+                                    <div class="text-gray-700 group-hover:text-cyan-600 focus:text-cyan-600 mr-1 whitespace-no-wrap">
                                         <span class="capitalize">{authUser.nombre}</span>
                                     </div>
-                                    <Icon name="cheveron-down" class="w-5 h-5 group-hover:fill-indigo-600 fill-gray-700 focus:fill-indigo-600" />
+                                    <Icon name="cheveron-down" class="w-5 h-5 group-hover:fill-cyan-600 fill-gray-700 focus:fill-cyan-600" />
                                 </div>
                                 <div slot="dropdown" class="mt-2 py-2 shadow-xl bg-white rounded text-sm">
-                                    <div class="flex items-center px-6 py-2 hover:bg-indigo-500 hover:text-white">
+                                    <div class="flex items-center px-6 py-2 hover:bg-cyan-500 hover:text-white">
                                         <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" style="flex-basis: 20px;" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                                             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M18.364 5.636l-3.536 3.536m0 5.656l3.536 3.536M9.172 9.172L5.636 5.636m3.536 9.192l-3.536 3.536M21 12a9 9 0 11-18 0 9 9 0 0118 0zm-5 0a4 4 0 11-8 0 4 4 0 018 0z" />
                                         </svg>
                                         <span class="ml-1.5"><a href="mailto:sgpssipro@sena.edu.co">sgpssipro@sena.edu.co</a></span>
                                     </div>
 
-                                    <a use:inertia href={route('users.change-password')} class="flex items-center px-6 py-2 hover:bg-indigo-500 hover:text-white">
+                                    <a use:inertia href={route('users.change-password')} class="flex items-center px-6 py-2 hover:bg-cyan-500 hover:text-white">
                                         <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" style="flex-basis: 20px;" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                                             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 15v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2zm10-10V7a4 4 0 00-8 0v4h8z" />
                                         </svg>
                                         <span class="ml-1.5">Cambiar contraseña</span>
                                     </a>
 
-                                    <a use:inertia={{ method: 'post' }} href={route('logout')} class="flex items-center px-6 py-2 hover:bg-indigo-500 hover:text-white">
+                                    <a use:inertia={{ method: 'post' }} href={route('logout')} class="flex items-center px-6 py-2 hover:bg-cyan-500 hover:text-white">
                                         <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" viewBox="0 0 20 20" fill="currentColor">
                                             <path fill-rule="evenodd" d="M3 3a1 1 0 00-1 1v12a1 1 0 102 0V4a1 1 0 00-1-1zm10.293 9.293a1 1 0 001.414 1.414l3-3a1 1 0 000-1.414l-3-3a1 1 0 10-1.414 1.414L14.586 9H7a1 1 0 100 2h7.586l-1.293 1.293z" clip-rule="evenodd" />
                                         </svg>

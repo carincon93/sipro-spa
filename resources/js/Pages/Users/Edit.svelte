@@ -85,9 +85,9 @@
             <div>
                 <h1 class="overflow-ellipsis overflow-hidden w-breadcrumb-ellipsis whitespace-nowrap">
                     {#if isSuperAdmin || checkRole(authUser, [4, 21, 17, 18, 20, 19, 5])}
-                        <a use:inertia href={route('users.index')} class="text-indigo-400 hover:text-indigo-600"> Usuarios </a>
+                        <a use:inertia href={route('users.index')} class="text-cyan-400 hover:text-cyan-600"> Usuarios </a>
                     {/if}
-                    <span class="text-indigo-400 font-medium">/</span>
+                    <span class="text-cyan-400 font-medium">/</span>
                     {usuario.nombre}
                 </h1>
             </div>
@@ -263,12 +263,12 @@
                 {#each proyectos as proyecto}
                     <tr class="hover:bg-gray-100 focus-within:bg-gray-100">
                         <td class="border-t">
-                            <p class="px-6 py-4 focus:text-indigo-500">
+                            <p class="px-6 py-4 focus:text-cyan-500">
                                 {proyecto.codigo}
                             </p>
                         </td>
                         <td class="border-t">
-                            <p class="px-6 py-4 focus:text-indigo-500">
+                            <p class="px-6 py-4 focus:text-cyan-500">
                                 {proyecto.idi ? proyecto.idi.titulo : proyecto.cultura_innovacion ? proyecto.cultura_innovacion.titulo : proyecto.servicio_tecnologico ? proyecto.servicio_tecnologico.titulo : proyecto.tp?.nodo_tecnoparque ? proyecto.tp?.titulo : proyecto.tecnoacademia_lineas_tecnoacademia ? proyecto.tecnoacademia_lineas_tecnoacademia[0]?.tecnoacademia.nombre : null}
                             </p>
                         </td>

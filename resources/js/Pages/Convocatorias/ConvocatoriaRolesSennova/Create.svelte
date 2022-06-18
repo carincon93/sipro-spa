@@ -51,9 +51,9 @@
             <div>
                 <h1>
                     {#if isSuperAdmin}
-                        <a use:inertia href={route('convocatorias.convocatoria-rol-sennova.index', convocatoria.id)} class="text-indigo-400 hover:text-indigo-600"> Roles SENNOVA de convocatoria </a>
+                        <a use:inertia href={route('convocatorias.convocatoria-rol-sennova.index', convocatoria.id)} class="text-cyan-400 hover:text-cyan-600"> Roles SENNOVA de convocatoria </a>
                     {/if}
-                    <span class="text-indigo-400 font-medium">/</span>
+                    <span class="text-cyan-400 font-medium">/</span>
                     Crear
                 </h1>
             </div>

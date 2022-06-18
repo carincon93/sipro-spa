@@ -25551,7 +25551,7 @@ function create_fragment(ctx) {
 
 			(0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.attr)(div2, "class", div2_class_value = "" + ((/*status*/ ctx[0] >= 500 || /*status*/ ctx[0] == 403 || /*status*/ ctx[0] == 405
 			? 'bg-red-500'
-			: 'bg-indigo-700') + " flex flex-col items-center justify-center min-h-screen text-white"));
+			: 'bg-cyan-700') + " flex flex-col items-center justify-center min-h-screen text-white"));
 		},
 		m(target, anchor) {
 			(0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.insert)(target, t0, anchor);
@@ -25616,7 +25616,7 @@ function create_fragment(ctx) {
 
 			if (!current || dirty & /*status*/ 1 && div2_class_value !== (div2_class_value = "" + ((/*status*/ ctx[0] >= 500 || /*status*/ ctx[0] == 403 || /*status*/ ctx[0] == 405
 			? 'bg-red-500'
-			: 'bg-indigo-700') + " flex flex-col items-center justify-center min-h-screen text-white"))) {
+			: 'bg-cyan-700') + " flex flex-col items-center justify-center min-h-screen text-white"))) {
 				(0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.attr)(div2, "class", div2_class_value);
 			}
 		},

@@ -47,9 +47,9 @@
             <div>
                 <h1 class="overflow-ellipsis overflow-hidden w-breadcrumb-ellipsis whitespace-nowrap">
                     {#if isSuperAdmin}
-                        <a use:inertia href={route('tematicas-estrategicas.index')} class="text-indigo-400 hover:text-indigo-600"> Temáticas estratégicas SENA </a>
+                        <a use:inertia href={route('tematicas-estrategicas.index')} class="text-cyan-400 hover:text-cyan-600"> Temáticas estratégicas SENA </a>
                     {/if}
-                    <span class="text-indigo-400 font-medium">/</span>
+                    <span class="text-cyan-400 font-medium">/</span>
                     {tematicaEstrategica.nombre}
                 </h1>
             </div>

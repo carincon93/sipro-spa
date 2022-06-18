@@ -29,27 +29,29 @@
 
         <div slot="caption">
             <InfoMessage>
-                Para modificar las reglas de negocio de los roles de Tecnoacademia haga clic en el siguiente botón:
+                <div class="flex justify-between">
+                    Para modificar las reglas de negocio de los roles de Tecnoacademia haga clic en el siguiente botón:
 
-                <Button class="ml-4" on:click={() => Inertia.visit(route('reglas-roles-ta.index'))} variant="raised">Reglas - Roles TA</Button>
-            </InfoMessage>
+                    <Button class="ml-4" on:click={() => Inertia.visit(route('reglas-roles-ta.index'))} variant="raised">Reglas - Roles TA</Button>
+                </div>
 
-            <InfoMessage>
-                Para modificar las reglas de negocio de los roles de Tecnoparque haga clic en el siguiente botón:
+                <div class="flex justify-between">
+                    Para modificar las reglas de negocio de los roles de Tecnoparque haga clic en el siguiente botón:
 
-                <Button class="ml-4" on:click={() => Inertia.visit(route('reglas-roles-tp.index'))} variant="raised">Reglas - Roles TP</Button>
-            </InfoMessage>
+                    <Button class="ml-4" on:click={() => Inertia.visit(route('reglas-roles-tp.index'))} variant="raised">Reglas - Roles TP</Button>
+                </div>
 
-            <InfoMessage>
-                Para modificar las reglas de negocio de los roles de Servicios Tecnológicos haga clic en el siguiente botón:
+                <div class="flex justify-between">
+                    Para modificar las reglas de negocio de los roles de Servicios Tecnológicos haga clic en el siguiente botón:
 
-                <Button class="ml-4" on:click={() => Inertia.visit(route('reglas-roles-st.index'))} variant="raised">Reglas - Roles ST</Button>
-            </InfoMessage>
+                    <Button class="ml-4" on:click={() => Inertia.visit(route('reglas-roles-st.index'))} variant="raised">Reglas - Roles ST</Button>
+                </div>
 
-            <InfoMessage>
-                Para modificar las reglas de negocio de los roles de Cultura de la innovación haga clic en el siguiente botón:
+                <div class="flex justify-between">
+                    Para modificar las reglas de negocio de los roles de Cultura de la innovación haga clic en el siguiente botón:
 
-                <Button class="ml-4" on:click={() => Inertia.visit(route('reglas-roles-cultura.index'))} variant="raised">Reglas - Roles C. de la innovación</Button>
+                    <Button class="ml-4" on:click={() => Inertia.visit(route('reglas-roles-cultura.index'))} variant="raised">Reglas - Roles C. de la innovación</Button>
+                </div>
             </InfoMessage>
         </div>
 
@@ -69,7 +71,7 @@
             {#each rolesSennova.data as rolSennova (rolSennova.id)}
                 <tr class="hover:bg-gray-100 focus-within:bg-gray-100">
                     <td class="border-t">
-                        <p class="px-6 py-4 focus:text-indigo-500">
+                        <p class="px-6 py-4 focus:text-cyan-500">
                             {rolSennova.nombre}
                         </p>
                     </td>

@@ -561,7 +561,7 @@
                 <h6>Versiones - PDF</h6>
                 <ul>
                     {#each versiones as version, i}
-                        <li class="bg-indigo-500 p-2 rounded text-white text-xs mb-2">
+                        <li class="bg-cyan-500 p-2 rounded text-white text-xs mb-2">
                             {#if version.estado == 1}
                                 <a href={route('convocatorias.proyectos.version', [convocatoria.id, servicioTecnologico.proyecto.id, version.version])}>Descargar versión {version.created_at}</a>
                             {:else}

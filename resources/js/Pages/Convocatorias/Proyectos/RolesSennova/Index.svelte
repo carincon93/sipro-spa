@@ -144,17 +144,17 @@
             {#each proyectoRolesSennova.data as proyectoRolSennova (proyectoRolSennova.id)}
                 <tr class="hover:bg-gray-100 focus-within:bg-gray-100">
                     <td class="border-t">
-                        <p class="px-6 py-4 focus:text-indigo-500">
+                        <p class="px-6 py-4 focus:text-cyan-500">
                             {proyectoRolSennova?.convocatoria_rol_sennova?.rol_sennova?.nombre}
                         </p>
                     </td>
                     <td class="border-t">
-                        <p class="px-6 py-4 focus:text-indigo-500">
+                        <p class="px-6 py-4 focus:text-cyan-500">
                             {nivelAcademico(proyectoRolSennova?.convocatoria_rol_sennova?.nivel_academico)}
                         </p>
                     </td>
                     <td class="border-t">
-                        <p class="px-6 py-4 focus:text-indigo-500">
+                        <p class="px-6 py-4 focus:text-cyan-500">
                             ${new Intl.NumberFormat('de-DE').format(!isNaN(proyectoRolSennova?.convocatoria_rol_sennova?.asignacion_mensual) ? proyectoRolSennova?.convocatoria_rol_sennova?.asignacion_mensual : 0)}
                         </p>
                     </td>

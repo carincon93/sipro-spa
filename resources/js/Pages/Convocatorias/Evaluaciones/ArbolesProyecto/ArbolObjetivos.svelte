@@ -899,7 +899,7 @@
                         {/if}
                     </div>
 
-                    <hr class="mt-10 mb-10 border-indigo-300" />
+                    <hr class="mt-10 mb-10 border-cyan-300" />
                     <h1 class="text-2xl text-center mb-10">Objetivos específicos</h1>
 
                     <h1>Criterios de evaluacion</h1>
@@ -951,7 +951,7 @@
                                 {/if}
                             </div>
                         {:else if j == 1}
-                            <hr class="mt-10 mb-10 border-indigo-300" />
+                            <hr class="mt-10 mb-10 border-cyan-300" />
 
                             <h1 class="text-black">Segundo objetivo específico</h1>
 
@@ -989,7 +989,7 @@
                                 {/if}
                             </div>
                         {:else if j == 2}
-                            <hr class="mt-10 mb-10 border-indigo-300" />
+                            <hr class="mt-10 mb-10 border-cyan-300" />
 
                             <h1 class="text-black">Tercer objetivo específico</h1>
                             <Label class="mt-4 mb-4" labelFor="tercer_objetivo_puntaje" value="Puntaje (Máximo {(8 / proyecto.cantidad_objetivos).toFixed(2)})" />
@@ -1026,7 +1026,7 @@
                                 {/if}
                             </div>
                         {:else if j == 3}
-                            <hr class="mt-10 mb-10 border-indigo-300" />
+                            <hr class="mt-10 mb-10 border-cyan-300" />
 
                             <h1 class="text-black">Cuardo objetivo específico</h1>
                             <Label class="mt-4 mb-4" labelFor="cuarto_objetivo_puntaje" value="Puntaje (Máximo {(8 / proyecto.cantidad_objetivos).toFixed(2)})" />
@@ -1065,7 +1065,7 @@
                         {/if}
                     {/each}
 
-                    <hr class="mt-10 mb-10 border-indigo-300" />
+                    <hr class="mt-10 mb-10 border-cyan-300" />
                     <h1 class="text-2xl text-center mb-10">Resultados</h1>
 
                     <h1>Criterios de evaluacion</h1>
@@ -1116,7 +1116,7 @@
                                 {/if}
                             </div>
                         {:else if j == 1}
-                            <hr class="mt-10 mb-10 border-indigo-300" />
+                            <hr class="mt-10 mb-10 border-cyan-300" />
 
                             <h1 class="text-black">Resultados del segundo objetivo específico</h1>
 
@@ -1153,7 +1153,7 @@
                                 {/if}
                             </div>
                         {:else if j == 2}
-                            <hr class="mt-10 mb-10 border-indigo-300" />
+                            <hr class="mt-10 mb-10 border-cyan-300" />
 
                             <h1 class="text-black">Resultados del tercer objetivo específico</h1>
 
@@ -1190,7 +1190,7 @@
                                 {/if}
                             </div>
                         {:else if j == 3}
-                            <hr class="mt-10 mb-10 border-indigo-300" />
+                            <hr class="mt-10 mb-10 border-cyan-300" />
 
                             <h1 class="text-black">Resultados del cuarto objetivo específico</h1>
 

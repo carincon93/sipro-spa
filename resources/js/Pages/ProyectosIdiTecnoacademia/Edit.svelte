@@ -18,6 +18,7 @@
     import Dialog from '@/Shared/Dialog'
     import Button from '@/Shared/Button'
     import InfoMessage from '@/Shared/InfoMessage'
+    import File from '@/Shared/File'
 
     export let errors
     export let proyectoIdiTecnoacademia
@@ -76,9 +77,9 @@
         proyecto_con_continuidad: proyectoIdiTecnoacademia.proyecto_con_continuidad,
         productos_premios: proyectoIdiTecnoacademia.productos_premios,
         texto_exposicion: proyectoIdiTecnoacademia.texto_exposicion,
-        pdf_proyecto: proyectoIdiTecnoacademia.pdf_proyecto,
+        pdf_proyecto: null,
         resultados_obtenidos: proyectoIdiTecnoacademia.resultados_obtenidos,
-        documentos_resultados: proyectoIdiTecnoacademia.documentos_resultados,
+        documentos_resultados: null,
         observaciones_resultados: proyectoIdiTecnoacademia.observaciones_resultados,
         nombre_aprendices_vinculados: proyectoIdiTecnoacademia.nombre_aprendices_vinculados,
         nombre_instituciones_educativas: proyectoIdiTecnoacademia.nombre_instituciones_educativas,
@@ -175,13 +176,13 @@
         <div class="flex items-center justify-between lg:px-8 max-w-7xl mx-auto px-4 py-6 sm:px-6">
             <div>
                 <h1>
-                    <a use:inertia href={route('proyectos-idi-tecnoacademia.index')} class="text-indigo-400 hover:text-indigo-600"> Proyectos I+D+i TecnoAcademia </a>
-                    <span class="text-indigo-400 font-medium">/</span>
-                    <a use:inertia href={route('proyectos-idi-tecnoacademia.edit', proyectoIdiTecnoacademia.id)} class="text-indigo-400 hover:text-indigo-600 font-extrabold underline"> Información básica </a>
-                    <span class="text-indigo-400 font-medium">/</span>
-                    <a use:inertia href={route('proyectos-idi-tecnoacademia.participantes.index', proyectoIdiTecnoacademia.id)} class="text-indigo-400 hover:text-indigo-600"> Participantes </a>
-                    <span class="text-indigo-400 font-medium">/</span>
-                    <a use:inertia href={route('proyectos-idi-tecnoacademia.productos.index', proyectoIdiTecnoacademia.id)} class="text-indigo-400 hover:text-indigo-600">Productos</a>
+                    <a use:inertia href={route('proyectos-idi-tecnoacademia.index')} class="text-cyan-400 hover:text-cyan-600"> Proyectos I+D+i TecnoAcademia </a>
+                    <span class="text-cyan-400 font-medium">/</span>
+                    <a use:inertia href={route('proyectos-idi-tecnoacademia.edit', proyectoIdiTecnoacademia.id)} class="text-cyan-400 hover:text-cyan-600 font-extrabold underline"> Información básica </a>
+                    <span class="text-cyan-400 font-medium">/</span>
+                    <a use:inertia href={route('proyectos-idi-tecnoacademia.participantes.index', proyectoIdiTecnoacademia.id)} class="text-cyan-400 hover:text-cyan-600"> Participantes </a>
+                    <span class="text-cyan-400 font-medium">/</span>
+                    <a use:inertia href={route('proyectos-idi-tecnoacademia.productos.index', proyectoIdiTecnoacademia.id)} class="text-cyan-400 hover:text-cyan-600">Productos</a>
                 </h1>
             </div>
         </div>
@@ -349,7 +350,7 @@
                     <Label required class="mb-4" labelFor="pdf_proyecto" value="Url del proyecto en documento pdf" />
                 </div>
                 <div>
-                    <Input label="Url" id="pdf_proyecto" type="url" class="mt-1" error={errors.pdf_proyecto} placeholder="Url https://www.google.com.co" bind:value={$form.pdf_proyecto} />
+                    <File id="pdf_proyecto" accept="application/pdf" showInput={false} maxSize="10000" bind:value={$form.pdf_proyecto} error={errors.pdf_proyecto} route={route('proyectos-idi-tecnoacademia.download-pdf', [proyectoIdiTecnoacademia, 'pdf_proyecto'])} />
                 </div>
             </div>
 
@@ -528,10 +529,10 @@
             {#if existenDocumentos}
                 <div class="mt-44 grid grid-cols-2">
                     <div>
-                        <Label required class="mb-4" labelFor="documentos_resultados" value="Si, sí, por favor cargar la url del documento" />
+                        <Label required class="mb-4" labelFor="documentos_resultados" value="Si, sí, por favor cargar un documento PDF con los resultados" />
                     </div>
                     <div>
-                        <Input label="Url" id="documentos_resultados" type="url" class="mt-1" error={errors.documentos_resultados} placeholder="Url https://www.google.com.co" bind:value={$form.documentos_resultados} required />
+                        <File id="documentos_resultados" accept="application/pdf" showInput={false} maxSize="10000" bind:value={$form.documentos_resultados} error={errors.documentos_resultados} route={route('proyectos-idi-tecnoacademia.download-pdf', [proyectoIdiTecnoacademia, 'documentos_resultados'])} />
                     </div>
                 </div>
             {/if}

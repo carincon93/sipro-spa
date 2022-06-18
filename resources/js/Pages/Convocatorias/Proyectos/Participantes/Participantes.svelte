@@ -183,7 +183,7 @@
     }
 </script>
 
-<div class="bg-indigo-100 p-4">
+<div class="bg-cyan-100 p-4">
     <h1 class="text-4xl text-center">Participantes</h1>
     <p class="text-center m-auto mt-8">Realice la búsqueda de participantes por nombre, número de documento o por el correo electrónico institucional</p>
     <form on:submit|preventDefault={submit} on:input={() => (sended = false)}>
@@ -213,7 +213,7 @@
                     {#each resultados as resultado (resultado.id)}
                         <tr class="hover:bg-gray-100 focus-within:bg-gray-100">
                             <td class="border-t">
-                                <p class="px-6 py-4 focus:text-indigo-500">
+                                <p class="px-6 py-4 focus:text-cyan-500">
                                     {resultado.nombre}
                                 </p>
                             </td>
@@ -273,7 +273,7 @@
             {#each proyecto.participantes as participante (participante.id)}
                 <tr class="hover:bg-gray-100 focus-within:bg-gray-100">
                     <td class="border-t">
-                        <p class="px-6 py-4 focus:text-indigo-500">
+                        <p class="px-6 py-4 focus:text-cyan-500">
                             {participante.nombre}
                         </p>
                     </td>
@@ -441,7 +441,7 @@
                     <InfoMessage message="Los datos proporcionados serán tratados de acuerdo con la política de tratamiento de datos personales del SENA y a la ley 1581 de 2012 (acuerdo No. 0009 del 2016" />
                     <FormField>
                         <Checkbox bind:checked={$formNuevoParticipante.autorizacion_datos} />
-                        <span slot="label">¿La persona autoriza el tratamiento de datos personales?. <a href="https://www.sena.edu.co/es-co/transparencia/Documents/proteccion_datos_personales_sena_2016.pdf" target="_blank" class="text-indigo-500">Leer acuerdo No. 0009 del 2016</a></span>
+                        <span slot="label">¿La persona autoriza el tratamiento de datos personales?. <a href="https://www.sena.edu.co/es-co/transparencia/Documents/proteccion_datos_personales_sena_2016.pdf" target="_blank" class="text-cyan-500">Leer acuerdo No. 0009 del 2016</a></span>
                     </FormField>
                 </div>
             </fieldset>

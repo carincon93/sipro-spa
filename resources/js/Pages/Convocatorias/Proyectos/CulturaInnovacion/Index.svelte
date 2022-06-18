@@ -63,7 +63,7 @@
             {#each culturaInnovacion.data as { id, proyecto, titulo, fecha_ejecucion }}
                 <tr class="hover:bg-gray-100 focus-within:bg-gray-100">
                     <td class="border-t">
-                        <p class="px-6 py-4 focus:text-indigo-500">
+                        <p class="px-6 py-4 focus:text-cyan-500">
                             {proyecto.codigo}
                             <br />
                             {#if JSON.parse(proyecto.estado)?.requiereSubsanar && proyecto.mostrar_recomendaciones == true && proyecto.mostrar_requiere_subsanacion == true}
@@ -72,7 +72,7 @@
                         </p>
                     </td>
                     <td class="border-t">
-                        <p class="px-6 py-4 focus:text-indigo-500">
+                        <p class="px-6 py-4 focus:text-cyan-500">
                             {titulo}
                         </p>
                     </td>

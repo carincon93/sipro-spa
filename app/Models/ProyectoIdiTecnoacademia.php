@@ -23,7 +23,7 @@ class ProyectoIdiTecnoacademia extends Model
      *
      * @var array
      */
-    protected $appends = ['estado_formateado', 'fecha_ejecucion'];
+    protected $appends = ['estado_formateado', 'fecha_ejecucion', 'codigo'];
 
 
     /**
@@ -252,5 +252,29 @@ class ProyectoIdiTecnoacademia extends Model
                 ->filterProyectoIdiTecnoacademia(request()->only('search'))->paginate();
         }
         return $proyectoIdiTecnoacademia;
+    }
+
+    /**
+     * Get codigo e.g. IDITA-00001
+     *
+     * @return string
+     */
+    public function getCodigoAttribute()
+    {
+        $numeroConsecutivo = sprintf("%05s", $this->id);
+        $codigo = 'IDITA-' . $numeroConsecutivo;
+
+        return $codigo;
+    }
+
+    /**
+     *
+     * @return string
+     */
+    public function filename($path)
+    {
+        $pathExplode = explode("/", $this->{$path});
+
+        return end($pathExplode);
     }
 }

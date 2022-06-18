@@ -600,7 +600,7 @@
                             <p class="mb-4" id="1.1">¿Qué actividad pretende realizar con la especie nativa?</p>
                         </div>
 
-                        <p class="bg-indigo-100 mt-10 p-4 text-indigo-600">Seleccione una opción</p>
+                        <p class="bg-cyan-100 mt-10 p-4 text-cyan-600">Seleccione una opción</p>
                         <div class="flex mt-4 items-center">
                             <FormField>
                                 <Radio disabled bind:group={idiInfo.actividades_muestreo} value="1.1.1" />
@@ -632,7 +632,7 @@
                             <p class="mb-4" id="1.2">¿Cuál es la finalidad de las actividades a realizar con la especie nativa/endémica?</p>
                         </div>
 
-                        <p class="bg-indigo-100 mt-10 p-4 text-indigo-600">Seleccione una opción</p>
+                        <p class="bg-cyan-100 mt-10 p-4 text-cyan-600">Seleccione una opción</p>
                         <div class="flex mt-4 items-center">
                             <FormField>
                                 <Radio disabled bind:group={idiInfo.objetivo_muestreo} value="1.2.1" />
@@ -757,14 +757,14 @@
 
         {#if idiInfo.relacionado_tecnoacademia?.value == 1}
             {#if isSuperAdmin}
-                <div class="bg-indigo-100 p-5 mt-10">
+                <div class="bg-cyan-100 p-5 mt-10">
                     <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" class="w-5" style="transform: translateX(-50px);">
                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
                     </svg>
 
                     <div class="grid grid-cols-2">
                         <div>
-                            <p class="text-indigo-600">Por favor seleccione la Tecnoacademia con la cual articuló el proyecto</p>
+                            <p class="text-cyan-600">Por favor seleccione la Tecnoacademia con la cual articuló el proyecto</p>
                         </div>
                         <div>
                             <Select disabled={true} items={tecnoacademias} id="tecnoacademia_id" bind:selectedValue={idiInfo.tecnoacademia_id} autocomplete="off" placeholder="Seleccione una opción" />
@@ -774,7 +774,7 @@
                                         <Label class="p-3 border-t border-b flex items-center text-sm" labelFor={'linea-tecnologica-' + value} value={label} />
 
                                         <div class="border-b border-t flex items-center justify-center">
-                                            <input disabled type="checkbox" bind:group={idiInfo.linea_tecnologica_id} id={'linea-tecnologica-' + value} {value} class="rounded text-indigo-500" />
+                                            <input disabled type="checkbox" bind:group={idiInfo.linea_tecnologica_id} id={'linea-tecnologica-' + value} {value} class="rounded text-cyan-500" />
                                         </div>
                                     {/each}
                                 </div>

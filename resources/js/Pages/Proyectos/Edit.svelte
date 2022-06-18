@@ -104,11 +104,11 @@
             <div>
                 <h1 class="overflow-ellipsis overflow-hidden w-breadcrumb-ellipsis whitespace-nowrap flex items-center">
                     {#if isSuperAdmin || checkRole(authUser, [20, 18, 19, 5, 17])}
-                        <a use:inertia href={route('proyectos.index')} class="text-indigo-400 hover:text-indigo-600"> Proyectos </a>
+                        <a use:inertia href={route('proyectos.index')} class="text-cyan-400 hover:text-cyan-600"> Proyectos </a>
                     {/if}
-                    <span class="text-indigo-400 font-medium mx-1.5">/</span>
+                    <span class="text-cyan-400 font-medium mx-1.5">/</span>
                     {proyecto.codigo}
-                    <a class="bg-indigo-600 text-white p-1 pr-5 rounded ml-2" href={route('convocatorias.proyectos.edit', [proyecto.convocatoria_id, proyecto.id])} target="_blank">
+                    <a class="bg-cyan-600 text-white p-1 pr-5 rounded ml-2" href={route('convocatorias.proyectos.edit', [proyecto.convocatoria_id, proyecto.id])} target="_blank">
                         <span class="flex items-center">
                             <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 mx-2" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14" />

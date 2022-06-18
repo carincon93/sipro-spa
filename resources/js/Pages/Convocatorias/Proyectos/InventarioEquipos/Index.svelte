@@ -67,13 +67,13 @@
             {#each inventarioEquipos.data as inventarioEquipo (inventarioEquipo.id)}
                 <tr class="hover:bg-gray-100 focus-within:bg-gray-100">
                     <td class="border-t">
-                        <p class="focus:text-indigo-500 my-2 paragraph-ellipsis px-6">
+                        <p class="focus:text-cyan-500 my-2 paragraph-ellipsis px-6">
                             {inventarioEquipo.nombre}
                         </p>
                     </td>
 
                     <td class="border-t">
-                        <p class="focus:text-indigo-500 my-2 paragraph-ellipsis px-6">
+                        <p class="focus:text-cyan-500 my-2 paragraph-ellipsis px-6">
                             {inventarioEquipo.fecha_adquisicion}
                         </p>
                     </td>

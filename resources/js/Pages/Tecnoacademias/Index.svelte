@@ -46,17 +46,17 @@
             {#each tecnoacademias.data as tecnoacademia (tecnoacademia.id)}
                 <tr class="hover:bg-gray-100 focus-within:bg-gray-100">
                     <td class="border-t">
-                        <p class="px-6 py-4 focus:text-indigo-500">
+                        <p class="px-6 py-4 focus:text-cyan-500">
                             {tecnoacademia.nombre}
                         </p>
                     </td>
                     <td class="border-t">
-                        <p class="px-6 py-4 focus:text-indigo-500">
+                        <p class="px-6 py-4 focus:text-cyan-500">
                             {tecnoacademia.modalidad}
                         </p>
                     </td>
                     <td class="border-t">
-                        <p class="px-6 py-4 focus:text-indigo-500">
+                        <p class="px-6 py-4 focus:text-cyan-500">
                             {tecnoacademia.centro_formacion.nombre}
                         </p>
                     </td>

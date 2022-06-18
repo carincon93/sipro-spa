@@ -91,9 +91,9 @@
             <div>
                 <h1 class="overflow-ellipsis overflow-hidden w-breadcrumb-ellipsis whitespace-nowrap">
                     {#if isSuperAdmin || checkRole(authUser, [11, 5])}
-                        <a use:inertia href={route('convocatorias.evaluaciones.presupuesto.index', [convocatoria.id, evaluacion.id])} class="text-indigo-400 hover:text-indigo-600"> Presupuesto </a>
+                        <a use:inertia href={route('convocatorias.evaluaciones.presupuesto.index', [convocatoria.id, evaluacion.id])} class="text-cyan-400 hover:text-cyan-600"> Presupuesto </a>
                     {/if}
-                    <span class="text-indigo-400 font-medium">/</span>
+                    <span class="text-cyan-400 font-medium">/</span>
                     {proyectoPresupuesto.convocatoria_presupuesto.presupuesto_sennova.uso_presupuestal.descripcion}
                 </h1>
             </div>
@@ -153,7 +153,7 @@
                     {#if presupuestoInfo.codigo_uso_presupuestal == '2010100600203101'}
                         <div class="mt-4">
                             <Label class="mb-4" labelFor="tipo_licencia" value="Tipo de licencia" />
-                            <select disabled id="tipo_licencia" class="w-full border-gray-300 rounded-md shadow-sm focus:ring focus:ring-opacity-50 focus:border-indigo-200 focus:ring-indigo-200 p-4" value={presupuestoInfo.tipo_licencia}>
+                            <select disabled id="tipo_licencia" class="w-full border-gray-300 rounded-md shadow-sm focus:ring focus:ring-opacity-50 focus:border-cyan-200 focus:ring-cyan-200 p-4" value={presupuestoInfo.tipo_licencia}>
                                 <option value="">Seleccione el tipo de licencia </option>
                                 {#each tiposLicencia as { value, label }}
                                     <option {value}>{label}</option>
@@ -163,7 +163,7 @@
 
                         <div class="mt-4">
                             <Label class="mb-4" labelFor="tipo_software" value="Tipo de software" />
-                            <select disabled id="tipo_software" class="w-full border-gray-300 rounded-md shadow-sm focus:ring focus:ring-opacity-50 focus:border-indigo-200 focus:ring-indigo-200 p-4" value={presupuestoInfo.tipo_software}>
+                            <select disabled id="tipo_software" class="w-full border-gray-300 rounded-md shadow-sm focus:ring focus:ring-opacity-50 focus:border-cyan-200 focus:ring-cyan-200 p-4" value={presupuestoInfo.tipo_software}>
                                 <option value="">Seleccione el tipo de software </option>
                                 {#each tiposSoftware as { value, label }}
                                     <option {value}>{label}</option>

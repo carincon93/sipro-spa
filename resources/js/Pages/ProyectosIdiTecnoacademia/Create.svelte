@@ -14,6 +14,7 @@
     import Select from '@/Shared/Select'
     import Tags from '@/Shared/Tags'
     import Input from '@/Shared/Input'
+    import File from '@/Shared/File'
     import Switch from '@/Shared/Switch'
     import InfoMessage from '@/Shared/InfoMessage'
 
@@ -144,9 +145,9 @@
             <div>
                 <h1>
                     {#if isSuperAdmin || checkRole(authUser, [5, 10, 12, 22])}
-                        <a use:inertia href={route('proyectos-idi-tecnoacademia.index')} class="text-indigo-400 hover:text-indigo-600"> Proyectos I+D+i TecnoAcademia </a>
+                        <a use:inertia href={route('proyectos-idi-tecnoacademia.index')} class="text-cyan-400 hover:text-cyan-600"> Proyectos I+D+i TecnoAcademia </a>
                     {/if}
-                    <span class="text-indigo-400 font-medium">/</span>
+                    <span class="text-cyan-400 font-medium">/</span>
                     Crear
                 </h1>
             </div>
@@ -312,10 +313,10 @@
 
             <div class="mt-44 grid grid-cols-2">
                 <div>
-                    <Label required class="mb-4" labelFor="pdf_proyecto" value="Url del proyecto en documento pdf" />
+                    <Label required class="mb-4" labelFor="pdf_proyecto" value="Proyecto en documento pdf" />
                 </div>
                 <div>
-                    <Input label="Url" id="pdf_proyecto" type="url" class="mt-1" error={errors.pdf_proyecto} placeholder="Url https://www.google.com.co" bind:value={$form.pdf_proyecto} />
+                    <File id="pdf_proyecto" accept="application/pdf" maxSize="10000" bind:value={$form.pdf_proyecto} error={errors.pdf_proyecto} />
                 </div>
             </div>
 
@@ -494,10 +495,10 @@
             {#if existenDocumentos}
                 <div class="mt-44 grid grid-cols-2">
                     <div>
-                        <Label required class="mb-4" labelFor="documentos_resultados" value="Si, sí, por favor cargar la url del documento" />
+                        <Label required class="mb-4" labelFor="documentos_resultados" value="Si, sí, por favor cargar un documento PDF con los resultados" />
                     </div>
                     <div>
-                        <Input label="Url" id="documentos_resultados" type="url" class="mt-1" error={errors.documentos_resultados} placeholder="Url https://www.google.com.co" bind:value={$form.documentos_resultados} required />
+                        <File id="documentos_resultados" accept="application/pdf" maxSize="10000" bind:value={$form.documentos_resultados} error={errors.documentos_resultados} />
                     </div>
                 </div>
             {/if}

@@ -34,13 +34,13 @@
             <div>
                 <h1 class="overflow-ellipsis overflow-hidden w-breadcrumb-ellipsis whitespace-nowrap">
                     {#if isSuperAdmin || checkPermission(authUser, [1, 3, 4, 8, 9, 10])}
-                        <a use:inertia href={route('convocatorias.proyectos.entidades-aliadas.index', [convocatoria.id, proyecto.id])} class="text-indigo-400 hover:text-indigo-600"> Entidades aliadas </a>
+                        <a use:inertia href={route('convocatorias.proyectos.entidades-aliadas.index', [convocatoria.id, proyecto.id])} class="text-cyan-400 hover:text-cyan-600"> Entidades aliadas </a>
                     {/if}
-                    <span class="text-indigo-400 font-medium">/</span>
-                    <a use:inertia href={route('convocatorias.proyectos.entidades-aliadas.edit', [convocatoria.id, proyecto.id, entidadAliada.id])} class="text-indigo-400 hover:text-indigo-600">
+                    <span class="text-cyan-400 font-medium">/</span>
+                    <a use:inertia href={route('convocatorias.proyectos.entidades-aliadas.edit', [convocatoria.id, proyecto.id, entidadAliada.id])} class="text-cyan-400 hover:text-cyan-600">
                         {entidadAliada.nombre}
                     </a>
-                    <span class="text-indigo-400 font-medium">/</span>
+                    <span class="text-cyan-400 font-medium">/</span>
                     Miembros de la entidad aliada
                 </h1>
             </div>
@@ -71,19 +71,19 @@
             {#each miembrosEntidadAliada.data as miembroEntidadAliada (miembroEntidadAliada.id)}
                 <tr class="hover:bg-gray-100 focus-within:bg-gray-100">
                     <td class="border-t">
-                        <p class="px-6 py-4 focus:text-indigo-500">
+                        <p class="px-6 py-4 focus:text-cyan-500">
                             {miembroEntidadAliada.nombre}
                         </p>
                     </td>
 
                     <td class="border-t">
-                        <p class="px-6 py-4 focus:text-indigo-500">
+                        <p class="px-6 py-4 focus:text-cyan-500">
                             {miembroEntidadAliada.email}
                         </p>
                     </td>
 
                     <td class="border-t">
-                        <p class="px-6 py-4 focus:text-indigo-500">
+                        <p class="px-6 py-4 focus:text-cyan-500">
                             {miembroEntidadAliada.numero_celular}
                         </p>
                     </td>

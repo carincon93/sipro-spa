@@ -82,7 +82,7 @@
                         <li><strong>Redacción:</strong> {evaluacion.redaccion_puntaje ? evaluacion.redaccion_puntaje : 0}</li>
                         <li><strong>Normas APA:</strong> {evaluacion.normas_apa_puntaje ? evaluacion.normas_apa_puntaje : 0}</li>
                     </ul>
-                    <div class="flex flex-1 items-center justify-center border-l-2 border-indigo-400 pl-10">
+                    <div class="flex flex-1 items-center justify-center border-l-2 border-cyan-400 pl-10">
                         <h1 class="text-2xl">
                             <strong>Puntaje total:</strong>
                             {evaluacion.total_evaluacion}
@@ -127,7 +127,7 @@
                         <li><strong>Análisis de riesgos a nivel de productos:</strong> {evaluacion.riesgos_productos_puntaje ? evaluacion.riesgos_productos_puntaje : 0}</li>
                         <li><strong>Análisis de riesgos a nivel de actividades:</strong> {evaluacion.riesgos_actividades_puntaje ? evaluacion.riesgos_actividades_puntaje : 0}</li>
                     </ul>
-                    <div class="flex flex-1 items-center justify-center border-l-2 border-indigo-400 pl-10">
+                    <div class="flex flex-1 items-center justify-center border-l-2 border-cyan-400 pl-10">
                         <h1 class="text-2xl">
                             <strong>Puntaje total:</strong>
                             {evaluacion.total_evaluacion}

@@ -132,19 +132,19 @@
             {#each analisisRiesgos.data as analisisRiesgo (analisisRiesgo.id)}
                 <tr class="hover:bg-gray-100 focus-within:bg-gray-100">
                     <td class="border-t">
-                        <p class="focus:text-indigo-500 my-2 paragraph-ellipsis px-6">
+                        <p class="focus:text-cyan-500 my-2 paragraph-ellipsis px-6">
                             {analisisRiesgo.descripcion}
                         </p>
                     </td>
 
                     <td class="border-t">
-                        <p class="focus:text-indigo-500 my-2 paragraph-ellipsis px-6">
+                        <p class="focus:text-cyan-500 my-2 paragraph-ellipsis px-6">
                             {analisisRiesgo.nivel}
                         </p>
                     </td>
 
                     <td class="border-t">
-                        <p class="focus:text-indigo-500 my-2 paragraph-ellipsis px-6">
+                        <p class="focus:text-cyan-500 my-2 paragraph-ellipsis px-6">
                             {analisisRiesgo.tipo}
                         </p>
                     </td>
@@ -260,7 +260,7 @@
                         <li><strong>Puntaje máximo por nivel de análisis de riesgos</strong> 2,4</li>
                     </ul>
 
-                    <hr class="mt-10 mb-10 border-indigo-300" />
+                    <hr class="mt-10 mb-10 border-cyan-300" />
 
                     <h1 class="font-black">Análisis de riesgos a nivel de objetivo general</h1>
 
@@ -297,7 +297,7 @@
                         {/if}
                     </div>
 
-                    <hr class="mt-10 mb-10 border-indigo-300" />
+                    <hr class="mt-10 mb-10 border-cyan-300" />
 
                     <h1 class="font-black">Análisis de riesgos a nivel de productos</h1>
 
@@ -334,7 +334,7 @@
                         {/if}
                     </div>
 
-                    <hr class="mt-10 mb-10 border-indigo-300" />
+                    <hr class="mt-10 mb-10 border-cyan-300" />
 
                     <h1 class="font-black">Análisis de riesgos a nivel de actividades</h1>
 

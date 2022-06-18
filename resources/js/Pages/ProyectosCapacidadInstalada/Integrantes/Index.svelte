@@ -178,25 +178,25 @@
         <div class="flex items-center justify-between lg:px-8 max-w-7xl mx-auto px-4 py-6 sm:px-6">
             <div>
                 <h1>
-                    <a use:inertia href={route('proyectos-capacidad-instalada.index')} class="text-indigo-400 hover:text-indigo-600"> Proyectos de capacidad instalada </a>
-                    <span class="text-indigo-400 font-medium">/</span>
-                    <a use:inertia href={route('proyectos-capacidad-instalada.edit', proyectoCapacidadInstalada.id)} class="text-indigo-400 hover:text-indigo-600">Información básica</a>
-                    <span class="text-indigo-400 font-medium">/</span>
-                    <a use:inertia href={route('proyectos-capacidad-instalada.integrantes.index', proyectoCapacidadInstalada.id)} class="text-indigo-400 hover:text-indigo-600 font-extrabold underline">Integrantes</a>
-                    <span class="text-indigo-400 font-medium">/</span>
-                    <a use:inertia href={route('proyectos-capacidad-instalada.objetivos-especificos.index', proyectoCapacidadInstalada.id)} class="text-indigo-400 hover:text-indigo-600">Objetivos específicos y resultados</a>
-                    <span class="text-indigo-400 font-medium">/</span>
-                    <a use:inertia href={route('proyectos-capacidad-instalada.productos.index', proyectoCapacidadInstalada.id)} class="text-indigo-400 hover:text-indigo-600">Productos</a>
+                    <a use:inertia href={route('proyectos-capacidad-instalada.index')} class="text-cyan-400 hover:text-cyan-600"> Proyectos de capacidad instalada </a>
+                    <span class="text-cyan-400 font-medium">/</span>
+                    <a use:inertia href={route('proyectos-capacidad-instalada.edit', proyectoCapacidadInstalada.id)} class="text-cyan-400 hover:text-cyan-600">Información básica</a>
+                    <span class="text-cyan-400 font-medium">/</span>
+                    <a use:inertia href={route('proyectos-capacidad-instalada.integrantes.index', proyectoCapacidadInstalada.id)} class="text-cyan-400 hover:text-cyan-600 font-extrabold underline">Integrantes</a>
+                    <span class="text-cyan-400 font-medium">/</span>
+                    <a use:inertia href={route('proyectos-capacidad-instalada.objetivos-especificos.index', proyectoCapacidadInstalada.id)} class="text-cyan-400 hover:text-cyan-600">Objetivos específicos y resultados</a>
+                    <span class="text-cyan-400 font-medium">/</span>
+                    <a use:inertia href={route('proyectos-capacidad-instalada.productos.index', proyectoCapacidadInstalada.id)} class="text-cyan-400 hover:text-cyan-600">Productos</a>
                     {#if isSuperAdmin || (checkRole(authUser, [4, 6]) && proyectoCapacidadInstalada.integrantes.find((item) => item.id == authUser.id))}
-                        <span class="text-indigo-400 font-medium">/</span>
-                        <a use:inertia href={route('proyectos-capacidad-instalada.finalizar', proyectoCapacidadInstalada.id)} class="text-indigo-400 hover:text-indigo-600">Finalizar</a>
+                        <span class="text-cyan-400 font-medium">/</span>
+                        <a use:inertia href={route('proyectos-capacidad-instalada.finalizar', proyectoCapacidadInstalada.id)} class="text-cyan-400 hover:text-cyan-600">Finalizar</a>
                     {/if}
                 </h1>
             </div>
         </div>
     </header>
 
-    <a use:inertia href={route('proyectos-capacidad-instalada.objetivos-especificos.index', proyectoCapacidadInstalada.id)} class="flex bottom-0 fixed hover:bg-indigo-600 mb-4 px-6 py-2 bg-indigo-700 rounded-lg shadow-2xl text-center text-white z-50">
+    <a use:inertia href={route('proyectos-capacidad-instalada.objetivos-especificos.index', proyectoCapacidadInstalada.id)} class="flex bottom-0 fixed hover:bg-cyan-600 mb-4 px-6 py-2 bg-cyan-700 rounded-lg shadow-2xl text-center text-white z-50">
         <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 mr-1.5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2m-3 7h3m-3 4h3m-6-4h.01M9 16h.01" />
         </svg>
@@ -204,7 +204,7 @@
     </a>
 
     {#if isSuperAdmin || (proyectoCapacidadInstalada.estado_proyecto != 'Finalizado' && checkRole(authUser, [4, 6]) && proyectoCapacidadInstalada.integrantes.find((item) => item.id == authUser.id))}
-        <div class="bg-indigo-100 p-4">
+        <div class="bg-cyan-100 p-4">
             <h1 class="text-4xl text-center">Integrantes</h1>
             <p class="text-center m-auto mt-8">Realice la búsqueda de integrantes por nombre, número de documento o por el correo electrónico institucional</p>
             <form on:submit|preventDefault={search} on:input={() => (sended = false)}>
@@ -234,7 +234,7 @@
                             {#each resultados as resultado (resultado.id)}
                                 <tr class="hover:bg-gray-100 focus-within:bg-gray-100">
                                     <td class="border-t">
-                                        <p class="px-6 py-4 focus:text-indigo-500">
+                                        <p class="px-6 py-4 focus:text-cyan-500">
                                             {resultado.nombre}
                                         </p>
                                     </td>
@@ -294,7 +294,7 @@
                 {#each proyectoCapacidadInstalada.integrantes as integrante (integrante.id)}
                     <tr class="hover:bg-gray-100 focus-within:bg-gray-100">
                         <td class="border-t">
-                            <p class="px-6 py-4 focus:text-indigo-500">
+                            <p class="px-6 py-4 focus:text-cyan-500">
                                 {integrante.nombre}
                             </p>
                         </td>
@@ -382,18 +382,18 @@
                     {#each proyectoCapacidadInstalada.entidades_aliadas as entidadAliada}
                         <tr class="hover:bg-gray-100 focus-within:bg-gray-100">
                             <td class="border-t">
-                                <p class="px-6 py-4 focus:text-indigo-500">
+                                <p class="px-6 py-4 focus:text-cyan-500">
                                     {entidadAliada.nombre}
                                 </p>
                             </td>
                             <td class="border-t">
-                                <p class="px-6 py-4 focus:text-indigo-500">
+                                <p class="px-6 py-4 focus:text-cyan-500">
                                     {entidadAliada.nit}
                                 </p>
                             </td>
                             <td class="border-t">
-                                <p class="px-6 py-4 focus:text-indigo-500">
-                                    <a target="_blank" class="text-indigo-400 underline mt-4 mb-4 flex" download href={entidadAliada.documento}>
+                                <p class="px-6 py-4 focus:text-cyan-500">
+                                    <a target="_blank" class="text-cyan-400 underline mt-4 mb-4 flex" download href={entidadAliada.documento}>
                                         <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 mr-2" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                                             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4" />
                                         </svg>
@@ -535,7 +535,7 @@
                         <InfoMessage message="Los datos proporcionados serán tratados de acuerdo con la política de tratamiento de datos personales del SENA y a la ley 1581 de 2012 (acuerdo No. 0009 del 2016" />
                         <FormField>
                             <Checkbox bind:checked={$formNuevoIntegrante.autorizacion_datos} />
-                            <span slot="label">¿La persona autoriza el tratamiento de datos personales?. <a href="https://www.sena.edu.co/es-co/transparencia/Documents/proteccion_datos_personales_sena_2016.pdf" target="_blank" class="text-indigo-500">Leer acuerdo No. 0009 del 2016</a></span>
+                            <span slot="label">¿La persona autoriza el tratamiento de datos personales?. <a href="https://www.sena.edu.co/es-co/transparencia/Documents/proteccion_datos_personales_sena_2016.pdf" target="_blank" class="text-cyan-500">Leer acuerdo No. 0009 del 2016</a></span>
                         </FormField>
                     </div>
                 </fieldset>

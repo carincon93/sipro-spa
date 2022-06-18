@@ -44,12 +44,12 @@
             {#each reglasRolesCultura.data as reglaRolCultura (reglaRolCultura.id)}
                 <tr class="hover:bg-gray-100 focus-within:bg-gray-100">
                     <td class="border-t">
-                        <p class="px-6 py-4 focus:text-indigo-500">
+                        <p class="px-6 py-4 focus:text-cyan-500">
                             {reglaRolCultura.nombre_centro_formacion}
                         </p>
                     </td>
                     <td class="border-t">
-                        <p class="px-6 py-4 focus:text-indigo-500">
+                        <p class="px-6 py-4 focus:text-cyan-500">
                             {reglaRolCultura.codigo}
                         </p>
                     </td>

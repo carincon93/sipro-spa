@@ -90,9 +90,9 @@
             <div>
                 <h1 class="overflow-ellipsis overflow-hidden w-breadcrumb-ellipsis whitespace-nowrap">
                     {#if isSuperAdmin || checkPermission(authUser, [3, 4, 9, 10, 21, 14, 15])}
-                        <a use:inertia href={route('convocatorias.proyectos.entidades-aliadas.index', [convocatoria.id, proyecto.id])} class="text-indigo-400 hover:text-indigo-600">Entidades aliadas</a>
+                        <a use:inertia href={route('convocatorias.proyectos.entidades-aliadas.index', [convocatoria.id, proyecto.id])} class="text-cyan-400 hover:text-cyan-600">Entidades aliadas</a>
                     {/if}
-                    <span class="text-indigo-400 font-medium">/</span>
+                    <span class="text-cyan-400 font-medium">/</span>
                     {entidadAliada.nombre}
                 </h1>
             </div>
@@ -298,10 +298,10 @@
                 <h1 class="mb-4">Enlaces de interés</h1>
                 <ul>
                     <li>
-                        <a class="bg-indigo-100 hover:bg-indigo-200 mb-4 px-6 py-2 rounded-3xl text-center text-indigo-400" href="#miembros-entidad-aliada"> Miembros de la entidad aliada </a>
+                        <a class="bg-cyan-100 hover:bg-cyan-200 mb-4 px-6 py-2 rounded-3xl text-center text-cyan-400" href="#miembros-entidad-aliada"> Miembros de la entidad aliada </a>
                     </li>
                     <li class="mt-6">
-                        <a class="bg-indigo-100 hover:bg-indigo-200 mb-4 px-6 py-2 rounded-3xl text-center text-indigo-400" href="#objetivos-especificos"> Objetivos específicos relacionados </a>
+                        <a class="bg-cyan-100 hover:bg-cyan-200 mb-4 px-6 py-2 rounded-3xl text-center text-cyan-400" href="#objetivos-especificos"> Objetivos específicos relacionados </a>
                     </li>
                 </ul>
             </div>
@@ -321,7 +321,7 @@
                 {#if proyecto.codigo_linea_programatica == 70}
                     <tr class="hover:bg-gray-100 focus-within:bg-gray-100">
                         <td class="border-t px-6 pt-6 pb-4">
-                            <a target="_blank" class="text-indigo-400 underline mb-4 flex" download href={entidadAliada.entidad_aliada_ta?.soporte_convenio}>
+                            <a target="_blank" class="text-cyan-400 underline mb-4 flex" download href={entidadAliada.entidad_aliada_ta?.soporte_convenio}>
                                 <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 mr-2" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4" />
                                 </svg>
@@ -332,7 +332,7 @@
                 {:else}
                     <tr class="hover:bg-gray-100 focus-within:bg-gray-100">
                         <td class="border-t px-6 pt-6 pb-4">
-                            <a target="_blank" class="text-indigo-400 underline mb-4 flex" download href={entidadAliada.entidad_aliada_idi?.carta_intencion}>
+                            <a target="_blank" class="text-cyan-400 underline mb-4 flex" download href={entidadAliada.entidad_aliada_idi?.carta_intencion}>
                                 <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 mr-2" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4" />
                                 </svg>
@@ -343,7 +343,7 @@
 
                     <tr class="hover:bg-gray-100 focus-within:bg-gray-100">
                         <td class="border-t px-6 pt-6 pb-4">
-                            <a target="_blank" class="text-indigo-400 underline mb-4 flex" download href={entidadAliada.entidad_aliada_idi?.carta_propiedad_intelectual}>
+                            <a target="_blank" class="text-cyan-400 underline mb-4 flex" download href={entidadAliada.entidad_aliada_idi?.carta_propiedad_intelectual}>
                                 <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 mr-2" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4" />
                                 </svg>
@@ -378,19 +378,19 @@
                     {#each entidadAliada.miembros_entidad_aliada as miembroEntidadAliada (miembroEntidadAliada.id)}
                         <tr class="hover:bg-gray-100 focus-within:bg-gray-100">
                             <td class="border-t">
-                                <p class="px-6 py-4 focus:text-indigo-500">
+                                <p class="px-6 py-4 focus:text-cyan-500">
                                     {miembroEntidadAliada.nombre}
                                 </p>
                             </td>
 
                             <td class="border-t">
-                                <p class="px-6 py-4 focus:text-indigo-500">
+                                <p class="px-6 py-4 focus:text-cyan-500">
                                     {miembroEntidadAliada.email}
                                 </p>
                             </td>
 
                             <td class="border-t">
-                                <p class="px-6 py-4 focus:text-indigo-500">
+                                <p class="px-6 py-4 focus:text-cyan-500">
                                     {miembroEntidadAliada.numero_celular}
                                 </p>
                             </td>
@@ -416,7 +416,7 @@
 
         <h1 class="mt-24 mb-8 text-center text-3xl" id="objetivos-especificos">Objetivos específicos</h1>
         <p class="mb-6">
-            A continuación, se listan los objetivos específicos relacionados con la entidad aliada. Si dice 'Sin información registrada' por favor diríjase a las <a href="#actividades" class="text-indigo-400">actividades</a> y relacione alguna.
+            A continuación, se listan los objetivos específicos relacionados con la entidad aliada. Si dice 'Sin información registrada' por favor diríjase a las <a href="#actividades" class="text-cyan-400">actividades</a> y relacione alguna.
         </p>
         <div class="bg-white rounded shadow">
             <table class="w-full whitespace-no-wrap table-fixed data-table">
@@ -430,7 +430,7 @@
                     {#each objetivosEspecificosRelacionados as { id, descripcion }}
                         <tr class="hover:bg-gray-100 focus-within:bg-gray-100">
                             <td class="border-t">
-                                <p class="px-6 py-4 focus:text-indigo-500">
+                                <p class="px-6 py-4 focus:text-cyan-500">
                                     {descripcion}
                                 </p>
                             </td>

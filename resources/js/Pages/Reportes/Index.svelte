@@ -44,7 +44,7 @@
         </thead>
         <tbody slot="tbody">
             <tr class="hover:bg-gray-100 focus-within:bg-gray-100">
-                <td class="border-t"><p class="px-6 py-4 focus:text-indigo-500">Resumen proyectos</p></td>
+                <td class="border-t"><p class="px-6 py-4 focus:text-cyan-500">Resumen proyectos</p></td>
                 <td class="border-t">
                     <Select id="convocatorias" items={convocatorias} bind:selectedValue={$form.convocatoria} error={errors.convocatoria} autocomplete="off" placeholder="Seleccione una convocatoria" required />
                 </td>
@@ -55,7 +55,7 @@
                 </td>
             </tr>
             <tr class="hover:bg-gray-100 focus-within:bg-gray-100">
-                <td class="border-t"><p class="px-6 py-4 focus:text-indigo-500">Resumen presupuestos y roles SENNOVA</p></td>
+                <td class="border-t"><p class="px-6 py-4 focus:text-cyan-500">Resumen presupuestos y roles SENNOVA</p></td>
                 <td>
                     <Select id="convocatorias" items={convocatorias} bind:selectedValue={$form.convocatoria} error={errors.convocatoria} autocomplete="off" placeholder="Seleccione una convocatoria" required />
                 </td>
@@ -67,7 +67,7 @@
             </tr>
             <tr class="hover:bg-gray-100 focus-within:bg-gray-100">
                 <td class="border-t">
-                    <p class="px-6 py-4 focus:text-indigo-500">Evaluaciones</p>
+                    <p class="px-6 py-4 focus:text-cyan-500">Evaluaciones</p>
                 </td>
                 <td class="border-t">
                     <Select id="convocatorias" items={convocatorias} bind:selectedValue={$form.convocatoria} error={errors.convocatoria} autocomplete="off" placeholder="Seleccione una convocatoria" required />
@@ -79,7 +79,7 @@
                 </td>
             </tr>
             <tr class="hover:bg-gray-100 focus-within:bg-gray-100">
-                <td class="border-t"><p class="px-6 py-4 focus:text-indigo-500">Resumen presupuesto proyecto aprobado</p></td>
+                <td class="border-t"><p class="px-6 py-4 focus:text-cyan-500">Resumen presupuesto proyecto aprobado</p></td>
                 <td>
                     <Select id="convocatorias" items={convocatorias} bind:selectedValue={$form.convocatoria} error={errors.convocatoria} autocomplete="off" placeholder="Seleccione una convocatoria" required />
                 </td>
@@ -90,7 +90,7 @@
                 </td>
             </tr>
             <tr class="hover:bg-gray-100 focus-within:bg-gray-100">
-                <td class="border-t"><p class="px-6 py-4 focus:text-indigo-500">Comentarios evaluaciones</p></td>
+                <td class="border-t"><p class="px-6 py-4 focus:text-cyan-500">Comentarios evaluaciones</p></td>
                 <td>
                     <Select id="convocatorias" items={convocatorias} bind:selectedValue={$form.convocatoria} error={errors.convocatoria} autocomplete="off" placeholder="Seleccione una convocatoria" required />
                 </td>
@@ -101,7 +101,7 @@
                 </td>
             </tr>
             <tr class="hover:bg-gray-100 focus-within:bg-gray-100">
-                <td class="border-t"><p class="px-6 py-4 focus:text-indigo-500">Proyectos TA</p></td>
+                <td class="border-t"><p class="px-6 py-4 focus:text-cyan-500">Proyectos TA</p></td>
                 <td>
                     <Select id="convocatorias" items={convocatorias} bind:selectedValue={$form.convocatoria} error={errors.convocatoria} autocomplete="off" placeholder="Seleccione una convocatoria" required />
                 </td>
@@ -113,7 +113,7 @@
             </tr>
 
             <tr class="hover:bg-gray-100 focus-within:bg-gray-100">
-                <td class="border-t"><p class="px-6 py-4 focus:text-indigo-500">Proyectos I+D+i</p></td>
+                <td class="border-t"><p class="px-6 py-4 focus:text-cyan-500">Proyectos I+D+i</p></td>
                 <td>
                     <Select id="convocatorias" items={convocatorias} bind:selectedValue={$form.convocatoria} error={errors.convocatoria} autocomplete="off" placeholder="Seleccione una convocatoria" required />
                 </td>
@@ -125,7 +125,7 @@
             </tr>
 
             <tr class="hover:bg-gray-100 focus-within:bg-gray-100">
-                <td class="border-t"><p class="px-6 py-4 focus:text-indigo-500">Proyectos TP</p></td>
+                <td class="border-t"><p class="px-6 py-4 focus:text-cyan-500">Proyectos TP</p></td>
                 <td>
                     <Select id="convocatorias" items={convocatorias} bind:selectedValue={$form.convocatoria} error={errors.convocatoria} autocomplete="off" placeholder="Seleccione una convocatoria" required />
                 </td>
@@ -137,7 +137,7 @@
             </tr>
 
             <tr class="hover:bg-gray-100 focus-within:bg-gray-100">
-                <td class="border-t"><p class="px-6 py-4 focus:text-indigo-500">Cultura de innovación</p></td>
+                <td class="border-t"><p class="px-6 py-4 focus:text-cyan-500">Cultura de innovación</p></td>
                 <td>
                     <Select id="convocatorias" items={convocatorias} bind:selectedValue={$form.convocatoria} error={errors.convocatoria} autocomplete="off" placeholder="Seleccione una convocatoria" required />
                 </td>
@@ -149,7 +149,7 @@
             </tr>
 
             <tr class="hover:bg-gray-100 focus-within:bg-gray-100">
-                <td class="border-t"><p class="px-6 py-4 focus:text-indigo-500">Proyectos ST</p></td>
+                <td class="border-t"><p class="px-6 py-4 focus:text-cyan-500">Proyectos ST</p></td>
                 <td>
                     <Select id="convocatorias" items={convocatorias} bind:selectedValue={$form.convocatoria} error={errors.convocatoria} autocomplete="off" placeholder="Seleccione una convocatoria" required />
                 </td>
@@ -162,7 +162,7 @@
 
             <tr class="hover:bg-gray-100 focus-within:bg-gray-100">
                 <td class="border-t">
-                    <p class="px-6 py-4 focus:text-indigo-500">Proyectos de capacidad instalada</p>
+                    <p class="px-6 py-4 focus:text-cyan-500">Proyectos de capacidad instalada</p>
                 </td>
                 <td />
                 <td class="border-t td-actions">
@@ -174,7 +174,7 @@
 
             <tr class="hover:bg-gray-100 focus-within:bg-gray-100">
                 <td class="border-t">
-                    <p class="px-6 py-4 focus:text-indigo-500">Grupos, Líneas y Semilleros de investigación</p>
+                    <p class="px-6 py-4 focus:text-cyan-500">Grupos, Líneas y Semilleros de investigación</p>
                 </td>
                 <td />
                 <td class="border-t td-actions">

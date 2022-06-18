@@ -55,9 +55,9 @@
             <div>
                 <h1 class="overflow-ellipsis overflow-hidden w-breadcrumb-ellipsis whitespace-nowrap">
                     {#if isSuperAdmin}
-                        <a use:inertia href={route('convocatorias.convocatoria-presupuesto.index', convocatoria.id)} class="text-indigo-400 hover:text-indigo-600"> Rubros presupuestales SENNOVA de convocatoria</a>
+                        <a use:inertia href={route('convocatorias.convocatoria-presupuesto.index', convocatoria.id)} class="text-cyan-400 hover:text-cyan-600"> Rubros presupuestales SENNOVA de convocatoria</a>
                     {/if}
-                    <span class="text-indigo-400 font-medium">/</span>
+                    <span class="text-cyan-400 font-medium">/</span>
                     {convocatoriaPresupuesto.presupuesto_sennova.codigo}
                 </h1>
             </div>

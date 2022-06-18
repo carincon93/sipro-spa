@@ -50,9 +50,9 @@
             <div>
                 <h1 class="overflow-ellipsis overflow-hidden w-breadcrumb-ellipsis whitespace-nowrap">
                     {#if isSuperAdmin}
-                        <a use:inertia href={route('redes-conocimiento.index')} class="text-indigo-400 hover:text-indigo-600"> Redes de conocimiento </a>
+                        <a use:inertia href={route('redes-conocimiento.index')} class="text-cyan-400 hover:text-cyan-600"> Redes de conocimiento </a>
                     {/if}
-                    <span class="text-indigo-400 font-medium">/</span>
+                    <span class="text-cyan-400 font-medium">/</span>
                     {redConocimiento.nombre}
                 </h1>
             </div>

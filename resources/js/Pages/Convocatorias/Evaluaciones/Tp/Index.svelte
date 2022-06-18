@@ -41,12 +41,12 @@
             {#each tp.data as { evaluacion_id, proyecto, titulo, fecha_ejecucion, iniciado, habilitado, finalizado }}
                 <tr class="hover:bg-gray-100 focus-within:bg-gray-100">
                     <td class="border-t">
-                        <p class="px-6 py-4 focus:text-indigo-500">
+                        <p class="px-6 py-4 focus:text-cyan-500">
                             {proyecto.codigo}
                         </p>
                     </td>
                     <td class="border-t">
-                        <p class="px-6 py-4 focus:text-indigo-500">
+                        <p class="px-6 py-4 focus:text-cyan-500">
                             {titulo}
                         </p>
                     </td>

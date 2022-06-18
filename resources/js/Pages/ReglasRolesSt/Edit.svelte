@@ -61,9 +61,9 @@
             <div>
                 <h1>
                     {#if isSuperAdmin}
-                        <a use:inertia href={route('reglas-roles-st.index')} class="text-indigo-400 hover:text-indigo-600"> Reglas de roles ST </a>
+                        <a use:inertia href={route('reglas-roles-st.index')} class="text-cyan-400 hover:text-cyan-600"> Reglas de roles ST </a>
                     {/if}
-                    <span class="text-indigo-400 font-medium">/</span>
+                    <span class="text-cyan-400 font-medium">/</span>
                     Editar
                 </h1>
             </div>

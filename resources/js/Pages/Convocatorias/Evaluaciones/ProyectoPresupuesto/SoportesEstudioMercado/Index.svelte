@@ -27,15 +27,15 @@
             <div>
                 <h1 class="flex">
                     {#if isSuperAdmin || checkRole(authUser, [11, 5])}
-                        <a use:inertia href={route('convocatorias.evaluaciones.presupuesto.index', [convocatoria.id, evaluacion.id])} class="text-indigo-400 hover:text-indigo-600 overflow-ellipsis overflow-hidden w-breadcrumb-ellipsis whitespace-nowrap inline-block"> Presupuesto </a>
+                        <a use:inertia href={route('convocatorias.evaluaciones.presupuesto.index', [convocatoria.id, evaluacion.id])} class="text-cyan-400 hover:text-cyan-600 overflow-ellipsis overflow-hidden w-breadcrumb-ellipsis whitespace-nowrap inline-block"> Presupuesto </a>
                     {/if}
-                    <span class="text-indigo-400 font-medium ml-2 mr-2">/</span>
+                    <span class="text-cyan-400 font-medium ml-2 mr-2">/</span>
                     {#if isSuperAdmin || checkRole(authUser, [11, 5])}
-                        <a use:inertia href={route('convocatorias.evaluaciones.presupuesto.edit', [convocatoria.id, evaluacion.id, proyectoPresupuesto.id])} class="text-indigo-400 hover:text-indigo-600 overflow-ellipsis overflow-hidden w-breadcrumb-ellipsis whitespace-nowrap inline-block">
+                        <a use:inertia href={route('convocatorias.evaluaciones.presupuesto.edit', [convocatoria.id, evaluacion.id, proyectoPresupuesto.id])} class="text-cyan-400 hover:text-cyan-600 overflow-ellipsis overflow-hidden w-breadcrumb-ellipsis whitespace-nowrap inline-block">
                             {proyectoPresupuesto.convocatoria_presupuesto.presupuesto_sennova.uso_presupuestal.descripcion}
                         </a>
                     {/if}
-                    <span class="text-indigo-400 font-medium ml-2 mr-2">/</span>
+                    <span class="text-cyan-400 font-medium ml-2 mr-2">/</span>
                     Soportes
                 </h1>
             </div>

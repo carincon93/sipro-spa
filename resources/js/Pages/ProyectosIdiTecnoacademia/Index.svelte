@@ -34,6 +34,7 @@
 
         <thead slot="thead">
             <tr class="text-left font-bold">
+                <th class="px-6 pt-6 pb-4 sticky top-0 z-10 bg-white shadow-xl w-full"> Código </th>
                 <th class="px-6 pt-6 pb-4 sticky top-0 z-10 bg-white shadow-xl w-full"> Título </th>
                 <th class="px-6 pt-6 pb-4 sticky top-0 z-10 bg-white shadow-xl w-full"> Estado </th>
                 <th class="px-6 pt-6 pb-4 sticky top-0 z-10 bg-white shadow-xl w-full"> Fecha de ejecución </th>
@@ -42,8 +43,11 @@
         </thead>
 
         <tbody slot="tbody">
-            {#each proyectosIdiTecnoacademia.data as { id, titulo, estado_formateado, fecha_ejecucion }}
+            {#each proyectosIdiTecnoacademia.data as { id, titulo, codigo, estado_formateado, fecha_ejecucion }}
                 <tr class="hover:bg-gray-100 focus-within:bg-gray-100">
+                    <td class="border-t">
+                        <p class="px-6 py-4">{codigo}</p>
+                    </td>
                     <td class="border-t">
                         <p class="px-6 py-4">{titulo}</p>
                     </td>

@@ -109,7 +109,7 @@
             {#each proyectos.data as { id, estado, titulo, codigo, fecha_ejecucion, pdf_versiones, convocatoria }}
                 <tr class="hover:bg-gray-100 focus-within:bg-gray-100">
                     <td class="border-t">
-                        <p class="px-6 py-4 focus:text-indigo-500">
+                        <p class="px-6 py-4 focus:text-cyan-500">
                             {codigo}
                             {#if JSON.parse(estado)?.requiereSubsanar}
                                 <br />
@@ -124,7 +124,7 @@
                                     {#each pdf_versiones as version}
                                         <li>
                                             {#if version.estado == 1}
-                                                <a class="text-indigo-500 underline" href={route('convocatorias.proyectos.version', [convocatoria.id, id, version.version])}> {version.version}.pdf - Descargar</a>
+                                                <a class="text-cyan-500 underline" href={route('convocatorias.proyectos.version', [convocatoria.id, id, version.version])}> {version.version}.pdf - Descargar</a>
                                                 <small class="block">{version.created_at}</small>
                                             {/if}
                                         </li>
