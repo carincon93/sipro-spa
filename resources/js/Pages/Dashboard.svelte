@@ -7,6 +7,7 @@
 
     import Button from '@/Shared/Button'
     import Dialog from '@/Shared/Dialog'
+    import InfoMessage from '@/Shared/InfoMessage'
 
     $title = 'Panel de control'
 
@@ -24,24 +25,19 @@
                     ¡Bienvenido(a)
                     <span class="capitalize">{$page.props.auth.user.nombre}</span>!
                 </h1>
-                {#if checkRole(authUser, [1])}
-                    <p class="text-cyan-700 mt-4">Su rol principal es: Administrador</p>
-                {:else if checkRole(authUser, [2])}
-                    <p class="text-cyan-700 mt-4">Su rol principal es: Director regional</p>
-                {:else if checkRole(authUser, [3])}
-                    <p class="text-cyan-700 mt-4">Su rol principal es: Subdirector de centro de formación</p>
-                {:else if checkRole(authUser, [5, 17, 18, 19, 20])}
-                    <p class="text-cyan-700 mt-4">Su rol principal es: Activador (a)</p>
-                {:else if checkRole(authUser, [4])}
-                    <p class="text-cyan-700 mt-4">Su rol principal es: Dinamizador (a) SENNOVA</p>
-                {:else if checkRole(authUser, [21])}
-                    <p class="text-cyan-700 mt-4">Su rol principal es: Líder de grupo de investigación</p>
-                {:else if checkRole(authUser, [11])}
-                    <p class="text-cyan-700 mt-4">Su rol principal es: Evaluador</p>
-                {:else}
-                    <p class="text-2xl mt-4">Formule proyectos de I+D+i, Tecnoacademia-Tecnoparque, Servicios Tecnológicos y/o Cultura de la innovación.</p>
+                <p class="text-2xl my-4">Formule proyectos de I+D+i, Tecnoacademia-Tecnoparque, Servicios Tecnológicos y/o Cultura de la innovación.</p>
+                <InfoMessage>
+                    <p class="text-indigo-700 font-black">Roles asociados a su usuario:</p>
+                    <ul class="text-indigo-700 list-disc ml-4">
+                        {#each $page.props.auth.user.roles as rol}
+                            <li>{rol.name}</li>
+                        {/each}
+                    </ul>
+                </InfoMessage>
+
+                {#if isSuperAdmin || checkRole(authUser, [11]) || checkPermission(authUser, [1, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 17, 18, 19, 14, 15, 16, 20, 21])}
+                    <Button variant="raised" on:click={() => Inertia.visit(route('convocatorias.index'))} class="mt-4 inline-block">Quiero revisar las convocatorias</Button>
                 {/if}
-                <p class="mt-10">A continuación se listan los módulos que puede administrar.</p>
             </div>
             <div>
                 <figure>
@@ -160,11 +156,6 @@
             <hr class="mt-10 mb-10" />
             <div>
                 <p><strong>Tenga en cuenta:</strong> El estado final de los proyectos se conocerá cuando finalice la etapa de segunda evaluación (Estado Rechazado, pre – aprobado con observaciones y Preaprobado). Fechas segunda evaluación: 22 de octubre (13:00 HH) al 3 de noviembre (23:59 HH).</p>
-            </div>
-
-            <hr class="mt-10 mb-10" />
-            <div>
-                <p>Los PDF finales de los proyectos se generará dentro de las próximas 24 horas. Por favor este atento (a).</p>
             </div>
         </div>
         <div slot="actions">

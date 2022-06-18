@@ -45,7 +45,7 @@
     }
 
     function submit() {
-        if (isSuperAdmin || checkPermissionByUser(authUser, [5]) || (checkPermission(authUser, [5]) && convocatoria.esta_activa == true)) {
+        if (isSuperAdmin || checkPermissionByUser(authUser, [5]) || checkPermission(authUser, [5])) {
             $form.post(route('convocatorias.servicios-tecnologicos.store', [convocatoria.id]), {
                 onStart: () => (sending = true),
                 onFinish: () => (sending = false),
@@ -152,7 +152,7 @@
         </fieldset>
 
         <div class="px-8 py-4 bg-gray-100 border-t border-gray-200 flex items-center sticky bottom-0">
-            {#if isSuperAdmin || checkPermissionByUser(authUser, [5]) || (checkPermission(authUser, [5]) && convocatoria.esta_activa == true)}
+            {#if isSuperAdmin || checkPermissionByUser(authUser, [5]) || checkPermission(authUser, [5])}
                 <LoadingButton loading={sending} class="btn-indigo ml-auto" type="submit">
                     {$_('Continue')}
                 </LoadingButton>

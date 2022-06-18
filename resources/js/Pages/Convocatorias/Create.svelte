@@ -29,6 +29,7 @@
     let form = useForm({
         descripcion: '',
         esta_activa: false,
+        visible: false,
         // fase: null,
         fecha_finalizacion_fase: '',
         min_fecha_inicio_proyectos_idi: '',
@@ -128,10 +129,17 @@
                 </div>
 
                 <div class="mt-10 mb-20">
-                    <Label required labelFor="esta_activa" value="¿Desea activar esta convocatoria? (Solo puede activar una convocatoria por tipo --Proyectos de convocatoria - Proyectos de ejecicio DEMO)" class="inline-block mb-4" />
+                    <Label required labelFor="esta_activa" value="¿Desea activar esta convocatoria? (Si la opción está habilitada permite a los usuarios formular proyectos. Tenga en cuenta que solo puede activar una convocatoria por tipo --Proyectos de convocatoria - Proyectos de ejecicio DEMO)" class="inline-block mb-4" />
                     <br />
                     <Switch bind:checked={$form.esta_activa} />
                     <InputError message={errors.esta_activa} />
+                </div>
+
+                <div class="mt-10 mb-20">
+                    <Label required labelFor="visible" value="Defina la visibilidad de la convocatoria. (Si la opción está habilitada permite a los usuarios visualizar la convocatoria)" class="inline-block mb-4" />
+                    <br />
+                    <Switch bind:checked={$form.visible} onMessage="Visible" offMessage="Oculta" />
+                    <InputError message={errors.visible} />
                 </div>
 
                 <hr />
