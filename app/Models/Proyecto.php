@@ -23,7 +23,7 @@ class Proyecto extends Model
      *
      * @var array
      */
-    protected $appends = ['codigo', 'diff_meses', 'precio_proyecto', 'total_roles_sennova', 'fecha_inicio', 'fecha_finalizacion', 'estado_evaluacion_idi', 'estado_evaluacion_cultura_innovacion', 'estado_evaluacion_ta', 'estado_evaluacion_tp', 'estado_evaluacion_servicios_tecnologicos', 'cantidad_objetivos', 'total_proyecto_presupuesto_aprobado', 'total_roles_sennova_aprobado', 'precio_proyecto_aprobado'];
+    protected $appends = ['codigo', 'diff_meses', 'precio_proyecto', 'total_roles_sennova', 'fecha_inicio', 'fecha_finalizacion', 'estado_evaluacion_idi', 'estado_evaluacion_cultura_innovacion', 'estado_evaluacion_ta', 'estado_evaluacion_tp', 'estado_evaluacion_servicios_tecnologicos', 'cantidad_objetivos', 'total_proyecto_presupuesto_aprobado', 'total_roles_sennova_aprobado', 'precio_proyecto_aprobado', 'all_files'];
 
     /**
      * The attributes that are mass assignable.
@@ -1129,5 +1129,33 @@ class Proyecto extends Model
             default:
                 break;
         }
+    }
+
+    public function getAllFilesAttribute()
+    {
+        $collect = collect([]);
+        foreach ($this->proyectoPresupuesto()->get() as $presupuesto) {
+            if ($presupuesto->formato_estudio_mercado) {
+                $collect->push(['formato_estudio_mercado' => $presupuesto->formato_estudio_mercado]);
+            }
+            foreach ($presupuesto->soportesEstudioMercado()->get() as $estudioMercado) {
+                $collect->push(['empresa' => $estudioMercado->empresa, 'soporte' => $estudioMercado->soporte]);
+            }
+        }
+
+        foreach ($this->entidadesAliadas()->get() as $entidadAliada) {
+            if ($entidadAliada->entidadAliadaIdi()->exists()) {
+                $collect->push(['entidad_aliada' => $entidadAliada->nombre, 'carta_intencion' => $entidadAliada->entidadAliadaIdi->carta_intencion]);
+                $collect->push(['entidad_aliada' => $entidadAliada->nombre, 'carta_propiedad_intelectual' => $entidadAliada->entidadAliadaIdi->carta_propiedad_intelectual]);
+            } else if ($entidadAliada->entidadAliadaTa()->exists()) {
+                $collect->push(['entidad_aliada' => $entidadAliada->nombre, 'soporte_convenio' => $entidadAliada->entidadAliadaTa->soporte_convenio]);
+            }
+        }
+
+        foreach ($this->proyectoAnexo()->get() as $proyectoAnexo) {
+            $collect->push(['anexo' => $proyectoAnexo->anexo->nombre, 'archivo' => $proyectoAnexo->archivo]);
+        }
+
+        return $collect;
     }
 }

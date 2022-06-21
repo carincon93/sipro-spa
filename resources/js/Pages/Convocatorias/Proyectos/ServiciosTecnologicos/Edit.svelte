@@ -27,7 +27,6 @@
     export let tiposProyectoSt
     export let sectoresProductivos
     export let proyectoProgramasFormacion
-    export let versiones
 
     let programasFormacion
 
@@ -142,7 +141,9 @@
 </script>
 
 <AuthenticatedLayout>
-    <Stepper {convocatoria} proyecto={servicioTecnologico} />
+    <header slot="header">
+        <Stepper {convocatoria} proyecto={servicioTecnologico} />
+    </header>
 
     <form on:submit|preventDefault={submit}>
         <fieldset class="p-8" disabled={isSuperAdmin || (checkPermissionByUser(authUser, [5]) && servicioTecnologico.proyecto.modificable == true) ? undefined : checkPermission(authUser, [6, 7]) && servicioTecnologico.proyecto.modificable == true ? undefined : true}>
@@ -544,7 +545,7 @@
             {#if isSuperAdmin || (checkPermissionByUser(authUser, [5]) && servicioTecnologico.proyecto.modificable == true) || (checkPermission(authUser, [6, 7]) && servicioTecnologico.proyecto.modificable == true)}
                 <small>{servicioTecnologico.updated_at}</small>
 
-                <LoadingButton loading={sending} class="btn-indigo" type="submit">Guardar</LoadingButton>
+                <LoadingButton loading={sending} type="submit">Guardar</LoadingButton>
             {/if}
         </div>
     </form>
@@ -555,30 +556,6 @@
                 <img src={window.basePath + '/images/proyecto.png'} alt="Proyecto" class="h-32 mb-6" />
             </figure>
             Código del proyecto: {servicioTecnologico.proyecto.codigo}
-
-            {#if versiones.length > 0}
-                <hr class="border border-white my-4 w-full" />
-                <h6>Versiones - PDF</h6>
-                <ul>
-                    {#each versiones as version, i}
-                        <li class="bg-cyan-500 p-2 rounded text-white text-xs mb-2">
-                            {#if version.estado == 1}
-                                <a href={route('convocatorias.proyectos.version', [convocatoria.id, servicioTecnologico.proyecto.id, version.version])}>Descargar versión {version.created_at}</a>
-                            {:else}
-                                Generando una nueva versión, regrese pronto.
-                            {/if}
-                        </li>
-                    {/each}
-                </ul>
-                <hr class="border border-white my-5 w-full" />
-            {:else}
-                <hr class="border border-white my-4 w-full" />
-
-                <h6>Versiones - PDF</h6>
-
-                <p class="text-xs">No se ha generado un PDF aún</p>
-                <hr class="border border-white my-5 w-full" />
-            {/if}
         </div>
         <div slot="content">
             <div>

@@ -89,7 +89,9 @@
 </script>
 
 <AuthenticatedLayout>
-    <Stepper {convocatoria} {proyecto} />
+    <header slot="header">
+        <Stepper {convocatoria} {proyecto} />
+    </header>
 
     <h1 class="text-3xl mt-24 mb-8 text-center">Articulación SENNOVA</h1>
 

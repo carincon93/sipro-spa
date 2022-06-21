@@ -104,8 +104,9 @@ Route::middleware(['auth', 'verified'])->group(function () {
     // Route::post('reportar-problemas/reportar', [HelpDeskController::class, 'report'])->name('reportar-problemas.report');
 
     // Cambiar contraseña
+    Route::put('/users/perfil', [UserController::class, 'changeUserProfile'])->name('users.change-user-profile');
     Route::put('/users/cambiar-password', [UserController::class, 'changePassword'])->name('users.change-password');
-    Route::get('/users/cambiar-password', [UserController::class, 'showChangePasswordForm'])->name('users.change-password-form');
+    Route::get('/users/perfil', [UserController::class, 'showPerfil'])->name('users.perfil');
 
     // Muestra los participantes
     Route::get('convocatorias/{convocatoria}/proyectos/{proyecto}/participantes', [ProyectoController::class, 'participantes'])->name('convocatorias.proyectos.participantes');

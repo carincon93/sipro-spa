@@ -408,9 +408,11 @@
 </script>
 
 <AuthenticatedLayout>
-    {#if !to_pdf}
-        <Stepper {convocatoria} {proyecto} />
-    {/if}
+    <header slot="header">
+        {#if !to_pdf}
+            <Stepper {convocatoria} {proyecto} />
+        {/if}
+    </header>
 
     <h1 class="text-3xl {to_pdf ? '' : 'mt-24'} mb-8 text-center">Árbol de problemas</h1>
     <p class="text-center">Diligenciar el árbol de problemas iniciando con el problema principal (tronco), sus causas (raíces) y efectos (ramas).</p>

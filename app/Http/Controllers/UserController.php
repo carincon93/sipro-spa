@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\UserProfileRequest;
 use App\Http\Requests\UserRequest;
 use App\Models\CentroFormacion;
 use App\Models\Role;
@@ -9,7 +10,6 @@ use App\Models\User;
 use Illuminate\Database\QueryException;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
-use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Storage;
 use Inertia\Inertia;
@@ -186,14 +186,50 @@ class UserController extends Controller
     }
 
     /**
-     * Show user's change password form.
+     * Show user's perfil.
      *
      * @param  \App\User  $user
      * @return \Illuminate\Http\Response
      */
-    public function showChangePasswordForm()
+    public function showPerfil()
     {
-        return Inertia::render('Auth/ChangePassword');
+        $user = auth()->user();
+
+        return Inertia::render('Users/Perfil', [
+            'user'                  => $user,
+            'tiposDocumento'        => json_decode(Storage::get('json/tipos-documento.json'), true),
+            'tiposVinculacion'      => json_decode(Storage::get('json/tipos-vinculacion.json'), true),
+            'rolesRelacionados'     => $user->roles()->pluck('id'),
+            'permisosRelacionados'  => $user->permissions()->pluck('id'),
+            'roles'                 => Role::select('id', 'name')->where('name', 'ilike', "%Proponente%")->orWhere('name', 'ilike', "%Facilitador%")->get(),
+        ]);
+    }
+
+    /**
+     * Update the specified resource in storage.
+     *
+     * @param  \Illuminate\Http\Request  $request
+     * @param  \App\Models\User  $user
+     * @return \Illuminate\Http\Response
+     */
+    public function changeUserProfile(UserProfileRequest $request)
+    {
+        $user = auth()->user();
+
+        $user->update(
+            [
+                'nombre'               => $request->nombre,
+                'email'                => $request->email,
+                'tipo_documento'       => $request->tipo_documento,
+                'numero_documento'     => $request->numero_documento,
+                'numero_celular'       => $request->numero_celular,
+                'tipo_vinculacion'     => $request->tipo_vinculacion
+            ]
+        );
+
+        $user->syncRoles($request->role_id);
+
+        return back()->with('success', 'El recurso se ha actualizado correctamente.');
     }
 
     /**

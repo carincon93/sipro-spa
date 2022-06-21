@@ -454,9 +454,11 @@
 </script>
 
 <AuthenticatedLayout>
-    {#if !to_pdf}
-        <Stepper {convocatoria} {proyecto} />
-    {/if}
+    <header slot="header">
+        {#if !to_pdf}
+            <Stepper {convocatoria} {proyecto} />
+        {/if}
+    </header>
 
     <h1 class="text-3xl {to_pdf ? '' : 'mt-24'} mb-8 text-center">Árbol de objetivos</h1>
     <p class="text-center">El árbol de objetivos se obtiene al transformar en positivo el árbol de problemas manteniendo la misma estructura y niveles de jerarquía.</p>

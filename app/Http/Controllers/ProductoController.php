@@ -69,7 +69,7 @@ class ProductoController extends Controller
 
         return Inertia::render('Convocatorias/Proyectos/Productos/Index', [
             'convocatoria'          => $convocatoria->only('id', 'esta_activa', 'fase_formateada', 'fase', 'tipo_convocatoria', 'mostrar_recomendaciones'),
-            'proyecto'              => $proyecto->only('id', 'codigo_linea_programatica', 'precio_proyecto', 'modificable', 'en_subsanacion', 'evaluaciones', 'mostrar_recomendaciones'),
+            'proyecto'              => $proyecto->only('id', 'codigo_linea_programatica', 'precio_proyecto', 'modificable', 'en_subsanacion', 'evaluaciones', 'mostrar_recomendaciones', 'PdfVersiones', 'all_files'),
             'filters'               => request()->all('search'),
             'validacionResultados'  => $validacionResultados,
             'productos'             => Producto::whereIn(

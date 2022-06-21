@@ -31,7 +31,9 @@
 </script>
 
 <AuthenticatedLayout>
-    <Stepper {convocatoria} {proyecto} />
+    <header slot="header">
+        <Stepper {convocatoria} {proyecto} />
+    </header>
 
     {#if proyecto.codigo_linea_programatica == 66 || proyecto.codigo_linea_programatica == 82}
         <h1 class="mt-24 mb-8 text-center text-3xl">Reglas</h1>

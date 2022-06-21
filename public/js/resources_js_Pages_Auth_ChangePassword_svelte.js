@@ -40425,7 +40425,7 @@ const { document: document_1 } = svelte_internal__WEBPACK_IMPORTED_MODULE_0__.gl
 const get_header_slot_changes = dirty => ({});
 const get_header_slot_context = ctx => ({});
 
-// (63:28) <Button on:click={() => (dialogOpen = true)} variant={null}>
+// (62:24) <Button on:click={() => (dialogOpen = true)} variant={null}>
 function create_default_slot_28(ctx) {
 	let t;
 
@@ -40442,7 +40442,7 @@ function create_default_slot_28(ctx) {
 	};
 }
 
-// (68:24) {#if $page.props.convocatoria}
+// (67:20) {#if $page.props.convocatoria}
 function create_if_block_24(ctx) {
 	let div;
 	let html_tag;
@@ -40487,7 +40487,7 @@ function create_if_block_24(ctx) {
 	};
 }
 
-// (71:32) {#if isSuperAdmin}
+// (70:28) {#if isSuperAdmin}
 function create_if_block_25(ctx) {
 	let button;
 	let current;
@@ -40535,7 +40535,7 @@ function create_if_block_25(ctx) {
 	};
 }
 
-// (72:36) <Button on:click={() => Inertia.visit(route('convocatorias.edit', [$page.props.convocatoria.id]))} class="ml-4 mb-2" variant="raised">
+// (71:32) <Button on:click={() => Inertia.visit(route('convocatorias.edit', [$page.props.convocatoria.id]))} class="ml-4 mb-2" variant="raised">
 function create_default_slot_27(ctx) {
 	let svg;
 	let path;
@@ -40565,7 +40565,7 @@ function create_default_slot_27(ctx) {
 	};
 }
 
-// (87:32) {#if $page.props.auth.numeroNotificaciones > 0}
+// (86:28) {#if $page.props.auth.numeroNotificaciones > 0}
 function create_if_block_23(ctx) {
 	let span;
 	let t_value = /*$page*/ ctx[2].props.auth.numeroNotificaciones + "";
@@ -40575,7 +40575,7 @@ function create_if_block_23(ctx) {
 		c() {
 			span = (0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.element)("span");
 			t = (0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.text)(t_value);
-			(0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.attr)(span, "class", "absolute bg-cyan-700 flex h-5/6 items-center justify-center rounded-full text-center text-white text-xs w-5/6");
+			(0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.attr)(span, "class", "absolute bg-cyan-500 flex h-5/6 items-center justify-center rounded-full text-center text-white text-xs w-5/6");
 			(0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.set_style)(span, "top", "-10px");
 			(0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.set_style)(span, "left", "10px");
 		},
@@ -40592,7 +40592,7 @@ function create_if_block_23(ctx) {
 	};
 }
 
-// (93:28) <Dropdown class="mt-1" placement="bottom-end">
+// (92:24) <Dropdown class="mt-1" placement="bottom-end">
 function create_default_slot_26(ctx) {
 	let div1;
 	let div0;
@@ -40645,7 +40645,7 @@ function create_default_slot_26(ctx) {
 	};
 }
 
-// (100:32) 
+// (99:28) 
 function create_dropdown_slot(ctx) {
 	let div1;
 	let div0;
@@ -40676,7 +40676,7 @@ function create_dropdown_slot(ctx) {
 			div0 = (0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.element)("div");
 
 			div0.innerHTML = `<svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" style="flex-basis: 20px;" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M18.364 5.636l-3.536 3.536m0 5.656l3.536 3.536M9.172 9.172L5.636 5.636m3.536 9.192l-3.536 3.536M21 12a9 9 0 11-18 0 9 9 0 0118 0zm-5 0a4 4 0 11-8 0 4 4 0 018 0z"></path></svg> 
-                                        <span class="ml-1.5"><a href="mailto:sgpssipro@sena.edu.co">sgpssipro@sena.edu.co</a></span>`;
+                                    <span class="ml-1.5"><a href="mailto:sgpssipro@sena.edu.co">sgpssipro@sena.edu.co</a></span>`;
 
 			t2 = (0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.space)();
 			a1 = (0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.element)("a");
@@ -40756,7 +40756,7 @@ function create_dropdown_slot(ctx) {
 	};
 }
 
-// (131:20) <ResponsiveNavLink href={route('dashboard')} active={route().current('dashboard')}>
+// (130:16) <ResponsiveNavLink href={route('dashboard')} active={route().current('dashboard')}>
 function create_default_slot_25(ctx) {
 	let t;
 
@@ -40773,7 +40773,7 @@ function create_default_slot_25(ctx) {
 	};
 }
 
-// (146:24) <ResponsiveNavLink href={route('logout')} method="post" as="button">
+// (145:20) <ResponsiveNavLink href={route('logout')} method="post" as="button">
 function create_default_slot_24(ctx) {
 	let t_value = /*$_*/ ctx[4]('Logout') + "";
 	let t;
@@ -40794,7 +40794,7 @@ function create_default_slot_24(ctx) {
 	};
 }
 
-// (155:8) {#if $$slots.header}
+// (154:4) {#if $$slots.header}
 function create_if_block_22(ctx) {
 	let current;
 	const header_slot_template = /*#slots*/ ctx[8].header;
@@ -40842,7 +40842,7 @@ function create_if_block_22(ctx) {
 	};
 }
 
-// (170:4) 
+// (168:4) 
 function create_title_slot(ctx) {
 	let div1;
 
@@ -40851,7 +40851,7 @@ function create_title_slot(ctx) {
 			div1 = (0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.element)("div");
 			div1.innerHTML = `<div class="">Menú de navegación</div>`;
 			(0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.attr)(div1, "slot", "title");
-			(0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.attr)(div1, "class", "mb-6 text-center text-primary");
+			(0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.attr)(div1, "class", "mb-6 text-center text-cyan-600");
 		},
 		m(target, anchor) {
 			(0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.insert)(target, div1, anchor);
@@ -40863,7 +40863,7 @@ function create_title_slot(ctx) {
 	};
 }
 
-// (175:12) {#if isSuperAdmin}
+// (173:12) {#if isSuperAdmin}
 function create_if_block_21(ctx) {
 	let button;
 	let current;
@@ -40911,7 +40911,7 @@ function create_if_block_21(ctx) {
 	};
 }
 
-// (176:16) <Button on:click={() => Inertia.visit(route('anexos.index'))} variant={route().current('anexos.*') ? 'raised' : 'outlined'} class="p-2">
+// (174:16) <Button on:click={() => Inertia.visit(route('anexos.index'))} variant={route().current('anexos.*') ? 'raised' : 'outlined'} class="p-2">
 function create_default_slot_23(ctx) {
 	let t;
 
@@ -40928,7 +40928,7 @@ function create_default_slot_23(ctx) {
 	};
 }
 
-// (179:12) {#if isSuperAdmin}
+// (177:12) {#if isSuperAdmin}
 function create_if_block_20(ctx) {
 	let button;
 	let current;
@@ -40978,7 +40978,7 @@ function create_if_block_20(ctx) {
 	};
 }
 
-// (180:16) <Button on:click={() => Inertia.visit(route('centros-formacion.index'))} variant={route().current('centros-formacion.*') ? 'raised' : 'outlined'} class="p-2">
+// (178:16) <Button on:click={() => Inertia.visit(route('centros-formacion.index'))} variant={route().current('centros-formacion.*') ? 'raised' : 'outlined'} class="p-2">
 function create_default_slot_22(ctx) {
 	let t;
 
@@ -40995,7 +40995,7 @@ function create_default_slot_22(ctx) {
 	};
 }
 
-// (183:12) {#if isSuperAdmin || checkRole(authUser, [11]) || checkPermission(authUser, [1, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 17, 18, 19, 14, 15, 16, 20, 21])}
+// (181:12) {#if isSuperAdmin || checkRole(authUser, [11]) || checkPermission(authUser, [1, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 17, 18, 19, 14, 15, 16, 20, 21])}
 function create_if_block_19(ctx) {
 	let button;
 	let current;
@@ -41045,7 +41045,7 @@ function create_if_block_19(ctx) {
 	};
 }
 
-// (184:16) <Button on:click={() => Inertia.visit(route('convocatorias.index'))} variant={route().current('convocatorias.*') ? 'raised' : 'outlined'} class="p-2">
+// (182:16) <Button on:click={() => Inertia.visit(route('convocatorias.index'))} variant={route().current('convocatorias.*') ? 'raised' : 'outlined'} class="p-2">
 function create_default_slot_21(ctx) {
 	let t;
 
@@ -41062,7 +41062,7 @@ function create_default_slot_21(ctx) {
 	};
 }
 
-// (187:12) {#if isSuperAdmin || checkRole(authUser, [20, 18, 19, 5, 17])}
+// (185:12) {#if isSuperAdmin || checkRole(authUser, [20, 18, 19, 5, 17])}
 function create_if_block_18(ctx) {
 	let button;
 	let current;
@@ -41112,7 +41112,7 @@ function create_if_block_18(ctx) {
 	};
 }
 
-// (188:16) <Button on:click={() => Inertia.visit(route('evaluaciones.index'))} variant={route().current('evaluaciones.*') ? 'raised' : 'outlined'} class="p-2">
+// (186:16) <Button on:click={() => Inertia.visit(route('evaluaciones.index'))} variant={route().current('evaluaciones.*') ? 'raised' : 'outlined'} class="p-2">
 function create_default_slot_20(ctx) {
 	let t;
 
@@ -41129,7 +41129,7 @@ function create_default_slot_20(ctx) {
 	};
 }
 
-// (191:12) <Button on:click={() => Inertia.visit(route('grupos-investigacion.index'))} variant={route().current('grupos-investigacion.*') ? 'raised' : 'outlined'} class="p-2">
+// (189:12) <Button on:click={() => Inertia.visit(route('grupos-investigacion.index'))} variant={route().current('grupos-investigacion.*') ? 'raised' : 'outlined'} class="p-2">
 function create_default_slot_19(ctx) {
 	let t;
 
@@ -41146,7 +41146,7 @@ function create_default_slot_19(ctx) {
 	};
 }
 
-// (193:12) {#if isSuperAdmin}
+// (191:12) {#if isSuperAdmin}
 function create_if_block_17(ctx) {
 	let button;
 	let current;
@@ -41196,7 +41196,7 @@ function create_if_block_17(ctx) {
 	};
 }
 
-// (194:16) <Button on:click={() => Inertia.visit(route('lineas-programaticas.index'))} variant={route().current('lineas-programaticas.*') ? 'raised' : 'outlined'} class="p-2">
+// (192:16) <Button on:click={() => Inertia.visit(route('lineas-programaticas.index'))} variant={route().current('lineas-programaticas.*') ? 'raised' : 'outlined'} class="p-2">
 function create_default_slot_18(ctx) {
 	let t;
 
@@ -41213,7 +41213,7 @@ function create_default_slot_18(ctx) {
 	};
 }
 
-// (197:12) {#if isSuperAdmin}
+// (195:12) {#if isSuperAdmin}
 function create_if_block_16(ctx) {
 	let button;
 	let current;
@@ -41263,7 +41263,7 @@ function create_if_block_16(ctx) {
 	};
 }
 
-// (198:16) <Button on:click={() => Inertia.visit(route('lineas-tecnoacademia.index'))} variant={route().current('lineas-tecnoacademia.*') ? 'raised' : 'outlined'} class="p-2">
+// (196:16) <Button on:click={() => Inertia.visit(route('lineas-tecnoacademia.index'))} variant={route().current('lineas-tecnoacademia.*') ? 'raised' : 'outlined'} class="p-2">
 function create_default_slot_17(ctx) {
 	let t;
 
@@ -41280,7 +41280,7 @@ function create_default_slot_17(ctx) {
 	};
 }
 
-// (201:12) {#if isSuperAdmin}
+// (199:12) {#if isSuperAdmin}
 function create_if_block_15(ctx) {
 	let button;
 	let current;
@@ -41330,7 +41330,7 @@ function create_if_block_15(ctx) {
 	};
 }
 
-// (202:16) <Button on:click={() => Inertia.visit(route('mesas-tecnicas.index'))} variant={route().current('mesas-tecnicas.*') ? 'raised' : 'outlined'} class="p-2">
+// (200:16) <Button on:click={() => Inertia.visit(route('mesas-tecnicas.index'))} variant={route().current('mesas-tecnicas.*') ? 'raised' : 'outlined'} class="p-2">
 function create_default_slot_16(ctx) {
 	let t;
 
@@ -41347,7 +41347,7 @@ function create_default_slot_16(ctx) {
 	};
 }
 
-// (205:12) {#if isSuperAdmin || checkRole(authUser, [4]) || checkPermission(authUser, [8, 17])}
+// (203:12) {#if isSuperAdmin || checkRole(authUser, [4]) || checkPermission(authUser, [8, 17])}
 function create_if_block_14(ctx) {
 	let button;
 	let current;
@@ -41397,7 +41397,7 @@ function create_if_block_14(ctx) {
 	};
 }
 
-// (206:16) <Button on:click={() => Inertia.visit(route('nuevos-proyectos-ta-tp'))} variant={route().current('nuevos-proyectos-ta-tp') ? 'raised' : 'outlined'} class="p-2">
+// (204:16) <Button on:click={() => Inertia.visit(route('nuevos-proyectos-ta-tp'))} variant={route().current('nuevos-proyectos-ta-tp') ? 'raised' : 'outlined'} class="p-2">
 function create_default_slot_15(ctx) {
 	let t;
 
@@ -41414,7 +41414,7 @@ function create_default_slot_15(ctx) {
 	};
 }
 
-// (209:12) {#if isSuperAdmin}
+// (207:12) {#if isSuperAdmin}
 function create_if_block_13(ctx) {
 	let button;
 	let current;
@@ -41464,7 +41464,7 @@ function create_if_block_13(ctx) {
 	};
 }
 
-// (210:16) <Button on:click={() => Inertia.visit(route('configuracion-presupuesto-sennova'))} variant={route().current('configuracion-presupuesto-sennova.*') ? 'raised' : 'outlined'} class="p-2">
+// (208:16) <Button on:click={() => Inertia.visit(route('configuracion-presupuesto-sennova'))} variant={route().current('configuracion-presupuesto-sennova.*') ? 'raised' : 'outlined'} class="p-2">
 function create_default_slot_14(ctx) {
 	let t;
 
@@ -41481,7 +41481,7 @@ function create_default_slot_14(ctx) {
 	};
 }
 
-// (213:12) {#if isSuperAdmin || checkRole(authUser, [4, 21, 20, 18, 19, 5, 17])}
+// (211:12) {#if isSuperAdmin || checkRole(authUser, [4, 21, 20, 18, 19, 5, 17])}
 function create_if_block_12(ctx) {
 	let button;
 	let current;
@@ -41531,7 +41531,7 @@ function create_if_block_12(ctx) {
 	};
 }
 
-// (214:16) <Button on:click={() => Inertia.visit(route('programas-formacion.index'))} variant={route().current('programas-formacion.*') ? 'raised' : 'outlined'} class="p-2">
+// (212:16) <Button on:click={() => Inertia.visit(route('programas-formacion.index'))} variant={route().current('programas-formacion.*') ? 'raised' : 'outlined'} class="p-2">
 function create_default_slot_13(ctx) {
 	let t;
 
@@ -41548,7 +41548,7 @@ function create_default_slot_13(ctx) {
 	};
 }
 
-// (217:12) {#if isSuperAdmin || checkRole(authUser, [20, 18, 19, 5, 17])}
+// (215:12) {#if isSuperAdmin || checkRole(authUser, [20, 18, 19, 5, 17])}
 function create_if_block_11(ctx) {
 	let button;
 	let current;
@@ -41596,7 +41596,7 @@ function create_if_block_11(ctx) {
 	};
 }
 
-// (218:16) <Button on:click={() => Inertia.visit(route('proyectos.index'))} variant={route().current('proyectos.*') ? 'raised' : 'outlined'} class="p-2">
+// (216:16) <Button on:click={() => Inertia.visit(route('proyectos.index'))} variant={route().current('proyectos.*') ? 'raised' : 'outlined'} class="p-2">
 function create_default_slot_12(ctx) {
 	let t;
 
@@ -41613,7 +41613,7 @@ function create_default_slot_12(ctx) {
 	};
 }
 
-// (221:12) {#if isSuperAdmin || checkRole(authUser, [4, 6]) || checkPermission(authUser, [22])}
+// (219:12) {#if isSuperAdmin || checkRole(authUser, [4, 6]) || checkPermission(authUser, [22])}
 function create_if_block_10(ctx) {
 	let button;
 	let current;
@@ -41663,7 +41663,7 @@ function create_if_block_10(ctx) {
 	};
 }
 
-// (222:16) <Button on:click={() => Inertia.visit(route('proyectos-capacidad-instalada.index'))} variant={route().current('proyectos-capacidad-instalada.*') ? 'raised' : 'outlined'} class="p-2">
+// (220:16) <Button on:click={() => Inertia.visit(route('proyectos-capacidad-instalada.index'))} variant={route().current('proyectos-capacidad-instalada.*') ? 'raised' : 'outlined'} class="p-2">
 function create_default_slot_11(ctx) {
 	let t;
 
@@ -41680,7 +41680,7 @@ function create_default_slot_11(ctx) {
 	};
 }
 
-// (225:12) {#if isSuperAdmin || checkRole(authUser, [5, 10, 12, 22])}
+// (223:12) {#if isSuperAdmin || checkRole(authUser, [5, 10, 12, 22])}
 function create_if_block_9(ctx) {
 	let button;
 	let current;
@@ -41730,7 +41730,7 @@ function create_if_block_9(ctx) {
 	};
 }
 
-// (226:16) <Button on:click={() => Inertia.visit(route('proyectos-idi-tecnoacademia.index'))} variant={route().current('proyectos-idi-tecnoacademia.*') ? 'raised' : 'outlined'} class="p-2">
+// (224:16) <Button on:click={() => Inertia.visit(route('proyectos-idi-tecnoacademia.index'))} variant={route().current('proyectos-idi-tecnoacademia.*') ? 'raised' : 'outlined'} class="p-2">
 function create_default_slot_10(ctx) {
 	let t;
 
@@ -41747,7 +41747,7 @@ function create_default_slot_10(ctx) {
 	};
 }
 
-// (229:12) {#if isSuperAdmin}
+// (227:12) {#if isSuperAdmin}
 function create_if_block_8(ctx) {
 	let button;
 	let current;
@@ -41797,7 +41797,7 @@ function create_if_block_8(ctx) {
 	};
 }
 
-// (230:16) <Button on:click={() => Inertia.visit(route('redes-conocimiento.index'))} variant={route().current('redes-conocimiento.*') ? 'raised' : 'outlined'} class="p-2">
+// (228:16) <Button on:click={() => Inertia.visit(route('redes-conocimiento.index'))} variant={route().current('redes-conocimiento.*') ? 'raised' : 'outlined'} class="p-2">
 function create_default_slot_9(ctx) {
 	let t;
 
@@ -41814,7 +41814,7 @@ function create_default_slot_9(ctx) {
 	};
 }
 
-// (233:12) {#if isSuperAdmin}
+// (231:12) {#if isSuperAdmin}
 function create_if_block_7(ctx) {
 	let button;
 	let current;
@@ -41862,7 +41862,7 @@ function create_if_block_7(ctx) {
 	};
 }
 
-// (234:16) <Button on:click={() => Inertia.visit(route('regionales.index'))} variant={route().current('regionales.*') ? 'raised' : 'outlined'} class="p-2">
+// (232:16) <Button on:click={() => Inertia.visit(route('regionales.index'))} variant={route().current('regionales.*') ? 'raised' : 'outlined'} class="p-2">
 function create_default_slot_8(ctx) {
 	let t;
 
@@ -41879,7 +41879,7 @@ function create_default_slot_8(ctx) {
 	};
 }
 
-// (237:12) {#if isSuperAdmin || checkRole(authUser, [20, 18, 19, 5, 17])}
+// (235:12) {#if isSuperAdmin || checkRole(authUser, [20, 18, 19, 5, 17])}
 function create_if_block_6(ctx) {
 	let button;
 	let current;
@@ -41927,7 +41927,7 @@ function create_if_block_6(ctx) {
 	};
 }
 
-// (238:16) <Button on:click={() => Inertia.visit(route('reportes.index'))} variant={route().current('reportes.*') ? 'raised' : 'outlined'} class="p-2">
+// (236:16) <Button on:click={() => Inertia.visit(route('reportes.index'))} variant={route().current('reportes.*') ? 'raised' : 'outlined'} class="p-2">
 function create_default_slot_7(ctx) {
 	let t;
 
@@ -41944,7 +41944,7 @@ function create_default_slot_7(ctx) {
 	};
 }
 
-// (241:12) {#if isSuperAdmin}
+// (239:12) {#if isSuperAdmin}
 function create_if_block_5(ctx) {
 	let button;
 	let current;
@@ -41994,7 +41994,7 @@ function create_if_block_5(ctx) {
 	};
 }
 
-// (242:16) <Button on:click={() => Inertia.visit(route('roles-sennova.index'))} variant={route().current('roles-sennova.*') ? 'raised' : 'outlined'} class="p-2">
+// (240:16) <Button on:click={() => Inertia.visit(route('roles-sennova.index'))} variant={route().current('roles-sennova.*') ? 'raised' : 'outlined'} class="p-2">
 function create_default_slot_6(ctx) {
 	let t;
 
@@ -42011,7 +42011,7 @@ function create_default_slot_6(ctx) {
 	};
 }
 
-// (245:12) {#if isSuperAdmin}
+// (243:12) {#if isSuperAdmin}
 function create_if_block_4(ctx) {
 	let button;
 	let current;
@@ -42059,7 +42059,7 @@ function create_if_block_4(ctx) {
 	};
 }
 
-// (246:16) <Button on:click={() => Inertia.visit(route('roles.index'))} variant={route().current('roles.*') ? 'raised' : 'outlined'} class="p-2">
+// (244:16) <Button on:click={() => Inertia.visit(route('roles.index'))} variant={route().current('roles.*') ? 'raised' : 'outlined'} class="p-2">
 function create_default_slot_5(ctx) {
 	let t;
 
@@ -42076,7 +42076,7 @@ function create_default_slot_5(ctx) {
 	};
 }
 
-// (249:12) {#if isSuperAdmin}
+// (247:12) {#if isSuperAdmin}
 function create_if_block_3(ctx) {
 	let button;
 	let current;
@@ -42126,7 +42126,7 @@ function create_if_block_3(ctx) {
 	};
 }
 
-// (250:16) <Button on:click={() => Inertia.visit(route('ambientes-modernizacion.index'))} variant={route().current('ambientes-modernizacion.*') ? 'raised' : 'outlined'} class="p-2">
+// (248:16) <Button on:click={() => Inertia.visit(route('ambientes-modernizacion.index'))} variant={route().current('ambientes-modernizacion.*') ? 'raised' : 'outlined'} class="p-2">
 function create_default_slot_4(ctx) {
 	let t;
 
@@ -42143,7 +42143,7 @@ function create_default_slot_4(ctx) {
 	};
 }
 
-// (253:12) {#if isSuperAdmin || checkRole(authUser, [5])}
+// (251:12) {#if isSuperAdmin || checkRole(authUser, [5])}
 function create_if_block_2(ctx) {
 	let button;
 	let current;
@@ -42193,7 +42193,7 @@ function create_if_block_2(ctx) {
 	};
 }
 
-// (254:16) <Button on:click={() => Inertia.visit(route('tecnoacademias.index'))} variant={route().current('tecnoacademias.*') ? 'raised' : 'outlined'} class="p-2">
+// (252:16) <Button on:click={() => Inertia.visit(route('tecnoacademias.index'))} variant={route().current('tecnoacademias.*') ? 'raised' : 'outlined'} class="p-2">
 function create_default_slot_3(ctx) {
 	let t;
 
@@ -42210,7 +42210,7 @@ function create_default_slot_3(ctx) {
 	};
 }
 
-// (257:12) {#if isSuperAdmin}
+// (255:12) {#if isSuperAdmin}
 function create_if_block_1(ctx) {
 	let button;
 	let current;
@@ -42260,7 +42260,7 @@ function create_if_block_1(ctx) {
 	};
 }
 
-// (258:16) <Button on:click={() => Inertia.visit(route('tematicas-estrategicas.index'))} variant={route().current('tematicas-estrategicas.*') ? 'raised' : 'outlined'} class="p-2">
+// (256:16) <Button on:click={() => Inertia.visit(route('tematicas-estrategicas.index'))} variant={route().current('tematicas-estrategicas.*') ? 'raised' : 'outlined'} class="p-2">
 function create_default_slot_2(ctx) {
 	let t;
 
@@ -42277,7 +42277,7 @@ function create_default_slot_2(ctx) {
 	};
 }
 
-// (261:12) {#if isSuperAdmin || checkRole(authUser, [4, 21, 18, 19, 5, 17])}
+// (259:12) {#if isSuperAdmin || checkRole(authUser, [4, 21, 18, 19, 5, 17])}
 function create_if_block(ctx) {
 	let button;
 	let current;
@@ -42325,7 +42325,7 @@ function create_if_block(ctx) {
 	};
 }
 
-// (262:16) <Button on:click={() => Inertia.visit(route('users.index'))} variant={route().current('users.*') ? 'raised' : 'outlined'} class="p-2">
+// (260:16) <Button on:click={() => Inertia.visit(route('users.index'))} variant={route().current('users.*') ? 'raised' : 'outlined'} class="p-2">
 function create_default_slot_1(ctx) {
 	let t;
 
@@ -42342,7 +42342,7 @@ function create_default_slot_1(ctx) {
 	};
 }
 
-// (173:4) 
+// (171:4) 
 function create_content_slot(ctx) {
 	let div1;
 	let div0;
@@ -42631,7 +42631,7 @@ function create_content_slot(ctx) {
 	};
 }
 
-// (268:12) <Button on:click={(event) => (dialogOpen = false)} variant={null}>
+// (266:12) <Button on:click={(event) => (dialogOpen = false)} variant={null}>
 function create_default_slot(ctx) {
 	let t;
 
@@ -42648,7 +42648,7 @@ function create_default_slot(ctx) {
 	};
 }
 
-// (266:4) 
+// (264:4) 
 function create_actions_slot(ctx) {
 	let div1;
 	let div0;
@@ -42707,7 +42707,6 @@ function create_actions_slot(ctx) {
 function create_fragment(ctx) {
 	let title_value;
 	let t0;
-	let div16;
 	let div15;
 	let nav;
 	let div7;
@@ -42842,7 +42841,6 @@ function create_fragment(ctx) {
 	return {
 		c() {
 			t0 = (0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.space)();
-			div16 = (0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.element)("div");
 			div15 = (0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.element)("div");
 			nav = (0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.element)("nav");
 			div7 = (0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.element)("div");
@@ -42907,7 +42905,7 @@ function create_fragment(ctx) {
 			(0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.attr)(svg, "viewBox", "0 0 24 24");
 			(0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.attr)(svg, "stroke", "currentColor");
 			(0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.attr)(a1, "href", a1_href_value = (0,_Utils__WEBPACK_IMPORTED_MODULE_4__.route)('notificaciones.index'));
-			(0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.attr)(a1, "class", "flex items-center hover:text-cyan-700");
+			(0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.attr)(a1, "class", "flex items-center hover:text-cyan-600");
 			(0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.attr)(div3, "class", "mr-5 ml-5 relative");
 			(0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.attr)(div4, "class", "ml-3 relative");
 			(0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.attr)(div5, "class", "hidden sm:flex sm:items-center sm:ml-6");
@@ -42926,8 +42924,7 @@ function create_fragment(ctx) {
 		},
 		m(target, anchor) {
 			(0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.insert)(target, t0, anchor);
-			(0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.insert)(target, div16, anchor);
-			(0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.append)(div16, div15);
+			(0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.insert)(target, div15, anchor);
 			(0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.append)(div15, nav);
 			(0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.append)(nav, div7);
 			(0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.append)(div7, div6);
@@ -43150,7 +43147,7 @@ function create_fragment(ctx) {
 		},
 		d(detaching) {
 			if (detaching) (0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.detach)(t0);
-			if (detaching) (0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.detach)(div16);
+			if (detaching) (0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.detach)(div15);
 			(0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.destroy_component)(applicationlogo);
 			(0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.destroy_component)(button);
 			if (if_block0) if_block0.d();
@@ -43444,7 +43441,6 @@ function create_default_slot(ctx) {
 	}
 
 	let loadingbutton_props = {
-		class: "btn-indigo",
 		type: "submit",
 		$$slots: { default: [create_default_slot_1] },
 		$$scope: { ctx }
@@ -47175,7 +47171,7 @@ function create_if_block(ctx) {
 		c() {
 			div = (0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.element)("div");
 			(0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.create_component)(jumper.$$.fragment);
-			(0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.attr)(div, "class", "bottom-0 fixed flex h-full items-center justify-center left-0 right-0 top-0 w-full");
+			(0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.attr)(div, "class", "bottom-0 fixed flex h-full items-center justify-center left-0 right-0 top-0 w-full z-10");
 		},
 		m(target, anchor) {
 			(0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.insert)(target, div, anchor);

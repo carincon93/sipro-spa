@@ -4,8 +4,22 @@
     import { _ } from 'svelte-i18n'
     import { onMount } from 'svelte'
 
+    import FileList from '@/Shared/FileList'
+    import Button from '@/Shared/Button'
+
     export let convocatoria
     export let proyecto
+
+    let versiones
+    if (proyecto.proyecto && proyecto.proyecto.PdfVersiones) {
+        versiones = proyecto.proyecto.PdfVersiones
+    } else if (proyecto && proyecto.PdfVersiones) {
+        versiones = proyecto.PdfVersiones
+    } else if (proyecto.proyecto && proyecto.proyecto.pdf_versiones) {
+        versiones = proyecto.proyecto.pdf_versiones
+    } else if (proyecto && proyecto.pdf_versiones) {
+        versiones = proyecto.pdf_versiones
+    }
 
     let container
     let activeProyecto = route().current('convocatorias.ta.edit') || route().current('convocatorias.tp.edit') || route().current('convocatorias.idi.edit') || route().current('convocatorias.servicios-tecnologicos.edit') || route().current('convocatorias.cultura-innovacion.edit')
@@ -22,7 +36,27 @@
      */
     let authUser = $page.props.auth.user
     let isSuperAdmin = checkRole(authUser, [1])
+
+    let hideFiles = true
 </script>
+
+<FileList {versiones} {hideFiles} {convocatoria} {proyecto} />
+<div class="flex items-center justify-center mb-8">
+    <button on:click={() => (hideFiles = !hideFiles)} class="flex items-center flex-col border p-1 rounded hover:bg-gray-100">
+        <svg id="Capa_2" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 600 497.08" class="w-10">
+            <g id="Object">
+                <g>
+                    <path d="M300,32.35v-8.21c0-13.33-10.81-24.14-24.14-24.14H24.14C10.81,0,0,10.81,0,24.14V459.45H600V56.49c0-13.33-10.81-24.14-24.14-24.14H300Z" style="fill:#f9df5c;" />
+                    <rect x="26.64" y="67.14" width="552.34" height="396.73" style="fill:#fff;" />
+                    <path d="M291.44,116.74l-8.91,24.69H24.14c-13.33,0-24.14,10.81-24.14,24.14V472.94c0,13.33,10.81,24.14,24.14,24.14H575.86c13.33,0,24.14-10.81,24.14-24.14V124.93c0-13.33-10.81-24.14-24.14-24.14H314.15c-10.17,0-19.26,6.38-22.71,15.95Z" style="fill:#f3cc30;" />
+                    <path d="M600,472.94v-200.39C433.34,434.65,144.27,478.03,6.71,489.61c4.39,4.59,10.57,7.47,17.43,7.47H575.86c13.33,0,24.14-10.81,24.14-24.14Z" style="fill:#edbd31;" />
+                    <path d="M243.65,160.87H39.63c-10.77,0-19.49,8.73-19.49,19.49v43.18c34.32-23.51,111.76-53.13,223.52-62.67Z" style="fill:#f6d738;" />
+                </g>
+            </g>
+        </svg>
+        <small class="text-center block leading-tight mt-2">{hideFiles ? 'Mostrar' : 'Ocultar'} archivos</small>
+    </button>
+</div>
 
 <!-- Stepper -->
 <div class="flex justify-around" id="stepper" bind:this={container}>
@@ -150,7 +184,7 @@
 
 <style>
     #stepper a[active='true'] .rounded-full {
-        background: #6366f1;
+        background: #58badd;
         color: #fff;
     }
 
@@ -160,6 +194,6 @@
 
     .total {
         bottom: -18px;
-        box-shadow: -1px -9px 17px 0px rgb(99 102 241 / 25%);
+        box-shadow: -1px -9px 17px 0px rgba(99, 163, 241, 0.25);
     }
 </style>

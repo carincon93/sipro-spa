@@ -125,7 +125,9 @@
 </script>
 
 <AuthenticatedLayout>
-    <Stepper {convocatoria} {proyecto} />
+    <header slot="header">
+        <Stepper {convocatoria} {proyecto} />
+    </header>
 
     <div class="mt-20">
         {#if proyecto.codigo_linea_programatica == 68}

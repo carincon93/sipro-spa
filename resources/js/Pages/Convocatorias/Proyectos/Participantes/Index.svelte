@@ -15,7 +15,9 @@
 </script>
 
 <AuthenticatedLayout>
-    <Stepper {convocatoria} {proyecto} />
+    <header slot="header">
+        <Stepper {convocatoria} {proyecto} />
+    </header>
 
     <div class="py-12">
         {#if proyecto.codigo_linea_programatica != 69}

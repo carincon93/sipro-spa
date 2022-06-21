@@ -208,7 +208,7 @@
         {/if}
         <div class="px-8 py-4 bg-gray-100 border-t border-gray-200 flex items-center sticky bottom-0">
             {#if isSuperAdmin || checkRole(authUser, [4, 21, 17, 18, 20, 19, 5])}
-                <LoadingButton bind:loading={sending} class="btn-indigo" type="submit" bind:disabled={$form.autorizacion_datos}>Crear usuario</LoadingButton>
+                <LoadingButton bind:loading={sending} type="submit" bind:disabled={$form.autorizacion_datos}>Crear usuario</LoadingButton>
             {/if}
         </div>
     </form>

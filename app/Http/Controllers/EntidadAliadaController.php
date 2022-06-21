@@ -45,7 +45,7 @@ class EntidadAliadaController extends Controller
 
         return Inertia::render('Convocatorias/Proyectos/EntidadesAliadas/Index', [
             'convocatoria'      => $convocatoria->only('id', 'esta_activa', 'fase_formateada', 'fase', 'tipo_convocatoria', 'mostrar_recomendaciones'),
-            'proyecto'          => $proyecto->only('id', 'codigo_linea_programatica', 'precio_proyecto', 'modificable', 'infraestructura_tecnoacademia', 'evaluaciones', 'mostrar_recomendaciones'),
+            'proyecto'          => $proyecto->only('id', 'codigo_linea_programatica', 'precio_proyecto', 'modificable', 'infraestructura_tecnoacademia', 'evaluaciones', 'mostrar_recomendaciones', 'PdfVersiones', 'all_files'),
             'filters'           => request()->all('search'),
             'entidadesAliadas'  => EntidadAliada::where('proyecto_id', $proyecto->id)->orderBy('nombre', 'ASC')
                 ->filterEntidadAliada(request()->only('search'))->select('id', 'nombre', 'tipo')->paginate(),

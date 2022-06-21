@@ -58,7 +58,7 @@ class ActividadController extends Controller
 
         return Inertia::render('Convocatorias/Proyectos/Actividades/Index', [
             'convocatoria'      => $convocatoria->only('id', 'esta_activa', 'fase_formateada', 'fase', 'tipo_convocatoria', 'mostrar_recomendaciones'),
-            'proyecto'          => $proyecto->only('id', 'codigo_linea_programatica', 'precio_proyecto', 'modificable', 'metodologia', 'metodologia_local', 'en_subsanacion', 'evaluaciones', 'mostrar_recomendaciones'),
+            'proyecto'          => $proyecto->only('id', 'codigo_linea_programatica', 'precio_proyecto', 'modificable', 'metodologia', 'metodologia_local', 'en_subsanacion', 'evaluaciones', 'mostrar_recomendaciones', 'PdfVersiones', 'all_files'),
             'filters'           => request()->all('search'),
             'actividades'       => Actividad::whereIn(
                 'objetivo_especifico_id',

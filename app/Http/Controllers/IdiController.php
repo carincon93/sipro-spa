@@ -155,6 +155,7 @@ class IdiController extends Controller
 
         $idi->disciplinaSubareaConocimiento->subareaConocimiento->areaConocimiento;
         $idi->proyecto->centroFormacion;
+        $idi->proyecto->all_files;
         $idi->mostrar_recomendaciones = $idi->proyecto->mostrar_recomendaciones;
         $idi->mostrar_requiere_subsanacion = $idi->proyecto->mostrar_requiere_subsanacion;
 

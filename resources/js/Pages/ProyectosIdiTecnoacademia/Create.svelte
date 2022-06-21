@@ -495,10 +495,10 @@
             {#if existenDocumentos}
                 <div class="mt-44 grid grid-cols-2">
                     <div>
-                        <Label required class="mb-4" labelFor="documentos_resultados" value="Si, sí, por favor cargar un documento PDF con los resultados" />
+                        <Label required class="mb-4" labelFor="documentos_resultados" value="Si, sí, por favor cargar el documento con los resultados. (Si son varios comprímalos en un archivo .zip)" />
                     </div>
                     <div>
-                        <File id="documentos_resultados" accept="application/pdf" maxSize="10000" bind:value={$form.documentos_resultados} error={errors.documentos_resultados} />
+                        <File id="documentos_resultados" maxSize="10000" bind:value={$form.documentos_resultados} error={errors.documentos_resultados} />
                     </div>
                 </div>
             {/if}

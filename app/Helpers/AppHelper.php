@@ -4,7 +4,6 @@ namespace App\Helpers;
 
 use GuzzleHttp\Psr7\Request;
 use GuzzleHttp\Client;
-use GuzzleHttp\Psr7\Utils;
 use GuzzleHttp\Exception\ClientException;
 
 class AppHelper
@@ -72,35 +71,48 @@ class AppHelper
 
     public static function uploadFile($folderName, $file, $fileName)
     {
-        $client = new Client();
+        $folderNamesFormat = '';
+        foreach (explode('/', $folderName) as $value) {
+            $folderNamesFormat .= str_replace('+', '%20', urlencode($value)) . '/';
+        }
+        $urlFormat = str_replace(' ', '%20', self::$rootFolder) . $folderNamesFormat;
+
+        $curl = curl_init();
 
         try {
-            $headers = [
-                'Authorization' => 'Bearer ' . static::generateToken(),
-                'Accept' => 'application/json;odata=verbose',
-                'Content-Type' => 'application/json;odata=verbose'
-            ];
-            $options = [
-                'multipart' => [
-                    [
-                        'name' => 'file',
-                        'contents' => Utils::tryFopen($file, 'r'),
-                        'filename' => $fileName,
-                        'headers'  => [
-                            'Content-Type' => '<Content-type header>'
-                        ]
-                    ]
-                ]
-            ];
-            $request = new Request('POST', self::$apiUrl . "/_api/web/GetFolderByServerRelativeUrl('" . self::$rootFolder . $folderName . "')/Files/add(url='" . $fileName . "',overwrite=true)", $headers);
-            $response = $client->sendAsync($request, $options)->wait();
-            $response = json_decode($response->getBody()->getContents(), true);
+            $fileHandler = fopen($file, 'r');
+            $fileData = fread($fileHandler, filesize($file));
+
+            $url = self::$apiUrl . '/_api/web/GetFolderByServerRelativeUrl(\'' . $urlFormat . '\')/Files/add(url=\'' . $fileName . '\',overwrite=true)';
+
+            curl_setopt_array($curl, array(
+                CURLOPT_URL => $url,
+                CURLOPT_RETURNTRANSFER => true,
+                CURLOPT_ENCODING => '',
+                CURLOPT_MAXREDIRS => 10,
+                CURLOPT_TIMEOUT => 0,
+                CURLOPT_FOLLOWLOCATION => true,
+                CURLOPT_HTTP_VERSION => CURL_HTTP_VERSION_1_1,
+                CURLOPT_CUSTOMREQUEST => 'POST',
+                CURLOPT_POSTFIELDS => $fileData,
+                CURLOPT_INFILE, $fileHandler,
+                CURLOPT_INFILESIZE, filesize($file),
+                CURLOPT_HTTPHEADER => array(
+                    'Authorization: Bearer ' . static::generateToken(),
+                    'Content-Type: ' . $file->getMimeType(),
+                    'Accept: application/json;odata=verbose'
+                ),
+            ));
+
+            $response = curl_exec($curl);
+
+            curl_close($curl);
+
+            $response = json_decode($response, true);
 
             return $response['d']['ServerRelativeUrl'];
-        } catch (ClientException $e) {
-            $response = $e->getResponse();
-
-            abort($response->getStatusCode());
+        } catch (\Throwable  $e) {
+            abort($e->getStatusCode());
         }
     }
 
@@ -158,12 +170,11 @@ class AppHelper
         try {
             $headers = [
                 'Authorization' => 'Bearer ' . static::generateToken(),
-                'Accept' => 'application/pdf'
             ];
             $request = new Request('GET', self::$apiUrl . "/_api/web/GetFolderByServerRelativeUrl('" . self::$rootFolder . $folderName . "')/Files('" . $fileName . "')/\$value", $headers);
             $response = $client->sendAsync($request)->wait();
 
-            header('Content-type: application/pdf');
+            header('Content-type: force-download');
             header('Content-Disposition: inline; filename="' . $fileName . '"');
             header('Content-Transfer-Encoding: binary');
             header('Accept-Ranges: bytes');

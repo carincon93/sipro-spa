@@ -26,7 +26,9 @@
 </script>
 
 <AuthenticatedLayout>
-    <Stepper {convocatoria} {proyecto} />
+    <header slot="header">
+        <Stepper {convocatoria} {proyecto} />
+    </header>
 
     <DataTable class="mt-20" routeParams={[convocatoria.id, proyecto.id]}>
         <div slot="title">Inventario de equipos</div>

@@ -117,6 +117,6 @@
             {$_('Already registered?')}
         </a>
 
-        <LoadingButton bind:loading={sending} class="btn-indigo" type="submit" bind:disabled={$form.autorizacion_datos}>{$_('Register')}</LoadingButton>
+        <LoadingButton bind:loading={sending} type="submit" bind:disabled={$form.autorizacion_datos}>{$_('Register')}</LoadingButton>
     </div>
 </form>

@@ -74,7 +74,9 @@
 </script>
 
 <AuthenticatedLayout>
-    <Stepper {convocatoria} {proyecto} />
+    <header slot="header">
+        <Stepper {convocatoria} {proyecto} />
+    </header>
 
     {#each evaluaciones as evaluacion}
         {#each evaluacion.evaluacion_causales_rechazo as causalRechazo}

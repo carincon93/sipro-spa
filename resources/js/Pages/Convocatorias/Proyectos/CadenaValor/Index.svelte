@@ -112,9 +112,12 @@
 </script>
 
 <AuthenticatedLayout>
+    <header slot="header">
+        {#if !to_pdf}
+            <Stepper {convocatoria} {proyecto} />
+        {/if}
+    </header>
     {#if !to_pdf}
-        <Stepper {convocatoria} {proyecto} />
-
         <h1 class="text-3xl mt-24 mb-10 text-center">Propuesta de sostenibilidad</h1>
 
         {#if proyecto.codigo_linea_programatica == 70}

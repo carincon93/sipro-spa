@@ -347,7 +347,7 @@
 
             <div class="mt-44 grid grid-cols-2">
                 <div>
-                    <Label required class="mb-4" labelFor="pdf_proyecto" value="Url del proyecto en documento pdf" />
+                    <Label required class="mb-4" labelFor="pdf_proyecto" value="Proyecto en documento pdf" />
                 </div>
                 <div>
                     <File id="pdf_proyecto" accept="application/pdf" showInput={false} maxSize="10000" bind:value={$form.pdf_proyecto} error={errors.pdf_proyecto} route={route('proyectos-idi-tecnoacademia.download-pdf', [proyectoIdiTecnoacademia, 'pdf_proyecto'])} />
@@ -529,10 +529,10 @@
             {#if existenDocumentos}
                 <div class="mt-44 grid grid-cols-2">
                     <div>
-                        <Label required class="mb-4" labelFor="documentos_resultados" value="Si, sí, por favor cargar un documento PDF con los resultados" />
+                        <Label required class="mb-4" labelFor="documentos_resultados" value="Si, sí, por favor cargar el documento con los resultados. (Si son varios comprímalos en un archivo .zip)" />
                     </div>
                     <div>
-                        <File id="documentos_resultados" accept="application/pdf" showInput={false} maxSize="10000" bind:value={$form.documentos_resultados} error={errors.documentos_resultados} route={route('proyectos-idi-tecnoacademia.download-pdf', [proyectoIdiTecnoacademia, 'documentos_resultados'])} />
+                        <File id="documentos_resultados" showInput={false} maxSize="10000" bind:value={$form.documentos_resultados} error={errors.documentos_resultados} route={route('proyectos-idi-tecnoacademia.download-pdf', [proyectoIdiTecnoacademia, 'documentos_resultados'])} />
                     </div>
                 </div>
             {/if}

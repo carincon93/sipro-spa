@@ -71,7 +71,7 @@
             {$_('Forgot your password?')}
         </a>
 
-        <LoadingButton bind:loading={sending} class="btn-indigo" type="submit">{$_('Login')}</LoadingButton>
+        <LoadingButton bind:loading={sending} type="submit">{$_('Login')}</LoadingButton>
     </div>
 </form>
 

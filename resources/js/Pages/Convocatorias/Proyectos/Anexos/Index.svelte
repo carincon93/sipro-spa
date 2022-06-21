@@ -49,7 +49,9 @@
 </script>
 
 <AuthenticatedLayout>
-    <Stepper {convocatoria} {proyecto} />
+    <header slot="header">
+        <Stepper {convocatoria} {proyecto} />
+    </header>
 
     {#if proyecto.codigo_linea_programatica == 68}
         <h1 class="mt-24 mb-8 text-center text-3xl">Especificaciones e infraestructura</h1>

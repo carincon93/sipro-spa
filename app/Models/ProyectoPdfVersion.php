@@ -4,6 +4,7 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Carbon\Carbon;
 
 class ProyectoPdfVersion extends Model
 {
@@ -15,6 +16,13 @@ class ProyectoPdfVersion extends Model
      * @var string
      */
     protected $table = 'proyecto_pdf_versiones';
+
+    /**
+     * appends
+     *
+     * @var array
+     */
+    protected $appends = ['fecha_generacion_pdf'];
 
     /**
      * The attributes that are mass assignable.
@@ -63,7 +71,17 @@ class ProyectoPdfVersion extends Model
     public function scopeFilterProyectoPdfVersion($query, array $filters)
     {
         $query->when($filters['search'] ?? null, function ($query, $search) {
-            $query->where('version', 'ilike', '%'.$search.'%');
+            $query->where('version', 'ilike', '%' . $search . '%');
         });
+    }
+
+    /**
+     * getFechaGeneracionPdfAttribute
+     *
+     * @return void
+     */
+    public function getFechaGeneracionPdfAttribute()
+    {
+        return Carbon::parse($this->created_at, 'UTC')->locale('es')->isoFormat('DD [de] MMMM [de] YYYY');
     }
 }

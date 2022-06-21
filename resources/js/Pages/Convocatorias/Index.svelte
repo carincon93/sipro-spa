@@ -78,7 +78,7 @@
                                     </DataTableMenu>
                                 </div>
                             {/if}
-                            <a use:inertia href={route('convocatorias.dashboard', convocatoria.id)} class="bg-white overflow-hidden shadow-sm px-6 py-2 hover:bg-indigo-500 hover:text-white h-72 flex justify-center items-center flex-col">
+                            <a use:inertia href={route('convocatorias.dashboard', convocatoria.id)} class="bg-white overflow-hidden shadow-sm px-6 py-2 hover:bg-cyan-500 hover:text-white h-72 flex justify-center items-center flex-col">
                                 <span class="mb-5 text-center">{convocatoria.tipo_convocatoria == 1 ? 'Proyectos de convocatoria' : convocatoria.tipo_convocatoria == 2 ? 'Proyectos de ejercicio (DEMO)' : 'Nuevas TecnoAcademias - Nuevos Tecnoparques'}</span>
                                 {#if convocatoria.tipo_convocatoria == 1}
                                     <h1 class="text-4xl text-center my-4">

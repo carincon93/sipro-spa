@@ -51,7 +51,9 @@
 </script>
 
 <AuthenticatedLayout>
-    <Stepper {convocatoria} {proyecto} />
+    <header slot="header">
+        <Stepper {convocatoria} {proyecto} />
+    </header>
 
     <h1 class="text-3xl m-24 text-center">Metodología</h1>
 

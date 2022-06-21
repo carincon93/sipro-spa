@@ -37,7 +37,6 @@
     export let proyectoMunicipios
     export let proyectoProgramasFormacion
     export let proyectoProgramasFormacionArticulados
-    export let versiones
 
     $: $title = idi ? idi.titulo : null
 
@@ -247,14 +246,16 @@
 </script>
 
 <AuthenticatedLayout>
-    <Stepper {convocatoria} proyecto={idi} />
+    <header slot="header">
+        <Stepper {convocatoria} proyecto={idi} />
+    </header>
 
-    <form on:submit|preventDefault={submit}>
+    <form on:submit|preventDefault={submit} class="bg-white shadow mt-14">
         <fieldset class="p-8" disabled={isSuperAdmin || (checkPermissionByUser(authUser, [1]) && idi.proyecto.modificable == true) ? undefined : checkPermission(authUser, [3, 4]) && idi.proyecto.modificable == true ? undefined : true}>
-            <div class="mt-28">
+            <div class="mt-14">
                 <Label required labelFor="titulo" class="font-medium inline-block mb-10 text-center text-gray-700 text-sm w-full" value="Descripción llamativa que orienta el enfoque del proyecto, indica el cómo y el para qué. (Máximo 20 palabras)" />
                 <Textarea label="Título" id="titulo" sinContador={true} error={errors.titulo} bind:value={$form.titulo} classes="bg-transparent block border-0 {errors.titulo ? '' : 'outline-none-important'} mt-1 outline-none text-4xl text-center w-full" required />
-                {#if isSuperAdmin || idi.proyecto.mostrar_recomendaciones}
+                <!-- {#if isSuperAdmin || idi.proyecto.mostrar_recomendaciones}
                     {#each idi.proyecto.evaluaciones as evaluacion, i}
                         {#if isSuperAdmin || (evaluacion.finalizado && evaluacion.habilitado)}
                             <div class="bg-gray-200 p-4 rounded border-orangered border mb-5">
@@ -268,7 +269,7 @@
                             </div>
                         {/if}
                     {/each}
-                {/if}
+                {/if} -->
             </div>
             <div class="mt-44">
                 <p class="text-center">Fecha de ejecución</p>
@@ -297,7 +298,7 @@
                     </div>
                 {/if}
 
-                {#if isSuperAdmin || idi.proyecto.mostrar_recomendaciones}
+                <!-- {#if isSuperAdmin || idi.proyecto.mostrar_recomendaciones}
                     {#each idi.proyecto.evaluaciones as evaluacion, i}
                         {#if isSuperAdmin || (evaluacion.finalizado && evaluacion.habilitado)}
                             <div class="bg-gray-200 p-4 rounded border-orangered border mb-5">
@@ -311,13 +312,13 @@
                             </div>
                         {/if}
                     {/each}
-                {/if}
+                {/if} -->
             </div>
             <fieldset disabled>
                 <div class="mt-44 grid grid-cols-2">
                     <div>
                         <Label required class="mb-4" labelFor="centro_formacion_id" value="Centro de formación" />
-                        <small> Nota: El Centro de Formación relacionado es el ejecutor del proyecto </small>
+                        <small class="block leading-tight"> Nota: El Centro de Formación relacionado es el ejecutor del proyecto </small>
                     </div>
                     <div>
                         {idi.proyecto.centro_formacion.nombre}
@@ -350,7 +351,7 @@
                 <div>
                     <DynamicList id="red_conocimiento_id" bind:value={$form.red_conocimiento_id} routeWebApi={route('web-api.redes-conocimiento')} classes="min-h" placeholder="Busque por el nombre de la red de conocimiento sectorial" message={errors.red_conocimiento_id} required />
 
-                    {#if isSuperAdmin || idi.proyecto.mostrar_recomendaciones}
+                    <!-- {#if isSuperAdmin || idi.proyecto.mostrar_recomendaciones}
                         {#each idi.proyecto.evaluaciones as evaluacion, i}
                             {#if isSuperAdmin || (evaluacion.finalizado && evaluacion.habilitado)}
                                 <div class="bg-gray-200 p-4 rounded border-orangered border mb-5">
@@ -364,7 +365,7 @@
                                 </div>
                             {/if}
                         {/each}
-                    {/if}
+                    {/if} -->
                 </div>
             </div>
             <div class="mt-44 grid grid-cols-2">
@@ -393,7 +394,7 @@
                     <div>
                         <DynamicList id="disciplina_subarea_conocimiento_id" bind:value={$form.disciplina_subarea_conocimiento_id} routeWebApi={route('web-api.disciplinas-subarea-conocimiento', $form.subarea_conocimiento_id)} classes="min-h" placeholder="Busque por el nombre de la disciplina de subáreas de conocimiento" message={errors.disciplina_subarea_conocimiento_id} required />
 
-                        {#if isSuperAdmin || idi.proyecto.mostrar_recomendaciones}
+                        <!-- {#if isSuperAdmin || idi.proyecto.mostrar_recomendaciones}
                             {#each idi.proyecto.evaluaciones as evaluacion, i}
                                 {#if isSuperAdmin || (evaluacion.finalizado && evaluacion.habilitado)}
                                     <div class="bg-gray-200 p-4 rounded border-orangered border mb-5">
@@ -407,7 +408,7 @@
                                     </div>
                                 {/if}
                             {/each}
-                        {/if}
+                        {/if} -->
                     </div>
                 </div>
             {/if}
@@ -418,7 +419,7 @@
                 <div>
                     <DynamicList id="actividad_economica_id" bind:value={$form.actividad_economica_id} routeWebApi={route('web-api.actividades-economicas')} placeholder="Busque por el nombre de la actividad económica" classes="min-h" message={errors.actividad_economica_id} required />
 
-                    {#if isSuperAdmin || idi.proyecto.mostrar_recomendaciones}
+                    <!-- {#if isSuperAdmin || idi.proyecto.mostrar_recomendaciones}
                         {#each idi.proyecto.evaluaciones as evaluacion, i}
                             {#if isSuperAdmin || (evaluacion.finalizado && evaluacion.habilitado)}
                                 <div class="bg-gray-200 p-4 rounded border-orangered border mb-5">
@@ -432,7 +433,7 @@
                                 </div>
                             {/if}
                         {/each}
-                    {/if}
+                    {/if} -->
                 </div>
             </div>
             <div class="mt-44 grid grid-cols-2">
@@ -442,7 +443,7 @@
                 <div>
                     <DynamicList id="tematica_estrategica_id" bind:value={$form.tematica_estrategica_id} routeWebApi={route('web-api.tematicas-estrategicas')} placeholder="Busque por el nombre de la temática estrategica SENA" message={errors.tematica_estrategica_id} required />
 
-                    {#if isSuperAdmin || idi.proyecto.mostrar_recomendaciones}
+                    <!-- {#if isSuperAdmin || idi.proyecto.mostrar_recomendaciones}
                         {#each idi.proyecto.evaluaciones as evaluacion, i}
                             {#if isSuperAdmin || (evaluacion.finalizado && evaluacion.habilitado)}
                                 <div class="bg-gray-200 p-4 rounded border-orangered border mb-5">
@@ -456,7 +457,7 @@
                                 </div>
                             {/if}
                         {/each}
-                    {/if}
+                    {/if} -->
                 </div>
             </div>
             <div class="mt-44 grid grid-cols-2">
@@ -469,7 +470,7 @@
                         <InfoMessage class="mb-2" message="Video de 3 minutos, en donde se presente de manera sencilla y dinámica la justificación del proyecto, la problemática, el objetivo general, los objetivos específicos, las actividades, los productos y su impacto en el marco del mecanismo de participación seleccionado como regional." />
                         <Input label="Link del video" id="video" type="url" class="mt-1" error={errors.video} placeholder="Link del video del proyecto https://www.youtube.com/watch?v=gmc4tk" bind:value={$form.video} required={!tieneVideo ? undefined : 'required'} />
 
-                        {#if isSuperAdmin || idi.proyecto.mostrar_recomendaciones}
+                        <!-- {#if isSuperAdmin || idi.proyecto.mostrar_recomendaciones}
                             {#each idi.proyecto.evaluaciones as evaluacion, i}
                                 {#if isSuperAdmin || (evaluacion.finalizado && evaluacion.habilitado)}
                                     <div class="bg-gray-200 p-4 rounded border-orangered border mb-5">
@@ -483,7 +484,7 @@
                                     </div>
                                 {/if}
                             {/each}
-                        {/if}
+                        {/if} -->
                     {/if}
                 </div>
             </div>
@@ -501,7 +502,7 @@
                         <InfoMessage class="mb-2" message="Si el proyecto está relacionado con la industria 4.0 por favor realice la justificación." />
                         <Textarea label="Justificación" maxlength="40000" id="justificacion_industria_4" error={errors.justificacion_industria_4} bind:value={$formJustificacionIndustria4.justificacion_industria_4} on:input={() => syncColumnLong('justificacion_industria_4', $formJustificacionIndustria4)} required={!requiereJustificacionIndustria4 ? undefined : 'required'} />
 
-                        {#if isSuperAdmin || idi.proyecto.mostrar_recomendaciones}
+                        <!-- {#if isSuperAdmin || idi.proyecto.mostrar_recomendaciones}
                             {#each idi.proyecto.evaluaciones as evaluacion, i}
                                 {#if isSuperAdmin || (evaluacion.finalizado && evaluacion.habilitado)}
                                     <div class="bg-gray-200 p-4 rounded border-orangered border mb-5">
@@ -515,7 +516,7 @@
                                     </div>
                                 {/if}
                             {/each}
-                        {/if}
+                        {/if} -->
                     {/if}
                 </div>
             </div>
@@ -540,7 +541,7 @@
                             required={!requiereJustificacionEconomiaNaranja ? undefined : 'required'}
                         />
 
-                        {#if isSuperAdmin || idi.proyecto.mostrar_recomendaciones}
+                        <!-- {#if isSuperAdmin || idi.proyecto.mostrar_recomendaciones}
                             {#each idi.proyecto.evaluaciones as evaluacion, i}
                                 {#if isSuperAdmin || (evaluacion.finalizado && evaluacion.habilitado)}
                                     <div class="bg-gray-200 p-4 rounded border-orangered border mb-5">
@@ -554,7 +555,7 @@
                                     </div>
                                 {/if}
                             {/each}
-                        {/if}
+                        {/if} -->
                     {/if}
                 </div>
             </div>
@@ -578,7 +579,7 @@
                             on:input={() => syncColumnLong('justificacion_politica_discapacidad', $formJustificacionPoliticaDiscapacidad)}
                             required={!requiereJustificacionPoliticaDiscapacidad ? undefined : 'required'}
                         />
-                        {#if isSuperAdmin || idi.proyecto.mostrar_recomendaciones}
+                        <!-- {#if isSuperAdmin || idi.proyecto.mostrar_recomendaciones}
                             {#each idi.proyecto.evaluaciones as evaluacion, i}
                                 {#if isSuperAdmin || (evaluacion.finalizado && evaluacion.habilitado)}
                                     <div class="bg-gray-200 p-4 rounded border-orangered border mb-5">
@@ -592,7 +593,7 @@
                                     </div>
                                 {/if}
                             {/each}
-                        {/if}
+                        {/if} -->
                     {/if}
                 </div>
             </div>
@@ -871,7 +872,7 @@
                 <div>
                     <Textarea label="Resumen" maxlength="40000" id="resumen" error={errors.resumen} on:input={() => syncColumnLong('resumen', $resumenForm)} bind:value={$resumenForm.resumen} required />
 
-                    {#if isSuperAdmin || idi.proyecto.mostrar_recomendaciones}
+                    <!-- {#if isSuperAdmin || idi.proyecto.mostrar_recomendaciones}
                         {#each idi.proyecto.evaluaciones as evaluacion, i}
                             {#if isSuperAdmin || (evaluacion.finalizado && evaluacion.habilitado)}
                                 <div class="bg-gray-200 p-4 rounded border-orangered border mb-5">
@@ -885,7 +886,7 @@
                                 </div>
                             {/if}
                         {/each}
-                    {/if}
+                    {/if} -->
                 </div>
             </div>
 
@@ -1004,7 +1005,7 @@
                 <div>
                     <Textarea label="Bibliografía" maxlength="40000" id="bibliografia" error={errors.bibliografia} bind:value={$formBibliografia.bibliografia} on:input={() => syncColumnLong('bibliografia', $formBibliografia)} required />
 
-                    {#if isSuperAdmin || idi.proyecto.mostrar_recomendaciones}
+                    <!-- {#if isSuperAdmin || idi.proyecto.mostrar_recomendaciones}
                         {#each idi.proyecto.evaluaciones as evaluacion, i}
                             {#if isSuperAdmin || (evaluacion.finalizado && evaluacion.habilitado)}
                                 <div class="bg-gray-200 p-4 rounded border-orangered border mb-5">
@@ -1018,11 +1019,11 @@
                                 </div>
                             {/if}
                         {/each}
-                    {/if}
+                    {/if} -->
                 </div>
             </div>
 
-            {#if isSuperAdmin || idi.proyecto.mostrar_recomendaciones}
+            <!-- {#if isSuperAdmin || idi.proyecto.mostrar_recomendaciones}
                 <hr class="mt-10 mb-10" />
                 <h1>Ortografía</h1>
                 {#each idi.proyecto.evaluaciones as evaluacion, i}
@@ -1036,11 +1037,11 @@
                             </div>
                             <p class="whitespace-pre-line">{evaluacion.idi_evaluacion.ortografia_comentario ? evaluacion.idi_evaluacion.ortografia_comentario : 'Sin recomendación'}</p>
                         </div>
-                    {/if}
+                    {/if} 
                 {/each}
-            {/if}
+            {/if}-->
 
-            {#if isSuperAdmin || idi.proyecto.mostrar_recomendaciones}
+            <!-- {#if isSuperAdmin || idi.proyecto.mostrar_recomendaciones}
                 <hr class="mt-10 mb-10" />
                 <h1>Redacción</h1>
                 {#each idi.proyecto.evaluaciones as evaluacion, i}
@@ -1054,11 +1055,11 @@
                             </div>
                             <p class="whitespace-pre-line">{evaluacion.idi_evaluacion.redaccion_comentario ? evaluacion.idi_evaluacion.redaccion_comentario : 'Sin recomendación'}</p>
                         </div>
-                    {/if}
+                    {/if} 
                 {/each}
-            {/if}
+            {/if}-->
 
-            {#if isSuperAdmin || idi.proyecto.mostrar_recomendaciones}
+            <!-- {#if isSuperAdmin || idi.proyecto.mostrar_recomendaciones}
                 <hr class="mt-10 mb-10" />
                 <h1>Normas APA</h1>
                 {#each idi.proyecto.evaluaciones as evaluacion, i}
@@ -1072,18 +1073,18 @@
                             </div>
                             <p class="whitespace-pre-line">{evaluacion.idi_evaluacion.normas_apa_comentario ? evaluacion.idi_evaluacion.normas_apa_comentario : 'Sin recomendación'}</p>
                         </div>
-                    {/if}
+                    {/if} 
                 {/each}
-            {/if}
+            {/if}-->
         </fieldset>
         <div class="px-8 py-4 bg-gray-100 border-t border-gray-200 flex items-center justify-between sticky bottom-0">
             {#if isSuperAdmin || (checkPermissionByUser(authUser, [1]) && idi.proyecto.modificable == true && idi.proyecto.radicado == false) || (checkPermission(authUser, [4]) && idi.proyecto.modificable == true && idi.proyecto.radicado == false)}
                 <button class="text-red-600 hover:underline text-left" tabindex="-1" type="button" on:click={(event) => (dialogOpen = true)}> Eliminar </button>
             {/if}
             {#if isSuperAdmin || (checkPermissionByUser(authUser, [1]) && idi.proyecto.modificable == true) || (checkPermission(authUser, [3, 4]) && idi.proyecto.modificable == true)}
-                <small>{idi.updated_at}</small>
+                <small class="block leading-tight">{idi.updated_at}</small>
 
-                <LoadingButton loading={sending} class="btn-indigo" type="submit">Guardar</LoadingButton>
+                <LoadingButton loading={sending} type="submit">Guardar</LoadingButton>
             {/if}
         </div>
     </form>
@@ -1094,30 +1095,6 @@
                 <img src={window.basePath + '/images/proyecto.png'} alt="Proyecto" class="h-32 mb-6" />
             </figure>
             Código del proyecto: {idi.proyecto.codigo}
-
-            {#if versiones.length > 0}
-                <hr class="my-10 w-full border-white" />
-                <h6>Versiones - PDF</h6>
-                <ul>
-                    {#each versiones as version, i}
-                        <li class="bg-cyan-500 p-2 rounded text-white text-xs mb-2">
-                            {#if version.estado == 1}
-                                <a href={route('convocatorias.proyectos.version', [convocatoria.id, idi.proyecto.id, version.version])}>Descargar versión {version.created_at}</a>
-                            {:else}
-                                Generando una nueva versión, regrese pronto.
-                            {/if}
-                        </li>
-                    {/each}
-                </ul>
-                <hr class="my-10 w-full border-white" />
-            {:else}
-                <hr class="my-10 w-full border-white" />
-
-                <h6>Versiones - PDF</h6>
-
-                <p class="text-xs">No se ha generado un PDF aún</p>
-                <hr class="my-10 w-full border-white" />
-            {/if}
         </div>
         <div slot="content">
             <div>

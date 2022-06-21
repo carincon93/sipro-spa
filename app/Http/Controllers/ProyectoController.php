@@ -215,7 +215,7 @@ class ProyectoController extends Controller
 
         return Inertia::render('Convocatorias/Proyectos/CadenaValor/Index', [
             'convocatoria'  => $convocatoria->only('id', 'esta_activa', 'fase_formateada', 'fase', 'tipo_convocatoria', 'tipo_convocatoria', 'mostrar_recomendaciones'),
-            'proyecto'      => $proyecto->only('id', 'codigo_linea_programatica', 'precio_proyecto', 'propuesta_sostenibilidad', 'propuesta_sostenibilidad_social', 'propuesta_sostenibilidad_ambiental', 'propuesta_sostenibilidad_financiera', 'modificable', 'en_subsanacion', 'evaluaciones', 'mostrar_recomendaciones'),
+            'proyecto'      => $proyecto->only('id', 'codigo_linea_programatica', 'precio_proyecto', 'propuesta_sostenibilidad', 'propuesta_sostenibilidad_social', 'propuesta_sostenibilidad_ambiental', 'propuesta_sostenibilidad_financiera', 'modificable', 'en_subsanacion', 'evaluaciones', 'mostrar_recomendaciones', 'PdfVersiones', 'all_files'),
             'productos'     => $productos,
             'objetivos'     => $objetivos,
             'to_pdf'            => ($request->to_pdf == 1) ? true : false
@@ -508,7 +508,7 @@ class ProyectoController extends Controller
 
         return Inertia::render('Convocatorias/Proyectos/Summary', [
             'convocatoria'              => $convocatoria->only('id', 'esta_activa', 'fase_formateada', 'fase', 'tipo_convocatoria', 'min_fecha_inicio_proyectos', 'max_fecha_finalizacion_proyectos'),
-            'proyecto'                  => $proyecto->only('id', 'precio_proyecto', 'codigo_linea_programatica', 'logs', 'finalizado', 'modificable', 'habilitado_para_evaluar', 'max_valor_roles', 'max_valor_presupuesto', 'mostrar_recomendaciones'),
+            'proyecto'                  => $proyecto->only('id', 'precio_proyecto', 'codigo_linea_programatica', 'logs', 'finalizado', 'modificable', 'habilitado_para_evaluar', 'max_valor_roles', 'max_valor_presupuesto', 'mostrar_recomendaciones', 'PdfVersiones', 'all_files'),
             'problemaCentral'           => ProyectoValidationTrait::problemaCentral($proyecto),
             'efectosDirectos'           => ProyectoValidationTrait::efectosDirectos($proyecto),
             'causasIndirectas'          => ProyectoValidationTrait::causasIndirectas($proyecto),
@@ -765,9 +765,11 @@ class ProyectoController extends Controller
         $proyecto->load('participantes.centroFormacion.regional');
         $proyecto->load('semillerosInvestigacion.lineaInvestigacion.grupoInvestigacion');
 
+        $proyecto->PdfVersiones;
+
         return Inertia::render('Convocatorias/Proyectos/Participantes/Index', [
             'convocatoria'          => $convocatoria,
-            'proyecto'              => $proyecto->only('id', 'codigo_linea_programatica', 'precio_proyecto', 'modificable', 'diff_meses', 'participantes', 'semillerosInvestigacion', 'mostrar_recomendaciones'),
+            'proyecto'              => $proyecto->only('id', 'codigo_linea_programatica', 'precio_proyecto', 'modificable', 'diff_meses', 'participantes', 'semillerosInvestigacion', 'mostrar_recomendaciones', 'PdfVersiones', 'all_files'),
             'tiposDocumento'        => json_decode(Storage::get('json/tipos-documento.json'), true),
             'tiposVinculacion'      => json_decode(Storage::get('json/tipos-vinculacion.json'), true),
             'roles'                 => $rolesSennova,
@@ -1176,6 +1178,9 @@ class ProyectoController extends Controller
         $proyecto->codigo_linea_programatica = $proyecto->lineaProgramatica->codigo;
 
         $proyecto->evaluaciones->load('evaluacionCausalesRechazo');
+
+        $proyecto->PdfVersiones;
+        $proyecto->all_files;
 
         return Inertia::render('Convocatorias/Proyectos/ComentariosGenerales', [
             'convocatoria'                  => $convocatoria->only('id', 'esta_activa', 'fase_formateada', 'fase', 'tipo_convocatoria'),

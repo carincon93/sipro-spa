@@ -39,7 +39,7 @@ class ProyectoAnexoController extends Controller
         return Inertia::render('Convocatorias/Proyectos/Anexos/Index', [
             'filters'           => request()->all('search'),
             'convocatoria'      => $convocatoria->only('id', 'esta_activa', 'fase_formateada', 'fase', 'tipo_convocatoria', 'mostrar_recomendaciones'),
-            'proyecto'          => $proyecto->only('id', 'codigo_linea_programatica', 'precio_proyecto', 'modificable', 'video', 'infraestructura_adecuada', 'especificaciones_area', 'en_subsanacion', 'evaluaciones', 'mostrar_recomendaciones'),
+            'proyecto'          => $proyecto->only('id', 'codigo_linea_programatica', 'precio_proyecto', 'modificable', 'video', 'infraestructura_adecuada', 'especificaciones_area', 'en_subsanacion', 'evaluaciones', 'mostrar_recomendaciones', 'PdfVersiones', 'all_files'),
             'proyectoAnexo'     => $proyecto->proyectoAnexo()->select('proyecto_anexo.id', 'proyecto_anexo.anexo_id', 'proyecto_anexo.archivo', 'proyecto_anexo.updated_at', 'anexos.nombre')
                 ->join('anexos', 'proyecto_anexo.anexo_id', 'anexos.id')->get(),
             'anexos'            => Anexo::select('id', 'nombre', 'archivo', 'obligatorio', 'habilitado')->join('anexo_lineas_programaticas', 'anexos.id', 'anexo_lineas_programaticas.anexo_id')

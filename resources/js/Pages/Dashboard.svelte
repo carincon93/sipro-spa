@@ -25,15 +25,13 @@
                     ¡Bienvenido(a)
                     <span class="capitalize">{$page.props.auth.user.nombre}</span>!
                 </h1>
-                <p class="text-2xl my-4">Formule proyectos de I+D+i, Tecnoacademia-Tecnoparque, Servicios Tecnológicos y/o Cultura de la innovación.</p>
-                <InfoMessage>
-                    <p class="text-indigo-700 font-black">Roles asociados a su usuario:</p>
-                    <ul class="text-indigo-700 list-disc ml-4">
-                        {#each $page.props.auth.user.roles as rol}
-                            <li>{rol.name}</li>
-                        {/each}
-                    </ul>
-                </InfoMessage>
+                <div class="mt-2">
+                    <p class="text-cyan-700 font-black text-xs">Roles asociados a su usuario:</p>
+                    {#each $page.props.auth.user.roles as rol}
+                        <span class="py-1 px-2 bg-cyan-500 text-white text-xs rounded-full mr-1">{rol.name}</span>
+                    {/each}
+                </div>
+                <p class="text-2xl my-8">Formule proyectos de I+D+i, Tecnoacademia-Tecnoparque, Servicios Tecnológicos y/o Cultura de la innovación.</p>
 
                 {#if isSuperAdmin || checkRole(authUser, [11]) || checkPermission(authUser, [1, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 17, 18, 19, 14, 15, 16, 20, 21])}
                     <Button variant="raised" on:click={() => Inertia.visit(route('convocatorias.index'))} class="mt-4 inline-block">Quiero revisar las convocatorias</Button>

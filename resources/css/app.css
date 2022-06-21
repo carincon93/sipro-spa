@@ -217,7 +217,7 @@ fieldset[disabled] .bg-white.mdc-text-field.mdc-text-field--label-floating {
 }
 
 .mdc-text-field--focused:not(.mdc-text-field--disabled) .mdc-floating-label {
-    color: #4f46e5;
+    color: #58badd;
 }
 
 th.th-actions {

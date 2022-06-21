@@ -43,6 +43,6 @@
     </div>
 
     <div class="flex items-center justify-end mt-4">
-        <LoadingButton bind:loading={sending} class="btn-indigo" type="submit">{$_('Reset Password')}</LoadingButton>
+        <LoadingButton bind:loading={sending} type="submit">{$_('Reset Password')}</LoadingButton>
     </div>
 </form>
