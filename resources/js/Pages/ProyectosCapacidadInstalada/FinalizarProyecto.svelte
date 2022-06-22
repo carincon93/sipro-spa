@@ -11,6 +11,7 @@
     export let errors
     export let proyectoCapacidadInstalada
     export let estadosProyectoCapacidadInstalada
+    export let autorPrincipal
 
     $: $title = 'Finalizar proyecto de capacidad instalada'
 
@@ -29,7 +30,7 @@
     })
 
     function submit() {
-        if (isSuperAdmin || (checkRole(authUser, [4, 6]) && proyectoCapacidadInstalada.integrantes.find((item) => item.id == authUser.id))) {
+        if (isSuperAdmin || (checkRole(authUser, [4, 6]) && authUser.id == autorPrincipal.id)) {
             $form.post(route('proyectos-capacidad-instalada.store.finalizar', proyectoCapacidadInstalada.id), {
                 onStart: () => (sending = true),
                 onFinish: () => (sending = false),
@@ -52,17 +53,15 @@
                     <a use:inertia href={route('proyectos-capacidad-instalada.objetivos-especificos.index', proyectoCapacidadInstalada.id)} class="text-indigo-400 hover:text-indigo-600">Objetivos específicos y resultados</a>
                     <span class="text-indigo-400 font-medium">/</span>
                     <a use:inertia href={route('proyectos-capacidad-instalada.productos.index', proyectoCapacidadInstalada.id)} class="text-indigo-400 hover:text-indigo-600">Productos</a>
-                    {#if isSuperAdmin || (checkRole(authUser, [4, 6]) && proyectoCapacidadInstalada.integrantes.find((item) => item.id == authUser.id))}
-                        <span class="text-indigo-400 font-medium">/</span>
-                        <a use:inertia href={route('proyectos-capacidad-instalada.finalizar', proyectoCapacidadInstalada.id)} class="text-indigo-400 hover:text-indigo-600">Finalizar</a>
-                    {/if}
+                    <span class="text-indigo-400 font-medium">/</span>
+                    <a use:inertia href={route('proyectos-capacidad-instalada.finalizar', proyectoCapacidadInstalada.id)} class="text-indigo-400 hover:text-indigo-600">Estado</a>
                 </h1>
             </div>
         </div>
     </header>
 
     <form on:submit|preventDefault={submit}>
-        <fieldset class="p-8" disabled={isSuperAdmin || (checkRole(authUser, [4, 6]) && proyectoCapacidadInstalada.integrantes.find((item) => item.id == authUser.id)) ? undefined : true}>
+        <fieldset class="p-8" disabled={isSuperAdmin || (checkRole(authUser, [4, 6]) && authUser.id == autorPrincipal.id) ? undefined : true}>
             <div class="mt-44 grid grid-cols-2">
                 <div>
                     <Label required class="mb-4" labelFor="estado_proyecto" value="Estado del proyecto" />
@@ -74,7 +73,7 @@
         </fieldset>
 
         <div class="px-8 py-4 bg-gray-100 border-t border-gray-200 flex items-center sticky bottom-0">
-            {#if isSuperAdmin || (checkRole(authUser, [4, 6]) && proyectoCapacidadInstalada.integrantes.find((item) => item.id == authUser.id))}
+            {#if isSuperAdmin || (checkRole(authUser, [4, 6]) && authUser.id == autorPrincipal.id)}
                 <LoadingButton loading={sending} class="btn-indigo ml-auto" type="submit">
                     {$_('Save')}
                 </LoadingButton>

@@ -19,6 +19,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Str;
 use Illuminate\Support\Facades\Storage;
 use Inertia\Inertia;
+use Illuminate\Support\Facades\DB;
 
 class ProyectoCapacidadInstaladaController extends Controller
 {
@@ -102,7 +103,7 @@ class ProyectoCapacidadInstaladaController extends Controller
      */
     public function edit(ProyectoCapacidadInstalada $proyectoCapacidadInstalada)
     {
-        $this->authorize('update', [ProyectoCapacidadInstalada::class, $proyectoCapacidadInstalada]);
+        $this->authorize('view', [ProyectoCapacidadInstalada::class, $proyectoCapacidadInstalada]);
 
         $centrosFormacion = CentroFormacion::selectRaw('centros_formacion.id as value, concat(centros_formacion.nombre, chr(10), \'∙ Código: \', centros_formacion.codigo) as label')->orderBy('centros_formacion.nombre', 'ASC')->get();
         $proyectoCapacidadInstalada->semilleroInvestigacion;
@@ -188,7 +189,7 @@ class ProyectoCapacidadInstaladaController extends Controller
      */
     public function indexIntegrantes(ProyectoCapacidadInstalada $proyectoCapacidadInstalada)
     {
-        $this->authorize('update', [ProyectoCapacidadInstalada::class, $proyectoCapacidadInstalada]);
+        $this->authorize('view', [ProyectoCapacidadInstalada::class, $proyectoCapacidadInstalada]);
 
         $proyectoCapacidadInstalada->integrantes;
         $proyectoCapacidadInstalada->entidadesAliadas;
@@ -199,6 +200,8 @@ class ProyectoCapacidadInstaladaController extends Controller
             'tiposDocumento'                => json_decode(Storage::get('json/tipos-documento.json'), true),
             'tiposVinculacion'              => json_decode(Storage::get('json/tipos-vinculacion.json'), true),
             'roles'                         => json_decode(Storage::get('json/roles-sennova-idi.json'), true),
+            'autorPrincipal'                => $proyectoCapacidadInstalada->integrantes()->where('proyecto_capacidad_instalada_integrante.autor_principal', true)->first(),
+
         ]);
     }
 
@@ -342,13 +345,15 @@ class ProyectoCapacidadInstaladaController extends Controller
 
     public function editEntidadAliada(ProyectoCapacidadInstalada $proyectoCapacidadInstalada, ProyectoCapacidadInstaladaEntidadAliada $entidadAliada)
     {
-        $this->authorize('update', [ProyectoCapacidadInstalada::class, $proyectoCapacidadInstalada]);
+        $this->authorize('view', [ProyectoCapacidadInstalada::class, $proyectoCapacidadInstalada]);
 
         $proyectoCapacidadInstalada->integrantes;
 
         return Inertia::render('ProyectosCapacidadInstalada/Integrantes/EntidadesAliadas/Edit', [
-            'proyectoCapacidadInstalada' => $proyectoCapacidadInstalada,
-            'entidadAliada' => $entidadAliada
+            'proyectoCapacidadInstalada'    => $proyectoCapacidadInstalada,
+            'entidadAliada'                 => $entidadAliada,
+            'autorPrincipal'                => $proyectoCapacidadInstalada->integrantes()->where('proyecto_capacidad_instalada_integrante.autor_principal', true)->first(),
+
         ]);
     }
 
@@ -389,13 +394,14 @@ class ProyectoCapacidadInstaladaController extends Controller
      */
     public function indexObjetivosEspecificos(ProyectoCapacidadInstalada $proyectoCapacidadInstalada)
     {
-        $this->authorize('update', [ProyectoCapacidadInstalada::class, $proyectoCapacidadInstalada]);
+        $this->authorize('view', [ProyectoCapacidadInstalada::class, $proyectoCapacidadInstalada]);
 
         $proyectoCapacidadInstalada->integrantes;
 
         return Inertia::render('ProyectosCapacidadInstalada/ObjetivosEspecificos/Index', [
             'proyectoCapacidadInstalada'    => $proyectoCapacidadInstalada,
-            'objetivosEspecificos'          => ProyectoCapacidadInstaladaObjetivoEspecifico::where('proyecto_capacidad_instalada_id', $proyectoCapacidadInstalada->id)->with('resultado')->orderBy('numero', 'ASC')->paginate(15)
+            'objetivosEspecificos'          => ProyectoCapacidadInstaladaObjetivoEspecifico::where('proyecto_capacidad_instalada_id', $proyectoCapacidadInstalada->id)->with('resultado')->orderBy('numero', 'ASC')->paginate(15),
+            'autorPrincipal'                => $proyectoCapacidadInstalada->integrantes()->where('proyecto_capacidad_instalada_integrante.autor_principal', true)->first(),
         ]);
     }
 
@@ -439,14 +445,15 @@ class ProyectoCapacidadInstaladaController extends Controller
 
     public function editObjetivoEspecifico(ProyectoCapacidadInstalada $proyectoCapacidadInstalada, ProyectoCapacidadInstaladaObjetivoEspecifico $objetivoEspecifico)
     {
-        $this->authorize('update', [ProyectoCapacidadInstalada::class, $proyectoCapacidadInstalada]);
+        $this->authorize('view', [ProyectoCapacidadInstalada::class, $proyectoCapacidadInstalada]);
 
         $objetivoEspecifico->resultado;
         $proyectoCapacidadInstalada->integrantes;
 
         return Inertia::render('ProyectosCapacidadInstalada/ObjetivosEspecificos/Edit', [
             'proyectoCapacidadInstalada'    => $proyectoCapacidadInstalada,
-            'objetivoEspecifico'            => $objetivoEspecifico
+            'objetivoEspecifico'            => $objetivoEspecifico,
+            'autorPrincipal'                => $proyectoCapacidadInstalada->integrantes()->where('proyecto_capacidad_instalada_integrante.autor_principal', true)->first(),
         ]);
     }
 
@@ -479,13 +486,14 @@ class ProyectoCapacidadInstaladaController extends Controller
      */
     public function indexProductos(ProyectoCapacidadInstalada $proyectoCapacidadInstalada)
     {
-        $this->authorize('update', [ProyectoCapacidadInstalada::class, $proyectoCapacidadInstalada]);
+        $this->authorize('view', [ProyectoCapacidadInstalada::class, $proyectoCapacidadInstalada]);
 
         $proyectoCapacidadInstalada->integrantes;
 
         return Inertia::render('ProyectosCapacidadInstalada/Productos/Index', [
             'proyectoCapacidadInstalada'    => $proyectoCapacidadInstalada,
-            'productos'                     => ProyectoCapacidadInstaladaProducto::select('proyectos_capacidad_producto.*', 'proyecto_capacidad_objetivo_especifico.proyecto_capacidad_instalada_id')->join('proyectos_capacidad_resultado', 'proyectos_capacidad_producto.proyecto_capacidad_resultado_id', 'proyectos_capacidad_resultado.id')->join('proyecto_capacidad_objetivo_especifico', 'proyectos_capacidad_resultado.proyecto_capacidad_objetivo_especifico_id', 'proyecto_capacidad_objetivo_especifico.id')->where('proyecto_capacidad_objetivo_especifico.proyecto_capacidad_instalada_id', $proyectoCapacidadInstalada->id)->with('resultado')->paginate(15)
+            'productos'                     => ProyectoCapacidadInstaladaProducto::select('proyectos_capacidad_producto.*', 'proyecto_capacidad_objetivo_especifico.proyecto_capacidad_instalada_id')->join('proyectos_capacidad_resultado', 'proyectos_capacidad_producto.proyecto_capacidad_resultado_id', 'proyectos_capacidad_resultado.id')->join('proyecto_capacidad_objetivo_especifico', 'proyectos_capacidad_resultado.proyecto_capacidad_objetivo_especifico_id', 'proyecto_capacidad_objetivo_especifico.id')->where('proyecto_capacidad_objetivo_especifico.proyecto_capacidad_instalada_id', $proyectoCapacidadInstalada->id)->with('resultado')->paginate(15),
+            'autorPrincipal'                => $proyectoCapacidadInstalada->integrantes()->where('proyecto_capacidad_instalada_integrante.autor_principal', true)->first(),
         ]);
     }
 
@@ -520,7 +528,7 @@ class ProyectoCapacidadInstaladaController extends Controller
 
     public function editProducto(ProyectoCapacidadInstalada $proyectoCapacidadInstalada, ProyectoCapacidadInstaladaProducto $producto)
     {
-        $this->authorize('update', [ProyectoCapacidadInstalada::class, $proyectoCapacidadInstalada]);
+        $this->authorize('view', [ProyectoCapacidadInstalada::class, $proyectoCapacidadInstalada]);
 
         $proyectoCapacidadInstalada->integrantes;
 
@@ -533,6 +541,7 @@ class ProyectoCapacidadInstaladaController extends Controller
                 $query->where('proyecto_capacidad_objetivo_especifico.proyecto_capacidad_instalada_id', $proyectoCapacidadInstalada->id);
             })->where('proyectos_capacidad_resultado.descripcion', '!=', null)->get(),
             'tipologiasMinciencias'         => json_decode(Storage::get('json/tipologia-minciencias.json'), true),
+            'autorPrincipal'                => $proyectoCapacidadInstalada->integrantes()->where('proyecto_capacidad_instalada_integrante.autor_principal', true)->first(),
         ]);
     }
 
@@ -559,14 +568,14 @@ class ProyectoCapacidadInstaladaController extends Controller
 
     public function finalizar(ProyectoCapacidadInstalada $proyectoCapacidadInstalada)
     {
-        $this->authorize('update', [ProyectoCapacidadInstalada::class, $proyectoCapacidadInstalada]);
+        $this->authorize('view', [ProyectoCapacidadInstalada::class, $proyectoCapacidadInstalada]);
 
         $proyectoCapacidadInstalada->integrantes;
 
         return Inertia::render('ProyectosCapacidadInstalada/FinalizarProyecto', [
             'proyectoCapacidadInstalada'        => $proyectoCapacidadInstalada,
             'estadosProyectoCapacidadInstalada' => json_decode(Storage::get('json/estados-proyecto-capacidad-instalada.json'), true),
-
+            'autorPrincipal'                    => $proyectoCapacidadInstalada->integrantes()->where('proyecto_capacidad_instalada_integrante.autor_principal', true)->first(),
         ]);
     }
 
@@ -593,5 +602,13 @@ class ProyectoCapacidadInstaladaController extends Controller
         $random    = Str::random(10);
 
         return str_replace(array("\r", "\n"), '', str_replace(array("\r", "\n"), '', "{$cleanName}cod{$random}." . $archivo->extension()));
+    }
+
+    public function cambiarAutorPrincipal(ProyectoCapacidadInstalada $proyectoCapacidadInstalada, $integrante)
+    {
+        DB::table('proyecto_capacidad_instalada_integrante')->where('proyecto_capacidad_instalada_integrante.proyecto_capacidad_instalada_id', $proyectoCapacidadInstalada->id)->where('proyecto_capacidad_instalada_integrante.autor_principal', true)->update(['proyecto_capacidad_instalada_integrante.autor_principal' => null]);
+        DB::table('proyecto_capacidad_instalada_integrante')->where('proyecto_capacidad_instalada_integrante.proyecto_capacidad_instalada_id', $proyectoCapacidadInstalada->id)->where('proyecto_capacidad_instalada_integrante.user_id', $integrante)->update(['proyecto_capacidad_instalada_integrante.autor_principal' => true]);
+
+        return back()->with('success', 'Se ha actualizado correctamente el autor principal.');
     }
 }
