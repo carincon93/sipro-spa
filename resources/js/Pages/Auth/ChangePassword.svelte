@@ -6,11 +6,10 @@
 
     import Input from '@/Shared/Input'
     import LoadingButton from '@/Shared/LoadingButton'
-    import InfoMessage from '@/Shared/InfoMessage'
 
     export let errors
 
-    $: $title = 'Soporte'
+    $: $title = 'Cambiar contraseña'
 
     /**
      * Permisos

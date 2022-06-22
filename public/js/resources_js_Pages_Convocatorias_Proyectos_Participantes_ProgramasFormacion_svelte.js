@@ -43869,7 +43869,7 @@ function create_default_slot_1(ctx) {
 	return {
 		c() {
 			strong = (0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.element)("strong");
-			strong.textContent = "Si va a cargar un archivo/documento/soporte tenga en cuenta lo siguiente:";
+			strong.textContent = "Si desea cargar un archivo/documento/soporte tenga en cuenta lo siguiente:";
 			t1 = (0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.space)();
 			ul = (0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.element)("ul");
 

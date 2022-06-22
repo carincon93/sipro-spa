@@ -276,6 +276,7 @@ Route::middleware(['auth', 'verified'])->group(function () {
      * Proyectos de capacidad instalada
      * 
      */
+    Route::post('proyectos-capacidad-instalada/{proyecto_capacidad_instalada}/{integrante}', [ProyectoCapacidadInstaladaController::class, 'cambiarAutorPrincipal'])->name('proyectos-capacidad-instalada.nuevo-autor-principal');
     Route::put('proyectos-capacidad-instalada/{proyecto_capacidad_instalada}/column/{column}', [ProyectoCapacidadInstaladaController::class, 'updateLongColumn'])->name('proyectos-capacidad-instalada.updateLongColumn');
     Route::get('proyectos-capacidad-instalada/{proyecto_capacidad_instalada}/objetivos-especificos', [ProyectoCapacidadInstaladaController::class, 'indexObjetivosEspecificos'])->name('proyectos-capacidad-instalada.objetivos-especificos.index');
     Route::get('proyectos-capacidad-instalada/{proyecto_capacidad_instalada}/objetivos-especificos/crear', [ProyectoCapacidadInstaladaController::class, 'createObjetivoEspecifico'])->name('proyectos-capacidad-instalada.objetivos-especificos.create');
