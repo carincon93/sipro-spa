@@ -756,34 +756,49 @@
         @forelse ($ambienteModernizacion->equiposAmbienteModernizacion as $equipo)
             <table width="100%" border="1" cellspacing="0" cellpadding="10" style="margin-top: 10px;">
                 <tr>
-                    <td width="33.33%">
-                        <p style="font-weight: bold;">Número de inventario del equipo o maquina</p>
+                    <td width="20%">
+                        <p style="font-weight: bold;">Número de inventario SENA del equipo o maquina</p>
                         <br>
                         <p>{{ $equipo->numero_inventario_equipo }}</p>
                     </td>
-                    <td width="33.33%">
+                    <td width="20%">
                         <p style="font-weight: bold;">Nombre del equipo o maquina</p>
                         <br>
                         <p>{{ $equipo->nombre_equipo }}</p>
                     </td>
-                    <td width="33.33%">
+                    <td width="20%">
+                        <p style="font-weight: bold;">Marca</p>
+                        <br>
+                        <p>{{ $equipo->marca }}</p>
+                    </td>
+                    <td width="20%">
                         <p style="font-weight: bold;">Descripción general técnica del equipo o maquina</p>
                         <br>
                         <p>{{ $equipo->descripcion_tecnica_equipo }}</p>
                     </td>
+                    <td width="20%">
+                        <p style="font-weight: bold;">Promedio de horas de uso al año</p>
+                        <br>
+                        <p>{{ $equipo->horas_promedio_uso }}</p>
+                    </td>
                 </tr>
                 <tr>
-                    <td width="33.33%">
+                    <td width="25%">
                         <p style="font-weight: bold;">Estado del equipo o maquina</p>
                         <br>
                         <p>{{ ($equipo->estado_equipo == 1 ? 'Bueno' : $equipo->estado_equipo == 2) ? 'Regular' : 'Malo' }}</p>
                     </td>
-                    <td width="33.33%">
-                        <p style="font-weight: bold;">¿El equipo o maquina está funcionamiento?</p>
+                    <td width="25%">
+                        <p style="font-weight: bold;">¿El equipo o maquina está en funcionamiento?</p>
                         <br>
                         <p>{{ $equipo->equipo_en_funcionamiento ? 'Si' : 'No' }}</p>
                     </td>
-                    <td width="33.33%">
+                    <td width="25%">
+                        <p style="font-weight: bold;">¿Con qué frecuencia requiere mantenimiento el equipo o maquina?</p>
+                        <br>
+                        <p>{{ $equipo->frecuencia_mantenimiento }}</p>
+                    </td>
+                    <td width="25%">
                         <p style="font-weight: bold;">Observaciones generales</p>
                         <br>
                         <p>{{ $equipo->observaciones_generales }}</p>

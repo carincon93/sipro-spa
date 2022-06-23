@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\AmbienteModernizacion;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\AmbienteModernizacionRequest;
+use App\Http\Requests\EquipoAmbienteModernizacionRequest;
 use App\Models\CodigoProyectoSgps;
 use App\Models\EquipoAmbienteModernizacion;
 use App\Models\MesaSectorial;
@@ -283,7 +284,7 @@ class AmbienteModernizacionController extends Controller
         return response()->download(storage_path("app/$path"));
     }
 
-    public function equiposStore(Request $request, AmbienteModernizacion $ambienteModernizacion)
+    public function equiposStore(EquipoAmbienteModernizacionRequest $request, AmbienteModernizacion $ambienteModernizacion)
     {
         $message = '';
 
@@ -292,10 +293,12 @@ class AmbienteModernizacionController extends Controller
             $equipoAmbienteModernizacion->numero_inventario_equipo      = $request->numero_inventario_equipo;
             $equipoAmbienteModernizacion->nombre_equipo                 = $request->nombre_equipo;
             $equipoAmbienteModernizacion->descripcion_tecnica_equipo    = $request->descripcion_tecnica_equipo;
-            $equipoAmbienteModernizacion->estado_equipo                 = $request->estado_equipo['value'];
-            $equipoAmbienteModernizacion->equipo_en_funcionamiento      = $request->equipo_en_funcionamiento['value'];
+            $equipoAmbienteModernizacion->estado_equipo                 = $request->estado_equipo;
+            $equipoAmbienteModernizacion->equipo_en_funcionamiento      = $request->equipo_en_funcionamiento;
             $equipoAmbienteModernizacion->observaciones_generales       = $request->observaciones_generales;
-
+            $equipoAmbienteModernizacion->marca                         = $request->marca;
+            $equipoAmbienteModernizacion->horas_promedio_uso            = $request->horas_promedio_uso;
+            $equipoAmbienteModernizacion->frecuencia_mantenimiento      = $request->frecuencia_mantenimiento;
             $equipoAmbienteModernizacion->save();
 
             $message = 'El recurso se ha modificado correctamente.';
@@ -304,9 +307,12 @@ class AmbienteModernizacionController extends Controller
             $equipoAmbienteModernizacion->numero_inventario_equipo      = $request->numero_inventario_equipo;
             $equipoAmbienteModernizacion->nombre_equipo                 = $request->nombre_equipo;
             $equipoAmbienteModernizacion->descripcion_tecnica_equipo    = $request->descripcion_tecnica_equipo;
-            $equipoAmbienteModernizacion->estado_equipo                 = $request->estado_equipo['value'];
-            $equipoAmbienteModernizacion->equipo_en_funcionamiento      = $request->equipo_en_funcionamiento['value'];
+            $equipoAmbienteModernizacion->estado_equipo                 = $request->estado_equipo;
+            $equipoAmbienteModernizacion->equipo_en_funcionamiento      = $request->equipo_en_funcionamiento;
             $equipoAmbienteModernizacion->observaciones_generales       = $request->observaciones_generales;
+            $equipoAmbienteModernizacion->marca                         = $request->marca;
+            $equipoAmbienteModernizacion->horas_promedio_uso            = $request->horas_promedio_uso;
+            $equipoAmbienteModernizacion->frecuencia_mantenimiento      = $request->frecuencia_mantenimiento;
             $equipoAmbienteModernizacion->ambienteModernizacion()->associate($ambienteModernizacion);
 
             $equipoAmbienteModernizacion->save();
