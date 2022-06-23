@@ -35,7 +35,10 @@ class EquipoAmbienteModernizacion extends Model
         'descripcion_tecnica_equipo',
         'estado_equipo',
         'equipo_en_funcionamiento',
-        'observaciones_generales'
+        'observaciones_generales',
+        'marca',
+        'horas_promedio_uso',
+        'frecuencia_mantenimiento'
     ];
 
     /**
