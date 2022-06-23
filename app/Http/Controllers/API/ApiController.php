@@ -85,7 +85,7 @@ class ApiController extends Controller
             ]);
         }
 
-        return response()->json(['erros' => ['User not found']], 404);
+        return response()->json(['errors' => ['User not found']], 404);
     }
 
     public function projectsByUser($id)

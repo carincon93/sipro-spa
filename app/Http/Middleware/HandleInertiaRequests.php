@@ -40,7 +40,7 @@ class HandleInertiaRequests extends Middleware
             'convocatoria' => Convocatoria::where('esta_activa', true)->first(),
             'auth' => [
                 'user'                  => $request->user() ? $request->user()->only('id', 'nombre', 'nombre_usuario', 'email', 'roles', 'can', 'can_by_user', 'centro_formacion_id') : null,
-                'notificaciones'        => $request->user()->notifications()->orderBy('created_at', 'DESC')->take(5)->get(),
+                'notificaciones'        => $request->user() ? $request->user()->unreadNotifications()->orderBy('created_at', 'DESC')->take(3)->get() : null,
                 'numeroNotificaciones'  => $request->user() ? $request->user()->unreadNotifications()->count() : 0
             ],
             'flash' => function () {

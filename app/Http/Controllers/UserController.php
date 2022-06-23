@@ -289,6 +289,12 @@ class UserController extends Controller
         return back();
     }
 
+    public function getNumeroNotificaciones()
+    {
+        $authUser = Auth::user();
+        return response()->json(['numeroNotificaciones' => $authUser->unreadNotifications()->count(), 'notificaciones' => $authUser->unreadNotifications()->orderBy('created_at', 'DESC')->take(3)->get()]);
+    }
+
     /**
      * Display a listing of the resource.
      *

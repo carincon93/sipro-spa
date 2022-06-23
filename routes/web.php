@@ -685,6 +685,7 @@ Route::middleware(['auth', 'verified'])->group(function () {
      * Usuarios
      * 
      */
+    Route::get('users/obtener-numero-notificaciones', [UserController::class, 'getNumeroNotificaciones'])->name('users.get-numero-notificaciones');
     Route::get('users/online', [UserController::class, 'enLinea'])->name('users.online');
     Route::resource('users',  UserController::class)->except(['show']);
 

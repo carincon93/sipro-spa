@@ -7,7 +7,7 @@
     import Pagination from '@/Shared/Pagination'
 
     export let convocatoria
-    export let proyecto
+    // export let proyecto
     export let evaluacion
     export let proyectoPresupuesto
     export let soportesEstudioMercado

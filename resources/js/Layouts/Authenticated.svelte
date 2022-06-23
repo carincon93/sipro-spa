@@ -10,6 +10,7 @@
     import { route, checkRole, checkPermission } from '@/Utils'
     import { _ } from 'svelte-i18n'
     import { onMount } from 'svelte'
+    import moment from 'moment'
 
     import ApplicationLogo from '@/Shared/ApplicationLogo'
     import Dropdown from '@/Shared/Dropdown'
@@ -272,15 +273,20 @@
 </Dialog>
 
 <Dialog bind:open={dialogNotifications} id="notificaciones" fullscreen hexBgColor="#58badd">
-    <div slot="title" class="mb-6 text-center text-cyan-600">
+    <div slot="title" class="mb-6 text-center text-cyan-600 mb-4">
         <div class="text-white">Notificaciones recientes</div>
+        <img src="/images/notifications.png" alt="" class="w-80 mx-auto" />
     </div>
-    <div slot="content" class="text-white">
+    <div slot="content" class="text-white scrollbar style-scrollbar">
         <div>
             <ul class="divide-y">
                 {#each authUser.notificaciones as notificacion}
                     <li class="flex justify-between py-4">
-                        {notificacion.data.message}
+                        <div>
+                            {notificacion.data.message}
+                            <br />
+                            <small class="mr-2">{moment(notificacion.created_at).locale('es').fromNow()}</small>
+                        </div>
                         <DataTableMenu style="color: #fff">
                             {#if notificacion.data.action}
                                 <Item on:SMUI:action={() => Inertia.visit(notificacion.data.action)}>
@@ -295,12 +301,14 @@
                     </li>
                 {/each}
             </ul>
-            <Button on:click={() => route('notificaciones.index')} style="border-color: #fff;" labelClass="text-white" variant="outlined">Mostrar todas las notificaciones</Button>
+            <div class="flex items-center justify-center">
+                <Button on:click={() => Inertia.visit(route('notificaciones.index'))} class="!text-white !border-white hover:opacity-90 transition-all" variant="outlined">Mostrar todas las notificaciones</Button>
+            </div>
         </div>
     </div>
     <div slot="actions">
         <div class="p-4">
-            <Button on:click={() => (dialogNotifications = false)} style="border-color: #fff;" labelClass="text-white" variant="outlined">Cancelar</Button>
+            <Button on:click={() => (dialogNotifications = false)} class="!text-white !border-white hover:opacity-90 transition-all" variant="outlined">Cancelar</Button>
         </div>
     </div>
 </Dialog>

@@ -27,7 +27,6 @@ module.exports = {
                     900: '#ff5019',
                     DEFAULT: '#4f46e5',
                 },
-                secondary: '#ffed4a',
                 danger: '#e3342f',
             },
         },
