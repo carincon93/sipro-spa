@@ -21,7 +21,7 @@
     $: $title = proyectoRolSennova.convocatoria_rol_sennova.rol_sennova.nombre
 
     /**
-     * Permisos
+     * Validar si el usuario autenticado es SuperAdmin
      */
     let authUser = $page.props.auth.user
     let isSuperAdmin = checkRole(authUser, [1])

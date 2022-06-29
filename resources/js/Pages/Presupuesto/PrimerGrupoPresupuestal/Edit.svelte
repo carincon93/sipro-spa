@@ -15,7 +15,7 @@
     $: $title = rubroPrimerGrupoPresupuestal ? rubroPrimerGrupoPresupuestal.nombre : null
 
     /**
-     * Permisos
+     * Validar si el usuario autenticado es SuperAdmin
      */
     let authUser = $page.props.auth.user
     let isSuperAdmin = checkRole(authUser, [1])

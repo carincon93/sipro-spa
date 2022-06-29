@@ -26,7 +26,7 @@
     $: $title = proyectoPresupuesto.convocatoria_presupuesto.presupuesto_sennova.uso_presupuestal ? proyectoPresupuesto.convocatoria_presupuesto.presupuesto_sennova.uso_presupuestal.descripcion : null
 
     /**
-     * Permisos
+     * Validar si el usuario autenticado es SuperAdmin
      */
     let authUser = $page.props.auth.user
     let isSuperAdmin = checkRole(authUser, [1])

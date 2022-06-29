@@ -19,7 +19,7 @@
     $: $title = 'Crear grupo de investigación'
 
     /**
-     * Permisos
+     * Validar si el usuario autenticado es SuperAdmin
      */
     let authUser = $page.props.auth.user
     let isSuperAdmin = checkRole(authUser, [1])

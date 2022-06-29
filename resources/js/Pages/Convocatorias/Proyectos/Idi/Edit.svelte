@@ -42,7 +42,7 @@
     $: $title = idi ? idi.titulo : null
 
     /**
-     * Permisos
+     * Validar si el usuario autenticado es SuperAdmin
      */
     let authUser = $page.props.auth.user
     let isSuperAdmin = checkRole(authUser, [1])

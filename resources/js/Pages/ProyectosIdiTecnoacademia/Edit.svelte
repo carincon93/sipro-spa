@@ -43,7 +43,7 @@
     $: $title = 'Editar proyecto I+D+i TecnoAcademia'
 
     /**
-     * Permisos
+     * Validar si el usuario autenticado es SuperAdmin
      */
     let authUser = $page.props.auth.user
     let isSuperAdmin = checkRole(authUser, [1])

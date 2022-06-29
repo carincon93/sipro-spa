@@ -21,7 +21,7 @@
     $: $title = 'Crear proyecto de servicios tecnológicos'
 
     /**
-     * Permisos
+     * Validar si el usuario autenticado es SuperAdmin
      */
     let authUser = $page.props.auth.user
     let isSuperAdmin = checkRole(authUser, [1])

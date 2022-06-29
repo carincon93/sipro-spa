@@ -18,7 +18,7 @@
     $: $title = convocatoriaPresupuesto ? convocatoriaPresupuesto.presupuesto_sennova.codigo : null
 
     /**
-     * Permisos
+     * Validar si el usuario autenticado es SuperAdmin
      */
     let authUser = $page.props.auth.user
     let isSuperAdmin = checkRole(authUser, [1])

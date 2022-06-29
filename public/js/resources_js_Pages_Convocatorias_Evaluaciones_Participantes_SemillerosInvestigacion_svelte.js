@@ -21894,7 +21894,7 @@ function instance($$self, $$props, $$invalidate) {
 	let { proyecto } = $$props;
 
 	/**
- * Permisos
+ * Validar si el usuario autenticado es SuperAdmin
  */
 	let authUser = $page.props.auth.user;
 
