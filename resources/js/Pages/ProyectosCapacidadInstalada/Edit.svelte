@@ -106,7 +106,7 @@
     })
 
     function submit() {
-        if (isSuperAdmin || (checkRole(authUser, [4, 6]) && authUser.id == autorPrincipal.id)) {
+        if (isSuperAdmin || (proyectoCapacidadInstalada.estado_proyecto != 'Finalizado' && checkRole(authUser, [4]) && proyectoCapacidadInstalada.semillero_investigacion.linea_investigacion.grupo_investigacion.centro_formacion.id && authUser.centro_formacion_id) || (proyectoCapacidadInstalada.estado_proyecto != 'Finalizado' && checkRole(authUser, [6]) && authUser.id == autorPrincipal.id)) {
             $form.put(route('proyectos-capacidad-instalada.update', proyectoCapacidadInstalada.id), {
                 onStart: () => (sending = true),
                 onFinish: () => (sending = false),
@@ -115,14 +115,14 @@
     }
 
     function destroy() {
-        if (isSuperAdmin || (checkRole(authUser, [4, 6]) && authUser.id == autorPrincipal.id)) {
+        if (isSuperAdmin || (proyectoCapacidadInstalada.estado_proyecto != 'Finalizado' && checkRole(authUser, [4]) && proyectoCapacidadInstalada.semillero_investigacion.linea_investigacion.grupo_investigacion.centro_formacion.id && authUser.centro_formacion_id) || (checkRole(authUser, [6]) && authUser.id == autorPrincipal.id)) {
             $form.delete(route('proyectos-capacidad-instalada.destroy', [proyectoCapacidadInstalada.id]))
         }
     }
 
     async function syncColumnLong(column, form) {
         return new Promise((resolve) => {
-            if ((typeof column !== 'undefined' && typeof form !== 'undefined' && isSuperAdmin) || (typeof column !== 'undefined' && typeof form !== 'undefined' && checkRole(authUser, [4, 6]) && authUser.id == autorPrincipal.id)) {
+            if ((typeof column !== 'undefined' && typeof form !== 'undefined' && isSuperAdmin) || (typeof column !== 'undefined' && typeof form !== 'undefined' && checkRole(authUser, [6]) && authUser.id == autorPrincipal.id)) {
                 Inertia.put(
                     route('proyectos-capacidad-instalada.updateLongColumn', [proyectoCapacidadInstalada.id, column]),
                     { [column]: form[column] },
@@ -181,7 +181,12 @@
     </header>
 
     <form on:submit|preventDefault={submit}>
-        <fieldset class="p-8" disabled={isSuperAdmin || (proyectoCapacidadInstalada.estado_proyecto != 'Finalizado' && checkRole(authUser, [4, 6]) && authUser.id == autorPrincipal.id) ? undefined : true}>
+        <fieldset
+            class="p-8"
+            disabled={isSuperAdmin || (proyectoCapacidadInstalada.estado_proyecto != 'Finalizado' && checkRole(authUser, [4]) && proyectoCapacidadInstalada.semillero_investigacion.linea_investigacion.grupo_investigacion.centro_formacion.id && authUser.centro_formacion_id) || (proyectoCapacidadInstalada.estado_proyecto != 'Finalizado' && checkRole(authUser, [6]) && authUser.id == autorPrincipal.id)
+                ? undefined
+                : true}
+        >
             <div class="mt-28">
                 <Label required labelFor="titulo" class="font-medium inline-block mb-10 text-center text-gray-700 text-sm w-full" value="Descripción llamativa que orienta el enfoque del proyecto, indica el cómo y el para qué. (Máximo 20 palabras)" />
                 <Textarea label="Título" id="titulo" sinContador={true} error={errors.titulo} bind:value={$form.titulo} classes="bg-transparent block border-0 {errors.titulo ? '' : 'outline-none-important'} mt-1 outline-none text-4xl text-center w-full" required />
@@ -467,15 +472,15 @@
         </fieldset>
 
         <div class="px-8 py-4 bg-gray-100 border-t border-gray-200 flex items-center sticky bottom-0">
-            {#if isSuperAdmin || (proyectoCapacidadInstalada.estado_proyecto != 'Finalizado' && checkRole(authUser, [4, 6]) && authUser.id == autorPrincipal.id)}
+            {#if isSuperAdmin || (proyectoCapacidadInstalada.estado_proyecto != 'Finalizado' && checkRole(authUser, [4]) && proyectoCapacidadInstalada.semillero_investigacion.linea_investigacion.grupo_investigacion.centro_formacion.id && authUser.centro_formacion_id) || (proyectoCapacidadInstalada.estado_proyecto != 'Finalizado' && checkRole(authUser, [6]) && authUser.id == autorPrincipal.id)}
                 <button class="text-red-600 hover:underline text-left" tabindex="-1" type="button" on:click={(event) => (dialogOpen = true)}> Eliminar proyecto de capacdad instalada </button>
             {/if}
-            {#if isSuperAdmin || (proyectoCapacidadInstalada.estado_proyecto != 'Finalizado' && checkRole(authUser, [4, 6]) && authUser.id == autorPrincipal.id)}
+            {#if isSuperAdmin || (proyectoCapacidadInstalada.estado_proyecto != 'Finalizado' && checkRole(authUser, [4]) && proyectoCapacidadInstalada.semillero_investigacion.linea_investigacion.grupo_investigacion.centro_formacion.id && authUser.centro_formacion_id) || (proyectoCapacidadInstalada.estado_proyecto != 'Finalizado' && checkRole(authUser, [6]) && authUser.id == autorPrincipal.id)}
                 <LoadingButton loading={sending} class="btn-indigo ml-auto" type="submit">Guardar y continuar</LoadingButton>
             {/if}
         </div>
     </form>
-    {#if isSuperAdmin || (checkRole(authUser, [4, 6]) && authUser.id == autorPrincipal.id)}
+    {#if isSuperAdmin || (checkRole(authUser, [6]) && authUser.id == autorPrincipal.id)}
         <Dialog bind:open={dialogOpen}>
             <div slot="title" class="flex items-center">
                 <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 mr-2 text-red-500" fill="none" viewBox="0 0 24 24" stroke="currentColor">

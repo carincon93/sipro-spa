@@ -307,8 +307,8 @@ Route::middleware(['auth', 'verified'])->group(function () {
     Route::put('proyectos-capacidad-instalada/{proyecto_capacidad_instalada}/productos/{producto}/editar', [ProyectoCapacidadInstaladaController::class, 'updateProducto'])->name('proyectos-capacidad-instalada.productos.update');
     Route::delete('proyectos-capacidad-instalada/{proyecto_capacidad_instalada}/productos/{producto}', [ProyectoCapacidadInstaladaController::class, 'destroyProducto'])->name('proyectos-capacidad-instalada.productos.destroy');
 
+    Route::post('proyectos-capacidad-instalada/{proyecto_capacidad_instalada}/finalizar/proyecto', [ProyectoCapacidadInstaladaController::class, 'storeFinalizar'])->name('proyectos-capacidad-instalada.store.finalizar');
     Route::get('proyectos-capacidad-instalada/{proyecto_capacidad_instalada}/finalizar', [ProyectoCapacidadInstaladaController::class, 'finalizar'])->name('proyectos-capacidad-instalada.finalizar');
-    Route::post('proyectos-capacidad-instalada/{proyecto_capacidad_instalada}/finalizar', [ProyectoCapacidadInstaladaController::class, 'storeFinalizar'])->name('proyectos-capacidad-instalada.store.finalizar');
 
     Route::resource('proyectos-capacidad-instalada', ProyectoCapacidadInstaladaController::class)->parameters(['proyectos-capacidad-instalada' => 'proyecto-capacidad-instalada'])->except(['show']);
 
