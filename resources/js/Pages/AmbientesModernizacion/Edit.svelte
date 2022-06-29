@@ -59,6 +59,15 @@
         { value: 'Malo', label: 'Malo' },
     ]
 
+    let opcionesFrecuencia = [
+        { value: 'N/A', label: 'N/A' },
+        { value: 'Semanal', label: 'Semanal' },
+        { value: 'Mensual', label: 'Mensual' },
+        { value: 'Trimestral', label: 'Trimestral' },
+        { value: 'Semestral', label: 'Semestral' },
+        { value: 'Anual', label: 'Anual' },
+    ]
+
     $: $title = 'Editar ambiente de modernización'
 
     /**
@@ -195,6 +204,9 @@
         estado_equipo: '',
         equipo_en_funcionamiento: '',
         observaciones_generales: '',
+        marca: '',
+        horas_promedio_uso: '',
+        frecuencia_mantenimiento: '',
     })
 
     function configurarDialogoEquipo(equipoAmbienteModernizacion) {
@@ -211,6 +223,12 @@
             label: opcionesSiNo.find((item) => item.value == equipoAmbienteModernizacion.equipo_en_funcionamiento)?.label,
         }
         $formEquipo.observaciones_generales = equipoAmbienteModernizacion.observaciones_generales
+        $formEquipo.marca = equipoAmbienteModernizacion.marca
+        $formEquipo.horas_promedio_uso = equipoAmbienteModernizacion.horas_promedio_uso
+        $formEquipo.frecuencia_mantenimiento = {
+            value: equipoAmbienteModernizacion.frecuencia_mantenimiento,
+            label: opcionesFrecuencia.find((item) => item.value == equipoAmbienteModernizacion.frecuencia_mantenimiento)?.label,
+        }
         equipoFormDialog = true
     }
 
@@ -843,28 +861,43 @@
         <table class="w-full bg-white whitespace-no-wrap table-fixed data-table mt-10">
             <thead>
                 <tr class="text-left font-bold">
-                    <th class="px-6 pt-6 pb-4 sticky top-0 z-10 bg-white shadow-xl w-full">Número de inventario del equipo o maquina</th>
-                    <th class="px-6 pt-6 pb-4 sticky top-0 z-10 bg-white shadow-xl w-full">Nombre del equipo o maquina</th>
-                    <th class="px-6 pt-6 pb-4 sticky top-0 z-10 bg-white shadow-xl w-full">Descripción general técnica del equipo o maquina</th>
-                    <th class="px-6 pt-6 pb-4 sticky top-0 z-10 bg-white shadow-xl w-full">Estado del equipo o maquina</th>
-                    <th class="px-6 pt-6 pb-4 sticky top-0 z-10 bg-white shadow-xl w-full">¿El equipo o maquina está funcionamiento?</th>
-                    <th class="px-6 pt-6 pb-4 sticky top-0 z-10 bg-white shadow-xl w-full">Observaciones generales</th>
-                    <th class="px-6 pt-6 pb-4 sticky top-0 z-10 bg-white shadow-xl w-full">Acciones</th>
+                    <th class="px-6 pt-6 pb-4 sticky top-0 z-10 bg-white shadow-xl w-full text-xs">Número de inventario SENA del equipo o maquina</th>
+                    <th class="px-6 pt-6 pb-4 sticky top-0 z-10 bg-white shadow-xl w-full text-xs">Marca y nombre del equipo o maquina</th>
+                    <th class="px-6 pt-6 pb-4 sticky top-0 z-10 bg-white shadow-xl w-full text-xs">Descripción general técnica del equipo o maquina</th>
+                    <th class="px-6 pt-6 pb-4 sticky top-0 z-10 bg-white shadow-xl w-full text-xs">Promedio de horas de uso al año</th>
+                    <th class="px-6 pt-6 pb-4 sticky top-0 z-10 bg-white shadow-xl w-full text-xs">Estado del equipo o maquina</th>
+                    <th class="px-6 pt-6 pb-4 sticky top-0 z-10 bg-white shadow-xl w-full text-xs">¿El equipo o maquina está en funcionamiento?</th>
+                    <th class="px-6 pt-6 pb-4 sticky top-0 z-10 bg-white shadow-xl w-full text-xs">¿Con qué frecuencia requiere mantenimiento el equipo o maquina?</th>
+                    <th class="px-6 pt-6 pb-4 sticky top-0 z-10 bg-white shadow-xl w-full text-xs">Observaciones generales</th>
+                    <th class="px-6 pt-6 pb-4 sticky top-0 z-10 bg-white shadow-xl w-full text-xs">Acciones</th>
                 </tr>
             </thead>
             <tbody>
                 {#each equiposAmbienteModernizacion as equipoAmbienteModernizacion}
                     <tr class="hover:bg-gray-100 focus-within:bg-gray-100">
-                        <td class="border-t px-6 pt-6 pb-4">{equipoAmbienteModernizacion.numero_inventario_equipo}</td>
-                        <td class="border-t px-6 pt-6 pb-4">{equipoAmbienteModernizacion.nombre_equipo}</td>
-                        <td class="border-t px-6 pt-6 pb-4">{equipoAmbienteModernizacion.descripcion_tecnica_equipo}</td>
-                        <td class="border-t px-6 pt-6 pb-4">{equipoAmbienteModernizacion.estado_equipo}</td>
-                        <td class="border-t px-6 pt-6 pb-4">{equipoAmbienteModernizacion.equipo_en_funcionamiento_text}</td>
-                        <td class="border-t px-6 pt-6 pb-4">
+                        <td class="border-t px-6 pt-6 pb-4 text-xs">{equipoAmbienteModernizacion.numero_inventario_equipo}</td>
+                        <td class="border-t px-6 pt-6 pb-4 text-xs">
+                            <strong>Marca:</strong>
+                            {equipoAmbienteModernizacion.marca}
+                            <br />
+                            <strong>Nombre del equipo:</strong>
+                            {equipoAmbienteModernizacion.nombre_equipo}
+                        </td>
+                        <td class="border-t px-6 pt-6 pb-4 text-xs">
+                            <p class="paragraph-ellipsis">
+                                {equipoAmbienteModernizacion.descripcion_tecnica_equipo}
+                            </p>
+                        </td>
+                        <td class="border-t px-6 pt-6 pb-4 text-xs">{equipoAmbienteModernizacion.horas_promedio_uso}</td>
+                        <td class="border-t px-6 pt-6 pb-4 text-xs">{equipoAmbienteModernizacion.estado_equipo}</td>
+                        <td class="border-t px-6 pt-6 pb-4 text-xs">{equipoAmbienteModernizacion.equipo_en_funcionamiento_text}</td>
+                        <td class="border-t px-6 pt-6 pb-4 text-xs">{equipoAmbienteModernizacion.frecuencia_mantenimiento}</td>
+                        <td class="border-t px-6 pt-6 pb-4 text-xs">
                             <p class="paragraph-ellipsis">
                                 {equipoAmbienteModernizacion.observaciones_generales}
                             </p>
                         </td>
+
                         <td class="border-t px-6 pt-6 pb-4">
                             <DataTableMenu>
                                 {#if isSuperAdmin || checkRole(authUser, [4])}
@@ -881,7 +914,7 @@
                 {/each}
                 {#if equiposAmbienteModernizacion.length === 0}
                     <tr class="hover:bg-gray-100 focus-within:bg-gray-100">
-                        <td class="border-t px-6 pt-6 pb-4" colspan="7"> Sin información registrada </td>
+                        <td class="border-t px-6 pt-6 pb-4" colspan="9"> Sin información registrada </td>
                     </tr>
                 {/if}
             </tbody>
@@ -904,8 +937,18 @@
                     </div>
 
                     <div class="mt-4">
+                        <Label required class="mb-4" labelFor="marca" value="Marca" />
+                        <Input id="marca" type="text" class="mt-1" error={errors.marca} placeholder="Escriba marca" bind:value={$formEquipo.marca} required />
+                    </div>
+
+                    <div class="mt-4">
                         <Label required class="mb-4" labelFor="descripcion_tecnica_equipo" value="Descripción general técnica del equipo o máquina" />
                         <Textarea maxlength="40000" id="descripcion_tecnica_equipo" error={errors.descripcion_tecnica_equipo} bind:value={$formEquipo.descripcion_tecnica_equipo} required />
+                    </div>
+
+                    <div class="mt-4">
+                        <Label required class="mb-4" labelFor="horas_promedio_uso" value="Promedio de horas de uso al año" />
+                        <Input id="horas_promedio_uso" type="number" input$min="0" class="mt-1" error={errors.horas_promedio_uso} placeholder="Escriba horas_promedio_uso" bind:value={$formEquipo.horas_promedio_uso} required />
                     </div>
 
                     <div class="mt-4">
@@ -916,6 +959,11 @@
                     <div class="mt-4">
                         <Label required class="mb-4" labelFor="equipo_en_funcionamiento" value="¿El equipo o máquina está funcionamiento? SI/NO" />
                         <Select items={opcionesSiNo} id="equipo_en_funcionamiento" bind:selectedValue={$formEquipo.equipo_en_funcionamiento} error={errors.equipo_en_funcionamiento} autocomplete="off" placeholder="Seleccione una opción" required />
+                    </div>
+
+                    <div class="mt-4">
+                        <Label required class="mb-4" labelFor="frecuencia_mantenimiento" value="¿Con qué frecuencia requiere mantenimiento el equipo o maquina?" />
+                        <Select items={opcionesFrecuencia} id="frecuencia_mantenimiento" bind:selectedValue={$formEquipo.frecuencia_mantenimiento} error={errors.frecuencia_mantenimiento} autocomplete="off" placeholder="Seleccione una opción" required />
                     </div>
 
                     <div class="mt-4">

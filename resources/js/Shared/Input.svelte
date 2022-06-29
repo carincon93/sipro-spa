@@ -43,7 +43,7 @@
         </InfoMessage>
     {:else if type == 'url' && message == ''}
         <InfoMessage>
-            <strong>Si va a cargar un archivo/documento/soporte tenga en cuenta lo siguiente:</strong>
+            <strong>Si desea cargar un archivo/documento/soporte tenga en cuenta lo siguiente:</strong>
             <ul>
                 <li>1. Si tiene cuenta @sena.edu.co cargue el archivo en <a href="https://sena4-my.sharepoint.com/" class="underline" target="_blank">https://sena4-my.sharepoint.com/</a> y si es @misena.edu.co en <a href="https://drive.google.com" class="underline" target="_blank">https://drive.google.com</a></li>
                 <li>2. De clic en la opción Share o Compartir y copie el enlace que se genera (Debe revisar que el enlace sea público)</li>

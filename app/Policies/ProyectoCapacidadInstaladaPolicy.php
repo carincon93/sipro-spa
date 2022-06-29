@@ -34,11 +34,7 @@ class ProyectoCapacidadInstaladaPolicy
      */
     public function view(User $user, ProyectoCapacidadInstalada $proyectoCapacidadInstalada)
     {
-        if ($user->getAllPermissions()->where('id', 22)->first() || $user->hasRole([4]) && $user->dinamizadorCentroFormacion && $proyectoCapacidadInstalada->semilleroInvestigacion->lineaInvestigacion->grupoInvestigacion->centroFormacion->id == $user->dinamizadorCentroFormacion->id) {
-            return true;
-        }
-
-        if ($proyectoCapacidadInstalada->integrantes()->where('proyecto_capacidad_instalada_integrante.user_id', $user->id)->where('proyecto_capacidad_instalada_integrante.autor_principal', true)->exists()) {
+        if ($user->getAllPermissions()->where('id', 22)->first() || $user->hasRole([4]) && $user->dinamizadorCentroFormacion && $proyectoCapacidadInstalada->semilleroInvestigacion->lineaInvestigacion->grupoInvestigacion->centroFormacion->id == $user->dinamizadorCentroFormacion->id || $proyectoCapacidadInstalada->integrantes()->where('proyecto_capacidad_instalada_integrante.user_id', $user->id)->exists()) {
             return true;
         }
 
@@ -69,7 +65,7 @@ class ProyectoCapacidadInstaladaPolicy
      */
     public function update(User $user, ProyectoCapacidadInstalada $proyectoCapacidadInstalada)
     {
-        if ($user->getAllPermissions()->where('id', 22)->first() || $user->hasRole([4]) && $user->dinamizadorCentroFormacion && $proyectoCapacidadInstalada->semilleroInvestigacion->lineaInvestigacion->grupoInvestigacion->centroFormacion->id == $user->dinamizadorCentroFormacion->id) {
+        if ($user->hasRole([4]) && $user->dinamizadorCentroFormacion && $proyectoCapacidadInstalada->semilleroInvestigacion->lineaInvestigacion->grupoInvestigacion->centroFormacion->id == $user->dinamizadorCentroFormacion->id) {
             return true;
         }
 
