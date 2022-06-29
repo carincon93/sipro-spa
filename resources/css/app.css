@@ -5,7 +5,7 @@
 
 :root {
     --mdc-theme-primary: #58badd;
-    --mdc-theme-secondary: #fff;
+    --mdc-theme-secondary: #4898B5;
     --mdc-theme-on-primary: #fff;
     --mdc-theme-error: #d93025;
 }
@@ -282,54 +282,6 @@ th.th-actions {
     background-color: rgb(229 231 235 / var(--tw-bg-opacity));
 }
 
-[role='tooltip'] {
-    display: inline-block;
-    background: #ffffff;
-    color: #767676;
-    font-weight: bold;
-    padding: 5px 10px;
-    font-size: 13px;
-    border-radius: 4px;
-    --tw-shadow: 0 1px 3px 0 rgb(0 0 0 / 0.1), 0 1px 2px -1px rgb(0 0 0 / 0.1);
-    --tw-shadow-colored: 0 1px 3px 0 var(--tw-shadow-color), 0 1px 2px -1px var(--tw-shadow-color);
-    box-shadow: var(--tw-ring-offset-shadow, 0 0 #0000), var(--tw-ring-shadow, 0 0 #0000), var(--tw-shadow);
-    text-align: center;
-}
-
-[data-popper-arrow],
-[data-popper-arrow]::before {
-    position: absolute;
-    width: 8px;
-    height: 8px;
-    background: inherit;
-}
-
-[data-popper-arrow] {
-    visibility: hidden;
-}
-
-[data-popper-arrow]::before {
-    visibility: visible;
-    content: '';
-    transform: rotate(45deg);
-}
-
-[role='tooltip'][data-popper-placement^='top'] > [data-popper-arrow] {
-    bottom: -4px;
-}
-
-[role='tooltip'][data-popper-placement^='bottom'] > [data-popper-arrow] {
-    top: -4px;
-}
-
-[role='tooltip'][data-popper-placement^='left'] > [data-popper-arrow] {
-    right: -4px;
-}
-
-[role='tooltip'][data-popper-placement^='right'] > [data-popper-arrow] {
-    left: -4px;
-}
-
 ::-webkit-scrollbar-track {
     -webkit-box-shadow: inset 0 0 6px rgba(0, 0, 0, 0.3);
     background-color: #e6e6e6;
@@ -344,3 +296,19 @@ th.th-actions {
     background-color: #aeaeae;
     border-radius: 10px;
 }
+
+ [role='tooltip'][data-popper-placement^='top']>[data-popper-arrow] {
+     bottom: -4px;
+ }
+
+ [role='tooltip'][data-popper-placement^='bottom']>[data-popper-arrow] {
+     top: -4px;
+ }
+
+ [role='tooltip'][data-popper-placement^='left']>[data-popper-arrow] {
+     right: -4px;
+ }
+
+ [role='tooltip'][data-popper-placement^='right']>[data-popper-arrow] {
+     left: -4px;
+ }

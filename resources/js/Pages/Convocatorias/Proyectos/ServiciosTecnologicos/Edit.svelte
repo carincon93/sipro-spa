@@ -20,6 +20,7 @@
     import Dialog from '@/Shared/Dialog'
     import SelectMulti from '@/Shared/SelectMulti'
     import Input from '@/Shared/Input'
+    import RecomendacionEvaluador from '@/Shared/RecomendacionEvaluador'
 
     export let errors
     export let convocatoria
@@ -147,7 +148,7 @@
 
     <form on:submit|preventDefault={submit}>
         <fieldset class="p-8" disabled={isSuperAdmin || (checkPermissionByUser(authUser, [5]) && servicioTecnologico.proyecto.modificable == true) ? undefined : checkPermission(authUser, [6, 7]) && servicioTecnologico.proyecto.modificable == true ? undefined : true}>
-            <div class="mt-28">
+            <div>
                 <Label
                     required
                     labelFor="titulo"
@@ -156,24 +157,21 @@
                 />
                 <Textarea label="Título" sinContador={true} id="titulo" error={errors.titulo} bind:value={$form.titulo} classes="bg-transparent block border-0 {errors.titulo ? '' : 'outline-none-important'} mt-1 outline-none text-4xl text-center w-full" required />
 
-                {#if isSuperAdmin || servicioTecnologico.proyecto.mostrar_recomendaciones}
-                    {#each servicioTecnologico.proyecto.evaluaciones as evaluacion, i}
-                        {#if isSuperAdmin || (evaluacion.finalizado && evaluacion.habilitado)}
-                            <div class="bg-gray-200 p-4 rounded border-orangered border mb-5">
-                                <div class="flex text-orangered-900 font-black">
-                                    <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 mr-1.5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2m-3 7h3m-3 4h3m-6-4h.01M9 16h.01" />
-                                    </svg>
-                                    Recomendación del evaluador COD-{evaluacion.id}:
+                <RecomendacionEvaluador class="mt-8">
+                    {#if isSuperAdmin || servicioTecnologico.proyecto.mostrar_recomendaciones}
+                        {#each servicioTecnologico.proyecto.evaluaciones as evaluacion, i}
+                            {#if isSuperAdmin || (evaluacion.finalizado && evaluacion.habilitado)}
+                                <div class="bg-zinc-900 p-4 rounded shadow text-white my-2">
+                                    <p class="text-xs">Evaluador COD-{evaluacion.id}:</p>
+                                    <p class="whitespace-pre-line text-xs">{evaluacion.servicio_tecnologico_evaluacion.titulo_comentario ? evaluacion.servicio_tecnologico_evaluacion.titulo_comentario : 'Sin recomendación'}</p>
                                 </div>
-                                <p class="whitespace-pre-line">{evaluacion.servicio_tecnologico_evaluacion.titulo_comentario ? evaluacion.servicio_tecnologico_evaluacion.titulo_comentario : 'Sin recomendación'}</p>
-                            </div>
-                        {/if}
-                    {/each}
-                {/if}
+                            {/if}
+                        {/each}
+                    {/if}
+                </RecomendacionEvaluador>
             </div>
 
-            <div class="mt-44">
+            <div>
                 <p class="text-center">Fecha de ejecución</p>
                 <small class="text-red-400 block text-center"> * Campo obligatorio </small>
                 <InfoMessage message={convocatoria.fecha_maxima_st} class="my-5" />
@@ -200,21 +198,18 @@
                     </div>
                 {/if}
 
-                {#if isSuperAdmin || servicioTecnologico.proyecto.mostrar_recomendaciones}
-                    {#each servicioTecnologico.proyecto.evaluaciones as evaluacion, i}
-                        {#if isSuperAdmin || (evaluacion.finalizado && evaluacion.habilitado)}
-                            <div class="bg-gray-200 p-4 rounded border-orangered border mb-5">
-                                <div class="flex text-orangered-900 font-black">
-                                    <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 mr-1.5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2m-3 7h3m-3 4h3m-6-4h.01M9 16h.01" />
-                                    </svg>
-                                    Recomendación del evaluador COD-{evaluacion.id}:
+                <RecomendacionEvaluador class="mt-8">
+                    {#if isSuperAdmin || servicioTecnologico.proyecto.mostrar_recomendaciones}
+                        {#each servicioTecnologico.proyecto.evaluaciones as evaluacion, i}
+                            {#if isSuperAdmin || (evaluacion.finalizado && evaluacion.habilitado)}
+                                <div class="bg-zinc-900 p-4 rounded shadow text-white my-2">
+                                    <p class="text-xs">Evaluador COD-{evaluacion.id}:</p>
+                                    <p class="whitespace-pre-line text-xs">{evaluacion.servicio_tecnologico_evaluacion.fecha_ejecucion_comentario ? evaluacion.servicio_tecnologico_evaluacion.fecha_ejecucion_comentario : 'Sin recomendación'}</p>
                                 </div>
-                                <p class="whitespace-pre-line">{evaluacion.servicio_tecnologico_evaluacion.fecha_ejecucion_comentario ? evaluacion.servicio_tecnologico_evaluacion.fecha_ejecucion_comentario : 'Sin recomendación'}</p>
-                            </div>
-                        {/if}
-                    {/each}
-                {/if}
+                            {/if}
+                        {/each}
+                    {/if}
+                </RecomendacionEvaluador>
             </div>
 
             <fieldset disabled>
@@ -261,69 +256,69 @@
 
             <h1 class="text-2xl text-center" id="estructura-proyecto">Estructura del proyecto</h1>
 
-            <div class="mt-40 grid grid-cols-1">
-                <div>
-                    <Label required class="mb-4" labelFor="resumen" value="Resumen ejecutivo" />
-                    <InfoMessage class="mb-2">
-                        <p>
-                            Información necesaria para darle al lector una idea precisa de la pertinencia y calidad del proyecto. Explique en qué consiste el problema o necesidad, cómo cree que lo resolverá, cuáles son las razones que justifican su ejecución y las herramientas que se utilizarán en el desarrollo del proyecto.
-                            <br />
-                            <strong>Nota:</strong> El resumen por lo general se construye al final de la contextualización con el fin de tener claros todos los puntos que intervinieron en la misma y poder dar a conocer de forma más pertinente los por menores del proyecto. (Máximo 1000 caracteres).
-                        </p>
-                    </InfoMessage>
+            <div>
+                <div class="mt-40 grid grid-cols-1">
+                    <div>
+                        <Label required class="mb-4" labelFor="resumen" value="Resumen ejecutivo" />
+                        <InfoMessage class="mb-2">
+                            <p>
+                                Información necesaria para darle al lector una idea precisa de la pertinencia y calidad del proyecto. Explique en qué consiste el problema o necesidad, cómo cree que lo resolverá, cuáles son las razones que justifican su ejecución y las herramientas que se utilizarán en el desarrollo del proyecto.
+                                <br />
+                                <strong>Nota:</strong> El resumen por lo general se construye al final de la contextualización con el fin de tener claros todos los puntos que intervinieron en la misma y poder dar a conocer de forma más pertinente los por menores del proyecto. (Máximo 1000 caracteres).
+                            </p>
+                        </InfoMessage>
+                    </div>
+                    <div>
+                        <Textarea maxlength="1000" id="resumen" error={errors.resumen} bind:value={$resumenForm.resumen} on:input={() => syncColumnLong('resumen', $resumenForm)} required />
+                    </div>
                 </div>
                 <div>
-                    <Textarea maxlength="1000" id="resumen" error={errors.resumen} bind:value={$resumenForm.resumen} on:input={() => syncColumnLong('resumen', $resumenForm)} required />
-
-                    {#if isSuperAdmin || servicioTecnologico.proyecto.mostrar_recomendaciones}
-                        {#each servicioTecnologico.proyecto.evaluaciones as evaluacion, i}
-                            {#if isSuperAdmin || (evaluacion.finalizado && evaluacion.habilitado)}
-                                <div class="bg-gray-200 p-4 rounded border-orangered border mb-5">
-                                    <div class="flex text-orangered-900 font-black">
-                                        <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 mr-1.5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2m-3 7h3m-3 4h3m-6-4h.01M9 16h.01" />
-                                        </svg>
-                                        Recomendación del evaluador COD-{evaluacion.id}:
+                    <RecomendacionEvaluador class="mt-8">
+                        {#if isSuperAdmin || servicioTecnologico.proyecto.mostrar_recomendaciones}
+                            {#each servicioTecnologico.proyecto.evaluaciones as evaluacion, i}
+                                {#if isSuperAdmin || (evaluacion.finalizado && evaluacion.habilitado)}
+                                    <div class="bg-zinc-900 p-4 rounded shadow text-white my-2">
+                                        <p class="text-xs">Evaluador COD-{evaluacion.id}:</p>
+                                        <p class="whitespace-pre-line text-xs">{evaluacion.servicio_tecnologico_evaluacion.resumen_comentario ? evaluacion.servicio_tecnologico_evaluacion.resumen_comentario : 'Sin recomendación'}</p>
                                     </div>
-                                    <p class="whitespace-pre-line">{evaluacion.servicio_tecnologico_evaluacion.resumen_comentario ? evaluacion.servicio_tecnologico_evaluacion.resumen_comentario : 'Sin recomendación'}</p>
-                                </div>
-                            {/if}
-                        {/each}
-                    {/if}
+                                {/if}
+                            {/each}
+                        {/if}
+                    </RecomendacionEvaluador>
                 </div>
             </div>
 
-            <div class="mt-44 grid grid-cols-1">
-                <div>
-                    <Label required class="mb-4" labelFor="antecedentes" value="Antecedentes" />
-                    <InfoMessage class="mb-2">
-                        <p>
-                            Se debe evidenciar la identificación y caracterización del mercado potencial/objetivo, nicho de mercado al cual se busca atender o la necesidad que se busca satisfacer tomando como referencia el estudio del sector, identificando si existen el(los) mismo(s) alcance(s) o similar(es) en la empresa privada o pública u otros centros de formación de tal forma que el proyecto
-                            no se convierta en una competencia frente a un servicio/producto ofertado. Se debe registrar el análisis de las tendencias del mercado, en relación con clientes potenciales, competidores y proveedores. En este ítem es necesario valorar las necesidades de los clientes actuales o potenciales y precisar la segmentación del mercado, las tendencias de los precios y las
-                            gestiones comerciales a realizadas.
-                            <br />
-                            <strong>Nota:</strong> La información debe ser de fuentes primarias, ejemplo: Secretarías, DANE, Artículos científicos, entre otros y citarla utilizando normas APA séptima edición. (Máximo 10000 caracteres).
-                        </p>
-                    </InfoMessage>
+            <div>
+                <div class="mt-44 grid grid-cols-1">
+                    <div>
+                        <Label required class="mb-4" labelFor="antecedentes" value="Antecedentes" />
+                        <InfoMessage class="mb-2">
+                            <p>
+                                Se debe evidenciar la identificación y caracterización del mercado potencial/objetivo, nicho de mercado al cual se busca atender o la necesidad que se busca satisfacer tomando como referencia el estudio del sector, identificando si existen el(los) mismo(s) alcance(s) o similar(es) en la empresa privada o pública u otros centros de formación de tal forma que el
+                                proyecto no se convierta en una competencia frente a un servicio/producto ofertado. Se debe registrar el análisis de las tendencias del mercado, en relación con clientes potenciales, competidores y proveedores. En este ítem es necesario valorar las necesidades de los clientes actuales o potenciales y precisar la segmentación del mercado, las tendencias de los
+                                precios y las gestiones comerciales a realizadas.
+                                <br />
+                                <strong>Nota:</strong> La información debe ser de fuentes primarias, ejemplo: Secretarías, DANE, Artículos científicos, entre otros y citarla utilizando normas APA séptima edición. (Máximo 10000 caracteres).
+                            </p>
+                        </InfoMessage>
+                    </div>
+                    <div>
+                        <Textarea maxlength="10000" id="antecedentes" error={errors.antecedentes} bind:value={$formAntecedentes.antecedentes} on:input={() => syncColumnLong('antecedentes', $formAntecedentes)} required />
+                    </div>
                 </div>
                 <div>
-                    <Textarea maxlength="10000" id="antecedentes" error={errors.antecedentes} bind:value={$formAntecedentes.antecedentes} on:input={() => syncColumnLong('antecedentes', $formAntecedentes)} required />
-
-                    {#if isSuperAdmin || servicioTecnologico.proyecto.mostrar_recomendaciones}
-                        {#each servicioTecnologico.proyecto.evaluaciones as evaluacion, i}
-                            {#if isSuperAdmin || (evaluacion.finalizado && evaluacion.habilitado)}
-                                <div class="bg-gray-200 p-4 rounded border-orangered border mb-5">
-                                    <div class="flex text-orangered-900 font-black">
-                                        <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 mr-1.5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2m-3 7h3m-3 4h3m-6-4h.01M9 16h.01" />
-                                        </svg>
-                                        Recomendación del evaluador COD-{evaluacion.id}:
+                    <RecomendacionEvaluador class="mt-8">
+                        {#if isSuperAdmin || servicioTecnologico.proyecto.mostrar_recomendaciones}
+                            {#each servicioTecnologico.proyecto.evaluaciones as evaluacion, i}
+                                {#if isSuperAdmin || (evaluacion.finalizado && evaluacion.habilitado)}
+                                    <div class="bg-zinc-900 p-4 rounded shadow text-white my-2">
+                                        <p class="text-xs">Evaluador COD-{evaluacion.id}:</p>
+                                        <p class="whitespace-pre-line text-xs">{evaluacion.servicio_tecnologico_evaluacion.antecedentes_comentario ? evaluacion.servicio_tecnologico_evaluacion.antecedentes_comentario : 'Sin recomendación'}</p>
                                     </div>
-                                    <p class="whitespace-pre-line">{evaluacion.servicio_tecnologico_evaluacion.antecedentes_comentario ? evaluacion.servicio_tecnologico_evaluacion.antecedentes_comentario : 'Sin recomendación'}</p>
-                                </div>
-                            {/if}
-                        {/each}
-                    {/if}
+                                {/if}
+                            {/each}
+                        {/if}
+                    </RecomendacionEvaluador>
                 </div>
             </div>
 
@@ -339,21 +334,18 @@
                 <div>
                     <Textarea label="Identificación y descripción del problema" maxlength="5000" id="identificacion_problema" error={errors.identificacion_problema} bind:value={$formIdentificacionProblema.identificacion_problema} on:input={() => syncColumnLong('identificacion_problema', $formIdentificacionProblema)} required />
 
-                    {#if isSuperAdmin || servicioTecnologico.proyecto.mostrar_recomendaciones}
-                        {#each servicioTecnologico.proyecto.evaluaciones as evaluacion, i}
-                            {#if isSuperAdmin || (evaluacion.finalizado && evaluacion.habilitado)}
-                                <div class="bg-gray-200 p-4 rounded border-orangered border mb-5">
-                                    <div class="flex text-orangered-900 font-black">
-                                        <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 mr-1.5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2m-3 7h3m-3 4h3m-6-4h.01M9 16h.01" />
-                                        </svg>
-                                        Recomendación del evaluador COD-{evaluacion.id}:
+                    <RecomendacionEvaluador class="mt-8">
+                        {#if isSuperAdmin || servicioTecnologico.proyecto.mostrar_recomendaciones}
+                            {#each servicioTecnologico.proyecto.evaluaciones as evaluacion, i}
+                                {#if isSuperAdmin || (evaluacion.finalizado && evaluacion.habilitado)}
+                                    <div class="bg-zinc-900 p-4 rounded shadow text-white my-2">
+                                        <p class="text-xs">Evaluador COD-{evaluacion.id}:</p>
+                                        <p class="whitespace-pre-line text-xs">{evaluacion.servicio_tecnologico_evaluacion.identificacion_problema_comentario ? evaluacion.servicio_tecnologico_evaluacion.identificacion_problema_comentario : 'Sin recomendación'}</p>
                                     </div>
-                                    <p class="whitespace-pre-line">{evaluacion.servicio_tecnologico_evaluacion.identificacion_problema_comentario ? evaluacion.servicio_tecnologico_evaluacion.identificacion_problema_comentario : 'Sin recomendación'}</p>
-                                </div>
-                            {/if}
-                        {/each}
-                    {/if}
+                                {/if}
+                            {/each}
+                        {/if}
+                    </RecomendacionEvaluador>
                 </div>
             </div>
 
@@ -377,21 +369,18 @@
                 <div>
                     <Textarea label="Pregunta formulación del problema" sinContador={true} id="pregunta_formulacion_problema" error={errors.pregunta_formulacion_problema} bind:value={$form.pregunta_formulacion_problema} required />
 
-                    {#if isSuperAdmin || servicioTecnologico.proyecto.mostrar_recomendaciones}
-                        {#each servicioTecnologico.proyecto.evaluaciones as evaluacion, i}
-                            {#if isSuperAdmin || (evaluacion.finalizado && evaluacion.habilitado)}
-                                <div class="bg-gray-200 p-4 rounded border-orangered border mb-5">
-                                    <div class="flex text-orangered-900 font-black">
-                                        <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 mr-1.5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2m-3 7h3m-3 4h3m-6-4h.01M9 16h.01" />
-                                        </svg>
-                                        Recomendación del evaluador COD-{evaluacion.id}:
+                    <RecomendacionEvaluador class="mt-8">
+                        {#if isSuperAdmin || servicioTecnologico.proyecto.mostrar_recomendaciones}
+                            {#each servicioTecnologico.proyecto.evaluaciones as evaluacion, i}
+                                {#if isSuperAdmin || (evaluacion.finalizado && evaluacion.habilitado)}
+                                    <div class="bg-zinc-900 p-4 rounded shadow text-white my-2">
+                                        <p class="text-xs">Evaluador COD-{evaluacion.id}:</p>
+                                        <p class="whitespace-pre-line text-xs">{evaluacion.servicio_tecnologico_evaluacion.pregunta_formulacion_problema_comentario ? evaluacion.servicio_tecnologico_evaluacion.pregunta_formulacion_problema_comentario : 'Sin recomendación'}</p>
                                     </div>
-                                    <p class="whitespace-pre-line">{evaluacion.servicio_tecnologico_evaluacion.pregunta_formulacion_problema_comentario ? evaluacion.servicio_tecnologico_evaluacion.pregunta_formulacion_problema_comentario : 'Sin recomendación'}</p>
-                                </div>
-                            {/if}
-                        {/each}
-                    {/if}
+                                {/if}
+                            {/each}
+                        {/if}
+                    </RecomendacionEvaluador>
                 </div>
             </div>
             <div class="mt-44 grid grid-cols-1">
@@ -411,21 +400,18 @@
                 </div>
                 <div>
                     <Textarea label="Justificación" maxlength="5000" id="justificacion_problema" error={errors.justificacion_problema} bind:value={$formJustificacionProblema.justificacion_problema} on:input={() => syncColumnLong('justificacion_problema', $formJustificacionProblema)} required />
-                    {#if isSuperAdmin || servicioTecnologico.proyecto.mostrar_recomendaciones}
-                        {#each servicioTecnologico.proyecto.evaluaciones as evaluacion, i}
-                            {#if isSuperAdmin || (evaluacion.finalizado && evaluacion.habilitado)}
-                                <div class="bg-gray-200 p-4 rounded border-orangered border mb-5">
-                                    <div class="flex text-orangered-900 font-black">
-                                        <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 mr-1.5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2m-3 7h3m-3 4h3m-6-4h.01M9 16h.01" />
-                                        </svg>
-                                        Recomendación del evaluador COD-{evaluacion.id}:
+                    <RecomendacionEvaluador class="mt-8">
+                        {#if isSuperAdmin || servicioTecnologico.proyecto.mostrar_recomendaciones}
+                            {#each servicioTecnologico.proyecto.evaluaciones as evaluacion, i}
+                                {#if isSuperAdmin || (evaluacion.finalizado && evaluacion.habilitado)}
+                                    <div class="bg-zinc-900 p-4 rounded shadow text-white my-2">
+                                        <p class="text-xs">Evaluador COD-{evaluacion.id}:</p>
+                                        <p class="whitespace-pre-line text-xs">{evaluacion.servicio_tecnologico_evaluacion.justificacion_problema_comentario ? evaluacion.servicio_tecnologico_evaluacion.justificacion_problema_comentario : 'Sin recomendación'}</p>
                                     </div>
-                                    <p class="whitespace-pre-line">{evaluacion.servicio_tecnologico_evaluacion.justificacion_problema_comentario ? evaluacion.servicio_tecnologico_evaluacion.justificacion_problema_comentario : 'Sin recomendación'}</p>
-                                </div>
-                            {/if}
-                        {/each}
-                    {/if}
+                                {/if}
+                            {/each}
+                        {/if}
+                    </RecomendacionEvaluador>
                 </div>
             </div>
 
@@ -466,21 +452,18 @@
                 <div>
                     <Textarea sinContador={true} id="bibliografia" error={errors.bibliografia} bind:value={$formBibliografia.bibliografia} on:input={() => syncColumnLong('bibliografia', $formBibliografia)} required />
 
-                    {#if isSuperAdmin || servicioTecnologico.proyecto.mostrar_recomendaciones}
-                        {#each servicioTecnologico.proyecto.evaluaciones as evaluacion, i}
-                            {#if isSuperAdmin || (evaluacion.finalizado && evaluacion.habilitado)}
-                                <div class="bg-gray-200 p-4 rounded border-orangered border mb-5">
-                                    <div class="flex text-orangered-900 font-black">
-                                        <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 mr-1.5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2m-3 7h3m-3 4h3m-6-4h.01M9 16h.01" />
-                                        </svg>
-                                        Recomendación del evaluador COD-{evaluacion.id}:
+                    <RecomendacionEvaluador class="mt-8">
+                        {#if isSuperAdmin || servicioTecnologico.proyecto.mostrar_recomendaciones}
+                            {#each servicioTecnologico.proyecto.evaluaciones as evaluacion, i}
+                                {#if isSuperAdmin || (evaluacion.finalizado && evaluacion.habilitado)}
+                                    <div class="bg-zinc-900 p-4 rounded shadow text-white my-2">
+                                        <p class="text-xs">Evaluador COD-{evaluacion.id}:</p>
+                                        <p class="whitespace-pre-line text-xs">{evaluacion.servicio_tecnologico_evaluacion.bibliografia_comentario ? evaluacion.servicio_tecnologico_evaluacion.bibliografia_comentario : 'Sin recomendación'}</p>
                                     </div>
-                                    <p class="whitespace-pre-line">{evaluacion.servicio_tecnologico_evaluacion.bibliografia_comentario ? evaluacion.servicio_tecnologico_evaluacion.bibliografia_comentario : 'Sin recomendación'}</p>
-                                </div>
-                            {/if}
-                        {/each}
-                    {/if}
+                                {/if}
+                            {/each}
+                        {/if}
+                    </RecomendacionEvaluador>
                 </div>
             </div>
 
@@ -489,14 +472,9 @@
                 <h1>Ortografía</h1>
                 {#each servicioTecnologico.proyecto.evaluaciones as evaluacion, i}
                     {#if isSuperAdmin || (evaluacion.finalizado && evaluacion.habilitado)}
-                        <div class="bg-gray-200 p-4 rounded border-orangered border mb-5">
-                            <div class="flex text-orangered-900 font-black">
-                                <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 mr-1.5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2m-3 7h3m-3 4h3m-6-4h.01M9 16h.01" />
-                                </svg>
-                                Recomendación del evaluador COD-{evaluacion.id}:
-                            </div>
-                            <p class="whitespace-pre-line">{evaluacion.servicio_tecnologico_evaluacion.ortografia_comentario ? evaluacion.servicio_tecnologico_evaluacion.ortografia_comentario : 'Sin recomendación'}</p>
+                        <div class="bg-zinc-900 p-4 rounded shadow text-white my-2">
+                            <p class="text-xs">Evaluador COD-{evaluacion.id}:</p>
+                            <p class="whitespace-pre-line text-xs">{evaluacion.servicio_tecnologico_evaluacion.ortografia_comentario ? evaluacion.servicio_tecnologico_evaluacion.ortografia_comentario : 'Sin recomendación'}</p>
                         </div>
                     {/if}
                 {/each}
@@ -507,14 +485,9 @@
                 <h1>Redacción</h1>
                 {#each servicioTecnologico.proyecto.evaluaciones as evaluacion, i}
                     {#if isSuperAdmin || (evaluacion.finalizado && evaluacion.habilitado)}
-                        <div class="bg-gray-200 p-4 rounded border-orangered border mb-5">
-                            <div class="flex text-orangered-900 font-black">
-                                <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 mr-1.5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2m-3 7h3m-3 4h3m-6-4h.01M9 16h.01" />
-                                </svg>
-                                Recomendación del evaluador COD-{evaluacion.id}:
-                            </div>
-                            <p class="whitespace-pre-line">{evaluacion.servicio_tecnologico_evaluacion.redaccion_comentario ? evaluacion.servicio_tecnologico_evaluacion.redaccion_comentario : 'Sin recomendación'}</p>
+                        <div class="bg-zinc-900 p-4 rounded shadow text-white my-2">
+                            <p class="text-xs">Evaluador COD-{evaluacion.id}:</p>
+                            <p class="whitespace-pre-line text-xs">{evaluacion.servicio_tecnologico_evaluacion.redaccion_comentario ? evaluacion.servicio_tecnologico_evaluacion.redaccion_comentario : 'Sin recomendación'}</p>
                         </div>
                     {/if}
                 {/each}
@@ -525,14 +498,9 @@
                 <h1>Normas APA</h1>
                 {#each servicioTecnologico.proyecto.evaluaciones as evaluacion, i}
                     {#if isSuperAdmin || (evaluacion.finalizado && evaluacion.habilitado)}
-                        <div class="bg-gray-200 p-4 rounded border-orangered border mb-5">
-                            <div class="flex text-orangered-900 font-black">
-                                <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 mr-1.5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2m-3 7h3m-3 4h3m-6-4h.01M9 16h.01" />
-                                </svg>
-                                Recomendación del evaluador COD-{evaluacion.id}:
-                            </div>
-                            <p class="whitespace-pre-line">{evaluacion.servicio_tecnologico_evaluacion.normas_apa_comentario ? evaluacion.servicio_tecnologico_evaluacion.normas_apa_comentario : 'Sin recomendación'}</p>
+                        <div class="bg-zinc-900 p-4 rounded shadow text-white my-2">
+                            <p class="text-xs">Evaluador COD-{evaluacion.id}:</p>
+                            <p class="whitespace-pre-line text-xs">{evaluacion.servicio_tecnologico_evaluacion.normas_apa_comentario ? evaluacion.servicio_tecnologico_evaluacion.normas_apa_comentario : 'Sin recomendación'}</p>
                         </div>
                     {/if}
                 {/each}

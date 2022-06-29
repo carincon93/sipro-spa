@@ -5,6 +5,7 @@
     import { route, checkRole, checkPermission } from '@/Utils'
     import { onMount } from 'svelte'
     import { _ } from 'svelte-i18n'
+    import { createPopper } from '@popperjs/core'
 
     import Dialog from '@/Shared/Dialog'
     import Button from '@/Shared/Button'
@@ -14,9 +15,7 @@
     import InfoMessage from '@/Shared/InfoMessage'
     import Stepper from '@/Shared/Stepper'
     import Dropdown from '@/Shared/Dropdown'
-    import Icon from '@/Shared/Icon'
-
-    import { createPopper } from '@popperjs/core'
+    import RecomendacionEvaluador from '@/Shared/RecomendacionEvaluador'
 
     export let errors
     export let to_pdf
@@ -417,31 +416,28 @@
     <h1 class="text-3xl {to_pdf ? '' : 'mt-24'} mb-8 text-center">Árbol de problemas</h1>
     <p class="text-center">Diligenciar el árbol de problemas iniciando con el problema principal (tronco), sus causas (raíces) y efectos (ramas).</p>
 
-    {#if isSuperAdmin || proyecto.mostrar_recomendaciones}
-        {#each proyecto.evaluaciones as evaluacion, i}
-            {#if isSuperAdmin || (evaluacion.finalizado && evaluacion.habilitado)}
-                <div class="bg-gray-200 p-4 rounded border-orangered border mb-5">
-                    <div class="flex text-orangered-900 font-black">
-                        <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 mr-1.5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2m-3 7h3m-3 4h3m-6-4h.01M9 16h.01" />
-                        </svg>
-                        Recomendación del evaluador COD-{evaluacion.id}:
+    <RecomendacionEvaluador class="mt-8">
+        {#if isSuperAdmin || proyecto.mostrar_recomendaciones}
+            {#each proyecto.evaluaciones as evaluacion, i}
+                {#if isSuperAdmin || (evaluacion.finalizado && evaluacion.habilitado)}
+                    <div class="bg-zinc-900 p-4 rounded shadow text-white my-2">
+                        <p class="text-xs">Evaluador COD-{evaluacion.id}:</p>
+                        {#if evaluacion.idi_evaluacion}
+                            <p class="whitespace-pre-line text-xs">{evaluacion.idi_evaluacion?.problema_central_comentario ? evaluacion.idi_evaluacion.problema_central_comentario : 'Sin recomendación'}</p>
+                        {:else if evaluacion.cultura_innovacion_evaluacion}
+                            <p class="whitespace-pre-line text-xs">{evaluacion.cultura_innovacion_evaluacion?.arbol_problemas_comentario ? evaluacion.cultura_innovacion_evaluacion.arbol_problemas_comentario : 'Sin recomendación'}</p>
+                        {:else if evaluacion.servicio_tecnologico_evaluacion}
+                            <p class="whitespace-pre-line text-xs">{evaluacion.servicio_tecnologico_evaluacion?.arbol_problemas_comentario ? evaluacion.servicio_tecnologico_evaluacion.arbol_problemas_comentario : 'Sin recomendación'}</p>
+                        {:else if evaluacion.ta_evaluacion}
+                            <p class="whitespace-pre-line text-xs">{evaluacion.ta_evaluacion?.arbol_problemas_comentario ? evaluacion.ta_evaluacion.arbol_problemas_comentario : 'Sin recomendación'}</p>
+                        {:else if evaluacion.tp_evaluacion}
+                            <p class="whitespace-pre-line text-xs">{evaluacion.tp_evaluacion?.arbol_problemas_comentario ? evaluacion.tp_evaluacion.arbol_problemas_comentario : 'Sin recomendación'}</p>
+                        {/if}
                     </div>
-                    {#if evaluacion.idi_evaluacion}
-                        <p class="whitespace-pre-line">{evaluacion.idi_evaluacion?.problema_central_comentario ? evaluacion.idi_evaluacion.problema_central_comentario : 'Sin recomendación'}</p>
-                    {:else if evaluacion.cultura_innovacion_evaluacion}
-                        <p class="whitespace-pre-line">{evaluacion.cultura_innovacion_evaluacion?.arbol_problemas_comentario ? evaluacion.cultura_innovacion_evaluacion.arbol_problemas_comentario : 'Sin recomendación'}</p>
-                    {:else if evaluacion.servicio_tecnologico_evaluacion}
-                        <p class="whitespace-pre-line">{evaluacion.servicio_tecnologico_evaluacion?.arbol_problemas_comentario ? evaluacion.servicio_tecnologico_evaluacion.arbol_problemas_comentario : 'Sin recomendación'}</p>
-                    {:else if evaluacion.ta_evaluacion}
-                        <p class="whitespace-pre-line">{evaluacion.ta_evaluacion?.arbol_problemas_comentario ? evaluacion.ta_evaluacion.arbol_problemas_comentario : 'Sin recomendación'}</p>
-                    {:else if evaluacion.tp_evaluacion}
-                        <p class="whitespace-pre-line">{evaluacion.tp_evaluacion?.arbol_problemas_comentario ? evaluacion.tp_evaluacion.arbol_problemas_comentario : 'Sin recomendación'}</p>
-                    {/if}
-                </div>
-            {/if}
-        {/each}
-    {/if}
+                {/if}
+            {/each}
+        {/if}
+    </RecomendacionEvaluador>
 
     <div class="mt-16 relative" bind:this={containerArbol}>
         <div class="flex opacity-50 absolute" style="height: {containerArbol?.offsetHeight}px; top: 0;">
@@ -812,7 +808,7 @@
                 </form>
             {/if}
         </div>
-        <div slot="actions" class="block flex w-full">
+        <div slot="actions" class="flex w-full">
             <Button on:click={closeDialog} type="button" variant={null}>Cancelar</Button>
             {#if (isSuperAdmin && formId) || (checkPermission(authUser, [1, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 17, 18, 19]) && proyecto.modificable == true && formId)}
                 <LoadingButton loading={sending} class="btn-indigo ml-auto" type="submit" form={formId}>Guardar</LoadingButton>

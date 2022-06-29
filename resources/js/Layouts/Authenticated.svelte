@@ -302,7 +302,7 @@
                 {/each}
             </ul>
             <div class="flex items-center justify-center">
-                <Button on:click={() => Inertia.visit(route('notificaciones.index'))} class="!text-white !border-white hover:opacity-90 transition-all" variant="outlined">Mostrar todas las notificaciones</Button>
+                <Button on:click={() => Inertia.visit(route('notificaciones.index'))} class="!text-white !border-white hover:opacity-90 transition-all" variant="outlined">Administrar todas las notificaciones</Button>
             </div>
         </div>
     </div>

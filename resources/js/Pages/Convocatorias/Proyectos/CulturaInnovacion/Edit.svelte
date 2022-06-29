@@ -4,6 +4,7 @@
     import { route, checkRole, checkPermission, checkPermissionByUser, monthDiff } from '@/Utils'
     import { _ } from 'svelte-i18n'
     import axios from 'axios'
+    import { Inertia } from '@inertiajs/inertia'
     import { onMount } from 'svelte'
 
     import Button from '@/Shared/Button'
@@ -23,7 +24,7 @@
     import FormField from '@smui/form-field'
     import Radio from '@smui/radio'
     import Dialog from '@/Shared/Dialog'
-    import { Inertia } from '@inertiajs/inertia'
+    import RecomendacionEvaluador from '@/Shared/RecomendacionEvaluador'
 
     export let errors
     export let convocatoria
@@ -57,7 +58,6 @@
         { value: 2, label: 'No' },
     ]
 
-    let nombreFormulario = culturaInnovacion.proyecto.codigo + 'cultura-innovacion-form'
     let lineasTecnologicas = []
     let tieneVideo = culturaInnovacion.video != null
     let requiereJustificacionIndustria4 = culturaInnovacion.justificacion_industria_4 != null
@@ -239,29 +239,26 @@
     </header>
 
     <form on:submit|preventDefault={submit}>
-        <fieldset class="p-8" disabled={isSuperAdmin || (checkPermissionByUser(authUser, [11]) && culturaInnovacion.proyecto.modificable == true) ? undefined : checkPermission(authUser, [12, 13]) && culturaInnovacion.proyecto.modificable == true ? undefined : true}>
-            <div class="mt-28">
+        <fieldset class="p-8 divide-y" disabled={isSuperAdmin || (checkPermissionByUser(authUser, [11]) && culturaInnovacion.proyecto.modificable == true) ? undefined : checkPermission(authUser, [12, 13]) && culturaInnovacion.proyecto.modificable == true ? undefined : true}>
+            <div class="py-24">
                 <Label required labelFor="titulo" class="font-medium inline-block mb-10 text-center text-gray-700 text-sm w-full" value="Descripción llamativa que orienta el enfoque del proyecto, indica el cómo y el para qué. (Máximo 20 palabras)" />
                 <Textarea label="Título" id="titulo" sinContador={true} error={errors.titulo} bind:value={$form.titulo} classes="bg-transparent block border-0 {errors.titulo ? '' : 'outline-none-important'} mt-1 outline-none text-4xl text-center w-full" required />
 
-                {#if isSuperAdmin || culturaInnovacion.proyecto.mostrar_recomendaciones}
-                    {#each culturaInnovacion.proyecto.evaluaciones as evaluacion, i}
-                        {#if isSuperAdmin || (evaluacion.finalizado && evaluacion.habilitado)}
-                            <div class="bg-gray-200 p-4 rounded border-orangered border mb-5">
-                                <div class="flex text-orangered-900 font-black">
-                                    <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 mr-1.5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2m-3 7h3m-3 4h3m-6-4h.01M9 16h.01" />
-                                    </svg>
-                                    Recomendación del evaluador COD-{evaluacion.id}:
+                <RecomendacionEvaluador class="mt-8">
+                    {#if isSuperAdmin || culturaInnovacion.proyecto.mostrar_recomendaciones}
+                        {#each culturaInnovacion.proyecto.evaluaciones as evaluacion, i}
+                            {#if isSuperAdmin || (evaluacion.finalizado && evaluacion.habilitado)}
+                                <div class="bg-zinc-900 p-4 rounded shadow text-white my-2">
+                                    <p class="text-xs">Evaluador COD-{evaluacion.id}:</p>
+                                    <p class="whitespace-pre-line">{evaluacion.cultura_innovacion_evaluacion.titulo_comentario ? evaluacion.cultura_innovacion_evaluacion.titulo_comentario : 'Sin recomendación'}</p>
                                 </div>
-                                <p class="whitespace-pre-line">{evaluacion.cultura_innovacion_evaluacion.titulo_comentario ? evaluacion.cultura_innovacion_evaluacion.titulo_comentario : 'Sin recomendación'}</p>
-                            </div>
-                        {/if}
-                    {/each}
-                {/if}
+                            {/if}
+                        {/each}
+                    {/if}
+                </RecomendacionEvaluador>
             </div>
 
-            <div class="mt-44">
+            <div class="py-24">
                 <p class="text-center">Fecha de ejecución</p>
                 <small class="text-red-400 block text-center"> * Campo obligatorio </small>
                 <InfoMessage message={convocatoria.fecha_maxima_cultura} class="my-5" />
@@ -288,24 +285,22 @@
                     </div>
                 {/if}
 
-                {#if isSuperAdmin || culturaInnovacion.proyecto.mostrar_recomendaciones}
-                    {#each culturaInnovacion.proyecto.evaluaciones as evaluacion, i}
-                        {#if isSuperAdmin || (evaluacion.finalizado && evaluacion.habilitado)}
-                            <div class="bg-gray-200 p-4 rounded border-orangered border mb-5">
-                                <div class="flex text-orangered-900 font-black">
-                                    <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 mr-1.5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2m-3 7h3m-3 4h3m-6-4h.01M9 16h.01" />
-                                    </svg>
-                                    Recomendación del evaluador COD-{evaluacion.id}:
+                <RecomendacionEvaluador class="mt-8">
+                    {#if isSuperAdmin || culturaInnovacion.proyecto.mostrar_recomendaciones}
+                        {#each culturaInnovacion.proyecto.evaluaciones as evaluacion, i}
+                            {#if isSuperAdmin || (evaluacion.finalizado && evaluacion.habilitado)}
+                                <div class="bg-zinc-900 p-4 rounded shadow text-white my-2">
+                                    <p class="text-xs">Evaluador COD-{evaluacion.id}:</p>
+                                    <p class="whitespace-pre-line">{evaluacion.cultura_innovacion_evaluacion.fechas_comentario ? evaluacion.cultura_innovacion_evaluacion.fechas_comentario : 'Sin recomendación'}</p>
                                 </div>
-                                <p class="whitespace-pre-line">{evaluacion.cultura_innovacion_evaluacion.fechas_comentario ? evaluacion.cultura_innovacion_evaluacion.fechas_comentario : 'Sin recomendación'}</p>
-                            </div>
-                        {/if}
-                    {/each}
-                {/if}
+                            {/if}
+                        {/each}
+                    {/if}
+                </RecomendacionEvaluador>
             </div>
-            <fieldset disabled>
-                <div class="mt-44 grid grid-cols-2">
+
+            <fieldset class="py-24" disabled>
+                <div class="grid grid-cols-2">
                     <div>
                         <Label required class="mb-4" labelFor="centro_formacion_id" value="Centro de formación" />
                         <small> Nota: El Centro de Formación relacionado es el ejecutor del proyecto </small>
@@ -334,204 +329,215 @@
                     </div>
                 </div>
             </fieldset>
-            <div class="mt-44 grid grid-cols-2">
-                <div>
-                    <Label required class="mb-4" labelFor="area_conocimiento_id" value="Área de conocimiento" />
-                </div>
-                <div>
-                    <DynamicList id="area_conocimiento_id" bind:value={$form.area_conocimiento_id} routeWebApi={route('web-api.areas-conocimiento')} classes="min-h" placeholder="Busque por el nombre de la área de conocimiento" message={errors.area_conocimiento_id} required />
 
-                    {#if isSuperAdmin || culturaInnovacion.proyecto.mostrar_recomendaciones}
-                        {#each culturaInnovacion.proyecto.evaluaciones as evaluacion, i}
-                            {#if isSuperAdmin || (evaluacion.finalizado && evaluacion.habilitado)}
-                                <div class="bg-gray-200 p-4 rounded border-orangered border mb-5">
-                                    <div class="flex text-orangered-900 font-black">
-                                        <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 mr-1.5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2m-3 7h3m-3 4h3m-6-4h.01M9 16h.01" />
-                                        </svg>
-                                        Recomendación del evaluador COD-{evaluacion.id}:
-                                    </div>
-                                    <p class="whitespace-pre-line">{evaluacion.cultura_innovacion_evaluacion.area_conocimiento_comentario ? evaluacion.cultura_innovacion_evaluacion.area_conocimiento_comentario : 'Sin recomendación'}</p>
-                                </div>
-                            {/if}
-                        {/each}
-                    {/if}
-                </div>
-            </div>
-            <div class="mt-44 grid grid-cols-2">
-                <div>
-                    <Label required class="mb-4" labelFor="actividad_economica_id" value="¿En cuál de estas actividades económicas se puede aplicar el proyecto de investigación?" />
+            <div class="py-24">
+                <div class="grid grid-cols-2">
+                    <div>
+                        <Label required class="mb-4" labelFor="area_conocimiento_id" value="Área de conocimiento" />
+                    </div>
+                    <div>
+                        <DynamicList id="area_conocimiento_id" bind:value={$form.area_conocimiento_id} routeWebApi={route('web-api.areas-conocimiento')} classes="min-h" placeholder="Busque por el nombre de la área de conocimiento" message={errors.area_conocimiento_id} required />
+                    </div>
                 </div>
                 <div>
-                    <DynamicList id="actividad_economica_id" bind:value={$form.actividad_economica_id} routeWebApi={route('web-api.actividades-economicas')} placeholder="Busque por el nombre de la actividad económica" classes="min-h" message={errors.actividad_economica_id} required />
-
-                    {#if isSuperAdmin || culturaInnovacion.proyecto.mostrar_recomendaciones}
-                        {#each culturaInnovacion.proyecto.evaluaciones as evaluacion, i}
-                            {#if isSuperAdmin || (evaluacion.finalizado && evaluacion.habilitado)}
-                                <div class="bg-gray-200 p-4 rounded border-orangered border mb-5">
-                                    <div class="flex text-orangered-900 font-black">
-                                        <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 mr-1.5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2m-3 7h3m-3 4h3m-6-4h.01M9 16h.01" />
-                                        </svg>
-                                        Recomendación del evaluador COD-{evaluacion.id}:
-                                    </div>
-                                    <p class="whitespace-pre-line">{evaluacion.cultura_innovacion_evaluacion.actividad_economica_comentario ? evaluacion.cultura_innovacion_evaluacion.actividad_economica_comentario : 'Sin recomendación'}</p>
-                                </div>
-                            {/if}
-                        {/each}
-                    {/if}
-                </div>
-            </div>
-            <div class="mt-44 grid grid-cols-2">
-                <div>
-                    <Label required class="mb-4" labelFor="tematica_estrategica_id" value="Temática estratégica SENA" />
-                </div>
-                <div>
-                    <DynamicList id="tematica_estrategica_id" bind:value={$form.tematica_estrategica_id} routeWebApi={route('web-api.tematicas-estrategicas')} placeholder="Busque por el nombre de la temática estrategica SENA" message={errors.tematica_estrategica_id} required />
-
-                    {#if isSuperAdmin || culturaInnovacion.proyecto.mostrar_recomendaciones}
-                        {#each culturaInnovacion.proyecto.evaluaciones as evaluacion, i}
-                            {#if isSuperAdmin || (evaluacion.finalizado && evaluacion.habilitado)}
-                                <div class="bg-gray-200 p-4 rounded border-orangered border mb-5">
-                                    <div class="flex text-orangered-900 font-black">
-                                        <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 mr-1.5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2m-3 7h3m-3 4h3m-6-4h.01M9 16h.01" />
-                                        </svg>
-                                        Recomendación del evaluador COD-{evaluacion.id}:
-                                    </div>
-                                    <p class="whitespace-pre-line">{evaluacion.cultura_innovacion_evaluacion.tematica_estrategica_comentario ? evaluacion.cultura_innovacion_evaluacion.tematica_estrategica_comentario : 'Sin recomendación'}</p>
-                                </div>
-                            {/if}
-                        {/each}
-                    {/if}
-                </div>
-            </div>
-            <div class="mt-44 grid grid-cols-2">
-                <div>
-                    <Label labelFor="video" value="¿El proyecto tiene video?" />
-                </div>
-                <div>
-                    <Switch bind:checked={tieneVideo} />
-                    {#if tieneVideo}
-                        <InfoMessage class="mb-2" message="Video de 3 minutos, en donde se presente de manera sencilla y dinámica la justificación del proyecto, la problemática, el objetivo general, los objetivos específicos, las actividades, los productos y su impacto en el marco del mecanismo de participación seleccionado como regional." />
-                        <Input label="Link del video" id="video" type="url" class="mt-1" error={errors.video} placeholder="Link del video del proyecto https://www.youtube.com/watch?v=gmc4tk" bind:value={$form.video} required={!tieneVideo ? undefined : 'required'} />
-
+                    <RecomendacionEvaluador class="mt-8">
                         {#if isSuperAdmin || culturaInnovacion.proyecto.mostrar_recomendaciones}
                             {#each culturaInnovacion.proyecto.evaluaciones as evaluacion, i}
                                 {#if isSuperAdmin || (evaluacion.finalizado && evaluacion.habilitado)}
-                                    <div class="bg-gray-200 p-4 rounded border-orangered border mb-5">
-                                        <div class="flex text-orangered-900 font-black">
-                                            <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 mr-1.5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2m-3 7h3m-3 4h3m-6-4h.01M9 16h.01" />
-                                            </svg>
-                                            Recomendación del evaluador COD-{evaluacion.id}:
-                                        </div>
-                                        <p class="whitespace-pre-line">{evaluacion.cultura_innovacion_evaluacion.video_comentario ? evaluacion.cultura_innovacion_evaluacion.video_comentario : 'Sin recomendación'}</p>
+                                    <div class="bg-zinc-900 p-4 rounded shadow text-white my-2">
+                                        <p class="text-xs">Evaluador COD-{evaluacion.id}:</p>
+                                        <p class="whitespace-pre-line">{evaluacion.cultura_innovacion_evaluacion.area_conocimiento_comentario ? evaluacion.cultura_innovacion_evaluacion.area_conocimiento_comentario : 'Sin recomendación'}</p>
                                     </div>
                                 {/if}
                             {/each}
                         {/if}
-                    {/if}
+                    </RecomendacionEvaluador>
                 </div>
             </div>
 
-            <div class="mt-44 grid grid-cols-2">
-                <div>
-                    <Label id="justificacion_industria_4" value="¿El proyecto está relacionado con la industria 4.0?" />
-                </div>
-                <div>
-                    <div class="flex items-center mb-14">
-                        <Switch bind:checked={requiereJustificacionIndustria4} />
+            <div class="py-24">
+                <div class="grid grid-cols-2">
+                    <div>
+                        <Label required class="mb-4" labelFor="actividad_economica_id" value="¿En cuál de estas actividades económicas se puede aplicar el proyecto de investigación?" />
                     </div>
+                    <div>
+                        <DynamicList id="actividad_economica_id" bind:value={$form.actividad_economica_id} routeWebApi={route('web-api.actividades-economicas')} placeholder="Busque por el nombre de la actividad económica" classes="min-h" message={errors.actividad_economica_id} required />
+                    </div>
+                </div>
 
-                    {#if requiereJustificacionIndustria4}
-                        <InfoMessage class="mb-2" message="Si el proyecto está relacionado con la industria 4.0 por favor realice la justificación." />
-                        <Textarea label="Justificación" maxlength="40000" id="justificacion_industria_4" error={errors.justificacion_industria_4} bind:value={$formJustificacionIndustria4.justificacion_industria_4} on:input={() => syncColumnLong('justificacion_industria_4', $formJustificacionIndustria4)} required={!requiereJustificacionIndustria4 ? undefined : 'required'} />
-
+                <div>
+                    <RecomendacionEvaluador class="mt-8">
                         {#if isSuperAdmin || culturaInnovacion.proyecto.mostrar_recomendaciones}
                             {#each culturaInnovacion.proyecto.evaluaciones as evaluacion, i}
                                 {#if isSuperAdmin || (evaluacion.finalizado && evaluacion.habilitado)}
-                                    <div class="bg-gray-200 p-4 rounded border-orangered border mb-5">
-                                        <div class="flex text-orangered-900 font-black">
-                                            <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 mr-1.5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2m-3 7h3m-3 4h3m-6-4h.01M9 16h.01" />
-                                            </svg>
-                                            Recomendación del evaluador COD-{evaluacion.id}:
-                                        </div>
-                                        <p class="whitespace-pre-line">{evaluacion.cultura_innovacion_evaluacion.justificacion_industria_4_comentario ? evaluacion.cultura_innovacion_evaluacion.justificacion_industria_4_comentario : 'Sin recomendación'}</p>
+                                    <div class="bg-zinc-900 p-4 rounded shadow text-white my-2">
+                                        <p class="text-xs">Evaluador COD-{evaluacion.id}:</p>
+                                        <p class="whitespace-pre-line">{evaluacion.cultura_innovacion_evaluacion.actividad_economica_comentario ? evaluacion.cultura_innovacion_evaluacion.actividad_economica_comentario : 'Sin recomendación'}</p>
                                     </div>
                                 {/if}
                             {/each}
                         {/if}
-                    {/if}
+                    </RecomendacionEvaluador>
                 </div>
             </div>
 
-            <div class="mt-44 grid grid-cols-2">
-                <div>
-                    <Label labelFor="justificacion_economia_naranja" value="¿El proyecto está relacionado con la economía naranja?" />
+            <div class="py-24">
+                <div class="grid grid-cols-2">
+                    <div>
+                        <Label required class="mb-4" labelFor="tematica_estrategica_id" value="Temática estratégica SENA" />
+                    </div>
+                    <div>
+                        <DynamicList id="tematica_estrategica_id" bind:value={$form.tematica_estrategica_id} routeWebApi={route('web-api.tematicas-estrategicas')} placeholder="Busque por el nombre de la temática estrategica SENA" message={errors.tematica_estrategica_id} required />
+                    </div>
                 </div>
                 <div>
-                    <div class="flex items-center mb-14">
-                        <Switch bind:checked={requiereJustificacionEconomiaNaranja} />
-                    </div>
-                    {#if requiereJustificacionEconomiaNaranja}
-                        <InfoMessage class="mb-2" message="Si el proyecto está relacionado con la economía naranja por favor realice la justificación. (Ver documento de apoyo: Guía Rápida SENA es NARANJA.)" />
-                        <Textarea
-                            label="Justificación"
-                            maxlength="40000"
-                            id="justificacion_economia_naranja"
-                            error={errors.justificacion_economia_naranja}
-                            bind:value={$formJustificacionEconomiaNaranja.justificacion_economia_naranja}
-                            on:input={() => syncColumnLong('justificacion_economia_naranja', $formJustificacionEconomiaNaranja)}
-                            required={!requiereJustificacionEconomiaNaranja ? undefined : 'required'}
-                        />
-
+                    <RecomendacionEvaluador class="mt-8">
                         {#if isSuperAdmin || culturaInnovacion.proyecto.mostrar_recomendaciones}
                             {#each culturaInnovacion.proyecto.evaluaciones as evaluacion, i}
                                 {#if isSuperAdmin || (evaluacion.finalizado && evaluacion.habilitado)}
-                                    <div class="bg-gray-200 p-4 rounded border-orangered border mb-5">
-                                        <div class="flex text-orangered-900 font-black">
-                                            <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 mr-1.5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2m-3 7h3m-3 4h3m-6-4h.01M9 16h.01" />
-                                            </svg>
-                                            Recomendación del evaluador COD-{evaluacion.id}:
-                                        </div>
-                                        <p class="whitespace-pre-line">{evaluacion.cultura_innovacion_evaluacion.justificacion_economia_naranja_comentario ? evaluacion.cultura_innovacion_evaluacion.justificacion_economia_naranja_comentario : 'Sin recomendación'}</p>
+                                    <div class="bg-zinc-900 p-4 rounded shadow text-white my-2">
+                                        <p class="text-xs">Evaluador COD-{evaluacion.id}:</p>
+                                        <p class="whitespace-pre-line">{evaluacion.cultura_innovacion_evaluacion.tematica_estrategica_comentario ? evaluacion.cultura_innovacion_evaluacion.tematica_estrategica_comentario : 'Sin recomendación'}</p>
                                     </div>
                                 {/if}
                             {/each}
                         {/if}
-                    {/if}
+                    </RecomendacionEvaluador>
                 </div>
             </div>
 
-            <div class="mt-44 grid grid-cols-2">
-                <div>
-                    <Label labelFor="justificacion_politica_discapacidad" value="¿El proyecto aporta a la Política Institucional para Atención de las Personas con discapacidad?" />
-                </div>
-                <div>
-                    <div class="flex items-center mb-14">
-                        <Switch bind:checked={requiereJustificacionPoliticaDiscapacidad} />
+            <div class="py-24">
+                <div class="grid grid-cols-2">
+                    <div>
+                        <Label labelFor="video" value="¿El proyecto tiene video?" />
                     </div>
-                    {#if requiereJustificacionPoliticaDiscapacidad}
-                        <InfoMessage class="mb-2" message="Si el proyecto aporta a la Política Institucional para Atención de las Personas con discapacidad por favor realice la justificación. RESOLUCIÓN 01726 DE 2014 - Por la cual se adopta la Política Institucional para Atención de las Personas con discapacidad." />
-                        <Textarea
-                            label="Justificación"
-                            maxlength="40000"
-                            id="justificacion_politica_discapacidad"
-                            error={errors.justificacion_politica_discapacidad}
-                            bind:value={$formJustificacionPoliticaDiscapacidad.justificacion_politica_discapacidad}
-                            on:input={() => syncColumnLong('justificacion_politica_discapacidad', $formJustificacionPoliticaDiscapacidad)}
-                            required={!requiereJustificacionPoliticaDiscapacidad ? undefined : 'required'}
-                        />
-                    {/if}
+                    <div>
+                        <Switch bind:checked={tieneVideo} />
+                        {#if tieneVideo}
+                            <InfoMessage class="mb-2" message="Video de 3 minutos, en donde se presente de manera sencilla y dinámica la justificación del proyecto, la problemática, el objetivo general, los objetivos específicos, las actividades, los productos y su impacto en el marco del mecanismo de participación seleccionado como regional." />
+                            <Input label="Link del video" id="video" type="url" class="mt-1" error={errors.video} placeholder="Link del video del proyecto https://www.youtube.com/watch?v=gmc4tk" bind:value={$form.video} required={!tieneVideo ? undefined : 'required'} />
+                        {/if}
+                    </div>
+                </div>
+                {#if tieneVideo}
+                    <div>
+                        <RecomendacionEvaluador class="mt-8">
+                            {#if isSuperAdmin || culturaInnovacion.proyecto.mostrar_recomendaciones}
+                                {#each culturaInnovacion.proyecto.evaluaciones as evaluacion, i}
+                                    {#if isSuperAdmin || (evaluacion.finalizado && evaluacion.habilitado)}
+                                        <div class="bg-zinc-900 p-4 rounded shadow text-white my-2">
+                                            <p class="text-xs">Evaluador COD-{evaluacion.id}:</p>
+                                            <p class="whitespace-pre-line">{evaluacion.cultura_innovacion_evaluacion.video_comentario ? evaluacion.cultura_innovacion_evaluacion.video_comentario : 'Sin recomendación'}</p>
+                                        </div>
+                                    {/if}
+                                {/each}
+                            {/if}
+                        </RecomendacionEvaluador>
+                    </div>
+                {/if}
+            </div>
+
+            <div class="py-24">
+                <div class="grid grid-cols-2">
+                    <div>
+                        <Label id="justificacion_industria_4" value="¿El proyecto está relacionado con la industria 4.0?" />
+                    </div>
+                    <div>
+                        <div class="flex items-center mb-14">
+                            <Switch bind:checked={requiereJustificacionIndustria4} />
+                        </div>
+
+                        {#if requiereJustificacionIndustria4}
+                            <InfoMessage class="mb-2" message="Si el proyecto está relacionado con la industria 4.0 por favor realice la justificación." />
+                            <Textarea label="Justificación" maxlength="40000" id="justificacion_industria_4" error={errors.justificacion_industria_4} bind:value={$formJustificacionIndustria4.justificacion_industria_4} on:input={() => syncColumnLong('justificacion_industria_4', $formJustificacionIndustria4)} required={!requiereJustificacionIndustria4 ? undefined : 'required'} />
+                        {/if}
+                    </div>
+                </div>
+                {#if requiereJustificacionIndustria4}
+                    <div>
+                        <RecomendacionEvaluador class="mt-8">
+                            {#if isSuperAdmin || culturaInnovacion.proyecto.mostrar_recomendaciones}
+                                {#each culturaInnovacion.proyecto.evaluaciones as evaluacion, i}
+                                    {#if isSuperAdmin || (evaluacion.finalizado && evaluacion.habilitado)}
+                                        <div class="bg-zinc-900 p-4 rounded shadow text-white my-2">
+                                            <p class="text-xs">Evaluador COD-{evaluacion.id}:</p>
+                                            <p class="whitespace-pre-line">{evaluacion.cultura_innovacion_evaluacion.justificacion_industria_4_comentario ? evaluacion.cultura_innovacion_evaluacion.justificacion_industria_4_comentario : 'Sin recomendación'}</p>
+                                        </div>
+                                    {/if}
+                                {/each}
+                            {/if}
+                        </RecomendacionEvaluador>
+                    </div>
+                {/if}
+            </div>
+
+            <div class="py-24">
+                <div class="grid grid-cols-2">
+                    <div>
+                        <Label labelFor="justificacion_economia_naranja" value="¿El proyecto está relacionado con la economía naranja?" />
+                    </div>
+                    <div>
+                        <div class="flex items-center mb-14">
+                            <Switch bind:checked={requiereJustificacionEconomiaNaranja} />
+                        </div>
+                        {#if requiereJustificacionEconomiaNaranja}
+                            <InfoMessage class="mb-2" message="Si el proyecto está relacionado con la economía naranja por favor realice la justificación. (Ver documento de apoyo: Guía Rápida SENA es NARANJA.)" />
+                            <Textarea
+                                label="Justificación"
+                                maxlength="40000"
+                                id="justificacion_economia_naranja"
+                                error={errors.justificacion_economia_naranja}
+                                bind:value={$formJustificacionEconomiaNaranja.justificacion_economia_naranja}
+                                on:input={() => syncColumnLong('justificacion_economia_naranja', $formJustificacionEconomiaNaranja)}
+                                required={!requiereJustificacionEconomiaNaranja ? undefined : 'required'}
+                            />
+                        {/if}
+                    </div>
+                </div>
+                {#if requiereJustificacionEconomiaNaranja}
+                    <div>
+                        <RecomendacionEvaluador class="mt-8">
+                            {#if isSuperAdmin || culturaInnovacion.proyecto.mostrar_recomendaciones}
+                                {#each culturaInnovacion.proyecto.evaluaciones as evaluacion, i}
+                                    {#if isSuperAdmin || (evaluacion.finalizado && evaluacion.habilitado)}
+                                        <div class="bg-zinc-900 p-4 rounded shadow text-white my-2">
+                                            <p class="text-xs">Evaluador COD-{evaluacion.id}:</p>
+                                            <p class="whitespace-pre-line">{evaluacion.cultura_innovacion_evaluacion.justificacion_economia_naranja_comentario ? evaluacion.cultura_innovacion_evaluacion.justificacion_economia_naranja_comentario : 'Sin recomendación'}</p>
+                                        </div>
+                                    {/if}
+                                {/each}
+                            {/if}
+                        </RecomendacionEvaluador>
+                    </div>
+                {/if}
+            </div>
+
+            <div class="py-24">
+                <div class="grid grid-cols-2">
+                    <div>
+                        <Label labelFor="justificacion_politica_discapacidad" value="¿El proyecto aporta a la Política Institucional para Atención de las Personas con discapacidad?" />
+                    </div>
+                    <div>
+                        <div class="flex items-center mb-14">
+                            <Switch bind:checked={requiereJustificacionPoliticaDiscapacidad} />
+                        </div>
+                        {#if requiereJustificacionPoliticaDiscapacidad}
+                            <InfoMessage class="mb-2" message="Si el proyecto aporta a la Política Institucional para Atención de las Personas con discapacidad por favor realice la justificación. RESOLUCIÓN 01726 DE 2014 - Por la cual se adopta la Política Institucional para Atención de las Personas con discapacidad." />
+                            <Textarea
+                                label="Justificación"
+                                maxlength="40000"
+                                id="justificacion_politica_discapacidad"
+                                error={errors.justificacion_politica_discapacidad}
+                                bind:value={$formJustificacionPoliticaDiscapacidad.justificacion_politica_discapacidad}
+                                on:input={() => syncColumnLong('justificacion_politica_discapacidad', $formJustificacionPoliticaDiscapacidad)}
+                                required={!requiereJustificacionPoliticaDiscapacidad ? undefined : 'required'}
+                            />
+                        {/if}
+                    </div>
                 </div>
             </div>
 
-            <hr class="mt-5 mb-5" />
-
-            <div>
+            <div class="py-24">
                 <p class="text-center mt-36 mb-8">¿Cuál es el origen de las muestras con las que se realizarán las actividades de investigación, bioprospección y/o aprovechamiento comercial o industrial?</p>
                 <InfoMessage class="mb-2" message="Nota: Bioprospección se define como la exploración sistemática y sostenible de la biodiversidad para identificar y obtener nuevas fuentes de compuestos químicos, genes, proteínas, microorganismos y otros productos que tienen potencial de ser aprovechados comercialmente" />
                 <InputError message={errors.muestreo} />
@@ -644,369 +650,386 @@
                 </div>
             </div>
 
-            <div class="mt-44 grid grid-cols-2">
-                <div>
-                    <Label
-                        required
-                        class="mb-4"
-                        labelFor="recoleccion_especimenes"
-                        value="En la ejecución del proyecto se requiere la recolección de especímenes de especies silvestres de la diversidad biológica con fines de elaboración de estudios ambientales (entendiendo como recolección los procesos de remoción o extracción temporal o definitiva de una especie ya sea vegetal o animal del medio natural) Nota: este permiso no se requiere cuando las actividades de recolección se limiten a investigaciones científicas o con fines industriales, comerciales o de prospección biológica."
-                    />
-                </div>
-                <div>
-                    <Select items={opcionesSiNo} id="recoleccion_especimenes" bind:selectedValue={$form.recoleccion_especimenes} error={errors.recoleccion_especimenes} autocomplete="off" placeholder="Seleccione una opción" required />
-                </div>
-                <div />
-            </div>
-
-            <div class="mt-44 grid grid-cols-2">
-                <div>
-                    <Label required class="mb-4" labelFor="relacionado_plan_tecnologico" value="¿El proyecto se alinea con el plan tecnológico desarrollado por el centro de formación?" />
-                </div>
-                <div>
-                    <Select items={opcionesAplicaNoAplica} id="relacionado_plan_tecnologico" bind:selectedValue={$form.relacionado_plan_tecnologico} error={errors.relacionado_plan_tecnologico} autocomplete="off" placeholder="Seleccione una opción" required />
-                </div>
-            </div>
-
-            <div class="mt-44 grid grid-cols-2">
-                <div>
-                    <Label required class="mb-4" labelFor="relacionado_agendas_competitividad" value="¿El proyecto se alinea con las Agendas Departamentales de Competitividad e Innovación?" />
-                </div>
-                <div>
-                    <Select items={opcionesAplicaNoAplica} id="relacionado_agendas_competitividad" bind:selectedValue={$form.relacionado_agendas_competitividad} error={errors.relacionado_agendas_competitividad} autocomplete="off" placeholder="Seleccione una opción" required />
-                </div>
-            </div>
-
-            <div class="mt-44 grid grid-cols-2">
-                <div>
-                    <Label required class="mb-4" labelFor="relacionado_mesas_sectoriales" value="¿El proyecto se alinea con las Mesas Sectoriales?" />
-                </div>
-                <div>
-                    <Select items={opcionesAplicaNoAplica} id="relacionado_mesas_sectoriales" bind:selectedValue={$form.relacionado_mesas_sectoriales} error={errors.relacionado_mesas_sectoriales} autocomplete="off" placeholder="Seleccione una opción" required />
-                </div>
-            </div>
-            {#if $form.relacionado_mesas_sectoriales?.value == 1}
-                {#if culturaInnovacion.proyecto.modificable == true}
-                    <div class="bg-cyan-100 p-5 mt-10">
-                        <InputError message={errors.mesa_sectorial_id} />
-                        <div class="grid grid-cols-2">
-                            <div>
-                                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" class="w-5" style="transform: translateX(-50px);">
-                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
-                                </svg>
-                                <p class="text-cyan-600">Por favor seleccione la o las mesas sectoriales con la cual o las cuales se alinea el proyecto</p>
-                            </div>
-                            <div class="bg-white grid grid-cols-2 max-w-xl overflow-y-scroll shadow-2xl mt-4 h-80">
-                                {#each mesasSectoriales as { id, nombre }, i}
-                                    <FormField>
-                                        <Checkbox bind:group={$form.mesa_sectorial_id} value={id} />
-                                        <span slot="label">{nombre}</span>
-                                    </FormField>
-                                {/each}
-                            </div>
-                        </div>
+            <div class="py-24">
+                <div class="grid grid-cols-2">
+                    <div>
+                        <Label
+                            required
+                            class="mb-4"
+                            labelFor="recoleccion_especimenes"
+                            value="En la ejecución del proyecto se requiere la recolección de especímenes de especies silvestres de la diversidad biológica con fines de elaboración de estudios ambientales (entendiendo como recolección los procesos de remoción o extracción temporal o definitiva de una especie ya sea vegetal o animal del medio natural) Nota: este permiso no se requiere cuando las actividades de recolección se limiten a investigaciones científicas o con fines industriales, comerciales o de prospección biológica."
+                        />
                     </div>
-                {:else}
-                    <div class="grid grid-cols-2">
-                        <div>Mesas sectoriales relacionadas:</div>
-                        <div>
-                            <ul class="list-disc p-4">
-                                {#each mesasSectoriales as { id, nombre }, i}
-                                    {#each $form.mesa_sectorial_id as mesaSectorialRelacionada}
-                                        {#if id == mesaSectorialRelacionada}
-                                            <li>{nombre}</li>
-                                        {/if}
+                    <div>
+                        <Select items={opcionesSiNo} id="recoleccion_especimenes" bind:selectedValue={$form.recoleccion_especimenes} error={errors.recoleccion_especimenes} autocomplete="off" placeholder="Seleccione una opción" required />
+                    </div>
+                    <div />
+                </div>
+            </div>
+
+            <div class="py-24">
+                <div class="grid grid-cols-2">
+                    <div>
+                        <Label required class="mb-4" labelFor="relacionado_plan_tecnologico" value="¿El proyecto se alinea con el plan tecnológico desarrollado por el centro de formación?" />
+                    </div>
+                    <div>
+                        <Select items={opcionesAplicaNoAplica} id="relacionado_plan_tecnologico" bind:selectedValue={$form.relacionado_plan_tecnologico} error={errors.relacionado_plan_tecnologico} autocomplete="off" placeholder="Seleccione una opción" required />
+                    </div>
+                </div>
+            </div>
+
+            <div class="py-24">
+                <div class="grid grid-cols-2">
+                    <div>
+                        <Label required class="mb-4" labelFor="relacionado_agendas_competitividad" value="¿El proyecto se alinea con las Agendas Departamentales de Competitividad e Innovación?" />
+                    </div>
+                    <div>
+                        <Select items={opcionesAplicaNoAplica} id="relacionado_agendas_competitividad" bind:selectedValue={$form.relacionado_agendas_competitividad} error={errors.relacionado_agendas_competitividad} autocomplete="off" placeholder="Seleccione una opción" required />
+                    </div>
+                </div>
+            </div>
+
+            <div class="py-24">
+                <div class="grid grid-cols-2">
+                    <div>
+                        <Label required class="mb-4" labelFor="relacionado_mesas_sectoriales" value="¿El proyecto se alinea con las Mesas Sectoriales?" />
+                    </div>
+                    <div>
+                        <Select items={opcionesAplicaNoAplica} id="relacionado_mesas_sectoriales" bind:selectedValue={$form.relacionado_mesas_sectoriales} error={errors.relacionado_mesas_sectoriales} autocomplete="off" placeholder="Seleccione una opción" required />
+                    </div>
+                </div>
+                {#if $form.relacionado_mesas_sectoriales?.value == 1}
+                    {#if culturaInnovacion.proyecto.modificable == true}
+                        <div class="bg-cyan-100 p-5 mt-10">
+                            <InputError message={errors.mesa_sectorial_id} />
+                            <div class="grid grid-cols-2">
+                                <div>
+                                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" class="w-5" style="transform: translateX(-50px);">
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
+                                    </svg>
+                                    <p class="text-cyan-600">Por favor seleccione la o las mesas sectoriales con la cual o las cuales se alinea el proyecto</p>
+                                </div>
+                                <div class="bg-white grid grid-cols-2 max-w-xl overflow-y-scroll shadow-2xl mt-4 h-80">
+                                    {#each mesasSectoriales as { id, nombre }, i}
+                                        <FormField>
+                                            <Checkbox bind:group={$form.mesa_sectorial_id} value={id} />
+                                            <span slot="label">{nombre}</span>
+                                        </FormField>
                                     {/each}
-                                {/each}
-                            </ul>
+                                </div>
+                            </div>
                         </div>
-                    </div>
+                    {:else}
+                        <div class="grid grid-cols-2">
+                            <div>Mesas sectoriales relacionadas:</div>
+                            <div>
+                                <ul class="list-disc p-4">
+                                    {#each mesasSectoriales as { id, nombre }, i}
+                                        {#each $form.mesa_sectorial_id as mesaSectorialRelacionada}
+                                            {#if id == mesaSectorialRelacionada}
+                                                <li>{nombre}</li>
+                                            {/if}
+                                        {/each}
+                                    {/each}
+                                </ul>
+                            </div>
+                        </div>
+                    {/if}
                 {/if}
-            {/if}
-
-            <div class="mt-40 grid grid-cols-2">
-                <div>
-                    <Label required class="mb-4" labelFor="relacionado_tecnoacademia" value="¿El proyecto se formuló en conjunto con la tecnoacademia?" />
-                </div>
-                <div>
-                    <Select items={opcionesAplicaNoAplica} id="relacionado_tecnoacademia" bind:selectedValue={$form.relacionado_tecnoacademia} error={errors.relacionado_tecnoacademia} autocomplete="off" placeholder="Seleccione una opción" required />
-                </div>
             </div>
 
-            {#if $form.relacionado_tecnoacademia?.value == 1}
-                {#if culturaInnovacion.proyecto.modificable == true}
-                    <div class="bg-cyan-100 p-5 mt-10">
-                        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" class="w-5" style="transform: translateX(-50px);">
-                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
-                        </svg>
+            <div class="py-24">
+                <div class="mt-40 grid grid-cols-2">
+                    <div>
+                        <Label required class="mb-4" labelFor="relacionado_tecnoacademia" value="¿El proyecto se formuló en conjunto con la tecnoacademia?" />
+                    </div>
+                    <div>
+                        <Select items={opcionesAplicaNoAplica} id="relacionado_tecnoacademia" bind:selectedValue={$form.relacionado_tecnoacademia} error={errors.relacionado_tecnoacademia} autocomplete="off" placeholder="Seleccione una opción" required />
+                    </div>
+                </div>
 
-                        <div class="grid grid-cols-2">
-                            <div>
-                                <p class="text-cyan-600">Por favor seleccione la Tecnoacademia con la cual articuló el proyecto</p>
+                {#if $form.relacionado_tecnoacademia?.value == 1}
+                    {#if culturaInnovacion.proyecto.modificable == true}
+                        <div class="bg-cyan-100 p-5 mt-10">
+                            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" class="w-5" style="transform: translateX(-50px);">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
+                            </svg>
+
+                            <div class="grid grid-cols-2">
+                                <div>
+                                    <p class="text-cyan-600">Por favor seleccione la Tecnoacademia con la cual articuló el proyecto</p>
+                                </div>
+                                <div>
+                                    <Select items={tecnoacademias} id="tecnoacademia_id" bind:selectedValue={$form.tecnoacademia_id} error={errors.tecnoacademia_id} autocomplete="off" placeholder="Seleccione una opción" required />
+                                    {#if lineasTecnologicas?.length > 0}
+                                        <div class="bg-white grid grid-cols-2 max-w-xl overflow-y-scroll shadow-2xl mt-4 h-80">
+                                            {#each lineasTecnologicas as { value, label }, i}
+                                                <Label class="p-3 border-t border-b flex items-center text-sm" labelFor={'linea-tecnologica-' + value} value={label} />
+
+                                                <div class="border-b border-t flex items-center justify-center">
+                                                    <input type="checkbox" bind:group={$form.linea_tecnologica_id} id={'linea-tecnologica-' + value} {value} class="rounded text-cyan-500" />
+                                                </div>
+                                            {/each}
+                                        </div>
+                                    {:else}
+                                        <div>
+                                            <p>Parece que no se han encontrado elementos, por favor haga clic en <strong>Refrescar</strong></p>
+                                            <button on:click={getLineasTecnologicas} type="button" class="flex underline">
+                                                <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 mr-2" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 4v5h.582m15.356 2A8.001 8.001 0 004.582 9m0 0H9m11 11v-5h-.581m0 0a8.003 8.003 0 01-15.357-2m15.357 2H15" />
+                                                </svg>
+                                                Refrescar
+                                            </button>
+                                        </div>
+                                    {/if}
+                                </div>
                             </div>
+                            <InputError message={errors.linea_tecnologica_id} />
+                        </div>
+                    {:else}
+                        <div class="grid grid-cols-2">
+                            <div>Tecnoacademia relacionada</div>
                             <div>
                                 <Select items={tecnoacademias} id="tecnoacademia_id" bind:selectedValue={$form.tecnoacademia_id} error={errors.tecnoacademia_id} autocomplete="off" placeholder="Seleccione una opción" required />
-                                {#if lineasTecnologicas?.length > 0}
-                                    <div class="bg-white grid grid-cols-2 max-w-xl overflow-y-scroll shadow-2xl mt-4 h-80">
-                                        {#each lineasTecnologicas as { value, label }, i}
-                                            <Label class="p-3 border-t border-b flex items-center text-sm" labelFor={'linea-tecnologica-' + value} value={label} />
-
-                                            <div class="border-b border-t flex items-center justify-center">
-                                                <input type="checkbox" bind:group={$form.linea_tecnologica_id} id={'linea-tecnologica-' + value} {value} class="rounded text-cyan-500" />
-                                            </div>
+                            </div>
+                        </div>
+                        <div class="grid grid-cols-2">
+                            <div>Líneas tecnológicas relacionadas:</div>
+                            <div>
+                                <ul class="list-disc p-4">
+                                    {#each lineasTecnologicas as { value, label }, i}
+                                        {#each $form.linea_tecnologica_id as lineaTecnologica}
+                                            {#if value == lineaTecnologica}
+                                                <li>{label}</li>
+                                            {/if}
                                         {/each}
-                                    </div>
-                                {:else}
-                                    <div>
-                                        <p>Parece que no se han encontrado elementos, por favor haga clic en <strong>Refrescar</strong></p>
-                                        <button on:click={getLineasTecnologicas} type="button" class="flex underline">
-                                            <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 mr-2" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 4v5h.582m15.356 2A8.001 8.001 0 004.582 9m0 0H9m11 11v-5h-.581m0 0a8.003 8.003 0 01-15.357-2m15.357 2H15" />
-                                            </svg>
-                                            Refrescar
-                                        </button>
+                                    {/each}
+                                </ul>
+                            </div>
+                        </div>
+                    {/if}
+                {/if}
+            </div>
+
+            <div class="py-24">
+                <div class="grid grid-cols-1">
+                    <div>
+                        <Label required class="mb-4" labelFor="resumen" value="Resumen del proyecto" />
+                        <InfoMessage class="mb-2" message="Información necesaria para darle al lector una idea precisa de la pertinencia y calidad del proyecto. Explique en qué consiste el problema o necesidad, cómo cree que lo resolverá, cuáles son las razones que justifican su ejecución y las herramientas que se utilizarán en el desarrollo del proyecto." />
+                    </div>
+                    <div>
+                        <Textarea label="Resumen" maxlength="40000" id="resumen" error={errors.resumen} bind:value={$resumenForm.resumen} on:input={() => syncColumnLong('resumen', $resumenForm)} required />
+
+                        <RecomendacionEvaluador class="mt-8">
+                            {#if isSuperAdmin || culturaInnovacion.proyecto.mostrar_recomendaciones}
+                                {#each culturaInnovacion.proyecto.evaluaciones as evaluacion, i}
+                                    {#if isSuperAdmin || (evaluacion.finalizado && evaluacion.habilitado)}
+                                        <div class="bg-zinc-900 p-4 rounded shadow text-white my-2">
+                                            <p class="text-xs">Evaluador COD-{evaluacion.id}:</p>
+                                            <p class="whitespace-pre-line">{evaluacion.cultura_innovacion_evaluacion.resumen_comentario ? evaluacion.cultura_innovacion_evaluacion.resumen_comentario : 'Sin recomendación'}</p>
+                                        </div>
+                                    {/if}
+                                {/each}
+                            {/if}
+                        </RecomendacionEvaluador>
+                    </div>
+                </div>
+            </div>
+
+            <div class="py-24">
+                <div class="grid grid-cols-1">
+                    <div>
+                        <Label required class="mb-4" labelFor="antecedentes" value="Antecedentes" />
+                        <InfoMessage class="mb-2" message="Presenta las investigaciones, innovaciones o desarrollos tecnológicos que se han realizado a nivel internacional, nacional, departamental o municipal en el marco de la temática de la propuesta del proyecto; que muestran la pertinencia del proyecto, citar toda la información consignada utilizando normas APA última edición." />
+                    </div>
+                    <div>
+                        <Textarea label="Antecedentes" maxlength="40000" id="antecedentes" error={errors.antecedentes} bind:value={$formAntecedentes.antecedentes} on:input={() => syncColumnLong('antecedentes', $formAntecedentes)} required />
+                    </div>
+                </div>
+            </div>
+
+            <div class="py-24">
+                <div class="grid grid-cols-1">
+                    <div>
+                        <Label required class="mb-4" labelFor="marco_conceptual" value="Marco conceptual" />
+                        <InfoMessage class="mb-2" message="Descripción de los aspectos conceptuales y/o teóricos relacionados con el problema. Se hace la claridad que no es un listado de definiciones." />
+                    </div>
+                    <div>
+                        <Textarea label="Marco conceptual" maxlength="20000" id="marco_conceptual" error={errors.marco_conceptual} bind:value={$formMarcoConceptual.marco_conceptual} on:input={() => syncColumnLong('marco_conceptual', $formMarcoConceptual)} required />
+                    </div>
+                </div>
+            </div>
+
+            <div class="py-24">
+                <div class="grid grid-cols-2">
+                    <div>
+                        <Label required class="mb-4" labelFor="numero_aprendices" value="Número de los aprendices que se beneficiarán en la ejecución del proyecto" />
+                    </div>
+                    <div>
+                        <Input label="Número de aprendices" id="numero_aprendices" type="number" input$min="0" input$max="9999" class="mt-1" error={errors.numero_aprendices} placeholder="Escriba el número de aprendices que se beneficiarán en la ejecución del proyecto" bind:value={$form.numero_aprendices} required />
+                    </div>
+                </div>
+            </div>
+
+            <div class="py-24">
+                <div class="grid grid-cols-2">
+                    <div>
+                        <Label required class="mb-4" labelFor="municipios" value="Nombre de los municipios beneficiados" />
+                    </div>
+                    <div>
+                        <SelectMulti id="municipios" bind:selectedValue={$form.municipios} items={municipios} isMulti={true} error={errors.municipios} placeholder="Buscar municipios" required />
+                        {#if municipios?.length == 0}
+                            <div>
+                                <p>Parece que no se han encontrado elementos, por favor haga clic en <strong>Refrescar</strong></p>
+                                <button on:click={getMunicipios} type="button" class="flex underline">
+                                    <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 mr-2" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 4v5h.582m15.356 2A8.001 8.001 0 004.582 9m0 0H9m11 11v-5h-.581m0 0a8.003 8.003 0 01-15.357-2m15.357 2H15" />
+                                    </svg>
+                                    Refrescar
+                                </button>
+                            </div>
+                        {/if}
+                    </div>
+                </div>
+            </div>
+
+            <div class="py-24">
+                <div class="grid grid-cols-1">
+                    <div>
+                        <Label required class="mb-4" labelFor="impacto_municipios" value="Descripción del beneficio en los municipios" />
+                    </div>
+                    <div>
+                        <Textarea label="Descripción" maxlength="40000" id="impacto_municipios" error={errors.impacto_municipios} bind:value={$formImpactoMunicipios.impacto_municipios} on:input={() => syncColumnLong('impacto_municipios', $formImpactoMunicipios)} required />
+                    </div>
+                </div>
+            </div>
+
+            <div class="py-24">
+                <div class="grid grid-cols-1">
+                    <div>
+                        <Label required class="mb-4" labelFor="impacto_centro_formacion" value="Impacto en el centro de formación" />
+                    </div>
+                    <div>
+                        <Textarea label="Descripción" maxlength="40000" id="impacto_centro_formacion" error={errors.impacto_centro_formacion} bind:value={$formImpactoCentroFormacion.impacto_centro_formacion} on:input={() => syncColumnLong('impacto_centro_formacion', $formImpactoCentroFormacion)} required />
+                    </div>
+                </div>
+            </div>
+
+            <div class="py-24">
+                <div class="grid grid-cols-2">
+                    <div>
+                        <Label required class="mb-4" labelFor="programas_formacion" value="Nombre de los programas de formación con registro calificado a impactar" />
+                    </div>
+                    <div>
+                        <SelectMulti id="programas_formacion" bind:selectedValue={$form.programas_formacion} items={programasFormacion} isMulti={true} error={errors.programas_formacion} placeholder="Buscar por el nombre del programa de formación" required />
+                        {#if programasFormacion?.length == 0}
+                            <div>
+                                <p>Parece que no se han encontrado elementos, por favor haga clic en <strong>Refrescar</strong></p>
+                                <button on:click={getProgramasFormacion} type="button" class="flex underline">
+                                    <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 mr-2" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 4v5h.582m15.356 2A8.001 8.001 0 004.582 9m0 0H9m11 11v-5h-.581m0 0a8.003 8.003 0 01-15.357-2m15.357 2H15" />
+                                    </svg>
+                                    Refrescar
+                                </button>
+                            </div>
+                        {/if}
+                    </div>
+                </div>
+            </div>
+
+            <div class="py-24">
+                <div class="grid grid-cols-2">
+                    <div>
+                        <Label class="mb-4" labelFor="programas_formacion_articulados" value="Nombre de los programas de formación articulados" />
+                    </div>
+                    <div>
+                        <SelectMulti id="programas_formacion_articulados" bind:selectedValue={$form.programas_formacion_articulados} items={programasFormacionArticular} isMulti={true} error={errors.programas_formacion_articulados} placeholder="Buscar por el nombre del programa de formación" />
+                        {#if programasFormacionArticular?.length == 0}
+                            <div>
+                                <p>Parece que no se han encontrado elementos, por favor haga clic en <strong>Refrescar</strong></p>
+                                <button on:click={getProgramasFormacion} type="button" class="flex underline">
+                                    <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 mr-2" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 4v5h.582m15.356 2A8.001 8.001 0 004.582 9m0 0H9m11 11v-5h-.581m0 0a8.003 8.003 0 01-15.357-2m15.357 2H15" />
+                                    </svg>
+                                    Refrescar
+                                </button>
+                            </div>
+                        {/if}
+                    </div>
+                </div>
+            </div>
+
+            <div class="py-24">
+                <div class="grid grid-cols-1">
+                    <div>
+                        <Label required class="mb-4" labelFor="bibliografia" value="Bibliografía" />
+                        <InfoMessage class="mb-2" message="Lista de las referencias utilizadas en cada apartado del proyecto. Utilizar normas APA- Última edición (http://biblioteca.sena.edu.co/images/PDF/InstructivoAPA.pdf)." />
+                    </div>
+                    <div>
+                        <Textarea label="Bibliografía" maxlength="40000" id="bibliografia" error={errors.bibliografia} bind:value={$formBibliografia.bibliografia} on:input={() => syncColumnLong('bibliografia', $formBibliografia)} required />
+                    </div>
+                </div>
+
+                <div>
+                    <RecomendacionEvaluador class="mt-8">
+                        {#if isSuperAdmin || culturaInnovacion.proyecto.mostrar_recomendaciones}
+                            {#each culturaInnovacion.proyecto.evaluaciones as evaluacion, i}
+                                {#if isSuperAdmin || (evaluacion.finalizado && evaluacion.habilitado)}
+                                    <div class="bg-zinc-900 p-4 rounded shadow text-white my-2">
+                                        <p class="text-xs">Evaluador COD-{evaluacion.id}:</p>
+                                        <p class="whitespace-pre-line">{evaluacion.cultura_innovacion_evaluacion.bibliografia_comentario ? evaluacion.cultura_innovacion_evaluacion.bibliografia_comentario : 'Sin recomendación'}</p>
                                     </div>
                                 {/if}
+                            {/each}
+                        {/if}
+                    </RecomendacionEvaluador>
+                </div>
+            </div>
+
+            <div class="py-24">
+                {#if isSuperAdmin || culturaInnovacion.proyecto.mostrar_recomendaciones}
+                    <hr class="mt-10 mb-10" />
+                    <h1>Ortografía</h1>
+                    {#each culturaInnovacion.proyecto.evaluaciones as evaluacion, i}
+                        {#if isSuperAdmin || (evaluacion.finalizado && evaluacion.habilitado)}
+                            <div class="bg-zinc-900 p-4 rounded shadow text-white my-2">
+                                <p class="text-xs">Evaluador COD-{evaluacion.id}:</p>
+                                <p class="whitespace-pre-line">{evaluacion.cultura_innovacion_evaluacion.ortografia_comentario ? evaluacion.cultura_innovacion_evaluacion.ortografia_comentario : 'Sin recomendación'}</p>
                             </div>
-                        </div>
-                        <InputError message={errors.linea_tecnologica_id} />
-                    </div>
-                {:else}
-                    <div class="grid grid-cols-2">
-                        <div>Tecnoacademia relacionada</div>
-                        <div>
-                            <Select items={tecnoacademias} id="tecnoacademia_id" bind:selectedValue={$form.tecnoacademia_id} error={errors.tecnoacademia_id} autocomplete="off" placeholder="Seleccione una opción" required />
-                        </div>
-                    </div>
-                    <div class="grid grid-cols-2">
-                        <div>Líneas tecnológicas relacionadas:</div>
-                        <div>
-                            <ul class="list-disc p-4">
-                                {#each lineasTecnologicas as { value, label }, i}
-                                    {#each $form.linea_tecnologica_id as lineaTecnologica}
-                                        {#if value == lineaTecnologica}
-                                            <li>{label}</li>
-                                        {/if}
-                                    {/each}
-                                {/each}
-                            </ul>
-                        </div>
-                    </div>
+                        {/if}
+                    {/each}
                 {/if}
-            {/if}
-
-            <div class="mt-40 grid grid-cols-1">
-                <div>
-                    <Label required class="mb-4" labelFor="resumen" value="Resumen del proyecto" />
-                    <InfoMessage class="mb-2" message="Información necesaria para darle al lector una idea precisa de la pertinencia y calidad del proyecto. Explique en qué consiste el problema o necesidad, cómo cree que lo resolverá, cuáles son las razones que justifican su ejecución y las herramientas que se utilizarán en el desarrollo del proyecto." />
-                </div>
-                <div>
-                    <Textarea label="Resumen" maxlength="40000" id="resumen" error={errors.resumen} bind:value={$resumenForm.resumen} on:input={() => syncColumnLong('resumen', $resumenForm)} required />
-
-                    {#if isSuperAdmin || culturaInnovacion.proyecto.mostrar_recomendaciones}
-                        {#each culturaInnovacion.proyecto.evaluaciones as evaluacion, i}
-                            {#if isSuperAdmin || (evaluacion.finalizado && evaluacion.habilitado)}
-                                <div class="bg-gray-200 p-4 rounded border-orangered border mb-5">
-                                    <div class="flex text-orangered-900 font-black">
-                                        <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 mr-1.5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2m-3 7h3m-3 4h3m-6-4h.01M9 16h.01" />
-                                        </svg>
-                                        Recomendación del evaluador COD-{evaluacion.id}:
-                                    </div>
-                                    <p class="whitespace-pre-line">{evaluacion.cultura_innovacion_evaluacion.resumen_comentario ? evaluacion.cultura_innovacion_evaluacion.resumen_comentario : 'Sin recomendación'}</p>
-                                </div>
-                            {/if}
-                        {/each}
-                    {/if}
-                </div>
             </div>
 
-            <div class="mt-44 grid grid-cols-1">
-                <div>
-                    <Label required class="mb-4" labelFor="antecedentes" value="Antecedentes" />
-                    <InfoMessage class="mb-2" message="Presenta las investigaciones, innovaciones o desarrollos tecnológicos que se han realizado a nivel internacional, nacional, departamental o municipal en el marco de la temática de la propuesta del proyecto; que muestran la pertinencia del proyecto, citar toda la información consignada utilizando normas APA última edición." />
-                </div>
-                <div>
-                    <Textarea label="Antecedentes" maxlength="40000" id="antecedentes" error={errors.antecedentes} bind:value={$formAntecedentes.antecedentes} on:input={() => syncColumnLong('antecedentes', $formAntecedentes)} required />
-                </div>
-            </div>
-
-            <div class="mt-44 grid grid-cols-1">
-                <div>
-                    <Label required class="mb-4" labelFor="marco_conceptual" value="Marco conceptual" />
-                    <InfoMessage class="mb-2" message="Descripción de los aspectos conceptuales y/o teóricos relacionados con el problema. Se hace la claridad que no es un listado de definiciones." />
-                </div>
-                <div>
-                    <Textarea label="Marco conceptual" maxlength="20000" id="marco_conceptual" error={errors.marco_conceptual} bind:value={$formMarcoConceptual.marco_conceptual} on:input={() => syncColumnLong('marco_conceptual', $formMarcoConceptual)} required />
-                </div>
-            </div>
-
-            <div class="mt-44 grid grid-cols-2">
-                <div>
-                    <Label required class="mb-4" labelFor="numero_aprendices" value="Número de los aprendices que se beneficiarán en la ejecución del proyecto" />
-                </div>
-                <div>
-                    <Input label="Número de aprendices" id="numero_aprendices" type="number" input$min="0" input$max="9999" class="mt-1" error={errors.numero_aprendices} placeholder="Escriba el número de aprendices que se beneficiarán en la ejecución del proyecto" bind:value={$form.numero_aprendices} required />
-                </div>
-            </div>
-
-            <div class="mt-44 grid grid-cols-2">
-                <div>
-                    <Label required class="mb-4" labelFor="municipios" value="Nombre de los municipios beneficiados" />
-                </div>
-                <div>
-                    <SelectMulti id="municipios" bind:selectedValue={$form.municipios} items={municipios} isMulti={true} error={errors.municipios} placeholder="Buscar municipios" required />
-                    {#if municipios?.length == 0}
-                        <div>
-                            <p>Parece que no se han encontrado elementos, por favor haga clic en <strong>Refrescar</strong></p>
-                            <button on:click={getMunicipios} type="button" class="flex underline">
-                                <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 mr-2" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 4v5h.582m15.356 2A8.001 8.001 0 004.582 9m0 0H9m11 11v-5h-.581m0 0a8.003 8.003 0 01-15.357-2m15.357 2H15" />
-                                </svg>
-                                Refrescar
-                            </button>
-                        </div>
-                    {/if}
-                </div>
-            </div>
-
-            <div class="mt-44 grid grid-cols-1">
-                <div>
-                    <Label required class="mb-4" labelFor="impacto_municipios" value="Descripción del beneficio en los municipios" />
-                </div>
-                <div>
-                    <Textarea label="Descripción" maxlength="40000" id="impacto_municipios" error={errors.impacto_municipios} bind:value={$formImpactoMunicipios.impacto_municipios} on:input={() => syncColumnLong('impacto_municipios', $formImpactoMunicipios)} required />
-                </div>
-            </div>
-
-            <div class="mt-44 grid grid-cols-1">
-                <div>
-                    <Label required class="mb-4" labelFor="impacto_centro_formacion" value="Impacto en el centro de formación" />
-                </div>
-                <div>
-                    <Textarea label="Descripción" maxlength="40000" id="impacto_centro_formacion" error={errors.impacto_centro_formacion} bind:value={$formImpactoCentroFormacion.impacto_centro_formacion} on:input={() => syncColumnLong('impacto_centro_formacion', $formImpactoCentroFormacion)} required />
-                </div>
-            </div>
-
-            <div class="mt-44 grid grid-cols-2">
-                <div>
-                    <Label required class="mb-4" labelFor="programas_formacion" value="Nombre de los programas de formación con registro calificado a impactar" />
-                </div>
-                <div>
-                    <SelectMulti id="programas_formacion" bind:selectedValue={$form.programas_formacion} items={programasFormacion} isMulti={true} error={errors.programas_formacion} placeholder="Buscar por el nombre del programa de formación" required />
-                    {#if programasFormacion?.length == 0}
-                        <div>
-                            <p>Parece que no se han encontrado elementos, por favor haga clic en <strong>Refrescar</strong></p>
-                            <button on:click={getProgramasFormacion} type="button" class="flex underline">
-                                <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 mr-2" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 4v5h.582m15.356 2A8.001 8.001 0 004.582 9m0 0H9m11 11v-5h-.581m0 0a8.003 8.003 0 01-15.357-2m15.357 2H15" />
-                                </svg>
-                                Refrescar
-                            </button>
-                        </div>
-                    {/if}
-                </div>
-            </div>
-
-            <div class="mt-44 grid grid-cols-2">
-                <div>
-                    <Label class="mb-4" labelFor="programas_formacion_articulados" value="Nombre de los programas de formación articulados" />
-                </div>
-                <div>
-                    <SelectMulti id="programas_formacion_articulados" bind:selectedValue={$form.programas_formacion_articulados} items={programasFormacionArticular} isMulti={true} error={errors.programas_formacion_articulados} placeholder="Buscar por el nombre del programa de formación" />
-                    {#if programasFormacionArticular?.length == 0}
-                        <div>
-                            <p>Parece que no se han encontrado elementos, por favor haga clic en <strong>Refrescar</strong></p>
-                            <button on:click={getProgramasFormacion} type="button" class="flex underline">
-                                <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 mr-2" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 4v5h.582m15.356 2A8.001 8.001 0 004.582 9m0 0H9m11 11v-5h-.581m0 0a8.003 8.003 0 01-15.357-2m15.357 2H15" />
-                                </svg>
-                                Refrescar
-                            </button>
-                        </div>
-                    {/if}
-                </div>
-            </div>
-
-            <div class="mt-44 grid grid-cols-1">
-                <div>
-                    <Label required class="mb-4" labelFor="bibliografia" value="Bibliografía" />
-                    <InfoMessage class="mb-2" message="Lista de las referencias utilizadas en cada apartado del proyecto. Utilizar normas APA- Última edición (http://biblioteca.sena.edu.co/images/PDF/InstructivoAPA.pdf)." />
-                </div>
-                <div>
-                    <Textarea label="Bibliografía" maxlength="40000" id="bibliografia" error={errors.bibliografia} bind:value={$formBibliografia.bibliografia} on:input={() => syncColumnLong('bibliografia', $formBibliografia)} required />
-
-                    {#if isSuperAdmin || culturaInnovacion.proyecto.mostrar_recomendaciones}
-                        {#each culturaInnovacion.proyecto.evaluaciones as evaluacion, i}
-                            {#if isSuperAdmin || (evaluacion.finalizado && evaluacion.habilitado)}
-                                <div class="bg-gray-200 p-4 rounded border-orangered border mb-5">
-                                    <div class="flex text-orangered-900 font-black">
-                                        <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 mr-1.5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2m-3 7h3m-3 4h3m-6-4h.01M9 16h.01" />
-                                        </svg>
-                                        Recomendación del evaluador COD-{evaluacion.id}:
-                                    </div>
-                                    <p class="whitespace-pre-line">{evaluacion.cultura_innovacion_evaluacion.bibliografia_comentario ? evaluacion.cultura_innovacion_evaluacion.bibliografia_comentario : 'Sin recomendación'}</p>
-                                </div>
-                            {/if}
-                        {/each}
-                    {/if}
-                </div>
-            </div>
-
-            {#if isSuperAdmin || culturaInnovacion.proyecto.mostrar_recomendaciones}
-                <hr class="mt-10 mb-10" />
-                <h1>Ortografía</h1>
-                {#each culturaInnovacion.proyecto.evaluaciones as evaluacion, i}
-                    {#if isSuperAdmin || (evaluacion.finalizado && evaluacion.habilitado)}
-                        <div class="bg-gray-200 p-4 rounded border-orangered border mb-5">
-                            <div class="flex text-orangered-900 font-black">
-                                <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 mr-1.5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2m-3 7h3m-3 4h3m-6-4h.01M9 16h.01" />
-                                </svg>
-                                Recomendación del evaluador COD-{evaluacion.id}:
+            <div class="py-24">
+                {#if isSuperAdmin || culturaInnovacion.proyecto.mostrar_recomendaciones}
+                    <hr class="mt-10 mb-10" />
+                    <h1>Redacción</h1>
+                    {#each culturaInnovacion.proyecto.evaluaciones as evaluacion, i}
+                        {#if isSuperAdmin || (evaluacion.finalizado && evaluacion.habilitado)}
+                            <div class="bg-zinc-900 p-4 rounded shadow text-white my-2">
+                                <p class="text-xs">Evaluador COD-{evaluacion.id}:</p>
+                                <p class="whitespace-pre-line">{evaluacion.cultura_innovacion_evaluacion.redaccion_comentario ? evaluacion.cultura_innovacion_evaluacion.redaccion_comentario : 'Sin recomendación'}</p>
                             </div>
-                            <p class="whitespace-pre-line">{evaluacion.cultura_innovacion_evaluacion.ortografia_comentario ? evaluacion.cultura_innovacion_evaluacion.ortografia_comentario : 'Sin recomendación'}</p>
-                        </div>
-                    {/if}
-                {/each}
-            {/if}
+                        {/if}
+                    {/each}
+                {/if}
+            </div>
 
-            {#if isSuperAdmin || culturaInnovacion.proyecto.mostrar_recomendaciones}
-                <hr class="mt-10 mb-10" />
-                <h1>Redacción</h1>
-                {#each culturaInnovacion.proyecto.evaluaciones as evaluacion, i}
-                    {#if isSuperAdmin || (evaluacion.finalizado && evaluacion.habilitado)}
-                        <div class="bg-gray-200 p-4 rounded border-orangered border mb-5">
-                            <div class="flex text-orangered-900 font-black">
-                                <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 mr-1.5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2m-3 7h3m-3 4h3m-6-4h.01M9 16h.01" />
-                                </svg>
-                                Recomendación del evaluador COD-{evaluacion.id}:
+            <div class="py-24">
+                {#if isSuperAdmin || culturaInnovacion.proyecto.mostrar_recomendaciones}
+                    <hr class="mt-10 mb-10" />
+                    <h1>Normas APA</h1>
+                    {#each culturaInnovacion.proyecto.evaluaciones as evaluacion, i}
+                        {#if isSuperAdmin || (evaluacion.finalizado && evaluacion.habilitado)}
+                            <div class="bg-zinc-900 p-4 rounded shadow text-white my-2">
+                                <p class="text-xs">Evaluador COD-{evaluacion.id}:</p>
+                                <p class="whitespace-pre-line">{evaluacion.cultura_innovacion_evaluacion.normas_apa_comentario ? evaluacion.cultura_innovacion_evaluacion.normas_apa_comentario : 'Sin recomendación'}</p>
                             </div>
-                            <p class="whitespace-pre-line">{evaluacion.cultura_innovacion_evaluacion.redaccion_comentario ? evaluacion.cultura_innovacion_evaluacion.redaccion_comentario : 'Sin recomendación'}</p>
-                        </div>
-                    {/if}
-                {/each}
-            {/if}
-
-            {#if isSuperAdmin || culturaInnovacion.proyecto.mostrar_recomendaciones}
-                <hr class="mt-10 mb-10" />
-                <h1>Normas APA</h1>
-                {#each culturaInnovacion.proyecto.evaluaciones as evaluacion, i}
-                    {#if isSuperAdmin || (evaluacion.finalizado && evaluacion.habilitado)}
-                        <div class="bg-gray-200 p-4 rounded border-orangered border mb-5">
-                            <div class="flex text-orangered-900 font-black">
-                                <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 mr-1.5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2m-3 7h3m-3 4h3m-6-4h.01M9 16h.01" />
-                                </svg>
-                                Recomendación del evaluador COD-{evaluacion.id}:
-                            </div>
-                            <p class="whitespace-pre-line">{evaluacion.cultura_innovacion_evaluacion.normas_apa_comentario ? evaluacion.cultura_innovacion_evaluacion.normas_apa_comentario : 'Sin recomendación'}</p>
-                        </div>
-                    {/if}
-                {/each}
-            {/if}
+                        {/if}
+                    {/each}
+                {/if}
+            </div>
         </fieldset>
         <div class="px-8 py-4 bg-gray-100 border-t border-gray-200 flex items-center justify-between sticky bottom-0">
             {#if isSuperAdmin || (checkPermissionByUser(authUser, [11]) && culturaInnovacion.proyecto.modificable == true && culturaInnovacion.proyecto.radicado == false) || (checkPermission(authUser, [12, 13]) && culturaInnovacion.proyecto.modificable == true && culturaInnovacion.proyecto.radicado == false)}

@@ -13,7 +13,7 @@
     let allFiles = proyecto.proyecto ? proyecto.proyecto.all_files : proyecto.all_files
 </script>
 
-<div class="bg-cyan-500 mb-12 p-8 text-white shadow-inner transition delay-150 duration-300 ease-in-out {hideFiles ? 'hide-files' : ''}">
+<div class="bg-cyan-500 mb-12 p-8 text-white shadow-inner transition delay-150 duration-300 ease-in-out {hideFiles ? 'hide-files' : 'min-h-screen max-h-screen overflow-y-scroll'}">
     <div class="bg-files {hideFiles ? 'hidden' : ''}">
         <div class="grid grid-cols-3">
             <div>

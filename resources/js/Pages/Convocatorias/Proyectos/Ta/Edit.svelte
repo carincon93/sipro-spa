@@ -5,6 +5,7 @@
     import { _ } from 'svelte-i18n'
     import axios from 'axios'
     import { onMount } from 'svelte'
+    import { Inertia } from '@inertiajs/inertia'
 
     import Button from '@/Shared/Button'
     import Input from '@/Shared/Input'
@@ -20,7 +21,7 @@
     import Dialog from '@/Shared/Dialog'
     import Tags from '@/Shared/Tags'
     import Select from '@/Shared/Select'
-    import { Inertia } from '@inertiajs/inertia'
+    import RecomendacionEvaluador from '@/Shared/RecomendacionEvaluador'
 
     export let errors
     export let convocatoria
@@ -313,537 +314,508 @@
                     </div>
                 {/if}
 
+                <RecomendacionEvaluador class="mt-8">
+                    {#if isSuperAdmin || ta.proyecto.mostrar_recomendaciones}
+                        {#each ta.proyecto.evaluaciones as evaluacion, i}
+                            {#if isSuperAdmin || (evaluacion.finalizado && evaluacion.habilitado)}
+                                <div class="bg-zinc-900 p-4 rounded shadow text-white my-2">
+                                    <p class="text-xs">Evaluador COD-{evaluacion.id}:</p>
+                                    <p class="whitespace-pre-line text-xs">{evaluacion.ta_evaluacion.fecha_ejecucion_comentario ? evaluacion.ta_evaluacion.fecha_ejecucion_comentario : 'Sin recomendación'}</p>
+                                </div>
+                            {/if}
+                        {/each}
+                    {/if}
+                </RecomendacionEvaluador>
+
+                <fieldset disabled>
+                    <div class="mt-44 grid grid-cols-2">
+                        <div>
+                            <Label required class="mb-4" labelFor="linea_programatica_id" value="Código dependencia presupuestal (SIIF)" />
+                        </div>
+                        <div>
+                            <DynamicList id="linea_programatica_id" bind:value={$form.linea_programatica_id} routeWebApi={route('web-api.lineas-programaticas', 1)} classes="min-h" placeholder="Busque por el nombre de la línea programática" message={errors.linea_programatica_id} required />
+                        </div>
+                    </div>
+                    <div class="mt-44 grid grid-cols-2">
+                        <div>
+                            <Label required class="mb-4" labelFor="centro_formacion_id" value="Centro de formación" />
+                            <small> Nota: El Centro de Formación relacionado es el ejecutor del proyecto </small>
+                        </div>
+                        <div>
+                            {ta.proyecto.centro_formacion.nombre}
+                        </div>
+                    </div>
+
+                    <div class="mt-44 grid grid-cols-2">
+                        <div>
+                            <Label required class="mb-4" labelFor="tecnoacademia_id" value="TecnoAcademia" />
+                        </div>
+                        <div>
+                            <Select id="tecnoacademia_id" items={tecnoAcademias} bind:selectedValue={$form.tecnoacademia_id} error={errors.tecnoacademia_id} autocomplete="off" placeholder="Busque por el nombre de la TecnoAcademia" required />
+                        </div>
+                    </div>
+                </fieldset>
+                {#if $form.tecnoacademia_id && lineasTecnoaAcademia}
+                    <div class="mt-44 grid grid-cols-2">
+                        <div>
+                            <Label required class="mb-4" labelFor="tecnoacademia_linea_tecnoacademia_id" value="Líneas temáticas a ejecutar en la vigencia del proyecto:" />
+                        </div>
+                        <div>
+                            <SelectMulti id="tecnoacademia_linea_tecnoacademia_id" bind:selectedValue={$form.tecnoacademia_linea_tecnoacademia_id} items={lineasTecnoaAcademia} isMulti={true} error={errors.tecnoacademia_linea_tecnoacademia_id} placeholder="Buscar por el nombre de la línea" required />
+                            {#if lineasTecnoaAcademia?.length == 0}
+                                <div>
+                                    <p>Parece que no se han encontrado elementos, por favor haga clic en <strong>Refrescar</strong></p>
+                                    <button on:click={getLineasTecnoacademia} type="button" class="flex underline">
+                                        <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 mr-2" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 4v5h.582m15.356 2A8.001 8.001 0 004.582 9m0 0H9m11 11v-5h-.581m0 0a8.003 8.003 0 01-15.357-2m15.357 2H15" />
+                                        </svg>
+                                        Refrescar
+                                    </button>
+                                </div>
+                            {/if}
+                        </div>
+                    </div>
+                {/if}
+
+                <fieldset disabled>
+                    <div class="mt-40 grid grid-cols-1">
+                        <div>
+                            <Label required class="mb-4" labelFor="resumen" value="Resumen del proyecto" />
+                            <InfoMessage message="Información necesaria para darle al lector una idea precisa de la pertinencia y calidad del proyecto. Explique en qué consiste el problema o necesidad, cómo cree que lo resolverá, cuáles son las razones que justifican su ejecución y las herramientas que se utilizarán en el desarrollo del proyecto." />
+                        </div>
+                        <div>
+                            <Textarea label="Resumen del proyecto" maxlength="40000" id="resumen" error={errors.resumen} bind:value={$resumenForm.resumen} on:input={() => syncColumnLong('resumen', $resumenForm)} required />
+                        </div>
+                    </div>
+                </fieldset>
+
+                <div class="mt-40 grid grid-cols-1">
+                    <div>
+                        <Label required class="mb-4" labelFor="resumen_regional" value="Complemento - Resumen ejecutivo regional" />
+                    </div>
+                    <div>
+                        <Textarea maxlength="40000" id="resumen_regional" error={errors.resumen_regional} bind:value={$formResumenRegional.resumen_regional} on:input={() => syncColumnLong('resumen_regional', $formResumenRegional)} required />
+
+                        <RecomendacionEvaluador class="mt-8">
+                            {#if isSuperAdmin || ta.proyecto.mostrar_recomendaciones}
+                                {#each ta.proyecto.evaluaciones as evaluacion, i}
+                                    {#if isSuperAdmin || (evaluacion.finalizado && evaluacion.habilitado)}
+                                        <div class="bg-zinc-900 p-4 rounded shadow text-white my-2">
+                                            <p class="text-xs">Evaluador COD-{evaluacion.id}:</p>
+                                            <p class="whitespace-pre-line text-xs">{evaluacion.ta_evaluacion.resumen_regional_comentario ? evaluacion.ta_evaluacion.resumen_regional_comentario : 'Sin recomendación'}</p>
+                                        </div>
+                                    {/if}
+                                {/each}
+                            {/if}
+                        </RecomendacionEvaluador>
+                    </div>
+                </div>
+
+                <fieldset disabled>
+                    <div class="mt-44 grid grid-cols-1">
+                        <div>
+                            <Label required class="mb-4" labelFor="antecedentes" value="Antecedentes" />
+                            <InfoMessage
+                                message="Presenta las investigaciones, innovaciones o desarrollos tecnológicos que se han realizado a nivel internacional, nacional, departamental o municipal en el marco de la temática de la propuesta del proyecto; que muestran la pertinencia del proyecto, citar toda la información consignada utilizando normas APA última edición. De igual forma, relacionar los proyectos ejecutados en vigencias anteriores (incluir códigos SGPS), si el proyecto corresponde a la continuidad de proyectos SENNOVA."
+                            />
+                        </div>
+                        <div>
+                            <Textarea label="Antecedentes" maxlength="40000" id="antecedentes" error={errors.antecedentes} bind:value={$formAntecedentes.antecedentes} on:input={() => syncColumnLong('antecedentes', $formAntecedentes)} required />
+                        </div>
+                    </div>
+                </fieldset>
+
+                <div class="mt-44 grid grid-cols-1">
+                    <div>
+                        <Label required class="mb-4" labelFor="antecedentes_tecnoacademia" value="Antecedentes de la Tecnoacademia y su impacto en la región" />
+                    </div>
+                    <div>
+                        <Textarea maxlength="40000" id="antecedentes_tecnoacademia" error={errors.antecedentes_tecnoacademia} bind:value={$formAntecedentesTA.antecedentes_tecnoacademia} on:input={() => syncColumnLong('antecedentes_tecnoacademia', $formAntecedentesTA)} required />
+
+                        <RecomendacionEvaluador class="mt-8">
+                            {#if isSuperAdmin || ta.proyecto.mostrar_recomendaciones}
+                                {#each ta.proyecto.evaluaciones as evaluacion, i}
+                                    {#if isSuperAdmin || (evaluacion.finalizado && evaluacion.habilitado)}
+                                        <div class="bg-zinc-900 p-4 rounded shadow text-white my-2">
+                                            <p class="text-xs">Evaluador COD-{evaluacion.id}:</p>
+                                            <p class="whitespace-pre-line text-xs">{evaluacion.ta_evaluacion.antecedentes_tecnoacademia_comentario ? evaluacion.ta_evaluacion.antecedentes_tecnoacademia_comentario : 'Sin recomendación'}</p>
+                                        </div>
+                                    {/if}
+                                {/each}
+                            {/if}
+                        </RecomendacionEvaluador>
+                    </div>
+                </div>
+
+                <fieldset disabled>
+                    <div class="mt-44 grid grid-cols-1">
+                        <div>
+                            <Label required class="mb-4" labelFor="justificacion_problema" value="Justificación" />
+                        </div>
+                        <div>
+                            <Textarea label="Justificación" maxlength="40000" id="justificacion_problema" error={errors.justificacion_problema} bind:value={$formJustificacionProblema.justificacion_problema} on:input={() => syncColumnLong('justificacion_problema', $formJustificacionProblema)} required />
+                        </div>
+                    </div>
+                </fieldset>
+
+                <div class="mt-44 grid grid-cols-1">
+                    <div>
+                        <Label required class="mb-4" labelFor="retos_oportunidades" value="Descripción de retos y prioridades locales y regionales en los cuales la Tecnoacademia tiene impacto" />
+                    </div>
+                    <div>
+                        <Textarea maxlength="40000" id="retos_oportunidades" error={errors.retos_oportunidades} bind:value={$formRetosOportunidades.retos_oportunidades} on:input={() => syncColumnLong('retos_oportunidades', $formRetosOportunidades)} required />
+
+                        <RecomendacionEvaluador class="mt-8">
+                            {#if isSuperAdmin || ta.proyecto.mostrar_recomendaciones}
+                                {#each ta.proyecto.evaluaciones as evaluacion, i}
+                                    {#if isSuperAdmin || (evaluacion.finalizado && evaluacion.habilitado)}
+                                        <div class="bg-zinc-900 p-4 rounded shadow text-white my-2">
+                                            <p class="text-xs">Evaluador COD-{evaluacion.id}:</p>
+                                            <p class="whitespace-pre-line text-xs">{evaluacion.ta_evaluacion.retos_oportunidades_comentario ? evaluacion.ta_evaluacion.retos_oportunidades_comentario : 'Sin recomendación'}</p>
+                                        </div>
+                                    {/if}
+                                {/each}
+                            {/if}
+                        </RecomendacionEvaluador>
+                    </div>
+                </div>
+
+                <div class="mt-44 grid grid-cols-1">
+                    <div>
+                        <Label required class="mb-4" labelFor="pertinencia_territorio" value="Justificación y pertinencia en el territorio" />
+                    </div>
+                    <div>
+                        <Textarea label="Justificación y pertinencia en el territorio" maxlength="40000" id="pertinencia_territorio" error={errors.pertinencia_territorio} bind:value={$formPertinenciaTerritorio.pertinencia_territorio} on:input={() => syncColumnLong('pertinencia_territorio', $formPertinenciaTerritorio)} required />
+                    </div>
+                </div>
+
+                <fieldset disabled>
+                    <div class="mt-44 grid grid-cols-1">
+                        <div>
+                            <Label required class="mb-4" labelFor="marco_conceptual" value="Marco conceptual" />
+                            <InfoMessage message="Descripción de los aspectos conceptuales y/o teóricos relacionados con el problema. Se hace la claridad que no es un listado de definiciones." />
+                        </div>
+                        <div>
+                            <Textarea label="Marco conceptual" maxlength="40000" id="marco_conceptual" error={errors.marco_conceptual} bind:value={$formMarcoConceptual.marco_conceptual} on:input={() => syncColumnLong('marco_conceptual', $formMarcoConceptual)} required />
+                        </div>
+                    </div>
+                </fieldset>
+
+                <div class="mt-44 grid grid-cols-2">
+                    <div>
+                        <Label required class="mb-4" labelFor="municipios" value="Nombre los municipios impactados en la vigencia anterior por la TecnoAcademia" />
+                    </div>
+                    <div>
+                        <SelectMulti id="municipios" bind:selectedValue={$form.municipios} items={municipios} isMulti={true} error={errors.municipios} placeholder="Buscar municipios" required />
+                    </div>
+                </div>
+
+                <div class="mt-44 grid grid-cols-2">
+                    <div>
+                        <Label required class="mb-4" labelFor="municipios_impactar" value="Defina los municipios a impactar en la vigencia el proyecto:" />
+                    </div>
+                    <div>
+                        <SelectMulti id="municipios_impactar" bind:selectedValue={$form.municipios_impactar} items={municipios} isMulti={true} error={errors.municipios_impactar} placeholder="Buscar municipios" required />
+                    </div>
+                </div>
+
+                <div class="mt-44 grid grid-cols-1">
+                    <div>
+                        <Label required class="mb-4" labelFor="impacto_municipios" value="Descripción del beneficio o impacto generado por la TecnoAcademia en los municipios" />
+                    </div>
+                    <div>
+                        <Textarea label="Descripción del beneficio o impacto generado por la TecnoAcademia en los municipios" maxlength="40000" id="impacto_municipios" error={errors.impacto_municipios} bind:value={$formImpactoMunicipios.impacto_municipios} on:input={() => syncColumnLong('impacto_municipios', $formImpactoMunicipios)} required />
+                    </div>
+                </div>
+
+                <div class="mt-44 grid grid-cols-1">
+                    <div />
+                    <div>
+                        <RecomendacionEvaluador class="mt-8">
+                            {#if isSuperAdmin || ta.proyecto.mostrar_recomendaciones}
+                                {#each ta.proyecto.evaluaciones as evaluacion, i}
+                                    {#if isSuperAdmin || (evaluacion.finalizado && evaluacion.habilitado)}
+                                        <div class="bg-zinc-900 p-4 rounded shadow text-white my-2">
+                                            <p class="text-xs">Evaluador COD-{evaluacion.id}:</p>
+                                            <p class="whitespace-pre-line text-xs">{evaluacion.ta_evaluacion.municipios_comentario ? evaluacion.ta_evaluacion.municipios_comentario : 'Sin recomendación'}</p>
+                                        </div>
+                                    {/if}
+                                {/each}
+                            {/if}
+                        </RecomendacionEvaluador>
+                    </div>
+                </div>
+
+                <div class="mt-44 grid grid-cols-2">
+                    <div>
+                        <Label required={$form.otras_nombre_instituciones_programas ? undefined : true} class="mb-4" labelFor="nombre_instituciones_programas" value="Instituciones donde se están ejecutando los programas y que se espera continuar con el proyecto de TecnoAcademias" />
+                    </div>
+                    <div>
+                        <Select id="departamento_instituciones_programas" bind:selectedValue={regionalIEEjecucion} items={regionales} placeholder="Seleccione un departamento" />
+
+                        <Tags id="nombre_instituciones_programas" class="mt-4" whitelist={whitelistInstitucionesEducativasEjecutar} bind:tags={$form.nombre_instituciones_programas} placeholder="Nombre(s) de la(s) IE" error={errors.nombre_instituciones_programas} required={$form.otras_nombre_instituciones_programas ? undefined : true} />
+                        <div class="mt-10">
+                            <InfoMessage>Si no encuentra alguna institución educativa en la anterior lista por favor escriba el nombre en el siguiente campo de texto</InfoMessage>
+                            <Textarea label="Instituciones" maxlength="40000" id="otras_nombre_instituciones_programas" error={errors.otras_nombre_instituciones_programas} bind:value={$form.otras_nombre_instituciones_programas} />
+                        </div>
+                    </div>
+                </div>
+
+                <div class="mt-44 grid grid-cols-2">
+                    <div>
+                        <Label required class="mb-4" labelFor="proyeccion_nuevas_instituciones" value="¿Se proyecta incluir nuevas Instituciones Educativas en la nueva vigencia?" />
+                    </div>
+                    <div>
+                        <Select items={opcionesSiNo} id="proyeccion_nuevas_instituciones" bind:selectedValue={$form.proyeccion_nuevas_instituciones} error={errors.proyeccion_nuevas_instituciones} autocomplete="off" placeholder="Seleccione una opción" required />
+                    </div>
+                </div>
+
+                {#if $form.proyeccion_nuevas_instituciones?.value == 1}
+                    <div class="mt-44 grid grid-cols-2">
+                        <div>
+                            <Label required={$form.otras_nuevas_instituciones ? undefined : true} class="mb-4" labelFor="nuevas_instituciones" value="Nuevas instituciones educativas que se vincularán con el proyecto de TecnoAcademia" />
+                        </div>
+                        <div>
+                            <Select id="departamento_nuevas_instituciones" bind:selectedValue={regionalIEEjecucion} items={regionales} placeholder="Seleccione un departamento" />
+
+                            <Tags id="nuevas_instituciones" class="mt-4" whitelist={whitelistInstitucionesEducativasEjecutar} bind:tags={$form.nuevas_instituciones} placeholder="Nombre(s) de la(s) IE" error={errors.nuevas_instituciones} required={$form.otras_nuevas_instituciones ? undefined : true} />
+                            <div class="mt-10">
+                                <InfoMessage>Si no encuentra alguna institución educativa en la anterior lista por favor escriba el nombre en el siguiente campo de texto</InfoMessage>
+                                <Textarea label="Instituciones" maxlength="40000" id="otras_nuevas_instituciones" error={errors.otras_nuevas_instituciones} bind:value={$form.otras_nuevas_instituciones} />
+                            </div>
+                        </div>
+                    </div>
+                {/if}
+
+                <div class="mt-44 grid grid-cols-2">
+                    <div>
+                        <Label required class="mb-4" labelFor="proyeccion_articulacion_media" value="¿Se proyecta incluir Instituciones Educativas en articulación con la media?" />
+                    </div>
+                    <div>
+                        <Select items={opcionesSiNo} id="proyeccion_articulacion_media" bind:selectedValue={$form.proyeccion_articulacion_media} error={errors.proyeccion_articulacion_media} autocomplete="off" placeholder="Seleccione una opción" required />
+                    </div>
+                </div>
+
+                {#if $form.proyeccion_articulacion_media?.value == 1}
+                    <div class="mt-44 grid grid-cols-2">
+                        <div>
+                            <Label required={$form.otras_nombre_instituciones ? undefined : true} class="mb-4" labelFor="nombre_instituciones" value="Instituciones donde se implementará el programa que tienen <strong>articulación con la Media</strong>" />
+                        </div>
+                        <div>
+                            <Select id="departamento_instituciones_media" bind:selectedValue={regionalIEArticulacion} items={regionales} placeholder="Seleccione un departamento" />
+
+                            <Tags id="nombre_instituciones" class="mt-4" whitelist={whitelistInstitucionesEducativasArticular} bind:tags={$form.nombre_instituciones} placeholder="Nombre(s) de la(s) IE" error={errors.nombre_instituciones} required={$form.otras_nombre_instituciones ? undefined : true} />
+                            <div class="mt-10">
+                                <InfoMessage>Si no encuentra alguna institución educativa en la anterior lista por favor escriba el nombre en el siguiente campo de texto</InfoMessage>
+                                <Textarea label="Instituciones" maxlength="40000" id="otras_nombre_instituciones" error={errors.otras_nombre_instituciones} bind:value={$form.otras_nombre_instituciones} />
+                            </div>
+                        </div>
+                    </div>
+                {/if}
+
+                <div class="mt-44 grid grid-cols-1">
+                    <div />
+                    <div>
+                        <RecomendacionEvaluador class="mt-8">
+                            {#if isSuperAdmin || ta.proyecto.mostrar_recomendaciones}
+                                {#each ta.proyecto.evaluaciones as evaluacion, i}
+                                    {#if isSuperAdmin || (evaluacion.finalizado && evaluacion.habilitado)}
+                                        <div class="bg-zinc-900 p-4 rounded shadow text-white my-2">
+                                            <p class="text-xs">Evaluador COD-{evaluacion.id}:</p>
+                                            <p class="whitespace-pre-line text-xs">{evaluacion.ta_evaluacion.instituciones_comentario ? evaluacion.ta_evaluacion.instituciones_comentario : 'Sin recomendación'}</p>
+                                        </div>
+                                    {/if}
+                                {/each}
+                            {/if}
+                        </RecomendacionEvaluador>
+                    </div>
+                </div>
+
+                <div class="mt-44 grid grid-cols-2">
+                    <div>
+                        <Label required class="mb-4" labelFor="programas_formacion_articulados" value="Programas de articulación con la Media con los cuales se espera dar continuidad a la ruta de formación de los aprendices de la TecnoAcademia" />
+                    </div>
+                    <div>
+                        <SelectMulti id="programas_formacion_articulados" bind:selectedValue={$form.programas_formacion_articulados} items={programasFormacion} isMulti={true} error={errors.programas_formacion_articulados} placeholder="Buscar por el nombre del programa de formación" required />
+                        <InfoMessage>
+                            Si no encuentra un programa por favor de clic en <strong>Añadir programa de formación</strong>. A continuación, se mostrará un campo de texto para que diligencie el nombre del programa y posterior de clic en <strong>Crear programa de formación</strong>.
+                            <br />
+                            Por último busque nuevamente en la lista y seleccione el programa recién creado.
+                            <br />
+                            <Button on:click={(event) => (programasFormacionDialogOpen = true)} variant="raised" type="button">Añadir programa de formación</Button>
+                        </InfoMessage>
+                    </div>
+                </div>
+
+                <div class="mt-40 grid grid-cols-1">
+                    <div>
+                        <Label required class="mb-4" labelFor="articulacion_centro_formacion" value="Articulación con el centro de formación" />
+                    </div>
+                    <div>
+                        <Textarea label="Articulación con el centro de formación" maxlength="40000" id="articulacion_centro_formacion" error={errors.articulacion_centro_formacion} bind:value={$formArticulacionCentroFormacion.articulacion_centro_formacion} on:input={() => syncColumnLong('articulacion_centro_formacion', $formArticulacionCentroFormacion)} required />
+                    </div>
+                </div>
+
+                <div class="mt-44 grid grid-cols-2">
+                    <div>
+                        <Label required class="mb-4" labelFor="dis_curricular_id" value="Programas a ejecutar en la vigencia del proyecto:" />
+                    </div>
+                    <div>
+                        <SelectMulti id="dis_curricular_id" bind:selectedValue={$form.dis_curricular_id} items={disCurriculares} isMulti={true} error={errors.dis_curricular_id} placeholder="Buscar por el nombre del programa de formación" required />
+
+                        <InfoMessage>
+                            Si no encuentra un programa por favor de clic en <strong>Añadir programa</strong>. A continuación, se mostrará un campo de texto para que diligencie el nombre del programa y posterior de clic en <strong>Crear programa</strong>.
+                            <br />
+                            Por último busque nuevamente en la lista y seleccione el programa recién creado.
+                            <br />
+                            <Button on:click={(event) => (disCurricularDialogOpen = true)} variant="raised" type="button">Añadir programa</Button>
+                        </InfoMessage>
+                    </div>
+                </div>
+
+                <div class="mt-40 grid grid-cols-1">
+                    <div>
+                        <Label required class="mb-4" labelFor="proyectos_macro" value="Proyectos Macro o líneas de proyecto de investigación formativa y aplicada de la TecnoAcademia para la vigencia 2022" />
+                    </div>
+                    <div>
+                        <Textarea maxlength="40000" id="proyectos_macro" error={errors.proyectos_macro} bind:value={$formProyectosMacro.proyectos_macro} on:input={() => syncColumnLong('proyectos_macro', $formProyectosMacro)} required />
+
+                        <RecomendacionEvaluador class="mt-8">
+                            {#if isSuperAdmin || ta.proyecto.mostrar_recomendaciones}
+                                {#each ta.proyecto.evaluaciones as evaluacion, i}
+                                    {#if isSuperAdmin || (evaluacion.finalizado && evaluacion.habilitado)}
+                                        <div class="bg-zinc-900 p-4 rounded shadow text-white my-2">
+                                            <p class="text-xs">Evaluador COD-{evaluacion.id}:</p>
+                                            <p class="whitespace-pre-line text-xs">{evaluacion.ta_evaluacion.proyectos_macro_comentario ? evaluacion.ta_evaluacion.proyectos_macro_comentario : 'Sin recomendación'}</p>
+                                        </div>
+                                    {/if}
+                                {/each}
+                            {/if}
+                        </RecomendacionEvaluador>
+                    </div>
+                </div>
+
+                <div class="mt-40 grid grid-cols-1">
+                    <div>
+                        <Label required class="mb-4" labelFor="lineas_medulares_centro" value="Líneas medulares del Centro con las que se articula la TecnoAcademia" />
+                    </div>
+                    <div>
+                        <Textarea maxlength="40000" id="lineas_medulares_centro" error={errors.lineas_medulares_centro} bind:value={$formLineasMedularesCentro.lineas_medulares_centro} on:input={() => syncColumnLong('lineas_medulares_centro', $formLineasMedularesCentro)} required />
+
+                        <RecomendacionEvaluador class="mt-8">
+                            {#if isSuperAdmin || ta.proyecto.mostrar_recomendaciones}
+                                {#each ta.proyecto.evaluaciones as evaluacion, i}
+                                    {#if isSuperAdmin || (evaluacion.finalizado && evaluacion.habilitado)}
+                                        <div class="bg-zinc-900 p-4 rounded shadow text-white my-2">
+                                            <p class="text-xs">Evaluador COD-{evaluacion.id}:</p>
+                                            <p class="whitespace-pre-line text-xs">{evaluacion.ta_evaluacion.lineas_medulares_centro_comentario ? evaluacion.ta_evaluacion.lineas_medulares_centro_comentario : 'Sin recomendación'}</p>
+                                        </div>
+                                    {/if}
+                                {/each}
+                            {/if}
+                        </RecomendacionEvaluador>
+                    </div>
+                </div>
+
+                <div class="mt-40 grid grid-cols-1">
+                    <div>
+                        <Label required class="mb-4" labelFor="lineas_tecnologicas_centro" value="Líneas tecnológicas del Centro con las que se articula la TecnoAcademia" />
+                    </div>
+                    <div>
+                        <Textarea maxlength="40000" id="lineas_tecnologicas_centro" error={errors.lineas_tecnologicas_centro} bind:value={$formLineasTecnologicasCentro.lineas_tecnologicas_centro} on:input={() => syncColumnLong('lineas_tecnologicas_centro', $formLineasTecnologicasCentro)} required />
+
+                        <RecomendacionEvaluador class="mt-8">
+                            {#if isSuperAdmin || ta.proyecto.mostrar_recomendaciones}
+                                {#each ta.proyecto.evaluaciones as evaluacion, i}
+                                    {#if isSuperAdmin || (evaluacion.finalizado && evaluacion.habilitado)}
+                                        <div class="bg-zinc-900 p-4 rounded shadow text-white my-2">
+                                            <p class="text-xs">Evaluador COD-{evaluacion.id}:</p>
+                                            <p class="whitespace-pre-line text-xs">{evaluacion.ta_evaluacion.lineas_tecnologicas_centro_comentario ? evaluacion.ta_evaluacion.lineas_tecnologicas_centro_comentario : 'Sin recomendación'}</p>
+                                        </div>
+                                    {/if}
+                                {/each}
+                            {/if}
+                        </RecomendacionEvaluador>
+                    </div>
+                </div>
+
+                <div class="mt-44 grid grid-cols-1">
+                    <div>
+                        <Label required class="mb-4" labelFor="bibliografia" value="Bibliografía" />
+                        <InfoMessage message="Lista de las referencias utilizadas en cada apartado del proyecto. Utilizar normas APA- Última edición (http://biblioteca.sena.edu.co/images/PDF/InstructivoAPA.pdf)." />
+                    </div>
+                    <div>
+                        <Textarea maxlength="40000" id="bibliografia" error={errors.bibliografia} bind:value={$formBibliografia.bibliografia} on:input={() => syncColumnLong('bibliografia', $formBibliografia)} required />
+
+                        <RecomendacionEvaluador class="mt-8">
+                            {#if isSuperAdmin || ta.proyecto.mostrar_recomendaciones}
+                                {#each ta.proyecto.evaluaciones as evaluacion, i}
+                                    {#if isSuperAdmin || (evaluacion.finalizado && evaluacion.habilitado)}
+                                        <div class="bg-zinc-900 p-4 rounded shadow text-white my-2">
+                                            <p class="text-xs">Evaluador COD-{evaluacion.id}:</p>
+                                            <p class="whitespace-pre-line text-xs">{evaluacion.ta_evaluacion.bibliografia ? evaluacion.ta_evaluacion.bibliografia : 'Sin recomendación'}</p>
+                                        </div>
+                                    {/if}
+                                {/each}
+                            {/if}
+                        </RecomendacionEvaluador>
+                    </div>
+                </div>
+
                 {#if isSuperAdmin || ta.proyecto.mostrar_recomendaciones}
+                    <hr class="mt-10 mb-10" />
+                    <h1>Ortografía</h1>
                     {#each ta.proyecto.evaluaciones as evaluacion, i}
                         {#if isSuperAdmin || (evaluacion.finalizado && evaluacion.habilitado)}
-                            <div class="bg-gray-200 p-4 rounded border-orangered border mb-5">
-                                <div class="flex text-orangered-900 font-black">
+                            <div class="bg-zinc-900 text-white p-4 rounded border mb-5">
+                                <div class="text-xs flex items-center">
                                     <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 mr-1.5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2m-3 7h3m-3 4h3m-6-4h.01M9 16h.01" />
                                     </svg>
-                                    Recomendación del evaluador COD-{evaluacion.id}:
+                                    Evaluador COD-{evaluacion.id}:
                                 </div>
-                                <p class="whitespace-pre-line">{evaluacion.ta_evaluacion.fecha_ejecucion_comentario ? evaluacion.ta_evaluacion.fecha_ejecucion_comentario : 'Sin recomendación'}</p>
+                                <p class="whitespace-pre-line text-xs">{evaluacion.ta_evaluacion.ortografia_comentario ? evaluacion.ta_evaluacion.ortografia_comentario : 'Sin recomendación'}</p>
+                            </div>
+                        {/if}
+                    {/each}
+                {/if}
+
+                {#if isSuperAdmin || ta.proyecto.mostrar_recomendaciones}
+                    <hr class="mt-10 mb-10" />
+                    <h1>Redacción</h1>
+                    {#each ta.proyecto.evaluaciones as evaluacion, i}
+                        {#if isSuperAdmin || (evaluacion.finalizado && evaluacion.habilitado)}
+                            <div class="bg-zinc-900 text-white p-4 rounded border mb-5">
+                                <div class="text-xs flex items-center">
+                                    <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 mr-1.5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2m-3 7h3m-3 4h3m-6-4h.01M9 16h.01" />
+                                    </svg>
+                                    Evaluador COD-{evaluacion.id}:
+                                </div>
+                                <p class="whitespace-pre-line text-xs">{evaluacion.ta_evaluacion.redaccion_comentario ? evaluacion.ta_evaluacion.redaccion_comentario : 'Sin recomendación'}</p>
+                            </div>
+                        {/if}
+                    {/each}
+                {/if}
+
+                {#if isSuperAdmin || ta.proyecto.mostrar_recomendaciones}
+                    <hr class="mt-10 mb-10" />
+                    <h1>Normas APA</h1>
+                    {#each ta.proyecto.evaluaciones as evaluacion, i}
+                        {#if isSuperAdmin || (evaluacion.finalizado && evaluacion.habilitado)}
+                            <div class="bg-zinc-900 text-white p-4 rounded border mb-5">
+                                <div class="text-xs flex items-center">
+                                    <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 mr-1.5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2m-3 7h3m-3 4h3m-6-4h.01M9 16h.01" />
+                                    </svg>
+                                    Evaluador COD-{evaluacion.id}:
+                                </div>
+                                <p class="whitespace-pre-line text-xs">{evaluacion.ta_evaluacion.normas_apa_comentario ? evaluacion.ta_evaluacion.normas_apa_comentario : 'Sin recomendación'}</p>
                             </div>
                         {/if}
                     {/each}
                 {/if}
             </div>
-
-            <fieldset disabled>
-                <div class="mt-44 grid grid-cols-2">
-                    <div>
-                        <Label required class="mb-4" labelFor="linea_programatica_id" value="Código dependencia presupuestal (SIIF)" />
-                    </div>
-                    <div>
-                        <DynamicList id="linea_programatica_id" bind:value={$form.linea_programatica_id} routeWebApi={route('web-api.lineas-programaticas', 1)} classes="min-h" placeholder="Busque por el nombre de la línea programática" message={errors.linea_programatica_id} required />
-                    </div>
-                </div>
-                <div class="mt-44 grid grid-cols-2">
-                    <div>
-                        <Label required class="mb-4" labelFor="centro_formacion_id" value="Centro de formación" />
-                        <small> Nota: El Centro de Formación relacionado es el ejecutor del proyecto </small>
-                    </div>
-                    <div>
-                        {ta.proyecto.centro_formacion.nombre}
-                    </div>
-                </div>
-
-                <div class="mt-44 grid grid-cols-2">
-                    <div>
-                        <Label required class="mb-4" labelFor="tecnoacademia_id" value="TecnoAcademia" />
-                    </div>
-                    <div>
-                        <Select id="tecnoacademia_id" items={tecnoAcademias} bind:selectedValue={$form.tecnoacademia_id} error={errors.tecnoacademia_id} autocomplete="off" placeholder="Busque por el nombre de la TecnoAcademia" required />
-                    </div>
-                </div>
-            </fieldset>
-            {#if $form.tecnoacademia_id && lineasTecnoaAcademia}
-                <div class="mt-44 grid grid-cols-2">
-                    <div>
-                        <Label required class="mb-4" labelFor="tecnoacademia_linea_tecnoacademia_id" value="Líneas temáticas a ejecutar en la vigencia del proyecto:" />
-                    </div>
-                    <div>
-                        <SelectMulti id="tecnoacademia_linea_tecnoacademia_id" bind:selectedValue={$form.tecnoacademia_linea_tecnoacademia_id} items={lineasTecnoaAcademia} isMulti={true} error={errors.tecnoacademia_linea_tecnoacademia_id} placeholder="Buscar por el nombre de la línea" required />
-                        {#if lineasTecnoaAcademia?.length == 0}
-                            <div>
-                                <p>Parece que no se han encontrado elementos, por favor haga clic en <strong>Refrescar</strong></p>
-                                <button on:click={getLineasTecnoacademia} type="button" class="flex underline">
-                                    <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 mr-2" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 4v5h.582m15.356 2A8.001 8.001 0 004.582 9m0 0H9m11 11v-5h-.581m0 0a8.003 8.003 0 01-15.357-2m15.357 2H15" />
-                                    </svg>
-                                    Refrescar
-                                </button>
-                            </div>
-                        {/if}
-                    </div>
-                </div>
-            {/if}
-
-            <fieldset disabled>
-                <div class="mt-40 grid grid-cols-1">
-                    <div>
-                        <Label required class="mb-4" labelFor="resumen" value="Resumen del proyecto" />
-                        <InfoMessage message="Información necesaria para darle al lector una idea precisa de la pertinencia y calidad del proyecto. Explique en qué consiste el problema o necesidad, cómo cree que lo resolverá, cuáles son las razones que justifican su ejecución y las herramientas que se utilizarán en el desarrollo del proyecto." />
-                    </div>
-                    <div>
-                        <Textarea label="Resumen del proyecto" maxlength="40000" id="resumen" error={errors.resumen} bind:value={$resumenForm.resumen} on:input={() => syncColumnLong('resumen', $resumenForm)} required />
-                    </div>
-                </div>
-            </fieldset>
-
-            <div class="mt-40 grid grid-cols-1">
-                <div>
-                    <Label required class="mb-4" labelFor="resumen_regional" value="Complemento - Resumen ejecutivo regional" />
-                </div>
-                <div>
-                    <Textarea maxlength="40000" id="resumen_regional" error={errors.resumen_regional} bind:value={$formResumenRegional.resumen_regional} on:input={() => syncColumnLong('resumen_regional', $formResumenRegional)} required />
-
-                    {#if isSuperAdmin || ta.proyecto.mostrar_recomendaciones}
-                        {#each ta.proyecto.evaluaciones as evaluacion, i}
-                            {#if isSuperAdmin || (evaluacion.finalizado && evaluacion.habilitado)}
-                                <div class="bg-gray-200 p-4 rounded border-orangered border mb-5">
-                                    <div class="flex text-orangered-900 font-black">
-                                        <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 mr-1.5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2m-3 7h3m-3 4h3m-6-4h.01M9 16h.01" />
-                                        </svg>
-                                        Recomendación del evaluador COD-{evaluacion.id}:
-                                    </div>
-                                    <p class="whitespace-pre-line">{evaluacion.ta_evaluacion.resumen_regional_comentario ? evaluacion.ta_evaluacion.resumen_regional_comentario : 'Sin recomendación'}</p>
-                                </div>
-                            {/if}
-                        {/each}
-                    {/if}
-                </div>
-            </div>
-
-            <fieldset disabled>
-                <div class="mt-44 grid grid-cols-1">
-                    <div>
-                        <Label required class="mb-4" labelFor="antecedentes" value="Antecedentes" />
-                        <InfoMessage
-                            message="Presenta las investigaciones, innovaciones o desarrollos tecnológicos que se han realizado a nivel internacional, nacional, departamental o municipal en el marco de la temática de la propuesta del proyecto; que muestran la pertinencia del proyecto, citar toda la información consignada utilizando normas APA última edición. De igual forma, relacionar los proyectos ejecutados en vigencias anteriores (incluir códigos SGPS), si el proyecto corresponde a la continuidad de proyectos SENNOVA."
-                        />
-                    </div>
-                    <div>
-                        <Textarea label="Antecedentes" maxlength="40000" id="antecedentes" error={errors.antecedentes} bind:value={$formAntecedentes.antecedentes} on:input={() => syncColumnLong('antecedentes', $formAntecedentes)} required />
-                    </div>
-                </div>
-            </fieldset>
-
-            <div class="mt-44 grid grid-cols-1">
-                <div>
-                    <Label required class="mb-4" labelFor="antecedentes_tecnoacademia" value="Antecedentes de la Tecnoacademia y su impacto en la región" />
-                </div>
-                <div>
-                    <Textarea maxlength="40000" id="antecedentes_tecnoacademia" error={errors.antecedentes_tecnoacademia} bind:value={$formAntecedentesTA.antecedentes_tecnoacademia} on:input={() => syncColumnLong('antecedentes_tecnoacademia', $formAntecedentesTA)} required />
-                    {#if isSuperAdmin || ta.proyecto.mostrar_recomendaciones}
-                        {#each ta.proyecto.evaluaciones as evaluacion, i}
-                            {#if isSuperAdmin || (evaluacion.finalizado && evaluacion.habilitado)}
-                                <div class="bg-gray-200 p-4 rounded border-orangered border mb-5">
-                                    <div class="flex text-orangered-900 font-black">
-                                        <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 mr-1.5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2m-3 7h3m-3 4h3m-6-4h.01M9 16h.01" />
-                                        </svg>
-                                        Recomendación del evaluador COD-{evaluacion.id}:
-                                    </div>
-                                    <p class="whitespace-pre-line">{evaluacion.ta_evaluacion.antecedentes_tecnoacademia_comentario ? evaluacion.ta_evaluacion.antecedentes_tecnoacademia_comentario : 'Sin recomendación'}</p>
-                                </div>
-                            {/if}
-                        {/each}
-                    {/if}
-                </div>
-            </div>
-
-            <fieldset disabled>
-                <div class="mt-44 grid grid-cols-1">
-                    <div>
-                        <Label required class="mb-4" labelFor="justificacion_problema" value="Justificación" />
-                    </div>
-                    <div>
-                        <Textarea label="Justificación" maxlength="40000" id="justificacion_problema" error={errors.justificacion_problema} bind:value={$formJustificacionProblema.justificacion_problema} on:input={() => syncColumnLong('justificacion_problema', $formJustificacionProblema)} required />
-                    </div>
-                </div>
-            </fieldset>
-
-            <div class="mt-44 grid grid-cols-1">
-                <div>
-                    <Label required class="mb-4" labelFor="retos_oportunidades" value="Descripción de retos y prioridades locales y regionales en los cuales la Tecnoacademia tiene impacto" />
-                </div>
-                <div>
-                    <Textarea maxlength="40000" id="retos_oportunidades" error={errors.retos_oportunidades} bind:value={$formRetosOportunidades.retos_oportunidades} on:input={() => syncColumnLong('retos_oportunidades', $formRetosOportunidades)} required />
-
-                    {#if isSuperAdmin || ta.proyecto.mostrar_recomendaciones}
-                        {#each ta.proyecto.evaluaciones as evaluacion, i}
-                            {#if isSuperAdmin || (evaluacion.finalizado && evaluacion.habilitado)}
-                                <div class="bg-gray-200 p-4 rounded border-orangered border mb-5">
-                                    <div class="flex text-orangered-900 font-black">
-                                        <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 mr-1.5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2m-3 7h3m-3 4h3m-6-4h.01M9 16h.01" />
-                                        </svg>
-                                        Recomendación del evaluador COD-{evaluacion.id}:
-                                    </div>
-                                    <p class="whitespace-pre-line">{evaluacion.ta_evaluacion.retos_oportunidades_comentario ? evaluacion.ta_evaluacion.retos_oportunidades_comentario : 'Sin recomendación'}</p>
-                                </div>
-                            {/if}
-                        {/each}
-                    {/if}
-                </div>
-            </div>
-
-            <div class="mt-44 grid grid-cols-1">
-                <div>
-                    <Label required class="mb-4" labelFor="pertinencia_territorio" value="Justificación y pertinencia en el territorio" />
-                </div>
-                <div>
-                    <Textarea label="Justificación y pertinencia en el territorio" maxlength="40000" id="pertinencia_territorio" error={errors.pertinencia_territorio} bind:value={$formPertinenciaTerritorio.pertinencia_territorio} on:input={() => syncColumnLong('pertinencia_territorio', $formPertinenciaTerritorio)} required />
-                </div>
-            </div>
-
-            <fieldset disabled>
-                <div class="mt-44 grid grid-cols-1">
-                    <div>
-                        <Label required class="mb-4" labelFor="marco_conceptual" value="Marco conceptual" />
-                        <InfoMessage message="Descripción de los aspectos conceptuales y/o teóricos relacionados con el problema. Se hace la claridad que no es un listado de definiciones." />
-                    </div>
-                    <div>
-                        <Textarea label="Marco conceptual" maxlength="40000" id="marco_conceptual" error={errors.marco_conceptual} bind:value={$formMarcoConceptual.marco_conceptual} on:input={() => syncColumnLong('marco_conceptual', $formMarcoConceptual)} required />
-                    </div>
-                </div>
-            </fieldset>
-
-            <div class="mt-44 grid grid-cols-2">
-                <div>
-                    <Label required class="mb-4" labelFor="municipios" value="Nombre los municipios impactados en la vigencia anterior por la TecnoAcademia" />
-                </div>
-                <div>
-                    <SelectMulti id="municipios" bind:selectedValue={$form.municipios} items={municipios} isMulti={true} error={errors.municipios} placeholder="Buscar municipios" required />
-                </div>
-            </div>
-
-            <div class="mt-44 grid grid-cols-2">
-                <div>
-                    <Label required class="mb-4" labelFor="municipios_impactar" value="Defina los municipios a impactar en la vigencia el proyecto:" />
-                </div>
-                <div>
-                    <SelectMulti id="municipios_impactar" bind:selectedValue={$form.municipios_impactar} items={municipios} isMulti={true} error={errors.municipios_impactar} placeholder="Buscar municipios" required />
-                </div>
-            </div>
-
-            <div class="mt-44 grid grid-cols-1">
-                <div>
-                    <Label required class="mb-4" labelFor="impacto_municipios" value="Descripción del beneficio o impacto generado por la TecnoAcademia en los municipios" />
-                </div>
-                <div>
-                    <Textarea label="Descripción del beneficio o impacto generado por la TecnoAcademia en los municipios" maxlength="40000" id="impacto_municipios" error={errors.impacto_municipios} bind:value={$formImpactoMunicipios.impacto_municipios} on:input={() => syncColumnLong('impacto_municipios', $formImpactoMunicipios)} required />
-                </div>
-            </div>
-
-            <div class="mt-44 grid grid-cols-1">
-                <div />
-                <div>
-                    {#if isSuperAdmin || ta.proyecto.mostrar_recomendaciones}
-                        {#each ta.proyecto.evaluaciones as evaluacion, i}
-                            {#if isSuperAdmin || (evaluacion.finalizado && evaluacion.habilitado)}
-                                <div class="bg-gray-200 p-4 rounded border-orangered border mb-5">
-                                    <div class="flex text-orangered-900 font-black">
-                                        <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 mr-1.5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2m-3 7h3m-3 4h3m-6-4h.01M9 16h.01" />
-                                        </svg>
-                                        Recomendación del evaluador COD-{evaluacion.id}:
-                                    </div>
-                                    <p class="whitespace-pre-line">{evaluacion.ta_evaluacion.municipios_comentario ? evaluacion.ta_evaluacion.municipios_comentario : 'Sin recomendación'}</p>
-                                </div>
-                            {/if}
-                        {/each}
-                    {/if}
-                </div>
-            </div>
-
-            <div class="mt-44 grid grid-cols-2">
-                <div>
-                    <Label required={$form.otras_nombre_instituciones_programas ? undefined : true} class="mb-4" labelFor="nombre_instituciones_programas" value="Instituciones donde se están ejecutando los programas y que se espera continuar con el proyecto de TecnoAcademias" />
-                </div>
-                <div>
-                    <Select id="departamento_instituciones_programas" bind:selectedValue={regionalIEEjecucion} items={regionales} placeholder="Seleccione un departamento" />
-
-                    <Tags id="nombre_instituciones_programas" class="mt-4" whitelist={whitelistInstitucionesEducativasEjecutar} bind:tags={$form.nombre_instituciones_programas} placeholder="Nombre(s) de la(s) IE" error={errors.nombre_instituciones_programas} required={$form.otras_nombre_instituciones_programas ? undefined : true} />
-                    <div class="mt-10">
-                        <InfoMessage>Si no encuentra alguna institución educativa en la anterior lista por favor escriba el nombre en el siguiente campo de texto</InfoMessage>
-                        <Textarea label="Instituciones" maxlength="40000" id="otras_nombre_instituciones_programas" error={errors.otras_nombre_instituciones_programas} bind:value={$form.otras_nombre_instituciones_programas} />
-                    </div>
-                </div>
-            </div>
-
-            <div class="mt-44 grid grid-cols-2">
-                <div>
-                    <Label required class="mb-4" labelFor="proyeccion_nuevas_instituciones" value="¿Se proyecta incluir nuevas Instituciones Educativas en la nueva vigencia?" />
-                </div>
-                <div>
-                    <Select items={opcionesSiNo} id="proyeccion_nuevas_instituciones" bind:selectedValue={$form.proyeccion_nuevas_instituciones} error={errors.proyeccion_nuevas_instituciones} autocomplete="off" placeholder="Seleccione una opción" required />
-                </div>
-            </div>
-
-            {#if $form.proyeccion_nuevas_instituciones?.value == 1}
-                <div class="mt-44 grid grid-cols-2">
-                    <div>
-                        <Label required={$form.otras_nuevas_instituciones ? undefined : true} class="mb-4" labelFor="nuevas_instituciones" value="Nuevas instituciones educativas que se vincularán con el proyecto de TecnoAcademia" />
-                    </div>
-                    <div>
-                        <Select id="departamento_nuevas_instituciones" bind:selectedValue={regionalIEEjecucion} items={regionales} placeholder="Seleccione un departamento" />
-
-                        <Tags id="nuevas_instituciones" class="mt-4" whitelist={whitelistInstitucionesEducativasEjecutar} bind:tags={$form.nuevas_instituciones} placeholder="Nombre(s) de la(s) IE" error={errors.nuevas_instituciones} required={$form.otras_nuevas_instituciones ? undefined : true} />
-                        <div class="mt-10">
-                            <InfoMessage>Si no encuentra alguna institución educativa en la anterior lista por favor escriba el nombre en el siguiente campo de texto</InfoMessage>
-                            <Textarea label="Instituciones" maxlength="40000" id="otras_nuevas_instituciones" error={errors.otras_nuevas_instituciones} bind:value={$form.otras_nuevas_instituciones} />
-                        </div>
-                    </div>
-                </div>
-            {/if}
-
-            <div class="mt-44 grid grid-cols-2">
-                <div>
-                    <Label required class="mb-4" labelFor="proyeccion_articulacion_media" value="¿Se proyecta incluir Instituciones Educativas en articulación con la media?" />
-                </div>
-                <div>
-                    <Select items={opcionesSiNo} id="proyeccion_articulacion_media" bind:selectedValue={$form.proyeccion_articulacion_media} error={errors.proyeccion_articulacion_media} autocomplete="off" placeholder="Seleccione una opción" required />
-                </div>
-            </div>
-
-            {#if $form.proyeccion_articulacion_media?.value == 1}
-                <div class="mt-44 grid grid-cols-2">
-                    <div>
-                        <Label required={$form.otras_nombre_instituciones ? undefined : true} class="mb-4" labelFor="nombre_instituciones" value="Instituciones donde se implementará el programa que tienen <strong>articulación con la Media</strong>" />
-                    </div>
-                    <div>
-                        <Select id="departamento_instituciones_media" bind:selectedValue={regionalIEArticulacion} items={regionales} placeholder="Seleccione un departamento" />
-
-                        <Tags id="nombre_instituciones" class="mt-4" whitelist={whitelistInstitucionesEducativasArticular} bind:tags={$form.nombre_instituciones} placeholder="Nombre(s) de la(s) IE" error={errors.nombre_instituciones} required={$form.otras_nombre_instituciones ? undefined : true} />
-                        <div class="mt-10">
-                            <InfoMessage>Si no encuentra alguna institución educativa en la anterior lista por favor escriba el nombre en el siguiente campo de texto</InfoMessage>
-                            <Textarea label="Instituciones" maxlength="40000" id="otras_nombre_instituciones" error={errors.otras_nombre_instituciones} bind:value={$form.otras_nombre_instituciones} />
-                        </div>
-                    </div>
-                </div>
-            {/if}
-
-            <div class="mt-44 grid grid-cols-1">
-                <div />
-                <div>
-                    {#if isSuperAdmin || ta.proyecto.mostrar_recomendaciones}
-                        {#each ta.proyecto.evaluaciones as evaluacion, i}
-                            {#if isSuperAdmin || (evaluacion.finalizado && evaluacion.habilitado)}
-                                <div class="bg-gray-200 p-4 rounded border-orangered border mb-5">
-                                    <div class="flex text-orangered-900 font-black">
-                                        <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 mr-1.5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2m-3 7h3m-3 4h3m-6-4h.01M9 16h.01" />
-                                        </svg>
-                                        Recomendación del evaluador COD-{evaluacion.id}:
-                                    </div>
-                                    <p class="whitespace-pre-line">{evaluacion.ta_evaluacion.instituciones_comentario ? evaluacion.ta_evaluacion.instituciones_comentario : 'Sin recomendación'}</p>
-                                </div>
-                            {/if}
-                        {/each}
-                    {/if}
-                </div>
-            </div>
-
-            <div class="mt-44 grid grid-cols-2">
-                <div>
-                    <Label required class="mb-4" labelFor="programas_formacion_articulados" value="Programas de articulación con la Media con los cuales se espera dar continuidad a la ruta de formación de los aprendices de la TecnoAcademia" />
-                </div>
-                <div>
-                    <SelectMulti id="programas_formacion_articulados" bind:selectedValue={$form.programas_formacion_articulados} items={programasFormacion} isMulti={true} error={errors.programas_formacion_articulados} placeholder="Buscar por el nombre del programa de formación" required />
-                    <InfoMessage>
-                        Si no encuentra un programa por favor de clic en <strong>Añadir programa de formación</strong>. A continuación, se mostrará un campo de texto para que diligencie el nombre del programa y posterior de clic en <strong>Crear programa de formación</strong>.
-                        <br />
-                        Por último busque nuevamente en la lista y seleccione el programa recién creado.
-                        <br />
-                        <Button on:click={(event) => (programasFormacionDialogOpen = true)} variant="raised" type="button">Añadir programa de formación</Button>
-                    </InfoMessage>
-                </div>
-            </div>
-
-            <div class="mt-40 grid grid-cols-1">
-                <div>
-                    <Label required class="mb-4" labelFor="articulacion_centro_formacion" value="Articulación con el centro de formación" />
-                </div>
-                <div>
-                    <Textarea label="Articulación con el centro de formación" maxlength="40000" id="articulacion_centro_formacion" error={errors.articulacion_centro_formacion} bind:value={$formArticulacionCentroFormacion.articulacion_centro_formacion} on:input={() => syncColumnLong('articulacion_centro_formacion', $formArticulacionCentroFormacion)} required />
-                </div>
-            </div>
-
-            <div class="mt-44 grid grid-cols-2">
-                <div>
-                    <Label required class="mb-4" labelFor="dis_curricular_id" value="Programas a ejecutar en la vigencia del proyecto:" />
-                </div>
-                <div>
-                    <SelectMulti id="dis_curricular_id" bind:selectedValue={$form.dis_curricular_id} items={disCurriculares} isMulti={true} error={errors.dis_curricular_id} placeholder="Buscar por el nombre del programa de formación" required />
-
-                    <InfoMessage>
-                        Si no encuentra un programa por favor de clic en <strong>Añadir programa</strong>. A continuación, se mostrará un campo de texto para que diligencie el nombre del programa y posterior de clic en <strong>Crear programa</strong>.
-                        <br />
-                        Por último busque nuevamente en la lista y seleccione el programa recién creado.
-                        <br />
-                        <Button on:click={(event) => (disCurricularDialogOpen = true)} variant="raised" type="button">Añadir programa</Button>
-                    </InfoMessage>
-                </div>
-            </div>
-
-            <div class="mt-40 grid grid-cols-1">
-                <div>
-                    <Label required class="mb-4" labelFor="proyectos_macro" value="Proyectos Macro o líneas de proyecto de investigación formativa y aplicada de la TecnoAcademia para la vigencia 2022" />
-                </div>
-                <div>
-                    <Textarea maxlength="40000" id="proyectos_macro" error={errors.proyectos_macro} bind:value={$formProyectosMacro.proyectos_macro} on:input={() => syncColumnLong('proyectos_macro', $formProyectosMacro)} required />
-
-                    {#if isSuperAdmin || ta.proyecto.mostrar_recomendaciones}
-                        {#each ta.proyecto.evaluaciones as evaluacion, i}
-                            {#if isSuperAdmin || (evaluacion.finalizado && evaluacion.habilitado)}
-                                <div class="bg-gray-200 p-4 rounded border-orangered border mb-5">
-                                    <div class="flex text-orangered-900 font-black">
-                                        <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 mr-1.5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2m-3 7h3m-3 4h3m-6-4h.01M9 16h.01" />
-                                        </svg>
-                                        Recomendación del evaluador COD-{evaluacion.id}:
-                                    </div>
-                                    <p class="whitespace-pre-line">{evaluacion.ta_evaluacion.proyectos_macro_comentario ? evaluacion.ta_evaluacion.proyectos_macro_comentario : 'Sin recomendación'}</p>
-                                </div>
-                            {/if}
-                        {/each}
-                    {/if}
-                </div>
-            </div>
-
-            <div class="mt-40 grid grid-cols-1">
-                <div>
-                    <Label required class="mb-4" labelFor="lineas_medulares_centro" value="Líneas medulares del Centro con las que se articula la TecnoAcademia" />
-                </div>
-                <div>
-                    <Textarea maxlength="40000" id="lineas_medulares_centro" error={errors.lineas_medulares_centro} bind:value={$formLineasMedularesCentro.lineas_medulares_centro} on:input={() => syncColumnLong('lineas_medulares_centro', $formLineasMedularesCentro)} required />
-
-                    {#if isSuperAdmin || ta.proyecto.mostrar_recomendaciones}
-                        {#each ta.proyecto.evaluaciones as evaluacion, i}
-                            {#if isSuperAdmin || (evaluacion.finalizado && evaluacion.habilitado)}
-                                <div class="bg-gray-200 p-4 rounded border-orangered border mb-5">
-                                    <div class="flex text-orangered-900 font-black">
-                                        <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 mr-1.5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2m-3 7h3m-3 4h3m-6-4h.01M9 16h.01" />
-                                        </svg>
-                                        Recomendación del evaluador COD-{evaluacion.id}:
-                                    </div>
-                                    <p class="whitespace-pre-line">{evaluacion.ta_evaluacion.lineas_medulares_centro_comentario ? evaluacion.ta_evaluacion.lineas_medulares_centro_comentario : 'Sin recomendación'}</p>
-                                </div>
-                            {/if}
-                        {/each}
-                    {/if}
-                </div>
-            </div>
-
-            <div class="mt-40 grid grid-cols-1">
-                <div>
-                    <Label required class="mb-4" labelFor="lineas_tecnologicas_centro" value="Líneas tecnológicas del Centro con las que se articula la TecnoAcademia" />
-                </div>
-                <div>
-                    <Textarea maxlength="40000" id="lineas_tecnologicas_centro" error={errors.lineas_tecnologicas_centro} bind:value={$formLineasTecnologicasCentro.lineas_tecnologicas_centro} on:input={() => syncColumnLong('lineas_tecnologicas_centro', $formLineasTecnologicasCentro)} required />
-
-                    {#if isSuperAdmin || ta.proyecto.mostrar_recomendaciones}
-                        {#each ta.proyecto.evaluaciones as evaluacion, i}
-                            {#if isSuperAdmin || (evaluacion.finalizado && evaluacion.habilitado)}
-                                <div class="bg-gray-200 p-4 rounded border-orangered border mb-5">
-                                    <div class="flex text-orangered-900 font-black">
-                                        <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 mr-1.5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2m-3 7h3m-3 4h3m-6-4h.01M9 16h.01" />
-                                        </svg>
-                                        Recomendación del evaluador COD-{evaluacion.id}:
-                                    </div>
-                                    <p class="whitespace-pre-line">{evaluacion.ta_evaluacion.lineas_tecnologicas_centro_comentario ? evaluacion.ta_evaluacion.lineas_tecnologicas_centro_comentario : 'Sin recomendación'}</p>
-                                </div>
-                            {/if}
-                        {/each}
-                    {/if}
-                </div>
-            </div>
-
-            <div class="mt-44 grid grid-cols-1">
-                <div>
-                    <Label required class="mb-4" labelFor="bibliografia" value="Bibliografía" />
-                    <InfoMessage message="Lista de las referencias utilizadas en cada apartado del proyecto. Utilizar normas APA- Última edición (http://biblioteca.sena.edu.co/images/PDF/InstructivoAPA.pdf)." />
-                </div>
-                <div>
-                    <Textarea maxlength="40000" id="bibliografia" error={errors.bibliografia} bind:value={$formBibliografia.bibliografia} on:input={() => syncColumnLong('bibliografia', $formBibliografia)} required />
-
-                    {#if isSuperAdmin || ta.proyecto.mostrar_recomendaciones}
-                        {#each ta.proyecto.evaluaciones as evaluacion, i}
-                            {#if isSuperAdmin || (evaluacion.finalizado && evaluacion.habilitado)}
-                                <div class="bg-gray-200 p-4 rounded border-orangered border mb-5">
-                                    <div class="flex text-orangered-900 font-black">
-                                        <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 mr-1.5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2m-3 7h3m-3 4h3m-6-4h.01M9 16h.01" />
-                                        </svg>
-                                        Recomendación del evaluador COD-{evaluacion.id}:
-                                    </div>
-                                    <p class="whitespace-pre-line">{evaluacion.ta_evaluacion.bibliografia ? evaluacion.ta_evaluacion.bibliografia : 'Sin recomendación'}</p>
-                                </div>
-                            {/if}
-                        {/each}
-                    {/if}
-                </div>
-            </div>
-
-            {#if isSuperAdmin || ta.proyecto.mostrar_recomendaciones}
-                <hr class="mt-10 mb-10" />
-                <h1>Ortografía</h1>
-                {#each ta.proyecto.evaluaciones as evaluacion, i}
-                    {#if isSuperAdmin || (evaluacion.finalizado && evaluacion.habilitado)}
-                        <div class="bg-gray-200 p-4 rounded border-orangered border mb-5">
-                            <div class="flex text-orangered-900 font-black">
-                                <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 mr-1.5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2m-3 7h3m-3 4h3m-6-4h.01M9 16h.01" />
-                                </svg>
-                                Recomendación del evaluador COD-{evaluacion.id}:
-                            </div>
-                            <p class="whitespace-pre-line">{evaluacion.ta_evaluacion.ortografia_comentario ? evaluacion.ta_evaluacion.ortografia_comentario : 'Sin recomendación'}</p>
-                        </div>
-                    {/if}
-                {/each}
-            {/if}
-
-            {#if isSuperAdmin || ta.proyecto.mostrar_recomendaciones}
-                <hr class="mt-10 mb-10" />
-                <h1>Redacción</h1>
-                {#each ta.proyecto.evaluaciones as evaluacion, i}
-                    {#if isSuperAdmin || (evaluacion.finalizado && evaluacion.habilitado)}
-                        <div class="bg-gray-200 p-4 rounded border-orangered border mb-5">
-                            <div class="flex text-orangered-900 font-black">
-                                <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 mr-1.5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2m-3 7h3m-3 4h3m-6-4h.01M9 16h.01" />
-                                </svg>
-                                Recomendación del evaluador COD-{evaluacion.id}:
-                            </div>
-                            <p class="whitespace-pre-line">{evaluacion.ta_evaluacion.redaccion_comentario ? evaluacion.ta_evaluacion.redaccion_comentario : 'Sin recomendación'}</p>
-                        </div>
-                    {/if}
-                {/each}
-            {/if}
-
-            {#if isSuperAdmin || ta.proyecto.mostrar_recomendaciones}
-                <hr class="mt-10 mb-10" />
-                <h1>Normas APA</h1>
-                {#each ta.proyecto.evaluaciones as evaluacion, i}
-                    {#if isSuperAdmin || (evaluacion.finalizado && evaluacion.habilitado)}
-                        <div class="bg-gray-200 p-4 rounded border-orangered border mb-5">
-                            <div class="flex text-orangered-900 font-black">
-                                <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 mr-1.5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2m-3 7h3m-3 4h3m-6-4h.01M9 16h.01" />
-                                </svg>
-                                Recomendación del evaluador COD-{evaluacion.id}:
-                            </div>
-                            <p class="whitespace-pre-line">{evaluacion.ta_evaluacion.normas_apa_comentario ? evaluacion.ta_evaluacion.normas_apa_comentario : 'Sin recomendación'}</p>
-                        </div>
-                    {/if}
-                {/each}
-            {/if}
         </fieldset>
         <div class="px-8 py-4 bg-gray-100 border-t border-gray-200 flex items-center justify-between sticky bottom-0">
             {#if isSuperAdmin || (checkPermission(authUser, [10]) && ta.proyecto.modificable == true && ta.proyecto.radicado == false) || (checkPermissionByUser(authUser, [8]) && ta.proyecto.modificable == true && ta.proyecto.radicado == false)}
@@ -896,7 +868,7 @@
                 <fieldset class="p-8" disabled={isSuperAdmin || (checkPermission(authUser, [9, 10]) && ta.proyecto.modificable == true) ? undefined : true}>
                     <div>
                         <Label required class="mb-4" labelFor="nombre" value="Nombre del programa" />
-                        <Textarea label="" maxlength="40000" id="nombre" error={errors.nombre} bind:value={$formDisCurricular.nombre} required />
+                        <Textarea maxlength="40000" error={errors.nombre} bind:value={$formDisCurricular.nombre} required />
                     </div>
                 </fieldset>
             </form>
