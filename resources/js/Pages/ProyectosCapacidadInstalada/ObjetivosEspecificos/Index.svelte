@@ -53,7 +53,7 @@
 
     <h1 class="mt-24 mb-8 text-center text-3xl">Objetivos específicos y resultados</h1>
 
-    {#if isSuperAdmin || (proyectoCapacidadInstalada.estado_proyecto != 'Finalizado' && checkRole(authUser, [4, 6]) && authUser.id == autorPrincipal.id)}
+    {#if isSuperAdmin || (proyectoCapacidadInstalada.estado_proyecto != 'Finalizado' && checkRole(authUser, [4]) && proyectoCapacidadInstalada.semillero_investigacion.linea_investigacion.grupo_investigacion.centro_formacion.id && authUser.centro_formacion_id) || (proyectoCapacidadInstalada.estado_proyecto != 'Finalizado' && checkRole(authUser, [6]) && authUser.id == autorPrincipal.id)}
         <div class="mb-6 flex justify-between items-center">
             <Button on:click={() => Inertia.visit(route('proyectos-capacidad-instalada.objetivos-especificos.create', [proyectoCapacidadInstalada.id]))} variant="raised">Crear objetivo específico</Button>
         </div>

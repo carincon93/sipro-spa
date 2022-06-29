@@ -30,7 +30,7 @@
     })
 
     function submit() {
-        if (isSuperAdmin || (checkRole(authUser, [4, 6]) && authUser.id == autorPrincipal.id)) {
+        if (isSuperAdmin || (proyectoCapacidadInstalada.estado_proyecto != 'Finalizado' && checkRole(authUser, [4]) && proyectoCapacidadInstalada.semillero_investigacion.linea_investigacion.grupo_investigacion.centro_formacion.id && authUser.centro_formacion_id) || (checkRole(authUser, [6]) && authUser.id == autorPrincipal.id)) {
             $form.post(route('proyectos-capacidad-instalada.store.finalizar', proyectoCapacidadInstalada.id), {
                 onStart: () => (sending = true),
                 onFinish: () => (sending = false),
@@ -61,7 +61,7 @@
     </header>
 
     <form on:submit|preventDefault={submit}>
-        <fieldset class="p-8" disabled={isSuperAdmin || (checkRole(authUser, [4, 6]) && authUser.id == autorPrincipal.id) ? undefined : true}>
+        <fieldset class="p-8" disabled={isSuperAdmin || (proyectoCapacidadInstalada.estado_proyecto != 'Finalizado' && checkRole(authUser, [4]) && proyectoCapacidadInstalada.semillero_investigacion.linea_investigacion.grupo_investigacion.centro_formacion.id && authUser.centro_formacion_id) || (checkRole(authUser, [6]) && authUser.id == autorPrincipal.id) ? undefined : true}>
             <div class="mt-44 grid grid-cols-2">
                 <div>
                     <Label required class="mb-4" labelFor="estado_proyecto" value="Estado del proyecto" />
@@ -73,7 +73,7 @@
         </fieldset>
 
         <div class="px-8 py-4 bg-gray-100 border-t border-gray-200 flex items-center sticky bottom-0">
-            {#if isSuperAdmin || (checkRole(authUser, [4, 6]) && authUser.id == autorPrincipal.id)}
+            {#if isSuperAdmin || (proyectoCapacidadInstalada.estado_proyecto != 'Finalizado' && checkRole(authUser, [4]) && proyectoCapacidadInstalada.semillero_investigacion.linea_investigacion.grupo_investigacion.centro_formacion.id && authUser.centro_formacion_id) || (checkRole(authUser, [6]) && authUser.id == autorPrincipal.id)}
                 <LoadingButton loading={sending} class="btn-indigo ml-auto" type="submit">
                     {$_('Save')}
                 </LoadingButton>

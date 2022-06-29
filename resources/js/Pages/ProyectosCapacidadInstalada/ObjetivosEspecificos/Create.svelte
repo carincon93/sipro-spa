@@ -25,7 +25,11 @@
     })
 
     function submit() {
-        if (isSuperAdmin || (proyectoCapacidadInstalada.estado_proyecto != 'Finalizado' && checkRole(authUser, [4, 6]) && proyectoCapacidadInstalada.integrantes.find((item) => item.id == authUser.id))) {
+        if (
+            isSuperAdmin ||
+            (proyectoCapacidadInstalada.estado_proyecto != 'Finalizado' && checkRole(authUser, [4]) && proyectoCapacidadInstalada.semillero_investigacion.linea_investigacion.grupo_investigacion.centro_formacion.id && authUser.centro_formacion_id) ||
+            (proyectoCapacidadInstalada.estado_proyecto != 'Finalizado' && checkRole(authUser, [6]) && proyectoCapacidadInstalada.integrantes.find((item) => item.id == authUser.id))
+        ) {
             $form.post(route('proyectos-capacidad-instalada.objetivos-especificos.store', [proyectoCapacidadInstalada.id]), {
                 onStart: () => (sending = true),
                 onFinish: () => (sending = false),
@@ -59,7 +63,14 @@
 
     <div class="bg-white rounded shadow max-w-3xl">
         <form on:submit|preventDefault={submit}>
-            <fieldset class="p-8" disabled={isSuperAdmin || (proyectoCapacidadInstalada.estado_proyecto != 'Finalizado' && checkRole(authUser, [4, 6]) && proyectoCapacidadInstalada.integrantes.find((item) => item.id == authUser.id)) ? undefined : true}>
+            <fieldset
+                class="p-8"
+                disabled={isSuperAdmin ||
+                (proyectoCapacidadInstalada.estado_proyecto != 'Finalizado' && checkRole(authUser, [4]) && proyectoCapacidadInstalada.semillero_investigacion.linea_investigacion.grupo_investigacion.centro_formacion.id && authUser.centro_formacion_id) ||
+                (proyectoCapacidadInstalada.estado_proyecto != 'Finalizado' && checkRole(authUser, [6]) && proyectoCapacidadInstalada.integrantes.find((item) => item.id == authUser.id))
+                    ? undefined
+                    : true}
+            >
                 <div class="mt-8">
                     <Textarea label="Descripción del objetivo específico" maxlength="255" id="descripcion" error={errors.descripcion} bind:value={$form.descripcion} required />
                 </div>
@@ -68,7 +79,7 @@
                 </div>
             </fieldset>
             <div class="px-8 py-4 bg-gray-100 border-t border-gray-200 flex items-center sticky bottom-0">
-                {#if isSuperAdmin || (proyectoCapacidadInstalada.estado_proyecto != 'Finalizado' && checkRole(authUser, [4, 6]) && proyectoCapacidadInstalada.integrantes.find((item) => item.id == authUser.id))}
+                {#if isSuperAdmin || (proyectoCapacidadInstalada.estado_proyecto != 'Finalizado' && checkRole( authUser, [4], ) && proyectoCapacidadInstalada.semillero_investigacion.linea_investigacion.grupo_investigacion.centro_formacion.id && authUser.centro_formacion_id) || (proyectoCapacidadInstalada.estado_proyecto != 'Finalizado' && checkRole( authUser, [6], ) && proyectoCapacidadInstalada.integrantes.find((item) => item.id == authUser.id))}
                     <LoadingButton loading={sending} class="btn-indigo ml-auto" type="submit">Crear objetivo específico</LoadingButton>
                 {/if}
             </div>
