@@ -299,6 +299,11 @@ class AmbienteModernizacionController extends Controller
             $equipoAmbienteModernizacion->marca                         = $request->marca;
             $equipoAmbienteModernizacion->horas_promedio_uso            = $request->horas_promedio_uso;
             $equipoAmbienteModernizacion->frecuencia_mantenimiento      = $request->frecuencia_mantenimiento;
+            $equipoAmbienteModernizacion->year_adquisicion              = $request->year_adquisicion;
+            $equipoAmbienteModernizacion->nombre_cuentadante            = $request->nombre_cuentadante;
+            $equipoAmbienteModernizacion->cedula_cuentadante            = $request->cedula_cuentadante;
+            $equipoAmbienteModernizacion->rol_cuentadante               = $request->rol_cuentadante;
+
             $equipoAmbienteModernizacion->save();
 
             $message = 'El recurso se ha modificado correctamente.';
@@ -313,6 +318,10 @@ class AmbienteModernizacionController extends Controller
             $equipoAmbienteModernizacion->marca                         = $request->marca;
             $equipoAmbienteModernizacion->horas_promedio_uso            = $request->horas_promedio_uso;
             $equipoAmbienteModernizacion->frecuencia_mantenimiento      = $request->frecuencia_mantenimiento;
+            $equipoAmbienteModernizacion->year_adquisicion              = $request->year_adquisicion;
+            $equipoAmbienteModernizacion->nombre_cuentadante            = $request->nombre_cuentadante;
+            $equipoAmbienteModernizacion->cedula_cuentadante            = $request->cedula_cuentadante;
+            $equipoAmbienteModernizacion->rol_cuentadante               = $request->rol_cuentadante;
             $equipoAmbienteModernizacion->ambienteModernizacion()->associate($ambienteModernizacion);
 
             $equipoAmbienteModernizacion->save();
@@ -379,6 +388,8 @@ class AmbienteModernizacionController extends Controller
         $pdf = PDF::loadView('AmbienteModernizacionPdf', [
             'ambienteModernizacion' => $ambienteModernizacion,
         ]);
+
+        // return $pdf->stream("dompdf_out.pdf", array("Attachment" => false));
 
         $output = $pdf->setWarnings(false)->output();
         $random    = Str::random(10);

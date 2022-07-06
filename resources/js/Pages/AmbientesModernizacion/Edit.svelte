@@ -68,6 +68,15 @@
         { value: 'Anual', label: 'Anual' },
     ]
 
+    let yearInicial = 2014
+    let yearFinal = new Date().getFullYear() - 1
+
+    let years = []
+
+    for (let index = yearInicial; index <= yearFinal; index++) {
+        years.push({ value: index, label: index })
+    }
+
     $: $title = 'Editar ambiente de modernización'
 
     /**
@@ -207,6 +216,10 @@
         marca: '',
         horas_promedio_uso: '',
         frecuencia_mantenimiento: '',
+        year_adquisicion: '',
+        nombre_cuentadante: '',
+        cedula_cuentadante: '',
+        rol_cuentadante: '',
     })
 
     function configurarDialogoEquipo(equipoAmbienteModernizacion) {
@@ -474,7 +487,7 @@
                     <Label required class="mb-4" labelFor="numero_tecnicas_tecnologias" value="11. Relacione el número de técnicas o tecnologías adquiridas y/o mejoradas con el ambiente de aprendizaje, modernizado por SENNOVA. " />
                 </div>
                 <div>
-                    <Input label="Número total" id="numero_tecnicas_tecnologias" type="number" input$min="0" input$max="999999" class="mt-1" error={errors.numero_tecnicas_tecnologias} placeholder="Escriba el número de técnicas o tecnologías adquiridas" bind:value={$form.numero_tecnicas_tecnologias} required />
+                    <Input id="numero_tecnicas_tecnologias" type="number" input$min="0" input$max="999999" class="mt-1" error={errors.numero_tecnicas_tecnologias} placeholder="Escriba el número de técnicas o tecnologías adquiridas" bind:value={$form.numero_tecnicas_tecnologias} required />
                 </div>
             </div>
 
@@ -623,7 +636,7 @@
                         <Label required class="mb-4" labelFor="numero_total_cursos_comp" value="Si la respuesta anterior fue afirmativa, relacione el número total de cursos complementarios que se ha brindado formación complementaria" />
                     </div>
                     <div>
-                        <Input label="Número total" id="numero_total_cursos_comp" type="number" input$min="0" input$max="999999" class="mt-1" error={errors.numero_total_cursos_comp} placeholder="Escriba el número de proyectos" bind:value={$form.numero_total_cursos_comp} required />
+                        <Input id="numero_total_cursos_comp" type="number" input$min="0" input$max="999999" class="mt-1" error={errors.numero_total_cursos_comp} placeholder="Escriba el número de proyectos" bind:value={$form.numero_total_cursos_comp} required />
                     </div>
                 </div>
 
@@ -709,7 +722,7 @@
                     <Label required class="mb-4" labelFor="numero_publicaciones" value="22. Relacione el número de publicaciones derivadas con el ambiente de aprendizaje después de ejecutar el proyecto de modernización SENNOVA." />
                 </div>
                 <div>
-                    <Input label="Número total" id="numero_publicaciones" type="number" input$min="0" input$max="999999" class="mt-1" error={errors.numero_publicaciones} placeholder="Escriba el número de técnicas o tecnologías adquiridas" bind:value={$form.numero_publicaciones} required />
+                    <Input id="numero_publicaciones" type="number" input$min="0" input$max="999999" class="mt-1" error={errors.numero_publicaciones} placeholder="Escriba el número de técnicas o tecnologías adquiridas" bind:value={$form.numero_publicaciones} required />
                 </div>
             </div>
 
@@ -718,7 +731,7 @@
                     <Label required class="mb-4" labelFor="numero_aprendices_beneficiados" value="23. Relacione el número de aprendices beneficiados con el ambiente de aprendizaje después de ejecutar el proyecto de modernización SENNOVA. " />
                 </div>
                 <div>
-                    <Input label="Número total" id="numero_aprendices_beneficiados" type="number" input$min="0" input$max="999999" class="mt-1" error={errors.numero_aprendices_beneficiados} placeholder="Escriba el número de técnicas o tecnologías adquiridas" bind:value={$form.numero_aprendices_beneficiados} required />
+                    <Input id="numero_aprendices_beneficiados" type="number" input$min="0" input$max="999999" class="mt-1" error={errors.numero_aprendices_beneficiados} placeholder="Escriba el número de técnicas o tecnologías adquiridas" bind:value={$form.numero_aprendices_beneficiados} required />
                 </div>
             </div>
 
@@ -861,38 +874,72 @@
         <table class="w-full bg-white whitespace-no-wrap table-fixed data-table mt-10">
             <thead>
                 <tr class="text-left font-bold">
-                    <th class="px-6 pt-6 pb-4 sticky top-0 z-10 bg-white shadow-xl w-full text-xs">Número de inventario SENA del equipo o maquina</th>
-                    <th class="px-6 pt-6 pb-4 sticky top-0 z-10 bg-white shadow-xl w-full text-xs">Marca y nombre del equipo o maquina</th>
-                    <th class="px-6 pt-6 pb-4 sticky top-0 z-10 bg-white shadow-xl w-full text-xs">Descripción general técnica del equipo o maquina</th>
-                    <th class="px-6 pt-6 pb-4 sticky top-0 z-10 bg-white shadow-xl w-full text-xs">Promedio de horas de uso al año</th>
+                    <th class="px-6 pt-6 pb-4 sticky top-0 z-10 bg-white shadow-xl w-full text-xs" colspan="2">Información del equipo/maquina</th>
+                    <th class="px-6 pt-6 pb-4 sticky top-0 z-10 bg-white shadow-xl w-full text-xs" colspan="2">Descripción general técnica del equipo o maquina</th>
                     <th class="px-6 pt-6 pb-4 sticky top-0 z-10 bg-white shadow-xl w-full text-xs">Estado del equipo o maquina</th>
-                    <th class="px-6 pt-6 pb-4 sticky top-0 z-10 bg-white shadow-xl w-full text-xs">¿El equipo o maquina está en funcionamiento?</th>
-                    <th class="px-6 pt-6 pb-4 sticky top-0 z-10 bg-white shadow-xl w-full text-xs">¿Con qué frecuencia requiere mantenimiento el equipo o maquina?</th>
-                    <th class="px-6 pt-6 pb-4 sticky top-0 z-10 bg-white shadow-xl w-full text-xs">Observaciones generales</th>
+                    <th class="px-6 pt-6 pb-4 sticky top-0 z-10 bg-white shadow-xl w-full text-xs">Información de funcionamiento y mantenimiento</th>
+                    <th class="px-6 pt-6 pb-4 sticky top-0 z-10 bg-white shadow-xl w-full text-xs" colspan="2">Observaciones generales</th>
                     <th class="px-6 pt-6 pb-4 sticky top-0 z-10 bg-white shadow-xl w-full text-xs">Acciones</th>
                 </tr>
             </thead>
             <tbody>
                 {#each equiposAmbienteModernizacion as equipoAmbienteModernizacion}
                     <tr class="hover:bg-gray-100 focus-within:bg-gray-100">
-                        <td class="border-t px-6 pt-6 pb-4 text-xs">{equipoAmbienteModernizacion.numero_inventario_equipo}</td>
-                        <td class="border-t px-6 pt-6 pb-4 text-xs">
-                            <strong>Marca:</strong>
-                            {equipoAmbienteModernizacion.marca}
-                            <br />
-                            <strong>Nombre del equipo:</strong>
-                            {equipoAmbienteModernizacion.nombre_equipo}
+                        <td class="border-t px-6 pt-6 pb-4 text-xs" colspan="2">
+                            <div class="my-4">
+                                <strong>Número de inventario SENA del equipo o maquina:</strong>
+                                {equipoAmbienteModernizacion.numero_inventario_equipo}
+                            </div>
+                            <div class="my-4">
+                                <strong>Marca:</strong>
+                                {equipoAmbienteModernizacion.marca}
+                            </div>
+                            <div class="my-4">
+                                <strong>Nombre del equipo:</strong>
+                                {equipoAmbienteModernizacion.nombre_equipo}
+                            </div>
+
+                            <div class="my-4">
+                                <strong>Promedio de horas de uso al año:</strong>
+                                {equipoAmbienteModernizacion.horas_promedio_uso}
+                            </div>
+
+                            <div class="my-4">
+                                <strong>Año de adquisición del equipo o maquina:</strong>
+                                {equipoAmbienteModernizacion.year_adquisicion}
+                            </div>
+                            <div class="my-4">
+                                <strong>Nombre del cuentadante:</strong>
+                                {equipoAmbienteModernizacion.nombre_cuentadante}
+                            </div>
+                            <div class="my-4">
+                                <strong>Cédula del cuentadante:</strong>
+                                {equipoAmbienteModernizacion.cedula_cuentadante}
+                            </div>
+
+                            <div class="my-4">
+                                <strong>Rol del cuentadante:</strong>
+                                {equipoAmbienteModernizacion.rol_cuentadante}
+                            </div>
                         </td>
-                        <td class="border-t px-6 pt-6 pb-4 text-xs">
+                        <td class="border-t px-6 pt-6 pb-4 text-xs" colspan="2">
                             <p class="paragraph-ellipsis">
                                 {equipoAmbienteModernizacion.descripcion_tecnica_equipo}
                             </p>
                         </td>
-                        <td class="border-t px-6 pt-6 pb-4 text-xs">{equipoAmbienteModernizacion.horas_promedio_uso}</td>
+
                         <td class="border-t px-6 pt-6 pb-4 text-xs">{equipoAmbienteModernizacion.estado_equipo}</td>
-                        <td class="border-t px-6 pt-6 pb-4 text-xs">{equipoAmbienteModernizacion.equipo_en_funcionamiento_text}</td>
-                        <td class="border-t px-6 pt-6 pb-4 text-xs">{equipoAmbienteModernizacion.frecuencia_mantenimiento}</td>
                         <td class="border-t px-6 pt-6 pb-4 text-xs">
+                            <div class="my-4">
+                                <strong>¿El equipo o maquina está en funcionamiento?</strong>
+                                {equipoAmbienteModernizacion.equipo_en_funcionamiento_text}
+                            </div>
+                            <div class="my-4">
+                                <strong>¿Con qué frecuencia requiere mantenimiento preventivo el equipo o maquina?</strong>
+                                {equipoAmbienteModernizacion.frecuencia_mantenimiento}
+                            </div>
+                        </td>
+                        <td class="border-t px-6 pt-6 pb-4 text-xs" colspan="2">
                             <p class="paragraph-ellipsis">
                                 {equipoAmbienteModernizacion.observaciones_generales}
                             </p>
@@ -932,6 +979,11 @@
                     </div>
 
                     <div class="mt-4">
+                        <Label required class="mb-4" labelFor="year_adquisicion" value="Año de adquisición del equipo o maquina" />
+                        <Select items={years} id="year_adquisicion" bind:selectedValue={$formEquipo.year_adquisicion} error={errors.year_adquisicion} autocomplete="off" placeholder="Seleccione una opción" required />
+                    </div>
+
+                    <div class="mt-4">
                         <Label required class="mb-4" labelFor="nombre_equipo" value="Nombre del equipo o máquina" />
                         <Input id="nombre_equipo" type="text" class="mt-1" error={errors.nombre_equipo} placeholder="Escriba el número de inventario del equipo/maquina" bind:value={$formEquipo.nombre_equipo} required />
                     </div>
@@ -962,13 +1014,32 @@
                     </div>
 
                     <div class="mt-4">
-                        <Label required class="mb-4" labelFor="frecuencia_mantenimiento" value="¿Con qué frecuencia requiere mantenimiento el equipo o maquina?" />
+                        <Label required class="mb-4" labelFor="frecuencia_mantenimiento" value="¿Con qué frecuencia requiere mantenimiento preventivo el equipo o maquina?" />
                         <Select items={opcionesFrecuencia} id="frecuencia_mantenimiento" bind:selectedValue={$formEquipo.frecuencia_mantenimiento} error={errors.frecuencia_mantenimiento} autocomplete="off" placeholder="Seleccione una opción" required />
                     </div>
 
                     <div class="mt-4">
                         <Label required class="mb-4" labelFor="observaciones_generales" value="Observaciones generales" />
                         <Textarea maxlength="40000" id="observaciones_generales" error={errors.observaciones_generales} bind:value={$formEquipo.observaciones_generales} required />
+                    </div>
+
+                    <hr class="w-full my-24" />
+
+                    <h1 class="text-cener font-black mb-14">Información del cuentadante</h1>
+
+                    <div class="mt-4">
+                        <Label required class="mb-4" labelFor="nombre_cuentadante" value="Nombre completo" />
+                        <Input id="nombre_cuentadante" type="text" error={errors.nombre_cuentadante} bind:value={$formEquipo.nombre_cuentadante} required />
+                    </div>
+
+                    <div class="mt-4">
+                        <Label required class="mb-4" labelFor="cedula_cuentadante" value="Número de cédula" />
+                        <Input id="cedula_cuentadante" type="number" input$min="0" error={errors.cedula_cuentadante} bind:value={$formEquipo.cedula_cuentadante} required />
+                    </div>
+
+                    <div class="mt-4">
+                        <Label required class="mb-4" labelFor="rol_cuentadante" value="Rol del cuentadante" />
+                        <Input id="rol_cuentadante" type="text" error={errors.rol_cuentadante} bind:value={$formEquipo.rol_cuentadante} required />
                     </div>
                 </fieldset>
             </form>
