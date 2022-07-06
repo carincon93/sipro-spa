@@ -33,6 +33,10 @@ class EquipoAmbienteModernizacionRequest extends FormRequest
             'marca'                         => ['required', 'string', 'max:191'],
             'horas_promedio_uso'            => ['required', 'min:1'],
             'frecuencia_mantenimiento'      => ['required', 'string', 'max:50'],
+            'year_adquisicion'              => ['required', 'integer', 'min:0', 'max:3099'],
+            'nombre_cuentadante'            => ['required', 'string', 'max:100'],
+            'cedula_cuentadante'            => ['required', 'integer', 'min:0', 'max:9999999999999'],
+            'rol_cuentadante'               => ['required', 'string', 'max:50'],
         ];
     }
 
@@ -58,6 +62,12 @@ class EquipoAmbienteModernizacionRequest extends FormRequest
         if (is_array($this->equipo_en_funcionamiento)) {
             $this->merge([
                 'equipo_en_funcionamiento' => $this->equipo_en_funcionamiento['value'],
+            ]);
+        }
+
+        if (is_array($this->year_adquisicion)) {
+            $this->merge([
+                'year_adquisicion' => $this->year_adquisicion['value'],
             ]);
         }
     }

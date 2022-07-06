@@ -97,7 +97,7 @@ Route::middleware(['auth', 'verified'])->group(function () {
     //Exporta resumen proyecto PDF
     Route::get('convocatorias/{convocatoria}/proyectos/{proyecto}/pdf', [PdfController::class, 'generateResumenProyecto'])->name('convocatorias.proyectos.pdf');
 
-    //Exporta resumen proyecto PDF
+    //Exporta proyecto post-cierre del ambiente de modernizacion en PDF
     Route::get('ambientes-modernizacion/{ambiente_modernizacion}/pdf', [AmbienteModernizacionController::class, 'descargarPdfAmbienteModernizacion'])->name('ambientes-modernizacion.descargar-pdf');
 
     // Reportar problemas

@@ -38,7 +38,11 @@ class EquipoAmbienteModernizacion extends Model
         'observaciones_generales',
         'marca',
         'horas_promedio_uso',
-        'frecuencia_mantenimiento'
+        'frecuencia_mantenimiento',
+        'year_adquisicion',
+        'nombre_cuentadante',
+        'cedula_cuentadante',
+        'rol_cuentadante'
     ];
 
     /**
