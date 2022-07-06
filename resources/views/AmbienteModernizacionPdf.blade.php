@@ -712,13 +712,17 @@
                 </td>
                 <td width="60%">
                     <ul>
-                        @forelse (json_decode($ambienteModernizacion->palabras_clave_ambiente) as $palabraClave)
-                            <li>
-                                {{ $palabraClave->value }}
-                            </li>
-                        @empty
+                        @if ($ambienteModernizacion->palabras_clave_ambiente)
+                            @forelse (json_decode($ambienteModernizacion->palabras_clave_ambiente) as $palabraClave)
+                                <li>
+                                    {{ $palabraClave->value }}
+                                </li>
+                            @empty
+                                <li>Sin información registrada</li>
+                            @endforelse
+                        @else
                             <li>Sin información registrada</li>
-                        @endforelse
+                        @endif
                     </ul>
                 </td>
             </tr>
