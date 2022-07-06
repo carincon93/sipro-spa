@@ -24,8 +24,11 @@
     let authUser = $page.props.auth.user
     let isSuperAdmin = checkRole(authUser, [1])
 
+    let isDinamizadorSennova = proyectoCapacidadInstalada.estado_proyecto != 'Finalizado' && checkRole(authUser, [4]) && proyectoCapacidadInstalada.semillero_investigacion.linea_investigacion.grupo_investigacion.centro_formacion.id && authUser.centro_formacion_id
+    let isAutorPrincipal = proyectoCapacidadInstalada.estado_proyecto != 'Finalizado' && checkRole(authUser, [6]) && authUser.id == autorPrincipal.id
+
     let dialogOpen = false
-    let sending = false
+
     let form = useForm({
         _method: 'put',
         nombre: entidadAliada.nombre,
@@ -34,17 +37,15 @@
     })
 
     function submit() {
-        if (isSuperAdmin || (proyectoCapacidadInstalada.estado_proyecto != 'Finalizado' && checkRole(authUser, [4]) && proyectoCapacidadInstalada.semillero_investigacion.linea_investigacion.grupo_investigacion.centro_formacion.id && authUser.centro_formacion_id) || (proyectoCapacidadInstalada.estado_proyecto != 'Finalizado' && checkRole(authUser, [6]) && authUser.id == autorPrincipal.id)) {
+        if (isSuperAdmin || isDinamizadorSennova || isAutorPrincipal) {
             $form.post(route('proyectos-capacidad-instalada.entidades-aliadas.update', [proyectoCapacidadInstalada.id, entidadAliada.id]), {
-                onStart: () => (sending = true),
-                onFinish: () => (sending = false),
                 preserveScroll: true,
             })
         }
     }
 
     function destroy() {
-        if (isSuperAdmin || (proyectoCapacidadInstalada.estado_proyecto != 'Finalizado' && checkRole(authUser, [4]) && proyectoCapacidadInstalada.semillero_investigacion.linea_investigacion.grupo_investigacion.centro_formacion.id && authUser.centro_formacion_id) || (proyectoCapacidadInstalada.estado_proyecto != 'Finalizado' && checkRole(authUser, [6]) && authUser.id == autorPrincipal.id)) {
+        if (isSuperAdmin || isDinamizadorSennova || isAutorPrincipal) {
             $form.delete(route('proyectos-capacidad-instalada.entidades-aliadas.destroy', [proyectoCapacidadInstalada.id, entidadAliada.id]))
         }
     }
@@ -55,17 +56,17 @@
         <div class="flex items-center justify-between lg:px-8 max-w-7xl mx-auto px-4 py-6 sm:px-6">
             <div>
                 <h1>
-                    <a use:inertia href={route('proyectos-capacidad-instalada.index')} class="text-indigo-400 hover:text-indigo-600"> Proyectos de capacidad instalada </a>
-                    <span class="text-indigo-400 font-medium">/</span>
-                    <a use:inertia href={route('proyectos-capacidad-instalada.edit', proyectoCapacidadInstalada.id)} class="text-indigo-400 hover:text-indigo-600">Información básica</a>
-                    <span class="text-indigo-400 font-medium">/</span>
-                    <a use:inertia href={route('proyectos-capacidad-instalada.integrantes.index', proyectoCapacidadInstalada.id)} class="text-indigo-400 hover:text-indigo-600 font-extrabold underline">Integrantes</a>
-                    <span class="text-indigo-400 font-medium">/</span>
-                    <a use:inertia href={route('proyectos-capacidad-instalada.objetivos-especificos.index', proyectoCapacidadInstalada.id)} class="text-indigo-400 hover:text-indigo-600">Objetivos específicos y resultados</a>
-                    <span class="text-indigo-400 font-medium">/</span>
-                    <a use:inertia href={route('proyectos-capacidad-instalada.productos.index', proyectoCapacidadInstalada.id)} class="text-indigo-400 hover:text-indigo-600">Productos</a>
-                    <span class="text-indigo-400 font-medium">/</span>
-                    <a use:inertia href={route('proyectos-capacidad-instalada.finalizar', proyectoCapacidadInstalada.id)} class="text-indigo-400 hover:text-indigo-600">Finalizar</a>
+                    <a use:inertia href={route('proyectos-capacidad-instalada.index')} class="text-cyan-400 hover:text-cyan-600"> Proyectos de capacidad instalada </a>
+                    <span class="text-cyan-400 font-medium">/</span>
+                    <a use:inertia href={route('proyectos-capacidad-instalada.edit', proyectoCapacidadInstalada.id)} class="text-cyan-400 hover:text-cyan-600">Información básica</a>
+                    <span class="text-cyan-400 font-medium">/</span>
+                    <a use:inertia href={route('proyectos-capacidad-instalada.integrantes.index', proyectoCapacidadInstalada.id)} class="text-cyan-400 hover:text-cyan-600 font-extrabold underline">Integrantes</a>
+                    <span class="text-cyan-400 font-medium">/</span>
+                    <a use:inertia href={route('proyectos-capacidad-instalada.objetivos-especificos.index', proyectoCapacidadInstalada.id)} class="text-cyan-400 hover:text-cyan-600">Objetivos específicos y resultados</a>
+                    <span class="text-cyan-400 font-medium">/</span>
+                    <a use:inertia href={route('proyectos-capacidad-instalada.productos.index', proyectoCapacidadInstalada.id)} class="text-cyan-400 hover:text-cyan-600">Productos</a>
+                    <span class="text-cyan-400 font-medium">/</span>
+                    <a use:inertia href={route('proyectos-capacidad-instalada.finalizar', proyectoCapacidadInstalada.id)} class="text-cyan-400 hover:text-cyan-600">Finalizar</a>
                 </h1>
             </div>
         </div>
@@ -73,14 +74,7 @@
 
     <div class="bg-white rounded shadow max-w-3xl">
         <form on:submit|preventDefault={submit}>
-            <fieldset
-                class="p-8"
-                disabled={isSuperAdmin ||
-                (proyectoCapacidadInstalada.estado_proyecto != 'Finalizado' && checkRole(authUser, [4]) && proyectoCapacidadInstalada.semillero_investigacion.linea_investigacion.grupo_investigacion.centro_formacion.id && authUser.centro_formacion_id) ||
-                (proyectoCapacidadInstalada.estado_proyecto != 'Finalizado' && checkRole(authUser, [6]) && authUser.id == autorPrincipal.id)
-                    ? undefined
-                    : true}
-            >
+            <fieldset class="p-8" disabled={isSuperAdmin || isDinamizadorSennova || isAutorPrincipal ? undefined : true}>
                 <div class="mt-8">
                     <Textarea label="Nombre de la entidad aliada/Centro de formación" maxlength="255" id="nombre" error={errors.nombre} bind:value={$form.nombre} required />
                 </div>
@@ -101,11 +95,11 @@
                 {/if}
             </fieldset>
             <div class="px-8 py-4 bg-gray-100 border-t border-gray-200 flex items-center sticky bottom-0">
-                {#if isSuperAdmin || (proyectoCapacidadInstalada.estado_proyecto != 'Finalizado' && checkRole(authUser, [4]) && proyectoCapacidadInstalada.semillero_investigacion.linea_investigacion.grupo_investigacion.centro_formacion.id && authUser.centro_formacion_id) || (proyectoCapacidadInstalada.estado_proyecto != 'Finalizado' && checkRole(authUser, [6]) && authUser.id == autorPrincipal.id)}
-                    <button class="text-red-600 hover:underline text-left" tabindex="-1" type="button" on:click={(event) => (dialogOpen = true)}> Eliminar entidad aliada </button>
+                {#if isSuperAdmin || isDinamizadorSennova || isAutorPrincipal}
+                    <button class="text-red-600 hover:underline text-left" tabindex="-1" type="button" on:click={() => (dialogOpen = true)}> Eliminar entidad aliada </button>
                 {/if}
-                {#if isSuperAdmin || (proyectoCapacidadInstalada.estado_proyecto != 'Finalizado' && checkRole(authUser, [4]) && proyectoCapacidadInstalada.semillero_investigacion.linea_investigacion.grupo_investigacion.centro_formacion.id && authUser.centro_formacion_id) || (proyectoCapacidadInstalada.estado_proyecto != 'Finalizado' && checkRole(authUser, [6]) && authUser.id == autorPrincipal.id)}
-                    <LoadingButton loading={sending} class="btn-indigo ml-auto" type="submit">Editar entidad aliada</LoadingButton>
+                {#if isSuperAdmin || isDinamizadorSennova || isAutorPrincipal}
+                    <LoadingButton loading={$form.processing} class="ml-auto" type="submit">Editar entidad aliada</LoadingButton>
                 {/if}
             </div>
         </form>
@@ -129,7 +123,7 @@
         </div>
         <div slot="actions">
             <div class="p-4">
-                <Button on:click={(event) => (dialogOpen = false)} variant={null}>Cancelar</Button>
+                <Button on:click={() => (dialogOpen = false)} variant={null}>Cancelar</Button>
                 <Button variant="raised" on:click={destroy}>Confirmar</Button>
             </div>
         </div>

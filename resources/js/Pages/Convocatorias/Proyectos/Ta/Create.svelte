@@ -24,7 +24,6 @@
     let authUser = $page.props.auth.user
     let isSuperAdmin = checkRole(authUser, [1])
 
-    let sending = false
     let tecnoacademia
     let form = useForm({
         fecha_inicio: null,
@@ -46,10 +45,7 @@
 
     function submit() {
         if (isSuperAdmin || checkPermission(authUser, [8])) {
-            $form.post(route('convocatorias.ta.store', [convocatoria.id]), {
-                onStart: () => (sending = true),
-                onFinish: () => (sending = false),
-            })
+            $form.post(route('convocatorias.ta.store', [convocatoria.id]))
         }
     }
 
@@ -86,8 +82,8 @@
     </header>
 
     <form on:submit|preventDefault={submit}>
-        <fieldset class="p-8">
-            <div class="mt-44">
+        <fieldset class="p-8 divide-y">
+            <div class="py-24">
                 <p class="text-center">Fecha de ejecución</p>
                 <small class="text-red-400 block text-center"> * Campo obligatorio </small>
                 <InfoMessage message={convocatoria.fecha_maxima_ta} class="my-5" />
@@ -116,27 +112,31 @@
             </div>
 
             {#if tecnoAcademias.length > 0}
-                <div class="mt-44 grid grid-cols-2">
-                    <div>
-                        <Label required class="mb-4" labelFor="tecnoacademia_id" value="TecnoAcademia" />
-                    </div>
-                    <div>
-                        <Select id="tecnoacademia_id" items={tecnoAcademias} bind:selectedValue={$form.tecnoacademia_id} error={errors.tecnoacademia_id} autocomplete="off" placeholder="Busque por el nombre de la TecnoAcademia" required />
+                <div class="py-24">
+                    <div class="grid grid-cols-2">
+                        <div>
+                            <Label required class="mb-4" labelFor="tecnoacademia_id" value="TecnoAcademia" />
+                        </div>
+                        <div>
+                            <Select id="tecnoacademia_id" items={tecnoAcademias} bind:selectedValue={$form.tecnoacademia_id} error={errors.tecnoacademia_id} autocomplete="off" placeholder="Busque por el nombre de la TecnoAcademia" required />
+                        </div>
                     </div>
                 </div>
             {:else}
-                <div class="mt-44">
+                <div class="py-24">
                     <InfoMessage message="Su centro de formación no tiene TecnoAcademias asociadas." alertMsg={true} />
                 </div>
             {/if}
 
             {#if $form.tecnoacademia_id?.value}
-                <div class="mt-44 grid grid-cols-2">
-                    <div>
-                        <Label required class="mb-4" labelFor="tecnoacademia_linea_tecnoacademia_id" value="Líneas temáticas a ejecutar en la vigencia del proyecto:" />
-                    </div>
-                    <div>
-                        <SelectMulti id="tecnoacademia_linea_tecnoacademia_id" bind:selectedValue={$form.tecnoacademia_linea_tecnoacademia_id} items={lineasTecnoaAcademia} isMulti={true} error={errors.tecnoacademia_linea_tecnoacademia_id} placeholder="Buscar por el nombre de la línea" required />
+                <div class="py-24">
+                    <div class="grid grid-cols-2">
+                        <div>
+                            <Label required class="mb-4" labelFor="tecnoacademia_linea_tecnoacademia_id" value="Líneas temáticas a ejecutar en la vigencia del proyecto:" />
+                        </div>
+                        <div>
+                            <SelectMulti id="tecnoacademia_linea_tecnoacademia_id" bind:selectedValue={$form.tecnoacademia_linea_tecnoacademia_id} items={lineasTecnoaAcademia} isMulti={true} error={errors.tecnoacademia_linea_tecnoacademia_id} placeholder="Buscar por el nombre de la línea" required />
+                        </div>
                     </div>
                 </div>
             {/if}
@@ -144,7 +144,7 @@
 
         <div class="px-8 py-4 bg-gray-100 border-t border-gray-200 flex items-center sticky bottom-0">
             {#if isSuperAdmin || checkPermission(authUser, [8])}
-                <LoadingButton loading={sending} class="btn-indigo ml-auto" type="submit">
+                <LoadingButton loading={$form.processing} class="ml-auto" type="submit">
                     {$_('Continue')}
                 </LoadingButton>
             {/if}

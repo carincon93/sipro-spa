@@ -28,7 +28,7 @@
     let authUser = $page.props.auth.user
     let isSuperAdmin = checkRole(authUser, [1])
 
-    let sending = false
+     
     let form = useForm({
         nombre: '',
         email: '',
@@ -45,10 +45,7 @@
 
     function submit() {
         if (isSuperAdmin || checkRole(authUser, [4, 21, 17, 18, 20, 19, 5])) {
-            $form.post(route('users.store'), {
-                onStart: () => (sending = true),
-                onFinish: () => (sending = false),
-            })
+            $form.post(route('users.store') )
         }
     }
 </script>
@@ -208,7 +205,7 @@
         {/if}
         <div class="px-8 py-4 bg-gray-100 border-t border-gray-200 flex items-center sticky bottom-0">
             {#if isSuperAdmin || checkRole(authUser, [4, 21, 17, 18, 20, 19, 5])}
-                <LoadingButton bind:loading={sending} type="submit" bind:disabled={$form.autorizacion_datos}>Crear usuario</LoadingButton>
+                <LoadingButton loading={$form.processing} type="submit" bind:disabled={$form.autorizacion_datos}>Crear usuario</LoadingButton>
             {/if}
         </div>
     </form>

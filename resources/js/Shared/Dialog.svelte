@@ -16,7 +16,10 @@
     <Title id="mandatory-title">
         <slot name="title" />
     </Title>
-    <Content id="mandatory-content">
+    <div class="p-4">
+        <slot name="header-info" />
+    </div>
+    <Content id="mandatory-content" class="p-4">
         <slot name="content" />
     </Content>
     <Actions>

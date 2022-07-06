@@ -15,6 +15,7 @@
     import Pagination from '@/Shared/Pagination'
     import DataTable from '@/Shared/DataTable'
     import DataTableMenu from '@/Shared/DataTableMenu'
+    import RecomendacionEvaluador from '@/Shared/RecomendacionEvaluador'
     import { Item, Text } from '@smui/list'
 
     export let convocatoria
@@ -33,7 +34,7 @@
     let isSuperAdmin = checkRole(authUser, [1])
 
     let showGantt = false
-    let sending = false
+
     let form = useForm({
         metodologia: proyecto.metodologia,
         metodologia_local: proyecto.metodologia_local,
@@ -42,8 +43,6 @@
     function submit() {
         if (isSuperAdmin || (checkPermission(authUser, [3, 4, 6, 7, 9, 10, 12, 13, 18, 19]) && proyecto.modificable == true)) {
             $form.put(route('convocatorias.proyectos.metodologia', [convocatoria.id, proyecto.id]), {
-                onStart: () => (sending = true),
-                onFinish: () => (sending = false),
                 preserveScroll: true,
             })
         }
@@ -75,46 +74,43 @@
                 </div>
             {/if}
             {#if isSuperAdmin || proyecto.mostrar_recomendaciones}
-                {#each proyecto.evaluaciones as evaluacion, i}
-                    {#if isSuperAdmin || (evaluacion.finalizado && evaluacion.habilitado)}
-                        <div class="bg-gray-200 p-4 rounded border-orangered border mb-5">
-                            <div class="flex text-orangered-900 font-black">
-                                <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 mr-1.5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2m-3 7h3m-3 4h3m-6-4h.01M9 16h.01" />
-                                </svg>
-                                Recomendación del evaluador COD-{evaluacion.id}:
+                <RecomendacionEvaluador class="mt-8">
+                    {#each proyecto.evaluaciones as evaluacion, i}
+                        {#if isSuperAdmin || (evaluacion.finalizado && evaluacion.habilitado)}
+                            <div class="bg-zinc-900 p-4 rounded shadow text-white my-2">
+                                <p class="text-xs">Evaluador COD-{evaluacion.id}:</p>
+                                {#if evaluacion.idi_evaluacion}
+                                    <p class="whitespace-pre-line text-xs">{evaluacion.idi_evaluacion?.metodologia_comentario ? evaluacion.idi_evaluacion.metodologia_comentario : 'Sin recomendación'}</p>
+                                {:else if evaluacion.cultura_innovacion_evaluacion}
+                                    <p class="whitespace-pre-line text-xs">{evaluacion.cultura_innovacion_evaluacion?.metodologia_comentario ? evaluacion.cultura_innovacion_evaluacion.metodologia_comentario : 'Sin recomendación'}</p>
+                                {:else if evaluacion.ta_evaluacion}
+                                    <p class="whitespace-pre-line text-xs">{evaluacion.ta_evaluacion?.metodologia_comentario ? evaluacion.ta_evaluacion.metodologia_comentario : 'Sin recomendación'}</p>
+                                {:else if evaluacion.tp_evaluacion}
+                                    <p class="whitespace-pre-line text-xs">{evaluacion.tp_evaluacion?.metodologia_comentario ? evaluacion.tp_evaluacion.metodologia_comentario : 'Sin recomendación'}</p>
+                                {:else if evaluacion.servicio_tecnologico_evaluacion}
+                                    <h1 class="font-black mt-10">Metodología</h1>
+
+                                    <p class="whitespace-pre-line text-xs">{evaluacion.servicio_tecnologico_evaluacion?.metodologia_comentario ? evaluacion.servicio_tecnologico_evaluacion.metodologia_comentario : 'Sin recomendación'}</p>
+
+                                    <hr class="mt-10 mb-10 border-black-200" />
+                                    <h1 class="font-black">Actividades</h1>
+
+                                    <ul class="list-disc pl-4">
+                                        <li class="whitespace-pre-line text-xs mb-10">{evaluacion.servicio_tecnologico_evaluacion?.actividades_primer_obj_comentario ? 'Recomendación actividades del primer objetivo específico: ' + evaluacion.servicio_tecnologico_evaluacion.actividades_primer_obj_comentario : 'Sin recomendación'}</li>
+                                        <li class="whitespace-pre-line text-xs mb-10">{evaluacion.servicio_tecnologico_evaluacion?.actividades_segundo_obj_comentario ? 'Recomendación actividades del segundo objetivo específico: ' + evaluacion.servicio_tecnologico_evaluacion.actividades_segundo_obj_comentario : 'Sin recomendación'}</li>
+                                        <li class="whitespace-pre-line text-xs mb-10">{evaluacion.servicio_tecnologico_evaluacion?.actividades_tercer_obj_comentario ? 'Recomendación actividades del tercer objetivo específico: ' + evaluacion.servicio_tecnologico_evaluacion.actividades_tercer_obj_comentario : 'Sin recomendación'}</li>
+                                        <li class="whitespace-pre-line text-xs mb-10">{evaluacion.servicio_tecnologico_evaluacion?.actividades_cuarto_obj_comentario ? 'Recomendación actividades del cuarto objetivo específico: ' + evaluacion.servicio_tecnologico_evaluacion.actividades_cuarto_obj_comentario : 'Sin recomendación'}</li>
+                                    </ul>
+                                {/if}
                             </div>
-                            {#if evaluacion.idi_evaluacion}
-                                <p class="whitespace-pre-line">{evaluacion.idi_evaluacion?.metodologia_comentario ? evaluacion.idi_evaluacion.metodologia_comentario : 'Sin recomendación'}</p>
-                            {:else if evaluacion.cultura_innovacion_evaluacion}
-                                <p class="whitespace-pre-line">{evaluacion.cultura_innovacion_evaluacion?.metodologia_comentario ? evaluacion.cultura_innovacion_evaluacion.metodologia_comentario : 'Sin recomendación'}</p>
-                            {:else if evaluacion.ta_evaluacion}
-                                <p class="whitespace-pre-line">{evaluacion.ta_evaluacion?.metodologia_comentario ? evaluacion.ta_evaluacion.metodologia_comentario : 'Sin recomendación'}</p>
-                            {:else if evaluacion.tp_evaluacion}
-                                <p class="whitespace-pre-line">{evaluacion.tp_evaluacion?.metodologia_comentario ? evaluacion.tp_evaluacion.metodologia_comentario : 'Sin recomendación'}</p>
-                            {:else if evaluacion.servicio_tecnologico_evaluacion}
-                                <h1 class="font-black mt-10">Metodología</h1>
-
-                                <p class="whitespace-pre-line">{evaluacion.servicio_tecnologico_evaluacion?.metodologia_comentario ? evaluacion.servicio_tecnologico_evaluacion.metodologia_comentario : 'Sin recomendación'}</p>
-
-                                <hr class="mt-10 mb-10 border-black-200" />
-                                <h1 class="font-black">Actividades</h1>
-
-                                <ul class="list-disc pl-4">
-                                    <li class="whitespace-pre-line mb-10">{evaluacion.servicio_tecnologico_evaluacion?.actividades_primer_obj_comentario ? 'Recomendación actividades del primer objetivo específico: ' + evaluacion.servicio_tecnologico_evaluacion.actividades_primer_obj_comentario : 'Sin recomendación'}</li>
-                                    <li class="whitespace-pre-line mb-10">{evaluacion.servicio_tecnologico_evaluacion?.actividades_segundo_obj_comentario ? 'Recomendación actividades del segundo objetivo específico: ' + evaluacion.servicio_tecnologico_evaluacion.actividades_segundo_obj_comentario : 'Sin recomendación'}</li>
-                                    <li class="whitespace-pre-line mb-10">{evaluacion.servicio_tecnologico_evaluacion?.actividades_tercer_obj_comentario ? 'Recomendación actividades del tercer objetivo específico: ' + evaluacion.servicio_tecnologico_evaluacion.actividades_tercer_obj_comentario : 'Sin recomendación'}</li>
-                                    <li class="whitespace-pre-line mb-10">{evaluacion.servicio_tecnologico_evaluacion?.actividades_cuarto_obj_comentario ? 'Recomendación actividades del cuarto objetivo específico: ' + evaluacion.servicio_tecnologico_evaluacion.actividades_cuarto_obj_comentario : 'Sin recomendación'}</li>
-                                </ul>
-                            {/if}
-                        </div>
-                    {/if}
-                {/each}
+                        {/if}
+                    {/each}
+                </RecomendacionEvaluador>
             {/if}
         </fieldset>
         <div class="py-4 bg-gray-100 border-t border-gray-200 flex items-center sticky bottom-0">
             {#if isSuperAdmin || (checkPermission(authUser, [3, 4, 6, 7, 9, 10, 12, 13, 18, 19]) && proyecto.modificable == true)}
-                <LoadingButton loading={sending} class="btn-indigo ml-auto" type="submit">Guardar metodología</LoadingButton>
+                <LoadingButton loading={$form.processing} class="ml-auto" type="submit">Guardar metodología</LoadingButton>
             {/if}
         </div>
     </form>
@@ -131,23 +127,20 @@
 
     {#if proyecto.codigo_linea_programatica == 23 || proyecto.codigo_linea_programatica == 65 || proyecto.codigo_linea_programatica == 66 || proyecto.codigo_linea_programatica == 82}
         {#if isSuperAdmin || proyecto.mostrar_recomendaciones}
-            {#each proyecto.evaluaciones as evaluacion, i}
-                {#if isSuperAdmin || (evaluacion.finalizado && evaluacion.habilitado)}
-                    <div class="bg-gray-200 p-4 rounded border-orangered border mb-5">
-                        <div class="flex text-orangered-900 font-black">
-                            <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 mr-1.5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2m-3 7h3m-3 4h3m-6-4h.01M9 16h.01" />
-                            </svg>
-                            Recomendación del evaluador COD-{evaluacion.id}:
+            <RecomendacionEvaluador class="mt-8">
+                {#each proyecto.evaluaciones as evaluacion, i}
+                    {#if isSuperAdmin || (evaluacion.finalizado && evaluacion.habilitado)}
+                        <div class="bg-zinc-900 p-4 rounded shadow text-white my-2">
+                            <p class="text-xs">Evaluador COD-{evaluacion.id}:</p>
+                            {#if evaluacion.idi_evaluacion}
+                                <p class="whitespace-pre-line text-xs">{evaluacion.idi_evaluacion?.actividades_comentario ? evaluacion.idi_evaluacion.actividades_comentario : 'Sin recomendación'}</p>
+                            {:else if evaluacion.cultura_innovacion_evaluacion}
+                                <p class="whitespace-pre-line text-xs">{evaluacion.cultura_innovacion_evaluacion?.actividades_comentario ? evaluacion.cultura_innovacion_evaluacion.actividades_comentario : 'Sin recomendación'}</p>
+                            {/if}
                         </div>
-                        {#if evaluacion.idi_evaluacion}
-                            <p class="whitespace-pre-line">{evaluacion.idi_evaluacion?.actividades_comentario ? evaluacion.idi_evaluacion.actividades_comentario : 'Sin recomendación'}</p>
-                        {:else if evaluacion.cultura_innovacion_evaluacion}
-                            <p class="whitespace-pre-line">{evaluacion.cultura_innovacion_evaluacion?.actividades_comentario ? evaluacion.cultura_innovacion_evaluacion.actividades_comentario : 'Sin recomendación'}</p>
-                        {/if}
-                    </div>
-                {/if}
-            {/each}
+                    {/if}
+                {/each}
+            </RecomendacionEvaluador>
         {/if}
     {/if}
 

@@ -27,7 +27,7 @@
     let authUser = $page.props.auth.user
     let isSuperAdmin = checkRole(authUser, [1])
 
-    let sending = false
+     
     let formChangePassword = useForm({
         old_password: '',
         password: '',
@@ -35,10 +35,7 @@
     })
 
     function submitChangePassword() {
-        $formChangePassword.put(route('users.change-password'), {
-            onStart: () => (sending = true),
-            onFinish: () => (sending = false),
-        })
+        $formChangePassword.put(route('users.change-password'))
     }
 
     let form = useForm({
@@ -58,10 +55,7 @@
     })
 
     function submitChangeUserProfile() {
-        $form.put(route('users.change-user-profile'), {
-            onStart: () => (sending = true),
-            onFinish: () => (sending = false),
-        })
+        $form.put(route('users.change-user-profile'))
     }
 </script>
 
@@ -114,7 +108,7 @@
                 </div>
             </fieldset>
             <div class="px-8 py-4 bg-gray-100 border-t border-gray-200 flex items-center">
-                <LoadingButton bind:loading={sending} type="submit">Guardar cambios</LoadingButton>
+                <LoadingButton loading={$form.processing} type="submit">Guardar cambios</LoadingButton>
             </div>
         </form>
     </div>
@@ -139,7 +133,7 @@
                 </div>
             </fieldset>
             <div class="px-8 py-4 bg-gray-100 border-t border-gray-200 flex items-center">
-                <LoadingButton bind:loading={sending} type="submit" bind:disabled={$formChangePassword.autorizacion_datos}>Cambiar contraseña</LoadingButton>
+                <LoadingButton loading={$formChangePassword.processing} type="submit" bind:disabled={$formChangePassword.autorizacion_datos}>Cambiar contraseña</LoadingButton>
             </div>
         </form>
     </div>

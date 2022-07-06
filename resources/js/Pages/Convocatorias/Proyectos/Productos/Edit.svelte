@@ -34,7 +34,7 @@
     let isSuperAdmin = checkRole(authUser, [1])
 
     let dialogOpen = false
-    let sending = false
+
     let form = useForm({
         nombre: producto.nombre,
         resultado_id: producto.resultado_id,
@@ -60,8 +60,6 @@
     function submit() {
         if (isSuperAdmin || (checkPermission(authUser, [3, 4, 6, 7, 9, 10, 12, 13, 18, 19]) && proyecto.modificable == true)) {
             $form.put(route('convocatorias.proyectos.productos.update', [convocatoria.id, proyecto.id, producto.id]), {
-                onStart: () => (sending = true),
-                onFinish: () => (sending = false),
                 preserveScroll: true,
             })
         }
@@ -245,10 +243,10 @@
             </fieldset>
             <div class="px-8 py-4 bg-gray-100 border-t border-gray-200 flex items-center sticky bottom-0">
                 {#if isSuperAdmin || (checkPermission(authUser, [4, 7, 10]) && proyecto.modificable == true && proyecto.codigo_linea_programatica != 70)}
-                    <button class="text-red-600 hover:underline text-left" tabindex="-1" type="button" on:click={(event) => (dialogOpen = true)}> Eliminar producto </button>
+                    <button class="text-red-600 hover:underline text-left" tabindex="-1" type="button" on:click={() => (dialogOpen = true)}> Eliminar producto </button>
                 {/if}
                 {#if isSuperAdmin || (checkPermission(authUser, [3, 4, 6, 7, 9, 10, 12, 13, 18, 19]) && proyecto.modificable == true)}
-                    <LoadingButton loading={sending} class="btn-indigo ml-auto" type="submit">Editar producto</LoadingButton>
+                    <LoadingButton loading={$form.processing} class="ml-auto" type="submit">Editar producto</LoadingButton>
                 {/if}
             </div>
         </form>
@@ -271,7 +269,7 @@
         </div>
         <div slot="actions">
             <div class="p-4">
-                <Button on:click={(event) => (dialogOpen = false)} variant={null}>Cancelar</Button>
+                <Button on:click={() => (dialogOpen = false)} variant={null}>Cancelar</Button>
                 <Button variant="raised" on:click={destroy}>Confirmar</Button>
             </div>
         </div>

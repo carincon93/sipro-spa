@@ -31,7 +31,7 @@
     let isSuperAdmin = checkRole(authUser, [1])
 
     let dialogOpen = false
-    let sending = false
+
     let form = useForm({
         nombre: tecnoacademia.nombre,
         modalidad: {
@@ -54,8 +54,6 @@
     function submit() {
         if (isSuperAdmin || checkRole(authUser, [5])) {
             $form.put(route('tecnoacademias.update', tecnoacademia.id), {
-                onStart: () => (sending = true),
-                onFinish: () => (sending = false),
                 preserveScroll: true,
             })
         }
@@ -152,10 +150,10 @@
             </fieldset>
             <div class="px-8 py-4 bg-gray-100 border-t border-gray-200 flex items-center sticky bottom-0">
                 {#if isSuperAdmin || checkRole(authUser, [5])}
-                    <button class="text-red-600 hover:underline text-left" tabindex="-1" type="button" on:click={(event) => (dialogOpen = true)}> Eliminar tecnoacademia </button>
+                    <button class="text-red-600 hover:underline text-left" tabindex="-1" type="button" on:click={() => (dialogOpen = true)}> Eliminar tecnoacademia </button>
                 {/if}
                 {#if isSuperAdmin || checkRole(authUser, [5])}
-                    <LoadingButton loading={sending} class="btn-indigo ml-auto" type="submit">Editar tecnoacademia</LoadingButton>
+                    <LoadingButton loading={$form.processing} class="ml-auto" type="submit">Editar tecnoacademia</LoadingButton>
                 {/if}
             </div>
         </form>
@@ -178,7 +176,7 @@
         </div>
         <div slot="actions">
             <div class="p-4">
-                <Button on:click={(event) => (dialogOpen = false)} variant={null}>Cancelar</Button>
+                <Button on:click={() => (dialogOpen = false)} variant={null}>Cancelar</Button>
                 <Button variant="raised" on:click={destroy}>Confirmar</Button>
             </div>
         </div>

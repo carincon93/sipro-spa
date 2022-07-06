@@ -28,7 +28,6 @@
     let authUser = $page.props.auth.user
     let isSuperAdmin = checkRole(authUser, [1])
 
-    let sending = false
     let form = useForm({
         convocatoria_presupuesto_id: null,
         descripcion: '',
@@ -46,11 +45,7 @@
 
     function submit() {
         if (isSuperAdmin || (checkPermission(authUser, [1, 5, 8, 11, 17]) && proyecto.modificable == true)) {
-            ;(sending = true),
-                $form.post(route('convocatorias.proyectos.presupuesto.store', [convocatoria.id, proyecto.id]), {
-                    onStart: () => (sending = true),
-                    onFinish: () => (sending = false),
-                })
+                $form.post(route('convocatorias.proyectos.presupuesto.store', [convocatoria.id, proyecto.id]))
         }
     }
 
@@ -184,7 +179,7 @@
                 <div class="px-8 py-4 bg-gray-100 border-t border-gray-200 flex items-center sticky bottom-0">
                     {#if isSuperAdmin || (checkPermission(authUser, [1, 5, 8, 11, 17]) && proyecto.modificable == true)}
                         {#if $form.convocatoria_presupuesto_id != '' || $form.convocatoria_presupuesto_id != ''}
-                            <LoadingButton loading={sending} class="btn-indigo ml-auto" type="submit">Crear presupuesto</LoadingButton>
+                            <LoadingButton loading={$form.processing} class="ml-auto" type="submit">Crear presupuesto</LoadingButton>
                         {/if}
                     {/if}
                 </div>

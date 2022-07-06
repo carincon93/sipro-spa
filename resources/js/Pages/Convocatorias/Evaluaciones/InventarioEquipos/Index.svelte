@@ -29,7 +29,6 @@
     let authUser = $page.props.auth.user
     let isSuperAdmin = checkRole(authUser, [1])
 
-    let sending = false
     let formServicioTecnologicoEvaluacion = useForm({
         inventario_equipos_comentario: evaluacion.servicio_tecnologico_evaluacion?.inventario_equipos_comentario,
         inventario_equipos_requiere_comentario: evaluacion.servicio_tecnologico_evaluacion?.inventario_equipos_comentario == null ? true : false,
@@ -37,8 +36,6 @@
     function submitServicioTecnologicoEvaluacion() {
         if (isSuperAdmin || (checkRole(authUser, [11, 5]) && evaluacion.finalizado == false && evaluacion.habilitado == true && evaluacion.modificable == true)) {
             $formServicioTecnologicoEvaluacion.put(route('convocatorias.evaluaciones.inventario-equipos.guardar-evaluacion', [convocatoria.id, evaluacion.id]), {
-                onStart: () => (sending = true),
-                onFinish: () => (sending = false),
                 preserveScroll: true,
             })
         }
@@ -133,7 +130,7 @@
             </InfoMessage>
             <div class="px-8 py-4 bg-gray-100 border-t border-gray-200 flex items-center sticky bottom-0">
                 {#if isSuperAdmin || (checkRole(authUser, [11, 5]) && evaluacion.finalizado == false && evaluacion.habilitado == true && evaluacion.modificable == true)}
-                    <LoadingButton loading={sending} class="btn-indigo ml-auto" type="submit">Guardar</LoadingButton>
+                    <LoadingButton loading={$formServicioTecnologicoEvaluacion.processing} class="ml-auto" type="submit">Guardar</LoadingButton>
                 {/if}
             </div>
         </form>

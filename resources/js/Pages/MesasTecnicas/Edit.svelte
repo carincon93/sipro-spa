@@ -18,7 +18,7 @@
     let isSuperAdmin = checkRole(authUser, [1])
 
     let dialogOpen = false
-    let sending = false
+
     let form = useForm({
         nombre: mesaTecnica.nombre,
     })
@@ -26,8 +26,6 @@
     function submit() {
         if (isSuperAdmin) {
             $form.put(route('mesas-tecnicas.update', mesaTecnica.id), {
-                onStart: () => (sending = true),
-                onFinish: () => (sending = false),
                 preserveScroll: true,
             })
         }
@@ -64,10 +62,10 @@
             </fieldset>
             <div class="px-8 py-4 bg-gray-100 border-t border-gray-200 flex items-center sticky bottom-0">
                 {#if isSuperAdmin}
-                    <button class="text-red-600 hover:underline text-left" tabindex="-1" type="button" on:click={(event) => (dialogOpen = true)}> Eliminar mesa técnica </button>
+                    <button class="text-red-600 hover:underline text-left" tabindex="-1" type="button" on:click={() => (dialogOpen = true)}> Eliminar mesa técnica </button>
                 {/if}
                 {#if isSuperAdmin}
-                    <LoadingButton loading={sending} class="btn-indigo ml-auto" type="submit">Editar mesa técnica</LoadingButton>
+                    <LoadingButton loading={$form.processing} class="ml-auto" type="submit">Editar mesa técnica</LoadingButton>
                 {/if}
             </div>
         </form>
@@ -90,7 +88,7 @@
         </div>
         <div slot="actions">
             <div class="p-4">
-                <Button on:click={(event) => (dialogOpen = false)} variant={null}>Cancelar</Button>
+                <Button on:click={() => (dialogOpen = false)} variant={null}>Cancelar</Button>
                 <Button variant="raised" on:click={destroy}>Confirmar</Button>
             </div>
         </div>

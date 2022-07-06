@@ -273,7 +273,7 @@
 </Dialog>
 
 <Dialog bind:open={dialogNotifications} id="notificaciones" fullscreen hexBgColor="#58badd">
-    <div slot="title" class="mb-6 text-center text-cyan-600 mb-4">
+    <div slot="title" class="mb-6 text-center text-cyan-600">
         <div class="text-white">Notificaciones recientes</div>
         <img src="/images/notifications.png" alt="" class="w-80 mx-auto" />
     </div>

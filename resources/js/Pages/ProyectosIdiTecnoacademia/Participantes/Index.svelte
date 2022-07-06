@@ -44,21 +44,18 @@
     let formID
     let dialogOpen = false
     let dialogTitle
-    let sending = false
+
     let sended = false
     function search() {
         if (isSuperAdmin || checkRole(authUser, [5, 10, 12, 22])) {
-            sending = true
             sended = false
             axios
                 .post(route('proyectos-idi-tecnoacademia.participantes.users', proyectoIdiTecnoacademia.id), $form)
                 .then((response) => {
                     resultados = response.data
-                    sending = false
                     sended = true
                 })
                 .catch((error) => {
-                    sending = false
                 })
         }
     }
@@ -100,15 +97,10 @@
     function submitParticipante() {
         if (isSuperAdmin || checkRole(authUser, [5, 10, 12, 22])) {
             $formParticipante.post(route('proyectos-idi-tecnoacademia.participantes.users.link', proyectoIdiTecnoacademia.id), {
-                onStart: () => {
-                    sending = true
-                },
                 onSuccess: () => {
                     closeDialog()
                 },
-                onFinish: () => {
-                    sending = false
-                },
+
                 preserveScroll: true,
             })
         }
@@ -142,15 +134,10 @@
     function submitRegister() {
         if (isSuperAdmin || checkRole(authUser, [5, 10, 12, 22])) {
             $formNuevoIntegrante.post(route('proyectos-idi-tecnoacademia.participantes.users.register', proyectoIdiTecnoacademia.id), {
-                onStart: () => {
-                    sending = true
-                },
                 onSuccess: () => {
                     closeDialog()
                 },
-                onFinish: () => {
-                    sending = false
-                },
+
                 preserveScroll: true,
             })
         }
@@ -167,7 +154,6 @@
         reset()
         dialogOpen = false
         openNuevoParticipanteDialog = false
-        sending = false
     }
 </script>
 
@@ -202,7 +188,7 @@
             <fieldset>
                 <div class="mt-4 flex flex-row">
                     <Input label="Escriba el nombre, número de documento o el correo electrónico instiucional" id="search_participante" type="search" class="mt-1 m-auto block flex-1" bind:value={$form.search_participante} input$minLength="4" autocomplete="off" required />
-                    <LoadingButton loading={sending} class="btn-indigo m-auto ml-1" type="submit">Buscar</LoadingButton>
+                    <LoadingButton loading={$form.processing} class="m-auto ml-1" type="submit">Buscar</LoadingButton>
                 </div>
             </fieldset>
         </form>
@@ -375,7 +361,7 @@
             <Button on:click={closeDialog} type="button" variant={null}>
                 {$_('Cancel')}
             </Button>
-            <LoadingButton loading={sending} class="btn-indigo ml-auto" type="submit" form={formID}>Vincular</LoadingButton>
+            <LoadingButton loading={$formParticipante.processing} class="ml-auto" type="submit" form={formID}>Vincular</LoadingButton>
         </div>
     </Dialog>
 
@@ -460,7 +446,7 @@
             <Button on:click={closeDialog} type="button" variant={null}>
                 {$_('Cancel')}
             </Button>
-            <LoadingButton loading={sending} class="btn-indigo ml-auto" type="submit" form={formNuevoIntegranteId}>
+            <LoadingButton loading={$formNuevoIntegrante.processing} class="ml-auto" type="submit" form={formNuevoIntegranteId}>
                 {$_('Save')}
             </LoadingButton>
         </div>

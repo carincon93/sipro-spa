@@ -14,8 +14,6 @@
     export let status
     export let errors
 
-    let sending = false
-
     let form = useForm({
         email: '',
     })
@@ -41,6 +39,6 @@
     </div>
 
     <div class="flex items-center justify-end mt-4">
-        <LoadingButton bind:loading={sending} type="submit">{$_('Email Password Reset Link')}</LoadingButton>
+        <LoadingButton loading={$form.processing} type="submit">{$_('Email Password Reset Link')}</LoadingButton>
     </div>
 </form>

@@ -127,7 +127,7 @@
         </div>
         <div slot="actions">
             <div class="p-4">
-                <Button on:click={(event) => ((seguimientosDialog = false), (seguimientoId = null))} variant={null}>Cancelar</Button>
+                <Button on:click={() => ((seguimientosDialog = false), (seguimientoId = null))} variant={null}>Cancelar</Button>
                 <Button on:click={() => Inertia.visit(route('ambientes-modernizacion.create', 'seguimiento_id=' + seguimientoId))} variant="raised">Asociar seguimiento ambiente de modernización</Button>
             </div>
         </div>

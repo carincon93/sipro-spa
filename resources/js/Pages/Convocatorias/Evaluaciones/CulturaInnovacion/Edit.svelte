@@ -48,7 +48,6 @@
     let programasFormacionArticular
     let dialogSegundaEvaluacion = convocatoria.fase == 4 ? true : false
     let proyectoDialogOpen = culturaInnovacionEvaluacion.evaluacion.clausula_confidencialidad == false ? true : false
-    let sending = false
     let opcionesSiNo = [
         { value: 1, label: 'Si' },
         { value: 2, label: 'No' },
@@ -180,8 +179,6 @@
     function submit() {
         if (isSuperAdmin || (checkRole(authUser, [11, 5]) && culturaInnovacionEvaluacion.evaluacion.finalizado == false && culturaInnovacionEvaluacion.evaluacion.habilitado == true && culturaInnovacionEvaluacion.evaluacion.modificable == true)) {
             $form.put(route('convocatorias.cultura-innovacion-evaluaciones.update', [convocatoria.id, culturaInnovacionEvaluacion.id]), {
-                onStart: () => (sending = true),
-                onFinish: () => (sending = false),
                 preserveScroll: true,
             })
         }
@@ -896,7 +893,7 @@
                     </svg>
                     <span class="text-red-500">No ha aceptado la cláusula de confidencialidad</span>
                 {/if}
-                <LoadingButton loading={sending} class="btn-indigo ml-auto" type="submit">Guardar</LoadingButton>
+                <LoadingButton loading={$form.processing} class="ml-auto" type="submit">Guardar</LoadingButton>
             {/if}
         </div>
     </form>
@@ -919,7 +916,7 @@
         </div>
         <div slot="actions">
             <div class="p-4">
-                <Button on:click={(event) => (($form.clausula_confidencialidad = true), (proyectoDialogOpen = false))} variant={null}>Aceptar</Button>
+                <Button on:click={() => (($form.clausula_confidencialidad = true), (proyectoDialogOpen = false))} variant={null}>Aceptar</Button>
             </div>
         </div>
     </Dialog>
@@ -956,7 +953,7 @@
         </div>
         <div slot="actions">
             <div class="p-4">
-                <Button on:click={(event) => (dialogSegundaEvaluacion = false)} variant={null}>Aceptar</Button>
+                <Button on:click={() => (dialogSegundaEvaluacion = false)} variant={null}>Aceptar</Button>
             </div>
         </div>
     </Dialog>

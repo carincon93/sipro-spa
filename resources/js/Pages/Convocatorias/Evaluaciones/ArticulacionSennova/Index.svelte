@@ -38,7 +38,6 @@
         { value: 1, label: 'Si' },
         { value: 2, label: 'No' },
     ]
-    let sending = false
     let articulacionSennovaInfo = {
         lineas_investigacion: lineasInvestigacionRelacionadas.length > 0 ? lineasInvestigacionRelacionadas : null,
         grupos_investigacion: gruposInvestigacionRelacionados.length > 0 ? gruposInvestigacionRelacionados : null,
@@ -58,8 +57,6 @@
     function submitTaEvaluacion() {
         if (isSuperAdmin || (checkRole(authUser, [11, 5]) && evaluacion.finalizado == false && evaluacion.habilitado == true && evaluacion.modificable == true)) {
             $formTaEvaluacion.put(route('convocatorias.evaluaciones.articulacion-sennova.guardar-evaluacion', [convocatoria.id, evaluacion.id]), {
-                onStart: () => (sending = true),
-                onFinish: () => (sending = false),
                 preserveScroll: true,
             })
         }
@@ -166,7 +163,7 @@
         {/if}
         <div class="py-4 bg-gray-100 border-t border-gray-200 flex items-center sticky bottom-0">
             {#if isSuperAdmin || (checkRole(authUser, [11, 5]) && evaluacion.finalizado == false && evaluacion.habilitado == true && evaluacion.modificable == true)}
-                <LoadingButton loading={sending} class="btn-indigo ml-auto" type="submit">Guardar</LoadingButton>
+                <LoadingButton loading={$formTaEvaluacion.processing} class="ml-auto" type="submit">Guardar</LoadingButton>
             {/if}
         </div>
     </form>

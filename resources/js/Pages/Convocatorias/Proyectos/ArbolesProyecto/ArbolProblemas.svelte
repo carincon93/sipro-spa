@@ -27,7 +27,7 @@
     let formId
     let dialogTitle
     let codigo
-    let sending = false
+
     let dialogOpen = false
 
     let cantidadCeldasCausasIndirectas = 3
@@ -88,15 +88,10 @@
                     efecto_directo: $formEfectoIndirecto.efecto_directo_id,
                 }),
                 {
-                    onStart: () => {
-                        sending = true
-                    },
                     onSuccess: () => {
                         closeDialog()
                     },
-                    onFinish: () => {
-                        sending = false
-                    },
+
                     preserveScroll: true,
                 },
             )
@@ -137,15 +132,10 @@
                     efecto_directo: $formEfectoDirecto.id,
                 }),
                 {
-                    onStart: () => {
-                        sending = true
-                    },
                     onSuccess: () => {
                         closeDialog()
                     },
-                    onFinish: () => {
-                        sending = false
-                    },
+
                     preserveScroll: true,
                 },
             )
@@ -184,15 +174,11 @@
     function submitProblemaCentral() {
         if (isSuperAdmin || (checkPermission(authUser, [1, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 17, 18, 19]) && proyecto.modificable == true)) {
             $formProblemaCentral.post(route('proyectos.problema-central', proyecto.id), {
-                onStart: () => {
-                    sending = true
-                },
+                 
                 onSuccess: () => {
                     closeDialog()
                 },
-                onFinish: () => {
-                    sending = false
-                },
+
                 preserveScroll: true,
             })
         }
@@ -226,15 +212,10 @@
                     causa_directa: $formCausaDirecta.id,
                 }),
                 {
-                    onStart: () => {
-                        sending = true
-                    },
                     onSuccess: () => {
                         closeDialog()
                     },
-                    onFinish: () => {
-                        sending = false
-                    },
+
                     preserveScroll: true,
                 },
             )
@@ -283,15 +264,10 @@
                     causa_directa: $formCausaIndirecta.causa_directa_id,
                 }),
                 {
-                    onStart: () => {
-                        sending = true
-                    },
                     onSuccess: () => {
                         closeDialog()
                     },
-                    onFinish: () => {
-                        sending = false
-                    },
+
                     preserveScroll: true,
                 },
             )
@@ -416,8 +392,8 @@
     <h1 class="text-3xl {to_pdf ? '' : 'mt-24'} mb-8 text-center">Árbol de problemas</h1>
     <p class="text-center">Diligenciar el árbol de problemas iniciando con el problema principal (tronco), sus causas (raíces) y efectos (ramas).</p>
 
-    <RecomendacionEvaluador class="mt-8">
-        {#if isSuperAdmin || proyecto.mostrar_recomendaciones}
+    {#if isSuperAdmin || proyecto.mostrar_recomendaciones}
+        <RecomendacionEvaluador class="mt-8">
             {#each proyecto.evaluaciones as evaluacion, i}
                 {#if isSuperAdmin || (evaluacion.finalizado && evaluacion.habilitado)}
                     <div class="bg-zinc-900 p-4 rounded shadow text-white my-2">
@@ -436,8 +412,8 @@
                     </div>
                 {/if}
             {/each}
-        {/if}
-    </RecomendacionEvaluador>
+        </RecomendacionEvaluador>
+    {/if}
 
     <div class="mt-16 relative" bind:this={containerArbol}>
         <div class="flex opacity-50 absolute" style="height: {containerArbol?.offsetHeight}px; top: 0;">
@@ -811,7 +787,7 @@
         <div slot="actions" class="flex w-full">
             <Button on:click={closeDialog} type="button" variant={null}>Cancelar</Button>
             {#if (isSuperAdmin && formId) || (checkPermission(authUser, [1, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 17, 18, 19]) && proyecto.modificable == true && formId)}
-                <LoadingButton loading={sending} class="btn-indigo ml-auto" type="submit" form={formId}>Guardar</LoadingButton>
+                <LoadingButton loading={$formProblemaCentral.processing} class="ml-auto" type="submit" form={formId}>Guardar</LoadingButton>
             {/if}
         </div>
     </Dialog>

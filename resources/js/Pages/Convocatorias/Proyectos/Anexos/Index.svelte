@@ -12,6 +12,7 @@
     import Switch from '@/Shared/Switch'
     import Textarea from '@/Shared/Textarea'
     import InfoMessage from '@/Shared/InfoMessage'
+    import RecomendacionEvaluador from '@/Shared/RecomendacionEvaluador'
     import Create from './Create'
 
     import Stepper from '@/Shared/Stepper'
@@ -30,7 +31,6 @@
     let authUser = $page.props.auth.user
     let isSuperAdmin = checkRole(authUser, [1])
 
-    let sending = false
     let form = useForm({
         video: proyecto.video,
         infraestructura_adecuada: proyecto.infraestructura_adecuada ? proyecto.infraestructura_adecuada : false,
@@ -38,10 +38,8 @@
     })
 
     function submit() {
-        if ((isSuperAdmin && !sending) || (checkPermission(authUser, [5, 6, 7]) && proyecto.modificable == true && !sending)) {
+        if (isSuperAdmin || (checkPermission(authUser, [5, 6, 7]) && proyecto.modificable == true && $form.processing)) {
             $form.put(route('convocatorias.servicios-tecnologicos.infraestructura', [convocatoria.id, proyecto.id]), {
-                onStart: () => (sending = true),
-                onFinish: () => (sending = false),
                 preserveScroll: true,
             })
         }
@@ -57,7 +55,7 @@
         <h1 class="mt-24 mb-8 text-center text-3xl">Especificaciones e infraestructura</h1>
 
         <form on:submit|preventDefault={submit} class="mt-4 p-4">
-            <fieldset disabled={(isSuperAdmin && !sending) || (checkPermission(authUser, [5, 6, 7]) && proyecto.modificable == true) ? undefined : true}>
+            <fieldset disabled={isSuperAdmin || (checkPermission(authUser, [5, 6, 7]) && proyecto.modificable == true) ? undefined : true}>
                 <div class="mt-4">
                     <Label required labelFor="infraestructura_adecuada" value="¿Cuenta con infraestructura adecuada y propia para el funcionamiento de la línea servicios tecnológicos en el centro de formación?" class="inline-block mb-4" />
                     <br />
@@ -73,7 +71,7 @@
                     <InfoMessage message="El vídeo debe incluir durante el recorrido en las instalaciones, una voz en off que justifique puntualmente el proyecto e incluya: el impacto a la formación, al sector productivo y a la política nacional de ciencia, tecnología e innovación." />
                 </div>
                 <div class="w-1/12">
-                    <Button loading={sending} class="w-full mt-4" type="submit">Guardar</Button>
+                    <Button loading={$form.processing} class="w-full mt-4" type="submit">Guardar</Button>
                 </div>
             </fieldset>
         </form>
@@ -94,48 +92,45 @@
 
             <div slot="caption">
                 {#if isSuperAdmin || proyecto.mostrar_recomendaciones}
-                    {#each proyecto.evaluaciones as evaluacion, i}
-                        {#if isSuperAdmin || (evaluacion.finalizado && evaluacion.habilitado)}
-                            <div class="bg-gray-200 p-4 rounded border-orangered border mb-5">
-                                <div class="flex text-orangered-900 font-black">
-                                    <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 mr-1.5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2m-3 7h3m-3 4h3m-6-4h.01M9 16h.01" />
-                                    </svg>
-                                    Recomendación del evaluador COD-{evaluacion.id}:
+                    <RecomendacionEvaluador class="mt-8">
+                        {#each proyecto.evaluaciones as evaluacion, i}
+                            {#if isSuperAdmin || (evaluacion.finalizado && evaluacion.habilitado)}
+                                <div class="bg-zinc-900 p-4 rounded shadow text-white my-2">
+                                    <p class="text-xs">Evaluador COD-{evaluacion.id}:</p>
+                                    {#if evaluacion.idi_evaluacion}
+                                        <p class="whitespace-pre-line">{evaluacion.idi_evaluacion?.anexos_comentario ? evaluacion.idi_evaluacion.anexos_comentario : 'Sin recomendación'}</p>
+                                    {:else if evaluacion.cultura_innovacion_evaluacion}
+                                        <p class="whitespace-pre-line">{evaluacion.cultura_innovacion_evaluacion?.anexos_comentario ? evaluacion.cultura_innovacion_evaluacion.anexos_comentario : 'Sin recomendación'}</p>
+                                    {:else if evaluacion.ta_evaluacion}
+                                        <p class="whitespace-pre-line">{evaluacion.ta_evaluacion?.anexos_comentario ? evaluacion.ta_evaluacion.anexos_comentario : 'Sin recomendación'}</p>
+                                    {:else if evaluacion.tp_evaluacion}
+                                        <p class="whitespace-pre-line">{evaluacion.tp_evaluacion?.anexos_comentario ? evaluacion.tp_evaluacion.anexos_comentario : 'Sin recomendación'}</p>
+                                    {:else if evaluacion.servicio_tecnologico_evaluacion}
+                                        <hr class="mt-10 mb-10 border-black-200" />
+                                        <h1 class="font-black">Anexos</h1>
+
+                                        <ul class="list-disc pl-4">
+                                            <li class="whitespace-pre-line mb-10">{evaluacion.servicio_tecnologico_evaluacion?.anexos_comentario ? 'Recomendación anexos: ' + evaluacion.servicio_tecnologico_evaluacion.anexos_comentario : 'Sin recomendación'}</li>
+                                        </ul>
+
+                                        <hr class="mt-10 mb-10 border-black-200" />
+                                        <h1 class="font-black">Video</h1>
+
+                                        <ul class="list-disc pl-4">
+                                            <li class="whitespace-pre-line mb-10">{evaluacion.servicio_tecnologico_evaluacion?.video_comentario ? 'Recomendación video: ' + evaluacion.servicio_tecnologico_evaluacion.video_comentario : 'Sin recomendación'}</li>
+                                        </ul>
+
+                                        <hr class="mt-10 mb-10 border-black-200" />
+                                        <h1 class="font-black">Especificaciones del área</h1>
+
+                                        <ul class="list-disc pl-4">
+                                            <li class="whitespace-pre-line mb-10">{evaluacion.servicio_tecnologico_evaluacion?.especificaciones_area_comentario ? 'Recomendación especificaciones área: ' + evaluacion.servicio_tecnologico_evaluacion.especificaciones_area_comentario : 'Sin recomendación'}</li>
+                                        </ul>
+                                    {/if}
                                 </div>
-                                {#if evaluacion.idi_evaluacion}
-                                    <p class="whitespace-pre-line">{evaluacion.idi_evaluacion?.anexos_comentario ? evaluacion.idi_evaluacion.anexos_comentario : 'Sin recomendación'}</p>
-                                {:else if evaluacion.cultura_innovacion_evaluacion}
-                                    <p class="whitespace-pre-line">{evaluacion.cultura_innovacion_evaluacion?.anexos_comentario ? evaluacion.cultura_innovacion_evaluacion.anexos_comentario : 'Sin recomendación'}</p>
-                                {:else if evaluacion.ta_evaluacion}
-                                    <p class="whitespace-pre-line">{evaluacion.ta_evaluacion?.anexos_comentario ? evaluacion.ta_evaluacion.anexos_comentario : 'Sin recomendación'}</p>
-                                {:else if evaluacion.tp_evaluacion}
-                                    <p class="whitespace-pre-line">{evaluacion.tp_evaluacion?.anexos_comentario ? evaluacion.tp_evaluacion.anexos_comentario : 'Sin recomendación'}</p>
-                                {:else if evaluacion.servicio_tecnologico_evaluacion}
-                                    <hr class="mt-10 mb-10 border-black-200" />
-                                    <h1 class="font-black">Anexos</h1>
-
-                                    <ul class="list-disc pl-4">
-                                        <li class="whitespace-pre-line mb-10">{evaluacion.servicio_tecnologico_evaluacion?.anexos_comentario ? 'Recomendación anexos: ' + evaluacion.servicio_tecnologico_evaluacion.anexos_comentario : 'Sin recomendación'}</li>
-                                    </ul>
-
-                                    <hr class="mt-10 mb-10 border-black-200" />
-                                    <h1 class="font-black">Video</h1>
-
-                                    <ul class="list-disc pl-4">
-                                        <li class="whitespace-pre-line mb-10">{evaluacion.servicio_tecnologico_evaluacion?.video_comentario ? 'Recomendación video: ' + evaluacion.servicio_tecnologico_evaluacion.video_comentario : 'Sin recomendación'}</li>
-                                    </ul>
-
-                                    <hr class="mt-10 mb-10 border-black-200" />
-                                    <h1 class="font-black">Especificaciones del área</h1>
-
-                                    <ul class="list-disc pl-4">
-                                        <li class="whitespace-pre-line mb-10">{evaluacion.servicio_tecnologico_evaluacion?.especificaciones_area_comentario ? 'Recomendación especificaciones área: ' + evaluacion.servicio_tecnologico_evaluacion.especificaciones_area_comentario : 'Sin recomendación'}</li>
-                                    </ul>
-                                {/if}
-                            </div>
-                        {/if}
-                    {/each}
+                            {/if}
+                        {/each}
+                    </RecomendacionEvaluador>
                 {/if}
             </div>
 
@@ -168,7 +163,7 @@
                         </td>
                         <td class="border-t">
                             {#if isSuperAdmin || checkPermission(authUser, [1, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 17, 18, 19, 14, 15, 16, 17, 18, 19, 20, 21])}
-                                <Create {convocatoria} {proyecto} {anexo} bind:proyectoAnexo bind:sending />
+                                <Create {convocatoria} {proyecto} {anexo} bind:proyectoAnexo />
                             {/if}
                         </td>
                     </tr>

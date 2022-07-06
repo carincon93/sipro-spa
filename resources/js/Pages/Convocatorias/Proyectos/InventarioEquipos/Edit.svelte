@@ -31,7 +31,7 @@
     let isSuperAdmin = checkRole(authUser, [1])
 
     let dialogOpen = false
-    let sending = false
+
     let form = useForm({
         nombre: inventarioEquipo.nombre,
         marca: inventarioEquipo.marca,
@@ -65,8 +65,6 @@
     function submit() {
         if (isSuperAdmin || (checkPermission(authUser, [6, 7]) && proyecto.modificable == true)) {
             $form.put(route('convocatorias.proyectos.inventario-equipos.update', [convocatoria.id, proyecto.id, inventarioEquipo.id]), {
-                onStart: () => (sending = true),
-                onFinish: () => (sending = false),
                 preserveScroll: true,
             })
         }
@@ -156,10 +154,10 @@
             </fieldset>
             <div class="px-8 py-4 bg-gray-100 border-t border-gray-200 flex items-center sticky bottom-0">
                 {#if isSuperAdmin || (checkPermission(authUser, [7]) && proyecto.modificable == true)}
-                    <button class="text-red-600 hover:underline text-left" tabindex="-1" type="button" on:click={(event) => (dialogOpen = true)}> Eliminar inventario </button>
+                    <button class="text-red-600 hover:underline text-left" tabindex="-1" type="button" on:click={() => (dialogOpen = true)}> Eliminar inventario </button>
                 {/if}
                 {#if isSuperAdmin || (checkPermission(authUser, [6, 7]) && proyecto.modificable == true)}
-                    <LoadingButton loading={sending} class="btn-indigo ml-auto" type="submit">Editar inventario de equipos</LoadingButton>
+                    <LoadingButton loading={$form.processing} class="ml-auto" type="submit">Editar inventario de equipos</LoadingButton>
                 {/if}
             </div>
         </form>
@@ -182,7 +180,7 @@
         </div>
         <div slot="actions">
             <div class="p-4">
-                <Button on:click={(event) => (dialogOpen = false)} variant={null}>Cancelar</Button>
+                <Button on:click={() => (dialogOpen = false)} variant={null}>Cancelar</Button>
                 <Button variant="raised" on:click={destroy}>Confirmar</Button>
             </div>
         </div>

@@ -10,6 +10,7 @@
     import Label from '@/Shared/Label'
     import Textarea from '@/Shared/Textarea'
     import LoadingButton from '@/Shared/LoadingButton'
+    import RecomendacionEvaluador from '@/Shared/RecomendacionEvaluador'
 
     export let errors
     export let convocatoria
@@ -26,8 +27,6 @@
     let authUser = $page.props.auth.user
     let isSuperAdmin = checkRole(authUser, [1])
 
-    let sending = false
-
     let form = useForm({
         propuesta_sostenibilidad: proyecto.propuesta_sostenibilidad,
         propuesta_sostenibilidad_social: proyecto.propuesta_sostenibilidad_social,
@@ -38,8 +37,6 @@
     function submit() {
         if (isSuperAdmin || (checkPermission(authUser, [3, 4, 6, 7, 9, 10, 12, 13, 18, 19]) && proyecto.modificable == true)) {
             $form.put(route('convocatorias.proyectos.propuesta-sostenibilidad', [convocatoria.id, proyecto.id]), {
-                onStart: () => (sending = true),
-                onFinish: () => (sending = false),
                 preserveScroll: true,
             })
         }
@@ -154,7 +151,7 @@
             </fieldset>
             <div class="py-4 bg-gray-100 border-t border-gray-200 flex items-center sticky bottom-0">
                 {#if isSuperAdmin || (checkPermission(authUser, [3, 4, 6, 7, 9, 10, 12, 13, 18, 19]) && proyecto.modificable == true)}
-                    <LoadingButton loading={sending} class="btn-indigo ml-auto" type="submit">Guardar propuesta de sostenibilidad</LoadingButton>
+                    <LoadingButton loading={$form.processing} class="ml-auto" type="submit">Guardar propuesta de sostenibilidad</LoadingButton>
                 {/if}
             </div>
         </form>
@@ -164,42 +161,39 @@
         <h1 class="text-3xl m-24 text-center">Cadena de valor</h1>
 
         {#if isSuperAdmin || proyecto.mostrar_recomendaciones}
-            {#each proyecto.evaluaciones as evaluacion, i}
-                {#if isSuperAdmin || (evaluacion.finalizado && evaluacion.habilitado)}
-                    <div class="bg-gray-200 p-4 rounded border-orangered border mb-5">
-                        <div class="flex text-orangered-900 font-black">
-                            <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 mr-1.5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2m-3 7h3m-3 4h3m-6-4h.01M9 16h.01" />
-                            </svg>
-                            Recomendación del evaluador COD-{evaluacion.id}:
+            <RecomendacionEvaluador class="mt-8">
+                {#each proyecto.evaluaciones as evaluacion, i}
+                    {#if isSuperAdmin || (evaluacion.finalizado && evaluacion.habilitado)}
+                        <div class="bg-zinc-900 p-4 rounded shadow text-white my-2">
+                            <p class="text-xs">Evaluador COD-{evaluacion.id}:</p>
+                            {#if evaluacion.idi_evaluacion}
+                                <p class="whitespace-pre-line text-xs">{evaluacion.idi_evaluacion?.cadena_valor_comentario ? evaluacion.idi_evaluacion.cadena_valor_comentario : 'Sin recomendación'}</p>
+                            {:else if evaluacion.cultura_innovacion_evaluacion}
+                                <p class="whitespace-pre-line text-xs">{evaluacion.cultura_innovacion_evaluacion?.cadena_valor_comentario ? evaluacion.cultura_innovacion_evaluacion.cadena_valor_comentario : 'Sin recomendación'}</p>
+                            {:else if evaluacion.ta_evaluacion}
+                                <p class="whitespace-pre-line text-xs">{evaluacion.ta_evaluacion?.cadena_valor_comentario ? evaluacion.ta_evaluacion.cadena_valor_comentario : 'Sin recomendación'}</p>
+                            {:else if evaluacion.tp_evaluacion}
+                                <p class="whitespace-pre-line text-xs">{evaluacion.tp_evaluacion?.cadena_valor_comentario ? evaluacion.tp_evaluacion.cadena_valor_comentario : 'Sin recomendación'}</p>
+                            {:else if evaluacion.servicio_tecnologico_evaluacion}
+                                <hr class="mt-10 mb-10 border-black-200" />
+                                <h1 class="font-black">Propuesta de sostenibilidad</h1>
+
+                                <p class="whitespace-pre-line text-xs mb-10">{evaluacion.servicio_tecnologico_evaluacion?.propuesta_sostenibilidad_comentario ? 'Recomendación: ' + evaluacion.servicio_tecnologico_evaluacion.propuesta_sostenibilidad_comentario : 'Sin recomendación'}</p>
+
+                                <hr class="mt-10 mb-10 border-black-200" />
+                                <h1 class="font-black">Impactos</h1>
+
+                                <ul class="list-disc pl-4">
+                                    <li class="whitespace-pre-line text-xs mb-10">{evaluacion.servicio_tecnologico_evaluacion?.impacto_ambiental_comentario ? 'Recomendación impacto ambiental: ' + evaluacion.servicio_tecnologico_evaluacion.impacto_ambiental_comentario : 'Sin recomendación'}</li>
+                                    <li class="whitespace-pre-line text-xs mb-10">{evaluacion.servicio_tecnologico_evaluacion?.impacto_social_centro_comentario ? 'Recomendación impacto social en el centro de formación: ' + evaluacion.servicio_tecnologico_evaluacion.impacto_social_centro_comentario : 'Sin recomendación'}</li>
+                                    <li class="whitespace-pre-line text-xs mb-10">{evaluacion.servicio_tecnologico_evaluacion?.impacto_social_productivo_comentario ? 'Recomendación impacto social en el sector productivo: ' + evaluacion.servicio_tecnologico_evaluacion.impacto_social_productivo_comentario : 'Sin recomendación'}</li>
+                                    <li class="whitespace-pre-line text-xs mb-10">{evaluacion.servicio_tecnologico_evaluacion?.impacto_tecnologico_comentario ? 'Recomendación impacto tecnológico: ' + evaluacion.servicio_tecnologico_evaluacion.impacto_tecnologico_comentario : 'Sin recomendación'}</li>
+                                </ul>
+                            {/if}
                         </div>
-                        {#if evaluacion.idi_evaluacion}
-                            <p class="whitespace-pre-line">{evaluacion.idi_evaluacion?.cadena_valor_comentario ? evaluacion.idi_evaluacion.cadena_valor_comentario : 'Sin recomendación'}</p>
-                        {:else if evaluacion.cultura_innovacion_evaluacion}
-                            <p class="whitespace-pre-line">{evaluacion.cultura_innovacion_evaluacion?.cadena_valor_comentario ? evaluacion.cultura_innovacion_evaluacion.cadena_valor_comentario : 'Sin recomendación'}</p>
-                        {:else if evaluacion.ta_evaluacion}
-                            <p class="whitespace-pre-line">{evaluacion.ta_evaluacion?.cadena_valor_comentario ? evaluacion.ta_evaluacion.cadena_valor_comentario : 'Sin recomendación'}</p>
-                        {:else if evaluacion.tp_evaluacion}
-                            <p class="whitespace-pre-line">{evaluacion.tp_evaluacion?.cadena_valor_comentario ? evaluacion.tp_evaluacion.cadena_valor_comentario : 'Sin recomendación'}</p>
-                        {:else if evaluacion.servicio_tecnologico_evaluacion}
-                            <hr class="mt-10 mb-10 border-black-200" />
-                            <h1 class="font-black">Propuesta de sostenibilidad</h1>
-
-                            <p class="whitespace-pre-line mb-10">{evaluacion.servicio_tecnologico_evaluacion?.propuesta_sostenibilidad_comentario ? 'Recomendación: ' + evaluacion.servicio_tecnologico_evaluacion.propuesta_sostenibilidad_comentario : 'Sin recomendación'}</p>
-
-                            <hr class="mt-10 mb-10 border-black-200" />
-                            <h1 class="font-black">Impactos</h1>
-
-                            <ul class="list-disc pl-4">
-                                <li class="whitespace-pre-line mb-10">{evaluacion.servicio_tecnologico_evaluacion?.impacto_ambiental_comentario ? 'Recomendación impacto ambiental: ' + evaluacion.servicio_tecnologico_evaluacion.impacto_ambiental_comentario : 'Sin recomendación'}</li>
-                                <li class="whitespace-pre-line mb-10">{evaluacion.servicio_tecnologico_evaluacion?.impacto_social_centro_comentario ? 'Recomendación impacto social en el centro de formación: ' + evaluacion.servicio_tecnologico_evaluacion.impacto_social_centro_comentario : 'Sin recomendación'}</li>
-                                <li class="whitespace-pre-line mb-10">{evaluacion.servicio_tecnologico_evaluacion?.impacto_social_productivo_comentario ? 'Recomendación impacto social en el sector productivo: ' + evaluacion.servicio_tecnologico_evaluacion.impacto_social_productivo_comentario : 'Sin recomendación'}</li>
-                                <li class="whitespace-pre-line mb-10">{evaluacion.servicio_tecnologico_evaluacion?.impacto_tecnologico_comentario ? 'Recomendación impacto tecnológico: ' + evaluacion.servicio_tecnologico_evaluacion.impacto_tecnologico_comentario : 'Sin recomendación'}</li>
-                            </ul>
-                        {/if}
-                    </div>
-                {/if}
-            {/each}
+                    {/if}
+                {/each}
+            </RecomendacionEvaluador>
         {/if}
 
         {#if productos.length == 0}

@@ -1,6 +1,6 @@
 <script>
     import AuthenticatedLayout, { title } from '@/Layouts/Authenticated'
-    import { page } from '@inertiajs/inertia-svelte'
+    import { page, useForm } from '@inertiajs/inertia-svelte'
     import { route, checkRole, checkPermission, checkPermissionByUser } from '@/Utils'
     import { _ } from 'svelte-i18n'
     import { Inertia } from '@inertiajs/inertia'
@@ -11,9 +11,13 @@
     import { Item, Text } from '@smui/list'
     import DataTable from '@/Shared/DataTable'
     import Dialog from '@/Shared/Dialog'
+    import InfoMessage from '@/Shared/InfoMessage'
+    import Label from '@/Shared/Label'
+    import Password from '@/Shared/Password'
 
     export let convocatoria
     export let tp
+    export let errors
 
     $title = 'Proyectos Tecnoparque'
 
@@ -28,6 +32,20 @@
     }
 
     let dialogOpen = true
+    let dialogEliminar = false
+
+    let deleteForm = useForm({
+        password: '',
+    })
+
+    let proyectoId
+    function destroy() {
+        if (isSuperAdmin || (checkPermission(authUser, [19]) && tp.proyecto.modificable == true && tp.proyecto.radicado == false) || (checkPermissionByUser(authUser, [17]) && tp.proyecto.modificable == true && tp.proyecto.radicado == false)) {
+            $deleteForm.delete(route('convocatorias.tp.destroy', [convocatoria.id, proyectoId]), {
+                preserveScroll: true,
+            })
+        }
+    }
 </script>
 
 <AuthenticatedLayout>
@@ -110,6 +128,11 @@
                                 <Item on:SMUI:action={() => Inertia.visit(route('convocatorias.tp.edit', [convocatoria.id, proyecto_tp.id]))}>
                                     <Text>Ver detalles</Text>
                                 </Item>
+                                {#if isSuperAdmin || (checkPermission(authUser, [19]) && proyecto_tp.proyecto.modificable == true && proyecto_tp.proyecto.radicado == false) || (checkPermissionByUser(authUser, [17]) && proyecto_tp.proyecto.modificable == true && proyecto_tp.proyecto.radicado == false)}
+                                    <Item on:SMUI:action={() => ((proyectoId = proyecto_tp.id), (dialogEliminar = true))}>
+                                        <Text>Eliminar</Text>
+                                    </Item>
+                                {/if}
                             {:else}
                                 <Item>
                                     <Text>No tiene permisos</Text>
@@ -151,9 +174,35 @@
             </div>
             <div slot="actions">
                 <div class="p-4">
-                    <Button variant="raised" on:click={(event) => (dialogOpen = false)}>Entendido</Button>
+                    <Button variant="raised" on:click={() => (dialogOpen = false)}>Entendido</Button>
                 </div>
             </div>
         </Dialog>
     {/if}
+
+    <Dialog bind:open={dialogEliminar}>
+        <div slot="title">
+            <div class="text-center">Eliminar recurso</div>
+            <div class="relative bg-cyan-100 text-cyan-600 p-5 h-44 w-1/3 m-auto my-10" style="border-radius: 41% 59% 70% 30% / 32% 40% 60% 68% ;">
+                <figure>
+                    <img src="/images/eliminar.png" alt="" class="h-44 m-auto" />
+                </figure>
+            </div>
+            <div class="text-center">
+                ¿Está seguro (a) que desea eliminar este proyecto?<br />Una vez eliminado el proyecto, todos sus recursos y datos se eliminarán de forma permanente.
+            </div>
+        </div>
+        <div slot="content">
+            <form on:submit|preventDefault={destroy} id="delete-tp" class="mt-24 mb-28">
+                <Label labelFor="password" value="Ingrese su contraseña para confirmar que desea eliminar permanentemente este proyecto" class="mb-4" />
+                <Password id="password" class="w-full" bind:value={$deleteForm.password} error={errors.password} required autocomplete="current-password" />
+            </form>
+        </div>
+        <div slot="actions">
+            <div class="p-4">
+                <Button on:click={() => (dialogEliminar = false)} variant={null}>Cancelar</Button>
+                <Button variant="raised" type="submit" form="delete-tp">Confirmar</Button>
+            </div>
+        </div>
+    </Dialog>
 </AuthenticatedLayout>

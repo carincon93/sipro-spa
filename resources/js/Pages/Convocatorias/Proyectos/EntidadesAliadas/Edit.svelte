@@ -39,7 +39,6 @@
     let isSuperAdmin = checkRole(authUser, [1])
 
     let dialogOpen = false
-    let sending = false
 
     let form = useForm({
         _method: 'put',
@@ -70,8 +69,6 @@
     function submit() {
         if (isSuperAdmin || (checkPermission(authUser, [3, 4, 9, 10]) && proyecto.modificable == true)) {
             $form.post(route('convocatorias.proyectos.entidades-aliadas.update', [convocatoria.id, proyecto.id, entidadAliada.id]), {
-                onStart: () => (sending = true),
-                onFinish: () => (sending = false),
                 preserveScroll: true,
             })
         }
@@ -285,10 +282,10 @@
                 </fieldset>
                 <div class="px-8 py-4 bg-gray-100 border-t border-gray-200 flex items-center sticky bottom-0">
                     {#if isSuperAdmin || (checkPermission(authUser, [4, 10]) && proyecto.modificable == true)}
-                        <button class="text-red-600 hover:underline text-left" tabindex="-1" type="button" on:click={(event) => (dialogOpen = true)}> Eliminar entidad aliada </button>
+                        <button class="text-red-600 hover:underline text-left" tabindex="-1" type="button" on:click={() => (dialogOpen = true)}> Eliminar entidad aliada </button>
                     {/if}
                     {#if isSuperAdmin || (checkPermission(authUser, [3, 4, 9, 10]) && proyecto.modificable == true)}
-                        <LoadingButton loading={sending} class="btn-indigo ml-auto" type="submit">Editar entidad aliada</LoadingButton>
+                        <LoadingButton loading={$form.processing} class="ml-auto" type="submit">Editar entidad aliada</LoadingButton>
                     {/if}
                 </div>
             </form>
@@ -465,7 +462,7 @@
         </div>
         <div slot="actions">
             <div class="p-4">
-                <Button on:click={(event) => (dialogOpen = false)} variant={null}>Cancelar</Button>
+                <Button on:click={() => (dialogOpen = false)} variant={null}>Cancelar</Button>
                 <Button variant="raised" on:click={destroy}>Confirmar</Button>
             </div>
         </div>

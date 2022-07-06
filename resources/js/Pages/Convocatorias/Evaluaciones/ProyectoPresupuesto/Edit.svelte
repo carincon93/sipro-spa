@@ -58,7 +58,6 @@
 
     let dialogEvaluacion = proyectoPresupuesto.convocatoria_presupuesto.presupuesto_sennova.requiere_estudio_mercado || presupuestoInfo.codigo_uso_presupuestal == '020202008005096'
 
-    let sending = false
     let form = useForm({
         comentario: proyectoPresupuestoEvaluacion ? proyectoPresupuestoEvaluacion.comentario : '',
         correcto: proyectoPresupuestoEvaluacion?.correcto == undefined || proyectoPresupuestoEvaluacion?.correcto == true ? true : false,
@@ -66,8 +65,6 @@
     function submit() {
         if (isSuperAdmin || (checkRole(authUser, [11, 5]) && evaluacion.finalizado == false && evaluacion.habilitado == true && evaluacion.modificable == true)) {
             $form.put(route('convocatorias.evaluaciones.presupuesto.update', [convocatoria.id, evaluacion.id, proyectoPresupuesto.id]), {
-                onStart: () => (sending = true),
-                onFinish: () => (sending = false),
                 preserveScroll: true,
             })
         }
@@ -227,7 +224,7 @@
                 <div class="px-8 py-4 bg-gray-100 border-t border-gray-200 flex items-center sticky bottom-0">
                     {#if isSuperAdmin || (checkRole(authUser, [11, 5]) && evaluacion.finalizado == false && evaluacion.habilitado == true && evaluacion.modificable == true)}
                         {#if presupuestoInfo.convocatoria_presupuesto_id != '' || presupuestoInfo.convocatoria_presupuesto_id != ''}
-                            <LoadingButton loading={sending} class="btn-indigo ml-auto" type="submit">Evaluar</LoadingButton>
+                            <LoadingButton loading={$form.processing} class="ml-auto" type="submit">Evaluar</LoadingButton>
                         {/if}
                     {/if}
                 </div>
@@ -263,7 +260,7 @@
         </div>
         <div slot="actions">
             <div class="p-4">
-                <Button on:click={(event) => (dialogEvaluacion = false)} variant={null}>Aceptar</Button>
+                <Button on:click={() => (dialogEvaluacion = false)} variant={null}>Aceptar</Button>
             </div>
         </div>
     </Dialog>

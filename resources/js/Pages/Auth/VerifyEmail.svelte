@@ -8,11 +8,9 @@
     import { inertia } from '@inertiajs/inertia-svelte'
     import { route, checkRole, checkPermission } from '@/Utils'
     import { _ } from 'svelte-i18n'
-    import LoadingButton from '@/Shared/LoadingButton'
+    import Button from '@/Shared/Button'
 
     export let status
-
-    let sending = false
 
     function handleSubmit() {
         Inertia.post(route('verification.send'))
@@ -35,7 +33,7 @@
 
 <form on:submit|preventDefault={handleSubmit}>
     <div class="mt-4 flex items-center justify-between">
-        <LoadingButton bind:loading={sending} type="submit">{$_('Resend Verification Email')}</LoadingButton>
+        <Button type="submit" variant="raised">{$_('Resend Verification Email')}</Button>
 
         <a use:inertia href={route('logout')} method="post" as="button" class="underline text-sm text-gray-600 hover:text-gray-900">Salir</a>
     </div>

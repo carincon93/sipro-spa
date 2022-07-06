@@ -52,7 +52,7 @@
     let programasFormacionArticular
     let dialogOpen = errors.password != undefined ? true : false
     let proyectoDialogOpen = true
-    let sending = false
+
     let opcionesSiNo = [
         { value: 1, label: 'Si' },
         { value: 2, label: 'No' },
@@ -173,9 +173,8 @@
                     route('convocatorias.idi.updateLongColumn', [convocatoria.id, idi.id, column]),
                     { [column]: form[column] },
                     {
-                        onStart: () => (sending = true),
-                        onError: (resp) => ((sending = false), resolve(resp)),
-                        onFinish: () => ((sending = false), resolve({})),
+                        onError: (resp) => (resolve(resp)),
+                        onFinish: () => (resolve({})),
                         preserveScroll: true,
                     },
                 )
@@ -193,8 +192,6 @@
             }
 
             $form.put(route('convocatorias.idi.update', [convocatoria.id, idi.id]), {
-                onStart: () => (sending = true),
-                onFinish: () => (sending = false),
                 preserveScroll: true,
             })
         }
@@ -256,8 +253,8 @@
             <div class="py-24">
                 <Label required labelFor="titulo" class="font-medium inline-block mb-10 text-center text-gray-700 text-sm w-full" value="Descripción llamativa que orienta el enfoque del proyecto, indica el cómo y el para qué. (Máximo 20 palabras)" />
                 <Textarea label="Título" id="titulo" sinContador={true} error={errors.titulo} bind:value={$form.titulo} classes="bg-transparent block border-0 {errors.titulo ? '' : 'outline-none-important'} mt-1 outline-none text-4xl text-center w-full" required />
-                <RecomendacionEvaluador class="mt-8">
-                    {#if isSuperAdmin || idi.proyecto.mostrar_recomendaciones}
+                {#if isSuperAdmin || idi.proyecto.mostrar_recomendaciones}
+                    <RecomendacionEvaluador class="mt-8">
                         {#each idi.proyecto.evaluaciones as evaluacion, i}
                             {#if isSuperAdmin || (evaluacion.finalizado && evaluacion.habilitado)}
                                 <div class="bg-zinc-900 p-4 rounded shadow text-white my-2">
@@ -266,8 +263,8 @@
                                 </div>
                             {/if}
                         {/each}
-                    {/if}
-                </RecomendacionEvaluador>
+                    </RecomendacionEvaluador>
+                {/if}
             </div>
 
             <div class="py-24">
@@ -297,8 +294,8 @@
                     </div>
                 {/if}
 
-                <RecomendacionEvaluador class="mt-8">
-                    {#if isSuperAdmin || idi.proyecto.mostrar_recomendaciones}
+                {#if isSuperAdmin || idi.proyecto.mostrar_recomendaciones}
+                    <RecomendacionEvaluador class="mt-8">
                         {#each idi.proyecto.evaluaciones as evaluacion, i}
                             {#if isSuperAdmin || (evaluacion.finalizado && evaluacion.habilitado)}
                                 <div class="bg-zinc-900 p-4 rounded shadow text-white my-2">
@@ -307,8 +304,8 @@
                                 </div>
                             {/if}
                         {/each}
-                    {/if}
-                </RecomendacionEvaluador>
+                    </RecomendacionEvaluador>
+                {/if}
             </div>
 
             <fieldset class="py-24" disabled>
@@ -352,20 +349,18 @@
                     </div>
                 </div>
 
-                <div>
+                {#if isSuperAdmin || idi.proyecto.mostrar_recomendaciones}
                     <RecomendacionEvaluador class="mt-8">
-                        {#if isSuperAdmin || idi.proyecto.mostrar_recomendaciones}
-                            {#each idi.proyecto.evaluaciones as evaluacion, i}
-                                {#if isSuperAdmin || (evaluacion.finalizado && evaluacion.habilitado)}
-                                    <div class="bg-zinc-900 p-4 rounded shadow text-white my-2">
-                                        <p class="text-xs">Evaluador COD-{evaluacion.id}:</p>
-                                        <p class="whitespace-pre-line text-xs">{evaluacion.idi_evaluacion.red_conocimiento_comentario ? evaluacion.idi_evaluacion.red_conocimiento_comentario : 'Sin recomendación'}</p>
-                                    </div>
-                                {/if}
-                            {/each}
-                        {/if}
+                        {#each idi.proyecto.evaluaciones as evaluacion, i}
+                            {#if isSuperAdmin || (evaluacion.finalizado && evaluacion.habilitado)}
+                                <div class="bg-zinc-900 p-4 rounded shadow text-white my-2">
+                                    <p class="text-xs">Evaluador COD-{evaluacion.id}:</p>
+                                    <p class="whitespace-pre-line text-xs">{evaluacion.idi_evaluacion.red_conocimiento_comentario ? evaluacion.idi_evaluacion.red_conocimiento_comentario : 'Sin recomendación'}</p>
+                                </div>
+                            {/if}
+                        {/each}
                     </RecomendacionEvaluador>
-                </div>
+                {/if}
             </div>
 
             <div class="py-24">
@@ -396,20 +391,18 @@
                             <DynamicList id="disciplina_subarea_conocimiento_id" bind:value={$form.disciplina_subarea_conocimiento_id} routeWebApi={route('web-api.disciplinas-subarea-conocimiento', $form.subarea_conocimiento_id)} classes="min-h" placeholder="Busque por el nombre de la disciplina de subáreas de conocimiento" message={errors.disciplina_subarea_conocimiento_id} required />
                         </div>
                     </div>
-                    <div>
+                    {#if isSuperAdmin || idi.proyecto.mostrar_recomendaciones}
                         <RecomendacionEvaluador class="mt-8">
-                            {#if isSuperAdmin || idi.proyecto.mostrar_recomendaciones}
-                                {#each idi.proyecto.evaluaciones as evaluacion, i}
-                                    {#if isSuperAdmin || (evaluacion.finalizado && evaluacion.habilitado)}
-                                        <div class="bg-zinc-900 p-4 rounded shadow text-white my-2">
-                                            <p class="text-xs">Evaluador COD-{evaluacion.id}:</p>
-                                            <p class="whitespace-pre-line text-xs">{evaluacion.idi_evaluacion.disciplina_subarea_conocimiento_comentario ? evaluacion.idi_evaluacion.disciplina_subarea_conocimiento_comentario : 'Sin recomendación'}</p>
-                                        </div>
-                                    {/if}
-                                {/each}
-                            {/if}
+                            {#each idi.proyecto.evaluaciones as evaluacion, i}
+                                {#if isSuperAdmin || (evaluacion.finalizado && evaluacion.habilitado)}
+                                    <div class="bg-zinc-900 p-4 rounded shadow text-white my-2">
+                                        <p class="text-xs">Evaluador COD-{evaluacion.id}:</p>
+                                        <p class="whitespace-pre-line text-xs">{evaluacion.idi_evaluacion.disciplina_subarea_conocimiento_comentario ? evaluacion.idi_evaluacion.disciplina_subarea_conocimiento_comentario : 'Sin recomendación'}</p>
+                                    </div>
+                                {/if}
+                            {/each}
                         </RecomendacionEvaluador>
-                    </div>
+                    {/if}
                 {/if}
             </div>
 
@@ -422,20 +415,18 @@
                         <DynamicList id="actividad_economica_id" bind:value={$form.actividad_economica_id} routeWebApi={route('web-api.actividades-economicas')} placeholder="Busque por el nombre de la actividad económica" classes="min-h" message={errors.actividad_economica_id} required />
                     </div>
                 </div>
-                <div>
+                {#if isSuperAdmin || idi.proyecto.mostrar_recomendaciones}
                     <RecomendacionEvaluador class="mt-8">
-                        {#if isSuperAdmin || idi.proyecto.mostrar_recomendaciones}
-                            {#each idi.proyecto.evaluaciones as evaluacion, i}
-                                {#if isSuperAdmin || (evaluacion.finalizado && evaluacion.habilitado)}
-                                    <div class="bg-zinc-900 p-4 rounded shadow text-white my-2">
-                                        <p class="text-xs">Evaluador COD-{evaluacion.id}:</p>
-                                        <p class="whitespace-pre-line text-xs">{evaluacion.idi_evaluacion.actividad_economica_comentario ? evaluacion.idi_evaluacion.actividad_economica_comentario : 'Sin recomendación'}</p>
-                                    </div>
-                                {/if}
-                            {/each}
-                        {/if}
+                        {#each idi.proyecto.evaluaciones as evaluacion, i}
+                            {#if isSuperAdmin || (evaluacion.finalizado && evaluacion.habilitado)}
+                                <div class="bg-zinc-900 p-4 rounded shadow text-white my-2">
+                                    <p class="text-xs">Evaluador COD-{evaluacion.id}:</p>
+                                    <p class="whitespace-pre-line text-xs">{evaluacion.idi_evaluacion.actividad_economica_comentario ? evaluacion.idi_evaluacion.actividad_economica_comentario : 'Sin recomendación'}</p>
+                                </div>
+                            {/if}
+                        {/each}
                     </RecomendacionEvaluador>
-                </div>
+                {/if}
             </div>
 
             <div class="py-24">
@@ -447,20 +438,18 @@
                         <DynamicList id="tematica_estrategica_id" bind:value={$form.tematica_estrategica_id} routeWebApi={route('web-api.tematicas-estrategicas')} placeholder="Busque por el nombre de la temática estrategica SENA" message={errors.tematica_estrategica_id} required />
                     </div>
                 </div>
-                <div>
+                {#if isSuperAdmin || idi.proyecto.mostrar_recomendaciones}
                     <RecomendacionEvaluador class="mt-8">
-                        {#if isSuperAdmin || idi.proyecto.mostrar_recomendaciones}
-                            {#each idi.proyecto.evaluaciones as evaluacion, i}
-                                {#if isSuperAdmin || (evaluacion.finalizado && evaluacion.habilitado)}
-                                    <div class="bg-zinc-900 p-4 rounded shadow text-white my-2">
-                                        <p class="text-xs">Evaluador COD-{evaluacion.id}:</p>
-                                        <p class="whitespace-pre-line text-xs">{evaluacion.idi_evaluacion.tematica_estrategica_comentario ? evaluacion.idi_evaluacion.tematica_estrategica_comentario : 'Sin recomendación'}</p>
-                                    </div>
-                                {/if}
-                            {/each}
-                        {/if}
+                        {#each idi.proyecto.evaluaciones as evaluacion, i}
+                            {#if isSuperAdmin || (evaluacion.finalizado && evaluacion.habilitado)}
+                                <div class="bg-zinc-900 p-4 rounded shadow text-white my-2">
+                                    <p class="text-xs">Evaluador COD-{evaluacion.id}:</p>
+                                    <p class="whitespace-pre-line text-xs">{evaluacion.idi_evaluacion.tematica_estrategica_comentario ? evaluacion.idi_evaluacion.tematica_estrategica_comentario : 'Sin recomendación'}</p>
+                                </div>
+                            {/if}
+                        {/each}
                     </RecomendacionEvaluador>
-                </div>
+                {/if}
             </div>
 
             <div class="py-24">
@@ -477,20 +466,18 @@
                     </div>
                 </div>
                 {#if tieneVideo}
-                    <div>
+                    {#if isSuperAdmin || idi.proyecto.mostrar_recomendaciones}
                         <RecomendacionEvaluador class="mt-8">
-                            {#if isSuperAdmin || idi.proyecto.mostrar_recomendaciones}
-                                {#each idi.proyecto.evaluaciones as evaluacion, i}
-                                    {#if isSuperAdmin || (evaluacion.finalizado && evaluacion.habilitado)}
-                                        <div class="bg-zinc-900 p-4 rounded shadow text-white my-2">
-                                            <p class="text-xs">Evaluador COD-{evaluacion.id}:</p>
-                                            <p class="whitespace-pre-line text-xs">{evaluacion.idi_evaluacion.video_comentario ? evaluacion.idi_evaluacion.video_comentario : 'Sin recomendación'}</p>
-                                        </div>
-                                    {/if}
-                                {/each}
-                            {/if}
+                            {#each idi.proyecto.evaluaciones as evaluacion, i}
+                                {#if isSuperAdmin || (evaluacion.finalizado && evaluacion.habilitado)}
+                                    <div class="bg-zinc-900 p-4 rounded shadow text-white my-2">
+                                        <p class="text-xs">Evaluador COD-{evaluacion.id}:</p>
+                                        <p class="whitespace-pre-line text-xs">{evaluacion.idi_evaluacion.video_comentario ? evaluacion.idi_evaluacion.video_comentario : 'Sin recomendación'}</p>
+                                    </div>
+                                {/if}
+                            {/each}
                         </RecomendacionEvaluador>
-                    </div>
+                    {/if}
                 {/if}
             </div>
 
@@ -511,20 +498,18 @@
                     </div>
                 </div>
                 {#if requiereJustificacionIndustria4}
-                    <div>
+                    {#if isSuperAdmin || idi.proyecto.mostrar_recomendaciones}
                         <RecomendacionEvaluador class="mt-8">
-                            {#if isSuperAdmin || idi.proyecto.mostrar_recomendaciones}
-                                {#each idi.proyecto.evaluaciones as evaluacion, i}
-                                    {#if isSuperAdmin || (evaluacion.finalizado && evaluacion.habilitado)}
-                                        <div class="bg-zinc-900 p-4 rounded shadow text-white my-2">
-                                            <p class="text-xs">Evaluador COD-{evaluacion.id}:</p>
-                                            <p class="whitespace-pre-line text-xs">{evaluacion.idi_evaluacion.justificacion_industria_4_comentario ? evaluacion.idi_evaluacion.justificacion_industria_4_comentario : 'Sin recomendación'}</p>
-                                        </div>
-                                    {/if}
-                                {/each}
-                            {/if}
+                            {#each idi.proyecto.evaluaciones as evaluacion, i}
+                                {#if isSuperAdmin || (evaluacion.finalizado && evaluacion.habilitado)}
+                                    <div class="bg-zinc-900 p-4 rounded shadow text-white my-2">
+                                        <p class="text-xs">Evaluador COD-{evaluacion.id}:</p>
+                                        <p class="whitespace-pre-line text-xs">{evaluacion.idi_evaluacion.justificacion_industria_4_comentario ? evaluacion.idi_evaluacion.justificacion_industria_4_comentario : 'Sin recomendación'}</p>
+                                    </div>
+                                {/if}
+                            {/each}
                         </RecomendacionEvaluador>
-                    </div>
+                    {/if}
                 {/if}
             </div>
 
@@ -552,20 +537,18 @@
                     </div>
                 </div>
                 {#if requiereJustificacionEconomiaNaranja}
-                    <div>
+                    {#if isSuperAdmin || idi.proyecto.mostrar_recomendaciones}
                         <RecomendacionEvaluador class="mt-8">
-                            {#if isSuperAdmin || idi.proyecto.mostrar_recomendaciones}
-                                {#each idi.proyecto.evaluaciones as evaluacion, i}
-                                    {#if isSuperAdmin || (evaluacion.finalizado && evaluacion.habilitado)}
-                                        <div class="bg-zinc-900 p-4 rounded shadow text-white my-2">
-                                            <p class="text-xs">Evaluador COD-{evaluacion.id}:</p>
-                                            <p class="whitespace-pre-line text-xs">{evaluacion.idi_evaluacion.justificacion_economia_naranja_comentario ? evaluacion.idi_evaluacion.justificacion_economia_naranja_comentario : 'Sin recomendación'}</p>
-                                        </div>
-                                    {/if}
-                                {/each}
-                            {/if}
+                            {#each idi.proyecto.evaluaciones as evaluacion, i}
+                                {#if isSuperAdmin || (evaluacion.finalizado && evaluacion.habilitado)}
+                                    <div class="bg-zinc-900 p-4 rounded shadow text-white my-2">
+                                        <p class="text-xs">Evaluador COD-{evaluacion.id}:</p>
+                                        <p class="whitespace-pre-line text-xs">{evaluacion.idi_evaluacion.justificacion_economia_naranja_comentario ? evaluacion.idi_evaluacion.justificacion_economia_naranja_comentario : 'Sin recomendación'}</p>
+                                    </div>
+                                {/if}
+                            {/each}
                         </RecomendacionEvaluador>
-                    </div>
+                    {/if}
                 {/if}
             </div>
 
@@ -593,20 +576,18 @@
                     </div>
                 </div>
                 {#if requiereJustificacionPoliticaDiscapacidad}
-                    <div>
+                    {#if isSuperAdmin || idi.proyecto.mostrar_recomendaciones}
                         <RecomendacionEvaluador class="mt-8">
-                            {#if isSuperAdmin || idi.proyecto.mostrar_recomendaciones}
-                                {#each idi.proyecto.evaluaciones as evaluacion, i}
-                                    {#if isSuperAdmin || (evaluacion.finalizado && evaluacion.habilitado)}
-                                        <div class="bg-zinc-900 p-4 rounded shadow text-white my-2">
-                                            <p class="text-xs">Evaluador COD-{evaluacion.id}:</p>
-                                            <p class="whitespace-pre-line text-xs">{evaluacion.idi_evaluacion.justificacion_politica_discapacidad_comentario ? evaluacion.idi_evaluacion.justificacion_politica_discapacidad_comentario : 'Sin recomendación'}</p>
-                                        </div>
-                                    {/if}
-                                {/each}
-                            {/if}
+                            {#each idi.proyecto.evaluaciones as evaluacion, i}
+                                {#if isSuperAdmin || (evaluacion.finalizado && evaluacion.habilitado)}
+                                    <div class="bg-zinc-900 p-4 rounded shadow text-white my-2">
+                                        <p class="text-xs">Evaluador COD-{evaluacion.id}:</p>
+                                        <p class="whitespace-pre-line text-xs">{evaluacion.idi_evaluacion.justificacion_politica_discapacidad_comentario ? evaluacion.idi_evaluacion.justificacion_politica_discapacidad_comentario : 'Sin recomendación'}</p>
+                                    </div>
+                                {/if}
+                            {/each}
                         </RecomendacionEvaluador>
-                    </div>
+                    {/if}
                 {/if}
             </div>
 
@@ -895,20 +876,18 @@
                     </div>
                 </div>
 
-                <div>
+                {#if isSuperAdmin || idi.proyecto.mostrar_recomendaciones}
                     <RecomendacionEvaluador class="mt-8">
-                        {#if isSuperAdmin || idi.proyecto.mostrar_recomendaciones}
-                            {#each idi.proyecto.evaluaciones as evaluacion, i}
-                                {#if isSuperAdmin || (evaluacion.finalizado && evaluacion.habilitado)}
-                                    <div class="bg-zinc-900 p-4 rounded shadow text-white my-2">
-                                        <p class="text-xs">Evaluador COD-{evaluacion.id}:</p>
-                                        <p class="whitespace-pre-line text-xs">{evaluacion.idi_evaluacion.resumen_comentario ? evaluacion.idi_evaluacion.resumen_comentario : 'Sin recomendación'}</p>
-                                    </div>
-                                {/if}
-                            {/each}
-                        {/if}
+                        {#each idi.proyecto.evaluaciones as evaluacion, i}
+                            {#if isSuperAdmin || (evaluacion.finalizado && evaluacion.habilitado)}
+                                <div class="bg-zinc-900 p-4 rounded shadow text-white my-2">
+                                    <p class="text-xs">Evaluador COD-{evaluacion.id}:</p>
+                                    <p class="whitespace-pre-line text-xs">{evaluacion.idi_evaluacion.resumen_comentario ? evaluacion.idi_evaluacion.resumen_comentario : 'Sin recomendación'}</p>
+                                </div>
+                            {/if}
+                        {/each}
                     </RecomendacionEvaluador>
-                </div>
+                {/if}
             </div>
 
             <div class="py-24">
@@ -1046,8 +1025,8 @@
                 </div>
 
                 <div>
-                    <RecomendacionEvaluador class="mt-8">
-                        {#if isSuperAdmin || idi.proyecto.mostrar_recomendaciones}
+                    {#if isSuperAdmin || idi.proyecto.mostrar_recomendaciones}
+                        <RecomendacionEvaluador class="mt-8">
                             {#each idi.proyecto.evaluaciones as evaluacion, i}
                                 {#if isSuperAdmin || (evaluacion.finalizado && evaluacion.habilitado)}
                                     <div class="bg-zinc-900 p-4 rounded shadow text-white my-2">
@@ -1056,14 +1035,13 @@
                                     </div>
                                 {/if}
                             {/each}
-                        {/if}
-                    </RecomendacionEvaluador>
+                        </RecomendacionEvaluador>
+                    {/if}
                 </div>
             </div>
 
-            <div>
-                {#if isSuperAdmin || idi.proyecto.mostrar_recomendaciones}
-                    <hr class="mt-10 mb-10" />
+            {#if isSuperAdmin || idi.proyecto.mostrar_recomendaciones}
+                <div class="py-24">
                     <h1>Ortografía</h1>
                     {#each idi.proyecto.evaluaciones as evaluacion, i}
                         {#if isSuperAdmin || (evaluacion.finalizado && evaluacion.habilitado)}
@@ -1073,12 +1051,11 @@
                             </div>
                         {/if}
                     {/each}
-                {/if}
-            </div>
+                </div>
+            {/if}
 
-            <div>
-                {#if isSuperAdmin || idi.proyecto.mostrar_recomendaciones}
-                    <hr class="mt-10 mb-10" />
+            {#if isSuperAdmin || idi.proyecto.mostrar_recomendaciones}
+                <div class="py-24">
                     <h1>Redacción</h1>
                     {#each idi.proyecto.evaluaciones as evaluacion, i}
                         {#if isSuperAdmin || (evaluacion.finalizado && evaluacion.habilitado)}
@@ -1088,12 +1065,11 @@
                             </div>
                         {/if}
                     {/each}
-                {/if}
-            </div>
+                </div>
+            {/if}
 
-            <div>
-                {#if isSuperAdmin || idi.proyecto.mostrar_recomendaciones}
-                    <hr class="mt-10 mb-10" />
+            {#if isSuperAdmin || idi.proyecto.mostrar_recomendaciones}
+                <div class="py-24">
                     <h1>Normas APA</h1>
                     {#each idi.proyecto.evaluaciones as evaluacion, i}
                         {#if isSuperAdmin || (evaluacion.finalizado && evaluacion.habilitado)}
@@ -1103,17 +1079,17 @@
                             </div>
                         {/if}
                     {/each}
-                {/if}
-            </div>
+                </div>
+            {/if}
         </fieldset>
         <div class="px-8 py-4 bg-gray-100 border-t border-gray-200 flex items-center justify-between sticky bottom-0">
             {#if isSuperAdmin || (checkPermissionByUser(authUser, [1]) && idi.proyecto.modificable == true && idi.proyecto.radicado == false) || (checkPermission(authUser, [4]) && idi.proyecto.modificable == true && idi.proyecto.radicado == false)}
-                <button class="text-red-600 hover:underline text-left" tabindex="-1" type="button" on:click={(event) => (dialogOpen = true)}> Eliminar </button>
+                <button class="text-red-600 hover:underline text-left" tabindex="-1" type="button" on:click={() => (dialogOpen = true)}> Eliminar </button>
             {/if}
             {#if isSuperAdmin || (checkPermissionByUser(authUser, [1]) && idi.proyecto.modificable == true) || (checkPermission(authUser, [3, 4]) && idi.proyecto.modificable == true)}
                 <small class="block leading-tight">{idi.updated_at}</small>
 
-                <LoadingButton loading={sending} type="submit">Guardar</LoadingButton>
+                <LoadingButton loading={$form.processing} type="submit">Guardar</LoadingButton>
             {/if}
         </div>
     </form>
@@ -1162,16 +1138,16 @@
         </div>
         <div slot="actions">
             <div class="p-4">
-                <Button on:click={(event) => (proyectoDialogOpen = false)} variant={null}>Omitir</Button>
+                <Button on:click={() => (proyectoDialogOpen = false)} variant={null}>Omitir</Button>
                 {#if idi.proyecto.modificable}
-                    <Button variant="raised" on:click={(event) => (proyectoDialogOpen = false)} on:click={() => Inertia.visit('#tematica_estrategica_id')}>Continuar diligenciando</Button>
+                    <Button variant="raised" on:click={() => (proyectoDialogOpen = false)} on:click={() => Inertia.visit('#tematica_estrategica_id')}>Continuar diligenciando</Button>
                 {/if}
             </div>
         </div>
     </Dialog>
 
     <Dialog bind:open={dialogOpen}>
-        <div slot="titulo" class="flex items-center">
+        <div slot="title" class="flex items-center">
             <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 mr-2 text-red-500" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-3L13.732 4c-.77-1.333-2.694-1.333-3.464 0L3.34 16c-.77 1.333.192 3 1.732 3z" />
             </svg>
@@ -1187,7 +1163,7 @@
         </div>
         <div slot="actions">
             <div class="p-4">
-                <Button on:click={(event) => (dialogOpen = false)} variant={null}>Cancelar</Button>
+                <Button on:click={() => (dialogOpen = false)} variant={null}>Cancelar</Button>
                 <Button variant="raised" form="delete-idi">Confirmar</Button>
             </div>
         </div>

@@ -23,7 +23,6 @@
     let authUser = $page.props.auth.user
     let isSuperAdmin = checkRole(authUser, [1])
 
-    let sending = false
     let formPrimeraEvaluacion = useForm({
         replicas: evaluaciones[0] ? evaluaciones[0].replicas : '',
     })
@@ -31,10 +30,6 @@
     function submitReplicaPrimeraEval() {
         if (isSuperAdmin || checkPermission(authUser, [1, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 17, 18, 19])) {
             $formPrimeraEvaluacion.post(route('convocatorias.proyectos.update-comentarios', [convocatoria.id, evaluaciones[0].id]), {
-                onStart: () => (sending = true),
-                onFinish: () => {
-                    sending = false
-                },
                 preserveScroll: true,
             })
         }
@@ -47,10 +42,6 @@
     function submitReplicaSegundaEval() {
         if (isSuperAdmin || checkPermission(authUser, [1, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 17, 18, 19])) {
             $formSegundaEvaluacion.post(route('convocatorias.proyectos.update-comentarios', [convocatoria.id, evaluaciones[1].id]), {
-                onStart: () => (sending = true),
-                onFinish: () => {
-                    sending = false
-                },
                 preserveScroll: true,
             })
         }
@@ -63,10 +54,6 @@
     function submitReplicaTerceraEval() {
         if (isSuperAdmin || checkPermission(authUser, [1, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 17, 18, 19])) {
             $formTerceraEvaluacion.post(route('convocatorias.proyectos.update-comentarios', [convocatoria.id, evaluaciones[2].id]), {
-                onStart: () => (sending = true),
-                onFinish: () => {
-                    sending = false
-                },
                 preserveScroll: true,
             })
         }
@@ -153,7 +140,7 @@
             </div>
             <div class="py-4 flex items-center sticky bottom-0">
                 {#if isSuperAdmin || (checkPermission(authUser, [1, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 17, 18, 19]) && proyecto.finalizado == false)}
-                    <LoadingButton loading={sending} class="btn-indigo ml-auto" type="submit">Enviar comentario / resupuesta</LoadingButton>
+                    <LoadingButton loading={$formPrimeraEvaluacion.processing} class="ml-auto" type="submit">Enviar comentario / resupuesta</LoadingButton>
                 {/if}
             </div>
         </form>
@@ -178,7 +165,7 @@
             </div>
             <div class="py-4 flex items-center sticky bottom-0">
                 {#if isSuperAdmin || (checkPermission(authUser, [1, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 17, 18, 19]) && proyecto.finalizado == false)}
-                    <LoadingButton loading={sending} class="btn-indigo ml-auto" type="submit">Enviar comentario / resupuesta</LoadingButton>
+                    <LoadingButton loading={$formSegundaEvaluacion.processing} class="ml-auto" type="submit">Enviar comentario / resupuesta</LoadingButton>
                 {/if}
             </div>
         </form>
@@ -203,7 +190,7 @@
             </div>
             <div class="py-4  flex items-center sticky bottom-0">
                 {#if isSuperAdmin || (checkPermission(authUser, [1, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 17, 18, 19]) && proyecto.finalizado == false)}
-                    <LoadingButton loading={sending} class="btn-indigo ml-auto" type="submit">Enviar comentario / resupuesta</LoadingButton>
+                    <LoadingButton loading={$formTerceraEvaluacion.processing} class="ml-auto" type="submit">Enviar comentario / resupuesta</LoadingButton>
                 {/if}
             </div>
         </form>

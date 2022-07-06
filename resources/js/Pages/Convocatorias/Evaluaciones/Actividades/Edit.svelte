@@ -5,8 +5,6 @@
     import { _ } from 'svelte-i18n'
 
     import Label from '@/Shared/Label'
-    import Checkbox from '@smui/checkbox'
-    import FormField from '@smui/form-field'
     import Textarea from '@/Shared/Textarea'
 
     export let convocatoria

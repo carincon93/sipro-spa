@@ -30,7 +30,7 @@
         { value: 1, label: 'Si' },
         { value: 2, label: 'No' },
     ]
-    let sending = false
+
     let form = useForm({
         nombre: '',
         fecha_creacion_semillero: '',
@@ -56,10 +56,7 @@
 
     function submit() {
         if (isSuperAdmin || checkRole(authUser, [4, 21, 20, 18, 19, 5, 17])) {
-            $form.post(route('grupos-investigacion.semilleros-investigacion.store', grupoInvestigacion.id), {
-                onStart: () => (sending = true),
-                onFinish: () => (sending = false),
-            })
+            $form.post(route('grupos-investigacion.semilleros-investigacion.store', grupoInvestigacion.id))
         }
     }
 
@@ -205,7 +202,7 @@
             </fieldset>
             <div class="px-8 py-4 bg-gray-100 border-t border-gray-200 flex items-center sticky bottom-0">
                 {#if isSuperAdmin || checkRole(authUser, [4, 21, 20, 18, 19, 5, 17])}
-                    <LoadingButton loading={sending} class="btn-indigo ml-auto" type="submit">Crear semillero de investigación</LoadingButton>
+                    <LoadingButton loading={$form.processing} class="ml-auto" type="submit">Crear semillero de investigación</LoadingButton>
                 {/if}
             </div>
         </form>

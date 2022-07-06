@@ -7,7 +7,6 @@
 
     import Pagination from '@/Shared/Pagination'
     import DataTableMenu from '@/Shared/DataTableMenu'
-    import Button from '@/Shared/Button'
     import { Item, Text } from '@smui/list'
     import DataTable from '@/Shared/DataTable'
 

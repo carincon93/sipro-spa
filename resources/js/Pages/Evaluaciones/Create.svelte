@@ -22,7 +22,6 @@
     let authUser = $page.props.auth.user
     let isSuperAdmin = checkRole(authUser, [1])
 
-    let sending = false
     let form = useForm({
         habilitado: false,
         modificable: false,
@@ -33,10 +32,7 @@
 
     function submit() {
         if (isSuperAdmin || checkRole(authUser, [20, 18, 19, 5, 17])) {
-            $form.post(route('evaluaciones.store'), {
-                onStart: () => (sending = true),
-                onFinish: () => (sending = false),
-            })
+            $form.post(route('evaluaciones.store'))
         }
     }
 </script>
@@ -93,7 +89,7 @@
 
             <div class="px-8 py-4 bg-gray-100 border-t border-gray-200 flex items-center sticky bottom-0">
                 {#if isSuperAdmin || checkRole(authUser, [20, 18, 19, 5, 17])}
-                    <LoadingButton loading={sending} class="btn-indigo ml-auto" type="submit">Crear evaluación</LoadingButton>
+                    <LoadingButton loading={$form.processing} class="ml-auto" type="submit">Crear evaluación</LoadingButton>
                 {/if}
             </div>
         </form>

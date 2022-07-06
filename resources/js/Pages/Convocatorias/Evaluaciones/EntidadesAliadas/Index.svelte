@@ -41,15 +41,12 @@
         },
     }
 
-    let sending = false
     let formEstrategiaRegionalEvaluacion = useForm({
         entidad_aliada_verificada: evaluacion.idi_evaluacion?.entidad_aliada_verificada,
     })
     function submitEstrategiaRegionalEvaluacion() {
         if (isSuperAdmin || (checkRole(authUser, [11, 5]) && evaluacion.finalizado == false && evaluacion.habilitado == true && evaluacion.modificable == true)) {
             $formEstrategiaRegionalEvaluacion.put(route('convocatorias.evaluaciones.entidades-aliadas.verificar', [convocatoria.id, evaluacion.id]), {
-                onStart: () => (sending = true),
-                onFinish: () => (sending = false),
                 preserveScroll: true,
             })
         }
@@ -62,8 +59,6 @@
     function submitTaEvaluacion() {
         if (isSuperAdmin || (checkRole(authUser, [11, 5]) && evaluacion.finalizado == false && evaluacion.habilitado == true && evaluacion.modificable == true)) {
             $formTaEvaluacion.put(route('convocatorias.evaluaciones.entidades-aliadas.guardar-evaluacion', [convocatoria.id, evaluacion.id]), {
-                onStart: () => (sending = true),
-                onFinish: () => (sending = false),
                 preserveScroll: true,
             })
         }
@@ -152,7 +147,7 @@
                 </div>
                 {#if isSuperAdmin || (checkRole(authUser, [11, 5]) && evaluacion.finalizado == false && evaluacion.habilitado == true && evaluacion.modificable == true)}
                     <div class="px-8 py-4 border-t border-gray-200 flex items-center sticky bottom-0">
-                        <LoadingButton loading={sending} class="btn-indigo ml-auto" type="submit">Guardar</LoadingButton>
+                        <LoadingButton loading={$formEstrategiaRegionalEvaluacion.processing} class="ml-auto" type="submit">Guardar</LoadingButton>
                     </div>
                 {/if}
             </form>
@@ -196,7 +191,7 @@
                 </InfoMessage>
                 <div class="px-8 py-4 bg-gray-100 border-t border-gray-200 flex items-center sticky bottom-0">
                     {#if isSuperAdmin || (checkRole(authUser, [11, 5]) && evaluacion.finalizado == false && evaluacion.habilitado == true && evaluacion.modificable == true)}
-                        <LoadingButton loading={sending} class="btn-indigo ml-auto" type="submit">Guardar</LoadingButton>
+                        <LoadingButton loading={$formTaEvaluacion.processing} class="ml-auto" type="submit">Guardar</LoadingButton>
                     {/if}
                 </div>
             </form>

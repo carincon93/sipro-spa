@@ -31,7 +31,6 @@
         year: $page.props.filters.year,
     }
 
-    let sending = false
     let form = useForm({
         proyectos_id: null,
         estado: false,
@@ -39,8 +38,6 @@
     function submit() {
         if (isSuperAdmin || checkRole(authUser, [20, 18, 19, 5, 17])) {
             $form.post(route('proyectos.update.actualizar-estados-proyectos'), {
-                onStart: () => (sending = true),
-                onFinish: () => (sending = false),
                 preserveScroll: true,
             })
         }
@@ -80,7 +77,7 @@
 
                     <div class="py-4 flex items-center sticky bottom-0">
                         {#if isSuperAdmin || checkRole(authUser, [20, 18, 19, 5, 17])}
-                            <LoadingButton loading={sending} class="btn-indigo ml-auto" type="submit">Actualizar estados de los proyectos</LoadingButton>
+                            <LoadingButton loading={$form.processing} class="ml-auto" type="submit">Actualizar estados de los proyectos</LoadingButton>
                         {/if}
                     </div>
                 </form>

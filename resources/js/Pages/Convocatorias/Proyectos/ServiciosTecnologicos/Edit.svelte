@@ -39,9 +39,17 @@
     let authUser = $page.props.auth.user
     let isSuperAdmin = checkRole(authUser, [1])
 
+    // Permiso asignado a usuarios específicos para crear proyectos ST / Proyecto modificable en verdadero
+    let permissionUserCreateEdit = checkPermissionByUser(authUser, [5]) && servicioTecnologico.proyecto.modificable == true
+    // Permiso asignado a usuarios específicos para crear proyectos ST / Proyecto modificable en verdadero y radicado en falso
+    let canUserDeleteProyectoST = permissionUserCreateEdit && servicioTecnologico.proyecto.radicado == false
+    // Verifica que el usuario tenga permisos de editar/eliminar proyectos ST / Proyecto modificable en verdadero
+    let canUpdateProyectoST = checkPermission(authUser, [6, 7]) && servicioTecnologico.proyecto.modificable == true
+    // Verifica que el usuario tenga permisos de eliminar proyectos ST / Proyecto modificable en verdadero y radicado en falso
+    let canDeleteProyectoST = checkPermission(authUser, [7]) && servicioTecnologico.proyecto.modificable == true && servicioTecnologico.proyecto.radicado == false
+
     let dialogOpen = errors.password != undefined ? true : false
     let proyectoDialogOpen = true
-    let sending = false
 
     let resumenForm = useForm({
         resumen: servicioTecnologico.resumen,
@@ -85,15 +93,14 @@
 
     async function syncColumnLong(column, form) {
         return new Promise((resolve) => {
-            if (isSuperAdmin || (checkPermissionByUser(authUser, [5]) && servicioTecnologico.proyecto.modificable == true) || (checkPermission(authUser, [6, 7]) && servicioTecnologico.proyecto.modificable == true)) {
+            if (isSuperAdmin || permissionUserCreateEdit || canUpdateProyectoST) {
                 //guardar
                 Inertia.put(
                     route('convocatorias.servicios-tecnologicos.updateLongColumn', [convocatoria.id, servicioTecnologico.id, column]),
                     { [column]: form[column] },
                     {
-                        onStart: () => (sending = true),
-                        onError: (resp) => ((sending = false), resolve(resp)),
-                        onFinish: () => ((sending = false), resolve({})),
+                        onError: (resp) => (resolve(resp)),
+                        onFinish: () => (resolve({})),
                         preserveScroll: true,
                     },
                 )
@@ -104,10 +111,8 @@
     }
 
     function submit() {
-        if (isSuperAdmin || (checkPermissionByUser(authUser, [5]) && servicioTecnologico.proyecto.modificable == true) || (checkPermission(authUser, [6, 7]) && servicioTecnologico.proyecto.modificable == true)) {
+        if (isSuperAdmin || permissionUserCreateEdit || canUpdateProyectoST) {
             $form.put(route('convocatorias.servicios-tecnologicos.update', [convocatoria.id, servicioTecnologico.id]), {
-                onStart: () => (sending = true),
-                onFinish: () => (sending = false),
                 preserveScroll: true,
             })
         }
@@ -118,7 +123,7 @@
     })
 
     function destroy() {
-        if (isSuperAdmin || (checkPermissionByUser(authUser, [5]) && servicioTecnologico.proyecto.modificable == true && servicioTecnologico.proyecto.radicado == false) || (checkPermission(authUser, [7]) && servicioTecnologico.proyecto.modificable == true && servicioTecnologico.proyecto.radicado == false)) {
+        if (isSuperAdmin || canUserDeleteProyectoST || canDeleteProyectoST) {
             $deleteForm.delete(route('convocatorias.servicios-tecnologicos.destroy', [convocatoria.id, servicioTecnologico.id]), {
                 preserveScroll: true,
             })
@@ -147,8 +152,8 @@
     </header>
 
     <form on:submit|preventDefault={submit}>
-        <fieldset class="p-8" disabled={isSuperAdmin || (checkPermissionByUser(authUser, [5]) && servicioTecnologico.proyecto.modificable == true) ? undefined : checkPermission(authUser, [6, 7]) && servicioTecnologico.proyecto.modificable == true ? undefined : true}>
-            <div>
+        <fieldset class="p-8 divide-y" disabled={isSuperAdmin || permissionUserCreateEdit || canUpdateProyectoST ? undefined : true}>
+            <div class="py-24">
                 <Label
                     required
                     labelFor="titulo"
@@ -157,8 +162,8 @@
                 />
                 <Textarea label="Título" sinContador={true} id="titulo" error={errors.titulo} bind:value={$form.titulo} classes="bg-transparent block border-0 {errors.titulo ? '' : 'outline-none-important'} mt-1 outline-none text-4xl text-center w-full" required />
 
-                <RecomendacionEvaluador class="mt-8">
-                    {#if isSuperAdmin || servicioTecnologico.proyecto.mostrar_recomendaciones}
+                {#if isSuperAdmin || servicioTecnologico.proyecto.mostrar_recomendaciones}
+                    <RecomendacionEvaluador class="mt-8">
                         {#each servicioTecnologico.proyecto.evaluaciones as evaluacion, i}
                             {#if isSuperAdmin || (evaluacion.finalizado && evaluacion.habilitado)}
                                 <div class="bg-zinc-900 p-4 rounded shadow text-white my-2">
@@ -167,11 +172,11 @@
                                 </div>
                             {/if}
                         {/each}
-                    {/if}
-                </RecomendacionEvaluador>
+                    </RecomendacionEvaluador>
+                {/if}
             </div>
 
-            <div>
+            <div class="py-24">
                 <p class="text-center">Fecha de ejecución</p>
                 <small class="text-red-400 block text-center"> * Campo obligatorio </small>
                 <InfoMessage message={convocatoria.fecha_maxima_st} class="my-5" />
@@ -198,8 +203,8 @@
                     </div>
                 {/if}
 
-                <RecomendacionEvaluador class="mt-8">
-                    {#if isSuperAdmin || servicioTecnologico.proyecto.mostrar_recomendaciones}
+                {#if isSuperAdmin || servicioTecnologico.proyecto.mostrar_recomendaciones}
+                    <RecomendacionEvaluador class="mt-8">
                         {#each servicioTecnologico.proyecto.evaluaciones as evaluacion, i}
                             {#if isSuperAdmin || (evaluacion.finalizado && evaluacion.habilitado)}
                                 <div class="bg-zinc-900 p-4 rounded shadow text-white my-2">
@@ -208,12 +213,12 @@
                                 </div>
                             {/if}
                         {/each}
-                    {/if}
-                </RecomendacionEvaluador>
+                    </RecomendacionEvaluador>
+                {/if}
             </div>
 
-            <fieldset disabled>
-                <div class="mt-44 grid grid-cols-2">
+            <fieldset class="py-24" disabled>
+                <div class="grid grid-cols-2">
                     <div>
                         <Label required class="mb-4" labelFor="tipo_proyecto_st_id" value="Centro de formación" />
                     </div>
@@ -223,7 +228,7 @@
                 </div>
 
                 {#if $form.tipo_proyecto_st_id}
-                    <div class="mt-44 grid grid-cols-2">
+                    <div class="grid grid-cols-2">
                         <div>
                             <Label required class="mb-4" labelFor="estado_sistema_gestion_id" value="Estado del sistema de gestión" />
                         </div>
@@ -233,7 +238,7 @@
                     </div>
                 {/if}
 
-                <div class="mt-44 grid grid-cols-2">
+                <div class="grid grid-cols-2">
                     <div>
                         <Label required class="mb-4" labelFor="sector_productivo" value="Sector priorizado de Colombia Productiva" />
                     </div>
@@ -242,7 +247,7 @@
                     </div>
                 </div>
 
-                <div class="mt-44 grid grid-cols-2">
+                <div class="grid grid-cols-2">
                     <div>
                         <Label required class="mb-4" labelFor="linea_programatica_id" value="Código dependencia presupuestal (SIIF)" />
                     </div>
@@ -256,8 +261,8 @@
 
             <h1 class="text-2xl text-center" id="estructura-proyecto">Estructura del proyecto</h1>
 
-            <div>
-                <div class="mt-40 grid grid-cols-1">
+            <div class="py-24">
+                <div class="grid grid-cols-1">
                     <div>
                         <Label required class="mb-4" labelFor="resumen" value="Resumen ejecutivo" />
                         <InfoMessage class="mb-2">
@@ -273,8 +278,8 @@
                     </div>
                 </div>
                 <div>
-                    <RecomendacionEvaluador class="mt-8">
-                        {#if isSuperAdmin || servicioTecnologico.proyecto.mostrar_recomendaciones}
+                    {#if isSuperAdmin || servicioTecnologico.proyecto.mostrar_recomendaciones}
+                        <RecomendacionEvaluador class="mt-8">
                             {#each servicioTecnologico.proyecto.evaluaciones as evaluacion, i}
                                 {#if isSuperAdmin || (evaluacion.finalizado && evaluacion.habilitado)}
                                     <div class="bg-zinc-900 p-4 rounded shadow text-white my-2">
@@ -283,13 +288,13 @@
                                     </div>
                                 {/if}
                             {/each}
-                        {/if}
-                    </RecomendacionEvaluador>
+                        </RecomendacionEvaluador>
+                    {/if}
                 </div>
             </div>
 
-            <div>
-                <div class="mt-44 grid grid-cols-1">
+            <div class="py-24">
+                <div class="grid grid-cols-1">
                     <div>
                         <Label required class="mb-4" labelFor="antecedentes" value="Antecedentes" />
                         <InfoMessage class="mb-2">
@@ -306,214 +311,225 @@
                         <Textarea maxlength="10000" id="antecedentes" error={errors.antecedentes} bind:value={$formAntecedentes.antecedentes} on:input={() => syncColumnLong('antecedentes', $formAntecedentes)} required />
                     </div>
                 </div>
-                <div>
+                {#if isSuperAdmin || servicioTecnologico.proyecto.mostrar_recomendaciones}
                     <RecomendacionEvaluador class="mt-8">
-                        {#if isSuperAdmin || servicioTecnologico.proyecto.mostrar_recomendaciones}
-                            {#each servicioTecnologico.proyecto.evaluaciones as evaluacion, i}
-                                {#if isSuperAdmin || (evaluacion.finalizado && evaluacion.habilitado)}
-                                    <div class="bg-zinc-900 p-4 rounded shadow text-white my-2">
-                                        <p class="text-xs">Evaluador COD-{evaluacion.id}:</p>
-                                        <p class="whitespace-pre-line text-xs">{evaluacion.servicio_tecnologico_evaluacion.antecedentes_comentario ? evaluacion.servicio_tecnologico_evaluacion.antecedentes_comentario : 'Sin recomendación'}</p>
-                                    </div>
-                                {/if}
-                            {/each}
-                        {/if}
+                        {#each servicioTecnologico.proyecto.evaluaciones as evaluacion, i}
+                            {#if isSuperAdmin || (evaluacion.finalizado && evaluacion.habilitado)}
+                                <div class="bg-zinc-900 p-4 rounded shadow text-white my-2">
+                                    <p class="text-xs">Evaluador COD-{evaluacion.id}:</p>
+                                    <p class="whitespace-pre-line text-xs">{evaluacion.servicio_tecnologico_evaluacion.antecedentes_comentario ? evaluacion.servicio_tecnologico_evaluacion.antecedentes_comentario : 'Sin recomendación'}</p>
+                                </div>
+                            {/if}
+                        {/each}
                     </RecomendacionEvaluador>
-                </div>
+                {/if}
             </div>
 
-            <div class="mt-44 grid grid-cols-1">
-                <div>
-                    <Label required class="mb-4" labelFor="identificacion_problema" value="Identificación y descripción del problema" />
-                    <InfoMessage
-                        class="mb-2"
-                        message="1. Descripción de la necesidad, problema u oportunidad identificada del plan tecnológico y/o agendas departamentales de innovación y competitividad.<br>2. Descripción del problema que se atiende con el proyecto, sustentado en el contexto, la caracterización, los datos, las estadísticas, de la regional, entre otros, citar toda la información consignada utilizando normas APA última edición. La información debe ser de fuentes primarias de información, ejemplo: Secretarías, DANE, Artículos científicos, entre otros."
-                    />
+            <div class="py-24">
+                <div class="grid grid-cols-1">
+                    <div>
+                        <Label required class="mb-4" labelFor="identificacion_problema" value="Identificación y descripción del problema" />
+                        <InfoMessage
+                            class="mb-2"
+                            message="1. Descripción de la necesidad, problema u oportunidad identificada del plan tecnológico y/o agendas departamentales de innovación y competitividad.<br>2. Descripción del problema que se atiende con el proyecto, sustentado en el contexto, la caracterización, los datos, las estadísticas, de la regional, entre otros, citar toda la información consignada utilizando normas APA última edición. La información debe ser de fuentes primarias de información, ejemplo: Secretarías, DANE, Artículos científicos, entre otros."
+                        />
+                    </div>
+
+                    <div>
+                        <Textarea label="Identificación y descripción del problema" maxlength="5000" id="identificacion_problema" error={errors.identificacion_problema} bind:value={$formIdentificacionProblema.identificacion_problema} on:input={() => syncColumnLong('identificacion_problema', $formIdentificacionProblema)} required />
+                    </div>
                 </div>
-
-                <div>
-                    <Textarea label="Identificación y descripción del problema" maxlength="5000" id="identificacion_problema" error={errors.identificacion_problema} bind:value={$formIdentificacionProblema.identificacion_problema} on:input={() => syncColumnLong('identificacion_problema', $formIdentificacionProblema)} required />
-
+                {#if isSuperAdmin || servicioTecnologico.proyecto.mostrar_recomendaciones}
                     <RecomendacionEvaluador class="mt-8">
-                        {#if isSuperAdmin || servicioTecnologico.proyecto.mostrar_recomendaciones}
-                            {#each servicioTecnologico.proyecto.evaluaciones as evaluacion, i}
-                                {#if isSuperAdmin || (evaluacion.finalizado && evaluacion.habilitado)}
-                                    <div class="bg-zinc-900 p-4 rounded shadow text-white my-2">
-                                        <p class="text-xs">Evaluador COD-{evaluacion.id}:</p>
-                                        <p class="whitespace-pre-line text-xs">{evaluacion.servicio_tecnologico_evaluacion.identificacion_problema_comentario ? evaluacion.servicio_tecnologico_evaluacion.identificacion_problema_comentario : 'Sin recomendación'}</p>
-                                    </div>
-                                {/if}
-                            {/each}
-                        {/if}
+                        {#each servicioTecnologico.proyecto.evaluaciones as evaluacion, i}
+                            {#if isSuperAdmin || (evaluacion.finalizado && evaluacion.habilitado)}
+                                <div class="bg-zinc-900 p-4 rounded shadow text-white my-2">
+                                    <p class="text-xs">Evaluador COD-{evaluacion.id}:</p>
+                                    <p class="whitespace-pre-line text-xs">{evaluacion.servicio_tecnologico_evaluacion.identificacion_problema_comentario ? evaluacion.servicio_tecnologico_evaluacion.identificacion_problema_comentario : 'Sin recomendación'}</p>
+                                </div>
+                            {/if}
+                        {/each}
                     </RecomendacionEvaluador>
-                </div>
+                {/if}
             </div>
 
-            <div class="mt-44 grid grid-cols-1">
-                <div>
-                    <Label required class="mb-4" labelFor="pregunta_formulacion_problema" value="Pregunta de formulación del problema" />
-                    <InfoMessage class="mb-2">
-                        <p>Se debe verificar que la pregunta del problema defina con exactitud ¿cuál es el problema para resolver, investigar o intervenir?</p>
-                        La pregunta debe cumplir las siguientes condiciones:
-                        <ul>
-                            <li>• Guardar estrecha correspondencia con el título del proyecto.</li>
-                            <li>• Evitar adjetivos que impliquen juicios de valor tales como: bueno, malo, mejor, peor.</li>
-                            <li>• No debe dar origen a respuestas tales como si o no.</li>
-                        </ul>
-                        <br />
-                        <strong>Nota:</strong> Se sugiere convertir el problema principal (tronco) identificado en el árbol de problemas en forma pregunta.
-                        <br />
-                        <strong>Máximo 50 palabras</strong>
-                    </InfoMessage>
+            <div class="py-24">
+                <div class="grid grid-cols-1">
+                    <div>
+                        <Label required class="mb-4" labelFor="pregunta_formulacion_problema" value="Pregunta de formulación del problema" />
+                        <InfoMessage class="mb-2">
+                            <p>Se debe verificar que la pregunta del problema defina con exactitud ¿cuál es el problema para resolver, investigar o intervenir?</p>
+                            La pregunta debe cumplir las siguientes condiciones:
+                            <ul>
+                                <li>• Guardar estrecha correspondencia con el título del proyecto.</li>
+                                <li>• Evitar adjetivos que impliquen juicios de valor tales como: bueno, malo, mejor, peor.</li>
+                                <li>• No debe dar origen a respuestas tales como si o no.</li>
+                            </ul>
+                            <br />
+                            <strong>Nota:</strong> Se sugiere convertir el problema principal (tronco) identificado en el árbol de problemas en forma pregunta.
+                            <br />
+                            <strong>Máximo 50 palabras</strong>
+                        </InfoMessage>
+                    </div>
+                    <div>
+                        <Textarea label="Pregunta formulación del problema" sinContador={true} id="pregunta_formulacion_problema" error={errors.pregunta_formulacion_problema} bind:value={$form.pregunta_formulacion_problema} required />
+                    </div>
                 </div>
-                <div>
-                    <Textarea label="Pregunta formulación del problema" sinContador={true} id="pregunta_formulacion_problema" error={errors.pregunta_formulacion_problema} bind:value={$form.pregunta_formulacion_problema} required />
-
+                {#if isSuperAdmin || servicioTecnologico.proyecto.mostrar_recomendaciones}
                     <RecomendacionEvaluador class="mt-8">
-                        {#if isSuperAdmin || servicioTecnologico.proyecto.mostrar_recomendaciones}
-                            {#each servicioTecnologico.proyecto.evaluaciones as evaluacion, i}
-                                {#if isSuperAdmin || (evaluacion.finalizado && evaluacion.habilitado)}
-                                    <div class="bg-zinc-900 p-4 rounded shadow text-white my-2">
-                                        <p class="text-xs">Evaluador COD-{evaluacion.id}:</p>
-                                        <p class="whitespace-pre-line text-xs">{evaluacion.servicio_tecnologico_evaluacion.pregunta_formulacion_problema_comentario ? evaluacion.servicio_tecnologico_evaluacion.pregunta_formulacion_problema_comentario : 'Sin recomendación'}</p>
-                                    </div>
-                                {/if}
-                            {/each}
-                        {/if}
+                        {#each servicioTecnologico.proyecto.evaluaciones as evaluacion, i}
+                            {#if isSuperAdmin || (evaluacion.finalizado && evaluacion.habilitado)}
+                                <div class="bg-zinc-900 p-4 rounded shadow text-white my-2">
+                                    <p class="text-xs">Evaluador COD-{evaluacion.id}:</p>
+                                    <p class="whitespace-pre-line text-xs">{evaluacion.servicio_tecnologico_evaluacion.pregunta_formulacion_problema_comentario ? evaluacion.servicio_tecnologico_evaluacion.pregunta_formulacion_problema_comentario : 'Sin recomendación'}</p>
+                                </div>
+                            {/if}
+                        {/each}
                     </RecomendacionEvaluador>
-                </div>
+                {/if}
             </div>
-            <div class="mt-44 grid grid-cols-1">
-                <div>
-                    <Label required class="mb-4" labelFor="justificacion_problema" value="Justificación" />
-                    <InfoMessage class="mb-2">
-                        <p>La justificación debe describir la solución del problema y debe responder a las siguientes preguntas:</p>
-                        <ul>
-                            <li>• ¿Cómo se relaciona el proyecto con las prioridades de la región y del país?</li>
-                            <li>• ¿Qué resultados se lograrán?</li>
-                            <li>• ¿Cuál es la finalidad con los resultados esperados?</li>
-                            <li>• ¿Cómo se utilizarán los resultados y quiénes serán los beneficiarios?</li>
-                            <li>• Debe incluir el impacto a la formación, al sector productivo y a la política nacional de ciencia, tecnología e innovación.</li>
-                        </ul>
-                        <strong>Nota:</strong> La justificación debe brindar un argumento convincente de los resultados del proyecto generado y de su aplicabilidad."
-                    </InfoMessage>
+
+            <div class="py-24">
+                <div class="grid grid-cols-1">
+                    <div>
+                        <Label required class="mb-4" labelFor="justificacion_problema" value="Justificación" />
+                        <InfoMessage class="mb-2">
+                            <p>La justificación debe describir la solución del problema y debe responder a las siguientes preguntas:</p>
+                            <ul>
+                                <li>• ¿Cómo se relaciona el proyecto con las prioridades de la región y del país?</li>
+                                <li>• ¿Qué resultados se lograrán?</li>
+                                <li>• ¿Cuál es la finalidad con los resultados esperados?</li>
+                                <li>• ¿Cómo se utilizarán los resultados y quiénes serán los beneficiarios?</li>
+                                <li>• Debe incluir el impacto a la formación, al sector productivo y a la política nacional de ciencia, tecnología e innovación.</li>
+                            </ul>
+                            <strong>Nota:</strong> La justificación debe brindar un argumento convincente de los resultados del proyecto generado y de su aplicabilidad."
+                        </InfoMessage>
+                    </div>
+                    <div>
+                        <Textarea label="Justificación" maxlength="5000" id="justificacion_problema" error={errors.justificacion_problema} bind:value={$formJustificacionProblema.justificacion_problema} on:input={() => syncColumnLong('justificacion_problema', $formJustificacionProblema)} required />
+                    </div>
                 </div>
-                <div>
-                    <Textarea label="Justificación" maxlength="5000" id="justificacion_problema" error={errors.justificacion_problema} bind:value={$formJustificacionProblema.justificacion_problema} on:input={() => syncColumnLong('justificacion_problema', $formJustificacionProblema)} required />
+                {#if isSuperAdmin || servicioTecnologico.proyecto.mostrar_recomendaciones}
                     <RecomendacionEvaluador class="mt-8">
-                        {#if isSuperAdmin || servicioTecnologico.proyecto.mostrar_recomendaciones}
-                            {#each servicioTecnologico.proyecto.evaluaciones as evaluacion, i}
-                                {#if isSuperAdmin || (evaluacion.finalizado && evaluacion.habilitado)}
-                                    <div class="bg-zinc-900 p-4 rounded shadow text-white my-2">
-                                        <p class="text-xs">Evaluador COD-{evaluacion.id}:</p>
-                                        <p class="whitespace-pre-line text-xs">{evaluacion.servicio_tecnologico_evaluacion.justificacion_problema_comentario ? evaluacion.servicio_tecnologico_evaluacion.justificacion_problema_comentario : 'Sin recomendación'}</p>
-                                    </div>
-                                {/if}
-                            {/each}
-                        {/if}
+                        {#each servicioTecnologico.proyecto.evaluaciones as evaluacion, i}
+                            {#if isSuperAdmin || (evaluacion.finalizado && evaluacion.habilitado)}
+                                <div class="bg-zinc-900 p-4 rounded shadow text-white my-2">
+                                    <p class="text-xs">Evaluador COD-{evaluacion.id}:</p>
+                                    <p class="whitespace-pre-line text-xs">{evaluacion.servicio_tecnologico_evaluacion.justificacion_problema_comentario ? evaluacion.servicio_tecnologico_evaluacion.justificacion_problema_comentario : 'Sin recomendación'}</p>
+                                </div>
+                            {/if}
+                        {/each}
                     </RecomendacionEvaluador>
+                {/if}
+            </div>
+
+            <div class="py-24">
+                <div class="grid grid-cols-2">
+                    <div>
+                        <Label required class="mb-4" labelFor="programas_formacion" value="Nombre de los programas de formación con los que se relaciona el proyecto" />
+                    </div>
+                    <div>
+                        <SelectMulti id="programas_formacion" bind:selectedValue={$form.programas_formacion} items={programasFormacion} isMulti={true} error={errors.programas_formacion} placeholder="Buscar por el nombre del programa de formación" required />
+                        {#if programasFormacion?.length == 0}
+                            <div>
+                                <p>Parece que no se han encontrado elementos, por favor haga clic en <strong>Refrescar</strong></p>
+                                <button on:click={getProgramasFormacion} type="button" class="flex underline">
+                                    <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 mr-2" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 4v5h.582m15.356 2A8.001 8.001 0 004.582 9m0 0H9m11 11v-5h-.581m0 0a8.003 8.003 0 01-15.357-2m15.357 2H15" />
+                                    </svg>
+                                    Refrescar
+                                </button>
+                            </div>
+                        {/if}
+                    </div>
                 </div>
             </div>
 
-            <div class="mt-44 grid grid-cols-2">
-                <div>
-                    <Label required class="mb-4" labelFor="programas_formacion" value="Nombre de los programas de formación con los que se relaciona el proyecto" />
-                </div>
-                <div>
-                    <SelectMulti id="programas_formacion" bind:selectedValue={$form.programas_formacion} items={programasFormacion} isMulti={true} error={errors.programas_formacion} placeholder="Buscar por el nombre del programa de formación" required />
-                    {#if programasFormacion?.length == 0}
-                        <div>
-                            <p>Parece que no se han encontrado elementos, por favor haga clic en <strong>Refrescar</strong></p>
-                            <button on:click={getProgramasFormacion} type="button" class="flex underline">
-                                <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 mr-2" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 4v5h.582m15.356 2A8.001 8.001 0 004.582 9m0 0H9m11 11v-5h-.581m0 0a8.003 8.003 0 01-15.357-2m15.357 2H15" />
-                                </svg>
-                                Refrescar
-                            </button>
-                        </div>
-                    {/if}
+            <div class="py-24">
+                <div class="grid grid-cols-2">
+                    <div>
+                        <Label required class="mb-4" labelFor="zona_influencia" value="Zona de influencia" />
+                    </div>
+                    <div>
+                        <Input label="Zona de influencia" id="zona_influencia" type="text" class="mt-1" error={errors.zona_influencia} placeholder="Escriba el número de aprendices que se beneficiarán en la ejecución del proyecto" bind:value={$formZonaInfluencia.zona_influencia} on:input={() => syncColumnLong('zona_influencia', $formZonaInfluencia)} required />
+                    </div>
                 </div>
             </div>
 
-            <div class="mt-44 grid grid-cols-2">
-                <div>
-                    <Label required class="mb-4" labelFor="zona_influencia" value="Zona de influencia" />
+            <div class="py-24">
+                <div class="grid grid-cols-1">
+                    <div>
+                        <Label required class="mb-4" labelFor="bibliografia" value="Bibliografía" />
+                        <InfoMessage message="Lista de las referencias utilizadas en cada apartado del proyecto. Utilizar normas APA- Última edición (http://biblioteca.sena.edu.co/images/PDF/InstructivoAPA.pdf)." />
+                    </div>
+                    <div>
+                        <Textarea sinContador={true} id="bibliografia" error={errors.bibliografia} bind:value={$formBibliografia.bibliografia} on:input={() => syncColumnLong('bibliografia', $formBibliografia)} required />
+                    </div>
                 </div>
-                <div>
-                    <Input label="Zona de influencia" id="zona_influencia" type="text" class="mt-1" error={errors.zona_influencia} placeholder="Escriba el número de aprendices que se beneficiarán en la ejecución del proyecto" bind:value={$formZonaInfluencia.zona_influencia} on:input={() => syncColumnLong('zona_influencia', $formZonaInfluencia)} required />
-                </div>
-            </div>
-
-            <div class="mt-44 grid grid-cols-1">
-                <div>
-                    <Label required class="mb-4" labelFor="bibliografia" value="Bibliografía" />
-                    <InfoMessage message="Lista de las referencias utilizadas en cada apartado del proyecto. Utilizar normas APA- Última edición (http://biblioteca.sena.edu.co/images/PDF/InstructivoAPA.pdf)." />
-                </div>
-                <div>
-                    <Textarea sinContador={true} id="bibliografia" error={errors.bibliografia} bind:value={$formBibliografia.bibliografia} on:input={() => syncColumnLong('bibliografia', $formBibliografia)} required />
-
+                {#if isSuperAdmin || servicioTecnologico.proyecto.mostrar_recomendaciones}
                     <RecomendacionEvaluador class="mt-8">
-                        {#if isSuperAdmin || servicioTecnologico.proyecto.mostrar_recomendaciones}
-                            {#each servicioTecnologico.proyecto.evaluaciones as evaluacion, i}
-                                {#if isSuperAdmin || (evaluacion.finalizado && evaluacion.habilitado)}
-                                    <div class="bg-zinc-900 p-4 rounded shadow text-white my-2">
-                                        <p class="text-xs">Evaluador COD-{evaluacion.id}:</p>
-                                        <p class="whitespace-pre-line text-xs">{evaluacion.servicio_tecnologico_evaluacion.bibliografia_comentario ? evaluacion.servicio_tecnologico_evaluacion.bibliografia_comentario : 'Sin recomendación'}</p>
-                                    </div>
-                                {/if}
-                            {/each}
-                        {/if}
+                        {#each servicioTecnologico.proyecto.evaluaciones as evaluacion, i}
+                            {#if isSuperAdmin || (evaluacion.finalizado && evaluacion.habilitado)}
+                                <div class="bg-zinc-900 p-4 rounded shadow text-white my-2">
+                                    <p class="text-xs">Evaluador COD-{evaluacion.id}:</p>
+                                    <p class="whitespace-pre-line text-xs">{evaluacion.servicio_tecnologico_evaluacion.bibliografia_comentario ? evaluacion.servicio_tecnologico_evaluacion.bibliografia_comentario : 'Sin recomendación'}</p>
+                                </div>
+                            {/if}
+                        {/each}
                     </RecomendacionEvaluador>
-                </div>
+                {/if}
             </div>
 
             {#if isSuperAdmin || servicioTecnologico.proyecto.mostrar_recomendaciones}
-                <hr class="mt-10 mb-10" />
-                <h1>Ortografía</h1>
-                {#each servicioTecnologico.proyecto.evaluaciones as evaluacion, i}
-                    {#if isSuperAdmin || (evaluacion.finalizado && evaluacion.habilitado)}
-                        <div class="bg-zinc-900 p-4 rounded shadow text-white my-2">
-                            <p class="text-xs">Evaluador COD-{evaluacion.id}:</p>
-                            <p class="whitespace-pre-line text-xs">{evaluacion.servicio_tecnologico_evaluacion.ortografia_comentario ? evaluacion.servicio_tecnologico_evaluacion.ortografia_comentario : 'Sin recomendación'}</p>
-                        </div>
-                    {/if}
-                {/each}
+                <div class="py-24">
+                    <h1>Ortografía</h1>
+                    {#each servicioTecnologico.proyecto.evaluaciones as evaluacion, i}
+                        {#if isSuperAdmin || (evaluacion.finalizado && evaluacion.habilitado)}
+                            <div class="bg-zinc-900 p-4 rounded shadow text-white my-2">
+                                <p class="text-xs">Evaluador COD-{evaluacion.id}:</p>
+                                <p class="whitespace-pre-line text-xs">{evaluacion.servicio_tecnologico_evaluacion.ortografia_comentario ? evaluacion.servicio_tecnologico_evaluacion.ortografia_comentario : 'Sin recomendación'}</p>
+                            </div>
+                        {/if}
+                    {/each}
+                </div>
             {/if}
 
             {#if isSuperAdmin || servicioTecnologico.proyecto.mostrar_recomendaciones}
-                <hr class="mt-10 mb-10" />
-                <h1>Redacción</h1>
-                {#each servicioTecnologico.proyecto.evaluaciones as evaluacion, i}
-                    {#if isSuperAdmin || (evaluacion.finalizado && evaluacion.habilitado)}
-                        <div class="bg-zinc-900 p-4 rounded shadow text-white my-2">
-                            <p class="text-xs">Evaluador COD-{evaluacion.id}:</p>
-                            <p class="whitespace-pre-line text-xs">{evaluacion.servicio_tecnologico_evaluacion.redaccion_comentario ? evaluacion.servicio_tecnologico_evaluacion.redaccion_comentario : 'Sin recomendación'}</p>
-                        </div>
-                    {/if}
-                {/each}
+                <div class="py-24">
+                    <h1>Redacción</h1>
+                    {#each servicioTecnologico.proyecto.evaluaciones as evaluacion, i}
+                        {#if isSuperAdmin || (evaluacion.finalizado && evaluacion.habilitado)}
+                            <div class="bg-zinc-900 p-4 rounded shadow text-white my-2">
+                                <p class="text-xs">Evaluador COD-{evaluacion.id}:</p>
+                                <p class="whitespace-pre-line text-xs">{evaluacion.servicio_tecnologico_evaluacion.redaccion_comentario ? evaluacion.servicio_tecnologico_evaluacion.redaccion_comentario : 'Sin recomendación'}</p>
+                            </div>
+                        {/if}
+                    {/each}
+                </div>
             {/if}
 
             {#if isSuperAdmin || servicioTecnologico.proyecto.mostrar_recomendaciones}
-                <hr class="mt-10 mb-10" />
-                <h1>Normas APA</h1>
-                {#each servicioTecnologico.proyecto.evaluaciones as evaluacion, i}
-                    {#if isSuperAdmin || (evaluacion.finalizado && evaluacion.habilitado)}
-                        <div class="bg-zinc-900 p-4 rounded shadow text-white my-2">
-                            <p class="text-xs">Evaluador COD-{evaluacion.id}:</p>
-                            <p class="whitespace-pre-line text-xs">{evaluacion.servicio_tecnologico_evaluacion.normas_apa_comentario ? evaluacion.servicio_tecnologico_evaluacion.normas_apa_comentario : 'Sin recomendación'}</p>
-                        </div>
-                    {/if}
-                {/each}
+                <div class="py-24">
+                    <h1>Normas APA</h1>
+                    {#each servicioTecnologico.proyecto.evaluaciones as evaluacion, i}
+                        {#if isSuperAdmin || (evaluacion.finalizado && evaluacion.habilitado)}
+                            <div class="bg-zinc-900 p-4 rounded shadow text-white my-2">
+                                <p class="text-xs">Evaluador COD-{evaluacion.id}:</p>
+                                <p class="whitespace-pre-line text-xs">{evaluacion.servicio_tecnologico_evaluacion.normas_apa_comentario ? evaluacion.servicio_tecnologico_evaluacion.normas_apa_comentario : 'Sin recomendación'}</p>
+                            </div>
+                        {/if}
+                    {/each}
+                </div>
             {/if}
         </fieldset>
         <div class="px-8 py-4 bg-gray-100 border-t border-gray-200 flex items-center justify-between sticky bottom-0">
-            {#if isSuperAdmin || (checkPermissionByUser(authUser, [5]) && servicioTecnologico.proyecto.modificable == true && servicioTecnologico.proyecto.radicado == false) || (checkPermission(authUser, [7]) && servicioTecnologico.proyecto.modificable == true && servicioTecnologico.proyecto.radicado == false)}
-                <button class="text-red-600 hover:underline text-left" tabindex="-1" type="button" on:click={(event) => (dialogOpen = true)}> Eliminar </button>
+            {#if isSuperAdmin || canUserDeleteProyectoST || canDeleteProyectoST}
+                <button class="text-red-600 hover:underline text-left" tabindex="-1" type="button" on:click={() => (dialogOpen = true)}> Eliminar </button>
             {/if}
-            {#if isSuperAdmin || (checkPermissionByUser(authUser, [5]) && servicioTecnologico.proyecto.modificable == true) || (checkPermission(authUser, [6, 7]) && servicioTecnologico.proyecto.modificable == true)}
+            {#if isSuperAdmin || permissionUserCreateEdit || canUpdateProyectoST}
                 <small>{servicioTecnologico.updated_at}</small>
 
-                <LoadingButton loading={sending} type="submit">Guardar</LoadingButton>
+                <LoadingButton loading={$form.processing} type="submit">Guardar</LoadingButton>
             {/if}
         </div>
     </form>
@@ -552,16 +568,16 @@
         </div>
         <div slot="actions">
             <div class="p-4">
-                <Button on:click={(event) => (proyectoDialogOpen = false)} variant={null}>Omitir</Button>
+                <Button on:click={() => (proyectoDialogOpen = false)} variant={null}>Omitir</Button>
                 {#if servicioTecnologico.proyecto.modificable}
-                    <Button variant="raised" on:click={(event) => (proyectoDialogOpen = false)} on:click={() => Inertia.visit('#estructura-proyecto')}>Continuar diligenciando</Button>
+                    <Button variant="raised" on:click={() => (proyectoDialogOpen = false)} on:click={() => Inertia.visit('#estructura-proyecto')}>Continuar diligenciando</Button>
                 {/if}
             </div>
         </div>
     </Dialog>
 
     <Dialog bind:open={dialogOpen}>
-        <div slot="titulo" class="flex items-center">
+        <div slot="title" class="flex items-center">
             <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 mr-2 text-red-500" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-3L13.732 4c-.77-1.333-2.694-1.333-3.464 0L3.34 16c-.77 1.333.192 3 1.732 3z" />
             </svg>
@@ -577,7 +593,7 @@
         </div>
         <div slot="actions">
             <div class="p-4">
-                <Button on:click={(event) => (dialogOpen = false)} variant={null}>Cancelar</Button>
+                <Button on:click={() => (dialogOpen = false)} variant={null}>Cancelar</Button>
                 <Button variant="raised" form="delete-servicio-tecnologico">Confirmar</Button>
             </div>
         </div>

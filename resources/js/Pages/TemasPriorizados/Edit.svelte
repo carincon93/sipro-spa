@@ -25,7 +25,7 @@
     let isSuperAdmin = checkRole(authUser, [1])
 
     let dialogOpen = false
-    let sending = false
+
     let form = useForm({
         nombre: temaPriorizado.nombre,
         sector_productivo_id: {
@@ -41,8 +41,6 @@
     function submit() {
         if (isSuperAdmin) {
             $form.put(route('temas-priorizados.update', temaPriorizado.id), {
-                onStart: () => (sending = true),
-                onFinish: () => (sending = false),
                 preserveScroll: true,
             })
         }
@@ -89,10 +87,10 @@
             </fieldset>
             <div class="px-8 py-4 bg-gray-100 border-t border-gray-200 flex items-center sticky bottom-0">
                 {#if isSuperAdmin}
-                    <button class="text-red-600 hover:underline text-left" tabindex="-1" type="button" on:click={(event) => (dialogOpen = true)}> Eliminar tema priorizado </button>
+                    <button class="text-red-600 hover:underline text-left" tabindex="-1" type="button" on:click={() => (dialogOpen = true)}> Eliminar tema priorizado </button>
                 {/if}
                 {#if isSuperAdmin}
-                    <LoadingButton loading={sending} class="btn-indigo ml-auto" type="submit">Editar tema priorizado</LoadingButton>
+                    <LoadingButton loading={$form.processing} class="ml-auto" type="submit">Editar tema priorizado</LoadingButton>
                 {/if}
             </div>
         </form>
@@ -115,7 +113,7 @@
         </div>
         <div slot="actions">
             <div class="p-4">
-                <Button on:click={(event) => (dialogOpen = false)} variant={null}>Cancelar</Button>
+                <Button on:click={() => (dialogOpen = false)} variant={null}>Cancelar</Button>
                 <Button variant="raised" on:click={destroy}>Confirmar</Button>
             </div>
         </div>

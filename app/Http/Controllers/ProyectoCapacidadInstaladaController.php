@@ -201,7 +201,6 @@ class ProyectoCapacidadInstaladaController extends Controller
             'tiposVinculacion'              => json_decode(Storage::get('json/tipos-vinculacion.json'), true),
             'roles'                         => json_decode(Storage::get('json/roles-sennova-idi.json'), true),
             'autorPrincipal'                => $proyectoCapacidadInstalada->integrantes()->where('proyecto_capacidad_instalada_integrante.autor_principal', true)->first(),
-
         ]);
     }
 

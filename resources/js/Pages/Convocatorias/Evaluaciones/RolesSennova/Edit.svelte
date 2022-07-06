@@ -33,7 +33,6 @@
         convocatoria_rol_sennova_id: proyectoRolSennova.convocatoria_rol_sennova_id,
     }
 
-    let sending = false
     let form = useForm({
         comentario: proyectoRolEvaluacion ? proyectoRolEvaluacion.comentario : '',
         correcto: proyectoRolEvaluacion?.correcto == undefined || proyectoRolEvaluacion?.correcto == true ? true : false,
@@ -41,8 +40,6 @@
     function submit() {
         if (isSuperAdmin || (checkRole(authUser, [11, 5]) && evaluacion.finalizado == false && evaluacion.habilitado == true && evaluacion.modificable == true)) {
             $form.put(route('convocatorias.evaluaciones.proyecto-rol-sennova.update', [convocatoria.id, evaluacion.id, proyectoRolSennova.id]), {
-                onStart: () => (sending = true),
-                onFinish: () => (sending = false),
                 preserveScroll: true,
             })
         }
@@ -134,7 +131,7 @@
             </InfoMessage>
             <div class="px-8 py-4 bg-gray-100 border-t border-gray-200 flex items-center sticky bottom-0">
                 {#if isSuperAdmin || (checkRole(authUser, [11, 5]) && evaluacion.finalizado == false && evaluacion.habilitado == true && evaluacion.modificable == true)}
-                    <LoadingButton loading={sending} class="btn-indigo ml-auto" type="submit">Evaluar</LoadingButton>
+                    <LoadingButton loading={$form.processing} class="ml-auto" type="submit">Evaluar</LoadingButton>
                 {/if}
             </div>
         </form>

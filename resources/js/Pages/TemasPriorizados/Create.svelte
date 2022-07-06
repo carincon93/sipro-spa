@@ -21,7 +21,6 @@
     let authUser = $page.props.auth.user
     let isSuperAdmin = checkRole(authUser, [1])
 
-    let sending = false
     let form = useForm({
         nombre: '',
         mesa_tecnica_id: null,
@@ -30,10 +29,7 @@
 
     function submit() {
         if (isSuperAdmin) {
-            $form.post(route('temas-priorizados.store'), {
-                onStart: () => (sending = true),
-                onFinish: () => (sending = false),
-            })
+            $form.post(route('temas-priorizados.store'))
         }
     }
 </script>
@@ -72,7 +68,7 @@
             </fieldset>
             <div class="px-8 py-4 bg-gray-100 border-t border-gray-200 flex items-center sticky bottom-0">
                 {#if isSuperAdmin}
-                    <LoadingButton loading={sending} class="btn-indigo ml-auto" type="submit">Crear tema priorizado</LoadingButton>
+                    <LoadingButton loading={$form.processing} class="ml-auto" type="submit">Crear tema priorizado</LoadingButton>
                 {/if}
             </div>
         </form>

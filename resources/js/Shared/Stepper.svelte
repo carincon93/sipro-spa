@@ -40,30 +40,8 @@
     let hideFiles = true
 </script>
 
-<FileList {versiones} {hideFiles} {convocatoria} {proyecto} />
-<div class="flex items-center justify-center mb-14 relative">
-    <div>
-        <button on:click={() => (hideFiles = !hideFiles)} class="flex items-center flex-col border p-1 rounded-full hover:bg-gray-100 mb-2">
-            <svg id="Capa_2" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 600 497.08" class="w-6 h-6">
-                <g id="Object">
-                    <g>
-                        <path d="M300,32.35v-8.21c0-13.33-10.81-24.14-24.14-24.14H24.14C10.81,0,0,10.81,0,24.14V459.45H600V56.49c0-13.33-10.81-24.14-24.14-24.14H300Z" style="fill:#f9df5c;" />
-                        <rect x="26.64" y="67.14" width="552.34" height="396.73" style="fill:#fff;" />
-                        <path d="M291.44,116.74l-8.91,24.69H24.14c-13.33,0-24.14,10.81-24.14,24.14V472.94c0,13.33,10.81,24.14,24.14,24.14H575.86c13.33,0,24.14-10.81,24.14-24.14V124.93c0-13.33-10.81-24.14-24.14-24.14H314.15c-10.17,0-19.26,6.38-22.71,15.95Z" style="fill:#f3cc30;" />
-                        <path d="M600,472.94v-200.39C433.34,434.65,144.27,478.03,6.71,489.61c4.39,4.59,10.57,7.47,17.43,7.47H575.86c13.33,0,24.14-10.81,24.14-24.14Z" style="fill:#edbd31;" />
-                        <path d="M243.65,160.87H39.63c-10.77,0-19.49,8.73-19.49,19.49v43.18c34.32-23.51,111.76-53.13,223.52-62.67Z" style="fill:#f6d738;" />
-                    </g>
-                </g>
-            </svg>
-        </button>
-        <Tooltip placement="bottom">
-            <small class="text-center block leading-tight">Clic en el icono para {hideFiles ? 'mostrar' : 'ocultar'} archivos</small>
-        </Tooltip>
-    </div>
-</div>
-
 <!-- Stepper -->
-<div class="flex justify-around" id="stepper" bind:this={container}>
+<div class="flex justify-around my-8" id="stepper" bind:this={container}>
     <div class="w-10/12 step">
         <a use:inertia active={activeProyecto} href={route('convocatorias.proyectos.edit', [convocatoria.id, proyecto.id])} class="flex flex-col items-center">
             <div class="rounded-full bg-white w-11 h-11 text-center flex items-center justify-center shadow mb-2 step-number" />
@@ -183,6 +161,28 @@
             <div class="rounded-full bg-white w-11 h-11 text-center flex items-center justify-center shadow mb-2 step-number" />
             <p class="text-sm text-center">Finalizar proyecto</p>
         </a>
+    </div>
+</div>
+
+<FileList {versiones} {hideFiles} {convocatoria} {proyecto} />
+<div class="flex items-center justify-center mb-14 relative">
+    <div>
+        <button on:click={() => (hideFiles = !hideFiles)} class="flex items-center flex-col border p-1 rounded-full hover:bg-gray-100 mb-2">
+            <svg id="Capa_2" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 600 497.08" class="w-6 h-6">
+                <g id="Object">
+                    <g>
+                        <path d="M300,32.35v-8.21c0-13.33-10.81-24.14-24.14-24.14H24.14C10.81,0,0,10.81,0,24.14V459.45H600V56.49c0-13.33-10.81-24.14-24.14-24.14H300Z" style="fill:#f9df5c;" />
+                        <rect x="26.64" y="67.14" width="552.34" height="396.73" style="fill:#fff;" />
+                        <path d="M291.44,116.74l-8.91,24.69H24.14c-13.33,0-24.14,10.81-24.14,24.14V472.94c0,13.33,10.81,24.14,24.14,24.14H575.86c13.33,0,24.14-10.81,24.14-24.14V124.93c0-13.33-10.81-24.14-24.14-24.14H314.15c-10.17,0-19.26,6.38-22.71,15.95Z" style="fill:#f3cc30;" />
+                        <path d="M600,472.94v-200.39C433.34,434.65,144.27,478.03,6.71,489.61c4.39,4.59,10.57,7.47,17.43,7.47H575.86c13.33,0,24.14-10.81,24.14-24.14Z" style="fill:#edbd31;" />
+                        <path d="M243.65,160.87H39.63c-10.77,0-19.49,8.73-19.49,19.49v43.18c34.32-23.51,111.76-53.13,223.52-62.67Z" style="fill:#f6d738;" />
+                    </g>
+                </g>
+            </svg>
+        </button>
+        <Tooltip placement="bottom">
+            <small class="text-center block leading-tight">Clic en el icono para {hideFiles ? 'mostrar' : 'ocultar'} archivos</small>
+        </Tooltip>
     </div>
 </div>
 

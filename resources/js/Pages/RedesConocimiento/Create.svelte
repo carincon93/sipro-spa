@@ -17,17 +17,13 @@
     let authUser = $page.props.auth.user
     let isSuperAdmin = checkRole(authUser, [1])
 
-    let sending = false
     let form = useForm({
         nombre: '',
     })
 
     function submit() {
         if (isSuperAdmin) {
-            $form.post(route('redes-conocimiento.store'), {
-                onStart: () => (sending = true),
-                onFinish: () => (sending = false),
-            })
+            $form.post(route('redes-conocimiento.store'))
         }
     }
 </script>
@@ -56,7 +52,7 @@
             </fieldset>
             <div class="px-8 py-4 bg-gray-100 border-t border-gray-200 flex items-center sticky bottom-0">
                 {#if isSuperAdmin}
-                    <LoadingButton loading={sending} class="btn-indigo ml-auto" type="submit">Crear red de conocimiento</LoadingButton>
+                    <LoadingButton loading={$form.processing} class="ml-auto" type="submit">Crear red de conocimiento</LoadingButton>
                 {/if}
             </div>
         </form>

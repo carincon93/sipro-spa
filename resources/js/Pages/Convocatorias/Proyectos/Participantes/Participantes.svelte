@@ -42,25 +42,21 @@
     let formID
     let dialogOpen = false
     let dialogTitle
-    let sending = false
+
     let sended = false
     function submit() {
         if (isSuperAdmin || (checkPermission(authUser, [1, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 17, 18, 19]) && proyecto.modificable == true)) {
-            sending = true
             sended = false
             try {
                 axios
                     .post(route('convocatorias.proyectos.participantes.users', { convocatoria: convocatoria.id, proyecto: proyecto.id }), $form)
                     .then((response) => {
                         resultados = response.data
-                        sending = false
                         sended = true
                     })
                     .catch((error) => {
-                        sending = false
                     })
             } catch (error) {
-                sending = false
             }
         }
     }
@@ -111,15 +107,10 @@
                     convocatoria: convocatoria.id,
                 }),
                 {
-                    onStart: () => {
-                        sending = true
-                    },
                     onSuccess: () => {
                         closeDialog()
                     },
-                    onFinish: () => {
-                        sending = false
-                    },
+
                     preserveScroll: true,
                 },
             )
@@ -154,15 +145,10 @@
     function submitRegister() {
         if (isSuperAdmin || (checkPermission(authUser, [1, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 17, 18, 19]) && proyecto.modificable == true)) {
             $formNuevoParticipante.post(route('convocatorias.proyectos.participantes.users.register', { convocatoria: convocatoria.id, proyecto: proyecto.id }), {
-                onStart: () => {
-                    sending = true
-                },
                 onSuccess: () => {
                     closeDialog()
                 },
-                onFinish: () => {
-                    sending = false
-                },
+
                 preserveScroll: true,
             })
         }
@@ -179,7 +165,6 @@
         reset()
         dialogOpen = false
         openNuevoParticipanteDialog = false
-        sending = false
     }
 </script>
 
@@ -190,7 +175,7 @@
         <fieldset disabled={isSuperAdmin || (checkPermission(authUser, [1, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 17, 18, 19]) && proyecto.modificable == true) ? undefined : true}>
             <div class="mt-4 flex flex-row">
                 <Input label="Escriba el nombre, número de documento o el correo electrónico instiucional" id="search_participante" type="search" class="mt-1 m-auto block flex-1" bind:value={$form.search_participante} input$minLength="4" autocomplete="off" required />
-                <LoadingButton loading={sending} class="btn-indigo m-auto ml-1" type="submit">Buscar</LoadingButton>
+                <LoadingButton loading={$form.processing} class="m-auto ml-1" type="submit">Buscar</LoadingButton>
             </div>
         </fieldset>
     </form>
@@ -363,7 +348,7 @@
         <Button on:click={closeDialog} type="button" variant={null}>
             {$_('Cancel')}
         </Button>
-        <LoadingButton loading={sending} class="btn-indigo ml-auto" type="submit" form={formID}>
+        <LoadingButton loading={$formParticipante.processing} class="ml-auto" type="submit" form={formID}>
             {$_('Save')}
         </LoadingButton>
     </div>
@@ -452,7 +437,7 @@
         <Button on:click={closeDialog} type="button" variant={null}>
             {$_('Cancel')}
         </Button>
-        <LoadingButton loading={sending} class="btn-indigo ml-auto" type="submit" form={formNuevoParticipanteId}>
+        <LoadingButton loading={$formNuevoParticipante.processing} class="ml-auto" type="submit" form={formNuevoParticipanteId}>
             {$_('Save')}
         </LoadingButton>
     </div>

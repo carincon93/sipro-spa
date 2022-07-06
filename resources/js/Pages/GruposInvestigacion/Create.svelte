@@ -24,7 +24,6 @@
     let authUser = $page.props.auth.user
     let isSuperAdmin = checkRole(authUser, [1])
 
-    let sending = false
     let form = useForm({
         nombre: '',
         acronimo: '',
@@ -51,10 +50,7 @@
 
     function submit() {
         if (isSuperAdmin || checkRole(authUser, [4])) {
-            $form.post(route('grupos-investigacion.store'), {
-                onStart: () => (sending = true),
-                onFinish: () => (sending = false),
-            })
+            $form.post(route('grupos-investigacion.store'))
         }
     }
 </script>
@@ -187,7 +183,7 @@
             <div class="px-8 py-4 bg-gray-100 border-t border-gray-200 sticky bottom-0">
                 {#if isSuperAdmin || checkRole(authUser, [4])}
                     <div class="flex items-center">
-                        <LoadingButton loading={sending} class="btn-indigo ml-auto" type="submit">Crear grupo de investigación</LoadingButton>
+                        <LoadingButton loading={$form.processing} class="ml-auto" type="submit">Crear grupo de investigación</LoadingButton>
                     </div>
                     <p class="mt-4"><strong>Nota: </strong>Después de crear el grupo de investigación será redirigido(a) a una nueva sección para añadir las líneas de investigación declaradas y el alineamiento con los programas de formación</p>
                 {/if}

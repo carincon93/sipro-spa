@@ -43,7 +43,7 @@
         { value: 1, label: 'Si' },
         { value: 2, label: 'No' },
     ]
-    let sending = false
+
     let form = useForm({
         area_conocimiento_id: null,
         subarea_conocimiento_id: null,
@@ -65,8 +65,6 @@
     function submit() {
         if (isSuperAdmin || (checkPermission(authUser, [8, 9, 10]) && proyecto.modificable == true)) {
             $form.post(route('convocatorias.proyectos.articulacion-sennova.store', [convocatoria.id, proyecto.id]), {
-                onStart: () => (sending = true),
-                onFinish: () => (sending = false),
                 preserveScroll: true,
             })
         }
@@ -212,7 +210,7 @@
         </fieldset>
         <div class="py-4 bg-gray-100 border-t border-gray-200 flex items-center sticky bottom-0">
             {#if isSuperAdmin || (checkPermission(authUser, [8, 9, 10]) && proyecto.modificable == true)}
-                <LoadingButton loading={sending} class="btn-indigo ml-auto" type="submit">Guardar</LoadingButton>
+                <LoadingButton loading={$form.processing} class="ml-auto" type="submit">Guardar</LoadingButton>
             {/if}
         </div>
     </form>

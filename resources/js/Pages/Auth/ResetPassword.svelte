@@ -15,8 +15,6 @@
     export let token
     export let errors
 
-    let sending = false
-
     let form = useForm({
         token: token,
         email: email,
@@ -43,6 +41,6 @@
     </div>
 
     <div class="flex items-center justify-end mt-4">
-        <LoadingButton bind:loading={sending} type="submit">{$_('Reset Password')}</LoadingButton>
+        <LoadingButton loading={$form.processing} type="submit">{$_('Reset Password')}</LoadingButton>
     </div>
 </form>

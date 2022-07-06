@@ -27,7 +27,6 @@
     let authUser = $page.props.auth.user
     let isSuperAdmin = checkRole(authUser, [1])
 
-    let sending = false
     let form = useForm({
         subsanacion: proyecto.habilitado_para_evaluar == false && proyecto.modificable == true && proyecto.finalizado == false,
         estado_cord_sennova: proyecto.estado_cord_sennova ? JSON.parse(proyecto.estado_cord_sennova)?.estado : null,
@@ -39,8 +38,6 @@
     function submit() {
         if (isSuperAdmin || checkRole(authUser, [20, 18, 19, 5, 17])) {
             $form.put(route('proyectos.update', proyecto.id), {
-                onStart: () => (sending = true),
-                onFinish: () => (sending = false),
                 preserveScroll: true,
             })
         }
@@ -58,8 +55,6 @@
     function submitEvaluacion() {
         if (isSuperAdmin || checkRole(authUser, [20, 18, 19, 5, 17])) {
             $formEvaluacion.put(route('evaluaciones.update', $formEvaluacion.id), {
-                onStart: () => (sending = true),
-                onFinish: () => (sending = false),
                 preserveScroll: true,
             })
         }
@@ -196,7 +191,7 @@
 
             <div class="px-8 py-4 bg-gray-100 border-t border-gray-200 flex items-center sticky bottom-0">
                 {#if isSuperAdmin || checkRole(authUser, [20, 18, 19, 5, 17])}
-                    <LoadingButton loading={sending} class="btn-indigo ml-auto" type="submit">Guardar</LoadingButton>
+                    <LoadingButton loading={$form.processing} class="ml-auto" type="submit">Guardar</LoadingButton>
                 {/if}
             </div>
         </form>
@@ -239,9 +234,9 @@
         </div>
         <div slot="actions">
             <div class="p-4">
-                <Button on:click={(event) => ((dialogOpen = false), ($form.subsanacion = proyecto.habilitado_para_evaluar == false && proyecto.modificable == true && proyecto.finalizado == false))} variant={null}>Cancelar</Button>
+                <Button on:click={() => ((dialogOpen = false), ($form.subsanacion = proyecto.habilitado_para_evaluar == false && proyecto.modificable == true && proyecto.finalizado == false))} variant={null}>Cancelar</Button>
 
-                <LoadingButton loading={sending} class="btn-gray ml-auto" type="submit" form="evaluacion">Guardar</LoadingButton>
+                <LoadingButton loading={$formEvaluacion.processing} class="btn-gray ml-auto" type="submit" form="evaluacion">Guardar</LoadingButton>
             </div>
         </div>
     </Dialog>

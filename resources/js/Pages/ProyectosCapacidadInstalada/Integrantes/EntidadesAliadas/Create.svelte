@@ -20,7 +20,9 @@
     let authUser = $page.props.auth.user
     let isSuperAdmin = checkRole(authUser, [1])
 
-    let sending = false
+    let isDinamizadorSennova = proyectoCapacidadInstalada.estado_proyecto != 'Finalizado' && checkRole(authUser, [4]) && proyectoCapacidadInstalada.semillero_investigacion.linea_investigacion.grupo_investigacion.centro_formacion.id && authUser.centro_formacion_id
+    let isAutorPrincipal = proyectoCapacidadInstalada.estado_proyecto != 'Finalizado' && checkRole(authUser, [6]) && proyectoCapacidadInstalada.integrantes.find((item) => item.id == authUser.id)
+
     let form = useForm({
         nombre: '',
         nit: '',
@@ -28,15 +30,8 @@
     })
 
     function submit() {
-        if (
-            isSuperAdmin ||
-            (proyectoCapacidadInstalada.estado_proyecto != 'Finalizado' && checkRole(authUser, [4]) && proyectoCapacidadInstalada.semillero_investigacion.linea_investigacion.grupo_investigacion.centro_formacion.id && authUser.centro_formacion_id) ||
-            (proyectoCapacidadInstalada.estado_proyecto != 'Finalizado' && checkRole(authUser, [6]) && proyectoCapacidadInstalada.integrantes.find((item) => item.id == authUser.id))
-        ) {
-            $form.post(route('proyectos-capacidad-instalada.entidades-aliadas.store', [proyectoCapacidadInstalada.id]), {
-                onStart: () => (sending = true),
-                onFinish: () => (sending = false),
-            })
+        if (isSuperAdmin || isDinamizadorSennova || isAutorPrincipal) {
+            $form.post(route('proyectos-capacidad-instalada.entidades-aliadas.store', [proyectoCapacidadInstalada.id]))
         }
     }
 </script>
@@ -55,10 +50,8 @@
                     <a use:inertia href={route('proyectos-capacidad-instalada.objetivos-especificos.index', proyectoCapacidadInstalada.id)} class="text-cyan-400 hover:text-cyan-600">Objetivos específicos y resultados</a>
                     <span class="text-cyan-400 font-medium">/</span>
                     <a use:inertia href={route('proyectos-capacidad-instalada.productos.index', proyectoCapacidadInstalada.id)} class="text-cyan-400 hover:text-cyan-600">Productos</a>
-                    {#if isSuperAdmin || (checkRole(authUser, [4, 6]) && proyectoCapacidadInstalada.integrantes.find((item) => item.id == authUser.id))}
-                        <span class="text-cyan-400 font-medium">/</span>
-                        <a use:inertia href={route('proyectos-capacidad-instalada.finalizar', proyectoCapacidadInstalada.id)} class="text-cyan-400 hover:text-cyan-600">Finalizar</a>
-                    {/if}
+                    <span class="text-cyan-400 font-medium">/</span>
+                    <a use:inertia href={route('proyectos-capacidad-instalada.finalizar', proyectoCapacidadInstalada.id)} class="text-cyan-400 hover:text-cyan-600">Finalizar</a>
                 </h1>
             </div>
         </div>
@@ -66,14 +59,7 @@
 
     <div class="bg-white rounded shadow max-w-3xl">
         <form on:submit|preventDefault={submit}>
-            <fieldset
-                class="p-8"
-                disabled={isSuperAdmin ||
-                (proyectoCapacidadInstalada.estado_proyecto != 'Finalizado' && checkRole(authUser, [4]) && proyectoCapacidadInstalada.semillero_investigacion.linea_investigacion.grupo_investigacion.centro_formacion.id && authUser.centro_formacion_id) ||
-                (proyectoCapacidadInstalada.estado_proyecto != 'Finalizado' && checkRole(authUser, [6]) && proyectoCapacidadInstalada.integrantes.find((item) => item.id == authUser.id))
-                    ? undefined
-                    : true}
-            >
+            <fieldset class="p-8" disabled={isSuperAdmin || isDinamizadorSennova || isAutorPrincipal ? undefined : true}>
                 <div class="mt-8">
                     <Textarea label="Nombre de la entidad aliada/Centro de formación" maxlength="255" id="nombre" error={errors.nombre} bind:value={$form.nombre} required />
                 </div>
@@ -95,7 +81,7 @@
             </fieldset>
             <div class="px-8 py-4 bg-gray-100 border-t border-gray-200 flex items-center sticky bottom-0">
                 {#if isSuperAdmin || (proyectoCapacidadInstalada.estado_proyecto != 'Finalizado' && checkRole( authUser, [4], ) && proyectoCapacidadInstalada.semillero_investigacion.linea_investigacion.grupo_investigacion.centro_formacion.id && authUser.centro_formacion_id) || (proyectoCapacidadInstalada.estado_proyecto != 'Finalizado' && checkRole( authUser, [6], ) && proyectoCapacidadInstalada.integrantes.find((item) => item.id == authUser.id))}
-                    <LoadingButton loading={sending} class="btn-indigo ml-auto" type="submit">Crear entidad aliada</LoadingButton>
+                    <LoadingButton loading={$form.processing} class="ml-auto" type="submit">Crear entidad aliada</LoadingButton>
                 {/if}
             </div>
         </form>

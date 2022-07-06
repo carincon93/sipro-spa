@@ -37,7 +37,7 @@
         { value: 2, label: 'No' },
     ]
     let dialogOpen = false
-    let sending = false
+
     let form = useForm({
         _method: 'put',
         nombre: semilleroInvestigacion.nombre,
@@ -71,8 +71,6 @@
     function submit() {
         if (isSuperAdmin || (checkRole(authUser, [4]) && authUser.centro_formacion_id == semilleroInvestigacion.linea_investigacion.grupo_investigacion.centro_formacion_id) || checkRole(authUser, [21, 20, 18, 19, 5, 17])) {
             $form.post(route('grupos-investigacion.semilleros-investigacion.update', [grupoInvestigacion.id, semilleroInvestigacion.id]), {
-                onStart: () => (sending = true),
-                onFinish: () => (sending = false),
                 preserveScroll: true,
             })
         }
@@ -260,10 +258,10 @@
             </fieldset>
             <div class="px-8 py-4 bg-gray-100 border-t border-gray-200 flex items-center sticky bottom-0">
                 {#if isSuperAdmin}
-                    <button class="text-red-600 hover:underline text-left" tabindex="-1" type="button" on:click={(event) => (dialogOpen = true)}> Eliminar semillero de investigación </button>
+                    <button class="text-red-600 hover:underline text-left" tabindex="-1" type="button" on:click={() => (dialogOpen = true)}> Eliminar semillero de investigación </button>
                 {/if}
                 {#if isSuperAdmin || (checkRole(authUser, [4]) && authUser.centro_formacion_id == semilleroInvestigacion.linea_investigacion.grupo_investigacion.centro_formacion_id) || checkRole(authUser, [21, 20, 18, 19, 5, 17])}
-                    <LoadingButton loading={sending} class="btn-indigo ml-auto" type="submit">Editar semillero de investigación</LoadingButton>
+                    <LoadingButton loading={$form.processing} class="ml-auto" type="submit">Editar semillero de investigación</LoadingButton>
                 {/if}
             </div>
         </form>
@@ -286,7 +284,7 @@
         </div>
         <div slot="actions">
             <div class="p-4">
-                <Button on:click={(event) => (dialogOpen = false)} variant={null}>Cancelar</Button>
+                <Button on:click={() => (dialogOpen = false)} variant={null}>Cancelar</Button>
                 <Button variant="raised" on:click={destroy}>Confirmar</Button>
             </div>
         </div>

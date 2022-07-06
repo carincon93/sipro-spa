@@ -13,8 +13,6 @@
     import Checkbox from '@smui/checkbox'
     import FormField from '@smui/form-field'
     import Password from '@/Shared/Password'
-    import Button from '@/Shared/Button'
-    import Dialog from '@/Shared/Dialog'
 
     export let status
     export let errors
@@ -23,8 +21,6 @@
 
     let canResetPassword
     let selection = []
-    let sending = false
-    let cacheDialog = false
 
     let form = useForm({
         email: '',
@@ -33,10 +29,7 @@
     })
 
     function handleSubmit() {
-        $form.post(route('login'), {
-            onStart: () => (sending = true),
-            onFinish: () => (sending = false),
-        })
+        $form.post(route('login'))
     }
 </script>
 
@@ -71,7 +64,7 @@
             {$_('Forgot your password?')}
         </a>
 
-        <LoadingButton bind:loading={sending} type="submit">{$_('Login')}</LoadingButton>
+        <LoadingButton loading={$form.processing} type="submit">{$_('Login')}</LoadingButton>
     </div>
 </form>
 

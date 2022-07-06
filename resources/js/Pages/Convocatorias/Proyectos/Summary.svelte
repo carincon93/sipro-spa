@@ -47,7 +47,6 @@
 
     let dialogFinalizarProyecto = errors.password != undefined ? true : false
     let sendProjectDialogOpen = errors.password != undefined ? true : false
-    let sending = false
 
     /**
      * Validar si el usuario autenticado es SuperAdmin
@@ -64,9 +63,7 @@
     function finishProject() {
         if (isSuperAdmin || checkPermissionByUser(authUser, [1, 5, 8, 11, 17]) || checkPermission(authUser, [1, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 17, 18, 19])) {
             $form.put(route('convocatorias.proyectos.finish', [convocatoria.id, proyecto.id]), {
-                onStart: () => (sending = true),
                 onFinish: () => {
-                    sending = false
                     $form.password = ''
 
                     if (!errors.password) {
@@ -82,9 +79,7 @@
     function sendProject() {
         if (isSuperAdmin || (checkRole(authUser, [4, 21]) && proyecto.finalizado == true)) {
             $form.put(route('convocatorias.proyectos.send', [convocatoria.id, proyecto.id]), {
-                onStart: () => (sending = true),
                 onFinish: () => {
-                    sending = false
                     $form.password = ''
 
                     if (!errors.password) {
@@ -103,10 +98,6 @@
     function submitComentario() {
         if (isSuperAdmin || (checkRole(authUser, [4, 21]) && proyecto.finalizado == true)) {
             $comentarioForm.put(route('convocatorias.proyectos.return-project', [convocatoria.id, proyecto.id]), {
-                onStart: () => (sending = true),
-                onFinish: () => {
-                    sending = false
-                },
                 preserveScroll: true,
             })
         }
@@ -161,7 +152,7 @@
                 <Switch bind:checked={proyectoCompleto} />
                 {#if proyectoCompleto}
                     <br />
-                    <Button on:click={(event) => (sendProjectDialogOpen = true)} variant="raised" class="mt-10">Confirmar proyecto</Button>
+                    <Button on:click={() => (sendProjectDialogOpen = true)} variant="raised" class="mt-10">Confirmar proyecto</Button>
                     <br />
                     <small class="mb-2 mt-8">Si desea confirmar el proyecto de clic en <strong>Confirmar proyecto</strong> y a continuación, escriba la contraseña de su usuario.</small>
                 {:else if proyectoCompleto == false}
@@ -174,7 +165,7 @@
                         </fieldset>
                         <div class="mt-10 flex items-center">
                             {#if isSuperAdmin || (checkRole(authUser, [4, 21]) && proyecto.finalizado == true)}
-                                <LoadingButton loading={sending} class="btn-indigo ml-auto" type="submit">Enviar comentario</LoadingButton>
+                                <LoadingButton loading={$comentarioForm.processing} class="ml-auto" type="submit">Enviar comentario</LoadingButton>
                             {/if}
                         </div>
                     </form>
@@ -184,7 +175,7 @@
             {#if proyecto.finalizado == false && proyecto.modificable == true && generalidades && problemaCentral && efectosDirectos && efectosIndirectos && causasDirectas && causasIndirectas && objetivoGeneral && resultados && objetivosEspecificos && actividades && impactos && metodologia && propuestaSostenibilidad && productosActividades && resultadoProducto && analisisRiesgo && anexos && soportesEstudioMercado && estudiosMercadoArchivo}
                 {#if convocatoria.tipo_convocatoria == 1 || convocatoria.tipo_convocatoria == 3}
                     <InfoMessage class="mb-2" message="Si desea finalizar el proyecto de clic en <strong>Finalizar proyecto</strong> y a continuación, escriba la contraseña de su usuario. Se le notificará al dinamizador SENNOVA de su centro de formación para que haga la respectiva revisión y radicación del proyecto." />
-                    <Button on:click={(event) => (dialogFinalizarProyecto = true)} variant="raised">Finalizar proyecto</Button>
+                    <Button on:click={() => (dialogFinalizarProyecto = true)} variant="raised">Finalizar proyecto</Button>
                 {:else}
                     <InfoMessage class="mb-2" message="El proyecto está completo." />
                 {/if}
@@ -314,7 +305,7 @@
     </div>
 
     <Dialog bind:open={dialogFinalizarProyecto}>
-        <div slot="titulo" class="flex items-center">
+        <div slot="title" class="flex items-center">
             <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 mr-2 text-red-500" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-3L13.732 4c-.77-1.333-2.694-1.333-3.464 0L3.34 16c-.77 1.333.192 3 1.732 3z" />
             </svg>
@@ -330,14 +321,14 @@
         </div>
         <div slot="actions">
             <div class="p-4">
-                <Button on:click={(event) => (dialogFinalizarProyecto = false)} variant={null}>Cancelar</Button>
+                <Button on:click={() => (dialogFinalizarProyecto = false)} variant={null}>Cancelar</Button>
                 <Button variant="raised" form="finalizar-proyecto">Finalizar proyecto</Button>
             </div>
         </div>
     </Dialog>
 
     <Dialog bind:open={sendProjectDialogOpen}>
-        <div slot="titulo" class="flex items-center">
+        <div slot="title" class="flex items-center">
             <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 mr-2 text-red-500" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-3L13.732 4c-.77-1.333-2.694-1.333-3.464 0L3.34 16c-.77 1.333.192 3 1.732 3z" />
             </svg>
@@ -353,7 +344,7 @@
         </div>
         <div slot="actions">
             <div class="p-4">
-                <Button on:click={(event) => (sendProjectDialogOpen = false)} variant={null}>Cancelar</Button>
+                <Button on:click={() => (sendProjectDialogOpen = false)} variant={null}>Cancelar</Button>
                 <Button variant="raised" form="confirmar-proyecto">Confirmar proyecto</Button>
             </div>
         </div>

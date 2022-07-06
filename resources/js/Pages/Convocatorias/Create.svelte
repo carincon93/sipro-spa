@@ -25,7 +25,6 @@
     let authUser = $page.props.auth.user
     let isSuperAdmin = checkRole(authUser, [1])
 
-    let sending = false
     let form = useForm({
         descripcion: '',
         esta_activa: false,
@@ -49,10 +48,7 @@
 
     function submit() {
         if (isSuperAdmin) {
-            $form.post(route('convocatorias.store'), {
-                onStart: () => (sending = true),
-                onFinish: () => (sending = false),
-            })
+            $form.post(route('convocatorias.store'))
         }
     }
 </script>
@@ -261,7 +257,7 @@
             </fieldset>
             <div class="px-8 py-4 bg-gray-100 border-t border-gray-200 flex items-center sticky bottom-0">
                 {#if isSuperAdmin}
-                    <LoadingButton loading={sending} class="btn-indigo ml-auto" type="submit">Crear convocatoria</LoadingButton>
+                    <LoadingButton loading={$form.processing} class="ml-auto" type="submit">Crear convocatoria</LoadingButton>
                 {/if}
             </div>
         </form>

@@ -11,6 +11,7 @@
     import Textarea from '@/Shared/Textarea'
     import DynamicList from '@/Shared/Dropdowns/DynamicList'
     import Dialog from '@/Shared/Dialog'
+    import RecomendacionEvaluador from '@/Shared/RecomendacionEvaluador'
 
     export let convocatoria
     export let proyecto
@@ -30,7 +31,7 @@
     let isSuperAdmin = checkRole(authUser, [1])
 
     let dialogOpen = false
-    let sending = false
+
     let form = useForm({
         numero_meses: proyectoRolSennova.numero_meses,
         numero_roles: proyectoRolSennova.numero_roles,
@@ -41,8 +42,6 @@
     function submit() {
         if (isSuperAdmin || (checkPermission(authUser, [3, 4, 6, 7, 9, 10, 12, 13, 18, 19]) && proyecto.modificable == true)) {
             $form.put(route('convocatorias.proyectos.proyecto-rol-sennova.update', [convocatoria.id, proyecto.id, proyectoRolSennova.id]), {
-                onStart: () => (sending = true),
-                onFinish: () => (sending = false),
                 preserveScroll: true,
             })
         }
@@ -90,9 +89,26 @@
         </div>
     </header>
 
-    <div class="flex">
-        <div class="bg-white rounded shadow max-w-3xl flex-1">
-            <form on:submit|preventDefault={submit}>
+    <div class="grid grid-cols-3">
+        <div>
+            <h1 class="font-black text-4xl sticky top-0 uppercase">Roles SENNOVA</h1>
+        </div>
+        <div class="col-span-2">
+            {#if isSuperAdmin || proyecto.mostrar_recomendaciones}
+                <RecomendacionEvaluador class="w-1/3">
+                    {#each proyectoRolSennova.proyecto_roles_evaluaciones as evaluacionRol, i}
+                        <div class="bg-zinc-900 p-4 rounded shadow text-white my-2">
+                            <p class="text-xs">Evaluador COD-{evaluacionRol.evaluacion.id}:</p>
+                            {#if evaluacionRol.correcto == false && evaluacionRol.evaluacion.habilitado}
+                                <p class="whitespace-pre-line">{evaluacionRol.comentario ? evaluacionRol.comentario : 'Sin recomendación'}</p>
+                            {:else}
+                                Aprobado
+                            {/if}
+                        </div>
+                    {/each}
+                </RecomendacionEvaluador>
+            {/if}
+            <form on:submit|preventDefault={submit} class="bg-white rounded shadow">
                 <fieldset class="p-8" disabled={isSuperAdmin || (checkPermission(authUser, [3, 4, 6, 7, 9, 10, 12, 13, 18, 19]) && proyecto.modificable == true) ? undefined : true}>
                     <div class="mt-4">
                         <Label required class="mb-4" labelFor="convocatoria_rol_sennova_id" value="Rol SENNOVA" />
@@ -119,32 +135,13 @@
                 </fieldset>
                 <div class="px-8 py-4 bg-gray-100 border-t border-gray-200 flex items-center sticky bottom-0">
                     {#if isSuperAdmin || (checkPermission(authUser, [4, 7, 10, 13, 19]) && proyecto.modificable == true)}
-                        <button class="text-red-600 hover:underline text-left" tabindex="-1" type="button" on:click={(event) => (dialogOpen = true)}> Eliminar rol SENNOVA </button>
+                        <button class="text-red-600 hover:underline text-left" tabindex="-1" type="button" on:click={() => (dialogOpen = true)}> Eliminar rol SENNOVA </button>
                     {/if}
                     {#if isSuperAdmin || (checkPermission(authUser, [3, 4, 6, 7, 9, 10, 12, 13, 18, 19]) && proyecto.modificable == true)}
-                        <LoadingButton loading={sending} class="btn-indigo ml-auto" type="submit">Editar rol SENNOVA</LoadingButton>
+                        <LoadingButton loading={$form.processing} class="ml-auto" type="submit">Editar rol SENNOVA</LoadingButton>
                     {/if}
                 </div>
             </form>
-        </div>
-        <div class="ml-1.5">
-            {#if isSuperAdmin || proyecto.mostrar_recomendaciones}
-                {#each proyectoRolSennova.proyecto_roles_evaluaciones as evaluacionRol, i}
-                    <div class="bg-gray-200 p-4 rounded border-orangered border mb-5">
-                        <div class="flex text-orangered-900 font-black">
-                            <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 mr-1.5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2m-3 7h3m-3 4h3m-6-4h.01M9 16h.01" />
-                            </svg>
-                            Recomendación del evaluador COD-{evaluacionRol.evaluacion.id}:
-                        </div>
-                        {#if evaluacionRol.correcto == false && evaluacionRol.evaluacion.habilitado}
-                            <p class="whitespace-pre-line">{evaluacionRol.comentario ? evaluacionRol.comentario : 'Sin recomendación'}</p>
-                        {:else}
-                            Aprobado
-                        {/if}
-                    </div>
-                {/each}
-            {/if}
         </div>
     </div>
     <Dialog bind:open={dialogOpen}>
@@ -165,7 +162,7 @@
         </div>
         <div slot="actions">
             <div class="p-4">
-                <Button on:click={(event) => (dialogOpen = false)} variant={null}>Cancelar</Button>
+                <Button on:click={() => (dialogOpen = false)} variant={null}>Cancelar</Button>
                 <Button variant="raised" on:click={destroy}>Confirmar</Button>
             </div>
         </div>

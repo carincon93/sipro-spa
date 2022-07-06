@@ -19,7 +19,6 @@
     let authUser = $page.props.auth.user
     let isSuperAdmin = checkRole(authUser, [1])
 
-    let sending = false
     let form = useForm({
         email: '',
         descripcion: '',
@@ -27,10 +26,7 @@
     })
 
     function submit() {
-        $form.post(route('reportar-problemas.report'), {
-            onStart: () => (sending = true),
-            onFinish: () => (sending = false),
-        })
+        $form.post(route('reportar-problemas.report'))
     }
 </script>
 
@@ -75,7 +71,7 @@
                 </div>
             </fieldset>
             <div class="px-8 py-4 bg-gray-100 border-t border-gray-200 flex items-center sticky bottom-0">
-                <LoadingButton bind:loading={sending} type="submit" bind:disabled={$form.autorizacion_datos}>Notificar a la mesa de ayuda</LoadingButton>
+                <LoadingButton loading={$form.processing} type="submit" bind:disabled={$form.autorizacion_datos}>Notificar a la mesa de ayuda</LoadingButton>
             </div>
         </form>
     </div>

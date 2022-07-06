@@ -27,7 +27,6 @@
     let formId
     let dialogTitle
     let codigo
-    let sending = false
     let dialogOpen = false
 
     let cantidadCeldasCausasIndirectas = 3
@@ -88,15 +87,10 @@
                     efecto_directo: $formEfectoIndirecto.efecto_directo_id,
                 }),
                 {
-                    onStart: () => {
-                        sending = true
-                    },
                     onSuccess: () => {
                         closeDialog()
                     },
-                    onFinish: () => {
-                        sending = false
-                    },
+
                     preserveScroll: true,
                 },
             )
@@ -131,15 +125,10 @@
                     efecto_directo: $formEfectoDirecto.id,
                 }),
                 {
-                    onStart: () => {
-                        sending = true
-                    },
                     onSuccess: () => {
                         closeDialog()
                     },
-                    onFinish: () => {
-                        sending = false
-                    },
+
                     preserveScroll: true,
                 },
             )
@@ -174,15 +163,10 @@
     function submitProblemaCentral() {
         if (isSuperAdmin || (checkPermission(authUser, [1, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 17, 18, 19]) && proyecto.modificable == true)) {
             $formProblemaCentral.post(route('proyectos.problema-central', proyecto.id), {
-                onStart: () => {
-                    sending = true
-                },
                 onSuccess: () => {
                     closeDialog()
                 },
-                onFinish: () => {
-                    sending = false
-                },
+
                 preserveScroll: true,
             })
         }
@@ -216,15 +200,10 @@
                     causa_directa: $formCausaDirecta.id,
                 }),
                 {
-                    onStart: () => {
-                        sending = true
-                    },
                     onSuccess: () => {
                         closeDialog()
                     },
-                    onFinish: () => {
-                        sending = false
-                    },
+
                     preserveScroll: true,
                 },
             )
@@ -267,15 +246,10 @@
                     causa_directa: $formCausaIndirecta.causa_directa_id,
                 }),
                 {
-                    onStart: () => {
-                        sending = true
-                    },
                     onSuccess: () => {
                         closeDialog()
                     },
-                    onFinish: () => {
-                        sending = false
-                    },
+
                     preserveScroll: true,
                 },
             )
@@ -312,8 +286,6 @@
     function submitEstrategiaRegionalEvaluacion() {
         if (isSuperAdmin || (checkRole(authUser, [11, 5]) && evaluacion.finalizado == false && evaluacion.habilitado == true && evaluacion.modificable == true)) {
             $formEstrategiaRegionalEvaluacion.put(route('convocatorias.evaluaciones.arbol-problemas.guardar-evaluacion', [convocatoria.id, evaluacion.id]), {
-                onStart: () => (sending = true),
-                onFinish: () => (sending = false),
                 preserveScroll: true,
             })
         }
@@ -327,8 +299,6 @@
     function submitServicioTecnologicoEvaluacion() {
         if (isSuperAdmin || (checkRole(authUser, [11, 5]) && evaluacion.finalizado == false && evaluacion.habilitado == true && evaluacion.modificable == true)) {
             $formServicioTecnologicoEvaluacion.put(route('convocatorias.evaluaciones.arbol-problemas.guardar-evaluacion', [convocatoria.id, evaluacion.id]), {
-                onStart: () => (sending = true),
-                onFinish: () => (sending = false),
                 preserveScroll: true,
             })
         }
@@ -341,8 +311,6 @@
     function submitTpEvaluacion() {
         if (isSuperAdmin || (checkRole(authUser, [11, 5]) && evaluacion.finalizado == false && evaluacion.habilitado == true && evaluacion.modificable == true)) {
             $formTpEvaluacion.put(route('convocatorias.evaluaciones.arbol-problemas.guardar-evaluacion', [convocatoria.id, evaluacion.id]), {
-                onStart: () => (sending = true),
-                onFinish: () => (sending = false),
                 preserveScroll: true,
             })
         }
@@ -733,7 +701,7 @@
                 </InfoMessage>
                 <div class="px-8 py-4 bg-gray-100 border-t border-gray-200 flex items-center sticky bottom-0">
                     {#if isSuperAdmin || (checkRole(authUser, [11, 5]) && evaluacion.finalizado == false && evaluacion.habilitado == true && evaluacion.modificable == true)}
-                        <LoadingButton loading={sending} class="btn-indigo ml-auto" type="submit">Guardar</LoadingButton>
+                        <LoadingButton loading={$formEstrategiaRegionalEvaluacion.processing} class="ml-auto" type="submit">Guardar</LoadingButton>
                     {/if}
                 </div>
             </form>
@@ -789,7 +757,7 @@
                 </InfoMessage>
                 <div class="px-8 py-4 bg-gray-100 border-t border-gray-200 flex items-center sticky bottom-0">
                     {#if isSuperAdmin || (checkRole(authUser, [11, 5]) && evaluacion.finalizado == false && evaluacion.habilitado == true && evaluacion.modificable == true)}
-                        <LoadingButton loading={sending} class="btn-indigo ml-auto" type="submit">Guardar</LoadingButton>
+                        <LoadingButton loading={$formServicioTecnologicoEvaluacion.processing} class="ml-auto" type="submit">Guardar</LoadingButton>
                     {/if}
                 </div>
             </form>
@@ -811,7 +779,7 @@
                 </InfoMessage>
                 <div class="px-8 py-4 bg-gray-100 border-t border-gray-200 flex items-center sticky bottom-0">
                     {#if isSuperAdmin || (checkRole(authUser, [11, 5]) && evaluacion.finalizado == false && evaluacion.habilitado == true && evaluacion.modificable == true)}
-                        <LoadingButton loading={sending} class="btn-indigo ml-auto" type="submit">Guardar</LoadingButton>
+                        <LoadingButton loading={$formTpEvaluacion.processing} class="ml-auto" type="submit">Guardar</LoadingButton>
                     {/if}
                 </div>
             </form>
@@ -899,7 +867,7 @@
                 </form>
             {/if}
         </div>
-        <div slot="actions" class="block flex w-full">
+        <div slot="actions" class="flex w-full">
             <Button on:click={closeDialog} type="button" variant={null}>Cancelar</Button>
         </div>
     </Dialog>

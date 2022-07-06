@@ -40,7 +40,6 @@
         { value: 1, label: 'Si' },
         { value: 2, label: 'No' },
     ]
-    let sending = false
 
     let dialogSegundaEvaluacion = convocatoria.fase == 4 ? true : false
     let proyectoDialogOpen = taEvaluacion.evaluacion.clausula_confidencialidad == false ? true : false
@@ -193,8 +192,6 @@
     function submit() {
         if (isSuperAdmin || (checkRole(authUser, [11, 5]) && taEvaluacion.evaluacion.finalizado == false && taEvaluacion.evaluacion.habilitado == true && taEvaluacion.evaluacion.modificable == true)) {
             $form.put(route('convocatorias.ta-evaluaciones.update', [convocatoria.id, taEvaluacion.id]), {
-                onStart: () => (sending = true),
-                onFinish: () => (sending = false),
                 preserveScroll: true,
             })
         }
@@ -934,7 +931,7 @@
                     <span class="text-red-500">No ha aceptado la cláusula de confidencialidad</span>
                 {/if}
 
-                <LoadingButton loading={sending} class="btn-indigo ml-auto" type="submit">Guardar</LoadingButton>
+                <LoadingButton loading={$form.processing} class="ml-auto" type="submit">Guardar</LoadingButton>
             {/if}
         </div>
     </form>
@@ -957,7 +954,7 @@
         </div>
         <div slot="actions">
             <div class="p-4">
-                <Button on:click={(event) => (($form.clausula_confidencialidad = true), (proyectoDialogOpen = false))} variant={null}>Aceptar</Button>
+                <Button on:click={() => (($form.clausula_confidencialidad = true), (proyectoDialogOpen = false))} variant={null}>Aceptar</Button>
             </div>
         </div>
     </Dialog>
@@ -994,7 +991,7 @@
         </div>
         <div slot="actions">
             <div class="p-4">
-                <Button on:click={(event) => (dialogSegundaEvaluacion = false)} variant={null}>Aceptar</Button>
+                <Button on:click={() => (dialogSegundaEvaluacion = false)} variant={null}>Aceptar</Button>
             </div>
         </div>
     </Dialog>

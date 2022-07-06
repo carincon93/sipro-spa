@@ -29,7 +29,6 @@
     let authUser = $page.props.auth.user
     let isSuperAdmin = checkRole(authUser, [1])
 
-    let sending = false
     let form = useForm({
         seguimiento_ambiente_modernizacion_id: seguimientoId,
         codigo_proyecto_sgps_id: null,
@@ -48,10 +47,7 @@
 
     function submit() {
         if (isSuperAdmin || checkRole(authUser, [4])) {
-            $form.post(route('ambientes-modernizacion.store'), {
-                onStart: () => (sending = true),
-                onFinish: () => (sending = false),
-            })
+            $form.post(route('ambientes-modernizacion.store'))
         }
     }
 
@@ -219,7 +215,7 @@
         </fieldset>
         <div class="px-8 py-4 bg-gray-100 border-t border-gray-200 flex items-center sticky bottom-0">
             {#if isSuperAdmin || checkRole(authUser, [4])}
-                <LoadingButton loading={sending} class="btn-indigo ml-auto" type="submit">Guardar y continuar diligenciando</LoadingButton>
+                <LoadingButton loading={$form.processing} class="ml-auto" type="submit">Guardar y continuar diligenciando</LoadingButton>
             {/if}
         </div>
     </form>

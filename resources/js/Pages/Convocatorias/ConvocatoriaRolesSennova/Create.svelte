@@ -24,7 +24,6 @@
     let authUser = $page.props.auth.user
     let isSuperAdmin = checkRole(authUser, [1])
 
-    let sending = false
     let form = useForm({
         rol_sennova_id: null,
         linea_programatica_id: null,
@@ -37,10 +36,7 @@
 
     function submit() {
         if (isSuperAdmin) {
-            $form.post(route('convocatorias.convocatoria-rol-sennova.store', convocatoria.id), {
-                onStart: () => (sending = true),
-                onFinish: () => (sending = false),
-            })
+            $form.post(route('convocatorias.convocatoria-rol-sennova.store', convocatoria.id))
         }
     }
 </script>
@@ -95,7 +91,7 @@
             </fieldset>
             <div class="px-8 py-4 bg-gray-100 border-t border-gray-200 flex items-center sticky bottom-0">
                 {#if isSuperAdmin}
-                    <LoadingButton loading={sending} class="btn-indigo ml-auto" type="submit">Crear rol SENNOVA convocatoria</LoadingButton>
+                    <LoadingButton loading={$form.processing} class="ml-auto" type="submit">Crear rol SENNOVA convocatoria</LoadingButton>
                 {/if}
             </div>
         </form>

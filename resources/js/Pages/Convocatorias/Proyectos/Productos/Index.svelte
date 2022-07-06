@@ -13,6 +13,7 @@
     import DataTable from '@/Shared/DataTable'
     import DataTableMenu from '@/Shared/DataTableMenu'
     import { Item, Text } from '@smui/list'
+    import RecomendacionEvaluador from '@/Shared/RecomendacionEvaluador'
 
     export let convocatoria
     export let proyecto
@@ -51,33 +52,30 @@
 
     {#if proyecto.codigo_linea_programatica == 23 || proyecto.codigo_linea_programatica == 65 || proyecto.codigo_linea_programatica == 66 || proyecto.codigo_linea_programatica == 68 || proyecto.codigo_linea_programatica == 82}
         {#if isSuperAdmin || proyecto.mostrar_recomendaciones}
-            {#each proyecto.evaluaciones as evaluacion, i}
-                {#if isSuperAdmin || (evaluacion.finalizado && evaluacion.habilitado)}
-                    <div class="bg-gray-200 p-4 rounded border-orangered border mb-5">
-                        <div class="flex text-orangered-900 font-black">
-                            <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 mr-1.5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2m-3 7h3m-3 4h3m-6-4h.01M9 16h.01" />
-                            </svg>
-                            Recomendación del evaluador COD-{evaluacion.id}:
-                        </div>
-                        {#if evaluacion.idi_evaluacion}
-                            <p class="whitespace-pre-line">{evaluacion.idi_evaluacion?.productos_comentario ? evaluacion.idi_evaluacion.productos_comentario : 'Sin recomendación'}</p>
-                        {:else if evaluacion.cultura_innovacion_evaluacion}
-                            <p class="whitespace-pre-line">{evaluacion.cultura_innovacion_evaluacion?.productos_comentario ? evaluacion.cultura_innovacion_evaluacion.productos_comentario : 'Sin recomendación'}</p>
-                        {:else if evaluacion.servicio_tecnologico_evaluacion}
-                            <hr class="mt-10 mb-10 border-black-200" />
-                            <h1 class="font-black">Productos</h1>
+            <RecomendacionEvaluador class="mt-8">
+                {#each proyecto.evaluaciones as evaluacion, i}
+                    {#if isSuperAdmin || (evaluacion.finalizado && evaluacion.habilitado)}
+                        <div class="bg-zinc-900 p-4 rounded shadow text-white my-2">
+                            <p class="text-xs">Evaluador COD-{evaluacion.id}:</p>
+                            {#if evaluacion.idi_evaluacion}
+                                <p class="whitespace-pre-line text-xs">{evaluacion.idi_evaluacion?.productos_comentario ? evaluacion.idi_evaluacion.productos_comentario : 'Sin recomendación'}</p>
+                            {:else if evaluacion.cultura_innovacion_evaluacion}
+                                <p class="whitespace-pre-line text-xs">{evaluacion.cultura_innovacion_evaluacion?.productos_comentario ? evaluacion.cultura_innovacion_evaluacion.productos_comentario : 'Sin recomendación'}</p>
+                            {:else if evaluacion.servicio_tecnologico_evaluacion}
+                                <hr class="mt-10 mb-10 border-black-200" />
+                                <h1 class="font-black">Productos</h1>
 
-                            <ul class="list-disc pl-4">
-                                <li class="whitespace-pre-line mb-10">{evaluacion.servicio_tecnologico_evaluacion?.productos_primer_obj_comentario ? 'Recomendación productos del primer objetivo específico: ' + evaluacion.servicio_tecnologico_evaluacion.productos_primer_obj_comentario : 'Sin recomendación'}</li>
-                                <li class="whitespace-pre-line mb-10">{evaluacion.servicio_tecnologico_evaluacion?.productos_segundo_obj_comentario ? 'Recomendación productos del segundo objetivo específico: ' + evaluacion.servicio_tecnologico_evaluacion.productos_segundo_obj_comentario : 'Sin recomendación'}</li>
-                                <li class="whitespace-pre-line mb-10">{evaluacion.servicio_tecnologico_evaluacion?.productos_tercer_obj_comentario ? 'Recomendación productos del tercer objetivo específico: ' + evaluacion.servicio_tecnologico_evaluacion.productos_tercer_obj_comentario : 'Sin recomendación'}</li>
-                                <li class="whitespace-pre-line mb-10">{evaluacion.servicio_tecnologico_evaluacion?.productos_cuarto_obj_comentario ? 'Recomendación productos del cuarto objetivo específico: ' + evaluacion.servicio_tecnologico_evaluacion.productos_cuarto_obj_comentario : 'Sin recomendación'}</li>
-                            </ul>
-                        {/if}
-                    </div>
-                {/if}
-            {/each}
+                                <ul class="list-disc pl-4">
+                                    <li class="whitespace-pre-line text-xs mb-10">{evaluacion.servicio_tecnologico_evaluacion?.productos_primer_obj_comentario ? 'Recomendación productos del primer objetivo específico: ' + evaluacion.servicio_tecnologico_evaluacion.productos_primer_obj_comentario : 'Sin recomendación'}</li>
+                                    <li class="whitespace-pre-line text-xs mb-10">{evaluacion.servicio_tecnologico_evaluacion?.productos_segundo_obj_comentario ? 'Recomendación productos del segundo objetivo específico: ' + evaluacion.servicio_tecnologico_evaluacion.productos_segundo_obj_comentario : 'Sin recomendación'}</li>
+                                    <li class="whitespace-pre-line text-xs mb-10">{evaluacion.servicio_tecnologico_evaluacion?.productos_tercer_obj_comentario ? 'Recomendación productos del tercer objetivo específico: ' + evaluacion.servicio_tecnologico_evaluacion.productos_tercer_obj_comentario : 'Sin recomendación'}</li>
+                                    <li class="whitespace-pre-line text-xs mb-10">{evaluacion.servicio_tecnologico_evaluacion?.productos_cuarto_obj_comentario ? 'Recomendación productos del cuarto objetivo específico: ' + evaluacion.servicio_tecnologico_evaluacion.productos_cuarto_obj_comentario : 'Sin recomendación'}</li>
+                                </ul>
+                            {/if}
+                        </div>
+                    {/if}
+                {/each}
+            </RecomendacionEvaluador>
         {/if}
     {/if}
 

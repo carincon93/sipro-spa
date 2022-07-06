@@ -30,7 +30,6 @@
     let authUser = $page.props.auth.user
     let isSuperAdmin = checkRole(authUser, [1])
 
-    let sending = false
     let formTaEvaluacion = useForm({
         edt_comentario: evaluacion.ta_evaluacion.edt_comentario,
         edt_requiere_comentario: evaluacion.ta_evaluacion.edt_comentario == null ? true : false,
@@ -38,8 +37,6 @@
     function submitTaEvaluacion() {
         if (isSuperAdmin || (checkRole(authUser, [11, 5]) && evaluacion.finalizado == false && evaluacion.habilitado == true && evaluacion.modificable == true)) {
             $formTaEvaluacion.put(route('convocatorias.evaluaciones.edt.guardar-evaluacion', [convocatoria.id, evaluacion.id]), {
-                onStart: () => (sending = true),
-                onFinish: () => (sending = false),
                 preserveScroll: true,
             })
         }
@@ -148,7 +145,7 @@
             </InfoMessage>
             <div class="px-8 py-4 bg-gray-100 border-t border-gray-200 flex items-center sticky bottom-0">
                 {#if isSuperAdmin || (checkRole(authUser, [11, 5]) && evaluacion.finalizado == false && evaluacion.habilitado == true && evaluacion.modificable == true)}
-                    <LoadingButton loading={sending} class="btn-indigo ml-auto" type="submit">Guardar</LoadingButton>
+                    <LoadingButton loading={$formTaEvaluacion.processing} class="ml-auto" type="submit">Guardar</LoadingButton>
                 {/if}
             </div>
         </form>

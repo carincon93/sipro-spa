@@ -23,6 +23,10 @@
     let authUser = $page.props.auth.user
     let isSuperAdmin = checkRole(authUser, [1])
 
+    let permissionCreateProyectoST = checkPermission(authUser, [5]) && convocatoria.fase == 1
+    let permissionUserCreateEdit = checkPermissionByUser(authUser, [5])
+    let canEditDeleteProyectoST = checkPermission(authUser, [6, 7, 16])
+
     let filters = {
         estructuracion_proyectos: $page.props.filters.estructuracion_proyectos,
     }
@@ -44,7 +48,7 @@
         </div>
 
         <div slot="actions">
-            {#if isSuperAdmin || (checkPermission(authUser, [5]) && convocatoria.fase == 1) || checkPermissionByUser(authUser, [5])}
+            {#if isSuperAdmin || permissionCreateProyectoST || permissionUserCreateEdit}
                 <Button on:click={() => Inertia.visit(route('convocatorias.servicios-tecnologicos.create', [convocatoria.id]))} variant="raised">Crear proyecto Servicios tecnológicos</Button>
             {/if}
         </div>
@@ -109,7 +113,7 @@
                     </td>
                     <td class="border-t td-actions">
                         <DataTableMenu class={serviciosTecnologicos.data.length < 4 ? 'z-50' : ''}>
-                            {#if isSuperAdmin || checkPermissionByUser(authUser, [5]) || checkPermission(authUser, [6, 7, 16])}
+                            {#if isSuperAdmin || permissionUserCreateEdit || canEditDeleteProyectoST}
                                 <Item on:SMUI:action={() => Inertia.visit(route('convocatorias.servicios-tecnologicos.edit', [convocatoria.id, id]))}>
                                     <Text>Ver detalles</Text>
                                 </Item>
@@ -154,7 +158,7 @@
             </div>
             <div slot="actions">
                 <div class="p-4">
-                    <Button variant="raised" on:click={(event) => (dialogOpen = false)}>Entendido</Button>
+                    <Button variant="raised" on:click={() => (dialogOpen = false)}>Entendido</Button>
                 </div>
             </div>
         </Dialog>

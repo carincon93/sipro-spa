@@ -29,7 +29,6 @@
     let authUser = $page.props.auth.user
     let isSuperAdmin = checkRole(authUser, [1])
 
-    let sending = false
     let form = useForm({
         nombre: '',
         resultado_id: null,
@@ -48,10 +47,7 @@
 
     function submit() {
         if (isSuperAdmin || (checkPermission(authUser, [1, 5, 8, 11, 17]) && proyecto.modificable == true)) {
-            $form.post(route('convocatorias.proyectos.productos.store', [convocatoria.id, proyecto.id]), {
-                onStart: () => (sending = true),
-                onFinish: () => (sending = false),
-            })
+            $form.post(route('convocatorias.proyectos.productos.store', [convocatoria.id, proyecto.id]))
         }
     }
 
@@ -211,7 +207,7 @@
             </fieldset>
             <div class="px-8 py-4 bg-gray-100 border-t border-gray-200 flex items-center sticky bottom-0">
                 {#if isSuperAdmin || (checkPermission(authUser, [1, 5, 8, 11, 17]) && proyecto.modificable == true)}
-                    <LoadingButton loading={sending} class="btn-indigo ml-auto" type="submit">Crear producto</LoadingButton>
+                    <LoadingButton loading={$form.processing} class="ml-auto" type="submit">Crear producto</LoadingButton>
                 {/if}
             </div>
         </form>

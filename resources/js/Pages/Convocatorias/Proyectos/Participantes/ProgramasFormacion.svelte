@@ -28,25 +28,21 @@
     let form = useForm({
         search_programa_formacion: '',
     })
-    let sending = false
+
     let sended = false
     function submit() {
         if (isSuperAdmin || (checkPermission(authUser, [1, 3, 4, 11, 12, 13]) && proyecto.modificable == true)) {
-            sending = true
             sended = console.log('here')
             try {
                 axios
                     .post(route('convocatorias.proyectos.participantes.programas-formacion', { convocatoria: convocatoria.id, proyecto: proyecto.id }), $form)
                     .then((response) => {
                         resultados = response.data
-                        sending = false
                         sended = true
                     })
                     .catch((error) => {
-                        sending = false
                     })
             } catch (error) {
-                sending = false
             }
         }
     }
@@ -86,7 +82,7 @@
         <fieldset disabled={isSuperAdmin || (checkPermission(authUser, [1, 3, 4, 11, 12, 13]) && proyecto.modificable == true) ? undefined : true}>
             <div class="mt-4 flex flex-row">
                 <Input label="Escriba el ID o el nombre completo del programa de formación" id="search_programa_formacion" type="search" class="mt-1 m-auto block flex-1" bind:value={$form.search_programa_formacion} input$minLength="4" autocomplete="off" required />
-                <LoadingButton loading={sending} class="btn-indigo m-auto ml-1" type="submit">Buscar</LoadingButton>
+                <LoadingButton loading={$form.processing} class="m-auto ml-1" type="submit">Buscar</LoadingButton>
             </div>
         </fieldset>
     </form>

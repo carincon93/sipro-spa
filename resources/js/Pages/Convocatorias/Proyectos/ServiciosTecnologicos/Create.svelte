@@ -26,7 +26,9 @@
     let authUser = $page.props.auth.user
     let isSuperAdmin = checkRole(authUser, [1])
 
-    let sending = false
+    let permissionUserCreateEdit = checkPermissionByUser(authUser, [5])
+    let permissionCreateProyectoST = checkPermission(authUser, [5])
+
     let form = useForm({
         tipo_proyecto_st_id: null,
         estado_sistema_gestion_id: null,
@@ -45,11 +47,8 @@
     }
 
     function submit() {
-        if (isSuperAdmin || checkPermissionByUser(authUser, [5]) || checkPermission(authUser, [5])) {
-            $form.post(route('convocatorias.servicios-tecnologicos.store', [convocatoria.id]), {
-                onStart: () => (sending = true),
-                onFinish: () => (sending = false),
-            })
+        if (isSuperAdmin || permissionUserCreateEdit || permissionCreateProyectoST) {
+            $form.post(route('convocatorias.servicios-tecnologicos.store', [convocatoria.id]))
         }
     }
 </script>
@@ -59,7 +58,7 @@
         <div class="flex items-center justify-between lg:px-8 max-w-7xl mx-auto px-4 py-6 sm:px-6">
             <div>
                 <h1>
-                    {#if isSuperAdmin || checkPermissionByUser(authUser, [5]) || checkPermission(authUser, [5])}
+                    {#if isSuperAdmin || permissionUserCreateEdit || permissionCreateProyectoST}
                         <a use:inertia href={route('convocatorias.servicios-tecnologicos.index', [convocatoria.id])} class="text-cyan-400 hover:text-cyan-600"> Servicios tecnológicos </a>
                     {/if}
                     <span class="text-cyan-400 font-medium">/</span>
@@ -70,8 +69,8 @@
     </header>
 
     <form on:submit|preventDefault={submit}>
-        <fieldset class="p-8">
-            <div class="mt-28">
+        <fieldset class="p-8 divide-y">
+            <div class="py-24">
                 <Label
                     required
                     labelFor="titulo"
@@ -81,7 +80,7 @@
                 <Textarea label="Título" id="titulo" sinContador={true} error={errors.titulo} bind:value={$form.titulo} classes="bg-transparent block border-0 {errors.titulo ? '' : 'outline-none-important'} mt-1 outline-none text-4xl text-center w-full" required />
             </div>
 
-            <div class="mt-44">
+            <div class="py-24">
                 <p class="text-center">Fecha de ejecución</p>
                 <small class="text-red-400 block text-center"> * Campo obligatorio </small>
                 <InfoMessage message={convocatoria.fecha_maxima_st} class="my-5" />
@@ -109,39 +108,45 @@
                 {/if}
             </div>
 
-            <div class="mt-44 grid grid-cols-2">
-                <div>
-                    <Label required class="mb-4" labelFor="tipo_proyecto_st_id" value="Centro de formación" />
-                </div>
-                <div>
-                    <Select id="tipo_proyecto_st_id" items={tiposProyectoSt} bind:selectedValue={$form.tipo_proyecto_st_id} error={errors.tipo_proyecto_st_id} autocomplete="off" placeholder="Seleccione una tipología de ST" required />
+            <div class="py-24">
+                <div class="grid grid-cols-2">
+                    <div>
+                        <Label required class="mb-4" labelFor="tipo_proyecto_st_id" value="Centro de formación" />
+                    </div>
+                    <div>
+                        <Select id="tipo_proyecto_st_id" items={tiposProyectoSt} bind:selectedValue={$form.tipo_proyecto_st_id} error={errors.tipo_proyecto_st_id} autocomplete="off" placeholder="Seleccione una tipología de ST" required />
+                    </div>
                 </div>
             </div>
 
             {#if $form.tipo_proyecto_st_id}
-                <div class="mt-44 grid grid-cols-2">
-                    <div>
-                        <Label required class="mb-4" labelFor="estado_sistema_gestion_id" value="Estado del sistema de gestión" />
-                    </div>
-                    <div>
-                        <DynamicList id="estado_sistema_gestion_id" bind:value={$form.estado_sistema_gestion_id} routeWebApi={route('web-api.estados-sistema-gestion', $form.tipo_proyecto_st_id['value'])} classes="min-h" placeholder="Seleccione un estado" message={errors.estado_sistema_gestion_id} required />
+                <div class="py-24">
+                    <div class="grid grid-cols-2">
+                        <div>
+                            <Label required class="mb-4" labelFor="estado_sistema_gestion_id" value="Estado del sistema de gestión" />
+                        </div>
+                        <div>
+                            <DynamicList id="estado_sistema_gestion_id" bind:value={$form.estado_sistema_gestion_id} routeWebApi={route('web-api.estados-sistema-gestion', $form.tipo_proyecto_st_id['value'])} classes="min-h" placeholder="Seleccione un estado" message={errors.estado_sistema_gestion_id} required />
+                        </div>
                     </div>
                 </div>
             {/if}
 
-            <div class="mt-44 grid grid-cols-2">
-                <div>
-                    <Label required class="mb-4" labelFor="sector_productivo" value="Sector priorizado de Colombia Productiva" />
-                </div>
-                <div>
-                    <Select id="sector_productivo" items={sectoresProductivos} bind:selectedValue={$form.sector_productivo} error={errors.sector_productivo} autocomplete="off" placeholder="Seleccione una sector" required />
+            <div class="py-24">
+                <div class="grid grid-cols-2">
+                    <div>
+                        <Label required class="mb-4" labelFor="sector_productivo" value="Sector priorizado de Colombia Productiva" />
+                    </div>
+                    <div>
+                        <Select id="sector_productivo" items={sectoresProductivos} bind:selectedValue={$form.sector_productivo} error={errors.sector_productivo} autocomplete="off" placeholder="Seleccione una sector" required />
+                    </div>
                 </div>
             </div>
 
             <hr class="mt-32" />
 
             <p class="text-center mt-36 mb-8">Información de mi participación en el proyecto</p>
-            <div class="mt-44 grid grid-cols-2">
+            <div class="grid grid-cols-2">
                 <div>
                     <Label required class="mb-4" labelFor="rol_sennova" value="Rol SENNOVA" />
                 </div>
@@ -152,8 +157,8 @@
         </fieldset>
 
         <div class="px-8 py-4 bg-gray-100 border-t border-gray-200 flex items-center sticky bottom-0">
-            {#if isSuperAdmin || checkPermissionByUser(authUser, [5]) || checkPermission(authUser, [5])}
-                <LoadingButton loading={sending} class="btn-indigo ml-auto" type="submit">
+            {#if isSuperAdmin || permissionUserCreateEdit || permissionCreateProyectoST}
+                <LoadingButton loading={$form.processing} class="ml-auto" type="submit">
                     {$_('Continue')}
                 </LoadingButton>
             {/if}

@@ -28,7 +28,6 @@
     let authUser = $page.props.auth.user
     let isSuperAdmin = checkRole(authUser, [1])
 
-    let sending = false
     let form = useForm({
         cantidad_instructores_planta: proyecto.cantidad_instructores_planta,
         cantidad_dinamizadores_planta: proyecto.cantidad_dinamizadores_planta,
@@ -37,8 +36,6 @@
     function submit() {
         if (isSuperAdmin || (checkPermission(authUser, [1, 5, 8, 11, 17]) && proyecto.modificable == true)) {
             $form.put(route('convocatorias.proyectos.rol-sennova-ta.update', [convocatoria.id, proyecto.id]), {
-                onStart: () => (sending = true),
-                onFinish: () => (sending = false),
                 preserveScroll: true,
             })
         }
@@ -115,7 +112,7 @@
                     </fieldset>
                     <div class="py-4 bg-gray-100 border-t border-gray-200 flex items-center sticky bottom-0">
                         {#if isSuperAdmin || (checkPermission(authUser, [1, 5, 8, 11, 17]) && proyecto.modificable == true)}
-                            <LoadingButton loading={sending} class="btn-indigo ml-auto" type="submit">Guardar</LoadingButton>
+                            <LoadingButton loading={$form.processing} class="ml-auto" type="submit">Guardar</LoadingButton>
                         {/if}
                     </div>
                 </form>

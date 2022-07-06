@@ -2079,9 +2079,9 @@ ___CSS_LOADER_EXPORT___.push([module.id, ".z-index-full.svelte-193iq1{z-index:99
 
 /***/ }),
 
-/***/ "./node_modules/css-loader/dist/cjs.js??ruleSet[1].rules[6].oneOf[1].use[1]!./node_modules/postcss-loader/dist/cjs.js??ruleSet[1].rules[6].oneOf[1].use[2]!./node_modules/svelte-loader/index.js?cssPath=D:/www/sipro-spa/resources/js/Shared/LoadingButton.svelte.14.css!./resources/js/Shared/LoadingButton.svelte":
+/***/ "./node_modules/css-loader/dist/cjs.js??ruleSet[1].rules[6].oneOf[1].use[1]!./node_modules/postcss-loader/dist/cjs.js??ruleSet[1].rules[6].oneOf[1].use[2]!./node_modules/svelte-loader/index.js?cssPath=D:/www/sipro-spa/resources/js/Shared/LoadingButton.svelte.11.css!./resources/js/Shared/LoadingButton.svelte":
 /*!***************************************************************************************************************************************************************************************************************************************************************************************************************************!*\
-  !*** ./node_modules/css-loader/dist/cjs.js??ruleSet[1].rules[6].oneOf[1].use[1]!./node_modules/postcss-loader/dist/cjs.js??ruleSet[1].rules[6].oneOf[1].use[2]!./node_modules/svelte-loader/index.js?cssPath=D:/www/sipro-spa/resources/js/Shared/LoadingButton.svelte.14.css!./resources/js/Shared/LoadingButton.svelte ***!
+  !*** ./node_modules/css-loader/dist/cjs.js??ruleSet[1].rules[6].oneOf[1].use[1]!./node_modules/postcss-loader/dist/cjs.js??ruleSet[1].rules[6].oneOf[1].use[2]!./node_modules/svelte-loader/index.js?cssPath=D:/www/sipro-spa/resources/js/Shared/LoadingButton.svelte.11.css!./resources/js/Shared/LoadingButton.svelte ***!
   \***************************************************************************************************************************************************************************************************************************************************************************************************************************/
 /***/ ((module, __webpack_exports__, __webpack_require__) => {
 
@@ -23799,9 +23799,9 @@ var update = _node_modules_style_loader_dist_runtime_injectStylesIntoStyleTag_js
 
 /***/ }),
 
-/***/ "./resources/js/Shared/LoadingButton.svelte.14.css!=!./node_modules/svelte-loader/index.js?cssPath=D:/www/sipro-spa/resources/js/Shared/LoadingButton.svelte.14.css!./resources/js/Shared/LoadingButton.svelte":
+/***/ "./resources/js/Shared/LoadingButton.svelte.11.css!=!./node_modules/svelte-loader/index.js?cssPath=D:/www/sipro-spa/resources/js/Shared/LoadingButton.svelte.11.css!./resources/js/Shared/LoadingButton.svelte":
 /*!*********************************************************************************************************************************************************************************************************************!*\
-  !*** ./resources/js/Shared/LoadingButton.svelte.14.css!=!./node_modules/svelte-loader/index.js?cssPath=D:/www/sipro-spa/resources/js/Shared/LoadingButton.svelte.14.css!./resources/js/Shared/LoadingButton.svelte ***!
+  !*** ./resources/js/Shared/LoadingButton.svelte.11.css!=!./node_modules/svelte-loader/index.js?cssPath=D:/www/sipro-spa/resources/js/Shared/LoadingButton.svelte.11.css!./resources/js/Shared/LoadingButton.svelte ***!
   \*********************************************************************************************************************************************************************************************************************/
 /***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
 
@@ -23812,7 +23812,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ });
 /* harmony import */ var _node_modules_style_loader_dist_runtime_injectStylesIntoStyleTag_js__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! !../../../node_modules/style-loader/dist/runtime/injectStylesIntoStyleTag.js */ "./node_modules/style-loader/dist/runtime/injectStylesIntoStyleTag.js");
 /* harmony import */ var _node_modules_style_loader_dist_runtime_injectStylesIntoStyleTag_js__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_node_modules_style_loader_dist_runtime_injectStylesIntoStyleTag_js__WEBPACK_IMPORTED_MODULE_0__);
-/* harmony import */ var _node_modules_css_loader_dist_cjs_js_ruleSet_1_rules_6_oneOf_1_use_1_node_modules_postcss_loader_dist_cjs_js_ruleSet_1_rules_6_oneOf_1_use_2_node_modules_svelte_loader_index_js_cssPath_D_www_sipro_spa_resources_js_Shared_LoadingButton_svelte_14_css_LoadingButton_svelte__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! !!../../../node_modules/css-loader/dist/cjs.js??ruleSet[1].rules[6].oneOf[1].use[1]!../../../node_modules/postcss-loader/dist/cjs.js??ruleSet[1].rules[6].oneOf[1].use[2]!../../../node_modules/svelte-loader/index.js?cssPath=D:/www/sipro-spa/resources/js/Shared/LoadingButton.svelte.14.css!./LoadingButton.svelte */ "./node_modules/css-loader/dist/cjs.js??ruleSet[1].rules[6].oneOf[1].use[1]!./node_modules/postcss-loader/dist/cjs.js??ruleSet[1].rules[6].oneOf[1].use[2]!./node_modules/svelte-loader/index.js?cssPath=D:/www/sipro-spa/resources/js/Shared/LoadingButton.svelte.14.css!./resources/js/Shared/LoadingButton.svelte");
+/* harmony import */ var _node_modules_css_loader_dist_cjs_js_ruleSet_1_rules_6_oneOf_1_use_1_node_modules_postcss_loader_dist_cjs_js_ruleSet_1_rules_6_oneOf_1_use_2_node_modules_svelte_loader_index_js_cssPath_D_www_sipro_spa_resources_js_Shared_LoadingButton_svelte_11_css_LoadingButton_svelte__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! !!../../../node_modules/css-loader/dist/cjs.js??ruleSet[1].rules[6].oneOf[1].use[1]!../../../node_modules/postcss-loader/dist/cjs.js??ruleSet[1].rules[6].oneOf[1].use[2]!../../../node_modules/svelte-loader/index.js?cssPath=D:/www/sipro-spa/resources/js/Shared/LoadingButton.svelte.11.css!./LoadingButton.svelte */ "./node_modules/css-loader/dist/cjs.js??ruleSet[1].rules[6].oneOf[1].use[1]!./node_modules/postcss-loader/dist/cjs.js??ruleSet[1].rules[6].oneOf[1].use[2]!./node_modules/svelte-loader/index.js?cssPath=D:/www/sipro-spa/resources/js/Shared/LoadingButton.svelte.11.css!./resources/js/Shared/LoadingButton.svelte");
 
             
 
@@ -23821,11 +23821,11 @@ var options = {};
 options.insert = "head";
 options.singleton = false;
 
-var update = _node_modules_style_loader_dist_runtime_injectStylesIntoStyleTag_js__WEBPACK_IMPORTED_MODULE_0___default()(_node_modules_css_loader_dist_cjs_js_ruleSet_1_rules_6_oneOf_1_use_1_node_modules_postcss_loader_dist_cjs_js_ruleSet_1_rules_6_oneOf_1_use_2_node_modules_svelte_loader_index_js_cssPath_D_www_sipro_spa_resources_js_Shared_LoadingButton_svelte_14_css_LoadingButton_svelte__WEBPACK_IMPORTED_MODULE_1__["default"], options);
+var update = _node_modules_style_loader_dist_runtime_injectStylesIntoStyleTag_js__WEBPACK_IMPORTED_MODULE_0___default()(_node_modules_css_loader_dist_cjs_js_ruleSet_1_rules_6_oneOf_1_use_1_node_modules_postcss_loader_dist_cjs_js_ruleSet_1_rules_6_oneOf_1_use_2_node_modules_svelte_loader_index_js_cssPath_D_www_sipro_spa_resources_js_Shared_LoadingButton_svelte_11_css_LoadingButton_svelte__WEBPACK_IMPORTED_MODULE_1__["default"], options);
 
 
 
-/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (_node_modules_css_loader_dist_cjs_js_ruleSet_1_rules_6_oneOf_1_use_1_node_modules_postcss_loader_dist_cjs_js_ruleSet_1_rules_6_oneOf_1_use_2_node_modules_svelte_loader_index_js_cssPath_D_www_sipro_spa_resources_js_Shared_LoadingButton_svelte_14_css_LoadingButton_svelte__WEBPACK_IMPORTED_MODULE_1__["default"].locals || {});
+/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (_node_modules_css_loader_dist_cjs_js_ruleSet_1_rules_6_oneOf_1_use_1_node_modules_postcss_loader_dist_cjs_js_ruleSet_1_rules_6_oneOf_1_use_2_node_modules_svelte_loader_index_js_cssPath_D_www_sipro_spa_resources_js_Shared_LoadingButton_svelte_11_css_LoadingButton_svelte__WEBPACK_IMPORTED_MODULE_1__["default"].locals || {});
 
 /***/ }),
 
@@ -31406,7 +31406,7 @@ __webpack_require__.r(__webpack_exports__);
 
 
 function create_default_slot(ctx) {
-	let t_value = /*$_*/ ctx[3]('Reset Password') + "";
+	let t_value = /*$_*/ ctx[2]('Reset Password') + "";
 	let t;
 
 	return {
@@ -31417,7 +31417,7 @@ function create_default_slot(ctx) {
 			(0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.insert)(target, t, anchor);
 		},
 		p(ctx, dirty) {
-			if (dirty & /*$_*/ 8 && t_value !== (t_value = /*$_*/ ctx[3]('Reset Password') + "")) (0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.set_data)(t, t_value);
+			if (dirty & /*$_*/ 4 && t_value !== (t_value = /*$_*/ ctx[2]('Reset Password') + "")) (0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.set_data)(t, t_value);
 		},
 		d(detaching) {
 			if (detaching) (0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.detach)(t);
@@ -31441,17 +31441,16 @@ function create_fragment(ctx) {
 	let t2;
 	let div3;
 	let loadingbutton;
-	let updating_loading;
 	let current;
 	let mounted;
 	let dispose;
 
 	function input0_value_binding(value) {
-		/*input0_value_binding*/ ctx[8](value);
+		/*input0_value_binding*/ ctx[7](value);
 	}
 
 	let input0_props = {
-		label: /*$_*/ ctx[3]('Email'),
+		label: /*$_*/ ctx[2]('Email'),
 		id: "email",
 		type: "email",
 		class: "mt-1",
@@ -31461,19 +31460,19 @@ function create_fragment(ctx) {
 		autocomplete: "email"
 	};
 
-	if (/*$form*/ ctx[2].email !== void 0) {
-		input0_props.value = /*$form*/ ctx[2].email;
+	if (/*$form*/ ctx[1].email !== void 0) {
+		input0_props.value = /*$form*/ ctx[1].email;
 	}
 
 	input0 = new _Shared_Input__WEBPACK_IMPORTED_MODULE_6__["default"]({ props: input0_props });
 	svelte_internal__WEBPACK_IMPORTED_MODULE_0__.binding_callbacks.push(() => (0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.bind)(input0, 'value', input0_value_binding));
 
 	function input1_value_binding(value) {
-		/*input1_value_binding*/ ctx[9](value);
+		/*input1_value_binding*/ ctx[8](value);
 	}
 
 	let input1_props = {
-		label: /*$_*/ ctx[3]('Password'),
+		label: /*$_*/ ctx[2]('Password'),
 		id: "password",
 		type: "password",
 		class: "mt-1",
@@ -31483,19 +31482,19 @@ function create_fragment(ctx) {
 		autocomplete: "new-password"
 	};
 
-	if (/*$form*/ ctx[2].password !== void 0) {
-		input1_props.value = /*$form*/ ctx[2].password;
+	if (/*$form*/ ctx[1].password !== void 0) {
+		input1_props.value = /*$form*/ ctx[1].password;
 	}
 
 	input1 = new _Shared_Input__WEBPACK_IMPORTED_MODULE_6__["default"]({ props: input1_props });
 	svelte_internal__WEBPACK_IMPORTED_MODULE_0__.binding_callbacks.push(() => (0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.bind)(input1, 'value', input1_value_binding));
 
 	function input2_value_binding(value) {
-		/*input2_value_binding*/ ctx[10](value);
+		/*input2_value_binding*/ ctx[9](value);
 	}
 
 	let input2_props = {
-		label: /*$_*/ ctx[3]('Confirm Password'),
+		label: /*$_*/ ctx[2]('Confirm Password'),
 		id: "password_confirmation",
 		type: "password",
 		class: "mt-1",
@@ -31505,30 +31504,21 @@ function create_fragment(ctx) {
 		autocomplete: "new-password"
 	};
 
-	if (/*$form*/ ctx[2].password_confirmation !== void 0) {
-		input2_props.value = /*$form*/ ctx[2].password_confirmation;
+	if (/*$form*/ ctx[1].password_confirmation !== void 0) {
+		input2_props.value = /*$form*/ ctx[1].password_confirmation;
 	}
 
 	input2 = new _Shared_Input__WEBPACK_IMPORTED_MODULE_6__["default"]({ props: input2_props });
 	svelte_internal__WEBPACK_IMPORTED_MODULE_0__.binding_callbacks.push(() => (0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.bind)(input2, 'value', input2_value_binding));
 
-	function loadingbutton_loading_binding(value) {
-		/*loadingbutton_loading_binding*/ ctx[11](value);
-	}
-
-	let loadingbutton_props = {
-		class: "btn-indigo",
-		type: "submit",
-		$$slots: { default: [create_default_slot] },
-		$$scope: { ctx }
-	};
-
-	if (/*sending*/ ctx[1] !== void 0) {
-		loadingbutton_props.loading = /*sending*/ ctx[1];
-	}
-
-	loadingbutton = new _Shared_LoadingButton__WEBPACK_IMPORTED_MODULE_5__["default"]({ props: loadingbutton_props });
-	svelte_internal__WEBPACK_IMPORTED_MODULE_0__.binding_callbacks.push(() => (0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.bind)(loadingbutton, 'loading', loadingbutton_loading_binding));
+	loadingbutton = new _Shared_LoadingButton__WEBPACK_IMPORTED_MODULE_5__["default"]({
+			props: {
+				loading: /*$form*/ ctx[1].processing,
+				type: "submit",
+				$$slots: { default: [create_default_slot] },
+				$$scope: { ctx }
+			}
+		});
 
 	return {
 		c() {
@@ -31564,54 +31554,49 @@ function create_fragment(ctx) {
 			current = true;
 
 			if (!mounted) {
-				dispose = (0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.listen)(form_1, "submit", (0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.prevent_default)(/*handleSubmit*/ ctx[5]));
+				dispose = (0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.listen)(form_1, "submit", (0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.prevent_default)(/*handleSubmit*/ ctx[4]));
 				mounted = true;
 			}
 		},
 		p(ctx, [dirty]) {
 			const input0_changes = {};
-			if (dirty & /*$_*/ 8) input0_changes.label = /*$_*/ ctx[3]('Email');
+			if (dirty & /*$_*/ 4) input0_changes.label = /*$_*/ ctx[2]('Email');
 			if (dirty & /*errors*/ 1) input0_changes.error = /*errors*/ ctx[0].email;
 
-			if (!updating_value && dirty & /*$form*/ 4) {
+			if (!updating_value && dirty & /*$form*/ 2) {
 				updating_value = true;
-				input0_changes.value = /*$form*/ ctx[2].email;
+				input0_changes.value = /*$form*/ ctx[1].email;
 				(0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.add_flush_callback)(() => updating_value = false);
 			}
 
 			input0.$set(input0_changes);
 			const input1_changes = {};
-			if (dirty & /*$_*/ 8) input1_changes.label = /*$_*/ ctx[3]('Password');
+			if (dirty & /*$_*/ 4) input1_changes.label = /*$_*/ ctx[2]('Password');
 			if (dirty & /*errors*/ 1) input1_changes.error = /*errors*/ ctx[0].password;
 
-			if (!updating_value_1 && dirty & /*$form*/ 4) {
+			if (!updating_value_1 && dirty & /*$form*/ 2) {
 				updating_value_1 = true;
-				input1_changes.value = /*$form*/ ctx[2].password;
+				input1_changes.value = /*$form*/ ctx[1].password;
 				(0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.add_flush_callback)(() => updating_value_1 = false);
 			}
 
 			input1.$set(input1_changes);
 			const input2_changes = {};
-			if (dirty & /*$_*/ 8) input2_changes.label = /*$_*/ ctx[3]('Confirm Password');
+			if (dirty & /*$_*/ 4) input2_changes.label = /*$_*/ ctx[2]('Confirm Password');
 			if (dirty & /*errors*/ 1) input2_changes.error = /*errors*/ ctx[0].password_confirmation;
 
-			if (!updating_value_2 && dirty & /*$form*/ 4) {
+			if (!updating_value_2 && dirty & /*$form*/ 2) {
 				updating_value_2 = true;
-				input2_changes.value = /*$form*/ ctx[2].password_confirmation;
+				input2_changes.value = /*$form*/ ctx[1].password_confirmation;
 				(0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.add_flush_callback)(() => updating_value_2 = false);
 			}
 
 			input2.$set(input2_changes);
 			const loadingbutton_changes = {};
+			if (dirty & /*$form*/ 2) loadingbutton_changes.loading = /*$form*/ ctx[1].processing;
 
-			if (dirty & /*$$scope, $_*/ 4104) {
+			if (dirty & /*$$scope, $_*/ 1028) {
 				loadingbutton_changes.$$scope = { dirty, ctx };
-			}
-
-			if (!updating_loading && dirty & /*sending*/ 2) {
-				updating_loading = true;
-				loadingbutton_changes.loading = /*sending*/ ctx[1];
-				(0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.add_flush_callback)(() => updating_loading = false);
 			}
 
 			loadingbutton.$set(loadingbutton_changes);
@@ -31648,11 +31633,10 @@ const layout = _Layouts_Guest__WEBPACK_IMPORTED_MODULE_1__["default"];
 function instance($$self, $$props, $$invalidate) {
 	let $form;
 	let $_;
-	(0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.component_subscribe)($$self, svelte_i18n__WEBPACK_IMPORTED_MODULE_4__._, $$value => $$invalidate(3, $_ = $$value));
+	(0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.component_subscribe)($$self, svelte_i18n__WEBPACK_IMPORTED_MODULE_4__._, $$value => $$invalidate(2, $_ = $$value));
 	let { email } = $$props;
 	let { token } = $$props;
 	let { errors } = $$props;
-	let sending = false;
 
 	let form = (0,_inertiajs_inertia_svelte__WEBPACK_IMPORTED_MODULE_2__.useForm)({
 		token,
@@ -31661,7 +31645,7 @@ function instance($$self, $$props, $$invalidate) {
 		password_confirmation: ''
 	});
 
-	(0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.component_subscribe)($$self, form, value => $$invalidate(2, $form = value));
+	(0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.component_subscribe)($$self, form, value => $$invalidate(1, $form = value));
 
 	function handleSubmit() {
 		$form.post((0,_Utils__WEBPACK_IMPORTED_MODULE_3__.route)('password.update'));
@@ -31688,20 +31672,14 @@ function instance($$self, $$props, $$invalidate) {
 		}
 	}
 
-	function loadingbutton_loading_binding(value) {
-		sending = value;
-		$$invalidate(1, sending);
-	}
-
 	$$self.$$set = $$props => {
-		if ('email' in $$props) $$invalidate(6, email = $$props.email);
-		if ('token' in $$props) $$invalidate(7, token = $$props.token);
+		if ('email' in $$props) $$invalidate(5, email = $$props.email);
+		if ('token' in $$props) $$invalidate(6, token = $$props.token);
 		if ('errors' in $$props) $$invalidate(0, errors = $$props.errors);
 	};
 
 	return [
 		errors,
-		sending,
 		$form,
 		$_,
 		form,
@@ -31710,15 +31688,14 @@ function instance($$self, $$props, $$invalidate) {
 		token,
 		input0_value_binding,
 		input1_value_binding,
-		input2_value_binding,
-		loadingbutton_loading_binding
+		input2_value_binding
 	];
 }
 
 class ResetPassword extends svelte_internal__WEBPACK_IMPORTED_MODULE_0__.SvelteComponent {
 	constructor(options) {
 		super();
-		(0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.init)(this, options, instance, create_fragment, svelte_internal__WEBPACK_IMPORTED_MODULE_0__.safe_not_equal, { email: 6, token: 7, errors: 0 });
+		(0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.init)(this, options, instance, create_fragment, svelte_internal__WEBPACK_IMPORTED_MODULE_0__.safe_not_equal, { email: 5, token: 6, errors: 0 });
 	}
 }
 
@@ -32883,7 +32860,7 @@ function instance($$self, $$props, $$invalidate) {
 			...$$restProps,
 			class: `relative ${alertMsg
 			? 'bg-red-100 text-red-600'
-			: 'bg-indigo-100 text-indigo-600'} p-5 ${$$restProps.class || ''}`
+			: 'bg-cyan-100 text-cyan-600'} p-5 ${$$restProps.class || ''}`
 		});
 	};
 
@@ -33693,7 +33670,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _smui_button__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @smui/button */ "./node_modules/@smui/button/index.js");
 /* harmony import */ var D_www_sipro_spa_node_modules_svelte_loader_lib_hot_api_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./node_modules/svelte-loader/lib/hot-api.js */ "./node_modules/svelte-loader/lib/hot-api.js");
 /* harmony import */ var D_www_sipro_spa_node_modules_svelte_hmr_runtime_proxy_adapter_dom_js__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./node_modules/svelte-hmr/runtime/proxy-adapter-dom.js */ "./node_modules/svelte-hmr/runtime/proxy-adapter-dom.js");
-/* harmony import */ var D_www_sipro_spa_resources_js_Shared_LoadingButton_svelte_14_css_svelte_loader_cssPath_D_www_sipro_spa_resources_js_Shared_LoadingButton_svelte_14_css_D_www_sipro_spa_resources_js_Shared_LoadingButton_svelte__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./resources/js/Shared/LoadingButton.svelte.14.css!=!svelte-loader?cssPath=D:/www/sipro-spa/resources/js/Shared/LoadingButton.svelte.14.css!./resources/js/Shared/LoadingButton.svelte */ "./resources/js/Shared/LoadingButton.svelte.14.css!=!./node_modules/svelte-loader/index.js?cssPath=D:/www/sipro-spa/resources/js/Shared/LoadingButton.svelte.14.css!./resources/js/Shared/LoadingButton.svelte");
+/* harmony import */ var D_www_sipro_spa_resources_js_Shared_LoadingButton_svelte_11_css_svelte_loader_cssPath_D_www_sipro_spa_resources_js_Shared_LoadingButton_svelte_11_css_D_www_sipro_spa_resources_js_Shared_LoadingButton_svelte__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./resources/js/Shared/LoadingButton.svelte.11.css!=!svelte-loader?cssPath=D:/www/sipro-spa/resources/js/Shared/LoadingButton.svelte.11.css!./resources/js/Shared/LoadingButton.svelte */ "./resources/js/Shared/LoadingButton.svelte.11.css!=!./node_modules/svelte-loader/index.js?cssPath=D:/www/sipro-spa/resources/js/Shared/LoadingButton.svelte.11.css!./resources/js/Shared/LoadingButton.svelte");
 /* module decorator */ module = __webpack_require__.hmd(module);
 /* resources\js\Shared\LoadingButton.svelte generated by Svelte v3.48.0 */
 

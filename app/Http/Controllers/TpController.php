@@ -8,6 +8,8 @@ use App\Models\Tp;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\TpLongColumnRequest;
 use App\Http\Requests\TpRequest;
+use App\Models\LineaProgramatica;
+use App\Models\Municipio;
 use App\Models\NodoTecnoparque;
 use App\Models\Regional;
 use Illuminate\Http\Request;
@@ -49,9 +51,9 @@ class TpController extends Controller
         }
 
         return Inertia::render('Convocatorias/Proyectos/Tp/Create', [
-            'convocatoria'      => $convocatoria->only('id', 'esta_activa', 'fase_formateada', 'fase', 'tipo_convocatoria', 'min_fecha_inicio_proyectos_tp', 'max_fecha_finalizacion_proyectos_tp', 'fecha_maxima_tp'),
-            'rolesTp'           => collect(json_decode(Storage::get('json/roles-sennova-tp.json'), true)),
-            'nodosTecnoParque'  => $nodosTecnoParque
+            'convocatoria'          => $convocatoria->only('id', 'esta_activa', 'fase_formateada', 'fase', 'tipo_convocatoria', 'min_fecha_inicio_proyectos_tp', 'max_fecha_finalizacion_proyectos_tp', 'fecha_maxima_tp'),
+            'rolesTp'               => collect(json_decode(Storage::get('json/roles-sennova-tp.json'), true)),
+            'nodosTecnoParque'      => $nodosTecnoParque,
         ]);
     }
 
@@ -146,19 +148,15 @@ class TpController extends Controller
         $tp->mostrar_recomendaciones = $tp->proyecto->mostrar_recomendaciones;
         $tp->mostrar_requiere_subsanacion = $tp->proyecto->mostrar_requiere_subsanacion;
 
-        if (auth()->user()->hasRole(16)) {
-            $nodosTecnoParque = NodoTecnoparque::select('nodos_tecnoparque.id as value', 'nodos_tecnoparque.nombre as label')->join('centros_formacion', 'nodos_tecnoparque.centro_formacion_id', 'centros_formacion.id')->where('centros_formacion.regional_id', auth()->user()->centroFormacion->regional_id)->get();
-        } else {
-            $nodosTecnoParque = NodoTecnoparque::select('nodos_tecnoparque.id as value', 'nodos_tecnoparque.nombre as label')->join('centros_formacion', 'nodos_tecnoparque.centro_formacion_id', 'centros_formacion.id')->get();
-        }
-
         return Inertia::render('Convocatorias/Proyectos/Tp/Edit', [
-            'convocatoria'       => $convocatoria->only('id', 'esta_activa', 'fase_formateada', 'fase', 'tipo_convocatoria', 'min_fecha_inicio_proyectos_tp', 'max_fecha_finalizacion_proyectos_tp', 'fecha_maxima_tp', 'mostrar_recomendaciones'),
-            'tp'                 => $tp,
-            'regionales'         => Regional::select('id as value', 'nombre as label', 'codigo')->orderBy('nombre')->get(),
-            'proyectoMunicipios' => $tp->proyecto->municipios()->select('municipios.id as value', 'municipios.nombre as label', 'regionales.nombre as group', 'regionales.codigo')->join('regionales', 'regionales.id', 'municipios.regional_id')->get(),
-            'nodosTecnoParque'   => $nodosTecnoParque,
-            'versiones'          => $tp->proyecto->PdfVersiones,
+            'convocatoria'          => $convocatoria->only('id', 'esta_activa', 'fase_formateada', 'fase', 'tipo_convocatoria', 'min_fecha_inicio_proyectos_tp', 'max_fecha_finalizacion_proyectos_tp', 'fecha_maxima_tp', 'mostrar_recomendaciones'),
+            'tp'                    => $tp,
+            'regionales'            => Regional::select('id as value', 'nombre as label', 'codigo')->orderBy('nombre')->get(),
+            'lineasProgramaticas'   => LineaProgramatica::selectRaw('id as value, concat(nombre, \' ∙ \', codigo) as label, codigo')->where('lineas_programaticas.categoria_proyecto', 1)->get(),
+            'municipios'            => Municipio::select('municipios.id as value', 'municipios.nombre as label', 'regionales.nombre as group', 'regionales.codigo')->join('regionales', 'regionales.id', 'municipios.regional_id')->get(),
+            'proyectoMunicipios'    => $tp->proyecto->municipios()->select('municipios.id as value', 'municipios.nombre as label', 'regionales.nombre as group', 'regionales.codigo')->join('regionales', 'regionales.id', 'municipios.regional_id')->get(),
+            'nodosTecnoparque'      => NodoTecnoparque::select('nodos_tecnoparque.id as value', 'nodos_tecnoparque.nombre as label')->where('nodos_tecnoparque.centro_formacion_id', $tp->proyecto->centroFormacion->id)->get(),
+            'versiones'             => $tp->proyecto->PdfVersiones,
         ]);
     }
 

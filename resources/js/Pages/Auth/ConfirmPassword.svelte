@@ -13,8 +13,6 @@
 
     export let errors
 
-    let sending = false
-
     let form = useForm({
         password: '',
     })
@@ -34,6 +32,6 @@
     </div>
 
     <div class="flex justify-end mt-4">
-        <LoadingButton bind:loading={sending} type="submit">Confirmar</LoadingButton>
+        <LoadingButton loading={$form.processing} type="submit">Confirmar</LoadingButton>
     </div>
 </form>

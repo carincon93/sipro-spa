@@ -3,7 +3,7 @@
     import { route, checkRole, checkPermission } from '@/Utils'
     import { _ } from 'svelte-i18n'
 
-    import Button from '@/Shared/Button'
+    import LoadingButton from '@/Shared/LoadingButton'
     import Input from '@/Shared/Input'
     import Label from '@/Shared/Label'
     import PercentageProgress from '@/Shared/PercentageProgress'
@@ -13,7 +13,6 @@
     export let proyecto
     export let anexo
     export let proyectoAnexo
-    export let sending = false
 
     /**
      * Validar si el usuario autenticado es SuperAdmin
@@ -27,10 +26,8 @@
     })
 
     function submit() {
-        if ((isSuperAdmin && !sending) || (checkPermission(authUser, [1, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 17, 18, 19]) && proyecto.modificable == true && !sending)) {
+        if ((isSuperAdmin) || (checkPermission(authUser, [1, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 17, 18, 19]) && proyecto.modificable == true && $form.processing)) {
             $form.post(route('convocatorias.proyectos.proyecto-anexos.store', [convocatoria.id, proyecto.id]), {
-                onStart: () => (sending = true),
-                onFinish: () => (sending = false),
                 preserveScroll: true,
             })
         }
@@ -55,15 +52,15 @@
             </span>
         </a>
     {/if}
-    <fieldset disabled={(isSuperAdmin && !sending) || (checkPermission(authUser, [1, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 17, 18, 19]) && proyecto.modificable == true && anexo.habilitado == true) ? undefined : true}>
+    <fieldset disabled={isSuperAdmin || (checkPermission(authUser, [1, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 17, 18, 19]) && proyecto.modificable == true && anexo.habilitado == true) ? undefined : true}>
         <div class="mt-20">
             <Label value="Url del archivo/anexo" />
             <Input type="url" class="mt-1" error={errors?.archivo} placeholder="Url https://www.google.com.co" bind:value={$form.archivo} required />
         </div>
         <div>
-            <Button loading={sending} class="w-full mt-4" type="submit">
+            <LoadingButton loading={$form.processing} class="w-full mt-4" type="submit">
                 Cargar {anexo.nombre}
-            </Button>
+            </LoadingButton>
         </div>
         {#if $form.progress}
             <PercentageProgress percentage={$form.progress.percentage} />

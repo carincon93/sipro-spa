@@ -42,7 +42,7 @@
     }
 
     let formId
-    let sending = false
+
     let dialogOpen = false
     let dialogTitle
     let codigo
@@ -115,15 +115,10 @@
                     impacto: $formImpacto.id,
                 }),
                 {
-                    onStart: () => {
-                        sending = true
-                    },
                     onSuccess: () => {
                         closeDialog()
                     },
-                    onFinish: () => {
-                        sending = false
-                    },
+
                     preserveScroll: true,
                 },
             )
@@ -174,15 +169,10 @@
                     resultado: $formResultado.id,
                 }),
                 {
-                    onStart: () => {
-                        sending = true
-                    },
                     onSuccess: () => {
                         closeDialog()
                     },
-                    onFinish: () => {
-                        sending = false
-                    },
+
                     preserveScroll: true,
                 },
             )
@@ -217,15 +207,10 @@
     function submitObjetivoGeneral() {
         if (isSuperAdmin || (checkPermission(authUser, [1, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 17, 18, 19]) && proyecto.modificable == true)) {
             $formObjetivoGeneral.post(route('proyectos.objetivo-general', proyecto.id), {
-                onStart: () => {
-                    sending = true
-                },
                 onSuccess: () => {
                     closeDialog()
                 },
-                onFinish: () => {
-                    sending = false
-                },
+
                 preserveScroll: true,
             })
         }
@@ -263,15 +248,10 @@
                     objetivo_especifico: $formObjetivoEspecifico.id,
                 }),
                 {
-                    onStart: () => {
-                        sending = true
-                    },
                     onSuccess: () => {
                         closeDialog()
                     },
-                    onFinish: () => {
-                        sending = false
-                    },
+
                     preserveScroll: true,
                 },
             )
@@ -330,16 +310,10 @@
                         actividad: $formActividad.id,
                     }),
                     {
-                        onStart: () => {
-                            sending = true
-                        },
                         onSuccess: () => {
                             closeDialog()
                         },
-                        onFinish: () => {
-                            sending = false
-                        },
-                        preserveScroll: true,
+                        serveScroll: true,
                     },
                 )
             }
@@ -464,8 +438,8 @@
     <h1 class="text-3xl {to_pdf ? '' : 'mt-24'} mb-8 text-center">Árbol de objetivos</h1>
     <p class="text-center">El árbol de objetivos se obtiene al transformar en positivo el árbol de problemas manteniendo la misma estructura y niveles de jerarquía.</p>
 
-    <RecomendacionEvaluador class="mt-8">
-        {#if isSuperAdmin || proyecto.mostrar_recomendaciones}
+    {#if isSuperAdmin || proyecto.mostrar_recomendaciones}
+        <RecomendacionEvaluador class="mt-8">
             {#each proyecto.evaluaciones as evaluacion, i}
                 {#if isSuperAdmin || (evaluacion.finalizado && evaluacion.habilitado)}
                     <div class="bg-zinc-900 p-4 rounded shadow text-white my-2">
@@ -518,8 +492,8 @@
                     </div>
                 {/if}
             {/each}
-        {/if}
-    </RecomendacionEvaluador>
+        </RecomendacionEvaluador>
+    {/if}
 
     <div class="mt-16 relative" bind:this={containerArbol}>
         <div class="flex opacity-50 absolute" style="height: {containerArbol?.offsetHeight}px; top: 0;">
@@ -983,10 +957,10 @@
                 {/if}
             {/if}
         </div>
-        <div slot="actions" class="block flex w-full">
+        <div slot="actions" class="flex w-full">
             <Button on:click={closeDialog} type="button" variant={null}>Cancelar</Button>
             {#if (isSuperAdmin && formId) || (checkPermission(authUser, [1, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 17, 18, 19]) && proyecto.modificable == true && formId)}
-                <LoadingButton loading={sending} class="btn-gray ml-auto" type="submit" form={formId}>Guardar</LoadingButton>
+                <LoadingButton loading={$formImpacto.processing} class="btn-gray ml-auto" type="submit" form={formId}>Guardar</LoadingButton>
             {/if}
         </div>
     </Dialog>

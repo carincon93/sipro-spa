@@ -14,7 +14,7 @@
 </script>
 
 <div class="bg-cyan-500 mb-12 p-8 text-white shadow-inner transition delay-150 duration-300 ease-in-out {hideFiles ? 'hide-files' : 'min-h-screen max-h-screen overflow-y-scroll'}">
-    <div class="bg-files {hideFiles ? 'hidden' : ''}">
+    <div class="min-h-screen bg-files{hideFiles ? ' hidden' : ''}">
         <div class="grid grid-cols-3">
             <div>
                 <h1 class="font-black text-6xl uppercase sticky top-0">Lista de archivos del proyecto</h1>

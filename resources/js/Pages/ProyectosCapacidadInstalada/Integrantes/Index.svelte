@@ -38,6 +38,9 @@
     let authUser = $page.props.auth.user
     let isSuperAdmin = checkRole(authUser, [1])
 
+    let isDinamizadorSennova = proyectoCapacidadInstalada.estado_proyecto != 'Finalizado' && checkRole(authUser, [4]) && proyectoCapacidadInstalada.semillero_investigacion.linea_investigacion.grupo_investigacion.centro_formacion.id && authUser.centro_formacion_id
+    let isAutorPrincipal = proyectoCapacidadInstalada.estado_proyecto != 'Finalizado' && checkRole(authUser, [6]) && authUser.id == autorPrincipal.id
+
     /**
      * Buscar
      */
@@ -47,27 +50,24 @@
     let formID
     let dialogOpen = false
     let dialogTitle
-    let sending = false
+
     let sended = false
     function search() {
-        if (isSuperAdmin || (proyectoCapacidadInstalada.estado_proyecto != 'Finalizado' && checkRole(authUser, [4]) && proyectoCapacidadInstalada.semillero_investigacion.linea_investigacion.grupo_investigacion.centro_formacion.id && authUser.centro_formacion_id) || (proyectoCapacidadInstalada.estado_proyecto != 'Finalizado' && checkRole(authUser, [6]) && authUser.id == autorPrincipal.id)) {
-            sending = true
+        if (isSuperAdmin || isDinamizadorSennova || isAutorPrincipal) {
             sended = false
             axios
                 .post(route('proyectos-capacidad-instalada.integrantes.users', proyectoCapacidadInstalada.id), $form)
                 .then((response) => {
                     resultados = response.data
-                    sending = false
                     sended = true
                 })
                 .catch((error) => {
-                    sending = false
                 })
         }
     }
 
     function removeParticipante(id) {
-        if (isSuperAdmin || (proyectoCapacidadInstalada.estado_proyecto != 'Finalizado' && checkRole(authUser, [4]) && proyectoCapacidadInstalada.semillero_investigacion.linea_investigacion.grupo_investigacion.centro_formacion.id && authUser.centro_formacion_id) || (proyectoCapacidadInstalada.estado_proyecto != 'Finalizado' && checkRole(authUser, [6]) && authUser.id == autorPrincipal.id)) {
+        if (isSuperAdmin || isDinamizadorSennova || isAutorPrincipal) {
             Inertia.post(route('proyectos-capacidad-instalada.integrantes.users.unlink', proyectoCapacidadInstalada.id), { user_id: id, _method: 'DELETE' }, { preserveScroll: true })
         }
     }
@@ -101,17 +101,12 @@
     }
 
     function submitParticipante() {
-        if (isSuperAdmin || (proyectoCapacidadInstalada.estado_proyecto != 'Finalizado' && checkRole(authUser, [4]) && proyectoCapacidadInstalada.semillero_investigacion.linea_investigacion.grupo_investigacion.centro_formacion.id && authUser.centro_formacion_id) || (proyectoCapacidadInstalada.estado_proyecto != 'Finalizado' && checkRole(authUser, [6]) && authUser.id == autorPrincipal.id)) {
+        if (isSuperAdmin || isDinamizadorSennova || isAutorPrincipal) {
             $formParticipante.post(route('proyectos-capacidad-instalada.integrantes.users.link', proyectoCapacidadInstalada.id), {
-                onStart: () => {
-                    sending = true
-                },
                 onSuccess: () => {
                     closeDialog()
                 },
-                onFinish: () => {
-                    sending = false
-                },
+
                 preserveScroll: true,
             })
         }
@@ -143,17 +138,12 @@
     }
 
     function submitRegister() {
-        if (isSuperAdmin || (proyectoCapacidadInstalada.estado_proyecto != 'Finalizado' && checkRole(authUser, [4]) && proyectoCapacidadInstalada.semillero_investigacion.linea_investigacion.grupo_investigacion.centro_formacion.id && authUser.centro_formacion_id) || (proyectoCapacidadInstalada.estado_proyecto != 'Finalizado' && checkRole(authUser, [6]) && authUser.id == autorPrincipal.id)) {
+        if (isSuperAdmin || isDinamizadorSennova || isAutorPrincipal) {
             $formNuevoIntegrante.post(route('proyectos-capacidad-instalada.integrantes.users.register', proyectoCapacidadInstalada.id), {
-                onStart: () => {
-                    sending = true
-                },
                 onSuccess: () => {
                     closeDialog()
                 },
-                onFinish: () => {
-                    sending = false
-                },
+
                 preserveScroll: true,
             })
         }
@@ -170,7 +160,6 @@
         reset()
         dialogOpen = false
         openNuevoParticipanteDialog = false
-        sending = false
     }
 
     let nuevoAutorPrinciaplId = null
@@ -190,17 +179,12 @@
     }
 
     function submitNuevoAutorPrincipal() {
-        if (isSuperAdmin || authUser.id == autorPrincipal.id) {
+        if (isSuperAdmin || isAutorPrincipal) {
             Inertia.post(route('proyectos-capacidad-instalada.nuevo-autor-principal', [proyectoCapacidadInstalada.id, nuevoAutorPrinciaplId]), [], {
-                onStart: () => {
-                    sending = true
-                },
                 onSuccess: () => {
                     dialogAutorPrincipal = false
                 },
-                onFinish: () => {
-                    sending = false
-                },
+
                 preserveScroll: true,
             })
         }
@@ -212,17 +196,17 @@
         <div class="flex items-center justify-between lg:px-8 max-w-7xl mx-auto px-4 py-6 sm:px-6">
             <div>
                 <h1>
-                    <a use:inertia href={route('proyectos-capacidad-instalada.index')} class="text-indigo-400 hover:text-indigo-600"> Proyectos de capacidad instalada </a>
-                    <span class="text-indigo-400 font-medium">/</span>
-                    <a use:inertia href={route('proyectos-capacidad-instalada.edit', proyectoCapacidadInstalada.id)} class="text-indigo-400 hover:text-indigo-600">Información básica</a>
-                    <span class="text-indigo-400 font-medium">/</span>
-                    <a use:inertia href={route('proyectos-capacidad-instalada.integrantes.index', proyectoCapacidadInstalada.id)} class="text-indigo-400 hover:text-indigo-600 font-extrabold underline">Integrantes</a>
-                    <span class="text-indigo-400 font-medium">/</span>
-                    <a use:inertia href={route('proyectos-capacidad-instalada.objetivos-especificos.index', proyectoCapacidadInstalada.id)} class="text-indigo-400 hover:text-indigo-600">Objetivos específicos y resultados</a>
-                    <span class="text-indigo-400 font-medium">/</span>
-                    <a use:inertia href={route('proyectos-capacidad-instalada.productos.index', proyectoCapacidadInstalada.id)} class="text-indigo-400 hover:text-indigo-600">Productos</a>
-                    <span class="text-indigo-400 font-medium">/</span>
-                    <a use:inertia href={route('proyectos-capacidad-instalada.finalizar', proyectoCapacidadInstalada.id)} class="text-indigo-400 hover:text-indigo-600">Estado</a>
+                    <a use:inertia href={route('proyectos-capacidad-instalada.index')} class="text-cyan-400 hover:text-cyan-600"> Proyectos de capacidad instalada </a>
+                    <span class="text-cyan-400 font-medium">/</span>
+                    <a use:inertia href={route('proyectos-capacidad-instalada.edit', proyectoCapacidadInstalada.id)} class="text-cyan-400 hover:text-cyan-600">Información básica</a>
+                    <span class="text-cyan-400 font-medium">/</span>
+                    <a use:inertia href={route('proyectos-capacidad-instalada.integrantes.index', proyectoCapacidadInstalada.id)} class="text-cyan-400 hover:text-cyan-600 font-extrabold underline">Integrantes</a>
+                    <span class="text-cyan-400 font-medium">/</span>
+                    <a use:inertia href={route('proyectos-capacidad-instalada.objetivos-especificos.index', proyectoCapacidadInstalada.id)} class="text-cyan-400 hover:text-cyan-600">Objetivos específicos y resultados</a>
+                    <span class="text-cyan-400 font-medium">/</span>
+                    <a use:inertia href={route('proyectos-capacidad-instalada.productos.index', proyectoCapacidadInstalada.id)} class="text-cyan-400 hover:text-cyan-600">Productos</a>
+                    <span class="text-cyan-400 font-medium">/</span>
+                    <a use:inertia href={route('proyectos-capacidad-instalada.finalizar', proyectoCapacidadInstalada.id)} class="text-cyan-400 hover:text-cyan-600">Estado</a>
                 </h1>
             </div>
         </div>
@@ -235,15 +219,15 @@
         Ir a los objetivos específicos y resultados
     </a>
 
-    {#if isSuperAdmin || (proyectoCapacidadInstalada.estado_proyecto != 'Finalizado' && checkRole(authUser, [4]) && proyectoCapacidadInstalada.semillero_investigacion.linea_investigacion.grupo_investigacion.centro_formacion.id && authUser.centro_formacion_id) || (proyectoCapacidadInstalada.estado_proyecto != 'Finalizado' && checkRole(authUser, [6]) && authUser.id == autorPrincipal.id)}
-        <div class="bg-indigo-100 p-4">
+    {#if isSuperAdmin || isDinamizadorSennova || isAutorPrincipal}
+        <div class="bg-cyan-100 p-4">
             <h1 class="text-4xl text-center">Integrantes</h1>
             <p class="text-center m-auto mt-8">Realice la búsqueda de integrantes por nombre, número de documento o por el correo electrónico institucional</p>
             <form on:submit|preventDefault={search} on:input={() => (sended = false)}>
                 <fieldset>
                     <div class="mt-4 flex flex-row">
                         <Input label="Escriba el nombre, número de documento o el correo electrónico instiucional" id="search_integrante" type="search" class="mt-1 m-auto block flex-1" bind:value={$form.search_integrante} input$minLength="4" autocomplete="off" required />
-                        <LoadingButton loading={sending} class="btn-indigo m-auto ml-1" type="submit">Buscar</LoadingButton>
+                        <LoadingButton loading={$form.processing} class="m-auto ml-1" type="submit">Buscar</LoadingButton>
                     </div>
                 </fieldset>
             </form>
@@ -360,7 +344,7 @@
                         </td>
                         <td class="border-t td-actions">
                             <DataTableMenu class={proyectoCapacidadInstalada.integrantes.length < 4 ? 'z-50' : ''}>
-                                {#if isSuperAdmin || (proyectoCapacidadInstalada.estado_proyecto != 'Finalizado' && checkRole( authUser, [4], ) && proyectoCapacidadInstalada.semillero_investigacion.linea_investigacion.grupo_investigacion.centro_formacion.id && authUser.centro_formacion_id) || (proyectoCapacidadInstalada.estado_proyecto != 'Finalizado' && checkRole( authUser, [6], ) && authUser.id == autorPrincipal.id)}
+                                {#if isSuperAdmin || isDinamizadorSennova || isAutorPrincipal}
                                     <Item on:SMUI:action={() => showParticipante(integrante)}>
                                         <Text>Editar</Text>
                                     </Item>
@@ -401,7 +385,7 @@
     </InfoMessage>
 
     {#if existenciaDocumentos}
-        {#if isSuperAdmin || (proyectoCapacidadInstalada.estado_proyecto != 'Finalizado' && checkRole(authUser, [4]) && proyectoCapacidadInstalada.semillero_investigacion.linea_investigacion.grupo_investigacion.centro_formacion.id && authUser.centro_formacion_id) || (proyectoCapacidadInstalada.estado_proyecto != 'Finalizado' && checkRole(authUser, [6]) && authUser.id == autorPrincipal.id)}
+        {#if isSuperAdmin || isDinamizadorSennova || isAutorPrincipal}
             <div class="mb-6 flex justify-between items-center mt-4">
                 <Button on:click={() => Inertia.visit(route('proyectos-capacidad-instalada.entidades-aliadas.create', [proyectoCapacidadInstalada.id]))} variant="raised">Crear entidad aliada</Button>
             </div>
@@ -474,13 +458,7 @@
         </div>
         <div slot="content">
             <form on:submit|preventDefault={submitParticipante} id="integrante-form">
-                <fieldset
-                    disabled={isSuperAdmin ||
-                    (proyectoCapacidadInstalada.estado_proyecto != 'Finalizado' && checkRole(authUser, [4]) && proyectoCapacidadInstalada.semillero_investigacion.linea_investigacion.grupo_investigacion.centro_formacion.id && authUser.centro_formacion_id) ||
-                    (proyectoCapacidadInstalada.estado_proyecto != 'Finalizado' && checkRole(authUser, [6]) && authUser.id == autorPrincipal.id)
-                        ? undefined
-                        : true}
-                >
+                <fieldset disabled={isSuperAdmin || isDinamizadorSennova || isAutorPrincipal ? undefined : true}>
                     <div class="mt-8">
                         <Label required class="mb-4" labelFor="rol_sennova" value="Rol SENNOVA" />
                         <Select id="rol_sennova" items={roles} bind:selectedValue={$formParticipante.rol_sennova} error={errors.rol_sennova} autocomplete="off" placeholder="Seleccione un rol SENNOVA" required />
@@ -499,7 +477,7 @@
             <Button on:click={closeDialog} type="button" variant={null}>
                 {$_('Cancel')}
             </Button>
-            <LoadingButton loading={sending} class="btn-indigo ml-auto" type="submit" form={formID}>Vincular</LoadingButton>
+            <LoadingButton loading={$formParticipante.processing} class="ml-auto" type="submit" form={formID}>Vincular</LoadingButton>
         </div>
     </Dialog>
 
@@ -584,7 +562,7 @@
             <Button on:click={closeDialog} type="button" variant={null}>
                 {$_('Cancel')}
             </Button>
-            <LoadingButton loading={sending} class="btn-indigo ml-auto" type="submit" form={formNuevoIntegranteId}>
+            <LoadingButton loading={$formNuevoIntegrante.processing} class="ml-auto" type="submit" form={formNuevoIntegranteId}>
                 {$_('Save')}
             </LoadingButton>
         </div>
@@ -607,13 +585,3 @@
         </div>
     </Dialog>
 </AuthenticatedLayout>
-
-<style>
-    :global(#nuevo-integrante-dialog .mdc-dialog__surface) {
-        max-width: 1050px;
-    }
-
-    :global(#integrante-dialog .mdc-dialog__surface) {
-        max-width: 1050px;
-    }
-</style>

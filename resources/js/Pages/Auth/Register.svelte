@@ -22,8 +22,6 @@
     export let tiposVinculacion
     export let roles
 
-    let sending = false
-
     let form = useForm({
         nombre: '',
         email: '',
@@ -117,6 +115,6 @@
             {$_('Already registered?')}
         </a>
 
-        <LoadingButton bind:loading={sending} type="submit" bind:disabled={$form.autorizacion_datos}>{$_('Register')}</LoadingButton>
+        <LoadingButton loading={$form.processing} type="submit" bind:disabled={$form.autorizacion_datos}>{$_('Register')}</LoadingButton>
     </div>
 </form>

@@ -26,7 +26,6 @@
     let authUser = $page.props.auth.user
     let isSuperAdmin = checkRole(authUser, [1])
 
-    let sending = false
     let form = useForm({
         centro_formacion_id: null,
         linea_investigacion_id: null,
@@ -49,10 +48,7 @@
 
     function submit() {
         if (isSuperAdmin || checkPermissionByUser(authUser, [11]) || checkPermission(authUser, [11])) {
-            $form.post(route('convocatorias.cultura-innovacion.store', [convocatoria.id]), {
-                onStart: () => (sending = true),
-                onFinish: () => (sending = false),
-            })
+            $form.post(route('convocatorias.cultura-innovacion.store', [convocatoria.id]))
         }
     }
 </script>
@@ -202,7 +198,7 @@
 
         <div class="px-8 py-4 bg-gray-100 border-t border-gray-200 flex items-center sticky bottom-0">
             {#if isSuperAdmin || checkPermissionByUser(authUser, [11]) || checkPermission(authUser, [11])}
-                <LoadingButton loading={sending} class="btn-indigo ml-auto" type="submit">
+                <LoadingButton loading={$form.processing} class="ml-auto" type="submit">
                     {$_('Continue')}
                 </LoadingButton>
             {/if}

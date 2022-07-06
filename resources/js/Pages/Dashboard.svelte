@@ -158,7 +158,7 @@
         </div>
         <div slot="actions">
             <div class="p-4">
-                <Button variant="raised" on:click={(event) => (dialogOpen = false)}>Entendido</Button>
+                <Button variant="raised" on:click={() => (dialogOpen = false)}>Entendido</Button>
             </div>
         </div>
     </Dialog>

@@ -14,6 +14,7 @@
     import InfoMessage from '@/Shared/InfoMessage'
     import Select from '@/Shared/Select'
     import DynamicList from '@/Shared/Dropdowns/DynamicList'
+    import RecomendacionEvaluador from '@/Shared/RecomendacionEvaluador'
 
     export let errors
     export let convocatoria
@@ -32,7 +33,7 @@
     let isSuperAdmin = checkRole(authUser, [1])
 
     let dialogOpen = false
-    let sending = false
+
     let form = useForm({
         _method: 'put',
         codigo_uso_presupuestal: '',
@@ -59,8 +60,6 @@
     function submit() {
         if (isSuperAdmin || (checkPermission(authUser, [3, 4, 6, 7, 9, 10, 12, 13, 18, 19]) && proyecto.modificable == true)) {
             $form.post(route('convocatorias.proyectos.presupuesto.update', [convocatoria.id, proyecto.id, proyectoPresupuesto.id]), {
-                onStart: () => (sending = true),
-                onFinish: () => (sending = false),
                 preserveScroll: true,
             })
         }
@@ -101,9 +100,26 @@
         </div>
     </header>
 
-    <div class="flex">
-        <div class="bg-white rounded shadow max-w-3xl flex-1">
-            <form on:submit|preventDefault={submit} id="form-proyecto-presupuesto">
+    <div class="grid grid-cols-3">
+        <div>
+            <h1 class="font-black text-4xl sticky top-0 uppercase">Presupuesto</h1>
+        </div>
+        <div class="col-span-2">
+            {#if isSuperAdmin || proyecto.mostrar_recomendaciones}
+                <RecomendacionEvaluador class="w-1/3">
+                    {#each proyectoPresupuesto.proyecto_presupuestos_evaluaciones as evaluacionPresupuesto, i}
+                        <div class="bg-zinc-900 p-4 rounded shadow text-white my-2">
+                            <p class="text-xs">Evaluador COD-{evaluacionPresupuesto.evaluacion.id}:</p>
+                            {#if evaluacionPresupuesto.correcto == false && evaluacionPresupuesto.evaluacion.habilitado}
+                                <p class="whitespace-pre-line text-xs">{evaluacionPresupuesto.comentario ? evaluacionPresupuesto.comentario : 'Sin recomendación'}</p>
+                            {:else}
+                                Aprobado
+                            {/if}
+                        </div>
+                    {/each}
+                </RecomendacionEvaluador>
+            {/if}
+            <form on:submit|preventDefault={submit} id="form-proyecto-presupuesto" class="bg-white rounded shadow">
                 <fieldset class="p-8" disabled={isSuperAdmin || (checkPermission(authUser, [3, 4, 6, 7, 9, 10, 12, 13, 18, 19]) && proyecto.modificable == true) ? undefined : true}>
                     <div class="mt-4">
                         <Label required labelFor="segundo_grupo_presupuestal_id" value="Homologable 2018" />
@@ -206,12 +222,12 @@
 
                 <div class="px-8 py-4 bg-gray-100 border-t border-gray-200 flex items-center sticky bottom-0">
                     {#if isSuperAdmin || (checkPermission(authUser, [4, 7, 10, 13, 19]) && proyecto.modificable == true)}
-                        <button class="text-red-600 hover:underline text-left" tabindex="-1" type="button" on:click={(event) => (dialogOpen = true)}> Eliminar ítem </button>
+                        <button class="text-red-600 hover:underline text-left" tabindex="-1" type="button" on:click={() => (dialogOpen = true)}> Eliminar ítem </button>
                     {/if}
 
                     {#if isSuperAdmin || (checkPermission(authUser, [3, 4, 6, 7, 9, 10, 12, 13, 18, 19]) && proyecto.modificable == true)}
                         {#if $form.convocatoria_presupuesto_id != '' || $form.convocatoria_presupuesto_id != ''}
-                            <LoadingButton loading={sending} class="btn-indigo ml-auto" type="submit">Editar presupuesto</LoadingButton>
+                            <LoadingButton loading={$form.processing} class="ml-auto" type="submit">Editar presupuesto</LoadingButton>
                         {/if}
                     {/if}
                 </div>
@@ -234,25 +250,6 @@
                     </li>
                 </ul>
             {/if}
-            <div class="ml-1.5">
-                {#if isSuperAdmin || proyecto.mostrar_recomendaciones}
-                    {#each proyectoPresupuesto.proyecto_presupuestos_evaluaciones as evaluacionPresupuesto, i}
-                        <div class="bg-gray-200 p-4 rounded border-orangered border mb-5">
-                            <div class="flex text-orangered-900 font-black">
-                                <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 mr-1.5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2m-3 7h3m-3 4h3m-6-4h.01M9 16h.01" />
-                                </svg>
-                                Recomendación del evaluador COD-{evaluacionPresupuesto.evaluacion.id}:
-                            </div>
-                            {#if evaluacionPresupuesto.correcto == false && evaluacionPresupuesto.evaluacion.habilitado}
-                                <p class="whitespace-pre-line">{evaluacionPresupuesto.comentario ? evaluacionPresupuesto.comentario : 'Sin recomendación'}</p>
-                            {:else}
-                                Aprobado
-                            {/if}
-                        </div>
-                    {/each}
-                {/if}
-            </div>
         </div>
     </div>
 
@@ -309,7 +306,7 @@
         </div>
         <div slot="actions">
             <div class="p-4">
-                <Button on:click={(event) => (dialogOpen = false)} variant={null}>Cancelar</Button>
+                <Button on:click={() => (dialogOpen = false)} variant={null}>Cancelar</Button>
                 <Button variant="raised" on:click={destroy}>Confirmar</Button>
             </div>
         </div>

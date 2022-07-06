@@ -38,9 +38,11 @@
     let authUser = $page.props.auth.user
     let isSuperAdmin = checkRole(authUser, [1])
 
+    let isDinamizadorSennova = proyectoCapacidadInstalada.estado_proyecto != 'Finalizado' && checkRole(authUser, [4]) && proyectoCapacidadInstalada.semillero_investigacion.linea_investigacion.grupo_investigacion.centro_formacion.id && authUser.centro_formacion_id
+    let isAutorPrincipal = proyectoCapacidadInstalada.estado_proyecto != 'Finalizado' && checkRole(authUser, [6]) && authUser.id == autorPrincipal.id
+
     let dialogOpen = false
     let proyectoDialogOpen = true
-    let sending = false
 
     let formBibliografia = useForm({
         bibliografia: proyectoCapacidadInstalada.bibliografia,
@@ -106,30 +108,26 @@
     })
 
     function submit() {
-        if (isSuperAdmin || (proyectoCapacidadInstalada.estado_proyecto != 'Finalizado' && checkRole(authUser, [4]) && proyectoCapacidadInstalada.semillero_investigacion.linea_investigacion.grupo_investigacion.centro_formacion.id && authUser.centro_formacion_id) || (proyectoCapacidadInstalada.estado_proyecto != 'Finalizado' && checkRole(authUser, [6]) && authUser.id == autorPrincipal.id)) {
-            $form.put(route('proyectos-capacidad-instalada.update', proyectoCapacidadInstalada.id), {
-                onStart: () => (sending = true),
-                onFinish: () => (sending = false),
-            })
+        if (isSuperAdmin || isDinamizadorSennova || isAutorPrincipal) {
+            $form.put(route('proyectos-capacidad-instalada.update', proyectoCapacidadInstalada.id))
         }
     }
 
     function destroy() {
-        if (isSuperAdmin || (proyectoCapacidadInstalada.estado_proyecto != 'Finalizado' && checkRole(authUser, [4]) && proyectoCapacidadInstalada.semillero_investigacion.linea_investigacion.grupo_investigacion.centro_formacion.id && authUser.centro_formacion_id) || (checkRole(authUser, [6]) && authUser.id == autorPrincipal.id)) {
+        if (isSuperAdmin || isDinamizadorSennova || isAutorPrincipal) {
             $form.delete(route('proyectos-capacidad-instalada.destroy', [proyectoCapacidadInstalada.id]))
         }
     }
 
     async function syncColumnLong(column, form) {
         return new Promise((resolve) => {
-            if ((typeof column !== 'undefined' && typeof form !== 'undefined' && isSuperAdmin) || (typeof column !== 'undefined' && typeof form !== 'undefined' && checkRole(authUser, [6]) && authUser.id == autorPrincipal.id)) {
+            if ((typeof column !== 'undefined' && typeof form !== 'undefined' && isSuperAdmin) || (typeof column !== 'undefined' && typeof form !== 'undefined' && isAutorPrincipal)) {
                 Inertia.put(
                     route('proyectos-capacidad-instalada.updateLongColumn', [proyectoCapacidadInstalada.id, column]),
                     { [column]: form[column] },
                     {
-                        onStart: () => (sending = true),
-                        onError: (resp) => ((sending = false), resolve(resp)),
-                        onFinish: () => ((sending = false), resolve({})),
+                        onError: (resp) => (resolve(resp)),
+                        onFinish: () => (resolve({})),
                         preserveScroll: true,
                     },
                 )
@@ -164,29 +162,24 @@
         <div class="flex items-center justify-between lg:px-8 max-w-7xl mx-auto px-4 py-6 sm:px-6">
             <div>
                 <h1>
-                    <a use:inertia href={route('proyectos-capacidad-instalada.index')} class="text-indigo-400 hover:text-indigo-600"> Proyectos de capacidad instalada </a>
-                    <span class="text-indigo-400 font-medium">/</span>
-                    <a use:inertia href={route('proyectos-capacidad-instalada.edit', proyectoCapacidadInstalada.id)} class="text-indigo-400 hover:text-indigo-600 font-extrabold underline">Información básica</a>
-                    <span class="text-indigo-400 font-medium">/</span>
-                    <a use:inertia href={route('proyectos-capacidad-instalada.integrantes.index', proyectoCapacidadInstalada.id)} class="text-indigo-400 hover:text-indigo-600">Integrantes</a>
-                    <span class="text-indigo-400 font-medium">/</span>
-                    <a use:inertia href={route('proyectos-capacidad-instalada.objetivos-especificos.index', proyectoCapacidadInstalada.id)} class="text-indigo-400 hover:text-indigo-600">Objetivos específicos y resultados</a>
-                    <span class="text-indigo-400 font-medium">/</span>
-                    <a use:inertia href={route('proyectos-capacidad-instalada.productos.index', proyectoCapacidadInstalada.id)} class="text-indigo-400 hover:text-indigo-600">Productos</a>
-                    <span class="text-indigo-400 font-medium">/</span>
-                    <a use:inertia href={route('proyectos-capacidad-instalada.finalizar', proyectoCapacidadInstalada.id)} class="text-indigo-400 hover:text-indigo-600">Estado</a>
+                    <a use:inertia href={route('proyectos-capacidad-instalada.index')} class="text-cyan-400 hover:text-cyan-600"> Proyectos de capacidad instalada </a>
+                    <span class="text-cyan-400 font-medium">/</span>
+                    <a use:inertia href={route('proyectos-capacidad-instalada.edit', proyectoCapacidadInstalada.id)} class="text-cyan-400 hover:text-cyan-600 font-extrabold underline">Información básica</a>
+                    <span class="text-cyan-400 font-medium">/</span>
+                    <a use:inertia href={route('proyectos-capacidad-instalada.integrantes.index', proyectoCapacidadInstalada.id)} class="text-cyan-400 hover:text-cyan-600">Integrantes</a>
+                    <span class="text-cyan-400 font-medium">/</span>
+                    <a use:inertia href={route('proyectos-capacidad-instalada.objetivos-especificos.index', proyectoCapacidadInstalada.id)} class="text-cyan-400 hover:text-cyan-600">Objetivos específicos y resultados</a>
+                    <span class="text-cyan-400 font-medium">/</span>
+                    <a use:inertia href={route('proyectos-capacidad-instalada.productos.index', proyectoCapacidadInstalada.id)} class="text-cyan-400 hover:text-cyan-600">Productos</a>
+                    <span class="text-cyan-400 font-medium">/</span>
+                    <a use:inertia href={route('proyectos-capacidad-instalada.finalizar', proyectoCapacidadInstalada.id)} class="text-cyan-400 hover:text-cyan-600">Estado</a>
                 </h1>
             </div>
         </div>
     </header>
 
     <form on:submit|preventDefault={submit}>
-        <fieldset
-            class="p-8"
-            disabled={isSuperAdmin || (proyectoCapacidadInstalada.estado_proyecto != 'Finalizado' && checkRole(authUser, [4]) && proyectoCapacidadInstalada.semillero_investigacion.linea_investigacion.grupo_investigacion.centro_formacion.id && authUser.centro_formacion_id) || (proyectoCapacidadInstalada.estado_proyecto != 'Finalizado' && checkRole(authUser, [6]) && authUser.id == autorPrincipal.id)
-                ? undefined
-                : true}
-        >
+        <fieldset class="p-8" disabled={isSuperAdmin || isDinamizadorSennova || isAutorPrincipal ? undefined : true}>
             <div class="mt-28">
                 <Label required labelFor="titulo" class="font-medium inline-block mb-10 text-center text-gray-700 text-sm w-full" value="Descripción llamativa que orienta el enfoque del proyecto, indica el cómo y el para qué. (Máximo 20 palabras)" />
                 <Textarea label="Título" id="titulo" sinContador={true} error={errors.titulo} bind:value={$form.titulo} classes="bg-transparent block border-0 {errors.titulo ? '' : 'outline-none-important'} mt-1 outline-none text-4xl text-center w-full" required />
@@ -439,6 +432,10 @@
                 </div>
             </div>
 
+            <hr class="mt-32 mb-32" />
+
+            <h1 class="text-2xl text-center" id="estructura-proyecto">Participación del autor principal</h1>
+
             <div class="mt-44 grid grid-cols-2">
                 <div>
                     <Label required class="mb-4" labelFor="rol_sennova" value="Rol SENNOVA" />
@@ -472,15 +469,15 @@
         </fieldset>
 
         <div class="px-8 py-4 bg-gray-100 border-t border-gray-200 flex items-center sticky bottom-0">
-            {#if isSuperAdmin || (proyectoCapacidadInstalada.estado_proyecto != 'Finalizado' && checkRole(authUser, [4]) && proyectoCapacidadInstalada.semillero_investigacion.linea_investigacion.grupo_investigacion.centro_formacion.id && authUser.centro_formacion_id) || (proyectoCapacidadInstalada.estado_proyecto != 'Finalizado' && checkRole(authUser, [6]) && authUser.id == autorPrincipal.id)}
-                <button class="text-red-600 hover:underline text-left" tabindex="-1" type="button" on:click={(event) => (dialogOpen = true)}> Eliminar proyecto de capacdad instalada </button>
+            {#if isSuperAdmin || isDinamizadorSennova || isAutorPrincipal}
+                <button class="text-red-600 hover:underline text-left" tabindex="-1" type="button" on:click={() => (dialogOpen = true)}> Eliminar proyecto de capacdad instalada </button>
             {/if}
-            {#if isSuperAdmin || (proyectoCapacidadInstalada.estado_proyecto != 'Finalizado' && checkRole(authUser, [4]) && proyectoCapacidadInstalada.semillero_investigacion.linea_investigacion.grupo_investigacion.centro_formacion.id && authUser.centro_formacion_id) || (proyectoCapacidadInstalada.estado_proyecto != 'Finalizado' && checkRole(authUser, [6]) && authUser.id == autorPrincipal.id)}
-                <LoadingButton loading={sending} class="btn-indigo ml-auto" type="submit">Guardar y continuar</LoadingButton>
+            {#if isSuperAdmin || isDinamizadorSennova || isAutorPrincipal}
+                <LoadingButton loading={$form.processing} class="ml-auto" type="submit">Guardar y continuar</LoadingButton>
             {/if}
         </div>
     </form>
-    {#if isSuperAdmin || (checkRole(authUser, [6]) && authUser.id == autorPrincipal.id)}
+    {#if isSuperAdmin || isAutorPrincipal}
         <Dialog bind:open={dialogOpen}>
             <div slot="title" class="flex items-center">
                 <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 mr-2 text-red-500" fill="none" viewBox="0 0 24 24" stroke="currentColor">
@@ -499,7 +496,7 @@
             </div>
             <div slot="actions">
                 <div class="p-4">
-                    <Button on:click={(event) => (dialogOpen = false)} variant={null}>Cancelar</Button>
+                    <Button on:click={() => (dialogOpen = false)} variant={null}>Cancelar</Button>
                     <Button variant="raised" on:click={destroy}>Confirmar</Button>
                 </div>
             </div>
@@ -531,9 +528,9 @@
             </div>
             <div slot="actions">
                 <div class="p-4">
-                    <Button on:click={(event) => (proyectoDialogOpen = false)} variant={null}>Omitir</Button>
+                    <Button on:click={() => (proyectoDialogOpen = false)} variant={null}>Omitir</Button>
                     {#if proyectoCapacidadInstalada.estado_proyecto != 'Finalizado'}
-                        <Button variant="raised" on:click={(event) => (proyectoDialogOpen = false)} on:click={() => Inertia.visit('#beneficia_a')}>Continuar diligenciando</Button>
+                        <Button variant="raised" on:click={() => (proyectoDialogOpen = false)} on:click={() => Inertia.visit('#beneficia_a')}>Continuar diligenciando</Button>
                     {/if}
                 </div>
             </div>

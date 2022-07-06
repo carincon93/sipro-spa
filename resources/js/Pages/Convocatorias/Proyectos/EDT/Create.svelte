@@ -24,7 +24,6 @@
     let authUser = $page.props.auth.user
     let isSuperAdmin = checkRole(authUser, [1])
 
-    let sending = false
     let form = useForm({
         tipo_evento: '',
         descripcion_evento: '',
@@ -37,10 +36,7 @@
 
     function submit() {
         if (isSuperAdmin || (checkPermission(authUser, [8]) && proyecto.modificable == true)) {
-            $form.post(route('convocatorias.proyectos.edt.store', [convocatoria.id, proyecto.id]), {
-                onStart: () => (sending = true),
-                onFinish: () => (sending = false),
-            })
+            $form.post(route('convocatorias.proyectos.edt.store', [convocatoria.id, proyecto.id]))
         }
     }
 </script>
@@ -95,7 +91,7 @@
             </fieldset>
             <div class="px-8 py-4 bg-gray-100 border-t border-gray-200 flex items-center sticky bottom-0">
                 {#if isSuperAdmin || (checkPermission(authUser, [8]) && proyecto.modificable == true)}
-                    <LoadingButton loading={sending} class="btn-indigo ml-auto" tipo="submit">Crear EDT</LoadingButton>
+                    <LoadingButton loading={$form.processing} class="ml-auto" tipo="submit">Crear EDT</LoadingButton>
                 {/if}
             </div>
         </form>

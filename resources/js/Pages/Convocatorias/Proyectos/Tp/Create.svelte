@@ -24,7 +24,6 @@
     let authUser = $page.props.auth.user
     let isSuperAdmin = checkRole(authUser, [1])
 
-    let sending = false
     let form = useForm({
         centro_formacion_id: null,
         fecha_inicio: null,
@@ -44,14 +43,9 @@
 
     function submit() {
         if (isSuperAdmin || checkPermission(authUser, [17])) {
-            $form.post(route('convocatorias.tp.store', [convocatoria.id]), {
-                onStart: () => (sending = true),
-                onFinish: () => (sending = false),
-            })
+            $form.post(route('convocatorias.tp.store', [convocatoria.id]))
         }
     }
-
-    $: console.log($form.linea_programatica)
 </script>
 
 <AuthenticatedLayout>
@@ -70,8 +64,25 @@
     </header>
 
     <form on:submit|preventDefault={submit}>
-        <fieldset class="p-8">
-            <div class="mt-44">
+        <fieldset class="p-8 divide-y">
+            {#if nodosTecnoParque.length > 0}
+                <div class="py-24">
+                    <div class=" grid grid-cols-2">
+                        <div>
+                            <Label required class="mb-4" labelFor="nodo_tecnoparque_id" value="Nodo Tecnoparque" />
+                        </div>
+                        <div>
+                            <Select id="nodo_tecnoparque_id" items={nodosTecnoParque} bind:selectedValue={$form.nodo_tecnoparque_id} error={errors.nodo_tecnoparque_id} autocomplete="off" placeholder="Seleccione un nodo TecnoParque" required />
+                        </div>
+                    </div>
+                </div>
+            {:else}
+                <div class="py-24">
+                    <InfoMessage message="Su regional no cuenta con nodos TecnoParque." alertMsg={true} />
+                </div>
+            {/if}
+
+            <div class="py-24">
                 <p class="text-center">Fecha de ejecución</p>
                 <small class="text-red-400 block text-center"> * Campo obligatorio </small>
                 <InfoMessage message={convocatoria.fecha_maxima_tp} class="my-5" />
@@ -99,58 +110,48 @@
                 {/if}
             </div>
 
-            {#if nodosTecnoParque.length > 0}
-                <div class="mt-44 grid grid-cols-2">
+            <div class="py-24">
+                <p class="text-center mt-36 mb-8">Información de mi participación en el proyecto</p>
+                <div class=" grid grid-cols-2">
                     <div>
-                        <Label required class="mb-4" labelFor="nodo_tecnoparque_id" value="Nodo Tecnoparque" />
+                        <Label required class="mb-4" labelFor="rol_sennova" value="Rol SENNOVA" />
                     </div>
                     <div>
-                        <Select id="nodo_tecnoparque_id" items={nodosTecnoParque} bind:selectedValue={$form.nodo_tecnoparque_id} error={errors.nodo_tecnoparque_id} autocomplete="off" placeholder="Seleccione un nodo TecnoParque" required />
+                        <Select id="rol_sennova" items={rolesTp} bind:selectedValue={$form.rol_sennova} error={errors.rol_sennova} autocomplete="off" placeholder="Seleccione un rol SENNOVA" required />
                     </div>
-                </div>
-            {:else}
-                <div class="mt-44">
-                    <InfoMessage message="Su regional no cuenta con nodos TecnoParque." alertMsg={true} />
-                </div>
-            {/if}
-
-            <hr class="mt-5 mb-5" />
-
-            <p class="text-center mt-36 mb-8">Información de mi participación en el proyecto</p>
-            <div class="mt-44 grid grid-cols-2">
-                <div>
-                    <Label required class="mb-4" labelFor="rol_sennova" value="Rol SENNOVA" />
-                </div>
-                <div>
-                    <Select id="rol_sennova" items={rolesTp} bind:selectedValue={$form.rol_sennova} error={errors.rol_sennova} autocomplete="off" placeholder="Seleccione un rol SENNOVA" required />
                 </div>
             </div>
+
             {#if $form.fecha_inicio && $form.fecha_finalizacion}
-                <div class="mt-44 grid grid-cols-2">
-                    <div>
-                        <Label required class="mb-4" labelFor="cantidad_meses" value="Número de meses de vinculación al proyecto" />
-                    </div>
-                    <div>
-                        <Input label="Número de meses de vinculación" id="cantidad_meses" type="number" input$step="0.1" input$min="1" input$max={monthDiff($form.fecha_inicio, $form.fecha_finalizacion)} class="mt-1" bind:value={$form.cantidad_meses} error={errors.cantidad_meses} placeholder="Número de meses de vinculación" autocomplete="off" required />
-                        <InfoMessage>Este proyecto será ejecutado en {monthDiff($form.fecha_inicio, $form.fecha_finalizacion)} meses.</InfoMessage>
+                <div class="py-24">
+                    <div class="grid grid-cols-2">
+                        <div>
+                            <Label required class="mb-4" labelFor="cantidad_meses" value="Número de meses de vinculación al proyecto" />
+                        </div>
+                        <div>
+                            <Input label="Número de meses de vinculación" id="cantidad_meses" type="number" input$step="0.1" input$min="1" input$max={monthDiff($form.fecha_inicio, $form.fecha_finalizacion)} class="mt-1" bind:value={$form.cantidad_meses} error={errors.cantidad_meses} placeholder="Número de meses de vinculación" autocomplete="off" required />
+                            <InfoMessage>Este proyecto será ejecutado en {monthDiff($form.fecha_inicio, $form.fecha_finalizacion)} meses.</InfoMessage>
+                        </div>
                     </div>
                 </div>
             {/if}
 
-            <div class="mt-44 grid grid-cols-2">
-                <div>
-                    <Label required class="mb-4" labelFor="cantidad_horas" value="Número de horas semanales dedicadas para el desarrollo del proyecto (basarse en los lineamientos operativos SENNOVA 2021 y en la circular 01-3-2021-000034)" />
-                </div>
-                <div>
-                    <Input label="Número de horas semanales dedicadas para el desarrollo del proyecto" id="cantidad_horas" type="number" input$step="1" input$min="1" input$max={$form.rol_sennova?.maxHoras} class="mt-1" bind:value={$form.cantidad_horas} error={errors.cantidad_horas} placeholder="Número de horas semanales dedicadas para el desarrollo del proyecto" autocomplete="off" required />
-                    <InfoMessage>Horas máximas permitidas para este rol: {$form.rol_sennova?.maxHoras ? $form.rol_sennova?.maxHoras : 0}.</InfoMessage>
+            <div class="py-24">
+                <div class="grid grid-cols-2">
+                    <div>
+                        <Label required class="mb-4" labelFor="cantidad_horas" value="Número de horas semanales dedicadas para el desarrollo del proyecto (basarse en los lineamientos operativos SENNOVA 2021 y en la circular 01-3-2021-000034)" />
+                    </div>
+                    <div>
+                        <Input label="Número de horas semanales dedicadas para el desarrollo del proyecto" id="cantidad_horas" type="number" input$step="1" input$min="1" input$max={$form.rol_sennova?.maxHoras} class="mt-1" bind:value={$form.cantidad_horas} error={errors.cantidad_horas} placeholder="Número de horas semanales dedicadas para el desarrollo del proyecto" autocomplete="off" required />
+                        <InfoMessage>Horas máximas permitidas para este rol: {$form.rol_sennova?.maxHoras ? $form.rol_sennova?.maxHoras : 0}.</InfoMessage>
+                    </div>
                 </div>
             </div>
         </fieldset>
 
         <div class="px-8 py-4 bg-gray-100 border-t border-gray-200 flex items-center sticky bottom-0">
             {#if isSuperAdmin || checkPermission(authUser, [17])}
-                <LoadingButton loading={sending} class="btn-indigo ml-auto" type="submit">
+                <LoadingButton loading={$form.processing} class="ml-auto" type="submit">
                     {$_('Continue')}
                 </LoadingButton>
             {/if}

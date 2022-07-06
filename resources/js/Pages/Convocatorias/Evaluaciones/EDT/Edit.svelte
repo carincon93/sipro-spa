@@ -23,8 +23,6 @@
     let authUser = $page.props.auth.user
     let isSuperAdmin = checkRole(authUser, [1])
 
-    let dialogOpen = false
-    let sending = false
     let edtInfo = {
         tipo_evento: {
             value: edt.tipo_evento,

@@ -123,7 +123,6 @@
     let infoDialog = true
     let equipoFormDialog = false
     let destroyEquipoDialog = false
-    let sending = false
     let form = useForm({
         _method: 'put',
         codigo_proyecto_sgps_id: {
@@ -189,8 +188,6 @@
     function submit() {
         if (isSuperAdmin || (checkRole(authUser, [4]) && ambienteModernizacion.estado == false)) {
             $form.post(route('ambientes-modernizacion.update', ambienteModernizacion.id), {
-                onStart: () => (sending = true),
-                onFinish: () => (sending = false),
                 preserveScroll: true,
             })
         }
@@ -235,8 +232,7 @@
     function submitEquipo() {
         if (isSuperAdmin || (checkRole(authUser, [4]) && ambienteModernizacion.estado == false)) {
             $formEquipo.post(route('equipos-ambiente-modernizacion.store', ambienteModernizacion.id), {
-                onStart: () => (sending = true),
-                onFinish: () => ((sending = false), (equipoFormDialog = false)),
+                onFinish: () => (equipoFormDialog = false),
                 preserveScroll: true,
             })
         }
@@ -289,9 +285,8 @@
                     route('ambientes-modernizacion.updateLongColumn', [ambienteModernizacion.id, column]),
                     { [column]: form[column] },
                     {
-                        onStart: () => (sending = true),
-                        onError: (resp) => ((sending = false), resolve(resp)),
-                        onFinish: () => ((sending = false), resolve({})),
+                        onError: (resp) => resolve(resp),
+                        onFinish: () => resolve({}),
                         preserveScroll: true,
                     },
                 )
@@ -811,7 +806,7 @@
                     <Label class="mb-4" labelFor="observaciones_generales_ambiente" value="33. Observaciones generales del ambiente modernizado por Sennova" />
                 </div>
                 <div>
-                    <Textarea label="Observaciones" maxlength="4000" id="observaciones_generales_ambiente" error={errors.observaciones_generales_ambiente} bind:value={$formObservacionesGeneralesAmbiente.observaciones_generales_ambiente} on:input={() => syncColumnLong('observaciones_generales_ambiente', $formObservacionesGeneralesAmbiente)} />
+                    <Textarea label="Observaciones" maxlength="4000" id="observaciones_generales_ambiente" bind:value={$formObservacionesGeneralesAmbiente.observaciones_generales_ambiente} on:input={() => syncColumnLong('observaciones_generales_ambiente', $formObservacionesGeneralesAmbiente)} error={errors.observaciones_generales_ambiente} />
                 </div>
             </div>
 
@@ -840,10 +835,10 @@
         </fieldset>
         <div class="px-8 py-4 bg-gray-100 border-t border-gray-200 flex items-center sticky bottom-0">
             {#if isSuperAdmin || (checkRole(authUser, [4]) && ambienteModernizacion.estado == false)}
-                <button class="text-red-600 hover:underline text-left" tabindex="-1" type="button" on:click={(event) => (destroyAmbienteModernizacionDialog = true)}> Eliminar ambiente de modernización </button>
+                <button class="text-red-600 hover:underline text-left" tabindex="-1" type="button" on:click={() => (destroyAmbienteModernizacionDialog = true)}> Eliminar ambiente de modernización </button>
             {/if}
             {#if isSuperAdmin || (checkRole(authUser, [4]) && ambienteModernizacion.estado == false)}
-                <LoadingButton loading={sending} class="btn-indigo ml-auto" type="submit">Guardar</LoadingButton>
+                <LoadingButton loading={$form.processing} class="ml-auto" type="submit">Guardar</LoadingButton>
             {/if}
         </div>
     </form>
@@ -975,9 +970,9 @@
         </div>
         <div slot="actions">
             <div class="p-4">
-                <Button on:click={(event) => (equipoFormDialog = false)} variant={null}>Cancelar</Button>
+                <Button on:click={() => (equipoFormDialog = false)} variant={null}>Cancelar</Button>
                 {#if isSuperAdmin || ambienteModernizacion.estado == false}
-                    <Button variant="raised" type="submit" form="equipo-ambiente-modernizacion">Guardar</Button>
+                    <LoadingButton type="submit" loading={$formEquipo.processing} form="equipo-ambiente-modernizacion">Guardar</LoadingButton>
                 {/if}
             </div>
         </div>
@@ -1001,7 +996,7 @@
         </div>
         <div slot="actions">
             <div class="p-4">
-                <Button on:click={(event) => ((destroyEquipoDialog = false), (equipoAmbienteModernizacionId = null))} variant={null}>Cancelar</Button>
+                <Button on:click={() => ((destroyEquipoDialog = false), (equipoAmbienteModernizacionId = null))} variant={null}>Cancelar</Button>
                 <Button variant="raised" on:click={destroyEquipo}>Confirmar</Button>
             </div>
         </div>
@@ -1028,8 +1023,8 @@
         </div>
         <div slot="actions">
             <div class="p-4">
-                <Button on:click={(event) => (infoDialog = false)} variant={null}>Omitir</Button>
-                <Button variant="raised" on:click={(event) => (infoDialog = false)} on:click={() => Inertia.visit('#financiado_anteriormente')}>Continuar diligenciando</Button>
+                <Button on:click={() => (infoDialog = false)} variant={null}>Omitir</Button>
+                <Button variant="raised" on:click={() => (infoDialog = false)} on:click={() => Inertia.visit('#financiado_anteriormente')}>Continuar diligenciando</Button>
             </div>
         </div>
     </Dialog>
@@ -1052,7 +1047,7 @@
         </div>
         <div slot="actions">
             <div class="p-4">
-                <Button on:click={(event) => (destroyAmbienteModernizacionDialog = false)} variant={null}>Cancelar</Button>
+                <Button on:click={() => (destroyAmbienteModernizacionDialog = false)} variant={null}>Cancelar</Button>
                 <Button variant="raised" on:click={destroy}>Confirmar</Button>
             </div>
         </div>
