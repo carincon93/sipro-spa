@@ -195,6 +195,6 @@ class Tecnoacademia extends Model
 
     public function getNombreCarpetaSharepointAttribute()
     {
-        return preg_replace('/[^A-Za-z0-9\-ÁÉÍÓÚáéíóúÑñ]/', ' ', mb_strtoupper($this->nombre));
+        return trim(preg_replace('/[^A-Za-z0-9\-ÁÉÍÓÚáéíóúÑñ]/', ' ', mb_strtoupper($this->nombre)));
     }
 }

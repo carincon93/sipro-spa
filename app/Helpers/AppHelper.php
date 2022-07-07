@@ -45,6 +45,7 @@ class AppHelper
     public static function createFolder($folderName)
     {
         $client = new Client();
+        Log::debug(self::$rootFolder . $folderName);
 
         try {
             $headers = [

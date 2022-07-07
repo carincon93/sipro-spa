@@ -41,9 +41,10 @@ class ConvocatoriaController extends Controller
     {
         $this->authorize('listar-convocatorias');
 
-        $centrosFormacion = CentroFormacion::selectRaw('DISTINCT(codigo), id, nombre, regional_id')->whereNotIn('codigo', [1010])->take(10)->get();
+        $centrosFormacion = CentroFormacion::selectRaw('DISTINCT(codigo), id, nombre, regional_id')->whereNotIn('codigo', [1010])->get();
 
         foreach ($centrosFormacion as $centroFormacion) {
+            // Log::debug($centroFormacion->nombre_carpeta_sharepoint);
             AppHelper::createFolder($centroFormacion->nombre_carpeta_sharepoint);
 
             foreach ($centroFormacion->gruposInvestigacion as $grupoInvestigacion) {
@@ -53,18 +54,18 @@ class ConvocatoriaController extends Controller
                 foreach ($grupoInvestigacion->lineasInvestigacion as $lineaInvestigacion) {
                     foreach ($lineaInvestigacion->semillerosInvestigacion as $semilleroInvestigacion) {
                         // Log::debug('SEM-' . $semilleroInvestigacion->nombre_carpeta_sharepoint);
-                        // AppHelper::createFolder($centroFormacion->nombre_carpeta_sharepoint . '/' . $grupoInvestigacion->nombre_carpeta_sharepoint . '/' . $semilleroInvestigacion->nombre_carpeta_sharepoint);
+                        AppHelper::createFolder($centroFormacion->nombre_carpeta_sharepoint . '/' . $grupoInvestigacion->nombre_carpeta_sharepoint . '/' . $semilleroInvestigacion->nombre_carpeta_sharepoint);
                     }
                 }
             }
 
             foreach ($centroFormacion->nodosTecnoparque as $nodoTecnoparque) {
                 // Log::debug('NOD-' . $nodoTecnoparque->nombre_carpeta_sharepoint);
-                // AppHelper::createFolder($centroFormacion->nombre_carpeta_sharepoint . '/' . $nodoTecnoparque->nombre_carpeta_sharepoint);
+                AppHelper::createFolder($centroFormacion->nombre_carpeta_sharepoint . '/' . $nodoTecnoparque->nombre_carpeta_sharepoint);
             }
             foreach ($centroFormacion->tecnoacademias as $tecnoacademia) {
                 // Log::debug('TEC-' . $tecnoacademia->nombre_carpeta_sharepoint);
-                // AppHelper::createFolder($centroFormacion->nombre_carpeta_sharepoint . '/' . $tecnoacademia->nombre_carpeta_sharepoint);
+                AppHelper::createFolder($centroFormacion->nombre_carpeta_sharepoint . '/' . $tecnoacademia->nombre_carpeta_sharepoint);
             }
         }
 
