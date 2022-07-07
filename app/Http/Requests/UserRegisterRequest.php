@@ -31,8 +31,8 @@ class UserRegisterRequest extends FormRequest
             'password'              => ['required', 'string', 'confirmed', 'min:8'],
             'tipo_documento'        => ['required', 'max:2'],
             'tipo_vinculacion'      => ['required', 'max:191'],
-            'numero_documento'      => ['required', 'min:0', 'unique:users,numero_documento', 'max:9999999999999', 'integer'],
-            'numero_celular'        => ['required', 'min:0', 'max:9999999999', 'integer'],
+            'numero_documento'      => ['required', 'min:0', 'unique:users,numero_documento', 'max:9223372036854775807', 'integer'],
+            'numero_celular'        => ['required', 'min:0', 'max:9223372036854775807', 'integer'],
             'autorizacion_datos'    => ['required', 'boolean'],
             'role_id*'              => ['required', 'min:0', 'max:2147483647', 'integer', 'exists:roles,id']
         ];

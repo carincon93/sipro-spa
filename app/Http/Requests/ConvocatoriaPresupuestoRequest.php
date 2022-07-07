@@ -24,7 +24,7 @@ class ConvocatoriaPresupuestoRequest extends FormRequest
     public function rules()
     {
         return [
-            'presupuesto_sennova_id' => ['required', 'min:0', 'max:9999999999', 'integer', 'exists:presupuesto_sennova,id'],
+            'presupuesto_sennova_id' => ['required', 'min:0', 'max:2147483647', 'integer', 'exists:presupuesto_sennova,id'],
         ];
     }
 

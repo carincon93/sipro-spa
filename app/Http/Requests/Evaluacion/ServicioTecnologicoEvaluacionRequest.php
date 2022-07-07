@@ -35,13 +35,13 @@ class ServicioTecnologicoEvaluacionRequest extends FormRequest
             'antecedentes_puntaje'          => ['nullable', 'numeric', 'max:3'],
             'antecedentes_comentario'       => ['nullable', 'string'],
 
-            'identificacion_problema_puntaje'      => ['nullable', 'integer', 'max:4'],
+            'identificacion_problema_puntaje'      => ['nullable', 'integer', 'min:0', 'max:4'],
             'identificacion_problema_comentario'   => ['nullable', 'string'],
 
-            'pregunta_formulacion_problema_puntaje'      => ['nullable', 'integer', 'max:2'],
+            'pregunta_formulacion_problema_puntaje'      => ['nullable', 'integer', 'min:0', 'max:2'],
             'pregunta_formulacion_problema_comentario'   => ['nullable', 'string'],
 
-            'justificacion_problema_puntaje'      => ['nullable', 'integer', 'max:4'],
+            'justificacion_problema_puntaje'      => ['nullable', 'integer', 'min:0', 'max:4'],
             'justificacion_problema_comentario'   => ['nullable', 'string'],
 
             'bibliografia_comentario'       => ['nullable', 'string'],

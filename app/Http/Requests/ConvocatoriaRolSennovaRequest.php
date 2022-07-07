@@ -27,7 +27,7 @@ class ConvocatoriaRolSennovaRequest extends FormRequest
             'linea_programatica_id' => ['required', 'min:0', 'max:2147483647', 'integer', 'exists:lineas_programaticas,id'],
             'rol_sennova_id'        => ['required', 'min:0', 'max:2147483647', 'integer', 'exists:roles_sennova,id'],
             'asignacion_mensual'    => ['required', 'min:0', 'max:2147483647'],
-            'nivel_academico'       => ['required', 'integer'],
+            'nivel_academico'       => ['required', 'integer', 'min:0', 'max:2147483647'],
             'experiencia'           => ['nullable', 'string'],
             'perfil'                => ['nullable', 'string'],
             'mensaje'               => ['nullable', 'string'],

@@ -33,8 +33,8 @@ class ProyectoCapacidadInstaladaRequest extends FormRequest
             'titulo'                                    => ['required', 'string', new MaxWords(20)],
             'fecha_inicio'                              => ['required', 'date', 'date_format:Y-m-d', 'before:fecha_finalizacion'],
             'fecha_finalizacion'                        => ['required', 'date', 'date_format:Y-m-d', 'after:fecha_inicio'],
-            'programas_formacion*'                      => ['required', 'integer', 'exists:programas_formacion,id'],
-            'programas_formacion_articulados*'          => ['required', 'integer', 'exists:programas_formacion_articulados,id'],
+            'programas_formacion*'                      => ['required', 'min:0', 'max:2147483647', 'integer', 'exists:programas_formacion,id'],
+            'programas_formacion_articulados*'          => ['required', 'min:0', 'max:2147483647', 'integer', 'exists:programas_formacion_articulados,id'],
         ];
     }
 

@@ -26,7 +26,7 @@ class SemilleroInvestigacionRequest extends FormRequest
         if ($this->isMethod('PUT')) {
             return [
                 'es_semillero_tecnoacademia' => ['required', 'min:0', 'max:3', 'integer'],
-                'linea_investigacion_id'    => ['required', 'min:0', 'max:2147483647999', 'integer', 'exists:lineas_investigacion,id'],
+                'linea_investigacion_id'    => ['required', 'min:0', 'max:2147483647', 'integer', 'exists:lineas_investigacion,id'],
                 'nombre'                    => ['required', 'max:191'],
                 'fecha_creacion_semillero'  => ['required', 'date', 'date_format:Y-m-d'],
                 'nombre_lider_semillero'    => ['required', 'max:191'],
@@ -47,7 +47,7 @@ class SemilleroInvestigacionRequest extends FormRequest
         } else {
             return [
                 'es_semillero_tecnoacademia' => ['required', 'min:0', 'max:3', 'integer'],
-                'linea_investigacion_id'    => ['required', 'min:0', 'max:2147483647999', 'integer', 'exists:lineas_investigacion,id'],
+                'linea_investigacion_id'    => ['required', 'min:0', 'max:2147483647', 'integer', 'exists:lineas_investigacion,id'],
                 'nombre'                    => ['required', 'max:191'],
                 'fecha_creacion_semillero'  => ['required', 'date', 'date_format:Y-m-d'],
                 'nombre_lider_semillero'    => ['required', 'max:191'],
