@@ -17,6 +17,13 @@ class NodoTecnoparque extends Model
     protected $table = 'nodos_tecnoparque';
 
     /**
+     * appends
+     *
+     * @var array
+     */
+    protected $appends = ['nombre_carpeta_sharepoint'];
+
+    /**
      * The attributes that are mass assignable.
      *
      * @var array
@@ -90,5 +97,10 @@ class NodoTecnoparque extends Model
             $search = str_replace(' ', '%%', $search);
             $query->whereRaw("unaccent(nombre) ilike unaccent('%" . $search . "%')");
         });
+    }
+
+    public function getNombreCarpetaSharepointAttribute()
+    {
+        return preg_replace('/[^A-Za-z0-9\-ÁÉÍÓÚáéíóúÑñ]/', ' ', mb_strtoupper($this->nombre));
     }
 }

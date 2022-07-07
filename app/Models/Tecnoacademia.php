@@ -21,7 +21,7 @@ class Tecnoacademia extends Model
      *
      * @var array
      */
-    protected $appends = ['suma_max_valores'];
+    protected $appends = ['suma_max_valores', 'nombre_carpeta_sharepoint'];
 
 
     /**
@@ -191,5 +191,10 @@ class Tecnoacademia extends Model
             $total = round($this->getMetaAprendicesAttribute() * 10200);
         }
         return $total;
+    }
+
+    public function getNombreCarpetaSharepointAttribute()
+    {
+        return preg_replace('/[^A-Za-z0-9\-ÁÉÍÓÚáéíóúÑñ]/', ' ', mb_strtoupper($this->nombre));
     }
 }

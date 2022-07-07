@@ -24,9 +24,13 @@ class SemilleroInvestigacionController extends Controller
         $this->authorize('viewAny', [SemilleroInvestigacion::class]);
 
         return Inertia::render('SemillerosInvestigacion/Index', [
-            'filters'   => request()->all('search'),
+            'filters'                   => request()->all('search'),
             'grupoInvestigacion'        => $grupoInvestigacion,
-            'semillerosInvestigacion'   => SemilleroInvestigacion::select('semilleros_investigacion.id', 'semilleros_investigacion.nombre', 'semilleros_investigacion.codigo', 'semilleros_investigacion.linea_investigacion_id', 'lineas_investigacion.nombre as nombre_linea_principal')->filterSemilleroInvestigacion(request()->only('search'))->join('lineas_investigacion', 'semilleros_investigacion.linea_investigacion_id', 'lineas_investigacion.id')->where('lineas_investigacion.grupo_investigacion_id', $grupoInvestigacion->id)->orderBy('semilleros_investigacion.nombre', 'ASC')->paginate(),
+            'semillerosInvestigacion'   => SemilleroInvestigacion::select('semilleros_investigacion.id', 'semilleros_investigacion.nombre', 'semilleros_investigacion.codigo', 'semilleros_investigacion.linea_investigacion_id', 'lineas_investigacion.nombre as nombre_linea_principal')
+                ->join('lineas_investigacion', 'semilleros_investigacion.linea_investigacion_id', 'lineas_investigacion.id')
+                ->where('lineas_investigacion.grupo_investigacion_id', $grupoInvestigacion->id)
+                ->filterSemilleroInvestigacion(request()->only('search'))
+                ->orderBy('semilleros_investigacion.nombre', 'ASC')->paginate(),
         ]);
     }
 

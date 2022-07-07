@@ -206,6 +206,6 @@ class CentroFormacion extends Model
 
     public function getNombreCarpetaSharepointAttribute()
     {
-        return mb_strtoupper($this->regional ? $this->regional->nombre : '') . ' - ' . $this->codigo . ' ' . mb_strtoupper($this->nombre);
+        return preg_replace('/[^A-Za-z0-9\-ÁÉÍÓÚáéíóúÑñ]/', ' ', mb_strtoupper($this->regional ? $this->regional->nombre : '') . ' - ' . $this->codigo . ' ' . mb_strtoupper($this->nombre));
     }
 }

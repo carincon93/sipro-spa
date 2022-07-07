@@ -35,7 +35,8 @@
             </div>
         </div>
     </header>
-    <DataTable class="mt-20">
+
+    <DataTable class="mt-20" routeParams={[grupoInvestigacion.id]}>
         <div slot="title">Semilleros de investigación - Grupo: {grupoInvestigacion.nombre}</div>
 
         <div slot="actions">

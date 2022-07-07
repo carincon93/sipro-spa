@@ -22,7 +22,7 @@ class GrupoInvestigacion extends Model
      *
      * @var array
      */
-    protected $appends = ['categoria_minciencias_formateado'];
+    protected $appends = ['categoria_minciencias_formateado', 'nombre_carpeta_sharepoint'];
 
     /**
      * The attributes that are mass assignable.
@@ -197,5 +197,10 @@ class GrupoInvestigacion extends Model
                 break;
         }
         return $categoriaMinciencias;
+    }
+
+    public function getNombreCarpetaSharepointAttribute()
+    {
+        return preg_replace('/[^A-Za-z0-9\-ÁÉÍÓÚáéíóúÑñ]/', ' ', mb_strtoupper($this->nombre));
     }
 }

@@ -17,6 +17,12 @@ class SemilleroInvestigacion extends Model
      */
     protected $table = 'semilleros_investigacion';
 
+    /**
+     * appends
+     *
+     * @var array
+     */
+    protected $appends = ['nombre_carpeta_sharepoint'];
 
     /**
      * The attributes that are mass assignable.
@@ -153,11 +159,13 @@ class SemilleroInvestigacion extends Model
             $search = str_replace(' ', '%%', $search);
             $search = str_replace('"', "", $search);
             $search = str_replace("'", "", $search);
-            $query->join('lineas_investigacion', 'semilleros_investigacion.linea_investigacion_id', 'lineas_investigacion.id');
-            $query->join('grupos_investigacion', 'lineas_investigacion.grupo_investigacion_id', 'grupos_investigacion.id');
+
             $query->whereRaw("unaccent(semilleros_investigacion.nombre) ilike unaccent('%" . $search . "%')");
-            $query->orWhereRaw("unaccent(lineas_investigacion.nombre) ilike unaccent('%" . $search . "%')");
-            $query->orWhereRaw("unaccent(grupos_investigacion.nombre) ilike unaccent('%" . $search . "%')");
         });
+    }
+
+    public function getNombreCarpetaSharepointAttribute()
+    {
+        return preg_replace('/[^A-Za-z0-9\-ÁÉÍÓÚáéíóúÑñ]/', ' ', mb_strtoupper($this->nombre));
     }
 }

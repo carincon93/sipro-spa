@@ -109,8 +109,6 @@ class ProyectoIdiTecnoacademiaController extends Controller
         if ($proyectoIdiTecnoacademia->save()) {
 
             // Crear las carpetas y subcarpetas del proyecto | CALDAS - 9220 CENTRO DE PROCESOS INDUSTRIALES Y CONSTRUCCION/TECNOACADEMIA CALDAS/IDITA-00022
-            AppHelper::createFolder($proyectoIdiTecnoacademia->tecnoacademia->centroFormacion->nombre_carpeta_sharepoint); // ! Eliminar cuando ya este creada la carpeta
-            AppHelper::createFolder($proyectoIdiTecnoacademia->tecnoacademia->centroFormacion->nombre_carpeta_sharepoint . '/' . mb_strtoupper($proyectoIdiTecnoacademia->tecnoacademia->nombre)); // ! Eliminar cuando ya este creada la carpeta
             AppHelper::createFolder($proyectoIdiTecnoacademia->tecnoacademia->centroFormacion->nombre_carpeta_sharepoint . '/' . mb_strtoupper($proyectoIdiTecnoacademia->tecnoacademia->nombre) . '/' . $proyectoIdiTecnoacademia->codigo);
 
             if ($request->hasFile('pdf_proyecto')) {
