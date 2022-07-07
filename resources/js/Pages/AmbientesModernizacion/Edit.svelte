@@ -38,6 +38,7 @@
     export let mesasSectorialesRelacionadas
     export let equiposAmbienteModernizacion
     export let centroFormacionId
+    export let roles
 
     let programasFormacion
     let programasFormacionArticular
@@ -241,6 +242,16 @@
         $formEquipo.frecuencia_mantenimiento = {
             value: equipoAmbienteModernizacion.frecuencia_mantenimiento,
             label: opcionesFrecuencia.find((item) => item.value == equipoAmbienteModernizacion.frecuencia_mantenimiento)?.label,
+        }
+        $formEquipo.year_adquisicion = {
+            value: equipoAmbienteModernizacion.year_adquisicion,
+            label: years.find((item) => item.value == equipoAmbienteModernizacion.year_adquisicion)?.label,
+        }
+        $formEquipo.nombre_cuentadante = equipoAmbienteModernizacion.nombre_cuentadante
+        $formEquipo.cedula_cuentadante = equipoAmbienteModernizacion.cedula_cuentadante
+        $formEquipo.rol_cuentadante = {
+            value: equipoAmbienteModernizacion.rol_cuentadante,
+            label: roles.find((item) => item.label == equipoAmbienteModernizacion.rol_cuentadante)?.label,
         }
         equipoFormDialog = true
     }
@@ -1039,7 +1050,7 @@
 
                     <div class="mt-4">
                         <Label required class="mb-4" labelFor="rol_cuentadante" value="Rol del cuentadante" />
-                        <Input id="rol_cuentadante" type="text" error={errors.rol_cuentadante} bind:value={$formEquipo.rol_cuentadante} required />
+                        <Select id="rol_cuentadante" items={roles} bind:selectedValue={$formEquipo.rol_cuentadante} error={errors.rol_cuentadante} autocomplete="off" placeholder="Seleccione un rol SENNOVA" required />
                     </div>
                 </fieldset>
             </form>

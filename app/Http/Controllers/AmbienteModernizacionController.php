@@ -194,6 +194,7 @@ class AmbienteModernizacionController extends Controller
             'semillerosRelacionados'                        => $ambienteModernizacion->semillerosInvestigacion()->select('semilleros_investigacion.nombre as label', 'semilleros_investigacion.id as value')->get(),
             'mesasSectorialesRelacionadas'                  => $ambienteModernizacion->mesasSectoriales()->pluck('id'),
             'equiposAmbienteModernizacion'                  => EquipoAmbienteModernizacion::where('ambiente_modernizacion_id', $ambienteModernizacion->id)->get(),
+            'roles'                                         => collect(json_decode(Storage::get('json/roles-sennova-idi.json'), true)),
         ]);
     }
 

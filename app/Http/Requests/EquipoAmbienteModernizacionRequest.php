@@ -70,5 +70,11 @@ class EquipoAmbienteModernizacionRequest extends FormRequest
                 'year_adquisicion' => $this->year_adquisicion['value'],
             ]);
         }
+
+        if (is_array($this->rol_cuentadante)) {
+            $this->merge([
+                'rol_cuentadante' => $this->rol_cuentadante['label'],
+            ]);
+        }
     }
 }
