@@ -14,6 +14,7 @@
     import SelectMulti from '@/Shared/SelectMulti'
     import Select from '@/Shared/Select'
     import InfoMessage from '@/Shared/InfoMessage'
+    import File from '@/Shared/File'
 
     export let errors
     export let semilleroInvestigacion
@@ -219,7 +220,7 @@
                     {:else if semilleroInvestigacion.formato_gic_f_021 == null && $form.formato_gic_f_021 == null}
                         <p class="my-10 text-red-400">No se ha cargado el formato GIC – F – 021</p>
                     {/if}
-                    <Input label="Url" id="formato_gic_f_021" type="url" class="mt-1" error={errors.formato_gic_f_021} placeholder="Url https://www.google.com.co" bind:value={$form.formato_gic_f_021} />
+                    <File id="formato_gic_f_021" accept="application/pdf" showInput={false} maxSize="10000" bind:value={$form.formato_gic_f_021} error={errors.formato_gic_f_021} route={route('semilleros-investigacion.download-file-sharepoint', [grupoInvestigacion, semilleroInvestigacion, 'formato_gic_f_021'])} />
                 </div>
 
                 <hr class="mt-10 mb-10" />
@@ -236,7 +237,7 @@
                     {:else if semilleroInvestigacion.formato_gic_f_032 == null && $form.formato_gic_f_032 == null}
                         <p class="my-10 text-red-400">No se ha cargado el formato GIC – F – 032</p>
                     {/if}
-                    <Input label="Url" id="formato_gic_f_032" type="url" class="mt-1" error={errors.formato_gic_f_032} placeholder="Url https://www.google.com.co" bind:value={$form.formato_gic_f_032} required />
+                    <File id="formato_gic_f_032" accept="application/pdf" showInput={false} maxSize="10000" bind:value={$form.formato_gic_f_032} error={errors.formato_gic_f_032} route={route('semilleros-investigacion.download-file-sharepoint', [grupoInvestigacion, semilleroInvestigacion, 'formato_gic_f_032'])} />
                 </div>
 
                 <hr class="mt-10 mb-10" />
@@ -253,7 +254,7 @@
                     {:else if semilleroInvestigacion.formato_aval_semillero == null && $form.formato_aval_semillero == null}
                         <p class="my-10 text-red-400">No se ha cargado el aval del semillero</p>
                     {/if}
-                    <Input label="Url" id="formato_aval_semillero" type="url" class="mt-1" error={errors.formato_aval_semillero} placeholder="Url https://www.google.com.co" bind:value={$form.formato_aval_semillero} required />
+                    <File id="formato_aval_semillero" accept="application/pdf" showInput={false} maxSize="10000" bind:value={$form.formato_aval_semillero} error={errors.formato_aval_semillero} route={route('semilleros-investigacion.download-file-sharepoint', [grupoInvestigacion, semilleroInvestigacion, 'formato_aval_semillero'])} />
                 </div>
             </fieldset>
             <div class="px-8 py-4 bg-gray-100 border-t border-gray-200 flex items-center sticky bottom-0">

@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Helpers\AppHelper;
 use App\Http\Requests\SemilleroInvestigacionRequest;
 use App\Models\GrupoInvestigacion;
 use App\Models\LineaInvestigacion;
@@ -72,19 +73,35 @@ class SemilleroInvestigacionController extends Controller
         $semilleroInvestigacion->objetivos_especificos                      = $request->objetivos_especificos;
         $semilleroInvestigacion->link_semillero                             = $request->link_semillero;
         $semilleroInvestigacion->es_semillero_tecnoacademia                 = $request->es_semillero_tecnoacademia;
-        $semilleroInvestigacion->formato_gic_f_021                          = $request->formato_gic_f_021;
-        $semilleroInvestigacion->formato_gic_f_032                          = $request->formato_gic_f_032;
-        $semilleroInvestigacion->formato_aval_semillero                     = $request->formato_aval_semillero;
 
         $semilleroInvestigacion->lineaInvestigacion()->associate($request->linea_investigacion_id);
 
-        $semilleroInvestigacion->save();
+        if ($semilleroInvestigacion->save()) {
 
-        $semilleroInvestigacion->update(['codigo' => 'SGPS-SEM-' . $semilleroInvestigacion->id]);
+            // Crear las carpetas y subcarpetas del proyecto | CALDAS - 9220 CENTRO DE PROCESOS INDUSTRIALES Y CONSTRUCCION/TECNOACADEMIA CALDAS/IDITA-00022
+            $status = AppHelper::checkFolderAndCreate($semilleroInvestigacion->ruta_final_sharepoint);
 
-        $semilleroInvestigacion->redesConocimiento()->attach($request->redes_conocimiento);
-        $semilleroInvestigacion->programasFormacion()->attach($request->programas_formacion);
-        $semilleroInvestigacion->lineasInvestigacionArticulados()->attach($request->lineas_investigacion);
+            if ($request->hasFile('formato_gic_f_021') && $status == true) {
+                // Nombre del archivo
+                $fileNameFormatoGICF021 = AppHelper::cleanFileName($request->nombre . 'formato_gic_f_021', $request->formato_gic_f_021);
+
+                // Subir el archvio a la carpeta anteriormente creada - Ej: CALDAS - 9220 CENTRO DE PROCESOS INDUSTRIALES Y CONSTRUCCION/TECNOACADEMIA CALDAS/IDITA-00022/proyectoIDITA-00022sGhff.pdf
+                $fileNameFormatoGICF021 = AppHelper::uploadFile($semilleroInvestigacion->ruta_final_sharepoint, $request->formato_gic_f_021, $fileNameFormatoGICF021);
+
+                // Actualiza la ruta del pdf en la db
+                $semilleroInvestigacion->update(['formato_gic_f_021' => $fileNameFormatoGICF021]);
+            }
+
+            $semilleroInvestigacion->formato_gic_f_032                      = $request->formato_gic_f_032;
+            $semilleroInvestigacion->formato_aval_semillero                 = $request->formato_aval_semillero;
+
+            $semilleroInvestigacion->update(['codigo' => 'SGPS-SEM-' . $semilleroInvestigacion->id]);
+
+            $semilleroInvestigacion->redesConocimiento()->attach($request->redes_conocimiento);
+            $semilleroInvestigacion->programasFormacion()->attach($request->programas_formacion);
+            $semilleroInvestigacion->lineasInvestigacionArticulados()->attach($request->lineas_investigacion);
+        }
+
 
         return redirect()->route('grupos-investigacion.semilleros-investigacion.index', [$grupoInvestigacion])->with('success', 'El recurso se ha creado correctamente.');
     }
@@ -145,9 +162,32 @@ class SemilleroInvestigacionController extends Controller
         $semilleroInvestigacion->objetivos_especificos                      = $request->objetivos_especificos;
         $semilleroInvestigacion->link_semillero                             = $request->link_semillero;
         $semilleroInvestigacion->es_semillero_tecnoacademia                 = $request->es_semillero_tecnoacademia;
-        $semilleroInvestigacion->formato_gic_f_021                          = $request->formato_gic_f_021;
-        $semilleroInvestigacion->formato_gic_f_032                          = $request->formato_gic_f_032;
-        $semilleroInvestigacion->formato_aval_semillero                     = $request->formato_aval_semillero;
+
+        $status = AppHelper::checkFolderAndCreate($semilleroInvestigacion->ruta_final_sharepoint);
+
+        if ($request->hasFile('formato_gic_f_021') && $status == true) {
+            $fileNameFormatoGICF021 = AppHelper::cleanFileName($request->nombre . 'formato_gic_f_021', $request->formato_gic_f_021);
+
+            $fileNameFormatoGICF021 = AppHelper::uploadFile($semilleroInvestigacion->ruta_final_sharepoint, $request->formato_gic_f_021, $fileNameFormatoGICF021);
+
+            $semilleroInvestigacion->formato_gic_f_021 = $fileNameFormatoGICF021;
+        }
+
+        if ($request->hasFile('formato_gic_f_032') && $status == true) {
+            $fileNameFormatoGICF032 = AppHelper::cleanFileName($request->nombre . 'formato_gic_f_032', $request->formato_gic_f_032);
+
+            $fileNameFormatoGICF032 = AppHelper::uploadFile($semilleroInvestigacion->ruta_final_sharepoint, $request->formato_gic_f_032, $fileNameFormatoGICF032);
+
+            $semilleroInvestigacion->formato_gic_f_032 = $fileNameFormatoGICF032;
+        }
+
+        if ($request->hasFile('formato_aval_semillero') && $status == true) {
+            $fileNameFormatoAvalSemillero = AppHelper::cleanFileName($request->nombre . 'formato_aval_semillero', $request->formato_aval_semillero);
+
+            $fileNameFormatoAvalSemillero = AppHelper::uploadFile($semilleroInvestigacion->ruta_final_sharepoint, $request->formato_aval_semillero, $fileNameFormatoAvalSemillero);
+
+            $semilleroInvestigacion->formato_aval_semillero = $fileNameFormatoAvalSemillero;
+        }
 
         $semilleroInvestigacion->lineaInvestigacion()->associate($request->linea_investigacion_id);
 
@@ -209,5 +249,18 @@ class SemilleroInvestigacionController extends Controller
         }
 
         return response()->download(storage_path("app/$ruta"));
+    }
+
+    public function downloadFileSharepoint(SemilleroInvestigacion $semilleroInvestigacion, $tipoArchivo)
+    {
+        $fileName = '';
+
+        $fileName = $semilleroInvestigacion->filename($tipoArchivo);
+
+        if ($fileName) {
+            AppHelper::downloadFile($semilleroInvestigacion->ruta_final_sharepoint, $fileName);
+        } else {
+            return back();
+        }
     }
 }

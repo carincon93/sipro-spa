@@ -5,6 +5,7 @@ namespace App\Helpers;
 use GuzzleHttp\Psr7\Request;
 use GuzzleHttp\Client;
 use GuzzleHttp\Exception\ClientException;
+use Illuminate\Support\Str;
 use Illuminate\Support\Facades\Log;
 
 class AppHelper
@@ -36,16 +37,40 @@ class AppHelper
             return $response['access_token'];
         } catch (ClientException $e) {
             $response = $e->getResponse();
-            Log::debug($response);
+            Log::debug($e->getMessage());
 
             abort($response->getStatusCode());
+        }
+    }
+
+    public static function checkFolderAndCreate($folderName)
+    {
+        $rutas = explode('/', $folderName);
+        $formatRoute = '';
+
+        try {
+            foreach ($rutas as $ruta) {
+                $formatRoute .= $ruta . '/';
+
+                $status = static::checkFolder($formatRoute);
+
+                if ($status == 404) {
+                    $folder = static::createFolder($formatRoute);
+                    Log::debug($folder);
+                }
+                Log::debug('Se han creado todas las carpetas');
+                return true;
+            }
+        } catch (\Throwable  $e) {
+            Log::debug($e->getMessage());
+
+            abort($e->getStatusCode());
         }
     }
 
     public static function createFolder($folderName)
     {
         $client = new Client();
-        Log::debug(self::$rootFolder . $folderName);
 
         try {
             $headers = [
@@ -67,7 +92,7 @@ class AppHelper
             return $response['d']['ServerRelativeUrl'];
         } catch (ClientException $e) {
             $response = $e->getResponse();
-            Log::debug($response);
+            Log::debug($e->getMessage());
 
             abort($response->getStatusCode());
         }
@@ -116,6 +141,8 @@ class AppHelper
 
             return $response['d']['ServerRelativeUrl'];
         } catch (\Throwable  $e) {
+            Log::debug($e->getMessage());
+
             abort($e->getStatusCode());
         }
     }
@@ -136,7 +163,7 @@ class AppHelper
             return $response->getStatusCode();
         } catch (ClientException $e) {
             $response = $e->getResponse();
-            Log::debug($response);
+            Log::debug($e->getMessage());
 
             return $response->getStatusCode();
         }
@@ -158,7 +185,7 @@ class AppHelper
             return $response->getStatusCode();
         } catch (ClientException $e) {
             $response = $e->getResponse();
-            Log::debug($response);
+            Log::debug($e->getMessage());
 
             return $response->getStatusCode();
         }
@@ -184,7 +211,7 @@ class AppHelper
                 return $response;
             } catch (ClientException $e) {
                 $response = $e->getResponse();
-                Log::debug($response);
+                Log::debug($e->getMessage());
 
                 abort($response->getStatusCode());
             }
@@ -210,9 +237,19 @@ class AppHelper
             echo $response->getBody();
         } catch (ClientException $e) {
             $response = $e->getResponse();
-            Log::debug($response);
+            Log::debug($e->getMessage());
 
             abort($response->getStatusCode());
         }
+    }
+
+    public static function cleanFileName($nombre, $archivo)
+    {
+        $cleanName = str_replace(' ', '', substr($nombre, 0, 30));
+        $cleanName = preg_replace('/[-`~!@#_$%\^&*()+={}[\]\\\\|;:\'",.><?\/]/', '', $cleanName);
+
+        $random    = Str::random(10);
+
+        return str_replace(array("\r", "\n"), '', str_replace(array("\r", "\n"), '', "{$cleanName}cod{$random}." . $archivo->extension()));
     }
 }

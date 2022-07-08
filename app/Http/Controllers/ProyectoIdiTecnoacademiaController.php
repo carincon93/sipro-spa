@@ -18,7 +18,6 @@ use App\Models\TipoProductoIdi;
 use App\Models\User;
 use App\Rules\Email;
 use Illuminate\Http\Request;
-use Illuminate\Support\Str;
 use Illuminate\Support\Facades\Storage;
 use Inertia\Inertia;
 
@@ -113,7 +112,7 @@ class ProyectoIdiTecnoacademiaController extends Controller
 
             if ($request->hasFile('pdf_proyecto')) {
                 // Nombre del archivo
-                $fileName = $this->cleanFileName($proyectoIdiTecnoacademia->codigo . '-pdf-proyecto', $request->pdf_proyecto);
+                $fileName = AppHelper::cleanFileName($proyectoIdiTecnoacademia->codigo . '-pdf-proyecto', $request->pdf_proyecto);
 
                 // Subir el archvio a la carpeta anteriormente creada - Ej: CALDAS - 9220 CENTRO DE PROCESOS INDUSTRIALES Y CONSTRUCCION/TECNOACADEMIA CALDAS/IDITA-00022/proyectoIDITA-00022sGhff.pdf
                 $fileName = AppHelper::uploadFile($proyectoIdiTecnoacademia->tecnoacademia->centroFormacion->nombre_carpeta_sharepoint . '/' . mb_strtoupper($proyectoIdiTecnoacademia->tecnoacademia->nombre) . '/' . $proyectoIdiTecnoacademia->codigo, $request->pdf_proyecto, $fileName);
@@ -124,7 +123,7 @@ class ProyectoIdiTecnoacademiaController extends Controller
 
             if ($request->hasFile('documentos_resultados')) {
                 // Nombre del archivo
-                $fileName = $this->cleanFileName($proyectoIdiTecnoacademia->codigo . '-pdf-proyecto', $request->documentos_resultados);
+                $fileName = AppHelper::cleanFileName($proyectoIdiTecnoacademia->codigo . '-pdf-proyecto', $request->documentos_resultados);
 
                 // Subir el archvio a la carpeta anteriormente creada - Ej: CALDAS - 9220 CENTRO DE PROCESOS INDUSTRIALES Y CONSTRUCCION/TECNOACADEMIA CALDAS/IDITA-00022/proyectoIDITA-00022sGhff.pdf
                 $fileName = AppHelper::uploadFile($proyectoIdiTecnoacademia->tecnoacademia->centroFormacion->nombre_carpeta_sharepoint . '/' . mb_strtoupper($proyectoIdiTecnoacademia->tecnoacademia->nombre) . '/' . $proyectoIdiTecnoacademia->codigo, $request->documentos_resultados, $fileName);
@@ -222,14 +221,14 @@ class ProyectoIdiTecnoacademiaController extends Controller
         $proyectoIdiTecnoacademia->nombre_centro_programa               = $request->nombre_centro_programa;
 
         if ($request->hasFile('pdf_proyecto')) {
-            $fileNamePdfProyecto = $this->cleanFileName($proyectoIdiTecnoacademia->codigo . '-pdf-proyecto', $request->pdf_proyecto);
+            $fileNamePdfProyecto = AppHelper::cleanFileName($proyectoIdiTecnoacademia->codigo . '-pdf-proyecto', $request->pdf_proyecto);
             AppHelper::deleteFile($proyectoIdiTecnoacademia->pdf_proyecto);
             $fileNamePdfProyecto = AppHelper::uploadFile($proyectoIdiTecnoacademia->tecnoacademia->centroFormacion->nombre_carpeta_sharepoint . '/' . mb_strtoupper($proyectoIdiTecnoacademia->tecnoacademia->nombre) . '/' . $proyectoIdiTecnoacademia->codigo, $request->pdf_proyecto, $fileNamePdfProyecto);
             $proyectoIdiTecnoacademia->pdf_proyecto = $fileNamePdfProyecto;
         }
 
         if ($request->hasFile('documentos_resultados')) {
-            $fileNameDocumentoResultados = $this->cleanFileName($proyectoIdiTecnoacademia->codigo . '-documento-resultados', $request->documentos_resultados);
+            $fileNameDocumentoResultados = AppHelper::cleanFileName($proyectoIdiTecnoacademia->codigo . '-documento-resultados', $request->documentos_resultados);
             AppHelper::deleteFile($proyectoIdiTecnoacademia->documentos_resultados);
             $fileNameDocumentoResultados = AppHelper::uploadFile($proyectoIdiTecnoacademia->tecnoacademia->centroFormacion->nombre_carpeta_sharepoint . '/' . mb_strtoupper($proyectoIdiTecnoacademia->tecnoacademia->nombre) . '/' . $proyectoIdiTecnoacademia->codigo, $request->documentos_resultados, $fileNameDocumentoResultados);
             $proyectoIdiTecnoacademia->documentos_resultados = $fileNameDocumentoResultados;
@@ -511,23 +510,6 @@ class ProyectoIdiTecnoacademiaController extends Controller
     {
         return response()->download(storage_path("app/" . $producto->soporte));
     }
-
-    /**
-     * cleanFileName
-     *
-     * @param  mixed $nombre
-     * @return void
-     */
-    public function cleanFileName($nombre, $archivo)
-    {
-        $cleanName = str_replace(' ', '', substr($nombre, 0, 30));
-        $cleanName = preg_replace('/[-`~!@#_$%\^&*()+={}[\]\\\\|;:\'",.><?\/]/', '', $cleanName);
-
-        $random    = Str::random(10);
-
-        return str_replace(array("\r", "\n"), '', str_replace(array("\r", "\n"), '', "{$cleanName}cod{$random}." . $archivo->extension()));
-    }
-
 
     public function downloadFiles(ProyectoIdiTecnoacademia $proyectoIdiTecnoacademia, $tipoArchivo)
     {

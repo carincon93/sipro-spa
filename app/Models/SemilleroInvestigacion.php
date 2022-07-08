@@ -22,7 +22,7 @@ class SemilleroInvestigacion extends Model
      *
      * @var array
      */
-    protected $appends = ['nombre_carpeta_sharepoint'];
+    protected $appends = ['nombre_carpeta_sharepoint', 'ruta_final_sharepoint'];
 
     /**
      * The attributes that are mass assignable.
@@ -167,5 +167,23 @@ class SemilleroInvestigacion extends Model
     public function getNombreCarpetaSharepointAttribute()
     {
         return trim(preg_replace('/[^A-Za-z0-9\-ÁÉÍÓÚáéíóúÑñ]/', ' ', mb_strtoupper($this->nombre)));
+    }
+
+    public function getRutaFinalSharepointAttribute()
+    {
+        $ruta = trim($this->lineaInvestigacion->grupoInvestigacion->centroFormacion->nombre_carpeta_sharepoint . '/' . $this->lineaInvestigacion->grupoInvestigacion->nombre_carpeta_sharepoint . '/' . $this->nombre_carpeta_sharepoint);
+
+        return $ruta;
+    }
+
+    /**
+     *
+     * @return string
+     */
+    public function filename($path)
+    {
+        $pathExplode = explode("/", $this->{$path});
+
+        return end($pathExplode);
     }
 }
