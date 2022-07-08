@@ -885,22 +885,25 @@
         <table class="w-full bg-white whitespace-no-wrap table-fixed data-table mt-10">
             <thead>
                 <tr class="text-left font-bold">
-                    <th class="px-6 pt-6 pb-4 sticky top-0 z-10 bg-white shadow-xl w-full text-xs" colspan="2">Información del equipo/maquina</th>
-                    <th class="px-6 pt-6 pb-4 sticky top-0 z-10 bg-white shadow-xl w-full text-xs" colspan="2">Descripción general técnica del equipo o maquina</th>
+                    <th class="px-6 pt-6 pb-4 sticky top-0 z-10 bg-white shadow-xl w-full text-xs">Número de inventario SENA del equipo o maquina</th>
+                    <th class="px-6 pt-6 pb-4 sticky top-0 z-10 bg-white shadow-xl w-full text-xs">Información del equipo o maquina</th>
+                    <th class="px-6 pt-6 pb-4 sticky top-0 z-10 bg-white shadow-xl w-full text-xs">Información del cuentadante</th>
+                    <th class="px-6 pt-6 pb-4 sticky top-0 z-10 bg-white shadow-xl w-full text-xs">Descripción general técnica del equipo o maquina</th>
                     <th class="px-6 pt-6 pb-4 sticky top-0 z-10 bg-white shadow-xl w-full text-xs">Estado del equipo o maquina</th>
                     <th class="px-6 pt-6 pb-4 sticky top-0 z-10 bg-white shadow-xl w-full text-xs">Información de funcionamiento y mantenimiento</th>
-                    <th class="px-6 pt-6 pb-4 sticky top-0 z-10 bg-white shadow-xl w-full text-xs" colspan="2">Observaciones generales</th>
+                    <th class="px-6 pt-6 pb-4 sticky top-0 z-10 bg-white shadow-xl w-full text-xs">Observaciones generales</th>
                     <th class="px-6 pt-6 pb-4 sticky top-0 z-10 bg-white shadow-xl w-full text-xs">Acciones</th>
                 </tr>
             </thead>
             <tbody>
                 {#each equiposAmbienteModernizacion as equipoAmbienteModernizacion}
                     <tr class="hover:bg-gray-100 focus-within:bg-gray-100">
-                        <td class="border-t px-6 pt-6 pb-4 text-xs" colspan="2">
+                        <td class="border-t px-6 pt-6 pb-4 text-xs">
                             <div class="my-4">
-                                <strong>Número de inventario SENA del equipo o maquina:</strong>
                                 {equipoAmbienteModernizacion.numero_inventario_equipo}
                             </div>
+                        </td>
+                        <td class="border-t px-6 pt-6 pb-4 text-xs">
                             <div class="my-4">
                                 <strong>Marca:</strong>
                                 {equipoAmbienteModernizacion.marca}
@@ -919,6 +922,8 @@
                                 <strong>Año de adquisición del equipo o maquina:</strong>
                                 {equipoAmbienteModernizacion.year_adquisicion}
                             </div>
+                        </td>
+                        <td class="border-t px-6 pt-6 pb-4 text-xs">
                             <div class="my-4">
                                 <strong>Nombre del cuentadante:</strong>
                                 {equipoAmbienteModernizacion.nombre_cuentadante}
@@ -933,7 +938,7 @@
                                 {equipoAmbienteModernizacion.rol_cuentadante}
                             </div>
                         </td>
-                        <td class="border-t px-6 pt-6 pb-4 text-xs" colspan="2">
+                        <td class="border-t px-6 pt-6 pb-4 text-xs">
                             <p class="paragraph-ellipsis">
                                 {equipoAmbienteModernizacion.descripcion_tecnica_equipo}
                             </p>
@@ -950,7 +955,7 @@
                                 {equipoAmbienteModernizacion.frecuencia_mantenimiento}
                             </div>
                         </td>
-                        <td class="border-t px-6 pt-6 pb-4 text-xs" colspan="2">
+                        <td class="border-t px-6 pt-6 pb-4 text-xs">
                             <p class="paragraph-ellipsis">
                                 {equipoAmbienteModernizacion.observaciones_generales}
                             </p>
