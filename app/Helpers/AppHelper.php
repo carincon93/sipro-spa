@@ -229,7 +229,9 @@ class AppHelper
             $request = new Request('GET', self::$apiUrl . "/_api/web/GetFolderByServerRelativeUrl('" . self::$rootFolder . $folderName . "')/Files('" . $fileName . "')/\$value", $headers);
             $response = $client->sendAsync($request)->wait();
 
-            header('Content-type: force-download');
+            $contenType = str_contains($fileName, 'pdf') ? 'Content-type: application/pdf' : 'Content-type: force-download';
+
+            header($contenType);
             header('Content-Disposition: inline; filename="' . $fileName . '"');
             header('Content-Transfer-Encoding: binary');
             header('Accept-Ranges: bytes');

@@ -32,7 +32,7 @@
         numero_celular: '',
         tipo_vinculacion: '',
         centro_formacion_id: null,
-        autorizacion_datos: false,
+        autorizacion_datos: true,
         role_id: [],
     })
 
@@ -51,8 +51,11 @@
     <div class="mt-4">
         <Input label="Correo electrónico institucional" id="email" type="email" class="mt-1" bind:value={$form.email} error={errors.email} required autocomplete="username" />
         {#if errors.email == 'El campo correo electrónico ya ha sido tomado.'}
-            <InfoMessage alertMsg={true}>El correo electrónico ya fue registrado, por favor comuníquese con el Dinamizador de su centro o el Activador de línea correspondiente para que habilite su usuario. Si no dan resupuesta envíe un correo a la dirección <a class="underline" href="mailto:sgpssipro@sena.edu.co">sgpssipro@sena.edu.co</a> (Se debe enviar desde una cuenta @sena.edu.co)</InfoMessage
-            >
+            <InfoMessage alertMsg={true} class="mt-4">
+                <p class="mt-3 py-4 text-justify">
+                    El correo electrónico ya fue registrado, por favor comuníquese con el Dinamizador de su centro o el Activador de línea correspondiente para que habilite su usuario. Si no dan resupuesta envíe un correo a la dirección <a class="underline" href="mailto:sgpssipro@sena.edu.co">sgpssipro@sena.edu.co</a> (Se debe enviar desde una cuenta @sena.edu.co)
+                </p>
+            </InfoMessage>
         {/if}
     </div>
 

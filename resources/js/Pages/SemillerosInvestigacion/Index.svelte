@@ -7,6 +7,7 @@
 
     import Button from '@/Shared/Button'
     import Pagination from '@/Shared/Pagination'
+    import Dialog from '@/Shared/Dialog'
     import DataTable from '@/Shared/DataTable'
     import DataTableMenu from '@/Shared/DataTableMenu'
     import { Item, Text } from '@smui/list'
@@ -23,6 +24,14 @@
     let isSuperAdmin = checkRole(authUser, [1])
 
     let filters = {}
+
+    let semilleroInvestigacionId
+    let dialogEliminar = false
+    function destroy() {
+        if (isSuperAdmin) {
+            Inertia.delete(route('grupos-investigacion.semilleros-investigacion.destroy', [grupoInvestigacion.id, semilleroInvestigacionId]))
+        }
+    }
 </script>
 
 <AuthenticatedLayout>
@@ -76,6 +85,11 @@
                             <Item on:SMUI:action={() => Inertia.visit(route('grupos-investigacion.semilleros-investigacion.edit', [grupoInvestigacion.id, semilleroInvestigacion.id]))}>
                                 <Text>Ver detalles</Text>
                             </Item>
+                            {#if isSuperAdmin}
+                                <Item on:SMUI:action={() => ((semilleroInvestigacionId = semilleroInvestigacion.id), (dialogEliminar = true))}>
+                                    <Text>Eliminar</Text>
+                                </Item>
+                            {/if}
                         </DataTableMenu>
                     </td>
                 </tr>
@@ -89,4 +103,25 @@
         </tbody>
     </DataTable>
     <Pagination links={semillerosInvestigacion.links} />
+
+    <Dialog bind:open={dialogEliminar}>
+        <div slot="title">
+            <div class="text-center">Eliminar recurso</div>
+            <div class="relative bg-cyan-100 text-cyan-600 p-5 h-44 w-1/3 m-auto my-10" style="border-radius: 41% 59% 70% 30% / 32% 40% 60% 68% ;">
+                <figure>
+                    <img src="/images/eliminar.png" alt="" class="h-44 m-auto" />
+                </figure>
+            </div>
+            <div class="text-center">
+                ¿Está seguro (a) que desea eliminar este proyecto?<br />Una vez eliminado el proyecto, todos sus recursos y datos se eliminarán de forma permanente.
+            </div>
+        </div>
+        <div slot="content" />
+        <div slot="actions">
+            <div class="p-4">
+                <Button on:click={() => (dialogEliminar = false)} variant={null}>Cancelar</Button>
+                <Button variant="raised" type="button" on:click={() => destroy}>Confirmar</Button>
+            </div>
+        </div>
+    </Dialog>
 </AuthenticatedLayout>

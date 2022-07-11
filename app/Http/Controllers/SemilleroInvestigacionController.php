@@ -167,6 +167,7 @@ class SemilleroInvestigacionController extends Controller
 
         if ($request->hasFile('formato_gic_f_021') && $status == true) {
             $fileNameFormatoGICF021 = AppHelper::cleanFileName($request->nombre . 'formato_gic_f_021', $request->formato_gic_f_021);
+            AppHelper::deleteFile($semilleroInvestigacion->formato_gic_f_021);
 
             $fileNameFormatoGICF021 = AppHelper::uploadFile($semilleroInvestigacion->ruta_final_sharepoint, $request->formato_gic_f_021, $fileNameFormatoGICF021);
 
@@ -175,6 +176,7 @@ class SemilleroInvestigacionController extends Controller
 
         if ($request->hasFile('formato_gic_f_032') && $status == true) {
             $fileNameFormatoGICF032 = AppHelper::cleanFileName($request->nombre . 'formato_gic_f_032', $request->formato_gic_f_032);
+            AppHelper::deleteFile($semilleroInvestigacion->formato_gic_f_032);
 
             $fileNameFormatoGICF032 = AppHelper::uploadFile($semilleroInvestigacion->ruta_final_sharepoint, $request->formato_gic_f_032, $fileNameFormatoGICF032);
 
@@ -183,6 +185,7 @@ class SemilleroInvestigacionController extends Controller
 
         if ($request->hasFile('formato_aval_semillero') && $status == true) {
             $fileNameFormatoAvalSemillero = AppHelper::cleanFileName($request->nombre . 'formato_aval_semillero', $request->formato_aval_semillero);
+            AppHelper::deleteFile($semilleroInvestigacion->formato_aval_semillero);
 
             $fileNameFormatoAvalSemillero = AppHelper::uploadFile($semilleroInvestigacion->ruta_final_sharepoint, $request->formato_aval_semillero, $fileNameFormatoAvalSemillero);
 
@@ -251,7 +254,7 @@ class SemilleroInvestigacionController extends Controller
         return response()->download(storage_path("app/$ruta"));
     }
 
-    public function downloadFileSharepoint(SemilleroInvestigacion $semilleroInvestigacion, $tipoArchivo)
+    public function downloadFileSharepoint(GrupoInvestigacion $grupoInvestigacion, SemilleroInvestigacion $semilleroInvestigacion, $tipoArchivo)
     {
         $fileName = '';
 
@@ -260,7 +263,7 @@ class SemilleroInvestigacionController extends Controller
         if ($fileName) {
             AppHelper::downloadFile($semilleroInvestigacion->ruta_final_sharepoint, $fileName);
         } else {
-            return back();
+            return redirect()->route('grupos-investigacion.semilleros-investigacion.edit', [$grupoInvestigacion, $semilleroInvestigacion])->with('error', 'No se encontró el archivo.');
         }
     }
 }
