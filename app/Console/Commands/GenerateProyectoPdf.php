@@ -6,7 +6,7 @@ use Illuminate\Console\Command;
 use Illuminate\Support\Facades\Auth;
 use App\Http\Controllers\PdfController;
 use App\Models\ProyectoPdfVersion;
-use App\Notifications\ProjectoVersion;
+use App\Notifications\ProyectoVersion;
 
 class GenerateProyectoPdf extends Command
 {
@@ -15,14 +15,14 @@ class GenerateProyectoPdf extends Command
      *
      * @var string
      */
-    protected $signature = 'versioning:project';
+    protected $signature = 'versionamiento:proyecto';
 
     /**
      * The console command description.
      *
      * @var string
      */
-    protected $description = 'Generate PDF version of project';
+    protected $description = 'Generar versión PDF del proyecto';
 
     /**
      * Create a new command instance.
@@ -49,7 +49,7 @@ class GenerateProyectoPdf extends Command
             if (!empty($same) && $same->estado == 1) {
                 $user = $pdfVersion->proyecto->participantes()->where('es_formulador', true)->first();
                 if (!empty($user)) {
-                    $user->notify(new ProjectoVersion($same));
+                    $user->notify(new ProyectoVersion($same));
                 }
             }
         }
