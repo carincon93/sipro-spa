@@ -14,6 +14,7 @@
 
     export let semillerosInvestigacion
     export let grupoInvestigacion
+    export let allowedToCreate
 
     $title = 'Semilleros de investigación'
 
@@ -27,9 +28,16 @@
 
     let semilleroInvestigacionId
     let dialogEliminar = false
+    let allowedToDestroy = false
+
     function destroy() {
-        if (isSuperAdmin) {
-            Inertia.delete(route('grupos-investigacion.semilleros-investigacion.destroy', [grupoInvestigacion.id, semilleroInvestigacionId]))
+        if (allowedToDestroy) {
+            Inertia.delete(route('grupos-investigacion.semilleros-investigacion.destroy', [grupoInvestigacion.id, semilleroInvestigacionId]), {
+                preserveScroll: true,
+                onFinish: () => {
+                    dialogEliminar = false
+                },
+            })
         }
     }
 </script>
@@ -39,7 +47,7 @@
         <div class="flex items-center justify-between lg:px-8 max-w-7xl mx-auto px-4 py-6 sm:px-6">
             <div>
                 <h1>
-                    <a use:inertia href={route('grupos-investigacion.index')} class="text-cyan-400 hover:text-cyan-600"> Grupos de investigación </a>
+                    <a use:inertia href={route('grupos-investigacion.index')} class="text-violet-400 hover:text-violet-600"> Grupos de investigación </a>
                 </h1>
             </div>
         </div>
@@ -49,7 +57,7 @@
         <div slot="title">Semilleros de investigación - Grupo: {grupoInvestigacion.nombre}</div>
 
         <div slot="actions">
-            {#if isSuperAdmin || checkRole(authUser, [4, 21, 20, 18, 19, 5, 17])}
+            {#if allowedToCreate}
                 <Button on:click={() => Inertia.visit(route('grupos-investigacion.semilleros-investigacion.create', grupoInvestigacion.id))} variant="raised">Crear semillero de investigación</Button>
             {/if}
         </div>
@@ -66,27 +74,30 @@
             {#each semillerosInvestigacion.data as semilleroInvestigacion (semilleroInvestigacion.id)}
                 <tr class="hover:bg-gray-100 focus-within:bg-gray-100">
                     <td class="border-t">
-                        <p class="px-6 py-4 focus:text-cyan-500">
+                        <p class="px-6 py-4 focus:text-violet-500">
                             {semilleroInvestigacion.nombre}
                         </p>
                     </td>
                     <td class="border-t">
-                        <p class="px-6 py-4 focus:text-cyan-500">
+                        <p class="px-6 py-4 focus:text-violet-500">
                             {semilleroInvestigacion.nombre_linea_principal}
                         </p>
                     </td>
                     <td class="border-t">
-                        <p class="px-6 py-4 focus:text-cyan-500">
+                        <p class="px-6 py-4 focus:text-violet-500">
                             {semilleroInvestigacion.codigo}
                         </p>
                     </td>
                     <td class="border-t td-actions">
                         <DataTableMenu class={semillerosInvestigacion.data.length < 4 ? 'z-50' : ''}>
-                            <Item on:SMUI:action={() => Inertia.visit(route('grupos-investigacion.semilleros-investigacion.edit', [grupoInvestigacion.id, semilleroInvestigacion.id]))}>
-                                <Text>Ver detalles</Text>
-                            </Item>
-                            {#if isSuperAdmin}
-                                <Item on:SMUI:action={() => ((semilleroInvestigacionId = semilleroInvestigacion.id), (dialogEliminar = true))}>
+                            {#if semilleroInvestigacion.allowed.to_view}
+                                <Item on:SMUI:action={() => Inertia.visit(route('grupos-investigacion.semilleros-investigacion.edit', [grupoInvestigacion.id, semilleroInvestigacion.id]))}>
+                                    <Text>Ver detalles</Text>
+                                </Item>
+                            {/if}
+
+                            {#if semilleroInvestigacion.allowed.to_destroy}
+                                <Item on:SMUI:action={() => ((semilleroInvestigacionId = semilleroInvestigacion.id), (dialogEliminar = true), (allowedToDestroy = semilleroInvestigacion.allowed.to_destroy))}>
                                     <Text>Eliminar</Text>
                                 </Item>
                             {/if}
@@ -107,7 +118,7 @@
     <Dialog bind:open={dialogEliminar}>
         <div slot="title">
             <div class="text-center">Eliminar recurso</div>
-            <div class="relative bg-cyan-100 text-cyan-600 p-5 h-44 w-1/3 m-auto my-10" style="border-radius: 41% 59% 70% 30% / 32% 40% 60% 68% ;">
+            <div class="relative bg-violet-100 text-violet-600 p-5 h-44 w-1/3 m-auto my-10" style="border-radius: 41% 59% 70% 30% / 32% 40% 60% 68% ;">
                 <figure>
                     <img src="/images/eliminar.png" alt="" class="h-44 m-auto" />
                 </figure>
@@ -120,7 +131,7 @@
         <div slot="actions">
             <div class="p-4">
                 <Button on:click={() => (dialogEliminar = false)} variant={null}>Cancelar</Button>
-                <Button variant="raised" type="button" on:click={() => destroy}>Confirmar</Button>
+                <Button variant="raised" type="button" on:click={() => destroy()}>Confirmar</Button>
             </div>
         </div>
     </Dialog>

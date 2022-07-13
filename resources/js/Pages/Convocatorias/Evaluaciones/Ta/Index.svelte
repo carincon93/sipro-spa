@@ -43,7 +43,7 @@
             {#each ta.data as { evaluacion_id, nombre_user, proyecto, fecha_ejecucion, iniciado, habilitado, finalizado, evaluacion_final }}
                 <tr class="hover:bg-gray-100 focus-within:bg-gray-100">
                     <td class="border-t">
-                        <p class="px-6 py-4 focus:text-cyan-500">
+                        <p class="px-6 py-4 focus:text-violet-500">
                             {proyecto.codigo}
 
                             {#if evaluacion_final}
@@ -56,7 +56,7 @@
                         </p>
                     </td>
                     <td class="border-t">
-                        <p class="px-6 py-4 focus:text-cyan-500">
+                        <p class="px-6 py-4 focus:text-violet-500">
                             {proyecto.tecnoacademia_lineas_tecnoacademia[0]?.tecnoacademia.nombre}
                         </p>
                     </td>
@@ -93,10 +93,6 @@
                                             Evaluar
                                         {/if}
                                     </Text>
-                                </Item>
-                            {:else}
-                                <Item>
-                                    <Text>No tiene permisos</Text>
                                 </Item>
                             {/if}
                         </DataTableMenu>

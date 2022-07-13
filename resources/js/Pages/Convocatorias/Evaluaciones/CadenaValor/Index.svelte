@@ -47,8 +47,8 @@
         data.addColumn('string', 'ToolTip')
 
         var options = {
-            nodeClass: 'bg-cyan-500 text-white shadow',
-            selectedNodeClass: 'bg-cyan-700',
+            nodeClass: 'bg-violet-500 text-white shadow',
+            selectedNodeClass: 'bg-violet-700',
             allowHtml: true,
             size: 'small',
         }
@@ -336,7 +336,7 @@
                         {/if}
                     </div>
 
-                    <hr class="mt-10 mb-10 border-cyan-300" />
+                    <hr class="mt-10 mb-10 border-violet-300" />
                     <h1 class="font-black">Impacto ambiental</h1>
                     <h1>Criterios de evaluacion</h1>
 
@@ -381,7 +381,7 @@
                         {/if}
                     </div>
 
-                    <hr class="mt-10 mb-10 border-cyan-300" />
+                    <hr class="mt-10 mb-10 border-violet-300" />
                     <h1 class="font-black">Impacto social en el centro de formación</h1>
                     <h1>Criterios de evaluacion</h1>
 
@@ -422,7 +422,7 @@
                         {/if}
                     </div>
 
-                    <hr class="mt-10 mb-10 border-cyan-300" />
+                    <hr class="mt-10 mb-10 border-violet-300" />
                     <h1 class="font-black">Impacto social en el sector productivo</h1>
                     <h1>Criterios de evaluacion</h1>
 
@@ -463,7 +463,7 @@
                         {/if}
                     </div>
 
-                    <hr class="mt-10 mb-10 border-cyan-300" />
+                    <hr class="mt-10 mb-10 border-violet-300" />
                     <h1 class="font-black">Impacto tecnológico</h1>
                     <h1>Criterios de evaluacion</h1>
 

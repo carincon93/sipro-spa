@@ -174,13 +174,13 @@
                 {#each actividades.data as actividad (actividad.id)}
                     <tr class="hover:bg-gray-100 focus-within:bg-gray-100">
                         <td class="border-t">
-                            <p class="focus:text-cyan-500 my-2 paragraph-ellipsis px-6">
+                            <p class="focus:text-violet-500 my-2 paragraph-ellipsis px-6">
                                 {actividad.descripcion}
                             </p>
                         </td>
 
                         <td class="border-t">
-                            <p class="focus:text-cyan-500 my-2 paragraph-ellipsis px-6">
+                            <p class="focus:text-violet-500 my-2 paragraph-ellipsis px-6">
                                 {#if actividad.fecha_inicio}
                                     Del {actividad.fecha_inicio} al {actividad.fecha_finalizacion}
                                 {:else}
@@ -189,7 +189,7 @@
                             </p>
                         </td>
                         <td class="border-t">
-                            <p class="focus:text-cyan-500 my-2 paragraph-ellipsis px-6">
+                            <p class="focus:text-violet-500 my-2 paragraph-ellipsis px-6">
                                 {actividad.objetivo_especifico.descripcion}
                             </p>
                         </td>
@@ -316,7 +316,7 @@
                         {/if}
                     </div>
 
-                    <hr class="mt-10 mb-10 border-cyan-300" />
+                    <hr class="mt-10 mb-10 border-violet-300" />
                     <h1 class="text-2xl text-center mb-10">Actividades</h1>
 
                     <h1>Criterios de evaluacion</h1>
@@ -364,7 +364,7 @@
                                 {/if}
                             </div>
                         {:else if j == 1}
-                            <hr class="mt-10 mb-10 border-cyan-300" />
+                            <hr class="mt-10 mb-10 border-violet-300" />
 
                             <h1 class="text-black">Actividades del segundo objetivo específico</h1>
 
@@ -401,7 +401,7 @@
                                 {/if}
                             </div>
                         {:else if j == 2}
-                            <hr class="mt-10 mb-10 border-cyan-300" />
+                            <hr class="mt-10 mb-10 border-violet-300" />
 
                             <h1 class="text-black">Actividades del tercer objetivo específico</h1>
 
@@ -438,7 +438,7 @@
                                 {/if}
                             </div>
                         {:else if j == 3}
-                            <hr class="mt-10 mb-10 border-cyan-300" />
+                            <hr class="mt-10 mb-10 border-violet-300" />
 
                             <h1 class="text-black">Actividades del cuarto objetivo específico</h1>
 

@@ -55,7 +55,7 @@
     <DataTable class="mt-20" routeParams={[convocatoria.id, evaluacion.id]}>
         <div slot="title">Inventario de equipos</div>
         <div slot="caption">
-            <a class="bg-cyan-600 text-white p-2 rounded shadow" target="_blank" href={route('reportes.inventario-equipos', [proyecto.id])}>Descargar Excel</a>
+            <a class="bg-violet-600 text-white p-2 rounded shadow" target="_blank" href={route('reportes.inventario-equipos', [proyecto.id])}>Descargar Excel</a>
         </div>
 
         <thead slot="thead">
@@ -70,13 +70,13 @@
             {#each inventarioEquipos.data as inventarioEquipo (inventarioEquipo.id)}
                 <tr class="hover:bg-gray-100 focus-within:bg-gray-100">
                     <td class="border-t">
-                        <p class="focus:text-cyan-500 my-2 paragraph-ellipsis px-6">
+                        <p class="focus:text-violet-500 my-2 paragraph-ellipsis px-6">
                             {inventarioEquipo.nombre}
                         </p>
                     </td>
 
                     <td class="border-t">
-                        <p class="focus:text-cyan-500 my-2 paragraph-ellipsis px-6">
+                        <p class="focus:text-violet-500 my-2 paragraph-ellipsis px-6">
                             {inventarioEquipo.fecha_adquisicion}
                         </p>
                     </td>
@@ -86,10 +86,6 @@
                             {#if isSuperAdmin || checkRole(authUser, [11, 5])}
                                 <Item on:SMUI:action={() => Inertia.visit(route('convocatorias.evaluaciones.inventario-equipos.edit', [convocatoria.id, evaluacion.id, inventarioEquipo.id]))}>
                                     <Text>Ver detalles</Text>
-                                </Item>
-                            {:else}
-                                <Item>
-                                    <Text>No tiene permisos</Text>
                                 </Item>
                             {/if}
                         </DataTableMenu>

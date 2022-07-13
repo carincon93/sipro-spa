@@ -91,9 +91,9 @@
             <div>
                 <h1 class="overflow-ellipsis overflow-hidden w-breadcrumb-ellipsis whitespace-nowrap">
                     {#if isSuperAdmin || checkPermission(authUser, [3, 4, 6, 7, 9, 10, 12, 13, 18, 19, 21, 14, 16, 15, 20])}
-                        <a use:inertia href={route('convocatorias.proyectos.presupuesto.index', [convocatoria.id, proyecto.id])} class="text-cyan-400 hover:text-cyan-600"> Presupuesto </a>
+                        <a use:inertia href={route('convocatorias.proyectos.presupuesto.index', [convocatoria.id, proyecto.id])} class="text-violet-400 hover:text-violet-600"> Presupuesto </a>
                     {/if}
-                    <span class="text-cyan-400 font-medium">/</span>
+                    <span class="text-violet-400 font-medium">/</span>
                     {proyectoPresupuesto.convocatoria_presupuesto.presupuesto_sennova.uso_presupuestal.descripcion}
                 </h1>
             </div>
@@ -180,7 +180,7 @@
                     {#if $form.codigo_uso_presupuestal == '2010100600203101'}
                         <div class="mt-4">
                             <Label required class="mb-4" labelFor="tipo_licencia" value="Tipo de licencia" />
-                            <select id="tipo_licencia" class="w-full border-gray-300 rounded-md shadow-sm focus:ring focus:ring-opacity-50 focus:border-cyan-200 focus:ring-cyan-200 p-4" bind:value={$form.tipo_licencia} required>
+                            <select id="tipo_licencia" class="w-full border-gray-300 rounded-md shadow-sm focus:ring focus:ring-opacity-50 focus:border-violet-200 focus:ring-violet-200 p-4" bind:value={$form.tipo_licencia} required>
                                 <option value="">Seleccione el tipo de licencia </option>
                                 {#each tiposLicencia as { value, label }}
                                     <option {value}>{label}</option>
@@ -190,7 +190,7 @@
 
                         <div class="mt-4">
                             <Label required class="mb-4" labelFor="tipo_software" value="Tipo de software" />
-                            <select id="tipo_software" class="w-full border-gray-300 rounded-md shadow-sm focus:ring focus:ring-opacity-50 focus:border-cyan-200 focus:ring-cyan-200 p-4" bind:value={$form.tipo_software} required>
+                            <select id="tipo_software" class="w-full border-gray-300 rounded-md shadow-sm focus:ring focus:ring-opacity-50 focus:border-violet-200 focus:ring-violet-200 p-4" bind:value={$form.tipo_software} required>
                                 <option value="">Seleccione el tipo de software </option>
                                 {#each tiposSoftware as { value, label }}
                                     <option {value}>{label}</option>
@@ -238,10 +238,10 @@
                 <h1 class="mb-4 text-2xl">Enlaces de interés</h1>
                 <ul>
                     <li>
-                        <a class="bg-cyan-100 hover:bg-cyan-200 mb-4 px-6 py-2 rounded-3xl text-center text-cyan-400" use:inertia href={route('convocatorias.proyectos.presupuesto.soportes.index', [convocatoria.id, proyecto.id, proyectoPresupuesto.id])}>Soportes / Cotizaciones</a>
+                        <a class="bg-violet-100 hover:bg-violet-200 mb-4 px-6 py-2 rounded-3xl text-center text-violet-400" use:inertia href={route('convocatorias.proyectos.presupuesto.soportes.index', [convocatoria.id, proyecto.id, proyectoPresupuesto.id])}>Soportes / Cotizaciones</a>
                     </li>
                     <li class="mt-4">
-                        <a class="flex bg-cyan-100 hover:bg-cyan-200 mb-4 px-6 py-2 rounded-3xl text-center text-cyan-400" target="_blank" download href={route('convocatorias.proyectos.presupuesto.download-formato-estudio-mercado', [convocatoria.id, proyecto.id])}>
+                        <a class="flex bg-violet-100 hover:bg-violet-200 mb-4 px-6 py-2 rounded-3xl text-center text-violet-400" target="_blank" download href={route('convocatorias.proyectos.presupuesto.download-formato-estudio-mercado', [convocatoria.id, proyecto.id])}>
                             <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 mr-2" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4" />
                             </svg>
@@ -274,7 +274,7 @@
                             <td class="border-t px-6 pt-6 pb-4"> Estudio de mercado </td>
 
                             <td class="border-t px-6 pt-6 pb-4">
-                                <a target="_blank" class="flex text-cyan-400 underline mb-4" download href={proyectoPresupuesto.formato_estudio_mercado}>
+                                <a target="_blank" class="flex text-violet-400 underline mb-4" download href={proyectoPresupuesto.formato_estudio_mercado}>
                                     <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 mr-2" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4" />
                                     </svg>

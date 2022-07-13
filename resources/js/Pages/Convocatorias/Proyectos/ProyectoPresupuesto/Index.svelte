@@ -250,7 +250,7 @@
             {#each proyectoPresupuesto.data as presupuesto (presupuesto.id)}
                 <tr class="hover:bg-gray-100 focus-within:bg-gray-100">
                     <td class="border-t">
-                        <div class="flex flex-col focus:text-cyan-500 px-6 py-4">
+                        <div class="flex flex-col focus:text-violet-500 px-6 py-4">
                             <small>
                                 Código: PRE-{presupuesto.id}
                             </small>
@@ -294,10 +294,6 @@
                                         <Text>Soportes</Text>
                                     </Item>
                                 {/if}
-                            {:else}
-                                <Item>
-                                    <Text>No tiene permisos</Text>
-                                </Item>
                             {/if}
                         </DataTableMenu>
                     </td>

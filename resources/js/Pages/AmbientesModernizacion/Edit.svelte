@@ -303,9 +303,9 @@
             <div>
                 <h1 class="overflow-ellipsis overflow-hidden w-breadcrumb-ellipsis whitespace-nowrap">
                     {#if isSuperAdmin || checkRole(authUser, [4])}
-                        <a use:inertia href={route('ambientes-modernizacion.index')} class="text-cyan-400 hover:text-cyan-600"> Ambientes de modernización </a>
+                        <a use:inertia href={route('ambientes-modernizacion.index')} class="text-violet-400 hover:text-violet-600"> Ambientes de modernización </a>
                     {/if}
-                    <span class="text-cyan-400 font-medium">/</span>
+                    <span class="text-violet-400 font-medium">/</span>
                     {ambienteModernizacion.nombre_ambiente}
                 </h1>
             </div>
@@ -353,7 +353,7 @@
             <div class="mt-44 grid grid-cols-2">
                 <div>
                     <Label required class="mb-4" labelFor="tipologia_ambiente_id" value="3. Tipologías de los ambientes (Circular 3-2018- 143)" />
-                    <a href={window.basePath + '/storage/documentos-descarga/Circular-3-2018-143.pdf'} target="_blank" class="underline text-cyan-500">Ver Circular 3-2018-143</a>
+                    <a href={window.basePath + '/storage/documentos-descarga/Circular-3-2018-143.pdf'} target="_blank" class="underline text-violet-500">Ver Circular 3-2018-143</a>
                 </div>
                 <div>
                     <Select id="tipologia_ambiente_id" items={tipologiasAmbientes} bind:selectedValue={$form.tipologia_ambiente_id} error={errors.tipologia_ambiente_id} autocomplete="off" placeholder="Seleccione una tipología" required />
@@ -434,14 +434,14 @@
                 </div>
             </div>
             {#if $form.alineado_mesas_sectoriales?.value == 1}
-                <div class="bg-cyan-100 p-5 mt-10">
+                <div class="bg-violet-100 p-5 mt-10">
                     <InputError message={errors.mesa_sectorial_id} />
                     <div class="grid grid-cols-2">
                         <div>
                             <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" class="w-5" style="transform: translateX(-50px);">
                                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
                             </svg>
-                            <p class="text-cyan-600">Por favor seleccione la o las mesas sectoriales con la cual o las cuales se alinea el proyecto</p>
+                            <p class="text-violet-600">Por favor seleccione la o las mesas sectoriales con la cual o las cuales se alinea el proyecto</p>
                         </div>
                         <div class="bg-white grid grid-cols-2 max-w-xl overflow-y-scroll shadow-2xl mt-4 h-80">
                             {#each mesasSectoriales as { id, nombre }, i}
@@ -1013,7 +1013,7 @@
             <ul>
                 <li class="flex items-center">
                     {#if ambienteModernizacion.finalizado}
-                        <a class="bg-cyan-500 mx-auto p-2 rounded text-white text-xs" href={route('ambientes-modernizacion.descargar-pdf', [ambienteModernizacion.id])}>Descargar PDF</a>
+                        <a class="bg-violet-500 mx-auto p-2 rounded text-white text-xs" href={route('ambientes-modernizacion.descargar-pdf', [ambienteModernizacion.id])}>Descargar PDF</a>
                     {/if}
                 </li>
             </ul>

@@ -59,9 +59,9 @@
             <div>
                 <h1>
                     {#if isSuperAdmin}
-                        <a use:inertia href={route('reglas-roles-tp.index')} class="text-cyan-400 hover:text-cyan-600"> Reglas de roles TP</a>
+                        <a use:inertia href={route('reglas-roles-tp.index')} class="text-violet-400 hover:text-violet-600"> Reglas de roles TP</a>
                     {/if}
-                    <span class="text-cyan-400 font-medium">/</span>
+                    <span class="text-violet-400 font-medium">/</span>
                     Editar
                 </h1>
             </div>

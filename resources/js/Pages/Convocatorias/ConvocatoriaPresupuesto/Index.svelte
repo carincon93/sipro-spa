@@ -48,30 +48,30 @@
             {#each convocatoriaPresupuesto.data as rubro (rubro.id)}
                 <tr class="hover:bg-gray-100 focus-within:bg-gray-100">
                     <td class="border-t">
-                        <p class="px-6 py-4 focus:text-cyan-500">
+                        <p class="px-6 py-4 focus:text-violet-500">
                             {rubro.presupuesto_sennova.codigo}
                         </p>
                     </td>
                     <td class="border-t">
-                        <p class="px-6 py-4 focus:text-cyan-500">
+                        <p class="px-6 py-4 focus:text-violet-500">
                             {rubro.presupuesto_sennova.segundo_grupo_presupuestal.nombre}
                         </p>
                     </td>
 
                     <td class="border-t">
-                        <p class="px-6 py-4 focus:text-cyan-500">
+                        <p class="px-6 py-4 focus:text-violet-500">
                             {rubro.presupuesto_sennova.tercer_grupo_presupuestal.nombre}
                         </p>
                     </td>
 
                     <td class="border-t">
-                        <p class="px-6 py-4 focus:text-cyan-500">
+                        <p class="px-6 py-4 focus:text-violet-500">
                             {rubro.presupuesto_sennova.uso_presupuestal.descripcion}
                         </p>
                     </td>
 
                     <td class="border-t">
-                        <p class="px-6 py-4 focus:text-cyan-500">
+                        <p class="px-6 py-4 focus:text-violet-500">
                             {rubro.presupuesto_sennova.linea_programatica.codigo}
                         </p>
                     </td>
@@ -81,10 +81,6 @@
                             {#if isSuperAdmin}
                                 <Item on:SMUI:action={() => Inertia.visit(route('convocatorias.convocatoria-presupuesto.edit', [convocatoria.id, rubro.id]))}>
                                     <Text>Ver detalles</Text>
-                                </Item>
-                            {:else}
-                                <Item>
-                                    <Text>No tiene permisos</Text>
                                 </Item>
                             {/if}
                         </DataTableMenu>

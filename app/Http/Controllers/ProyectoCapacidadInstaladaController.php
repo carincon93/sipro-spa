@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Helpers\AppHelper;
 use App\Models\ProyectoCapacidadInstalada;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\NuevoProponenteRequest;
@@ -9,17 +10,28 @@ use App\Http\Requests\ProyectoCapacidadInstaladaEntidadAliadaRequest;
 use App\Http\Requests\ProyectoCapacidadInstaladaObjetivoEspecificoRequest;
 use App\Http\Requests\ProyectoCapacidadInstaladaProductoRequest;
 use App\Http\Requests\ProyectoCapacidadInstaladaRequest;
+use App\Models\ActividadEconomica;
+use App\Models\AreaConocimiento;
 use App\Models\CentroFormacion;
+use App\Models\DisciplinaSubareaConocimiento;
+use App\Models\LineaInvestigacion;
+use App\Models\ProgramaFormacion;
 use App\Models\ProyectoCapacidadInstaladaEntidadAliada;
 use App\Models\ProyectoCapacidadInstaladaObjetivoEspecifico;
 use App\Models\ProyectoCapacidadInstaladaProducto;
 use App\Models\ProyectoCapacidadInstaladaResultado;
+use App\Models\RedConocimiento;
+use App\Models\SemilleroInvestigacion;
+use App\Models\SubareaConocimiento;
+use App\Models\SubtipoProyectoCapacidadInstalada;
+use App\Models\TipoProyectoCapacidadInstalada;
 use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Str;
 use Illuminate\Support\Facades\Storage;
 use Inertia\Inertia;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Gate;
 
 class ProyectoCapacidadInstaladaController extends Controller
 {
@@ -33,6 +45,7 @@ class ProyectoCapacidadInstaladaController extends Controller
         return Inertia::render('ProyectosCapacidadInstalada/Index', [
             'filters'                     => request()->all('search'),
             'proyectosCapacidadInstalada' => ProyectoCapacidadInstalada::getProyectosPorRol()->appends(['search' => request()->search]),
+            'allowedToCreate'             => Gate::inspect('create', [ProyectoCapacidadInstalada::class])
         ]);
     }
 
@@ -51,6 +64,7 @@ class ProyectoCapacidadInstaladaController extends Controller
             'centrosFormacion'  => $centrosFormacion,
             'listaBeneficiados' => json_decode(Storage::get('json/proyectos-capacidad-instalada-beneficiados.json'), true),
             'roles'             => json_decode(Storage::get('json/roles-sennova-idi.json'), true),
+            'allowedToCreate'   => Gate::inspect('create', [ProyectoCapacidadInstalada::class])
         ]);
     }
 
@@ -103,7 +117,7 @@ class ProyectoCapacidadInstaladaController extends Controller
      */
     public function edit(ProyectoCapacidadInstalada $proyectoCapacidadInstalada)
     {
-        $this->authorize('view', [ProyectoCapacidadInstalada::class, $proyectoCapacidadInstalada]);
+        $responseUserAbilities = $this->authorize('view', [ProyectoCapacidadInstalada::class, $proyectoCapacidadInstalada]);
 
         $centrosFormacion = CentroFormacion::selectRaw('centros_formacion.id as value, concat(centros_formacion.nombre, chr(10), \'∙ Código: \', centros_formacion.codigo) as label')->orderBy('centros_formacion.nombre', 'ASC')->get();
         $proyectoCapacidadInstalada->semilleroInvestigacion;
@@ -114,13 +128,28 @@ class ProyectoCapacidadInstaladaController extends Controller
         $proyectoCapacidadInstalada->integrantes;
 
         return Inertia::render('ProyectosCapacidadInstalada/Edit', [
-            'proyectoCapacidadInstalada'            => $proyectoCapacidadInstalada,
-            'centrosFormacion'                      => $centrosFormacion,
-            'listaBeneficiados'                     => json_decode(Storage::get('json/proyectos-capacidad-instalada-beneficiados.json'), true),
-            'proyectoProgramasFormacion'            => $proyectoCapacidadInstalada->programasFormacionImpactados()->selectRaw('programas_formacion.id as value, concat(programas_formacion.nombre, chr(10), \'∙ Código: \', programas_formacion.codigo) as label')->get(),
-            'proyectoProgramasFormacionArticulados' => $proyectoCapacidadInstalada->programasFormacionArticulados()->selectRaw('programas_formacion_articulados.id as value, concat(programas_formacion_articulados.nombre, chr(10), \'∙ Código: \', programas_formacion_articulados.codigo) as label')->get(),
-            'autorPrincipal'                        => $proyectoCapacidadInstalada->integrantes()->where('proyecto_capacidad_instalada_integrante.autor_principal', true)->first(),
-            'roles'                                 => json_decode(Storage::get('json/roles-sennova-idi.json'), true),
+            'proyectoCapacidadInstalada'                => $proyectoCapacidadInstalada,
+            'centrosFormacion'                          => $centrosFormacion,
+            'listaBeneficiados'                         => json_decode(Storage::get('json/proyectos-capacidad-instalada-beneficiados.json'), true),
+
+            'programasFormacion'                        => ProgramaFormacion::selectRaw('programas_formacion.id as value, concat(programas_formacion.nombre, chr(10), \'∙ Código: \', programas_formacion.codigo) as label, registro_calificado, centro_formacion_id')->get(),
+            'lineasInvestigacion'                       => LineaInvestigacion::selectRaw('lineas_investigacion.id as value, concat(lineas_investigacion.nombre, chr(10), \'∙ Grupo de investigación: \', grupos_investigacion.nombre, chr(10)) as label, centros_formacion.id as centro_formacion_id')->join('grupos_investigacion', 'lineas_investigacion.grupo_investigacion_id', 'grupos_investigacion.id')->join('centros_formacion', 'grupos_investigacion.centro_formacion_id', 'centros_formacion.id')->join('regionales', 'centros_formacion.regional_id', 'regionales.id')->get(),
+            'semillerosInvestigacion'                   => SemilleroInvestigacion::select('semilleros_investigacion.id as value', 'semilleros_investigacion.nombre as label', 'linea_investigacion_id')->orderBy('nombre', 'ASC')->get(),
+            'areasConocimiento'                         => AreaConocimiento::select('areas_conocimiento.id as value', 'areas_conocimiento.nombre as label')->orderBy('nombre', 'ASC')->get(),
+            'subareasConocimiento'                      => SubareaConocimiento::select('subareas_conocimiento.id as value', 'subareas_conocimiento.nombre as label', 'area_conocimiento_id')->orderBy('nombre', 'ASC')->get(),
+            'disciplinasSubareaConocimiento'            => DisciplinaSubareaConocimiento::select('disciplinas_subarea_conocimiento.id as value', 'disciplinas_subarea_conocimiento.nombre as label', 'subarea_conocimiento_id')->orderBy('nombre', 'ASC')->get(),
+            'redesConocimiento'                         => RedConocimiento::select('redes_conocimiento.id as value', 'redes_conocimiento.nombre as label')->orderBy('nombre', 'ASC')->get(),
+            'actividadesEconomicas'                     => ActividadEconomica::select('actividades_economicas.id as value', 'actividades_economicas.nombre as label')->orderBy('nombre', 'ASC')->get(),
+            'tiposProyectoCapacidadInstalada'           => TipoProyectoCapacidadInstalada::select('id as value', 'tipo as label')->orderBy('tipo', 'ASC')->get(),
+            'subtiposProyectoCapacidadInstalada'        => SubtipoProyectoCapacidadInstalada::select('id as value', 'subtipo as label', 'tipo_proyecto_capacidad_instalada_id')->orderBy('subtipo', 'ASC')->get(),
+
+            'programasFormacionRegistroAsociados'       => $proyectoCapacidadInstalada->programasFormacion()->selectRaw('programas_formacion.id as value, concat(programas_formacion.nombre, chr(10), \'∙ Código: \', programas_formacion.codigo) as label')->where('registro_calificado', true)->get(),
+            'programasFormacionSinRegistroAsociados'    => $proyectoCapacidadInstalada->programasFormacion()->selectRaw('programas_formacion.id as value, concat(programas_formacion.nombre, chr(10), \'∙ Código: \', programas_formacion.codigo) as label')->where('registro_calificado', false)->get(),
+            'autorPrincipal'                            => $proyectoCapacidadInstalada->integrantes()->where('proyecto_capacidad_instalada_integrante.autor_principal', true)->first(),
+            'roles'                                     => json_decode(Storage::get('json/roles-sennova-idi.json'), true),
+
+            'userAllowed' => $responseUserAbilities->allowed(),
+            'formAllowed' => true
         ]);
     }
 
@@ -146,8 +175,7 @@ class ProyectoCapacidadInstaladaController extends Controller
         $proyectoCapacidadInstalada->redConocimiento()->associate($request->red_conocimiento_id);
         $proyectoCapacidadInstalada->actividadEconomica()->associate($request->actividad_economica_id);
 
-        $proyectoCapacidadInstalada->programasFormacionImpactados()->sync($request->programas_formacion);
-        $proyectoCapacidadInstalada->programasFormacionArticulados()->sync($request->programas_formacion_articulados);
+        $proyectoCapacidadInstalada->programasFormacion()->sync(array_merge($request->programas_formacion_registro_calificado, $request->programas_formacion_sin_registro_calificado));
 
         $proyectoCapacidadInstalada->save();
 
@@ -337,9 +365,17 @@ class ProyectoCapacidadInstaladaController extends Controller
         $entidadAliada->documento   = $request->documento;
 
         $entidadAliada->proyectoCapacidadInstalada()->associate($proyectoCapacidadInstalada);
-        $entidadAliada->save();
+        if ($entidadAliada->save()) {
+            $status = AppHelper::checkFolderAndCreate($proyectoCapacidadInstalada->ruta_final_sharepoint);
 
-        return redirect()->route('proyectos-capacidad-instalada.integrantes.index', $proyectoCapacidadInstalada)->with('success', 'El recurso se ha creado correctamente.');
+            if ($request->hasFile('documento') && $status == true) {
+                $fileNameDocumento = AppHelper::cleanFileName($request->nombre . 'documento', $request->documento);
+                $fileNameDocumento = AppHelper::uploadFile($proyectoCapacidadInstalada->ruta_final_sharepoint, $request->documento, $fileNameDocumento);
+                $proyectoCapacidadInstalada->update(['documento' => $fileNameDocumento]);
+            }
+
+            return redirect()->route('proyectos-capacidad-instalada.integrantes.index', $proyectoCapacidadInstalada)->with('success', 'El recurso se ha creado correctamente.');
+        }
     }
 
     public function editEntidadAliada(ProyectoCapacidadInstalada $proyectoCapacidadInstalada, ProyectoCapacidadInstaladaEntidadAliada $entidadAliada)
@@ -351,8 +387,6 @@ class ProyectoCapacidadInstaladaController extends Controller
         return Inertia::render('ProyectosCapacidadInstalada/Integrantes/EntidadesAliadas/Edit', [
             'proyectoCapacidadInstalada'    => $proyectoCapacidadInstalada,
             'entidadAliada'                 => $entidadAliada,
-            'autorPrincipal'                => $proyectoCapacidadInstalada->integrantes()->where('proyecto_capacidad_instalada_integrante.autor_principal', true)->first(),
-
         ]);
     }
 
@@ -400,7 +434,6 @@ class ProyectoCapacidadInstaladaController extends Controller
         return Inertia::render('ProyectosCapacidadInstalada/ObjetivosEspecificos/Index', [
             'proyectoCapacidadInstalada'    => $proyectoCapacidadInstalada,
             'objetivosEspecificos'          => ProyectoCapacidadInstaladaObjetivoEspecifico::where('proyecto_capacidad_instalada_id', $proyectoCapacidadInstalada->id)->with('resultado')->orderBy('numero', 'ASC')->paginate(15),
-            'autorPrincipal'                => $proyectoCapacidadInstalada->integrantes()->where('proyecto_capacidad_instalada_integrante.autor_principal', true)->first(),
         ]);
     }
 
@@ -452,7 +485,6 @@ class ProyectoCapacidadInstaladaController extends Controller
         return Inertia::render('ProyectosCapacidadInstalada/ObjetivosEspecificos/Edit', [
             'proyectoCapacidadInstalada'    => $proyectoCapacidadInstalada,
             'objetivoEspecifico'            => $objetivoEspecifico,
-            'autorPrincipal'                => $proyectoCapacidadInstalada->integrantes()->where('proyecto_capacidad_instalada_integrante.autor_principal', true)->first(),
         ]);
     }
 
@@ -492,7 +524,6 @@ class ProyectoCapacidadInstaladaController extends Controller
         return Inertia::render('ProyectosCapacidadInstalada/Productos/Index', [
             'proyectoCapacidadInstalada'    => $proyectoCapacidadInstalada,
             'productos'                     => ProyectoCapacidadInstaladaProducto::select('proyectos_capacidad_producto.*', 'proyecto_capacidad_objetivo_especifico.proyecto_capacidad_instalada_id')->join('proyectos_capacidad_resultado', 'proyectos_capacidad_producto.proyecto_capacidad_resultado_id', 'proyectos_capacidad_resultado.id')->join('proyecto_capacidad_objetivo_especifico', 'proyectos_capacidad_resultado.proyecto_capacidad_objetivo_especifico_id', 'proyecto_capacidad_objetivo_especifico.id')->where('proyecto_capacidad_objetivo_especifico.proyecto_capacidad_instalada_id', $proyectoCapacidadInstalada->id)->with('resultado')->paginate(15),
-            'autorPrincipal'                => $proyectoCapacidadInstalada->integrantes()->where('proyecto_capacidad_instalada_integrante.autor_principal', true)->first(),
         ]);
     }
 
@@ -540,7 +571,6 @@ class ProyectoCapacidadInstaladaController extends Controller
                 $query->where('proyecto_capacidad_objetivo_especifico.proyecto_capacidad_instalada_id', $proyectoCapacidadInstalada->id);
             })->where('proyectos_capacidad_resultado.descripcion', '!=', null)->get(),
             'tipologiasMinciencias'         => json_decode(Storage::get('json/tipologia-minciencias.json'), true),
-            'autorPrincipal'                => $proyectoCapacidadInstalada->integrantes()->where('proyecto_capacidad_instalada_integrante.autor_principal', true)->first(),
         ]);
     }
 
@@ -574,7 +604,6 @@ class ProyectoCapacidadInstaladaController extends Controller
         return Inertia::render('ProyectosCapacidadInstalada/FinalizarProyecto', [
             'proyectoCapacidadInstalada'        => $proyectoCapacidadInstalada,
             'estadosProyectoCapacidadInstalada' => json_decode(Storage::get('json/estados-proyecto-capacidad-instalada.json'), true),
-            'autorPrincipal'                    => $proyectoCapacidadInstalada->integrantes()->where('proyecto_capacidad_instalada_integrante.autor_principal', true)->first(),
         ]);
     }
 
@@ -585,22 +614,6 @@ class ProyectoCapacidadInstaladaController extends Controller
         $proyectoCapacidadInstalada->update(['estado_proyecto' => $request->estado_proyecto['value']]);
 
         return redirect()->back()->with('success', 'El proyecto se ha finalizado correctamente.');
-    }
-
-    /**
-     * cleanFileName
-     *
-     * @param  mixed $nombre
-     * @return void
-     */
-    public function cleanFileName($nombre, $archivo)
-    {
-        $cleanName = str_replace(' ', '', substr($nombre, 0, 30));
-        $cleanName = preg_replace('/[-`~!@#_$%\^&*()+={}[\]\\\\|;:\'",.><?\/]/', '', $cleanName);
-
-        $random    = Str::random(10);
-
-        return str_replace(array("\r", "\n"), '', str_replace(array("\r", "\n"), '', "{$cleanName}cod{$random}." . $archivo->extension()));
     }
 
     public function cambiarAutorPrincipal(ProyectoCapacidadInstalada $proyectoCapacidadInstalada, $integrante)

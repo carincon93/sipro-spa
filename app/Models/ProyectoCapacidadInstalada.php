@@ -6,6 +6,7 @@ use Carbon\Carbon;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Gate;
 
 class ProyectoCapacidadInstalada extends Model
 {
@@ -23,7 +24,7 @@ class ProyectoCapacidadInstalada extends Model
      *
      * @var array
      */
-    protected $appends = ['fecha_ejecucion', 'codigo', 'beneficiados_text'];
+    protected $appends = ['fecha_ejecucion', 'codigo', 'beneficiados_text', 'allowed', 'ruta_final_sharepoint'];
 
     /**
      * The attributes that are mass assignable.
@@ -124,19 +125,9 @@ class ProyectoCapacidadInstalada extends Model
      *
      * @return object
      */
-    public function programasFormacionImpactados()
+    public function programasFormacion()
     {
         return $this->belongsToMany(ProgramaFormacion::class, 'proyecto_capacidad_programa_formacion', 'proyecto_capacidad_instalada_id', 'programa_formacion_id');
-    }
-
-    /**
-     * Relationship with ProgramaFormacionArticulado
-     *
-     * @return object
-     */
-    public function programasFormacionArticulados()
-    {
-        return $this->belongsToMany(ProgramaFormacionArticulado::class, 'proyecto_capacidad_programa_formacion_articulado', 'proyecto_capacidad_instalada_id', 'programa_formacion_articulado_id');
     }
 
     /**
@@ -264,7 +255,7 @@ class ProyectoCapacidadInstalada extends Model
     }
 
     /**
-     * Get codigo e.g. SGPS-8000-2021
+     * Get codigo e.g. cAPP-00011
      *
      * @return string
      */
@@ -324,5 +315,45 @@ class ProyectoCapacidadInstalada extends Model
         }
 
         return $beneficiado;
+    }
+
+    /**
+     * getUpdatedAtAttribute
+     *
+     * @return void
+     */
+    public function getUpdatedAtAttribute($value)
+    {
+        return "Última modificación de este formulario: " . Carbon::parse($value, 'UTC')->timezone('America/Bogota')->locale('es')->isoFormat('DD [de] MMMM [de] YYYY [a las] HH:mm:ss');
+    }
+
+    public function getRutaFinalSharepointAttribute()
+    {
+        $ruta = '';
+        if ($this->semilleroInvestigacion) {
+            $ruta = trim($this->semilleroInvestigacion->lineaInvestigacion->grupoInvestigacion->centroFormacion->nombre_carpeta_sharepoint . '/PROYECTOS-CAPACIDAD-INSTALADA/' . $this->codigo);
+        }
+
+        return $ruta;
+    }
+
+    /**
+     *
+     * @return string
+     */
+    public function filename($path)
+    {
+        $pathExplode = explode("/", $this->{$path});
+
+        return end($pathExplode);
+    }
+
+    public function getAllowedAttribute()
+    {
+        $allowedToView      = Gate::inspect('view', [ProyectoCapacidadInstalada::class, $this]);
+        $allowedToUpdate    = Gate::inspect('update', [ProyectoCapacidadInstalada::class, $this]);
+        $allowedToDestroy   = Gate::inspect('delete', [ProyectoCapacidadInstalada::class, $this]);
+
+        return collect(['to_view' => $allowedToView->allowed(), 'to_update' => $allowedToUpdate->allowed(), 'to_destroy' => $allowedToDestroy->allowed()]);
     }
 }

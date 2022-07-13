@@ -40,10 +40,8 @@
                         resultados = response.data
                         sended = true
                     })
-                    .catch((error) => {
-                    })
-            } catch (error) {
-            }
+                    .catch((error) => {})
+            } catch (error) {}
         }
     }
 
@@ -74,7 +72,7 @@
     }
 </script>
 
-<div class="bg-cyan-100 p-4">
+<div class="bg-violet-100 p-4">
     <h1 class="text-4xl text-center title">Programas de formación</h1>
     <p class="text-center w-1/3 m-auto mt-8">Realice la búsqueda de programas de formación</p>
 
@@ -106,7 +104,7 @@
                     {#each resultados as resultado (resultado.id)}
                         <tr class="hover:bg-gray-100 focus-within:bg-gray-100">
                             <td class="border-t">
-                                <p class="px-6 py-4 focus:text-cyan-500">
+                                <p class="px-6 py-4 focus:text-violet-500">
                                     {resultado.codigo}
                                 </p>
                             </td>
@@ -174,7 +172,7 @@
             {#each proyecto.programasFormacion as programaFormacion (programaFormacion.id)}
                 <tr class="hover:bg-gray-100 focus-within:bg-gray-100">
                     <td class="border-t">
-                        <p class="px-6 py-4 focus:text-cyan-500">
+                        <p class="px-6 py-4 focus:text-violet-500">
                             {programaFormacion.codigo}
                         </p>
                     </td>

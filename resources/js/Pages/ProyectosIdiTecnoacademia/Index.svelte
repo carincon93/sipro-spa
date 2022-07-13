@@ -70,10 +70,6 @@
                                 <Item on:SMUI:action={() => Inertia.visit(route('proyectos-idi-tecnoacademia.edit', [id]))}>
                                     <Text>Ver detalles</Text>
                                 </Item>
-                            {:else}
-                                <Item>
-                                    <Text>No tiene permisos</Text>
-                                </Item>
                             {/if}
                         </DataTableMenu>
                     </td>

@@ -81,7 +81,7 @@
             {#each tp.data as proyecto_tp}
                 <tr class="hover:bg-gray-100 focus-within:bg-gray-100">
                     <td class="border-t">
-                        <p class="px-6 py-4 focus:text-cyan-500">
+                        <p class="px-6 py-4 focus:text-violet-500">
                             {proyecto_tp.proyecto.codigo}
                             {#if JSON.parse(proyecto_tp.proyecto.estado)?.requiereSubsanar && proyecto_tp.proyecto.mostrar_recomendaciones == true && proyecto_tp.proyecto.mostrar_requiere_subsanacion == true}
                                 <span class="bg-red-100 inline-block mt-2 p-2 rounded text-red-400"> Requiere ser subsanado </span>
@@ -89,7 +89,7 @@
                         </p>
                     </td>
                     <td class="border-t">
-                        <p class="px-6 py-4 focus:text-cyan-500">
+                        <p class="px-6 py-4 focus:text-violet-500">
                             {proyecto_tp.titulo}
                         </p>
                     </td>
@@ -133,10 +133,6 @@
                                         <Text>Eliminar</Text>
                                     </Item>
                                 {/if}
-                            {:else}
-                                <Item>
-                                    <Text>No tiene permisos</Text>
-                                </Item>
                             {/if}
                         </DataTableMenu>
                     </td>
@@ -183,7 +179,7 @@
     <Dialog bind:open={dialogEliminar}>
         <div slot="title">
             <div class="text-center">Eliminar recurso</div>
-            <div class="relative bg-cyan-100 text-cyan-600 p-5 h-44 w-1/3 m-auto my-10" style="border-radius: 41% 59% 70% 30% / 32% 40% 60% 68% ;">
+            <div class="relative bg-violet-100 text-violet-600 p-5 h-44 w-1/3 m-auto my-10" style="border-radius: 41% 59% 70% 30% / 32% 40% 60% 68% ;">
                 <figure>
                     <img src="/images/eliminar.png" alt="" class="h-44 m-auto" />
                 </figure>

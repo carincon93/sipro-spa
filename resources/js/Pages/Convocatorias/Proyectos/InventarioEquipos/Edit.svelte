@@ -83,9 +83,9 @@
             <div>
                 <h1 class="overflow-ellipsis overflow-hidden w-breadcrumb-ellipsis whitespace-nowrap">
                     {#if isSuperAdmin || checkPermission(authUser, [6, 7, 16])}
-                        <a use:inertia href={route('convocatorias.proyectos.inventario-equipos.index', [convocatoria.id, proyecto.id])} class="text-cyan-400 hover:text-cyan-600">Inventario de equipos</a>
+                        <a use:inertia href={route('convocatorias.proyectos.inventario-equipos.index', [convocatoria.id, proyecto.id])} class="text-violet-400 hover:text-violet-600">Inventario de equipos</a>
                     {/if}
-                    <span class="text-cyan-400 font-medium">/</span>
+                    <span class="text-violet-400 font-medium">/</span>
                     Editar
                 </h1>
             </div>

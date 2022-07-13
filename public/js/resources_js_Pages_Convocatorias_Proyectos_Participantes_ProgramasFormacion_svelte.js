@@ -41946,7 +41946,7 @@ function get_each_context_1(ctx, list, i) {
 	return child_ctx;
 }
 
-// (85:16) <LoadingButton loading={$form.processing} class="m-auto ml-1" type="submit">
+// (83:16) <LoadingButton loading={$form.processing} class="m-auto ml-1" type="submit">
 function create_default_slot_8(ctx) {
 	let t;
 
@@ -41963,7 +41963,7 @@ function create_default_slot_8(ctx) {
 	};
 }
 
-// (90:4) {#if sended}
+// (88:4) {#if sended}
 function create_if_block_1(ctx) {
 	let h1;
 	let t1;
@@ -42102,7 +42102,7 @@ function create_if_block_1(ctx) {
 	};
 }
 
-// (139:36) {:else}
+// (137:36) {:else}
 function create_else_block(ctx) {
 	let item;
 	let current;
@@ -42146,7 +42146,7 @@ function create_else_block(ctx) {
 	};
 }
 
-// (135:36) {#if isSuperAdmin || (checkPermission(authUser, [1, 3, 4, 11, 12, 13]) && proyecto.modificable == true)}
+// (133:36) {#if isSuperAdmin || (checkPermission(authUser, [1, 3, 4, 11, 12, 13]) && proyecto.modificable == true)}
 function create_if_block_3(ctx) {
 	let item;
 	let current;
@@ -42197,7 +42197,7 @@ function create_if_block_3(ctx) {
 	};
 }
 
-// (141:44) <Text>
+// (139:44) <Text>
 function create_default_slot_7(ctx) {
 	let t;
 
@@ -42214,7 +42214,7 @@ function create_default_slot_7(ctx) {
 	};
 }
 
-// (140:40) <Item>
+// (138:40) <Item>
 function create_default_slot_6(ctx) {
 	let text_1;
 	let current;
@@ -42258,7 +42258,7 @@ function create_default_slot_6(ctx) {
 	};
 }
 
-// (137:44) <Text>
+// (135:44) <Text>
 function create_default_slot_5(ctx) {
 	let t;
 
@@ -42275,7 +42275,7 @@ function create_default_slot_5(ctx) {
 	};
 }
 
-// (136:40) <Item on:SMUI:action={() => linkProgramaFormacion(resultado.id)}>
+// (134:40) <Item on:SMUI:action={() => linkProgramaFormacion(resultado.id)}>
 function create_default_slot_4(ctx) {
 	let text_1;
 	let current;
@@ -42319,7 +42319,7 @@ function create_default_slot_4(ctx) {
 	};
 }
 
-// (134:32) <DataTableMenu class={resultados.length < 4 ? 'z-50' : ''}>
+// (132:32) <DataTableMenu class={resultados.length < 4 ? 'z-50' : ''}>
 function create_default_slot_3(ctx) {
 	let show_if;
 	let current_block_type_index;
@@ -42392,7 +42392,7 @@ function create_default_slot_3(ctx) {
 	};
 }
 
-// (106:20) {#each resultados as resultado (resultado.id)}
+// (104:20) {#each resultados as resultado (resultado.id)}
 function create_each_block_1(key_1, ctx) {
 	let tr;
 	let td0;
@@ -42459,7 +42459,7 @@ function create_each_block_1(key_1, ctx) {
 			t9 = (0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.space)();
 			td5 = (0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.element)("td");
 			(0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.create_component)(datatablemenu.$$.fragment);
-			(0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.attr)(p0, "class", "px-6 py-4 focus:text-cyan-500");
+			(0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.attr)(p0, "class", "px-6 py-4 focus:text-violet-500");
 			(0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.attr)(td0, "class", "border-t");
 			(0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.attr)(p1, "class", "px-6 py-4");
 			(0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.attr)(td1, "class", "border-t");
@@ -42531,7 +42531,7 @@ function create_each_block_1(key_1, ctx) {
 	};
 }
 
-// (149:20) {#if resultados.length === 0}
+// (147:20) {#if resultados.length === 0}
 function create_if_block_2(ctx) {
 	let tr;
 	let td;
@@ -42560,7 +42560,7 @@ function create_if_block_2(ctx) {
 	};
 }
 
-// (204:32) <Text>
+// (202:32) <Text>
 function create_default_slot_2(ctx) {
 	let t;
 
@@ -42577,7 +42577,7 @@ function create_default_slot_2(ctx) {
 	};
 }
 
-// (203:28) <Item on:SMUI:action={() => removeProgramaFormacion(programaFormacion.id)}>
+// (201:28) <Item on:SMUI:action={() => removeProgramaFormacion(programaFormacion.id)}>
 function create_default_slot_1(ctx) {
 	let text_1;
 	let current;
@@ -42621,7 +42621,7 @@ function create_default_slot_1(ctx) {
 	};
 }
 
-// (202:24) <DataTableMenu class={proyecto.programasFormacion.length < 4 ? 'z-50' : ''}>
+// (200:24) <DataTableMenu class={proyecto.programasFormacion.length < 4 ? 'z-50' : ''}>
 function create_default_slot(ctx) {
 	let item;
 	let current;
@@ -42672,7 +42672,7 @@ function create_default_slot(ctx) {
 	};
 }
 
-// (174:12) {#each proyecto.programasFormacion as programaFormacion (programaFormacion.id)}
+// (172:12) {#each proyecto.programasFormacion as programaFormacion (programaFormacion.id)}
 function create_each_block(key_1, ctx) {
 	let tr;
 	let td0;
@@ -42741,7 +42741,7 @@ function create_each_block(key_1, ctx) {
 			t9 = (0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.space)();
 			td5 = (0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.element)("td");
 			(0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.create_component)(datatablemenu.$$.fragment);
-			(0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.attr)(p0, "class", "px-6 py-4 focus:text-cyan-500");
+			(0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.attr)(p0, "class", "px-6 py-4 focus:text-violet-500");
 			(0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.attr)(td0, "class", "border-t");
 			(0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.attr)(p1, "class", "px-6 py-4");
 			(0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.attr)(td1, "class", "border-t");
@@ -42816,7 +42816,7 @@ function create_each_block(key_1, ctx) {
 	};
 }
 
-// (211:12) {#if proyecto.programasFormacion.length === 0}
+// (209:12) {#if proyecto.programasFormacion.length === 0}
 function create_if_block(ctx) {
 	let tr;
 	let td;
@@ -42967,7 +42967,7 @@ function create_fragment(ctx) {
 			? undefined
 			: true;
 
-			(0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.attr)(div1, "class", "bg-cyan-100 p-4");
+			(0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.attr)(div1, "class", "bg-violet-100 p-4");
 			(0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.attr)(h11, "class", "mt-24 mb-8 text-center text-3xl");
 			(0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.attr)(table, "class", "w-full whitespace-no-wrap table-fixed data-table");
 			(0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.attr)(div2, "class", "bg-white rounded shadow");
@@ -43780,7 +43780,7 @@ function instance($$self, $$props, $$invalidate) {
 			...$$restProps,
 			class: `relative ${alertMsg
 			? 'bg-red-100 text-red-400'
-			: 'bg-cyan-100 text-cyan-600'} py-1 px-2 ${$$restProps.class || ''}`
+			: 'bg-violet-100 text-violet-600'} py-1 px-2 ${$$restProps.class || ''}`
 		});
 	};
 
@@ -43893,7 +43893,7 @@ function create_fragment(ctx) {
 	}
 
 	textfield = new _smui_textfield__WEBPACK_IMPORTED_MODULE_3__["default"]({ props: textfield_props });
-	/*textfield_binding*/ ctx[14](textfield);
+	/*textfield_binding*/ ctx[13](textfield);
 	textfield.$on("input", /*update*/ ctx[9]);
 	let if_block = /*error*/ ctx[3] && create_if_block(ctx);
 
@@ -43914,7 +43914,7 @@ function create_fragment(ctx) {
 			(0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.mount_component)(textfield, div, null);
 			(0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.append)(div, t1);
 			if (if_block) if_block.m(div, null);
-			/*div_binding*/ ctx[15](div);
+			/*div_binding*/ ctx[14](div);
 			current = true;
 		},
 		p(ctx, [dirty]) {
@@ -43979,17 +43979,17 @@ function create_fragment(ctx) {
 		d(detaching) {
 			if (detaching) (0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.detach)(div);
 			(0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.destroy_component)(label_1);
-			/*textfield_binding*/ ctx[14](null);
+			/*textfield_binding*/ ctx[13](null);
 			(0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.destroy_component)(textfield);
 			if (if_block) if_block.d();
-			/*div_binding*/ ctx[15](null);
+			/*div_binding*/ ctx[14](null);
 		}
 	};
 }
 
 function instance($$self, $$props, $$invalidate) {
 	let props;
-	const omit_props_names = ["id","value","label","error","type","disabled","message","focus","select"];
+	const omit_props_names = ["id","value","label","error","type","disabled","focus","select"];
 	let $$restProps = (0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.compute_rest_props)($$props, omit_props_names);
 	let { id } = $$props;
 	let { value } = $$props;
@@ -43997,7 +43997,6 @@ function instance($$self, $$props, $$invalidate) {
 	let { error } = $$props;
 	let { type } = $$props;
 	let { disabled } = $$props;
-	let { message = '' } = $$props;
 	let input;
 	let container;
 	const focus = () => input.focus();
@@ -44034,7 +44033,6 @@ function instance($$self, $$props, $$invalidate) {
 		if ('error' in $$new_props) $$invalidate(3, error = $$new_props.error);
 		if ('type' in $$new_props) $$invalidate(4, type = $$new_props.type);
 		if ('disabled' in $$new_props) $$invalidate(5, disabled = $$new_props.disabled);
-		if ('message' in $$new_props) $$invalidate(11, message = $$new_props.message);
 	};
 
 	$$self.$$.update = () => {
@@ -44056,7 +44054,6 @@ function instance($$self, $$props, $$invalidate) {
 		props,
 		update,
 		$$restProps,
-		message,
 		focus,
 		select,
 		textfield_binding,
@@ -44075,18 +44072,17 @@ class Input extends svelte_internal__WEBPACK_IMPORTED_MODULE_0__.SvelteComponent
 			error: 3,
 			type: 4,
 			disabled: 5,
-			message: 11,
-			focus: 12,
-			select: 13
+			focus: 11,
+			select: 12
 		});
 	}
 
 	get focus() {
-		return this.$$.ctx[12];
+		return this.$$.ctx[11];
 	}
 
 	get select() {
-		return this.$$.ctx[13];
+		return this.$$.ctx[12];
 	}
 }
 

@@ -108,7 +108,7 @@ class ServicioTecnologicoEvaluacionController extends Controller
             })->where('servicios_tecnologicos_evaluaciones.id', '!=', $servicioTecnologicoEvaluacion->id)->first(),
             'sectoresProductivos'                   => collect(json_decode(Storage::get('json/sectores-productivos.json'), true)),
             'tiposProyectoSt'                       => $tipoProyectoSt,
-            'proyectoProgramasFormacion'            => $servicioTecnologico->proyecto->programasFormacionImpactados()->selectRaw('id as value, concat(programas_formacion.nombre, chr(10), \'∙ Código: \', programas_formacion.codigo) as label')->get(),
+            'proyectoProgramasFormacion'            => $servicioTecnologico->proyecto->programasFormacion()->selectRaw('id as value, concat(programas_formacion.nombre, chr(10), \'∙ Código: \', programas_formacion.codigo) as label')->where('registro_calificado', true)->get(),
         ]);
     }
 

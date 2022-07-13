@@ -89,10 +89,10 @@
             <div>
                 <h1 class="overflow-ellipsis overflow-hidden w-breadcrumb-ellipsis whitespace-nowrap">
                     {#if isSuperAdmin}
-                        <a use:inertia href={route('convocatorias.index')} class="text-cyan-400 hover:text-cyan-600"> Convocatorias </a>
+                        <a use:inertia href={route('convocatorias.index')} class="text-violet-400 hover:text-violet-600"> Convocatorias </a>
                     {/if}
-                    <span class="text-cyan-400 font-medium">/</span>
-                    <a use:inertia href={route('convocatorias.dashboard', convocatoria.id)} class="text-cyan-400 hover:text-cyan-600">
+                    <span class="text-violet-400 font-medium">/</span>
+                    <a use:inertia href={route('convocatorias.dashboard', convocatoria.id)} class="text-violet-400 hover:text-violet-600">
                         {convocatoria.descripcion}
                     </a>
                 </h1>

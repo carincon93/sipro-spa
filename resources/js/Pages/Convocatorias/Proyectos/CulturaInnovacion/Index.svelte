@@ -63,7 +63,7 @@
             {#each culturaInnovacion.data as { id, proyecto, titulo, fecha_ejecucion }}
                 <tr class="hover:bg-gray-100 focus-within:bg-gray-100">
                     <td class="border-t">
-                        <p class="px-6 py-4 focus:text-cyan-500">
+                        <p class="px-6 py-4 focus:text-violet-500">
                             {proyecto.codigo}
                             <br />
                             {#if JSON.parse(proyecto.estado)?.requiereSubsanar && proyecto.mostrar_recomendaciones == true && proyecto.mostrar_requiere_subsanacion == true}
@@ -72,7 +72,7 @@
                         </p>
                     </td>
                     <td class="border-t">
-                        <p class="px-6 py-4 focus:text-cyan-500">
+                        <p class="px-6 py-4 focus:text-violet-500">
                             {titulo}
                         </p>
                     </td>
@@ -111,10 +111,6 @@
                             {#if isSuperAdmin || checkPermissionByUser(authUser, [11]) || checkPermission(authUser, [12, 13, 21])}
                                 <Item on:SMUI:action={() => Inertia.visit(route('convocatorias.cultura-innovacion.edit', [convocatoria.id, id]))}>
                                     <Text>Ver detalles</Text>
-                                </Item>
-                            {:else}
-                                <Item>
-                                    <Text>No tiene permisos</Text>
                                 </Item>
                             {/if}
                         </DataTableMenu>

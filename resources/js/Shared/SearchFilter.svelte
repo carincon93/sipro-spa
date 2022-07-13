@@ -68,5 +68,5 @@
     {/if}
     <input class="relative w-full px-6 py-3 rounded focus:shadow-outline" autocomplete="off" type="text" name="search" placeholder="Buscar…" bind:value={form.search} />
 
-    <button class="ml-3 text-sm text-gray-500 hover:text-gray-700 focus:text-cyan-500" type="button" on:click={reset}> Limpiar </button>
+    <button class="ml-3 text-sm text-gray-500 hover:text-gray-700 focus:text-violet-500" type="button" on:click={reset}> Limpiar </button>
 </div>

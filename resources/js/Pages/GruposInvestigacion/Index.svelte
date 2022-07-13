@@ -12,6 +12,7 @@
     import { Item, Text } from '@smui/list'
 
     export let gruposInvestigacion
+    export let gruposInvestigacionCentroFormacion
 
     $title = 'Grupos de investigación'
 
@@ -25,6 +26,59 @@
 </script>
 
 <AuthenticatedLayout>
+    <DataTable class="my-20" showSearchInput={false}>
+        <div slot="title">Grupos de investigación de mi centro de formación</div>
+
+        <thead slot="thead">
+            <tr class="text-left font-bold">
+                <th class="px-6 pt-6 pb-4 sticky top-0 z-10 bg-white shadow-xl w-full"> Nombre </th>
+                <th class="px-6 pt-6 pb-4 sticky top-0 z-10 bg-white shadow-xl w-full"> Centro de formación </th>
+                <th class="px-6 pt-6 pb-4 sticky top-0 z-10 bg-white shadow-xl w-full"> Regional </th>
+                <th class="px-6 pt-6 pb-4 sticky top-0 z-10 bg-white shadow-xl text-center th-actions"> Acciones </th>
+            </tr>
+        </thead>
+        <tbody slot="tbody">
+            {#each gruposInvestigacionCentroFormacion as grupoInvestigacion (grupoInvestigacion.id)}
+                <tr class="hover:bg-gray-100 focus-within:bg-gray-100">
+                    <td class="border-t">
+                        <p class="px-6 py-4 focus:text-violet-500 first-letter-uppercase">
+                            {grupoInvestigacion.nombre}
+                        </p>
+                    </td>
+                    <td class="border-t">
+                        <p class="px-6 py-4 focus:text-violet-500">
+                            {grupoInvestigacion.centro_formacion?.nombre}
+                        </p>
+                    </td>
+                    <td class="border-t">
+                        <p class="px-6 py-4 focus:text-violet-500">
+                            {grupoInvestigacion.centro_formacion?.regional?.nombre}
+                        </p>
+                    </td>
+                    <td class="border-t td-actions">
+                        <DataTableMenu class={gruposInvestigacionCentroFormacion.length < 4 ? 'z-50' : ''}>
+                            <Item on:SMUI:action={() => Inertia.visit(route('grupos-investigacion.edit', grupoInvestigacion.id))}>
+                                <Text>Detalles del grupo de investigación</Text>
+                            </Item>
+                            <Item on:SMUI:action={() => Inertia.visit(route('grupos-investigacion.lineas-investigacion.index', grupoInvestigacion.id))}>
+                                <Text>Líneas de investigación</Text>
+                            </Item>
+                            <Item on:SMUI:action={() => Inertia.visit(route('grupos-investigacion.semilleros-investigacion.index', grupoInvestigacion.id))}>
+                                <Text>Semilleros de investigación</Text>
+                            </Item>
+                        </DataTableMenu>
+                    </td>
+                </tr>
+            {/each}
+
+            {#if gruposInvestigacionCentroFormacion.length === 0}
+                <tr>
+                    <td class="border-t px-6 py-4" colspan="4"> Sin información registrada </td>
+                </tr>
+            {/if}
+        </tbody>
+    </DataTable>
+
     <DataTable class="mt-20">
         <div slot="title">Grupos de investigación</div>
 
@@ -46,24 +100,24 @@
             {#each gruposInvestigacion.data as grupoInvestigacion (grupoInvestigacion.id)}
                 <tr class="hover:bg-gray-100 focus-within:bg-gray-100">
                     <td class="border-t">
-                        <p class="px-6 py-4 focus:text-cyan-500 first-letter-uppercase">
+                        <p class="px-6 py-4 focus:text-violet-500 first-letter-uppercase">
                             {grupoInvestigacion.nombre}
                         </p>
                     </td>
                     <td class="border-t">
-                        <p class="px-6 py-4 focus:text-cyan-500">
+                        <p class="px-6 py-4 focus:text-violet-500">
                             {grupoInvestigacion.centro_formacion?.nombre}
                         </p>
                     </td>
                     <td class="border-t">
-                        <p class="px-6 py-4 focus:text-cyan-500">
+                        <p class="px-6 py-4 focus:text-violet-500">
                             {grupoInvestigacion.centro_formacion?.regional?.nombre}
                         </p>
                     </td>
                     <td class="border-t td-actions">
                         <DataTableMenu class={gruposInvestigacion.data.length < 4 ? 'z-50' : ''}>
                             <Item on:SMUI:action={() => Inertia.visit(route('grupos-investigacion.edit', grupoInvestigacion.id))}>
-                                <Text>Ver detalles</Text>
+                                <Text>Detalles del grupo de investigación</Text>
                             </Item>
                             <Item on:SMUI:action={() => Inertia.visit(route('grupos-investigacion.lineas-investigacion.index', grupoInvestigacion.id))}>
                                 <Text>Líneas de investigación</Text>

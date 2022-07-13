@@ -6,9 +6,11 @@ use App\Helpers\AppHelper;
 use App\Http\Requests\SemilleroInvestigacionRequest;
 use App\Models\GrupoInvestigacion;
 use App\Models\LineaInvestigacion;
+use App\Models\ProgramaFormacion;
 use App\Models\RedConocimiento;
 use App\Models\SemilleroInvestigacion;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Gate;
 use Illuminate\Support\Facades\Storage;
 use Inertia\Inertia;
 use Illuminate\Support\Str;
@@ -26,6 +28,7 @@ class SemilleroInvestigacionController extends Controller
 
         return Inertia::render('SemillerosInvestigacion/Index', [
             'filters'                   => request()->all('search'),
+            'allowedToCreate'           => Gate::inspect('create', [SemilleroInvestigacion::class]),
             'grupoInvestigacion'        => $grupoInvestigacion,
             'semillerosInvestigacion'   => SemilleroInvestigacion::select('semilleros_investigacion.id', 'semilleros_investigacion.nombre', 'semilleros_investigacion.codigo', 'semilleros_investigacion.linea_investigacion_id', 'lineas_investigacion.nombre as nombre_linea_principal')
                 ->join('lineas_investigacion', 'semilleros_investigacion.linea_investigacion_id', 'lineas_investigacion.id')
@@ -45,9 +48,11 @@ class SemilleroInvestigacionController extends Controller
         $this->authorize('create', [SemilleroInvestigacion::class]);
 
         return Inertia::render('SemillerosInvestigacion/Create', [
-            'grupoInvestigacion'  => $grupoInvestigacion,
-            'lineasInvestigacion' => LineaInvestigacion::select('id as value', 'nombre as label')->where('lineas_investigacion.grupo_investigacion_id', $grupoInvestigacion->id)->get(),
-            'redesConocimiento'   => RedConocimiento::select('id as value', 'nombre as label')->get('id'),
+            'grupoInvestigacion'    => $grupoInvestigacion,
+            'lineasInvestigacion'   => LineaInvestigacion::select('id as value', 'nombre as label')->where('lineas_investigacion.grupo_investigacion_id', $grupoInvestigacion->id)->get(),
+            'redesConocimiento'     => RedConocimiento::select('id as value', 'nombre as label')->get('id'),
+            'programasFormacion'    => ProgramaFormacion::selectRaw('programas_formacion.id as value, CONCAT(programas_formacion.nombre, chr(10), \'∙ Código: \', programas_formacion.codigo) as label, linea_investigacion_programa_formacion.linea_investigacion_id as linea_investigacion_id')->join('linea_investigacion_programa_formacion', 'programas_formacion.id', 'linea_investigacion_programa_formacion.programa_formacion_id')->orderBy('programas_formacion.nombre', 'ASC')->get(),
+            'allowedToCreate'       => Gate::inspect('create', [SemilleroInvestigacion::class])
         ]);
     }
 
@@ -78,32 +83,18 @@ class SemilleroInvestigacionController extends Controller
 
         if ($semilleroInvestigacion->save()) {
 
-            // Crear las carpetas y subcarpetas del proyecto | CALDAS - 9220 CENTRO DE PROCESOS INDUSTRIALES Y CONSTRUCCION/TECNOACADEMIA CALDAS/IDITA-00022
-            $status = AppHelper::checkFolderAndCreate($semilleroInvestigacion->ruta_final_sharepoint);
-
-            if ($request->hasFile('formato_gic_f_021') && $status == true) {
-                // Nombre del archivo
-                $fileNameFormatoGICF021 = AppHelper::cleanFileName($request->nombre . 'formato_gic_f_021', $request->formato_gic_f_021);
-
-                // Subir el archvio a la carpeta anteriormente creada - Ej: CALDAS - 9220 CENTRO DE PROCESOS INDUSTRIALES Y CONSTRUCCION/TECNOACADEMIA CALDAS/IDITA-00022/proyectoIDITA-00022sGhff.pdf
-                $fileNameFormatoGICF021 = AppHelper::uploadFile($semilleroInvestigacion->ruta_final_sharepoint, $request->formato_gic_f_021, $fileNameFormatoGICF021);
-
-                // Actualiza la ruta del pdf en la db
-                $semilleroInvestigacion->update(['formato_gic_f_021' => $fileNameFormatoGICF021]);
-            }
-
-            $semilleroInvestigacion->formato_gic_f_032                      = $request->formato_gic_f_032;
-            $semilleroInvestigacion->formato_aval_semillero                 = $request->formato_aval_semillero;
+            AppHelper::checkFolderAndCreate($semilleroInvestigacion->ruta_final_sharepoint);
 
             $semilleroInvestigacion->update(['codigo' => 'SGPS-SEM-' . $semilleroInvestigacion->id]);
 
             $semilleroInvestigacion->redesConocimiento()->attach($request->redes_conocimiento);
             $semilleroInvestigacion->programasFormacion()->attach($request->programas_formacion);
             $semilleroInvestigacion->lineasInvestigacionArticulados()->attach($request->lineas_investigacion);
+
+            return redirect()->route('grupos-investigacion.semilleros-investigacion.edit', [$grupoInvestigacion, $semilleroInvestigacion])->with('success', 'El recurso se ha creado correctamente.');
+        } else {
+            abort(500, 'No se ha podido crear el semillero de investigación.');
         }
-
-
-        return redirect()->route('grupos-investigacion.semilleros-investigacion.index', [$grupoInvestigacion])->with('success', 'El recurso se ha creado correctamente.');
     }
 
     /**
@@ -130,10 +121,10 @@ class SemilleroInvestigacionController extends Controller
         $semilleroInvestigacion->lineaInvestigacion->grupoInvestigacion;
 
         return Inertia::render('SemillerosInvestigacion/Edit', [
-            'semilleroInvestigacion'    => $semilleroInvestigacion,
-            'grupoInvestigacion'        => $grupoInvestigacion,
-            'lineasInvestigacion'       => LineaInvestigacion::select('id as value', 'nombre as label')->where('lineas_investigacion.grupo_investigacion_id', $grupoInvestigacion->id)->get(),
-            'redesConocimiento'         => RedConocimiento::select('id as value', 'nombre as label')->get('id'),
+            'semilleroInvestigacion'                    => $semilleroInvestigacion,
+            'grupoInvestigacion'                        => $grupoInvestigacion,
+            'lineasInvestigacion'                       => LineaInvestigacion::select('id as value', 'nombre as label')->where('lineas_investigacion.grupo_investigacion_id', $grupoInvestigacion->id)->get(),
+            'redesConocimiento'                         => RedConocimiento::select('id as value', 'nombre as label')->get('id'),
             'redesConocimientoSemilleroInvestigacion'   => $semilleroInvestigacion->redesConocimiento()->select('redes_conocimiento.id as value', 'redes_conocimiento.nombre as label')->get(),
             'programasFormacionSemilleroInvestigacion'  => $semilleroInvestigacion->programasFormacion()->select('programas_formacion.id as value', 'programas_formacion.nombre as label')->get(),
             'lineasInvestigacionSemilleroInvestigacion' => $semilleroInvestigacion->lineasInvestigacionArticulados()->select('lineas_investigacion.id as value', 'lineas_investigacion.nombre as label')->get(),
@@ -163,44 +154,17 @@ class SemilleroInvestigacionController extends Controller
         $semilleroInvestigacion->link_semillero                             = $request->link_semillero;
         $semilleroInvestigacion->es_semillero_tecnoacademia                 = $request->es_semillero_tecnoacademia;
 
-        $status = AppHelper::checkFolderAndCreate($semilleroInvestigacion->ruta_final_sharepoint);
-
-        if ($request->hasFile('formato_gic_f_021') && $status == true) {
-            $fileNameFormatoGICF021 = AppHelper::cleanFileName($request->nombre . 'formato_gic_f_021', $request->formato_gic_f_021);
-            AppHelper::deleteFile($semilleroInvestigacion->formato_gic_f_021);
-
-            $fileNameFormatoGICF021 = AppHelper::uploadFile($semilleroInvestigacion->ruta_final_sharepoint, $request->formato_gic_f_021, $fileNameFormatoGICF021);
-
-            $semilleroInvestigacion->formato_gic_f_021 = $fileNameFormatoGICF021;
-        }
-
-        if ($request->hasFile('formato_gic_f_032') && $status == true) {
-            $fileNameFormatoGICF032 = AppHelper::cleanFileName($request->nombre . 'formato_gic_f_032', $request->formato_gic_f_032);
-            AppHelper::deleteFile($semilleroInvestigacion->formato_gic_f_032);
-
-            $fileNameFormatoGICF032 = AppHelper::uploadFile($semilleroInvestigacion->ruta_final_sharepoint, $request->formato_gic_f_032, $fileNameFormatoGICF032);
-
-            $semilleroInvestigacion->formato_gic_f_032 = $fileNameFormatoGICF032;
-        }
-
-        if ($request->hasFile('formato_aval_semillero') && $status == true) {
-            $fileNameFormatoAvalSemillero = AppHelper::cleanFileName($request->nombre . 'formato_aval_semillero', $request->formato_aval_semillero);
-            AppHelper::deleteFile($semilleroInvestigacion->formato_aval_semillero);
-
-            $fileNameFormatoAvalSemillero = AppHelper::uploadFile($semilleroInvestigacion->ruta_final_sharepoint, $request->formato_aval_semillero, $fileNameFormatoAvalSemillero);
-
-            $semilleroInvestigacion->formato_aval_semillero = $fileNameFormatoAvalSemillero;
-        }
-
         $semilleroInvestigacion->lineaInvestigacion()->associate($request->linea_investigacion_id);
 
-        $semilleroInvestigacion->save();
+        if ($semilleroInvestigacion->save()) {
+            $semilleroInvestigacion->redesConocimiento()->sync($request->redes_conocimiento);
+            $semilleroInvestigacion->programasFormacion()->sync($request->programas_formacion);
+            $semilleroInvestigacion->lineasInvestigacionArticulados()->sync($request->lineas_investigacion);
 
-        $semilleroInvestigacion->redesConocimiento()->sync($request->redes_conocimiento);
-        $semilleroInvestigacion->programasFormacion()->sync($request->programas_formacion);
-        $semilleroInvestigacion->lineasInvestigacionArticulados()->sync($request->lineas_investigacion);
-
-        return back()->with('success', 'El recurso se ha actualizado correctamente.');
+            return back()->with('success', 'El recurso se ha actualizado correctamente.');
+        } else {
+            abort(500, 'No se ha podido modificar el semillero de investigación.');
+        }
     }
 
     /**
@@ -231,6 +195,57 @@ class SemilleroInvestigacionController extends Controller
         $random    = Str::random(10);
 
         return str_replace(array("\r", "\n"), '', "{$nombre}{$random}." . $archivo->extension());
+    }
+
+    public function saveFilesSharepoint(Request $request, GrupoInvestigacion $grupoInvestigacion, SemilleroInvestigacion $semilleroInvestigacion)
+    {
+        $request->validate([
+            'formato_gic_f_021'         => 'nullable|file|max:10240',
+            'formato_gic_f_032'         => 'nullable|file|max:10240',
+            'formato_aval_semillero'    => 'nullable|file|max:10240',
+        ]);
+
+        $status = AppHelper::checkFolderAndCreate($semilleroInvestigacion->ruta_final_sharepoint);
+        $success = null;
+
+        if ($request->hasFile('formato_gic_f_021') && $status == true) {
+            $fileNameFormatoGICF021 = AppHelper::cleanFileName($request->nombre . 'formato_gic_f_021', $request->formato_gic_f_021);
+            AppHelper::deleteFile($semilleroInvestigacion->formato_gic_f_021);
+
+            $fileNameFormatoGICF021 = AppHelper::uploadFile($semilleroInvestigacion->ruta_final_sharepoint, $request->formato_gic_f_021, $fileNameFormatoGICF021);
+
+            $semilleroInvestigacion->update(['formato_gic_f_021' => $fileNameFormatoGICF021]);
+
+            $success = true;
+        }
+
+        if ($request->hasFile('formato_gic_f_032') && $status == true) {
+            $fileNameFormatoGICF032 = AppHelper::cleanFileName($request->nombre . 'formato_gic_f_032', $request->formato_gic_f_032);
+            AppHelper::deleteFile($semilleroInvestigacion->formato_gic_f_032);
+
+            $fileNameFormatoGICF032 = AppHelper::uploadFile($semilleroInvestigacion->ruta_final_sharepoint, $request->formato_gic_f_032, $fileNameFormatoGICF032);
+
+            $semilleroInvestigacion->update(['formato_gic_f_032' => $fileNameFormatoGICF032]);
+
+            $success = true;
+        }
+
+        if ($request->hasFile('formato_aval_semillero') && $status == true) {
+            $fileNameFormatoAvalSemillero = AppHelper::cleanFileName($request->nombre . 'formato_aval_semillero', $request->formato_aval_semillero);
+            AppHelper::deleteFile($semilleroInvestigacion->formato_aval_semillero);
+
+            $fileNameFormatoAvalSemillero = AppHelper::uploadFile($semilleroInvestigacion->ruta_final_sharepoint, $request->formato_aval_semillero, $fileNameFormatoAvalSemillero);
+
+            $semilleroInvestigacion->update(['formato_aval_semillero' => $fileNameFormatoAvalSemillero]);
+
+            $success = true;
+        }
+
+        if ($success) {
+            return back()->with('success', 'Los archivos se han cargado correctamente');
+        } else {
+            return back()->with('error', 'No se han podido cargar los archivos. Por favor vuelva a intentar');
+        }
     }
 
     /**

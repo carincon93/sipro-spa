@@ -47,7 +47,6 @@ class AppHelper
     {
         $rutas = explode('/', $folderName);
         $formatRoute = '';
-
         try {
             foreach ($rutas as $ruta) {
                 $formatRoute .= $ruta . '/';
@@ -59,12 +58,14 @@ class AppHelper
                     Log::debug($folder);
                 }
                 Log::debug('Se han creado todas las carpetas');
-                return true;
             }
+            return true;
         } catch (\Throwable  $e) {
             Log::debug($e->getMessage());
 
-            abort($e->getStatusCode());
+            if ($e) {
+                abort($e->getStatusCode());
+            }
         }
     }
 
@@ -143,6 +144,7 @@ class AppHelper
         } catch (\Throwable  $e) {
             Log::debug($e->getMessage());
 
+            dd($e);
             abort($e->getStatusCode());
         }
     }

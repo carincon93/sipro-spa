@@ -9,9 +9,11 @@
     import DataTable from '@/Shared/DataTable'
     import DataTableMenu from '@/Shared/DataTableMenu'
     import Button from '@/Shared/Button'
+    import Dialog from '@/Shared/Dialog'
     import { Item, Text } from '@smui/list'
 
     export let proyectosCapacidadInstalada
+    export let allowedToCreate
 
     $title = 'Proyectos de capacidad instalada'
 
@@ -20,6 +22,20 @@
      */
     let authUser = $page.props.auth.user
     let isSuperAdmin = checkRole(authUser, [1])
+
+    let dialogEliminar = false
+    let proyectoCapacidadInstaladaId = null
+    let allowedToDestroy = false
+    function destroy() {
+        if (allowedToDestroy) {
+            Inertia.delete(route('proyectos-capacidad-instalada.destroy', [proyectoCapacidadInstaladaId]), {
+                preserveScroll: true,
+                onFinish: () => {
+                    dialogEliminar = false
+                },
+            })
+        }
+    }
 </script>
 
 <AuthenticatedLayout>
@@ -27,7 +43,7 @@
         <div slot="title">Proyectos de capacidad instalada</div>
 
         <div slot="actions">
-            {#if isSuperAdmin || checkRole(authUser, [4, 6])}
+            {#if allowedToCreate}
                 <Button on:click={() => Inertia.visit(route('proyectos-capacidad-instalada.create'))} variant="raised">Crear proyecto de capacidad instalada</Button>
             {/if}
         </div>
@@ -43,7 +59,7 @@
         </thead>
 
         <tbody slot="tbody">
-            {#each proyectosCapacidadInstalada.data as { id, titulo, codigo, estado_proyecto, fecha_ejecucion }}
+            {#each proyectosCapacidadInstalada.data as { id, titulo, codigo, estado_proyecto, fecha_ejecucion, allowed }}
                 <tr class="hover:bg-gray-100 focus-within:bg-gray-100">
                     <td class="border-t">
                         <p class="px-6 py-4">{codigo}</p>
@@ -66,13 +82,15 @@
 
                     <td class="border-t td-actions">
                         <DataTableMenu class={proyectosCapacidadInstalada.data.length < 4 ? 'z-50' : ''}>
-                            {#if isSuperAdmin || (estado_proyecto != 3 && checkRole(authUser, [4, 6])) || checkPermission(authUser, [22])}
+                            {#if allowed.to_view}
                                 <Item on:SMUI:action={() => Inertia.visit(route('proyectos-capacidad-instalada.edit', [id]))}>
                                     <Text>Ver detalles</Text>
                                 </Item>
-                            {:else}
-                                <Item>
-                                    <Text>No tiene permisos</Text>
+                            {/if}
+
+                            {#if allowed.to_destroy}
+                                <Item on:SMUI:action={() => ((proyectoCapacidadInstaladaId = id), (dialogEliminar = true), (allowedToDestroy = allowed.to_destroy))}>
+                                    <Text>Eliminar</Text>
                                 </Item>
                             {/if}
                         </DataTableMenu>
@@ -88,4 +106,25 @@
         </tbody>
     </DataTable>
     <Pagination links={proyectosCapacidadInstalada.links} />
+
+    <Dialog bind:open={dialogEliminar}>
+        <div slot="title">
+            <div class="text-center">Eliminar recurso</div>
+            <div class="relative bg-violet-100 text-violet-600 p-5 h-44 w-1/3 m-auto my-10" style="border-radius: 41% 59% 70% 30% / 32% 40% 60% 68% ;">
+                <figure>
+                    <img src="/images/eliminar.png" alt="" class="h-44 m-auto" />
+                </figure>
+            </div>
+            <div class="text-center">
+                ¿Está seguro (a) que desea eliminar este proyecto?<br />Una vez eliminado el proyecto, todos sus recursos y datos se eliminarán de forma permanente.
+            </div>
+        </div>
+        <div slot="content" />
+        <div slot="actions">
+            <div class="p-4">
+                <Button on:click={() => (dialogEliminar = false)} variant={null}>Cancelar</Button>
+                <Button variant="raised" type="button" on:click={() => destroy()}>Confirmar</Button>
+            </div>
+        </div>
+    </Dialog>
 </AuthenticatedLayout>

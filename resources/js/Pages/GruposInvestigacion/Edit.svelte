@@ -79,8 +79,8 @@
         <div class="flex items-center justify-between lg:px-8 max-w-7xl mx-auto px-4 py-6 sm:px-6">
             <div>
                 <h1 class="overflow-ellipsis overflow-hidden w-breadcrumb-ellipsis whitespace-nowrap">
-                    <a use:inertia href={route('grupos-investigacion.index')} class="text-cyan-400 hover:text-cyan-600"> Grupos de investigación </a>
-                    <span class="text-cyan-400 font-medium">/</span>
+                    <a use:inertia href={route('grupos-investigacion.index')} class="text-violet-400 hover:text-violet-600"> Grupos de investigación </a>
+                    <span class="text-violet-400 font-medium">/</span>
                     {grupoInvestigacion.nombre}
                 </h1>
             </div>

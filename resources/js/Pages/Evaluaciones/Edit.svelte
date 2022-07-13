@@ -63,11 +63,11 @@
             <div>
                 <h1 class="overflow-ellipsis overflow-hidden w-breadcrumb-ellipsis whitespace-nowrap flex items-center">
                     {#if isSuperAdmin || checkRole(authUser, [20, 18, 19, 5, 17])}
-                        <a use:inertia href={route('evaluaciones.index')} class="text-cyan-400 hover:text-cyan-600"> Evaluaciones </a>
+                        <a use:inertia href={route('evaluaciones.index')} class="text-violet-400 hover:text-violet-600"> Evaluaciones </a>
                     {/if}
-                    <span class="text-cyan-400 font-medium mx-1.5">/</span>
+                    <span class="text-violet-400 font-medium mx-1.5">/</span>
                     {evaluacion.proyecto.codigo}
-                    <a class="bg-cyan-600 text-white p-1 pr-5 rounded ml-2" href={route('convocatorias.evaluaciones.redireccionar', [evaluacion.proyecto.convocatoria.id, evaluacion.id])} target="_blank">
+                    <a class="bg-violet-600 text-white p-1 pr-5 rounded ml-2" href={route('convocatorias.evaluaciones.redireccionar', [evaluacion.proyecto.convocatoria.id, evaluacion.id])} target="_blank">
                         <span class="flex items-center">
                             <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 mx-2" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14" />

@@ -21,12 +21,10 @@ class GrupoInvestigacionController extends Controller
     {
         $this->authorize('viewAny', [GrupoInvestigacion::class]);
 
-        //  select('grupos_investigacion.id', 'grupos_investigacion.nombre', 'grupos_investigacion.centro_formacion_id')->orderBy('grupos_investigacion.nombre', 'ASC')->with('centroFormacion.regional')
-        //         ->filterGrupoInvestigacion(request()->only('search'))->paginate()->appends(['search' => request()->search]),
-
         return Inertia::render('GruposInvestigacion/Index', [
-            'filters'               => request()->all('search'),
-            'gruposInvestigacion'   => GrupoInvestigacion::getGruposInvestigacionByRol()->appends(['search' => request()->search])
+            'filters'                               => request()->all('search'),
+            'gruposInvestigacion'                   => GrupoInvestigacion::select('grupos_investigacion.id', 'grupos_investigacion.nombre', 'grupos_investigacion.centro_formacion_id')->with('centroFormacion.regional')->filterGrupoInvestigacion(request()->only('search', 'grupoInvestigacion'))->orderBy('grupos_investigacion.nombre', 'ASC')->paginate(),
+            'gruposInvestigacionCentroFormacion'    => GrupoInvestigacion::select('grupos_investigacion.id', 'grupos_investigacion.nombre', 'grupos_investigacion.centro_formacion_id')->where('grupos_investigacion.centro_formacion_id', auth()->user()->centro_formacion_id)->with('centroFormacion.regional')->get()
         ]);
     }
 

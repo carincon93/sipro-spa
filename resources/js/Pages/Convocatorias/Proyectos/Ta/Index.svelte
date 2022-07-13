@@ -63,7 +63,7 @@
             {#each ta.data as proyecto_ta}
                 <tr class="hover:bg-gray-100 focus-within:bg-gray-100">
                     <td class="border-t">
-                        <p class="px-6 py-4 focus:text-cyan-500">
+                        <p class="px-6 py-4 focus:text-violet-500">
                             {proyecto_ta.proyecto.codigo}
                             {#if JSON.parse(proyecto_ta.proyecto.estado)?.requiereSubsanar && proyecto_ta.proyecto.mostrar_recomendaciones == true && proyecto_ta.proyecto.mostrar_requiere_subsanacion == true}
                                 <span class="bg-red-100 inline-block mt-2 p-2 rounded text-red-400"> Requiere ser subsanado </span>
@@ -71,7 +71,7 @@
                         </p>
                     </td>
                     <td class="border-t">
-                        <p class="px-6 py-4 focus:text-cyan-500">
+                        <p class="px-6 py-4 focus:text-violet-500">
                             {proyecto_ta.proyecto.tecnoacademia_lineas_tecnoacademia[0]?.tecnoacademia.nombre}
                         </p>
                     </td>
@@ -109,10 +109,6 @@
                             {#if isSuperAdmin || checkPermission(authUser, [9, 10, 15])}
                                 <Item on:SMUI:action={() => Inertia.visit(route('convocatorias.ta.edit', [convocatoria.id, proyecto_ta.id]))}>
                                     <Text>Ver detalles</Text>
-                                </Item>
-                            {:else}
-                                <Item>
-                                    <Text>No tiene permisos</Text>
                                 </Item>
                             {/if}
                         </DataTableMenu>

@@ -106,7 +106,7 @@
             {#each proyectos.data as { id, estado, titulo, codigo, fecha_ejecucion, pdf_versiones, convocatoria }}
                 <tr class="hover:bg-gray-100 focus-within:bg-gray-100">
                     <td class="border-t">
-                        <p class="px-6 py-4 focus:text-cyan-500">
+                        <p class="px-6 py-4 focus:text-violet-500">
                             {codigo}
                             {#if JSON.parse(estado)?.requiereSubsanar}
                                 <br />
@@ -121,7 +121,7 @@
                                     {#each pdf_versiones as version}
                                         <li>
                                             {#if version.estado == 1}
-                                                <a class="text-cyan-500 underline" href={route('convocatorias.proyectos.version', [convocatoria.id, id, version.version])}> {version.version}.pdf - Descargar</a>
+                                                <a class="text-violet-500 underline" href={route('convocatorias.proyectos.version', [convocatoria.id, id, version.version])}> {version.version}.pdf - Descargar</a>
                                                 <small class="block">{version.created_at}</small>
                                             {/if}
                                         </li>
@@ -141,10 +141,6 @@
                             {#if isSuperAdmin || checkRole(authUser, [20, 18, 19, 5, 17])}
                                 <Item on:SMUI:action={() => Inertia.visit(route('proyectos.edit', [id]))}>
                                     <Text>Ver detalles</Text>
-                                </Item>
-                            {:else}
-                                <Item>
-                                    <Text>No tiene permisos</Text>
                                 </Item>
                             {/if}
                         </DataTableMenu>

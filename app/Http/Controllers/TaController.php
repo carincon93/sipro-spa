@@ -11,7 +11,7 @@ use App\Http\Requests\ArticulacionSennovaRequest;
 use App\Http\Requests\TaLongColumnRequest;
 use App\Http\Requests\TaRequest;
 use App\Models\ActividadEconomica;
-use App\Models\DisCurricular;
+use App\Models\DisenoCurricular;
 use App\Models\Evaluacion\Evaluacion;
 use App\Models\Evaluacion\TaEvaluacion;
 use App\Models\GrupoInvestigacion;
@@ -197,9 +197,9 @@ class TaController extends Controller
             'tecnoacademias'                        => TecnoAcademia::select('id as value', 'nombre as label')->get(),
             'proyectoMunicipios'                    => $ta->proyecto->municipios()->select('municipios.id as value', 'municipios.nombre as label', 'regionales.nombre as group', 'regionales.codigo')->join('regionales', 'regionales.id', 'municipios.regional_id')->get(),
             'proyectoMunicipiosImpactar'            => $ta->proyecto->municipiosAImpactar()->select('municipios.id as value', 'municipios.nombre as label', 'regionales.nombre as group', 'regionales.codigo')->join('regionales', 'regionales.id', 'municipios.regional_id')->get(),
-            'proyectoProgramasFormacionArticulados' => $ta->proyecto->taProgramasFormacion()->selectRaw('id as value, concat(programas_formacion.nombre, chr(10), \'∙ Código: \', programas_formacion.codigo) as label')->get(),
-            'proyectoDisCurriculares'               => $ta->proyecto->disCurriculares()->selectRaw('id as value, concat(nombre, \' ∙ Código: \', codigo) as label')->get(),
-            'disCurriculares'                       => DisCurricular::selectRaw('id as value, concat(nombre, \' ∙ Código: \', codigo) as label')->get(),
+            'proyectoProgramasFormacionArticulados' => $ta->proyecto->taProgramasFormacion()->selectRaw('id as value, concat(programas_formacion.nombre, chr(10), \'∙ Código: \', programas_formacion.codigo) as label')->where('programas_formacion.registro_calificado', true)->get(),
+            'proyectoDisenoCurriculares'            => $ta->proyecto->disenosCurriculares()->selectRaw('id as value, concat(nombre, \' ∙ Código: \', codigo) as label')->get(),
+            'disenosCurriculares'                   => DisenoCurricular::selectRaw('id as value, concat(nombre, \' ∙ Código: \', codigo) as label')->get(),
             'programasFormacion'                    => ProgramaFormacion::selectRaw('id as value, concat(programas_formacion.nombre, chr(10), \'∙ Código: \', programas_formacion.codigo) as label')->where('centro_formacion_id', $ta->proyecto->centroFormacion->id)->orderBy('nombre', 'ASC')->get(),
             'tecnoAcademias'                        => $tecnoAcademias,
             'modalidades'                           => json_decode(Storage::get('json/modalidades-estudio.json'), true),
@@ -219,17 +219,17 @@ class TaController extends Controller
     {
         $this->authorize('modificar-proyecto-autor', [$ta->proyecto]);
 
-        $ta->fecha_inicio                       = $request->fecha_inicio;
-        $ta->fecha_finalizacion                 = $request->fecha_finalizacion;
-        $ta->max_meses_ejecucion                = $request->max_meses_ejecucion;
+        $ta->fecha_inicio                           = $request->fecha_inicio;
+        $ta->fecha_finalizacion                     = $request->fecha_finalizacion;
+        $ta->max_meses_ejecucion                    = $request->max_meses_ejecucion;
 
-        $ta->numero_instituciones               = is_array(json_decode($request->nombre_instituciones)) ? count(json_decode($request->nombre_instituciones)) : 0;
-        $ta->nombre_instituciones               = $request->nombre_instituciones;
-        $ta->nombre_instituciones_programas     = $request->nombre_instituciones_programas;
-        $ta->nuevas_instituciones               = $request->nuevas_instituciones;
+        $ta->numero_instituciones                   = is_array(json_decode($request->nombre_instituciones)) ? count(json_decode($request->nombre_instituciones)) : 0;
+        $ta->nombre_instituciones                   = $request->nombre_instituciones;
+        $ta->nombre_instituciones_programas         = $request->nombre_instituciones_programas;
+        $ta->nuevas_instituciones                   = $request->nuevas_instituciones;
 
-        $ta->proyeccion_nuevas_instituciones    = $request->proyeccion_nuevas_instituciones;
-        $ta->proyeccion_articulacion_media      = $request->proyeccion_articulacion_media;
+        $ta->proyeccion_nuevas_instituciones        = $request->proyeccion_nuevas_instituciones;
+        $ta->proyeccion_articulacion_media          = $request->proyeccion_articulacion_media;
 
         $ta->otras_nuevas_instituciones             = $request->otras_nuevas_instituciones;
         $ta->otras_nombre_instituciones_programas   = $request->otras_nombre_instituciones_programas;
@@ -239,7 +239,7 @@ class TaController extends Controller
         $ta->proyecto->municipiosAImpactar()->sync($request->municipios_impactar);
         $ta->proyecto->taProgramasFormacion()->sync($request->programas_formacion_articulados);
         $ta->proyecto->tecnoacademiaLineasTecnoacademia()->sync($request->tecnoacademia_linea_tecnoacademia_id);
-        $ta->proyecto->disCurriculares()->sync($request->dis_curricular_id);
+        $ta->proyecto->disenosCurriculares()->sync($request->diseno_curricular_id);
 
         $ta->save();
 

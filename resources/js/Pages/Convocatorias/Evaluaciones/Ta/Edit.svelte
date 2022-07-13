@@ -99,7 +99,7 @@
         tecnoacademia_linea_tecnoacademia_id: lineasTecnoacademiaRelacionadas,
         codigo_linea_programatica: null,
         programas_formacion_articulados: proyectoProgramasFormacionArticulados.length > 0 ? proyectoProgramasFormacionArticulados : null,
-        dis_curricular_id: proyectoDisCurriculares.length > 0 ? proyectoDisCurriculares : null,
+        diseno_curricular_id: proyectoDisCurriculares.length > 0 ? proyectoDisCurriculares : null,
     }
 
     let regionalIEArticulacion
@@ -698,10 +698,10 @@
 
         <div class="mt-44 grid grid-cols-2">
             <div>
-                <Label class="mb-4" labelFor="dis_curricular_id" value="Programas a ejecutar en la vigencia del proyecto:" />
+                <Label class="mb-4" labelFor="diseno_curricular_id" value="Programas a ejecutar en la vigencia del proyecto:" />
             </div>
             <div>
-                <SelectMulti classes="evaluacion-select-multi" disabled={true} id="dis_curricular_id" bind:selectedValue={taInfo.dis_curricular_id} items={disCurriculares} isMulti={true} placeholder="Buscar por el nombre del programa de formación" />
+                <SelectMulti classes="evaluacion-select-multi" disabled={true} id="diseno_curricular_id" bind:selectedValue={taInfo.diseno_curricular_id} items={disCurriculares} isMulti={true} placeholder="Buscar por el nombre del programa de formación" />
             </div>
         </div>
 

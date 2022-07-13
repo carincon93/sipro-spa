@@ -67,13 +67,13 @@
             {#each inventarioEquipos.data as inventarioEquipo (inventarioEquipo.id)}
                 <tr class="hover:bg-gray-100 focus-within:bg-gray-100">
                     <td class="border-t">
-                        <p class="focus:text-cyan-500 my-2 paragraph-ellipsis px-6">
+                        <p class="focus:text-violet-500 my-2 paragraph-ellipsis px-6">
                             {inventarioEquipo.nombre}
                         </p>
                     </td>
 
                     <td class="border-t">
-                        <p class="focus:text-cyan-500 my-2 paragraph-ellipsis px-6">
+                        <p class="focus:text-violet-500 my-2 paragraph-ellipsis px-6">
                             {inventarioEquipo.fecha_adquisicion}
                         </p>
                     </td>
@@ -83,10 +83,6 @@
                             {#if isSuperAdmin || checkPermission(authUser, [6, 7, 16])}
                                 <Item on:SMUI:action={() => Inertia.visit(route('convocatorias.proyectos.inventario-equipos.edit', [convocatoria.id, proyecto.id, inventarioEquipo.id]))}>
                                     <Text>Ver detalles</Text>
-                                </Item>
-                            {:else}
-                                <Item>
-                                    <Text>No tiene permisos</Text>
                                 </Item>
                             {/if}
                         </DataTableMenu>

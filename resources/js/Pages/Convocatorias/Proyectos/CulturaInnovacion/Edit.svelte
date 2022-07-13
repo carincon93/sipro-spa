@@ -547,7 +547,7 @@
                                 <Label required class="mb-4" id="1.1" value="¿Qué actividad pretende realizar con la especie nativa?" />
                             </div>
 
-                            <p class="bg-cyan-100 mt-10 p-4 text-cyan-600">Seleccione una opción</p>
+                            <p class="bg-violet-100 mt-10 p-4 text-violet-600">Seleccione una opción</p>
                             <div class="flex mt-4 items-center">
                                 <FormField>
                                     <Radio bind:group={$form.actividades_muestreo} value="1.1.1" />
@@ -579,7 +579,7 @@
                                 <Label required class="mb-4" id="1.2" value="¿Cuál es la finalidad de las actividades a realizar con la especie nativa/endémica?" />
                             </div>
 
-                            <p class="bg-cyan-100 mt-10 p-4 text-cyan-600">Seleccione una opción</p>
+                            <p class="bg-violet-100 mt-10 p-4 text-violet-600">Seleccione una opción</p>
                             <div class="flex mt-4 items-center">
                                 <FormField>
                                     <Radio bind:group={$form.objetivo_muestreo} value="1.2.1" />
@@ -687,14 +687,14 @@
                 </div>
                 {#if $form.relacionado_mesas_sectoriales?.value == 1}
                     {#if culturaInnovacion.proyecto.modificable == true}
-                        <div class="bg-cyan-100 p-5 mt-10">
+                        <div class="bg-violet-100 p-5 mt-10">
                             <InputError message={errors.mesa_sectorial_id} />
                             <div class="grid grid-cols-2">
                                 <div>
                                     <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" class="w-5" style="transform: translateX(-50px);">
                                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
                                     </svg>
-                                    <p class="text-cyan-600">Por favor seleccione la o las mesas sectoriales con la cual o las cuales se alinea el proyecto</p>
+                                    <p class="text-violet-600">Por favor seleccione la o las mesas sectoriales con la cual o las cuales se alinea el proyecto</p>
                                 </div>
                                 <div class="bg-white grid grid-cols-2 max-w-xl overflow-y-scroll shadow-2xl mt-4 h-80">
                                     {#each mesasSectoriales as { id, nombre }, i}
@@ -737,14 +737,14 @@
 
                 {#if $form.relacionado_tecnoacademia?.value == 1}
                     {#if culturaInnovacion.proyecto.modificable == true}
-                        <div class="bg-cyan-100 p-5 mt-10">
+                        <div class="bg-violet-100 p-5 mt-10">
                             <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" class="w-5" style="transform: translateX(-50px);">
                                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
                             </svg>
 
                             <div class="grid grid-cols-2">
                                 <div>
-                                    <p class="text-cyan-600">Por favor seleccione la Tecnoacademia con la cual articuló el proyecto</p>
+                                    <p class="text-violet-600">Por favor seleccione la Tecnoacademia con la cual articuló el proyecto</p>
                                 </div>
                                 <div>
                                     <Select items={tecnoacademias} id="tecnoacademia_id" bind:selectedValue={$form.tecnoacademia_id} error={errors.tecnoacademia_id} autocomplete="off" placeholder="Seleccione una opción" required />
@@ -754,7 +754,7 @@
                                                 <Label class="p-3 border-t border-b flex items-center text-sm" labelFor={'linea-tecnologica-' + value} value={label} />
 
                                                 <div class="border-b border-t flex items-center justify-center">
-                                                    <input type="checkbox" bind:group={$form.linea_tecnologica_id} id={'linea-tecnologica-' + value} {value} class="rounded text-cyan-500" />
+                                                    <input type="checkbox" bind:group={$form.linea_tecnologica_id} id={'linea-tecnologica-' + value} {value} class="rounded text-violet-500" />
                                                 </div>
                                             {/each}
                                         </div>

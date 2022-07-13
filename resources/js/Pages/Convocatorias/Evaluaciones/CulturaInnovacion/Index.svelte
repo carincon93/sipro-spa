@@ -42,12 +42,12 @@
             {#each culturaInnovacion.data as { evaluacion_id, proyecto, titulo, fecha_ejecucion, iniciado, finalizado }}
                 <tr class="hover:bg-gray-100 focus-within:bg-gray-100">
                     <td class="border-t">
-                        <p class="px-6 py-4 focus:text-cyan-500">
+                        <p class="px-6 py-4 focus:text-violet-500">
                             {proyecto.codigo}
                         </p>
                     </td>
                     <td class="border-t">
-                        <p class="px-6 py-4 focus:text-cyan-500">
+                        <p class="px-6 py-4 focus:text-violet-500">
                             {titulo}
                         </p>
                     </td>
@@ -76,10 +76,6 @@
                                             Evaluar
                                         {/if}
                                     </Text>
-                                </Item>
-                            {:else}
-                                <Item>
-                                    <Text>No tiene permisos</Text>
                                 </Item>
                             {/if}
                         </DataTableMenu>

@@ -4,8 +4,10 @@
     import { _ } from 'svelte-i18n'
     import { onMount } from 'svelte'
 
-    import FileList from '@/Shared/FileList'
+    import Dialog from '@/Shared/Dialog'
+    import Button from '@/Shared/Button'
     import Tooltip from '@/Shared/Tooltip'
+    import FileFormat from '@/Shared/FileFormat'
 
     export let convocatoria
     export let proyecto
@@ -24,6 +26,9 @@
     let container
     let activeProyecto = route().current('convocatorias.ta.edit') || route().current('convocatorias.tp.edit') || route().current('convocatorias.idi.edit') || route().current('convocatorias.servicios-tecnologicos.edit') || route().current('convocatorias.cultura-innovacion.edit')
 
+    let dialogFiles = false
+    let allFiles = proyecto.proyecto ? proyecto.proyecto.all_files : proyecto.all_files
+
     onMount(() => {
         let steps = container.getElementsByClassName('step-number')
         for (let i = 0; i < steps.length; i++) {
@@ -36,8 +41,6 @@
      */
     let authUser = $page.props.auth.user
     let isSuperAdmin = checkRole(authUser, [1])
-
-    let hideFiles = true
 </script>
 
 <!-- Stepper -->
@@ -98,7 +101,7 @@
                 </a>
             </div>
         {/if}
-        <small class="absolute bg-cyan-500 text-white px-2 py-1 rounded-full w-max text-center total">$ {new Intl.NumberFormat('de-DE').format(!isNaN(proyecto.precio_proyecto) ? proyecto.precio_proyecto : 0)} COP</small>
+        <small class="absolute bg-violet-500 text-white px-2 py-1 rounded-full w-max text-center total">$ {new Intl.NumberFormat('de-DE').format(!isNaN(proyecto.precio_proyecto) ? proyecto.precio_proyecto : 0)} COP</small>
     </div>
     <div class="w-10/12 step">
         <a use:inertia active={route().current('convocatorias.proyectos.actividades.index')} href={route('convocatorias.proyectos.actividades.index', [convocatoria.id, proyecto.id])} class="flex flex-col items-center">
@@ -164,10 +167,99 @@
     </div>
 </div>
 
-<FileList {versiones} {hideFiles} {convocatoria} {proyecto} />
+<Dialog bind:open={dialogFiles} id="notificaciones" size="calc(100% - 32px)" fullscreen hexBgColor="#7e22ce">
+    <div slot="title" class="mb-6 text-center text-violet-600" />
+    <div slot="content" class="text-white scrollbar style-scrollbar">
+        <div class="grid grid-cols-3">
+            <div>
+                <h1 class="font-black text-6xl uppercase sticky top-0">Lista de archivos del proyecto</h1>
+                <img src="/images/files.png" alt="" class="w-20 mt-10 mx-auto" />
+            </div>
+            <div class="col-span-2">
+                {#if versiones.length > 0}
+                    <h1 class="font-black">Versiones - PDF</h1>
+                    <ul class="flex flex-wrap">
+                        {#each versiones as version, i}
+                            <li class="mr-4 w-20 hover:opacity-95">
+                                {#if version.estado == 1}
+                                    <a target="_blank" href={route('convocatorias.proyectos.version', [convocatoria.id, proyecto.id, version.version])}>
+                                        <FileFormat extension="pdf" />
+                                        <small class="block leading-tight">Versión: {version.fecha_generacion_pdf}</small>
+                                    </a>
+                                {/if}
+                            </li>
+                        {/each}
+                    </ul>
+                {:else}
+                    <h6>Versiones - PDF</h6>
+
+                    <p class="text-xs">No se ha generado un PDF aún</p>
+                {/if}
+
+                {#if allFiles.length > 0}
+                    <h1 class="font-black my-4">Archivos cargados</h1>
+
+                    <ul class="flex flex-wrap">
+                        {#each allFiles as file}
+                            {#if file.empresa}
+                                <li class="mr-4 w-20 hover:opacity-95">
+                                    <a target="_blank" href={file.soporte}>
+                                        <FileFormat extension={file.soporte.split('.').at(-1)} />
+                                        <small class="block leading-tight capitalize">{file.empresa}</small>
+                                    </a>
+                                </li>
+                            {:else if file.formato_estudio_mercado}
+                                <li class="mr-4 w-20 hover:opacity-95">
+                                    <a target="_blank" href={file.formato_estudio_mercado}>
+                                        <FileFormat extension={file.formato_estudio_mercado.split('.').at(-1)} />
+                                        <small class="block leading-tight">Estudio de mercado</small>
+                                    </a>
+                                </li>
+                            {:else if file.carta_intencion}
+                                <li class="mr-4 w-20 hover:opacity-95">
+                                    <a target="_blank" href={file.carta_intencion}>
+                                        <FileFormat extension={file.carta_intencion.split('.').at(-1)} />
+                                        <small class="block leading-tight capitalize paragraph-ellipsis">{file.entidad_aliada}</small>
+                                    </a>
+                                </li>
+                            {:else if file.carta_intencion}
+                                <li class="mr-4 w-20 hover:opacity-95">
+                                    <a target="_blank" href={file.carta_propiedad_intelectual}>
+                                        <FileFormat extension={file.carta_propiedad_intelectual.split('.').at(-1)} />
+                                        <small class="block leading-tight capitalize paragraph-ellipsis">{file.entidad_aliada}</small>
+                                    </a>
+                                </li>
+                            {:else if file.soporte_convenio}
+                                <li class="mr-4 w-20 hover:opacity-95">
+                                    <a target="_blank" href={file.soporte_convenio}>
+                                        <FileFormat extension={file.soporte_convenio.split('.').at(-1)} />
+                                        <small class="block leading-tight capitalize paragraph-ellipsis">{file.entidad_aliada}</small>
+                                    </a>
+                                </li>
+                            {:else if file.anexo}
+                                <li class="mr-4 w-20 hover:opacity-95">
+                                    <a target="_blank" href={file.archivo}>
+                                        <FileFormat extension={file.archivo.split('.').at(-1)} />
+                                        <small class="block leading-tight paragraph-ellipsis">{file.anexo}</small>
+                                    </a>
+                                </li>
+                            {/if}
+                        {/each}
+                    </ul>
+                {/if}
+            </div>
+        </div>
+    </div>
+    <div slot="actions">
+        <div class="p-4">
+            <Button on:click={() => (dialogFiles = false)} class="!text-white !border-white hover:opacity-90 transition-all" variant="outlined">Cancelar</Button>
+        </div>
+    </div>
+</Dialog>
+
 <div class="flex items-center justify-center mb-14 relative">
     <div>
-        <button on:click={() => (hideFiles = !hideFiles)} class="flex items-center flex-col border p-1 rounded-full hover:bg-gray-100 mb-2">
+        <button on:click={() => (dialogFiles = true)} class="flex items-center flex-col border p-1 rounded-full hover:bg-gray-100 mb-2">
             <svg id="Capa_2" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 600 497.08" class="w-6 h-6">
                 <g id="Object">
                     <g>
@@ -181,14 +273,20 @@
             </svg>
         </button>
         <Tooltip placement="bottom">
-            <small class="text-center block leading-tight">Clic en el icono para {hideFiles ? 'mostrar' : 'ocultar'} archivos</small>
+            <small class="text-center block leading-tight">Clic en el icono para mostrar archivos</small>
         </Tooltip>
     </div>
 </div>
 
 <style>
     #stepper a[active='true'] .rounded-full {
-        background: #58badd;
+        background: #7e22ce;
+        color: #fff;
+    }
+
+    #stepper a .rounded-full:hover {
+        background: #c4b5fd;
+        transition: cubic-bezier(0.075, 0.82, 0.165, 1);
         color: #fff;
     }
 
@@ -197,7 +295,7 @@
     }
 
     .total {
-        bottom: -18px;
-        box-shadow: -1px -9px 17px 0px rgba(99, 163, 241, 0.25);
+        bottom: -26px;
+        box-shadow: -1px -9px 17px 0px rgb(103 58 183 / 34%);
     }
 </style>

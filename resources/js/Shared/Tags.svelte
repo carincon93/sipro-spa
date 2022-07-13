@@ -86,7 +86,7 @@
 
     $: props = {
         ...$$restProps,
-        class: `tagify-input bg-white w-full border-gray-300 rounded-md shadow-sm focus:ring focus:ring-opacity-50 focus:border-cyan-200 focus:ring-cyan-200 ${$$restProps.class || ''}`,
+        class: `tagify-input bg-white w-full border-gray-300 rounded-md shadow-sm focus:ring focus:ring-opacity-50 focus:border-violet-200 focus:ring-violet-200 ${$$restProps.class || ''}`,
     }
 </script>
 

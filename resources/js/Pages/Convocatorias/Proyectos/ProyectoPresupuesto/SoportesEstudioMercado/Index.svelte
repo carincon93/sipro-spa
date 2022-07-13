@@ -31,15 +31,15 @@
             <div>
                 <h1 class="flex">
                     {#if isSuperAdmin || checkPermission(authUser, [1, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 17, 18, 19, 14, 15, 16, 20, 21])}
-                        <a use:inertia href={route('convocatorias.proyectos.presupuesto.index', [convocatoria.id, proyecto.id])} class="text-cyan-400 hover:text-cyan-600 overflow-ellipsis overflow-hidden w-breadcrumb-ellipsis whitespace-nowrap inline-block"> Presupuesto </a>
+                        <a use:inertia href={route('convocatorias.proyectos.presupuesto.index', [convocatoria.id, proyecto.id])} class="text-violet-400 hover:text-violet-600 overflow-ellipsis overflow-hidden w-breadcrumb-ellipsis whitespace-nowrap inline-block"> Presupuesto </a>
                     {/if}
-                    <span class="text-cyan-400 font-medium ml-2 mr-2">/</span>
+                    <span class="text-violet-400 font-medium ml-2 mr-2">/</span>
                     {#if isSuperAdmin || checkPermission(authUser, [1, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 17, 18, 19, 14, 15, 16, 20, 21])}
-                        <a use:inertia href={route('convocatorias.proyectos.presupuesto.edit', [convocatoria.id, proyecto.id, proyectoPresupuesto.id])} class="text-cyan-400 hover:text-cyan-600 overflow-ellipsis overflow-hidden w-breadcrumb-ellipsis whitespace-nowrap inline-block">
+                        <a use:inertia href={route('convocatorias.proyectos.presupuesto.edit', [convocatoria.id, proyecto.id, proyectoPresupuesto.id])} class="text-violet-400 hover:text-violet-600 overflow-ellipsis overflow-hidden w-breadcrumb-ellipsis whitespace-nowrap inline-block">
                             {proyectoPresupuesto.convocatoria_presupuesto.presupuesto_sennova.uso_presupuestal.descripcion}
                         </a>
                     {/if}
-                    <span class="text-cyan-400 font-medium ml-2 mr-2">/</span>
+                    <span class="text-violet-400 font-medium ml-2 mr-2">/</span>
                     Soportes
                 </h1>
             </div>
@@ -87,7 +87,7 @@
                             </td>
 
                             <td class="border-t px-6 pt-6 pb-4">
-                                <a target="_blank" class="text-cyan-400 underline inline-block mb-4" download href={soporte.soporte}>Descargar soporte/cotización</a>
+                                <a target="_blank" class="text-violet-400 underline inline-block mb-4" download href={soporte.soporte}>Descargar soporte/cotización</a>
                             </td>
 
                             <td class="border-t px-6 pt-6 pb-4">

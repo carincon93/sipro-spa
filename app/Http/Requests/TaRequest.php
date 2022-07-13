@@ -34,7 +34,7 @@ class TaRequest extends FormRequest
                 'municipios*'                               => ['required', 'integer', 'exists:municipios,id'],
                 'municipios_impactar*'                      => ['required', 'integer', 'exists:municipios,id'],
                 'programas_formacion_articulados*'          => ['required', 'integer', 'exists:programas_formacion,id'],
-                'dis_curricular_id*'                        => ['required', 'integer', 'exists:dis_curriculares,id'],
+                'diseno_curricular_id*'                     => ['required', 'integer', 'exists:disenos_curriculares,id'],
                 'nombre_instituciones'                      => ['nullable', 'json'],
                 'nombre_instituciones_programas'            => ['required_if:otras_nombre_instituciones_programas,null', 'nullable', 'json'],
                 'nuevas_instituciones'                      => ['nullable', 'json'],
@@ -106,19 +106,19 @@ class TaRequest extends FormRequest
             }
         }
 
-        if (is_array($this->dis_curricular_id)) {
-            if (isset($this->dis_curricular_id['value']) && is_numeric($this->dis_curricular_id['value'])) {
+        if (is_array($this->diseno_curricular_id)) {
+            if (isset($this->diseno_curricular_id['value']) && is_numeric($this->diseno_curricular_id['value'])) {
                 $this->merge([
-                    'dis_curricular_id' => $this->dis_curricular_id['value'],
+                    'diseno_curricular_id' => $this->diseno_curricular_id['value'],
                 ]);
             } else {
                 $programasDisCurricular = [];
-                foreach ($this->dis_curricular_id as $programaFormacion) {
+                foreach ($this->diseno_curricular_id as $programaFormacion) {
                     if (is_array($programaFormacion)) {
                         array_push($programasDisCurricular, $programaFormacion['value']);
                     }
                 }
-                $this->merge(['dis_curricular_id' => $programasDisCurricular]);
+                $this->merge(['diseno_curricular_id' => $programasDisCurricular]);
             }
         }
 

@@ -550,7 +550,7 @@
 
     <Dialog bind:open={dialogGuardar}>
         <div slot="title">
-            <div class="relative bg-cyan-100 text-cyan-600 p-5 h-36 w-1/3 m-auto my-10" style="border-radius: 41% 59% 70% 30% / 32% 40% 60% 68% ;">
+            <div class="relative bg-violet-100 text-violet-600 p-5 h-36 w-1/3 m-auto my-10" style="border-radius: 41% 59% 70% 30% / 32% 40% 60% 68% ;">
                 <figure>
                     <img src="/images/megaphone.png" alt="" class="m-auto" />
                 </figure>

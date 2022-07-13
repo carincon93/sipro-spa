@@ -28,10 +28,10 @@ class ProyectosCapacidadInstaladaProgramasFormacionArticuladosExport implements 
      */
     public function collection()
     {
-        return DB::table('proyecto_capacidad_programa_formacion_articulado')
+        return DB::table('proyecto_capacidad_programa_formacion')
             ->select('programas_formacion.nombre', 'proyectos_capacidad_instalada.id as id_proyecto')
-            ->join('proyectos_capacidad_instalada', 'proyecto_capacidad_programa_formacion_articulado.proyecto_capacidad_instalada_id', 'proyectos_capacidad_instalada.id')
-            ->join('programas_formacion', 'proyecto_capacidad_programa_formacion_articulado.programa_formacion_articulado_id', 'programas_formacion.id')
+            ->join('proyectos_capacidad_instalada', 'proyecto_capacidad_programa_formacion.proyecto_capacidad_instalada_id', 'proyectos_capacidad_instalada.id')
+            ->join('programas_formacion', 'proyecto_capacidad_programa_formacion.programa_formacion_id', 'programas_formacion.id')
             ->orderBy('proyectos_capacidad_instalada.id')
             ->get();
     }

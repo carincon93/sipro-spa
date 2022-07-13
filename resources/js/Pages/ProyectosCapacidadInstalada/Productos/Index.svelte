@@ -2,17 +2,18 @@
     import AuthenticatedLayout, { title } from '@/Layouts/Authenticated'
     import { page, inertia } from '@inertiajs/inertia-svelte'
     import { route, checkRole, checkPermission } from '@/Utils'
+    import { Inertia } from '@inertiajs/inertia'
     import { _ } from 'svelte-i18n'
 
     import DataTableMenu from '@/Shared/DataTableMenu'
     import { Item, Text } from '@smui/list'
     import Pagination from '@/Shared/Pagination'
     import Button from '@/Shared/Button'
-    import { Inertia } from '@inertiajs/inertia'
+
+    import Header from '../Shared/Header'
 
     export let proyectoCapacidadInstalada
     export let productos
-    export let autorPrincipal
 
     $title = 'Productos'
 
@@ -25,26 +26,10 @@
 
 <AuthenticatedLayout>
     <header class="shadow bg-white" slot="header">
-        <div class="flex items-center justify-between lg:px-8 max-w-7xl mx-auto px-4 py-6 sm:px-6">
-            <div>
-                <h1>
-                    <a use:inertia href={route('proyectos-capacidad-instalada.index')} class="text-cyan-400 hover:text-cyan-600"> Proyectos de capacidad instalada </a>
-                    <span class="text-cyan-400 font-medium">/</span>
-                    <a use:inertia href={route('proyectos-capacidad-instalada.edit', proyectoCapacidadInstalada.id)} class="text-cyan-400 hover:text-cyan-600">Información básica</a>
-                    <span class="text-cyan-400 font-medium">/</span>
-                    <a use:inertia href={route('proyectos-capacidad-instalada.integrantes.index', proyectoCapacidadInstalada.id)} class="text-cyan-400 hover:text-cyan-600">Integrantes</a>
-                    <span class="text-cyan-400 font-medium">/</span>
-                    <a use:inertia href={route('proyectos-capacidad-instalada.objetivos-especificos.index', proyectoCapacidadInstalada.id)} class="text-cyan-400 hover:text-cyan-600">Objetivos específicos y resultados</a>
-                    <span class="text-cyan-400 font-medium">/</span>
-                    <a use:inertia href={route('proyectos-capacidad-instalada.productos.index', proyectoCapacidadInstalada.id)} class="text-cyan-400 hover:text-cyan-600 font-extrabold underline">Productos</a>
-                    <span class="text-cyan-400 font-medium">/</span>
-                    <a use:inertia href={route('proyectos-capacidad-instalada.finalizar', proyectoCapacidadInstalada.id)} class="text-cyan-400 hover:text-cyan-600">Estado</a>
-                </h1>
-            </div>
-        </div>
+        <Header {proyectoCapacidadInstalada} />
     </header>
 
-    <a use:inertia href={route('proyectos-capacidad-instalada.finalizar', proyectoCapacidadInstalada.id)} class="flex bottom-0 fixed hover:bg-cyan-600 mb-4 px-6 py-2 bg-cyan-700 rounded-lg shadow-2xl text-center text-white z-50">
+    <a use:inertia href={route('proyectos-capacidad-instalada.finalizar', proyectoCapacidadInstalada.id)} class="flex bottom-0 fixed hover:bg-violet-600 mb-4 px-6 py-2 bg-violet-700 rounded-lg shadow-2xl text-center text-white z-50">
         <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 mr-1.5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2m-3 7h3m-3 4h3m-6-4h.01M9 16h.01" />
         </svg>
@@ -53,7 +38,7 @@
 
     <h1 class="mt-24 mb-8 text-center text-3xl">Productos</h1>
 
-    {#if isSuperAdmin || (proyectoCapacidadInstalada.estado_proyecto != 'Finalizado' && checkRole(authUser, [4, 6]) && authUser.id == autorPrincipal.id)}
+    {#if proyectoCapacidadInstalada.allowed.to_update}
         <div class="mb-6 flex justify-between items-center">
             <Button on:click={() => Inertia.visit(route('proyectos-capacidad-instalada.productos.create', [proyectoCapacidadInstalada.id]))} variant="raised">Crear producto</Button>
         </div>

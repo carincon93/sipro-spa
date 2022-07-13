@@ -46,17 +46,17 @@
             {#each tecnoacademias.data as tecnoacademia (tecnoacademia.id)}
                 <tr class="hover:bg-gray-100 focus-within:bg-gray-100">
                     <td class="border-t">
-                        <p class="px-6 py-4 focus:text-cyan-500">
+                        <p class="px-6 py-4 focus:text-violet-500">
                             {tecnoacademia.nombre}
                         </p>
                     </td>
                     <td class="border-t">
-                        <p class="px-6 py-4 focus:text-cyan-500">
+                        <p class="px-6 py-4 focus:text-violet-500">
                             {tecnoacademia.modalidad}
                         </p>
                     </td>
                     <td class="border-t">
-                        <p class="px-6 py-4 focus:text-cyan-500">
+                        <p class="px-6 py-4 focus:text-violet-500">
                             {tecnoacademia.centro_formacion.nombre}
                         </p>
                     </td>
@@ -65,10 +65,6 @@
                             {#if isSuperAdmin || checkRole(authUser, [5])}
                                 <Item on:SMUI:action={() => Inertia.visit(route('tecnoacademias.edit', tecnoacademia.id))}>
                                     <Text>Ver detalles</Text>
-                                </Item>
-                            {:else}
-                                <Item>
-                                    <Text>No tiene permisos</Text>
                                 </Item>
                             {/if}
                         </DataTableMenu>

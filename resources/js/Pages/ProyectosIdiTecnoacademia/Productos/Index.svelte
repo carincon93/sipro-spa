@@ -27,13 +27,13 @@
         <div class="flex items-center justify-between lg:px-8 max-w-7xl mx-auto px-4 py-6 sm:px-6">
             <div>
                 <h1>
-                    <a use:inertia href={route('proyectos-idi-tecnoacademia.index')} class="text-cyan-400 hover:text-cyan-600"> Proyectos I+D+i TecnoAcademia </a>
-                    <span class="text-cyan-400 font-medium">/</span>
-                    <a use:inertia href={route('proyectos-idi-tecnoacademia.edit', proyectoIdiTecnoacademia.id)} class="text-cyan-400 hover:text-cyan-600">Información básica</a>
-                    <span class="text-cyan-400 font-medium">/</span>
-                    <a use:inertia href={route('proyectos-idi-tecnoacademia.participantes.index', proyectoIdiTecnoacademia.id)} class="text-cyan-400 hover:text-cyan-600">Participantes</a>
-                    <span class="text-cyan-400 font-medium">/</span>
-                    <a use:inertia href={route('proyectos-idi-tecnoacademia.productos.index', proyectoIdiTecnoacademia.id)} class="text-cyan-400 hover:text-cyan-600 font-extrabold underline">Productos</a>
+                    <a use:inertia href={route('proyectos-idi-tecnoacademia.index')} class="text-violet-400 hover:text-violet-600"> Proyectos I+D+i TecnoAcademia </a>
+                    <span class="text-violet-400 font-medium">/</span>
+                    <a use:inertia href={route('proyectos-idi-tecnoacademia.edit', proyectoIdiTecnoacademia.id)} class="text-violet-400 hover:text-violet-600">Información básica</a>
+                    <span class="text-violet-400 font-medium">/</span>
+                    <a use:inertia href={route('proyectos-idi-tecnoacademia.participantes.index', proyectoIdiTecnoacademia.id)} class="text-violet-400 hover:text-violet-600">Participantes</a>
+                    <span class="text-violet-400 font-medium">/</span>
+                    <a use:inertia href={route('proyectos-idi-tecnoacademia.productos.index', proyectoIdiTecnoacademia.id)} class="text-violet-400 hover:text-violet-600 font-extrabold underline">Productos</a>
                 </h1>
             </div>
         </div>

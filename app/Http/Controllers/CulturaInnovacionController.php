@@ -164,8 +164,8 @@ class CulturaInnovacionController extends Controller
             'tecnoacademias'                            => TecnoAcademia::select('id as value', 'nombre as label')->get(),
             'opcionesAplicaNoAplica'                    => json_decode(Storage::get('json/opciones-aplica-no-aplica.json'), true),
             'proyectoMunicipios'                        => $culturaInnovacion->proyecto->municipios()->select('municipios.id as value', 'municipios.nombre as label', 'regionales.nombre as group')->join('regionales', 'regionales.id', 'municipios.regional_id')->get(),
-            'proyectoProgramasFormacion'                => $culturaInnovacion->proyecto->programasFormacionImpactados()->selectRaw('id as value, concat(programas_formacion.nombre, chr(10), \'∙ Código: \', programas_formacion.codigo) as label')->get(),
-            'proyectoProgramasFormacionArticulados'     => $culturaInnovacion->proyecto->programasFormacionArticulados()->selectRaw('id as value, concat(programas_formacion_articulados.nombre, chr(10), \'∙ Código: \', programas_formacion_articulados.codigo) as label')->get(),
+            'proyectoProgramasFormacion'                => $culturaInnovacion->proyecto->programasFormacion()->selectRaw('id as value, concat(programas_formacion.nombre, chr(10), \'∙ Código: \', programas_formacion.codigo) as label')->where('registro_calificado', true)->get(),
+            'proyectoProgramasFormacionArticulados'     => $culturaInnovacion->proyecto->programasFormacion()->selectRaw('id as value, concat(programas_formacion.nombre, chr(10), \'∙ Código: \', programas_formacion.codigo) as label')->where('registro_calificado', false)->get(),
             'versiones'                                 => $culturaInnovacion->proyecto->PdfVersiones,
         ]);
     }
@@ -205,8 +205,8 @@ class CulturaInnovacionController extends Controller
         $culturaInnovacion->relacionado_tecnoacademia             = $request->relacionado_tecnoacademia;
 
         $culturaInnovacion->proyecto->municipios()->sync($request->municipios);
-        $culturaInnovacion->proyecto->programasFormacionImpactados()->sync($request->programas_formacion);
-        $culturaInnovacion->proyecto->programasFormacionArticulados()->sync($request->programas_formacion_articulados);
+        $culturaInnovacion->proyecto->programasFormacion()->sync($request->programas_formacion);
+        $culturaInnovacion->proyecto->programasFormacion()->sync($request->programas_formacion_articulados);
 
         $culturaInnovacion->save();
 

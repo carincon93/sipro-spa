@@ -52,7 +52,7 @@
                 />
 
                 <div class="border-b border-t flex items-center justify-center">
-                    <input type="checkbox" bind:group={$form.causal_rechazo} id="1" value={1} class="rounded text-cyan-500" />
+                    <input type="checkbox" bind:group={$form.causal_rechazo} id="1" value={1} class="rounded text-violet-500" />
                 </div>
             </div>
 
@@ -60,7 +60,7 @@
                 <Label class="p-3 border-t border-b flex items-center text-sm" labelFor="2" value="En la formulación del proyecto se consideran como actividades principales y no como productos resultados de investigación, la realización de actividades de divulgación tecnológica como congresos, simposios, semanarios, entre otros." />
 
                 <div class="border-b border-t flex items-center justify-center">
-                    <input type="checkbox" bind:group={$form.causal_rechazo} id="2" value={2} class="rounded text-cyan-500" />
+                    <input type="checkbox" bind:group={$form.causal_rechazo} id="2" value={2} class="rounded text-violet-500" />
                 </div>
             </div>
 
@@ -68,7 +68,7 @@
                 <Label class="p-3 border-t border-b flex items-center text-sm" labelFor="3" value="Se verifique que el proyecto y sus productos resultados de investigación sean parte de una tesis doctoral, de maestría o de pregrado." />
 
                 <div class="border-b border-t flex items-center justify-center">
-                    <input type="checkbox" bind:group={$form.causal_rechazo} id="3" value={3} class="rounded text-cyan-500" />
+                    <input type="checkbox" bind:group={$form.causal_rechazo} id="3" value={3} class="rounded text-violet-500" />
                 </div>
             </div>
 
@@ -76,7 +76,7 @@
                 <Label class="p-3 border-t border-b flex items-center text-sm" labelFor="4" value="Se verifique una posible vulneración de los derechos de uno o varios autores que debe ser validada por la Coordinación SENNOVA." />
 
                 <div class="border-b border-t flex items-center justify-center">
-                    <input type="checkbox" bind:group={$form.causal_rechazo} id="4" value={4} class="rounded text-cyan-500" />
+                    <input type="checkbox" bind:group={$form.causal_rechazo} id="4" value={4} class="rounded text-violet-500" />
                 </div>
             </div>
             {#if $form.causal_rechazo?.length > 0}

@@ -279,19 +279,9 @@ class Proyecto extends Model
      *
      * @return object
      */
-    public function programasFormacionImpactados()
+    public function programasFormacion()
     {
-        return $this->belongsToMany(ProgramaFormacion::class, 'proyecto_programa_formacion_impactados', 'proyecto_id', 'programa_formacion_id');
-    }
-
-    /**
-     * Relationship with ProgramaFormacionArticulado
-     *
-     * @return object
-     */
-    public function programasFormacionArticulados()
-    {
-        return $this->belongsToMany(ProgramaFormacionArticulado::class, 'proyecto_programa_formacion_articulados', 'proyecto_id', 'programa_formacion_articulado_id');
+        return $this->belongsToMany(ProgramaFormacion::class, 'proyecto_programa_formacion', 'proyecto_id', 'programa_formacion_id');
     }
 
     /**
@@ -351,7 +341,7 @@ class Proyecto extends Model
      */
     public function disCurriculares()
     {
-        return $this->belongsToMany(DisCurricular::class, 'proyecto_dis_curricular', 'proyecto_id', 'dis_curricular_id');
+        return $this->belongsToMany(DisCurricular::class, 'proyecto_diseno_curricular', 'proyecto_id', 'diseno_curricular_id');
     }
 
     /**

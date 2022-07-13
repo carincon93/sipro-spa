@@ -65,7 +65,7 @@ class ProgramaFormacion extends Model
      */
     public function proyectosImpactados()
     {
-        return $this->belongsToMany(Proyecto::class, 'proyecto_programa_formacion_impactados', 'programa_formacion_id', 'proyecto_id');
+        return $this->belongsToMany(Proyecto::class, 'proyecto_programa_formacion', 'programa_formacion_id', 'proyecto_id');
     }
 
     /**
@@ -95,7 +95,7 @@ class ProgramaFormacion extends Model
      */
     public function ambientesModernizacion()
     {
-        return $this->belongsToMany(AmbienteModernizacion::class, 'ambiente_modernizacion_programa_calificado', 'programa_formacion_calificado_id', 'ambiente_modernizacion_id');
+        return $this->belongsToMany(AmbienteModernizacion::class, 'ambiente_modernizacion_programa_formacion', 'programa_formacion_id', 'ambiente_modernizacion_id');
     }
 
     /**

@@ -5,7 +5,7 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class DisCurricular extends Model
+class DisenoCurricular extends Model
 {
     use HasFactory;
 
@@ -14,7 +14,7 @@ class DisCurricular extends Model
      *
      * @var string
      */
-    protected $table = 'dis_curriculares';
+    protected $table = 'disenos_curriculares';
 
     /**
      * The attributes that are mass assignable.
@@ -51,7 +51,7 @@ class DisCurricular extends Model
      */
     public function proyectos()
     {
-        return $this->belongsToMany(Proyecto::class, 'proyecto_dis_curricular', 'dis_curricular_id', 'proyecto_id');
+        return $this->belongsToMany(Proyecto::class, 'proyecto_diseno_curricular', 'diseno_curricular_id', 'proyecto_id');
     }
 
     /**

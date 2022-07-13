@@ -91,19 +91,19 @@
             {#each analisisRiesgos.data as analisisRiesgo (analisisRiesgo.id)}
                 <tr class="hover:bg-gray-100 focus-within:bg-gray-100">
                     <td class="border-t">
-                        <p class="focus:text-cyan-500 my-2 paragraph-ellipsis px-6">
+                        <p class="focus:text-violet-500 my-2 paragraph-ellipsis px-6">
                             {analisisRiesgo.descripcion}
                         </p>
                     </td>
 
                     <td class="border-t">
-                        <p class="focus:text-cyan-500 my-2 paragraph-ellipsis px-6">
+                        <p class="focus:text-violet-500 my-2 paragraph-ellipsis px-6">
                             {analisisRiesgo.nivel}
                         </p>
                     </td>
 
                     <td class="border-t">
-                        <p class="focus:text-cyan-500 my-2 paragraph-ellipsis px-6">
+                        <p class="focus:text-violet-500 my-2 paragraph-ellipsis px-6">
                             {analisisRiesgo.tipo}
                         </p>
                     </td>
@@ -113,10 +113,6 @@
                             {#if isSuperAdmin || checkPermission(authUser, [3, 4, 6, 7, 9, 10, 12, 13, 18, 19, 21, 14, 16, 15, 20])}
                                 <Item on:SMUI:action={() => Inertia.visit(route('convocatorias.proyectos.analisis-riesgos.edit', [convocatoria.id, proyecto.id, analisisRiesgo.id]))}>
                                     <Text>Ver detalles</Text>
-                                </Item>
-                            {:else}
-                                <Item>
-                                    <Text>No tiene permisos</Text>
                                 </Item>
                             {/if}
                         </DataTableMenu>

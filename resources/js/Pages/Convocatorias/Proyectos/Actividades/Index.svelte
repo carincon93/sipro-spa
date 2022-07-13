@@ -175,13 +175,13 @@
                 {#each actividades.data as actividad (actividad.id)}
                     <tr class="hover:bg-gray-100 focus-within:bg-gray-100">
                         <td class="border-t">
-                            <p class="focus:text-cyan-500 my-2 paragraph-ellipsis px-6">
+                            <p class="focus:text-violet-500 my-2 paragraph-ellipsis px-6">
                                 {actividad.descripcion}
                             </p>
                         </td>
 
                         <td class="border-t">
-                            <p class="focus:text-cyan-500 my-2 paragraph-ellipsis px-6">
+                            <p class="focus:text-violet-500 my-2 paragraph-ellipsis px-6">
                                 {#if actividad.fecha_inicio}
                                     Del {actividad.fecha_inicio} al {actividad.fecha_finalizacion}
                                 {:else}
@@ -190,7 +190,7 @@
                             </p>
                         </td>
                         <td class="border-t">
-                            <p class="focus:text-cyan-500 my-2 paragraph-ellipsis px-6">
+                            <p class="focus:text-violet-500 my-2 paragraph-ellipsis px-6">
                                 {actividad.objetivo_especifico.descripcion}
                             </p>
                         </td>

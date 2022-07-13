@@ -62,13 +62,13 @@
                             <div class="flex items-center">
                                 <small class="mr-2">{moment(notificacion.created_at).locale('es').fromNow()}</small> |
                                 {#if notificacion.read_at}
-                                    <span class="bg-green-500 focus:text-cyan-500 px-4 rounded text-center text-white text-xs ml-2"> Leído </span>
+                                    <span class="bg-green-500 focus:text-violet-500 px-4 rounded text-center text-white text-xs ml-2"> Leído </span>
                                 {:else}
-                                    <span class="bg-red-500 focus:text-cyan-500 px-4 rounded text-center text-white text-xs ml-2 mr-2"> Sin leer </span>
+                                    <span class="bg-red-500 focus:text-violet-500 px-4 rounded text-center text-white text-xs ml-2 mr-2"> Sin leer </span>
                                     <Button on:click={() => marcarLeido(notificacion.id)} variant={null}>Marcar como leído</Button>
                                 {/if}
                             </div>
-                            <p id={notificacion.id} class="focus:text-cyan-500 whitespace-pre-wrap mt-10{notificacion.data.message.length > 521 ? ' paragraph-ellipsis' : ''}">
+                            <p id={notificacion.id} class="focus:text-violet-500 whitespace-pre-wrap mt-10{notificacion.data.message.length > 521 ? ' paragraph-ellipsis' : ''}">
                                 {#if notificacion.data.proyectoId}
                                     Código del proyecto: SGPS-{notificacion.data.proyectoId + 8000}-SIPRO
                                     <br />

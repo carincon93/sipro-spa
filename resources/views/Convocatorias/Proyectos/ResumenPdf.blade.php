@@ -510,28 +510,26 @@
                     </td>
                 </tr>
             @endif
-            @if (!empty($proyecto->programasFormacionArticulados) && $proyecto->programasFormacionArticulados()->count() > 0)
+            @if (!empty($proyecto->programasFormacion) && $proyecto->programasFormacion()->count() > 0)
                 <tr>
                     <td width="35%">
                         <p class="title">Programas de formación con registro calificado a impactar</p>
                     </td>
                     <td>
                         <ul>
-                            @foreach ($proyecto->programasFormacionArticulados as $formCurricular)
+                            @foreach ($proyecto->programasFormacion()->where('registro_calificado', true)->get() as $formCurricular)
                                 <li>{{ $formCurricular->codigo }}: {{ $formCurricular->nombre }}</li>
                             @endforeach
                         </ul>
                     </td>
                 </tr>
-            @endif
-            @if (!empty($proyecto->programasFormacionImpactados) && $proyecto->programasFormacionImpactados()->count() > 0)
                 <tr>
                     <td width="35%">
                         <p class="title">Programas de formación articulados</p>
                     </td>
                     <td>
                         <ul>
-                            @foreach ($proyecto->programasFormacionImpactados as $formImp)
+                            @foreach ($proyecto->programasFormacion()->where('registro_calificado', false)->get() as $formImp)
                                 <li>{{ $formImp->codigo }}: {{ $formImp->nombre }}</li>
                             @endforeach
                         </ul>

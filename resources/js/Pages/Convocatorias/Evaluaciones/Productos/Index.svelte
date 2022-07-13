@@ -152,25 +152,25 @@
                 {#each productos.data as producto (producto.id)}
                     <tr class="hover:bg-gray-100 focus-within:bg-gray-100">
                         <td class="border-t">
-                            <p class="focus:text-cyan-500 my-2 paragraph-ellipsis px-6">
+                            <p class="focus:text-violet-500 my-2 paragraph-ellipsis px-6">
                                 {producto.nombre}
                             </p>
                         </td>
 
                         <td class="border-t">
-                            <p class="focus:text-cyan-500 my-2 paragraph-ellipsis px-6">
+                            <p class="focus:text-violet-500 my-2 paragraph-ellipsis px-6">
                                 {producto.resultado.objetivo_especifico.descripcion}
                             </p>
                         </td>
                         <td class="border-t">
-                            <p class="focus:text-cyan-500 my-2 paragraph-ellipsis px-6">
+                            <p class="focus:text-violet-500 my-2 paragraph-ellipsis px-6">
                                 {producto.resultado.descripcion}
                             </p>
                         </td>
 
                         {#if proyecto.codigo_linea_programatica == 70}
                             <td class="border-t">
-                                <p class="focus:text-cyan-500 my-2 paragraph-ellipsis px-6">
+                                <p class="focus:text-violet-500 my-2 paragraph-ellipsis px-6">
                                     {producto.producto_ta_tp?.valor_proyectado}
                                 </p>
                             </td>
@@ -298,7 +298,7 @@
                                 {/if}
                             </div>
                         {:else if j == 1}
-                            <hr class="mt-10 mb-10 border-cyan-300" />
+                            <hr class="mt-10 mb-10 border-violet-300" />
 
                             <h1 class="text-black">Productos del segundo objetivo específico</h1>
 
@@ -335,7 +335,7 @@
                                 {/if}
                             </div>
                         {:else if j == 2}
-                            <hr class="mt-10 mb-10 border-cyan-300" />
+                            <hr class="mt-10 mb-10 border-violet-300" />
 
                             <h1 class="text-black">Productos del tercer objetivo específico</h1>
 
@@ -372,7 +372,7 @@
                                 {/if}
                             </div>
                         {:else if j == 3}
-                            <hr class="mt-10 mb-10 border-cyan-300" />
+                            <hr class="mt-10 mb-10 border-violet-300" />
 
                             <h1 class="text-black">Productos del cuarto objetivo específico</h1>
 

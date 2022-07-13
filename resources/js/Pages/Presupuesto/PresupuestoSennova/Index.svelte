@@ -48,30 +48,30 @@
             {#each presupuestoSennova.data as rubroPresupuestal (rubroPresupuestal.id)}
                 <tr class="hover:bg-gray-100 focus-within:bg-gray-100">
                     <td class="border-t">
-                        <p class="px-6 py-4 focus:text-cyan-500">
+                        <p class="px-6 py-4 focus:text-violet-500">
                             {rubroPresupuestal.codigo}
                         </p>
                     </td>
                     <td class="border-t">
-                        <p class="px-6 py-4 focus:text-cyan-500">
+                        <p class="px-6 py-4 focus:text-violet-500">
                             {rubroPresupuestal.segundo_grupo_presupuestal.nombre}
                         </p>
                     </td>
 
                     <td class="border-t">
-                        <p class="px-6 py-4 focus:text-cyan-500">
+                        <p class="px-6 py-4 focus:text-violet-500">
                             {rubroPresupuestal.tercer_grupo_presupuestal.nombre}
                         </p>
                     </td>
 
                     <td class="border-t">
-                        <p class="px-6 py-4 focus:text-cyan-500">
+                        <p class="px-6 py-4 focus:text-violet-500">
                             {rubroPresupuestal.uso_presupuestal.descripcion}
                         </p>
                     </td>
 
                     <td class="border-t">
-                        <p class="px-6 py-4 focus:text-cyan-500">
+                        <p class="px-6 py-4 focus:text-violet-500">
                             {rubroPresupuestal.linea_programatica.codigo}
                         </p>
                     </td>
@@ -81,10 +81,6 @@
                             {#if isSuperAdmin}
                                 <Item on:SMUI:action={() => Inertia.visit(route('presupuesto-sennova.edit', rubroPresupuestal.id))}>
                                     <Text>Ver detalles</Text>
-                                </Item>
-                            {:else}
-                                <Item>
-                                    <Text>No tiene permisos</Text>
                                 </Item>
                             {/if}
                         </DataTableMenu>

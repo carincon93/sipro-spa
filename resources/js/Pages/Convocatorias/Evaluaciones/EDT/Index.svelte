@@ -77,19 +77,19 @@
             {#each eventos.data as evento (evento.id)}
                 <tr class="hover:bg-gray-100 focus-within:bg-gray-100">
                     <td class="border-t">
-                        <p class="focus:text-cyan-500 my-2 paragraph-ellipsis px-6">
+                        <p class="focus:text-violet-500 my-2 paragraph-ellipsis px-6">
                             {evento.descripcion_evento}
                         </p>
                     </td>
 
                     <td class="border-t">
-                        <p class="focus:text-cyan-500 my-2 paragraph-ellipsis px-6">
+                        <p class="focus:text-violet-500 my-2 paragraph-ellipsis px-6">
                             {evento.numero_asistentes}
                         </p>
                     </td>
 
                     <td class="border-t">
-                        <p class="focus:text-cyan-500 my-2 paragraph-ellipsis px-6">
+                        <p class="focus:text-violet-500 my-2 paragraph-ellipsis px-6">
                             ${new Intl.NumberFormat('de-DE').format(!isNaN(evento.proyecto_presupuesto.valor_total) ? evento.proyecto_presupuesto.valor_total : 0)}
                         </p>
                     </td>
@@ -99,10 +99,6 @@
                             {#if isSuperAdmin || checkPermission(authUser, [6, 7, 15])}
                                 <Item on:SMUI:action={() => Inertia.visit(route('convocatorias.evaluaciones.edt.edit', [convocatoria.id, evaluacion.id, evento.id]))}>
                                     <Text>Ver detalles</Text>
-                                </Item>
-                            {:else}
-                                <Item>
-                                    <Text>No tiene permisos</Text>
                                 </Item>
                             {/if}
                         </DataTableMenu>

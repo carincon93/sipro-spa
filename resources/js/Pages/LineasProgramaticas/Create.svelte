@@ -44,9 +44,9 @@
             <div>
                 <h1>
                     {#if isSuperAdmin}
-                        <a use:inertia href={route('lineas-programaticas.index')} class="text-cyan-400 hover:text-cyan-600"> Líneas programáticas </a>
+                        <a use:inertia href={route('lineas-programaticas.index')} class="text-violet-400 hover:text-violet-600"> Líneas programáticas </a>
                     {/if}
-                    <span class="text-cyan-400 font-medium">/</span>
+                    <span class="text-violet-400 font-medium">/</span>
                     Crear
                 </h1>
             </div>

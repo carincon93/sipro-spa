@@ -4,6 +4,7 @@ namespace App\Exceptions;
 
 use Symfony\Component\HttpKernel\Exception\MethodNotAllowedHttpException;
 use Illuminate\Foundation\Exceptions\Handler as ExceptionHandler;
+use Illuminate\Support\Facades\Log;
 use Inertia\Inertia;
 use Throwable;
 
@@ -34,6 +35,8 @@ class Handler extends ExceptionHandler
         $response = parent::render($request, $e);
 
         if (!app()->environment(['local', 'testing']) && in_array($response->status(), [500, 503, 404, 403, 405])) {
+            Log::debug($e->getMessage() . ' / user_id: ' . auth()->user()->id);
+
             return Inertia::render('Error', ['status' => $response->status()])
                 ->toResponse($request)
                 ->setStatusCode($response->status());

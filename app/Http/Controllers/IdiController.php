@@ -169,8 +169,8 @@ class IdiController extends Controller
             'tecnoacademias'                            => TecnoAcademia::select('id as value', 'nombre as label')->get(),
             'opcionesIDiDropdown'                       => json_decode(Storage::get('json/opciones-aplica-no-aplica.json'), true),
             'proyectoMunicipios'                        => $idi->proyecto->municipios()->select('municipios.id as value', 'municipios.nombre as label', 'regionales.nombre as group')->join('regionales', 'regionales.id', 'municipios.regional_id')->get(),
-            'proyectoProgramasFormacion'                => $idi->proyecto->programasFormacionImpactados()->selectRaw('id as value, concat(programas_formacion.nombre, chr(10), \'∙ Código: \', programas_formacion.codigo) as label')->get(),
-            'proyectoProgramasFormacionArticulados'     => $idi->proyecto->programasFormacionArticulados()->selectRaw('id as value, concat(programas_formacion_articulados.nombre, chr(10), \'∙ Código: \', programas_formacion_articulados.codigo) as label')->get(),
+            'proyectoProgramasFormacion'                => $idi->proyecto->programasFormacion()->selectRaw('id as value, concat(programas_formacion.nombre, chr(10), \'∙ Código: \', programas_formacion.codigo) as label')->where('registro_calificado', true)->get(),
+            'proyectoProgramasFormacionArticulados'     => $idi->proyecto->programasFormacion()->selectRaw('id as value, concat(programas_formacion.nombre, chr(10), \'∙ Código: \', programas_formacion.codigo) as label')->where('registro_calificado', false)->get(),
             'versiones'                                 => $idi->proyecto->PdfVersiones,
         ]);
     }
@@ -210,8 +210,8 @@ class IdiController extends Controller
         $idi->relacionado_tecnoacademia             = $request->relacionado_tecnoacademia;
 
         $idi->proyecto->municipios()->sync($request->municipios);
-        $idi->proyecto->programasFormacionImpactados()->sync($request->programas_formacion);
-        $idi->proyecto->programasFormacionArticulados()->sync($request->programas_formacion_articulados);
+        $idi->proyecto->programasFormacion()->sync($request->programas_formacion);
+        $idi->proyecto->programasFormacion()->sync($request->programas_formacion_articulados);
 
         $idi->save();
 

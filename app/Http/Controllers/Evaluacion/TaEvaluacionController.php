@@ -6,7 +6,7 @@ use App\Models\Evaluacion\TaEvaluacion;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Evaluacion\TaEvaluacionRequest;
 use App\Models\Convocatoria;
-use App\Models\DisCurricular;
+use App\Models\DisenoCurricular;
 use App\Models\Regional;
 use App\Models\Tecnoacademia;
 use Illuminate\Http\Request;
@@ -108,9 +108,9 @@ class TaEvaluacionController extends Controller
             'tecnoacademias'                            => TecnoAcademia::select('id as value', 'nombre as label')->get(),
             'proyectoMunicipios'                        => $ta->proyecto->municipios()->select('municipios.id as value', 'municipios.nombre as label', 'regionales.nombre as group', 'regionales.codigo')->join('regionales', 'regionales.id', 'municipios.regional_id')->get(),
             'proyectoMunicipiosImpactar'                => $ta->proyecto->municipiosAImpactar()->select('municipios.id as value', 'municipios.nombre as label', 'regionales.nombre as group', 'regionales.codigo')->join('regionales', 'regionales.id', 'municipios.regional_id')->get(),
-            'proyectoProgramasFormacionArticulados'     => $ta->proyecto->taProgramasFormacion()->selectRaw('id as value, concat(programas_formacion.nombre, chr(10), \'∙ Código: \', programas_formacion.codigo) as label')->get(),
-            'proyectoDisCurriculares'                   => $ta->proyecto->disCurriculares()->selectRaw('id as value, concat(nombre, \' ∙ Código: \', codigo) as label')->get(),
-            'disCurriculares'                           => DisCurricular::selectRaw('id as value, concat(nombre, \' ∙ Código: \', codigo) as label')->get(),
+            'proyectoProgramasFormacionArticulados'     => $ta->proyecto->taProgramasFormacion()->selectRaw('id as value, concat(programas_formacion.nombre, chr(10), \'∙ Código: \', programas_formacion.codigo) as label')->where('programas_formacion.registro_calificado', true)->get(),
+            'proyectoDisenoCurriculares'                => $ta->proyecto->disenosCurriculares()->selectRaw('id as value, concat(nombre, \' ∙ Código: \', codigo) as label')->get(),
+            'disenosCurriculares'                       => DisenoCurricular::selectRaw('id as value, concat(nombre, \' ∙ Código: \', codigo) as label')->get(),
             'tecnoAcademias'                            => $tecnoAcademias
         ]);
     }

@@ -65,6 +65,10 @@ class ProyectoCapacidadInstaladaPolicy
      */
     public function update(User $user, ProyectoCapacidadInstalada $proyectoCapacidadInstalada)
     {
+        if ($proyectoCapacidadInstalada->estado_proyecto && $proyectoCapacidadInstalada->estado_proyecto == 'Finalizado') {
+            return false;
+        }
+
         if ($user->hasRole([4]) && $user->dinamizadorCentroFormacion && $proyectoCapacidadInstalada->semilleroInvestigacion->lineaInvestigacion->grupoInvestigacion->centroFormacion->id == $user->dinamizadorCentroFormacion->id) {
             return true;
         }

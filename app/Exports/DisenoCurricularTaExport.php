@@ -3,8 +3,7 @@
 namespace App\Exports;
 
 use App\Models\Convocatoria;
-use App\Models\DisCurricular;
-use App\Models\SemilleroInvestigacion;
+use App\Models\DisenoCurricular;
 use Maatwebsite\Excel\Concerns\FromCollection;
 use Maatwebsite\Excel\Concerns\WithMapping;
 use Maatwebsite\Excel\Concerns\WithHeadings;
@@ -29,7 +28,7 @@ class DisenoCurricularTaExport implements FromCollection, WithHeadings, WithMapp
      */
     public function collection()
     {
-        return DisCurricular::select('dis_curriculares.*', 'proyectos.id as proyecto_id')->join('proyecto_dis_curricular', 'dis_curriculares.id', 'proyecto_dis_curricular.dis_curricular_id')->join('proyectos', 'proyecto_dis_curricular.proyecto_id', 'proyectos.id')->where('proyectos.linea_programatica_id', 5)->whereNotIn('proyectos.id', [1052, 1113])->get();
+        return DisenoCurricular::select('disenos_curriculares.*', 'proyectos.id as proyecto_id')->join('proyecto_diseno_curricular', 'disenos_curriculares.id', 'proyecto_diseno_curricular.diseno_curricular_id')->join('proyectos', 'proyecto_diseno_curricular.proyecto_id', 'proyectos.id')->where('proyectos.linea_programatica_id', 5)->whereNotIn('proyectos.id', [1052, 1113])->get();
     }
 
     /**

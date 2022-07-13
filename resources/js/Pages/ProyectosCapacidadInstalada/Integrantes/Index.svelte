@@ -20,6 +20,8 @@
     import Checkbox from '@smui/checkbox'
     import FormField from '@smui/form-field'
 
+    import Header from '../Shared/Header'
+
     export let errors
     export let proyectoCapacidadInstalada
     export let tiposDocumento
@@ -38,9 +40,6 @@
     let authUser = $page.props.auth.user
     let isSuperAdmin = checkRole(authUser, [1])
 
-    let isDinamizadorSennova = proyectoCapacidadInstalada.estado_proyecto != 'Finalizado' && checkRole(authUser, [4]) && proyectoCapacidadInstalada.semillero_investigacion.linea_investigacion.grupo_investigacion.centro_formacion.id && authUser.centro_formacion_id
-    let isAutorPrincipal = proyectoCapacidadInstalada.estado_proyecto != 'Finalizado' && checkRole(authUser, [6]) && authUser.id == autorPrincipal.id
-
     /**
      * Buscar
      */
@@ -53,7 +52,7 @@
 
     let sended = false
     function search() {
-        if (isSuperAdmin || isDinamizadorSennova || isAutorPrincipal) {
+        if (proyectoCapacidadInstalada.allowed.to_update) {
             sended = false
             axios
                 .post(route('proyectos-capacidad-instalada.integrantes.users', proyectoCapacidadInstalada.id), $form)
@@ -61,13 +60,12 @@
                     resultados = response.data
                     sended = true
                 })
-                .catch((error) => {
-                })
+                .catch((error) => {})
         }
     }
 
     function removeParticipante(id) {
-        if (isSuperAdmin || isDinamizadorSennova || isAutorPrincipal) {
+        if (proyectoCapacidadInstalada.allowed.to_update) {
             Inertia.post(route('proyectos-capacidad-instalada.integrantes.users.unlink', proyectoCapacidadInstalada.id), { user_id: id, _method: 'DELETE' }, { preserveScroll: true })
         }
     }
@@ -101,7 +99,7 @@
     }
 
     function submitParticipante() {
-        if (isSuperAdmin || isDinamizadorSennova || isAutorPrincipal) {
+        if (proyectoCapacidadInstalada.allowed.to_update) {
             $formParticipante.post(route('proyectos-capacidad-instalada.integrantes.users.link', proyectoCapacidadInstalada.id), {
                 onSuccess: () => {
                     closeDialog()
@@ -138,7 +136,7 @@
     }
 
     function submitRegister() {
-        if (isSuperAdmin || isDinamizadorSennova || isAutorPrincipal) {
+        if (proyectoCapacidadInstalada.allowed.to_update) {
             $formNuevoIntegrante.post(route('proyectos-capacidad-instalada.integrantes.users.register', proyectoCapacidadInstalada.id), {
                 onSuccess: () => {
                     closeDialog()
@@ -179,7 +177,7 @@
     }
 
     function submitNuevoAutorPrincipal() {
-        if (isSuperAdmin || isAutorPrincipal) {
+        if (proyectoCapacidadInstalada.allowed.to_update) {
             Inertia.post(route('proyectos-capacidad-instalada.nuevo-autor-principal', [proyectoCapacidadInstalada.id, nuevoAutorPrinciaplId]), [], {
                 onSuccess: () => {
                     dialogAutorPrincipal = false
@@ -189,38 +187,35 @@
             })
         }
     }
+
+    let entidadAliadaId = null
+    let dialogEliminar = false
+    function destroyEntidadAliada() {
+        if (proyectoCapacidadInstalada.allowed.to_update) {
+            Inertia.delete(route('proyectos-capacidad-instalada.entidades-aliadas.destroy', [proyectoCapacidadInstalada.id, entidadAliadaId]), {
+                preserveScroll: true,
+                onFinish: () => {
+                    dialogEliminar = false
+                },
+            })
+        }
+    }
 </script>
 
 <AuthenticatedLayout>
     <header class="shadow bg-white" slot="header">
-        <div class="flex items-center justify-between lg:px-8 max-w-7xl mx-auto px-4 py-6 sm:px-6">
-            <div>
-                <h1>
-                    <a use:inertia href={route('proyectos-capacidad-instalada.index')} class="text-cyan-400 hover:text-cyan-600"> Proyectos de capacidad instalada </a>
-                    <span class="text-cyan-400 font-medium">/</span>
-                    <a use:inertia href={route('proyectos-capacidad-instalada.edit', proyectoCapacidadInstalada.id)} class="text-cyan-400 hover:text-cyan-600">Información básica</a>
-                    <span class="text-cyan-400 font-medium">/</span>
-                    <a use:inertia href={route('proyectos-capacidad-instalada.integrantes.index', proyectoCapacidadInstalada.id)} class="text-cyan-400 hover:text-cyan-600 font-extrabold underline">Integrantes</a>
-                    <span class="text-cyan-400 font-medium">/</span>
-                    <a use:inertia href={route('proyectos-capacidad-instalada.objetivos-especificos.index', proyectoCapacidadInstalada.id)} class="text-cyan-400 hover:text-cyan-600">Objetivos específicos y resultados</a>
-                    <span class="text-cyan-400 font-medium">/</span>
-                    <a use:inertia href={route('proyectos-capacidad-instalada.productos.index', proyectoCapacidadInstalada.id)} class="text-cyan-400 hover:text-cyan-600">Productos</a>
-                    <span class="text-cyan-400 font-medium">/</span>
-                    <a use:inertia href={route('proyectos-capacidad-instalada.finalizar', proyectoCapacidadInstalada.id)} class="text-cyan-400 hover:text-cyan-600">Estado</a>
-                </h1>
-            </div>
-        </div>
+        <Header {proyectoCapacidadInstalada} />
     </header>
 
-    <a use:inertia href={route('proyectos-capacidad-instalada.objetivos-especificos.index', proyectoCapacidadInstalada.id)} class="flex bottom-0 fixed hover:bg-cyan-600 mb-4 px-6 py-2 bg-cyan-700 rounded-lg shadow-2xl text-center text-white z-50">
+    <a use:inertia href={route('proyectos-capacidad-instalada.objetivos-especificos.index', proyectoCapacidadInstalada.id)} class="flex bottom-0 fixed hover:bg-violet-600 mb-4 px-6 py-2 bg-violet-700 rounded-lg shadow-2xl text-center text-white z-50">
         <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 mr-1.5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2m-3 7h3m-3 4h3m-6-4h.01M9 16h.01" />
         </svg>
         Ir a los objetivos específicos y resultados
     </a>
 
-    {#if isSuperAdmin || isDinamizadorSennova || isAutorPrincipal}
-        <div class="bg-cyan-100 p-4">
+    {#if proyectoCapacidadInstalada.allowed.to_update}
+        <div class="bg-violet-100 p-4">
             <h1 class="text-4xl text-center">Integrantes</h1>
             <p class="text-center m-auto mt-8">Realice la búsqueda de integrantes por nombre, número de documento o por el correo electrónico institucional</p>
             <form on:submit|preventDefault={search} on:input={() => (sended = false)}>
@@ -250,7 +245,7 @@
                             {#each resultados as resultado (resultado.id)}
                                 <tr class="hover:bg-gray-100 focus-within:bg-gray-100">
                                     <td class="border-t">
-                                        <p class="px-6 py-4 focus:text-cyan-500">
+                                        <p class="px-6 py-4 focus:text-violet-500">
                                             {resultado.nombre}
                                         </p>
                                     </td>
@@ -310,7 +305,7 @@
                 {#each proyectoCapacidadInstalada.integrantes as integrante (integrante.id)}
                     <tr class="hover:bg-gray-100 focus-within:bg-gray-100">
                         <td class="border-t">
-                            <p class="px-6 py-4 focus:text-cyan-500">
+                            <p class="px-6 py-4 focus:text-violet-500">
                                 {integrante.nombre}
                                 {#if integrante.id == autorPrincipal.id}
                                     <span class="inline-block text-xs bg-green-100 py-1 px-4 rounded-full shadow">Autor(a) principal</span>
@@ -344,7 +339,7 @@
                         </td>
                         <td class="border-t td-actions">
                             <DataTableMenu class={proyectoCapacidadInstalada.integrantes.length < 4 ? 'z-50' : ''}>
-                                {#if isSuperAdmin || isDinamizadorSennova || isAutorPrincipal}
+                                {#if proyectoCapacidadInstalada.allowed.to_update}
                                     <Item on:SMUI:action={() => showParticipante(integrante)}>
                                         <Text>Editar</Text>
                                     </Item>
@@ -377,21 +372,21 @@
 
     <hr class="mt-10 mb-10" />
 
-    <h1 class="mt-24 mb-8 text-center text-3xl">Entidades aliadas</h1>
+    <h1 class="my-10 mb-8 text-center text-3xl">Entidades aliadas</h1>
 
-    <InfoMessage>
+    <InfoMessage class={existenciaDocumentos ? 'mb-8' : 'mb-40'}>
         <p>¿Existen documentos tipo contrato, convenio o acuerdos que hagan parte del proyecto con entidades aliadas u otros centros de formación SENA?</p>
-        <Switch bind:checked={existenciaDocumentos} disabled={isSuperAdmin || proyectoCapacidadInstalada.integrantes.find((item) => item.id == authUser.id) ? undefined : true} />
+        <Switch bind:checked={existenciaDocumentos} disabled={proyectoCapacidadInstalada.allowed.to_update ? undefined : true} />
     </InfoMessage>
 
     {#if existenciaDocumentos}
-        {#if isSuperAdmin || isDinamizadorSennova || isAutorPrincipal}
+        {#if proyectoCapacidadInstalada.allowed.to_update}
             <div class="mb-6 flex justify-between items-center mt-4">
                 <Button on:click={() => Inertia.visit(route('proyectos-capacidad-instalada.entidades-aliadas.create', [proyectoCapacidadInstalada.id]))} variant="raised">Crear entidad aliada</Button>
             </div>
         {/if}
-        <div class="bg-white rounded shadow">
-            <table class="w-full whitespace-no-wrap table-fixed data-table">
+        <div class="bg-white rounded shadow mb-10">
+            <table class="w-full whitespace-no-wrap table-fixed data-table" id="entidades-aliadas">
                 <thead>
                     <tr class="text-left font-bold">
                         <th class="px-6 pt-6 pb-4 sticky top-0 z-10 bg-white shadow-xl w-full">Nombre</th>
@@ -404,18 +399,18 @@
                     {#each proyectoCapacidadInstalada.entidades_aliadas as entidadAliada}
                         <tr class="hover:bg-gray-100 focus-within:bg-gray-100">
                             <td class="border-t">
-                                <p class="px-6 py-4 focus:text-cyan-500">
+                                <p class="px-6 py-4 focus:text-violet-500">
                                     {entidadAliada.nombre}
                                 </p>
                             </td>
                             <td class="border-t">
-                                <p class="px-6 py-4 focus:text-cyan-500">
+                                <p class="px-6 py-4 focus:text-violet-500">
                                     {entidadAliada.nit}
                                 </p>
                             </td>
                             <td class="border-t">
-                                <p class="px-6 py-4 focus:text-cyan-500">
-                                    <a target="_blank" class="text-cyan-400 underline mt-4 mb-4 flex" download href={entidadAliada.documento}>
+                                <p class="px-6 py-4 focus:text-violet-500">
+                                    <a target="_blank" class="text-violet-400 underline mt-4 mb-4 flex" download href={entidadAliada.documento}>
                                         <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 mr-2" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                                             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4" />
                                         </svg>
@@ -425,9 +420,14 @@
                             </td>
                             <td class="border-t td-actions">
                                 <DataTableMenu class={proyectoCapacidadInstalada.entidades_aliadas.length < 4 ? 'z-50' : ''}>
-                                    <Item on:SMUI:action={() => Inertia.visit(route('proyectos-capacidad-instalada.entidades-aliadas.edit', [proyectoCapacidadInstalada.id, entidadAliada.id]))}>
-                                        <Text>Ver detalles</Text>
-                                    </Item>
+                                    {#if proyectoCapacidadInstalada.allowed.to_update}
+                                        <Item on:SMUI:action={() => Inertia.visit(route('proyectos-capacidad-instalada.entidades-aliadas.edit', [proyectoCapacidadInstalada.id, entidadAliada.id]))}>
+                                            <Text>Ver detalles</Text>
+                                        </Item>
+                                        <Item on:SMUI:action={(() => (dialogEliminar = true), (entidadAliadaId = entidadAliada.id))}>
+                                            <Text>Eliminar</Text>
+                                        </Item>
+                                    {/if}
                                 </DataTableMenu>
                             </td>
                         </tr>
@@ -458,7 +458,7 @@
         </div>
         <div slot="content">
             <form on:submit|preventDefault={submitParticipante} id="integrante-form">
-                <fieldset disabled={isSuperAdmin || isDinamizadorSennova || isAutorPrincipal ? undefined : true}>
+                <fieldset disabled={proyectoCapacidadInstalada.allowed.to_update ? undefined : true}>
                     <div class="mt-8">
                         <Label required class="mb-4" labelFor="rol_sennova" value="Rol SENNOVA" />
                         <Select id="rol_sennova" items={roles} bind:selectedValue={$formParticipante.rol_sennova} error={errors.rol_sennova} autocomplete="off" placeholder="Seleccione un rol SENNOVA" required />
@@ -551,7 +551,7 @@
                         <InfoMessage message="Los datos proporcionados serán tratados de acuerdo con la política de tratamiento de datos personales del SENA y a la ley 1581 de 2012 (acuerdo No. 0009 del 2016" />
                         <FormField>
                             <Checkbox bind:checked={$formNuevoIntegrante.autorizacion_datos} />
-                            <span slot="label">¿La persona autoriza el tratamiento de datos personales?. <a href="https://www.sena.edu.co/es-co/transparencia/Documents/proteccion_datos_personales_sena_2016.pdf" target="_blank" class="text-cyan-500">Leer acuerdo No. 0009 del 2016</a></span>
+                            <span slot="label">¿La persona autoriza el tratamiento de datos personales?. <a href="https://www.sena.edu.co/es-co/transparencia/Documents/proteccion_datos_personales_sena_2016.pdf" target="_blank" class="text-violet-500">Leer acuerdo No. 0009 del 2016</a></span>
                         </FormField>
                     </div>
                 </fieldset>
@@ -581,6 +581,27 @@
             <div class="p-4">
                 <Button on:click={() => (dialogAutorPrincipal = false)} variant={null}>Cancelar</Button>
                 <Button variant="raised" on:click={submitNuevoAutorPrincipal}>Confirmar</Button>
+            </div>
+        </div>
+    </Dialog>
+
+    <Dialog bind:open={dialogEliminar}>
+        <div slot="title">
+            <div class="text-center">Eliminar recurso</div>
+            <div class="relative bg-violet-100 text-violet-600 p-5 h-44 w-1/3 m-auto my-10" style="border-radius: 41% 59% 70% 30% / 32% 40% 60% 68% ;">
+                <figure>
+                    <img src="/images/eliminar.png" alt="" class="h-44 m-auto" />
+                </figure>
+            </div>
+            <div class="text-center">
+                ¿Está seguro (a) que desea eliminar este proyecto?<br />Una vez eliminado el proyecto, todos sus recursos y datos se eliminarán de forma permanente.
+            </div>
+        </div>
+        <div slot="content" />
+        <div slot="actions">
+            <div class="p-4">
+                <Button on:click={() => (dialogEliminar = false)} variant={null}>Cancelar</Button>
+                <Button variant="raised" type="button" on:click={() => destroyEntidadAliada()}>Confirmar</Button>
             </div>
         </div>
     </Dialog>

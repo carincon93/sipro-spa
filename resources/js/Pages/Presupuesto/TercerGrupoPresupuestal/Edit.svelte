@@ -48,9 +48,9 @@
             <div>
                 <h1 class="overflow-ellipsis overflow-hidden w-breadcrumb-ellipsis whitespace-nowrap">
                     {#if isSuperAdmin}
-                        <a use:inertia href={route('tercer-grupo-presupuestal.index')} class="text-cyan-400 hover:text-cyan-600"> Tercer grupo presupuestal </a>
+                        <a use:inertia href={route('tercer-grupo-presupuestal.index')} class="text-violet-400 hover:text-violet-600"> Tercer grupo presupuestal </a>
                     {/if}
-                    <span class="text-cyan-400 font-medium">/</span>
+                    <span class="text-violet-400 font-medium">/</span>
                     {rubroTercerGrupoPresupuestal.nombre}
                 </h1>
             </div>

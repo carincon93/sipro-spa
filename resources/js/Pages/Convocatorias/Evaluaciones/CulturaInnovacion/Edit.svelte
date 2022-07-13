@@ -488,7 +488,7 @@
                             <p class="mb-4">¿Qué actividad pretende realizar con la especie nativa?</p>
                         </div>
 
-                        <p class="bg-cyan-100 mt-10 p-4 text-cyan-600">Seleccione una opción</p>
+                        <p class="bg-violet-100 mt-10 p-4 text-violet-600">Seleccione una opción</p>
                         <div class="flex mt-4 items-center">
                             <FormField>
                                 <Radio disabled bind:group={culturaInnovacionInfo.actividades_muestreo} value="1.1.1" />
@@ -520,7 +520,7 @@
                             <p class="mb-4">¿Cuál es la finalidad de las actividades a realizar con la especie nativa/endémica?</p>
                         </div>
 
-                        <p class="bg-cyan-100 mt-10 p-4 text-cyan-600">Seleccione una opción</p>
+                        <p class="bg-violet-100 mt-10 p-4 text-violet-600">Seleccione una opción</p>
                         <div class="flex mt-4 items-center">
                             <FormField>
                                 <Radio disabled bind:group={culturaInnovacionInfo.objetivo_muestreo} value="1.2.1" />

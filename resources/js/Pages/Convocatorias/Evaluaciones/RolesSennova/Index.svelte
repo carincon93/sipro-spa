@@ -119,23 +119,23 @@
             {#each proyectoRolesSennova.data as proyectoRolSennova (proyectoRolSennova.id)}
                 <tr class="hover:bg-gray-100 focus-within:bg-gray-100">
                     <td class="border-t">
-                        <p class="px-6 py-4 focus:text-cyan-500">
+                        <p class="px-6 py-4 focus:text-violet-500">
                             {proyectoRolSennova?.convocatoria_rol_sennova?.rol_sennova?.nombre}
                         </p>
                     </td>
                     <td class="border-t">
-                        <p class="px-6 py-4 focus:text-cyan-500">
+                        <p class="px-6 py-4 focus:text-violet-500">
                             {nivelAcademico(proyectoRolSennova?.convocatoria_rol_sennova?.nivel_academico)}
                         </p>
                     </td>
                     <td class="border-t">
-                        <p class="px-6 py-4 focus:text-cyan-500">
+                        <p class="px-6 py-4 focus:text-violet-500">
                             ${new Intl.NumberFormat('de-DE').format(!isNaN(proyectoRolSennova?.convocatoria_rol_sennova?.asignacion_mensual) ? proyectoRolSennova?.convocatoria_rol_sennova?.asignacion_mensual : 0)}
                         </p>
                     </td>
                     <td class="border-t">
                         <div class="flex items-center">
-                            <p class="px-6 py-4 focus:text-cyan-500">
+                            <p class="px-6 py-4 focus:text-violet-500">
                                 {proyectoRolSennova.proyecto_roles_evaluaciones?.find((item) => item.evaluacion_id == evaluacion.id) ? 'Evaluado' : 'Sin evaluar'}
                             </p>
                             {#if convocatoria.fase == 4}
@@ -154,10 +154,6 @@
                                             Evaluar
                                         {/if}
                                     </Text>
-                                </Item>
-                            {:else}
-                                <Item>
-                                    <Text>No tiene permisos</Text>
                                 </Item>
                             {/if}
                         </DataTableMenu>

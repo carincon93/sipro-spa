@@ -53,8 +53,8 @@
         data.addColumn('string', 'ToolTip')
 
         var options = {
-            nodeClass: 'bg-cyan-500 text-white shadow',
-            selectedNodeClass: 'bg-cyan-700',
+            nodeClass: 'bg-violet-500 text-white shadow',
+            selectedNodeClass: 'bg-violet-700',
             allowHtml: true,
             size: 'small',
         }

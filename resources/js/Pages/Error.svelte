@@ -9,6 +9,9 @@
     import Button from '@/Shared/Button'
 
     export let status
+    export let message
+
+    console.log(message)
 
     $title = 'SGPS-SIPRO - Error ' + status
 </script>
@@ -17,7 +20,7 @@
     <title>SGPS-SIPRO - Error {status}</title>
 </svelte:head>
 
-<div class="{status >= 500 || status == 403 || status == 405 ? 'bg-red-500' : 'bg-cyan-700'} flex flex-col items-center justify-center min-h-screen text-white">
+<div class="{status >= 500 || status == 403 || status == 405 ? 'bg-red-500' : 'bg-violet-700'} flex flex-col items-center justify-center min-h-screen text-white">
     <figure>
         {#if status >= 500 || status == 403 || status == 405}
             <img src="/images/error.png" alt="Error" class="w-2/3 m-auto mb-10" />
@@ -47,13 +50,12 @@
             <h1 class="text-2xl text-center">La aplicación está en mantenimiento. Por favor intenta de nuevo en unos minutos.</h1>
         {/if}
 
-        {#if status != 503 && status != 405 && status == 403}
+        {#if status != 503 && status != 405 && status != 403}
             <div class="mt-10">
                 <p>Puede notificar a la mesa de ayuda realice los siguientes pasos:</p>
                 <ul class="list-disc mt-5">
-                    <li>Tome un pantallazo del error desde Windows o Mac.</li>
-                    <li>Copie la URL donde surgió el error.</li>
-                    <li>Envie las evidencias al correo <a class="underline" href="mailto:sgpssipro@sena.edu.co">sgpssipro@sena.edu.co</a> detallando el error. (Se debe enviar desde una cuenta @sena.edu.co)</li>
+                    <li>Tome un pantallazo del error desde alguna aplicación de Windows o Mac. El pantallazo se recomienda hacerlo de pantalla completa donde se observe con claridad la url y la fecha del momento en el que ocurrió el error.</li>
+                    <li>Envie las evidencias al correo <a class="underline" href="mailto:sgpssipro@sena.edu.co">sgpssipro@sena.edu.co</a> describriendo de como ocurrió el error. (Se debe enviar desde una cuenta @sena.edu.co)</li>
                 </ul>
             </div>
         {/if}

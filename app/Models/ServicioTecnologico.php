@@ -227,6 +227,6 @@ class ServicioTecnologico extends Model
      */
     public function getUpdatedAtAttribute($value)
     {
-        return "Última modificación de este formulario: " . Carbon::parse($value, 'UTC')->locale('es')->isoFormat('DD [de] MMMM [de] YYYY [a las] HH:mm:ss');
+        return "Última modificación de este formulario: " . Carbon::parse($value, 'UTC')->timezone('America/Bogota')->locale('es')->isoFormat('DD [de] MMMM [de] YYYY [a las] HH:mm:ss');
     }
 }

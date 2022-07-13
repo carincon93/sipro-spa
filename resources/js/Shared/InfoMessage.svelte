@@ -4,7 +4,7 @@
 
     $: props = {
         ...$$restProps,
-        class: `relative ${alertMsg ? 'bg-red-100 text-red-400' : 'bg-cyan-100 text-cyan-600'} py-1 px-2 ${$$restProps.class || ''}`,
+        class: `relative ${alertMsg ? 'bg-red-100 text-red-400' : 'bg-violet-100 text-violet-600'} py-1 px-2 ${$$restProps.class || ''}`,
     }
 </script>
 

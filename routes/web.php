@@ -159,12 +159,6 @@ Route::middleware(['auth', 'verified'])->group(function () {
     Route::get('web-api/estados-sistema-gestion/{tipo_proyecto_st}', [WebController::class, 'estadosSistemaGestion'])->name('web-api.estados-sistema-gestion');
 
     /**
-     * Programas de formación articulados
-     * 
-     */
-    Route::get('web-api/programas-formacion-articulados', [WebController::class, 'programasFormacionArticulados'])->name('web-api.programas-formacion-articulados');
-
-    /**
      * Regionales
      * 
      * Trae las regiones
@@ -269,6 +263,7 @@ Route::middleware(['auth', 'verified'])->group(function () {
 
     Route::get('grupos-investigacion/{grupo_investigacion}/semilleros-investigacion/{semillero_investigacion}/download-file-sharepoint/{tipo_archivo}', [SemilleroInvestigacionController::class, 'downloadFileSharepoint'])->name('semilleros-investigacion.download-file-sharepoint');
     Route::get('grupos-investigacion/{grupo_investigacion}/semilleros-investigacion/{semillero_investigacion}/download/{formato}', [SemilleroInvestigacionController::class, 'descargarFormato'])->name('grupos-investigacion.semilleros-investigacion.download');
+    Route::post('grupos-investigacion/{grupo_investigacion}/semilleros-investigacion/{semillero_investigacion}/guardar-archivos', [SemilleroInvestigacionController::class, 'saveFilesSharepoint'])->name('grupos-investigacion.semilleros-investigacion.guardar-archivos');
     Route::resource('grupos-investigacion.semilleros-investigacion', SemilleroInvestigacionController::class)->parameters(['grupos-investigacion' => 'grupo-investigacion', 'semilleros-investigacion' => 'semillero-investigacion'])->except(['show']);
 
     Route::resource('grupos-investigacion.semilleros-investigacion', SemilleroInvestigacionController::class)->parameters(['grupos-investigacion' => 'grupo-investigacion', 'semilleros-investigacion' => 'semillero-investigacion'])->except(['show']);

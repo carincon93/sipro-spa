@@ -40,10 +40,8 @@
                         resultados = response.data
                         sended = true
                     })
-                    .catch((error) => {
-                    })
-            } catch (error) {
-            }
+                    .catch((error) => {})
+            } catch (error) {}
         }
     }
 
@@ -74,7 +72,7 @@
     }
 </script>
 
-<div class="bg-cyan-100 p-4">
+<div class="bg-violet-100 p-4">
     <h1 class="text-4xl text-center">Semilleros de investigación</h1>
     <p class="text-center w-1/3 m-auto mt-8">Realice la búsqueda de semilleros de investigación</p>
     <form on:submit|preventDefault={submit} on:input={() => (sended = false)}>
@@ -103,7 +101,7 @@
                     {#each resultados as resultado (resultado.id)}
                         <tr class="hover:bg-gray-100 focus-within:bg-gray-100">
                             <td class="border-t">
-                                <p class="px-6 py-4 focus:text-cyan-500">
+                                <p class="px-6 py-4 focus:text-violet-500">
                                     {resultado.nombre}
                                 </p>
                             </td>
@@ -159,7 +157,7 @@
             {#each proyecto.semillerosInvestigacion as semilleroInvestigacion (semilleroInvestigacion.id)}
                 <tr class="hover:bg-gray-100 focus-within:bg-gray-100">
                     <td class="border-t">
-                        <p class="px-6 py-4 focus:text-cyan-500">
+                        <p class="px-6 py-4 focus:text-violet-500">
                             {semilleroInvestigacion.nombre}
                         </p>
                     </td>
@@ -178,10 +176,6 @@
                             {#if isSuperAdmin || (checkPermission(authUser, [1, 3, 4, 8, 9, 10, 11, 12, 13, 17, 18, 19]) && proyecto.modificable == true)}
                                 <Item on:SMUI:action={() => removeSemilleroInvestigacion(semilleroInvestigacion.id)}>
                                     <Text>Quitar</Text>
-                                </Item>
-                            {:else}
-                                <Item>
-                                    <Text>No tiene permisos</Text>
                                 </Item>
                             {/if}
                         </DataTableMenu>

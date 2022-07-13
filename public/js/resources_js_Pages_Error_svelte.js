@@ -25313,7 +25313,7 @@ function create_if_block_7(ctx) {
 	};
 }
 
-// (22:8) {#if status >= 500 || status == 403 || status == 405}
+// (25:8) {#if status >= 500 || status == 403 || status == 405}
 function create_if_block_6(ctx) {
 	let img;
 	let img_src_value;
@@ -25334,7 +25334,7 @@ function create_if_block_6(ctx) {
 	};
 }
 
-// (46:32) 
+// (49:32) 
 function create_if_block_5(ctx) {
 	let h1;
 
@@ -25353,7 +25353,7 @@ function create_if_block_5(ctx) {
 	};
 }
 
-// (44:32) 
+// (47:32) 
 function create_if_block_4(ctx) {
 	let h1;
 
@@ -25372,7 +25372,7 @@ function create_if_block_4(ctx) {
 	};
 }
 
-// (34:32) 
+// (37:32) 
 function create_if_block_3(ctx) {
 	let h1;
 	let t1;
@@ -25405,7 +25405,7 @@ function create_if_block_3(ctx) {
 	};
 }
 
-// (32:32) 
+// (35:32) 
 function create_if_block_2(ctx) {
 	let h1;
 
@@ -25424,7 +25424,7 @@ function create_if_block_2(ctx) {
 	};
 }
 
-// (30:8) {#if status == 403}
+// (33:8) {#if status == 403}
 function create_if_block_1(ctx) {
 	let h1;
 
@@ -25443,7 +25443,7 @@ function create_if_block_1(ctx) {
 	};
 }
 
-// (50:8) {#if status != 503 && status != 405 && status == 403}
+// (53:8) {#if status != 503 && status != 405 && status != 403}
 function create_if_block(ctx) {
 	let div;
 
@@ -25452,9 +25452,8 @@ function create_if_block(ctx) {
 			div = (0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.element)("div");
 
 			div.innerHTML = `<p>Puede notificar a la mesa de ayuda realice los siguientes pasos:</p> 
-                <ul class="list-disc mt-5"><li>Tome un pantallazo del error desde Windows o Mac.</li> 
-                    <li>Copie la URL donde surgió el error.</li> 
-                    <li>Envie las evidencias al correo <a class="underline" href="mailto:sgpssipro@sena.edu.co">sgpssipro@sena.edu.co</a> detallando el error. (Se debe enviar desde una cuenta @sena.edu.co)</li></ul>`;
+                <ul class="list-disc mt-5"><li>Tome un pantallazo del error desde alguna aplicación de Windows o Mac. El pantallazo se recomienda hacerlo de pantalla completa donde se observe con claridad la url y la fecha del momento en el que ocurrió el error.</li> 
+                    <li>Envie las evidencias al correo <a class="underline" href="mailto:sgpssipro@sena.edu.co">sgpssipro@sena.edu.co</a> describriendo de como ocurrió el error. (Se debe enviar desde una cuenta @sena.edu.co)</li></ul>`;
 
 			(0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.attr)(div, "class", "mt-10");
 		},
@@ -25467,7 +25466,7 @@ function create_if_block(ctx) {
 	};
 }
 
-// (61:12) <Button on:click={() => Inertia.visit(route('login'))} variant="raised" type="button" class="mr-4" style="background-color: white !important; color: black !important;">
+// (63:12) <Button on:click={() => Inertia.visit(route('login'))} variant="raised" type="button" class="mr-4" style="background-color: white !important; color: black !important;">
 function create_default_slot(ctx) {
 	let t;
 
@@ -25517,7 +25516,7 @@ function create_fragment(ctx) {
 
 	let current_block_type_1 = select_block_type_1(ctx, -1);
 	let if_block1 = current_block_type_1 && current_block_type_1(ctx);
-	let if_block2 = /*status*/ ctx[0] != 503 && /*status*/ ctx[0] != 405 && /*status*/ ctx[0] == 403 && create_if_block(ctx);
+	let if_block2 = /*status*/ ctx[0] != 503 && /*status*/ ctx[0] != 405 && /*status*/ ctx[0] != 403 && create_if_block(ctx);
 
 	button = new _Shared_Button__WEBPACK_IMPORTED_MODULE_4__["default"]({
 			props: {
@@ -25530,7 +25529,7 @@ function create_fragment(ctx) {
 			}
 		});
 
-	button.$on("click", /*click_handler*/ ctx[1]);
+	button.$on("click", /*click_handler*/ ctx[2]);
 
 	return {
 		c() {
@@ -25551,7 +25550,7 @@ function create_fragment(ctx) {
 
 			(0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.attr)(div2, "class", div2_class_value = "" + ((/*status*/ ctx[0] >= 500 || /*status*/ ctx[0] == 403 || /*status*/ ctx[0] == 405
 			? 'bg-red-500'
-			: 'bg-cyan-700') + " flex flex-col items-center justify-center min-h-screen text-white"));
+			: 'bg-violet-700') + " flex flex-col items-center justify-center min-h-screen text-white"));
 		},
 		m(target, anchor) {
 			(0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.insert)(target, t0, anchor);
@@ -25593,7 +25592,7 @@ function create_fragment(ctx) {
 				}
 			}
 
-			if (/*status*/ ctx[0] != 503 && /*status*/ ctx[0] != 405 && /*status*/ ctx[0] == 403) {
+			if (/*status*/ ctx[0] != 503 && /*status*/ ctx[0] != 405 && /*status*/ ctx[0] != 403) {
 				if (if_block2) {
 					
 				} else {
@@ -25608,7 +25607,7 @@ function create_fragment(ctx) {
 
 			const button_changes = {};
 
-			if (dirty & /*$$scope*/ 8) {
+			if (dirty & /*$$scope*/ 16) {
 				button_changes.$$scope = { dirty, ctx };
 			}
 
@@ -25616,7 +25615,7 @@ function create_fragment(ctx) {
 
 			if (!current || dirty & /*status*/ 1 && div2_class_value !== (div2_class_value = "" + ((/*status*/ ctx[0] >= 500 || /*status*/ ctx[0] == 403 || /*status*/ ctx[0] == 405
 			? 'bg-red-500'
-			: 'bg-cyan-700') + " flex flex-col items-center justify-center min-h-screen text-white"))) {
+			: 'bg-violet-700') + " flex flex-col items-center justify-center min-h-screen text-white"))) {
 				(0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.attr)(div2, "class", div2_class_value);
 			}
 		},
@@ -25652,25 +25651,28 @@ const title = (0,svelte_store__WEBPACK_IMPORTED_MODULE_1__.writable)(null);
 function instance($$self, $$props, $$invalidate) {
 	let $title,
 		$$unsubscribe_title = svelte_internal__WEBPACK_IMPORTED_MODULE_0__.noop,
-		$$subscribe_title = () => ($$unsubscribe_title(), $$unsubscribe_title = (0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.subscribe)(title, $$value => $$invalidate(2, $title = $$value)), title);
+		$$subscribe_title = () => ($$unsubscribe_title(), $$unsubscribe_title = (0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.subscribe)(title, $$value => $$invalidate(3, $title = $$value)), title);
 
-	(0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.component_subscribe)($$self, title, $$value => $$invalidate(2, $title = $$value));
+	(0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.component_subscribe)($$self, title, $$value => $$invalidate(3, $title = $$value));
 	$$self.$$.on_destroy.push(() => $$unsubscribe_title());
 	let { status } = $$props;
+	let { message } = $$props;
+	console.log(message);
 	(0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.set_store_value)(title, $title = 'SGPS-SIPRO - Error ' + status, $title);
 	const click_handler = () => _inertiajs_inertia__WEBPACK_IMPORTED_MODULE_2__.Inertia.visit((0,_Utils__WEBPACK_IMPORTED_MODULE_3__.route)('login'));
 
 	$$self.$$set = $$props => {
 		if ('status' in $$props) $$invalidate(0, status = $$props.status);
+		if ('message' in $$props) $$invalidate(1, message = $$props.message);
 	};
 
-	return [status, click_handler];
+	return [status, message, click_handler];
 }
 
 class Error extends svelte_internal__WEBPACK_IMPORTED_MODULE_0__.SvelteComponent {
 	constructor(options) {
 		super();
-		(0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.init)(this, options, instance, create_fragment, svelte_internal__WEBPACK_IMPORTED_MODULE_0__.safe_not_equal, { status: 0 });
+		(0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.init)(this, options, instance, create_fragment, svelte_internal__WEBPACK_IMPORTED_MODULE_0__.safe_not_equal, { status: 0, message: 1 });
 	}
 }
 

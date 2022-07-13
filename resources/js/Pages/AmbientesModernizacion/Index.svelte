@@ -72,23 +72,23 @@
             {#each ambientesModernizacion.data as ambienteModernizacion (ambienteModernizacion.id)}
                 <tr class="hover:bg-gray-100 focus-within:bg-gray-100">
                     <td class="border-t">
-                        <p class="px-6 py-4 focus:text-cyan-500">
+                        <p class="px-6 py-4 focus:text-violet-500">
                             {ambienteModernizacion.seguimiento_ambiente_modernizacion.codigo}
                         </p>
                     </td>
                     <td class="border-t">
-                        <p class="px-6 py-4 focus:text-cyan-500">
+                        <p class="px-6 py-4 focus:text-violet-500">
                             {ambienteModernizacion.seguimiento_ambiente_modernizacion.centro_formacion.regional.nombre}
                         </p>
                     </td>
                     <td class="border-t">
-                        <p class="px-6 py-4 focus:text-cyan-500">
+                        <p class="px-6 py-4 focus:text-violet-500">
                             {ambienteModernizacion.nombre_ambiente}
                         </p>
                     </td>
 
                     <td class="border-t">
-                        <p class="px-6 py-4 focus:text-cyan-500">{ambienteModernizacion.estado}</p>
+                        <p class="px-6 py-4 focus:text-violet-500">{ambienteModernizacion.estado}</p>
                     </td>
 
                     <td class="border-t td-actions">
@@ -96,10 +96,6 @@
                             {#if isSuperAdmin || checkRole(authUser, [4])}
                                 <Item on:SMUI:action={() => configurarDialogoSeguimiento(ambienteModernizacion)}>
                                     <Text>Revisar seguimientos</Text>
-                                </Item>
-                            {:else}
-                                <Item>
-                                    <Text>No tiene permisos</Text>
                                 </Item>
                             {/if}
                         </DataTableMenu>

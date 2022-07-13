@@ -120,19 +120,19 @@
                 {#each productos.data as producto (producto.id)}
                     <tr class="hover:bg-gray-100 focus-within:bg-gray-100">
                         <td class="border-t">
-                            <p class="focus:text-cyan-500 my-2 paragraph-ellipsis px-6">
+                            <p class="focus:text-violet-500 my-2 paragraph-ellipsis px-6">
                                 {producto.nombre}
                             </p>
                         </td>
 
                         <td class="border-t">
-                            <p class="focus:text-cyan-500 my-2 paragraph-ellipsis px-6">
+                            <p class="focus:text-violet-500 my-2 paragraph-ellipsis px-6">
                                 {producto.resultado.objetivo_especifico.descripcion}
                             </p>
                         </td>
 
                         <td class="border-t">
-                            <p class="focus:text-cyan-500 my-2 paragraph-ellipsis px-6">
+                            <p class="focus:text-violet-500 my-2 paragraph-ellipsis px-6">
                                 {#if proyecto.codigo_linea_programatica != 70}
                                     {producto.resultado.descripcion}
                                 {:else if proyecto.codigo_linea_programatica == 70}

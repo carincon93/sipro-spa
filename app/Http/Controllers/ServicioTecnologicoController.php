@@ -181,7 +181,7 @@ class ServicioTecnologicoController extends Controller
             'servicioTecnologico'           => $servicioTecnologico,
             'sectoresProductivos'           => collect(json_decode(Storage::get('json/sectores-productivos.json'), true)),
             'tiposProyectoSt'               => $tipoProyectoSt,
-            'proyectoProgramasFormacion'    => $servicioTecnologico->proyecto->programasFormacionImpactados()->selectRaw('id as value, concat(programas_formacion.nombre, chr(10), \'∙ Código: \', programas_formacion.codigo) as label')->get(),
+            'proyectoProgramasFormacion'    => $servicioTecnologico->proyecto->programasFormacion()->selectRaw('id as value, concat(programas_formacion.nombre, chr(10), \'∙ Código: \', programas_formacion.codigo) as label')->where('programas_formacion.registro_calificado', false)->get(),
             'versiones'                     => $servicioTecnologico->proyecto->PdfVersiones,
         ]);
     }
@@ -203,7 +203,7 @@ class ServicioTecnologicoController extends Controller
         $servicioTecnologico->max_meses_ejecucion           = $request->max_meses_ejecucion;
         $servicioTecnologico->pregunta_formulacion_problema = $request->pregunta_formulacion_problema;
 
-        $servicioTecnologico->proyecto->programasFormacionImpactados()->sync($request->programas_formacion);
+        $servicioTecnologico->proyecto->programasFormacion()->sync($request->programas_formacion);
 
         $servicioTecnologico->save();
 

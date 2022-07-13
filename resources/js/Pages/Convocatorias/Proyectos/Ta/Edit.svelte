@@ -133,7 +133,7 @@
         tecnoacademia_linea_tecnoacademia_id: lineasTecnoacademiaRelacionadas,
         codigo_linea_programatica: null,
         programas_formacion_articulados: proyectoProgramasFormacionArticulados.length > 0 ? proyectoProgramasFormacionArticulados : null,
-        dis_curricular_id: proyectoDisCurriculares.length > 0 ? proyectoDisCurriculares : null,
+        diseno_curricular_id: proyectoDisCurriculares.length > 0 ? proyectoDisCurriculares : null,
 
         otras_nuevas_instituciones: ta.otras_nuevas_instituciones,
         otras_nombre_instituciones_programas: ta.otras_nombre_instituciones_programas,
@@ -193,8 +193,8 @@
                     route('convocatorias.ta.updateLongColumn', [convocatoria.id, ta.id, column]),
                     { [column]: form[column] },
                     {
-                        onError: (resp) => (resolve(resp)),
-                        onFinish: () => (resolve({})),
+                        onError: (resp) => resolve(resp),
+                        onFinish: () => resolve({}),
                         preserveScroll: true,
                     },
                 )
@@ -255,7 +255,7 @@
     function submitProgramasFormacion() {
         if (isSuperAdmin || (checkPermissionByUser(authUser, [8]) && ta.proyecto.modificable == true) || (checkPermission(authUser, [9, 10]) && ta.proyecto.modificable == true)) {
             $formProgramasFormacion.post(route('convocatorias.proyectos.programas-formacion.store', [convocatoria.id, ta.id]), {
-                onFinish: () => (((programasFormacionDialogOpen = false), $formProgramasFormacion.reset())),
+                onFinish: () => ((programasFormacionDialogOpen = false), $formProgramasFormacion.reset()),
                 preserveScroll: true,
             })
         }
@@ -268,7 +268,7 @@
     function submitDisCurricular() {
         if (isSuperAdmin || (checkPermissionByUser(authUser, [8]) && ta.proyecto.modificable == true) || (checkPermission(authUser, [9, 10]) && ta.proyecto.modificable == true)) {
             $formDisCurricular.post(route('convocatorias.proyectos.dis-curriculares.store', [convocatoria.id, ta.id]), {
-                onFinish: () => ((disCurricularDialogOpen = false)),
+                onFinish: () => (disCurricularDialogOpen = false),
                 preserveScroll: true,
             })
         }
@@ -660,10 +660,10 @@
                 <div class="py-24">
                     <div class="grid grid-cols-2">
                         <div>
-                            <Label required class="mb-4" labelFor="dis_curricular_id" value="Programas a ejecutar en la vigencia del proyecto:" />
+                            <Label required class="mb-4" labelFor="diseno_curricular_id" value="Programas a ejecutar en la vigencia del proyecto:" />
                         </div>
                         <div>
-                            <SelectMulti id="dis_curricular_id" bind:selectedValue={$form.dis_curricular_id} items={disCurriculares} isMulti={true} error={errors.dis_curricular_id} placeholder="Buscar por el nombre del programa de formación" required />
+                            <SelectMulti id="diseno_curricular_id" bind:selectedValue={$form.diseno_curricular_id} items={disCurriculares} isMulti={true} error={errors.diseno_curricular_id} placeholder="Buscar por el nombre del programa de formación" required />
 
                             <InfoMessage>
                                 Si no encuentra un programa por favor de clic en <strong>Añadir programa</strong>. A continuación, se mostrará un campo de texto para que diligencie el nombre del programa y posterior de clic en <strong>Crear programa</strong>.

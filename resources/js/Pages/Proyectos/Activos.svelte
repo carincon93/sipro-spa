@@ -36,7 +36,7 @@
             {#each proyectos.data as { id, estado, titulo, codigo, fecha_ejecucion, convocatoria }}
                 <tr class="hover:bg-gray-100 focus-within:bg-gray-100">
                     <td class="border-t" style="border-left: 1px solid limegreen">
-                        <p class="px-6 py-4 focus:text-cyan-500">
+                        <p class="px-6 py-4 focus:text-violet-500">
                             {codigo}
                         </p>
                     </td>
@@ -46,10 +46,6 @@
                             {#if isSuperAdmin || checkRole(authUser, [20, 18, 19, 5, 17])}
                                 <Item on:SMUI:action={() => Inertia.visit(route('proyectos.edit', [id]))}>
                                     <Text>Ver detalles</Text>
-                                </Item>
-                            {:else}
-                                <Item>
-                                    <Text>No tiene permisos</Text>
                                 </Item>
                             {/if}
                         </DataTableMenu>

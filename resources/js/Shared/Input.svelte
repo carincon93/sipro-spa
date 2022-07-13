@@ -10,7 +10,6 @@
     export let error
     export let type
     export let disabled
-    export let message = ''
 
     let input
     let container

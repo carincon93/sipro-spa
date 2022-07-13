@@ -38,7 +38,7 @@
             {#each usuarios.data as usuario (usuario.id)}
                 <tr class="hover:bg-gray-100 focus-within:bg-gray-100">
                     <td class="border-t" style="border-left: 1px solid limegreen">
-                        <p class="px-6 py-4 focus:text-cyan-500">
+                        <p class="px-6 py-4 focus:text-violet-500">
                             {usuario.nombre}
                         </p>
                     </td>
@@ -60,10 +60,6 @@
                             {#if isSuperAdmin || checkRole(authUser, [4, 21, 17, 18, 20, 19, 5])}
                                 <Item on:SMUI:action={() => Inertia.visit(route('users.edit', usuario.user_id))}>
                                     <Text>Ver detalles</Text>
-                                </Item>
-                            {:else}
-                                <Item>
-                                    <Text>No tiene permisos</Text>
                                 </Item>
                             {/if}
                         </DataTableMenu>

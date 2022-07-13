@@ -60,9 +60,9 @@
             <div>
                 <h1>
                     {#if isSuperAdmin || checkPermissionByUser(authUser, [1]) || checkPermission(authUser, [1])}
-                        <a use:inertia href={route('convocatorias.idi.index', [convocatoria.id])} class="text-cyan-400 hover:text-cyan-600"> I+D+i </a>
+                        <a use:inertia href={route('convocatorias.idi.index', [convocatoria.id])} class="text-violet-400 hover:text-violet-600"> I+D+i </a>
                     {/if}
-                    <span class="text-cyan-400 font-medium">/</span>
+                    <span class="text-violet-400 font-medium">/</span>
                     Crear
                 </h1>
             </div>

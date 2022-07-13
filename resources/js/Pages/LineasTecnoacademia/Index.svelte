@@ -42,7 +42,7 @@
             {#each lineasTecnoacademia.data as lineaTecnoacademia (lineaTecnoacademia.id)}
                 <tr class="hover:bg-gray-100 focus-within:bg-gray-100">
                     <td class="border-t">
-                        <p class="px-6 py-4 focus:text-cyan-500">
+                        <p class="px-6 py-4 focus:text-violet-500">
                             {lineaTecnoacademia.nombre}
                         </p>
                     </td>
@@ -51,10 +51,6 @@
                             {#if isSuperAdmin}
                                 <Item on:SMUI:action={() => Inertia.visit(route('lineas-tecnoacademia.edit', lineaTecnoacademia.id))}>
                                     <Text>Ver detalles</Text>
-                                </Item>
-                            {:else}
-                                <Item>
-                                    <Text>No tiene permisos</Text>
                                 </Item>
                             {/if}
                         </DataTableMenu>

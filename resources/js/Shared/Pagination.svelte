@@ -11,7 +11,7 @@
                 {link.label}
             </div>
         {:else}
-            <a use:inertia href={link.url} class={`mr-1 mb-1 px-4 py-3 text-sm border rounded hover:bg-white focus:border-cyan-500 focus:text-cyan-500 ${link.active && 'bg-white'} ${link.label === 'Siguiente' && 'ml-auto'}`}>
+            <a use:inertia href={link.url} class={`mr-1 mb-1 px-4 py-3 text-sm border rounded hover:bg-white focus:border-violet-500 focus:text-violet-500 ${link.active && 'bg-white'} ${link.label === 'Siguiente' && 'ml-auto'}`}>
                 {link.label}
             </a>
         {/if}

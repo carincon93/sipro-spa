@@ -48,9 +48,9 @@
             <div>
                 <h1>
                     {#if isSuperAdmin || checkPermission(authUser, [1])}
-                        <a use:inertia href={route('convocatorias.proyectos.entidades-aliadas.miembros-entidad-aliada.index', [convocatoria.id, proyecto.id, entidadAliada.id])} class="text-cyan-400 hover:text-cyan-600">Miembros de la entidad aliada</a>
+                        <a use:inertia href={route('convocatorias.proyectos.entidades-aliadas.miembros-entidad-aliada.index', [convocatoria.id, proyecto.id, entidadAliada.id])} class="text-violet-400 hover:text-violet-600">Miembros de la entidad aliada</a>
                     {/if}
-                    <span class="text-cyan-400 font-medium">/</span>
+                    <span class="text-violet-400 font-medium">/</span>
                     Crear
                 </h1>
             </div>
@@ -84,7 +84,7 @@
                     <InfoMessage message="Los datos proporcionados serán tratados de acuerdo con la política de tratamiento de datos personales del SENA y a la ley 1581 de 2012 (acuerdo No. 0009 del 2016)" />
                     <FormField>
                         <Checkbox bind:checked={$form.autorizacion_datos} />
-                        <span slot="label">¿La persona autoriza el tratamiento de datos personales?. <a href="https://www.sena.edu.co/es-co/transparencia/Documents/proteccion_datos_personales_sena_2016.pdf" target="_blank" class="text-cyan-500">Leer acuerdo No. 0009 del 2016</a></span>
+                        <span slot="label">¿La persona autoriza el tratamiento de datos personales?. <a href="https://www.sena.edu.co/es-co/transparencia/Documents/proteccion_datos_personales_sena_2016.pdf" target="_blank" class="text-violet-500">Leer acuerdo No. 0009 del 2016</a></span>
                     </FormField>
                 </div>
             </fieldset>
