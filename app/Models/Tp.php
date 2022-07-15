@@ -156,7 +156,9 @@ class Tp extends Model
      */
     public static function getProyectosPorRol($convocatoria)
     {
+        /** @var \App\Models\User */
         $authUser = Auth::user();
+
         if ($authUser->hasRole(1)) {
             $tp = Tp::select('tp.id', 'tp.nodo_tecnoparque_id', 'tp.fecha_inicio', 'tp.fecha_finalizacion')
                 ->join('proyectos', 'tp.id', 'proyectos.id')

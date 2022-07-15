@@ -5,7 +5,6 @@
     import { _ } from 'svelte-i18n'
 
     import Label from '@/Shared/Label'
-    import Button from '@/Shared/Button'
     import LoadingButton from '@/Shared/LoadingButton'
     import File from '@/Shared/File'
 
@@ -16,6 +15,7 @@
     export let lineasInvestigacion
     export let grupoInvestigacion
     export let redesConocimiento
+    export let programasFormacion
     export let redesConocimientoSemilleroInvestigacion
     export let programasFormacionSemilleroInvestigacion
     export let lineasInvestigacionSemilleroInvestigacion
@@ -124,7 +124,7 @@
                         />
                     </div>
                 </fieldset>
-                <div class="px-8 py-4 bg-gray-100 border-t border-gray-200 flex items-center sticky bottom-0">
+                <div class="shadow-inner bg-violet-200 border-violet-400 bottom-0 flex items-center justify-between mt-14 px-8 py-4 sticky">
                     {#if semilleroInvestigacion.allowed.to_update}
                         <LoadingButton loading={$filesForm.processing} class="ml-auto" type="submit">Guardar formatos</LoadingButton>
                     {/if}
@@ -134,7 +134,7 @@
 
         <div class="col-span-2">
             <h1 class="font-black text-4xl uppercase">{semilleroInvestigacion.nombre}</h1>
-            <Form {form} {submit} {errors} {opcionesSiNo} {semilleroInvestigacion} {lineasInvestigacion} {grupoInvestigacion} {redesConocimiento} {redesConocimientoSemilleroInvestigacion} {programasFormacionSemilleroInvestigacion} {lineasInvestigacionSemilleroInvestigacion} />
+            <Form {form} {submit} {errors} {opcionesSiNo} {semilleroInvestigacion} {lineasInvestigacion} {grupoInvestigacion} {redesConocimiento} {programasFormacion} {redesConocimientoSemilleroInvestigacion} {programasFormacionSemilleroInvestigacion} {lineasInvestigacionSemilleroInvestigacion} />
         </div>
     </div>
 </AuthenticatedLayout>

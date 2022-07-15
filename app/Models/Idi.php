@@ -216,7 +216,9 @@ class Idi extends Model
      */
     public static function getProyectosPorRol($convocatoria)
     {
+        /** @var \App\Models\User */
         $authUser = Auth::user();
+
         if ($authUser->hasRole(1)) { // Admin
             $idi = Idi::select('idi.id', 'idi.titulo', 'idi.fecha_inicio', 'idi.fecha_finalizacion')
                 ->join('proyectos', 'idi.id', 'proyectos.id')

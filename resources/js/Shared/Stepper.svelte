@@ -173,7 +173,7 @@
         <div class="grid grid-cols-3">
             <div>
                 <h1 class="font-black text-6xl uppercase sticky top-0">Lista de archivos del proyecto</h1>
-                <img src="/images/files.png" alt="" class="w-20 mt-10 mx-auto" />
+                <img src="/images/files.png" alt="" class="w-20 mt-10 mx-auto sticky top-48" />
             </div>
             <div class="col-span-2">
                 {#if versiones.length > 0}

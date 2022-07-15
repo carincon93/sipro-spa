@@ -144,7 +144,7 @@
                         </div>
                     </td>
                     <td class="border-t td-actions">
-                        <DataTableMenu class={proyectoRolesSennova.data.length < 4 ? 'z-50' : ''}>
+                        <DataTableMenu class={proyectoRolesSennova.data.length < 3 ? 'z-50' : ''}>
                             {#if isSuperAdmin || checkRole(authUser, [11, 5])}
                                 <Item on:SMUI:action={() => Inertia.visit(route('convocatorias.evaluaciones.proyecto-rol-sennova.edit', [convocatoria.id, evaluacion.id, proyectoRolSennova.id]))}>
                                     <Text>

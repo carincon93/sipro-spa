@@ -89,7 +89,7 @@
                         </p>
                     </td>
                     <td class="border-t td-actions">
-                        <DataTableMenu class={semillerosInvestigacion.data.length < 4 ? 'z-50' : ''}>
+                        <DataTableMenu class={semillerosInvestigacion.data.length < 3 ? 'z-50' : ''}>
                             {#if semilleroInvestigacion.allowed.to_view}
                                 <Item on:SMUI:action={() => Inertia.visit(route('grupos-investigacion.semilleros-investigacion.edit', [grupoInvestigacion.id, semilleroInvestigacion.id]))}>
                                     <Text>Ver detalles</Text>

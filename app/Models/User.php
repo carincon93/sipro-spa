@@ -256,7 +256,9 @@ class User extends Authenticatable
      */
     public static function getUsersByRol()
     {
+        /** @var \App\Models\User */
         $user = Auth::user();
+
         if ($user->hasRole(1)) {
             $users = User::select('users.id', 'users.nombre', 'users.email', 'centro_formacion_id')->with('roles', 'centroFormacion')->orderBy('nombre', 'ASC')
                 ->filterUser(request()->only('search', 'roles'))->paginate();

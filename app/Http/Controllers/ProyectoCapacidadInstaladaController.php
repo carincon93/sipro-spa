@@ -27,6 +27,7 @@ use App\Models\SubtipoProyectoCapacidadInstalada;
 use App\Models\TipoProyectoCapacidadInstalada;
 use App\Models\User;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Str;
 use Illuminate\Support\Facades\Storage;
 use Inertia\Inertia;
@@ -45,7 +46,7 @@ class ProyectoCapacidadInstaladaController extends Controller
         return Inertia::render('ProyectosCapacidadInstalada/Index', [
             'filters'                     => request()->all('search'),
             'proyectosCapacidadInstalada' => ProyectoCapacidadInstalada::getProyectosPorRol()->appends(['search' => request()->search]),
-            'allowedToCreate'             => Gate::inspect('create', [ProyectoCapacidadInstalada::class])
+            'allowedToCreate'             => Gate::inspect('create', [ProyectoCapacidadInstalada::class])->allowed()
         ]);
     }
 
@@ -64,7 +65,7 @@ class ProyectoCapacidadInstaladaController extends Controller
             'centrosFormacion'  => $centrosFormacion,
             'listaBeneficiados' => json_decode(Storage::get('json/proyectos-capacidad-instalada-beneficiados.json'), true),
             'roles'             => json_decode(Storage::get('json/roles-sennova-idi.json'), true),
-            'allowedToCreate'   => Gate::inspect('create', [ProyectoCapacidadInstalada::class])
+            'allowedToCreate'   => Gate::inspect('create', [ProyectoCapacidadInstalada::class])->allowed()
         ]);
     }
 
@@ -77,6 +78,9 @@ class ProyectoCapacidadInstaladaController extends Controller
     public function store(ProyectoCapacidadInstaladaRequest $request)
     {
         $this->authorize('create', [ProyectoCapacidadInstalada::class]);
+
+        /** @var \App\Models\User */
+        $authUser = Auth::user();
 
         $proyectoCapacidadInstalada = new ProyectoCapacidadInstalada();
 
@@ -93,7 +97,7 @@ class ProyectoCapacidadInstaladaController extends Controller
 
         $proyectoCapacidadInstalada->save();
 
-        $proyectoCapacidadInstalada->integrantes()->attach(auth()->user()->id, ['rol_sennova' => $request->rol_sennova['value'], 'cantidad_meses' => $request->cantidad_meses, 'cantidad_horas' => $request->cantidad_horas, 'autor_principal' => true]);
+        $proyectoCapacidadInstalada->integrantes()->attach($authUser->id, ['rol_sennova' => $request->rol_sennova['value'], 'cantidad_meses' => $request->cantidad_meses, 'cantidad_horas' => $request->cantidad_horas, 'autor_principal' => true]);
 
         return redirect()->route('proyectos-capacidad-instalada.edit', [$proyectoCapacidadInstalada])->with('success', 'Por favor continue diligenciado la información básica.');
     }
@@ -117,7 +121,7 @@ class ProyectoCapacidadInstaladaController extends Controller
      */
     public function edit(ProyectoCapacidadInstalada $proyectoCapacidadInstalada)
     {
-        $responseUserAbilities = $this->authorize('view', [ProyectoCapacidadInstalada::class, $proyectoCapacidadInstalada]);
+        $this->authorize('view', [ProyectoCapacidadInstalada::class, $proyectoCapacidadInstalada]);
 
         $centrosFormacion = CentroFormacion::selectRaw('centros_formacion.id as value, concat(centros_formacion.nombre, chr(10), \'∙ Código: \', centros_formacion.codigo) as label')->orderBy('centros_formacion.nombre', 'ASC')->get();
         $proyectoCapacidadInstalada->semilleroInvestigacion;
@@ -147,9 +151,6 @@ class ProyectoCapacidadInstaladaController extends Controller
             'programasFormacionSinRegistroAsociados'    => $proyectoCapacidadInstalada->programasFormacion()->selectRaw('programas_formacion.id as value, concat(programas_formacion.nombre, chr(10), \'∙ Código: \', programas_formacion.codigo) as label')->where('registro_calificado', false)->get(),
             'autorPrincipal'                            => $proyectoCapacidadInstalada->integrantes()->where('proyecto_capacidad_instalada_integrante.autor_principal', true)->first(),
             'roles'                                     => json_decode(Storage::get('json/roles-sennova-idi.json'), true),
-
-            'userAllowed' => $responseUserAbilities->allowed(),
-            'formAllowed' => true
         ]);
     }
 

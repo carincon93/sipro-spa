@@ -11,13 +11,13 @@
     import { Item, Text } from '@smui/list'
     import DataTable from '@/Shared/DataTable'
     import Dialog from '@/Shared/Dialog'
-    import InfoMessage from '@/Shared/InfoMessage'
     import Label from '@/Shared/Label'
     import Password from '@/Shared/Password'
 
-    export let convocatoria
-    export let tp
     export let errors
+    export let convocatoria
+    export let proyectosTp
+    export let allowedToCreate
 
     $title = 'Proyectos Tecnoparque'
 
@@ -31,17 +31,18 @@
         estructuracion_proyectos: $page.props.filters.estructuracion_proyectos,
     }
 
-    let dialogOpen = true
     let dialogEliminar = false
 
     let deleteForm = useForm({
         password: '',
     })
 
-    let proyectoId
+    let proyectoId = null
+    let allowedToDestroy = false
     function destroy() {
-        if (isSuperAdmin || (checkPermission(authUser, [19]) && tp.proyecto.modificable == true && tp.proyecto.radicado == false) || (checkPermissionByUser(authUser, [17]) && tp.proyecto.modificable == true && tp.proyecto.radicado == false)) {
+        if (allowedToDestroy && proyectoId) {
             $deleteForm.delete(route('convocatorias.tp.destroy', [convocatoria.id, proyectoId]), {
+                onFinish: () => ((proyectoId = null), (dialogEliminar = false)),
                 preserveScroll: true,
             })
         }
@@ -62,7 +63,7 @@
         </div>
 
         <div slot="actions">
-            {#if isSuperAdmin || (checkPermission(authUser, [17]) && convocatoria.fase == 1) || checkPermissionByUser(authUser, [17])}
+            {#if allowedToCreate}
                 <Button on:click={() => Inertia.visit(route('convocatorias.tp.create', [convocatoria.id]))} variant="raised">Crear proyecto Tecnoparque</Button>
             {/if}
         </div>
@@ -78,41 +79,41 @@
         </thead>
 
         <tbody slot="tbody">
-            {#each tp.data as proyecto_tp}
+            {#each proyectosTp.data as tp}
                 <tr class="hover:bg-gray-100 focus-within:bg-gray-100">
                     <td class="border-t">
                         <p class="px-6 py-4 focus:text-violet-500">
-                            {proyecto_tp.proyecto.codigo}
-                            {#if JSON.parse(proyecto_tp.proyecto.estado)?.requiereSubsanar && proyecto_tp.proyecto.mostrar_recomendaciones == true && proyecto_tp.proyecto.mostrar_requiere_subsanacion == true}
+                            {tp.proyecto.codigo}
+                            {#if JSON.parse(tp.proyecto.estado)?.requiereSubsanar && tp.proyecto.mostrar_recomendaciones == true && tp.proyecto.mostrar_requiere_subsanacion == true}
                                 <span class="bg-red-100 inline-block mt-2 p-2 rounded text-red-400"> Requiere ser subsanado </span>
                             {/if}
                         </p>
                     </td>
                     <td class="border-t">
                         <p class="px-6 py-4 focus:text-violet-500">
-                            {proyecto_tp.titulo}
+                            {tp.titulo}
                         </p>
                     </td>
                     <td class="border-t">
                         <p class="px-6 py-4">
-                            {proyecto_tp.fecha_ejecucion}
+                            {tp.fecha_ejecucion}
                         </p>
                     </td>
                     <td class="border-t">
-                        {#if isSuperAdmin || (checkRole(authUser, [4, 24]) && proyecto_tp.proyecto.mostrar_recomendaciones) || (convocatoria.fase == 5 && proyecto_tp.proyecto.mostrar_recomendaciones)}
+                        {#if isSuperAdmin || (checkRole(authUser, [4, 24]) && tp.proyecto.mostrar_recomendaciones) || (convocatoria.fase == 5 && tp.proyecto.mostrar_recomendaciones)}
                             <p class="px-6 py-4">
-                                {proyecto_tp.proyecto.estado_evaluacion_tp.estado}
+                                {tp.proyecto.estado_evaluacion_tp.estado}
                                 {#if isSuperAdmin}
                                     <br />
                                     <small>
                                         <br />
-                                        Número de recomendaciones: {proyecto_tp.proyecto.estado_evaluacion_tp.numeroRecomendaciones}
+                                        Número de recomendaciones: {tp.proyecto.estado_evaluacion_tp.numeroRecomendaciones}
                                         <br />
-                                        Evaluaciones: {proyecto_tp.proyecto.estado_evaluacion_tp.evaluacionesHabilitadas} habilitada(s) / {proyecto_tp.proyecto.estado_evaluacion_tp.evaluacionesFinalizadas} finalizada(s)
+                                        Evaluaciones: {tp.proyecto.estado_evaluacion_tp.evaluacionesHabilitadas} habilitada(s) / {tp.proyecto.estado_evaluacion_tp.evaluacionesFinalizadas} finalizada(s)
                                         <br />
-                                        {#if proyecto_tp.proyecto.estado_evaluacion_tp.alerta}
+                                        {#if tp.proyecto.estado_evaluacion_tp.alerta}
                                             <strong class="text-red-500">
-                                                Importante: {proyecto_tp.proyecto.estado_evaluacion_tp.alerta}
+                                                Importante: {tp.proyecto.estado_evaluacion_tp.alerta}
                                             </strong>
                                         {/if}
                                     </small>
@@ -123,58 +124,30 @@
                         {/if}
                     </td>
                     <td class="border-t td-actions">
-                        <DataTableMenu class={tp.data.length < 4 ? 'z-50' : ''}>
-                            {#if isSuperAdmin || checkPermission(authUser, [18, 19, 20])}
-                                <Item on:SMUI:action={() => Inertia.visit(route('convocatorias.tp.edit', [convocatoria.id, proyecto_tp.id]))}>
+                        <DataTableMenu class={proyectosTp.data.length < 3 ? 'z-50' : ''}>
+                            {#if tp.proyecto.allowed.to_view}
+                                <Item on:SMUI:action={() => Inertia.visit(route('convocatorias.tp.edit', [convocatoria.id, tp.id]))}>
                                     <Text>Ver detalles</Text>
                                 </Item>
-                                {#if isSuperAdmin || (checkPermission(authUser, [19]) && proyecto_tp.proyecto.modificable == true && proyecto_tp.proyecto.radicado == false) || (checkPermissionByUser(authUser, [17]) && proyecto_tp.proyecto.modificable == true && proyecto_tp.proyecto.radicado == false)}
-                                    <Item on:SMUI:action={() => ((proyectoId = proyecto_tp.id), (dialogEliminar = true))}>
-                                        <Text>Eliminar</Text>
-                                    </Item>
-                                {/if}
+                            {/if}
+                            {#if tp.proyecto.allowed.to_destroy}
+                                <Item on:SMUI:action={() => ((proyectoId = tp.id), (dialogEliminar = true), (allowedToDestroy = tp.proyecto.allowed.to_destroy))}>
+                                    <Text>Eliminar</Text>
+                                </Item>
                             {/if}
                         </DataTableMenu>
                     </td>
                 </tr>
             {/each}
 
-            {#if tp.data.length === 0}
+            {#if proyectosTp.data.length === 0}
                 <tr>
                     <td class="border-t px-6 py-4" colspan="5"> Sin información registrada </td>
                 </tr>
             {/if}
         </tbody>
     </DataTable>
-    <Pagination links={tp.links} />
-
-    {#if convocatoria.fase == 3}
-        <Dialog bind:open={dialogOpen} id="informacion">
-            <div slot="title" class="flex items-center flex-col mb-10">Importante</div>
-            <div slot="content">
-                <small>Octubre 14</small>
-
-                <hr class="mt-10 mb-10" />
-                <div>
-                    <p>Desde el 14 de octubre (13:00HH) hasta el 21 de octubre (23:59 HH) del 2021, se dará inicio la etapa de subsanación. Únicamente los proyectos que tienen un ítem a subsanar podrán realizar la edición del proyecto.</p>
-                </div>
-
-                <hr class="mt-10 mb-10" />
-                <div>
-                    <p>Revise cuales proyectos tienen el mensaje de <strong>Requiere ser subsanado</strong>, ingrese al proyecto y realice la respectiva subsanación. <br /> <img class="mx-auto" src={window.basePath + '/images/img-subsanacion.png'} alt="" /></p>
-                </div>
-                <hr class="mt-10 mb-10" />
-                <div>
-                    <p><strong>Tenga en cuenta:</strong> El estado final de los proyectos se conocerá cuando finalice la etapa de segunda evaluación (Estado Rechazado, pre – aprobado con observaciones y Preaprobado). Fechas segunda evaluación: 22 de octubre (13:00 HH) al 3 de noviembre (23:59 HH).</p>
-                </div>
-            </div>
-            <div slot="actions">
-                <div class="p-4">
-                    <Button variant="raised" on:click={() => (dialogOpen = false)}>Entendido</Button>
-                </div>
-            </div>
-        </Dialog>
-    {/if}
+    <Pagination links={proyectosTp.links} />
 
     <Dialog bind:open={dialogEliminar}>
         <div slot="title">

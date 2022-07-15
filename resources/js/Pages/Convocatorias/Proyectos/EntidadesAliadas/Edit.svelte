@@ -280,7 +280,7 @@
                         </div>
                     {/if}
                 </fieldset>
-                <div class="px-8 py-4 bg-gray-100 border-t border-gray-200 flex items-center sticky bottom-0">
+                <div class="shadow-inner bg-violet-200 border-violet-400 bottom-0 flex items-center justify-between mt-14 px-8 py-4 sticky">
                     {#if isSuperAdmin || (checkPermission(authUser, [4, 10]) && proyecto.modificable == true)}
                         <button class="text-red-600 hover:underline text-left" tabindex="-1" type="button" on:click={() => (dialogOpen = true)}> Eliminar entidad aliada </button>
                     {/if}
@@ -393,7 +393,7 @@
                             </td>
 
                             <td class="border-t td-actions">
-                                <DataTableMenu class={entidadAliada.miembros_entidad_aliada.length < 4 ? 'z-50' : ''}>
+                                <DataTableMenu class={entidadAliada.miembros_entidad_aliada.length < 3 ? 'z-50' : ''}>
                                     {#if isSuperAdmin || checkPermission(authUser, [3, 4, 9, 10])}
                                         <Item on:SMUI:action={() => Inertia.visit(route('convocatorias.proyectos.entidades-aliadas.miembros-entidad-aliada.edit', [convocatoria.id, proyecto.id, entidadAliada.id, miembroEntidadAliada.id]))}>
                                             <Text>Ver detalles</Text>

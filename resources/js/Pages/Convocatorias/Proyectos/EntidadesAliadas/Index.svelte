@@ -85,7 +85,7 @@
                             <Select id="infraestructura_tecnoacademia" items={infraestructuraTecnoacademia} bind:selectedValue={$form.infraestructura_tecnoacademia} error={errors.infraestructura_tecnoacademia} autocomplete="off" placeholder="Seleccione el tipo de insfraestructura" required />
                         </div>
                         {#if isSuperAdmin || (checkPermission(authUser, [8, 9]) && proyecto.modificable == true)}
-                            <div class="py-4 bg-gray-100 border-t border-gray-200 flex items-center sticky bottom-0">
+                            <div class="shadow-inner bg-violet-200 border-violet-400 bottom-0 flex items-center justify-between mt-14 px-8 py-4 sticky">
                                 <LoadingButton loading={$form.processing} class="ml-auto" type="submit">Guardar</LoadingButton>
                             </div>
                         {/if}
@@ -124,7 +124,7 @@
                         </p>
                     </td>
                     <td class="border-t td-actions">
-                        <DataTableMenu class={entidadesAliadas.data.length < 4 ? 'z-50' : ''}>
+                        <DataTableMenu class={entidadesAliadas.data.length < 3 ? 'z-50' : ''}>
                             {#if isSuperAdmin || checkPermission(authUser, [3, 4, 9, 10, 21, 14, 15])}
                                 <Item on:SMUI:action={() => Inertia.visit(route('convocatorias.proyectos.entidades-aliadas.edit', [convocatoria.id, proyecto.id, entidadAliada.id]))}>
                                     <Text>Ver detalles</Text>

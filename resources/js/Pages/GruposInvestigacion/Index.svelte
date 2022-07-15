@@ -56,7 +56,7 @@
                         </p>
                     </td>
                     <td class="border-t td-actions">
-                        <DataTableMenu class={gruposInvestigacionCentroFormacion.length < 4 ? 'z-50' : ''}>
+                        <DataTableMenu class={gruposInvestigacionCentroFormacion.length < 3 ? 'z-50' : ''}>
                             <Item on:SMUI:action={() => Inertia.visit(route('grupos-investigacion.edit', grupoInvestigacion.id))}>
                                 <Text>Detalles del grupo de investigación</Text>
                             </Item>
@@ -115,7 +115,7 @@
                         </p>
                     </td>
                     <td class="border-t td-actions">
-                        <DataTableMenu class={gruposInvestigacion.data.length < 4 ? 'z-50' : ''}>
+                        <DataTableMenu class={gruposInvestigacion.data.length < 3 ? 'z-50' : ''}>
                             <Item on:SMUI:action={() => Inertia.visit(route('grupos-investigacion.edit', grupoInvestigacion.id))}>
                                 <Text>Detalles del grupo de investigación</Text>
                             </Item>

@@ -70,7 +70,7 @@
                             </p>
                         </td>
                         <td class="border-t td-actions">
-                            <DataTableMenu class={productos.data.length < 4 ? 'z-50' : ''}>
+                            <DataTableMenu class={productos.data.length < 3 ? 'z-50' : ''}>
                                 {#if isSuperAdmin || checkRole(authUser, [5, 10, 12, 22])}
                                     <Item on:SMUI:action={() => Inertia.visit(route('proyectos-idi-tecnoacademia.productos.edit', [proyectoIdiTecnoacademia.id, producto.id]))}>
                                         <Text>Ver detalles</Text>

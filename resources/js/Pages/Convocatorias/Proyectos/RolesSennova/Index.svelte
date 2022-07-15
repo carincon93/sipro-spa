@@ -34,7 +34,7 @@
         cantidad_psicopedagogos_planta: proyecto.cantidad_psicopedagogos_planta,
     })
     function submit() {
-        if (isSuperAdmin || (checkPermission(authUser, [1, 5, 8, 11, 17]) && proyecto.modificable == true)) {
+        if (proyecto.allowed.to_update) {
             $form.put(route('convocatorias.proyectos.rol-sennova-ta.update', [convocatoria.id, proyecto.id]), {
                 preserveScroll: true,
             })
@@ -97,7 +97,7 @@
             </h2>
             {#if proyecto.codigo_linea_programatica == 70}
                 <form on:submit|preventDefault={submit} class="mb-40">
-                    <fieldset disabled={isSuperAdmin || (checkPermission(authUser, [1, 5, 8, 11, 17]) && proyecto.modificable == true) ? undefined : true}>
+                    <fieldset disabled={proyecto.allowed.to_update ? undefined : true}>
                         <div class="mt-4">
                             <Input label="Número de instructores de planta" id="cantidad_instructores_planta" type="number" input$min="0" input$max="32767" class="mt-1" error={errors.cantidad_instructores_planta} bind:value={$form.cantidad_instructores_planta} required />
                         </div>
@@ -110,8 +110,8 @@
                             <Input label="Número de psicopedagógos de planta" id="cantidad_psicopedagogos_planta" type="number" input$min="0" input$max="32767" class="mt-1" error={errors.cantidad_psicopedagogos_planta} bind:value={$form.cantidad_psicopedagogos_planta} required />
                         </div>
                     </fieldset>
-                    <div class="py-4 bg-gray-100 border-t border-gray-200 flex items-center sticky bottom-0">
-                        {#if isSuperAdmin || (checkPermission(authUser, [1, 5, 8, 11, 17]) && proyecto.modificable == true)}
+                    <div class="shadow-inner bg-violet-200 border-violet-400 bottom-0 flex items-center justify-between mt-14 px-8 py-4 sticky">
+                        {#if proyecto.allowed.to_update}
                             <LoadingButton loading={$form.processing} class="ml-auto" type="submit">Guardar</LoadingButton>
                         {/if}
                     </div>
@@ -122,7 +122,7 @@
         </div>
 
         <div slot="actions">
-            {#if isSuperAdmin || (checkPermission(authUser, [1, 5, 8, 11, 17]) && proyecto.modificable == true)}
+            {#if proyecto.allowed.to_update}
                 <Button on:click={() => Inertia.visit(route('convocatorias.proyectos.proyecto-rol-sennova.create', [convocatoria.id, proyecto.id]))} variant="raised">Crear Rol SENNOVA</Button>
             {/if}
         </div>
@@ -165,12 +165,10 @@
                         </td>
                     {/if}
                     <td class="border-t td-actions">
-                        <DataTableMenu class={proyectoRolesSennova.data.length < 4 ? 'z-50' : ''}>
-                            {#if isSuperAdmin || checkPermission(authUser, [3, 4, 6, 7, 9, 10, 12, 13, 18, 19, 21, 14, 16, 15, 20])}
-                                <Item on:SMUI:action={() => Inertia.visit(route('convocatorias.proyectos.proyecto-rol-sennova.edit', [convocatoria.id, proyecto.id, proyectoRolSennova.id]))}>
-                                    <Text>Ver detalles</Text>
-                                </Item>
-                            {/if}
+                        <DataTableMenu class={proyectoRolesSennova.data.length < 3 ? 'z-50' : ''}>
+                            <Item on:SMUI:action={() => Inertia.visit(route('convocatorias.proyectos.proyecto-rol-sennova.edit', [convocatoria.id, proyecto.id, proyectoRolSennova.id]))}>
+                                <Text>Ver detalles</Text>
+                            </Item>
                         </DataTableMenu>
                     </td>
                 </tr>

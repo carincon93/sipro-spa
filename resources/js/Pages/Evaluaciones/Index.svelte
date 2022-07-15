@@ -164,7 +164,7 @@
                         </p>
                     </td>
                     <td class="border-t td-actions">
-                        <DataTableMenu class={evaluaciones.data.length < 4 ? 'z-50' : ''}>
+                        <DataTableMenu class={evaluaciones.data.length < 3 ? 'z-50' : ''}>
                             {#if isSuperAdmin || checkRole(authUser, [4, 17, 18, 20, 19, 5])}
                                 <Item on:SMUI:action={() => Inertia.visit(route('evaluaciones.edit', evaluacion.id))}>
                                     <Text>Ver detalles</Text>

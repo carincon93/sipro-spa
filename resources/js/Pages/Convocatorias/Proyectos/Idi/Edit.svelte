@@ -16,7 +16,6 @@
     import DynamicList from '@/Shared/Dropdowns/DynamicList'
     import Textarea from '@/Shared/Textarea'
     import InfoMessage from '@/Shared/InfoMessage'
-    import Password from '@/Shared/Password'
     import Select from '@/Shared/Select'
     import SelectMulti from '@/Shared/SelectMulti'
     import Switch from '@/Shared/Switch'
@@ -50,7 +49,6 @@
     let municipios
     let programasFormacion
     let programasFormacionArticular
-    let dialogOpen = errors.password != undefined ? true : false
     let proyectoDialogOpen = true
 
     let opcionesSiNo = [
@@ -167,7 +165,7 @@
 
     async function syncColumnLong(column, form) {
         return new Promise((resolve) => {
-            if (typeof column !== 'undefined' && typeof form !== 'undefined' && (isSuperAdmin || (checkPermissionByUser(authUser, [1]) && idi.proyecto.modificable == true) || (checkPermission(authUser, [3, 4]) && idi.proyecto.modificable == true))) {
+            if (typeof column !== 'undefined' && typeof form !== 'undefined' && idi.proyecto.allowed.to_update) {
                 //guardar
                 Inertia.put(
                     route('convocatorias.idi.updateLongColumn', [convocatoria.id, idi.id, column]),
@@ -185,25 +183,13 @@
     }
 
     async function submit() {
-        if (isSuperAdmin || (checkPermissionByUser(authUser, [1]) && idi.proyecto.modificable == true) || (checkPermission(authUser, [3, 4]) && idi.proyecto.modificable == true)) {
+        if (idi.proyecto.allowed.to_update) {
             if ($form.relacionado_tecnoacademia?.value != 1) {
                 $form.tecnoacademia_id = {}
                 lineasTecnologicas = []
             }
 
             $form.put(route('convocatorias.idi.update', [convocatoria.id, idi.id]), {
-                preserveScroll: true,
-            })
-        }
-    }
-
-    let deleteForm = useForm({
-        password: '',
-    })
-
-    function destroy() {
-        if (isSuperAdmin || (checkPermissionByUser(authUser, [1]) && idi.proyecto.modificable == true && idi.proyecto.radicado == false) || (checkPermission(authUser, [4]) && idi.proyecto.modificable == true && idi.proyecto.radicado == false)) {
-            $deleteForm.delete(route('convocatorias.idi.destroy', [convocatoria.id, idi.id]), {
                 preserveScroll: true,
             })
         }
@@ -249,7 +235,7 @@
     </header>
 
     <form on:submit|preventDefault={submit}>
-        <fieldset class="p-8 divide-y" disabled={isSuperAdmin || (checkPermissionByUser(authUser, [1]) && idi.proyecto.modificable == true) ? undefined : checkPermission(authUser, [3, 4]) && idi.proyecto.modificable == true ? undefined : true}>
+        <fieldset class="p-8 divide-y" disabled={idi.proyecto.allowed.to_update ? undefined : true}>
             <div class="py-24">
                 <Label required labelFor="titulo" class="font-medium inline-block mb-10 text-center text-gray-700 text-sm w-full" value="Descripción llamativa que orienta el enfoque del proyecto, indica el cómo y el para qué. (Máximo 20 palabras)" />
                 <Textarea label="Título" id="titulo" sinContador={true} error={errors.titulo} bind:value={$form.titulo} classes="bg-transparent block border-0 {errors.titulo ? '' : 'outline-none-important'} mt-1 outline-none text-4xl text-center w-full" required />
@@ -268,7 +254,9 @@
             </div>
 
             <div class="py-24">
-                <p class="text-center">Fecha de ejecución</p>
+                {#if idi.proyecto.allowed.to_update}
+                    <p class="text-center">Fecha de ejecución</p>
+                {/if}
                 <small class="text-red-400 block text-center"> * Campo obligatorio </small>
                 <InfoMessage message={convocatoria.fecha_maxima_idi} class="my-5" />
 
@@ -753,7 +741,7 @@
                     </div>
                 </div>
                 {#if $form.relacionado_mesas_sectoriales?.value == 1}
-                    {#if isSuperAdmin || idi.proyecto.modificable == true}
+                    {#if isSuperAdmin || idi.proyecto.allowed.to_update}
                         <div class="bg-violet-100 p-5 mt-10">
                             <InputError message={errors.mesa_sectorial_id} />
                             <div class="grid grid-cols-2">
@@ -803,7 +791,7 @@
                 </div>
 
                 {#if $form.relacionado_tecnoacademia?.value == 1}
-                    {#if isSuperAdmin || idi.proyecto.modificable == true}
+                    {#if isSuperAdmin || idi.proyecto.allowed.to_update}
                         <div class="bg-violet-100 p-5 mt-10">
                             <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" class="w-5" style="transform: translateX(-50px);">
                                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
@@ -1082,14 +1070,17 @@
                 </div>
             {/if}
         </fieldset>
-        <div class="px-8 py-4 bg-gray-100 border-t border-gray-200 flex items-center justify-between sticky bottom-0">
-            {#if isSuperAdmin || (checkPermissionByUser(authUser, [1]) && idi.proyecto.modificable == true && idi.proyecto.radicado == false) || (checkPermission(authUser, [4]) && idi.proyecto.modificable == true && idi.proyecto.radicado == false)}
-                <button class="text-red-600 hover:underline text-left" tabindex="-1" type="button" on:click={() => (dialogOpen = true)}> Eliminar </button>
-            {/if}
-            {#if isSuperAdmin || (checkPermissionByUser(authUser, [1]) && idi.proyecto.modificable == true) || (checkPermission(authUser, [3, 4]) && idi.proyecto.modificable == true)}
-                <small class="block leading-tight">{idi.updated_at}</small>
-
+        <div class="shadow-inner bg-violet-200 border-violet-400 bottom-0 flex items-center justify-between mt-14 px-8 py-4 sticky">
+            <small class="flex items-center text-violet-700">
+                <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 mr-2" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+                    <path stroke-linecap="round" stroke-linejoin="round" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z" />
+                </svg>
+                {idi.updated_at}
+            </small>
+            {#if idi.proyecto.allowed.to_update}
                 <LoadingButton loading={$form.processing} type="submit">Guardar</LoadingButton>
+            {:else}
+                <span class="inline-block ml-1.5"> El proyecto no se puede modificar </span>
             {/if}
         </div>
     </form>
@@ -1139,32 +1130,9 @@
         <div slot="actions">
             <div class="p-4">
                 <Button on:click={() => (proyectoDialogOpen = false)} variant={null}>Omitir</Button>
-                {#if idi.proyecto.modificable}
+                {#if idi.proyecto.allowed.to_update}
                     <Button variant="raised" on:click={() => (proyectoDialogOpen = false)} on:click={() => Inertia.visit('#tematica_estrategica_id')}>Continuar diligenciando</Button>
                 {/if}
-            </div>
-        </div>
-    </Dialog>
-
-    <Dialog bind:open={dialogOpen}>
-        <div slot="title" class="flex items-center">
-            <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 mr-2 text-red-500" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-3L13.732 4c-.77-1.333-2.694-1.333-3.464 0L3.34 16c-.77 1.333.192 3 1.732 3z" />
-            </svg>
-            Eliminar recurso
-        </div>
-        <div slot="content">
-            <InfoMessage class="mb-2" message="¿Está seguro (a) que desea eliminar este proyecto?<br />Una vez eliminado el proyecto, todos sus recursos y datos se eliminarán de forma permanente." />
-
-            <form on:submit|preventDefault={destroy} id="delete-idi" class="mt-10 mb-28">
-                <Label labelFor="password" value="Ingrese su contraseña para confirmar que desea eliminar permanentemente este proyecto" class="mb-4" />
-                <Password id="password" class="w-full" bind:value={$deleteForm.password} error={errors.password} required autocomplete="current-password" />
-            </form>
-        </div>
-        <div slot="actions">
-            <div class="p-4">
-                <Button on:click={() => (dialogOpen = false)} variant={null}>Cancelar</Button>
-                <Button variant="raised" form="delete-idi">Confirmar</Button>
             </div>
         </div>
     </Dialog>

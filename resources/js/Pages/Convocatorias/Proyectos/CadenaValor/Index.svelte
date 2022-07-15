@@ -35,7 +35,7 @@
     })
 
     function submit() {
-        if (isSuperAdmin || (checkPermission(authUser, [3, 4, 6, 7, 9, 10, 12, 13, 18, 19]) && proyecto.modificable == true)) {
+        if (proyecto.allowed.to_update) {
             $form.put(route('convocatorias.proyectos.propuesta-sostenibilidad', [convocatoria.id, proyecto.id]), {
                 preserveScroll: true,
             })
@@ -122,12 +122,12 @@
         {/if}
 
         <form on:submit|preventDefault={submit}>
-            <fieldset disabled={isSuperAdmin || (checkPermission(authUser, [3, 4, 6, 7, 9, 10, 12, 13, 18, 19]) && proyecto.modificable == true) ? undefined : true}>
+            <fieldset disabled={proyecto.allowed.to_update ? undefined : true}>
                 {#if proyecto.codigo_linea_programatica != 70}
                     <div class="mt-4">
                         <Label required class="mb-4" labelFor="propuesta_sostenibilidad" value="Propuesta de sostenibilidad" />
                         {#if proyecto.codigo_linea_programatica == 68}
-                            <InfoMessage class="mb-2">
+                            <InfoMessage class="mb-6">
                                 Se deben mencionar aquellos factores que pueden comprometer la viabilidad, desarrollo de los objetivos y resultados del proyecto a través del tiempo.
                                 <br />
                                 Para definir la propuesta de sostenibilidad se deben tener en cuenta los impactos definidos en el árbol de objetivos (ambiental, social - en el centro de formación, social - en el sector productivo, tecnológico)
@@ -149,9 +149,17 @@
                     </div>
                 {/if}
             </fieldset>
-            <div class="py-4 bg-gray-100 border-t border-gray-200 flex items-center sticky bottom-0">
-                {#if isSuperAdmin || (checkPermission(authUser, [3, 4, 6, 7, 9, 10, 12, 13, 18, 19]) && proyecto.modificable == true)}
+            <div class="shadow-inner bg-violet-200 border-violet-400 bottom-0 flex items-center justify-between mt-14 px-8 py-4 sticky">
+                <small class="flex items-center text-violet-700">
+                    <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 mr-2" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+                        <path stroke-linecap="round" stroke-linejoin="round" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z" />
+                    </svg>
+                    {proyecto.updated_at}
+                </small>
+                {#if proyecto.allowed.to_update}
                     <LoadingButton loading={$form.processing} class="ml-auto" type="submit">Guardar propuesta de sostenibilidad</LoadingButton>
+                {:else}
+                    <span class="inline-block ml-1.5"> El proyecto no se puede modificar </span>
                 {/if}
             </div>
         </form>

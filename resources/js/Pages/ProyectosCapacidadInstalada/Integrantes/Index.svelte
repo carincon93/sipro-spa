@@ -265,7 +265,7 @@
                                         </p>
                                     </td>
                                     <td class="border-t td-actions">
-                                        <DataTableMenu class={resultados.length < 4 ? 'z-50' : ''}>
+                                        <DataTableMenu class={resultados.length < 3 ? 'z-50' : ''}>
                                             <Item on:SMUI:action={() => showParticipante(resultado)}>
                                                 <Text>Vincular</Text>
                                             </Item>
@@ -338,7 +338,7 @@
                             </p>
                         </td>
                         <td class="border-t td-actions">
-                            <DataTableMenu class={proyectoCapacidadInstalada.integrantes.length < 4 ? 'z-50' : ''}>
+                            <DataTableMenu class={proyectoCapacidadInstalada.integrantes.length < 3 ? 'z-50' : ''}>
                                 {#if proyectoCapacidadInstalada.allowed.to_update}
                                     <Item on:SMUI:action={() => showParticipante(integrante)}>
                                         <Text>Editar</Text>
@@ -419,7 +419,7 @@
                                 </p>
                             </td>
                             <td class="border-t td-actions">
-                                <DataTableMenu class={proyectoCapacidadInstalada.entidades_aliadas.length < 4 ? 'z-50' : ''}>
+                                <DataTableMenu class={proyectoCapacidadInstalada.entidades_aliadas.length < 3 ? 'z-50' : ''}>
                                     {#if proyectoCapacidadInstalada.allowed.to_update}
                                         <Item on:SMUI:action={() => Inertia.visit(route('proyectos-capacidad-instalada.entidades-aliadas.edit', [proyectoCapacidadInstalada.id, entidadAliada.id]))}>
                                             <Text>Ver detalles</Text>

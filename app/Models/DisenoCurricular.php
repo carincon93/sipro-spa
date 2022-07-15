@@ -61,7 +61,7 @@ class DisenoCurricular extends Model
      * @param  mixed $filters
      * @return void
      */
-    public function scopeFilterDisCurricular($query, array $filters)
+    public function scopeFilterDisenoCurricular($query, array $filters)
     {
         $query->when($filters['search'] ?? null, function ($query, $search) {
             $query->where('nombre', 'ilike', '%' . $search . '%');

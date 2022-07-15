@@ -4,11 +4,11 @@ namespace App\Http\Controllers;
 
 use App\Http\Controllers\Controller;
 use App\Models\Convocatoria;
-use App\Models\DisCurricular;
+use App\Models\DisenoCurricular;
 use App\Models\Proyecto;
 use Illuminate\Http\Request;
 
-class DisCurricularController extends Controller
+class DisenoCurricularController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -86,15 +86,15 @@ class DisCurricularController extends Controller
         //
     }
 
-    public function storeDisCurricular(Request $request, Convocatoria $convocatoria, Proyecto $proyecto)
+    public function storeDisenoCurricular(Request $request, Convocatoria $convocatoria, Proyecto $proyecto)
     {
-        $disCurricular = new DisCurricular();
-        $disCurricular->nombre = $request->nombre;
-        $disCurricular->codigo = 0;
+        $disenoCurricular = new DisenoCurricular();
+        $disenoCurricular->nombre = $request->nombre;
+        $disenoCurricular->codigo = 0;
 
-        $disCurricular->save();
+        $disenoCurricular->save();
 
-        $proyecto->disCurriculares()->attach($disCurricular);
+        $proyecto->disenosCurriculares()->attach($disenoCurricular);
 
         return back()->with('success', 'El recurso se ha creado correctamente.');
     }

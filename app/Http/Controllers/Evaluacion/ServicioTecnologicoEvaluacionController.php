@@ -8,6 +8,7 @@ use App\Http\Requests\Evaluacion\ServicioTecnologicoEvaluacionRequest;
 use App\Models\Convocatoria;
 use App\Models\TipoProyectoSt;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Storage;
 use Inertia\Inertia;
 
@@ -69,6 +70,9 @@ class ServicioTecnologicoEvaluacionController extends Controller
     {
         $this->authorize('visualizar-evaluacion-autor', $servicioTecnologicoEvaluacion->evaluacion);
 
+        /** @var \App\Models\User */
+        $authUser = Auth::user();
+
         $servicioTecnologicoEvaluacion->evaluacion->proyecto;
         $servicioTecnologico = $servicioTecnologicoEvaluacion->evaluacion->proyecto->servicioTecnologico;
         $servicioTecnologico->proyecto->pdfVersiones;
@@ -77,7 +81,7 @@ class ServicioTecnologicoEvaluacionController extends Controller
 
         $servicioTecnologico->proyecto->centroFormacion;
 
-        if (auth()->user()->hasRole(13)) {
+        if ($authUser->hasRole(13)) {
             $tipoProyectoSt = TipoProyectoSt::selectRaw("tipos_proyecto_st.id as value, CASE subclasificacion
                 WHEN '1' THEN	concat(centros_formacion.nombre, chr(10), '∙ Automatización y TICs', chr(10), '∙ Mesa técnica: ', mesas_tecnicas.nombre)
                 WHEN '2' THEN	concat(centros_formacion.nombre, chr(10), '∙ Calibración', chr(10), '∙ Mesa técnica: ', mesas_tecnicas.nombre)
@@ -86,7 +90,7 @@ class ServicioTecnologicoEvaluacionController extends Controller
                 WHEN '5' THEN	concat(centros_formacion.nombre, chr(10), '∙ Fabricación especial', chr(10), '∙ Mesa técnica: ', mesas_tecnicas.nombre)
                 WHEN '6' THEN	concat(centros_formacion.nombre, chr(10), '∙ Seguridad y salud en el trabajo', chr(10), '∙ Mesa técnica: ', mesas_tecnicas.nombre)
                 WHEN '7' THEN	concat(centros_formacion.nombre, chr(10), '∙ Servicios de salud', chr(10), '∙ Mesa técnica: ', mesas_tecnicas.nombre)
-            END as label")->join('centros_formacion', 'tipos_proyecto_st.centro_formacion_id', 'centros_formacion.id')->join('mesas_tecnicas', 'tipos_proyecto_st.mesa_tecnica_id', 'mesas_tecnicas.id')->where('centros_formacion.regional_id', auth()->user()->centroFormacion->regional_id)->get();
+            END as label")->join('centros_formacion', 'tipos_proyecto_st.centro_formacion_id', 'centros_formacion.id')->join('mesas_tecnicas', 'tipos_proyecto_st.mesa_tecnica_id', 'mesas_tecnicas.id')->where('centros_formacion.regional_id', $authUser->centroFormacion->regional_id)->get();
         } else {
             $tipoProyectoSt = TipoProyectoSt::selectRaw("tipos_proyecto_st.id as value, CASE subclasificacion
                 WHEN '1' THEN	concat(centros_formacion.nombre, chr(10), '∙ Automatización y TICs', chr(10), '∙ Mesa técnica: ', mesas_tecnicas.nombre)

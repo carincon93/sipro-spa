@@ -153,7 +153,9 @@ class ServicioTecnologico extends Model
      */
     public static function getProyectosPorRol($convocatoria)
     {
+        /** @var \App\Models\User */
         $authUser = Auth::user();
+
         if ($authUser->hasRole(1)) {
             $servicioTecnologico = ServicioTecnologico::select('servicios_tecnologicos.id', 'servicios_tecnologicos.titulo', 'servicios_tecnologicos.fecha_inicio', 'servicios_tecnologicos.fecha_finalizacion')
                 ->join('proyectos', 'servicios_tecnologicos.id', 'proyectos.id')

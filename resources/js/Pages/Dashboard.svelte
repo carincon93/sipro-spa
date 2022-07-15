@@ -27,9 +27,11 @@
                 </h1>
                 <div class="mt-2">
                     <p class="text-violet-700 font-black text-xs">Roles asociados a su usuario:</p>
-                    {#each $page.props.auth.user.roles as rol}
-                        <span class="py-1 px-2 bg-violet-500 text-white text-xs rounded-full mr-1">{rol.name}</span>
-                    {/each}
+                    <div class="flex flex-wrap">
+                        {#each $page.props.auth.user.roles as rol}
+                            <span class="py-1 px-2 bg-violet-500 text-white text-xs rounded-full mr-1 mt-1 capitalize">{rol.name}</span>
+                        {/each}
+                    </div>
                 </div>
                 <p class="text-2xl my-8">Formule proyectos de I+D+i, Tecnoacademia-Tecnoparque, Servicios Tecnológicos y/o Cultura de la innovación.</p>
 

@@ -9,6 +9,7 @@ use App\Models\Convocatoria;
 use App\Models\NodoTecnoparque;
 use App\Models\Regional;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 use Inertia\Inertia;
 
 class TpEvaluacionController extends Controller
@@ -69,6 +70,9 @@ class TpEvaluacionController extends Controller
     {
         $this->authorize('visualizar-evaluacion-autor', $tpEvaluacion->evaluacion);
 
+        /** @var \App\Models\User */
+        $authUser = Auth::user();
+
         $tpEvaluacion->evaluacion->proyecto;
         $tp = $tpEvaluacion->evaluacion->proyecto->tp;
         $tp->proyecto->pdfVersiones;
@@ -76,8 +80,8 @@ class TpEvaluacionController extends Controller
         $tp->precio_proyecto           = $tp->proyecto->precioProyecto;
         $tp->proyecto->centroFormacion;
 
-        if (auth()->user()->hasRole(16)) {
-            $nodosTecnoParque = NodoTecnoparque::select('nodos_tecnoparque.id as value', 'nodos_tecnoparque.nombre as label')->join('centros_formacion', 'nodos_tecnoparque.centro_formacion_id', 'centros_formacion.id')->where('centros_formacion.regional_id', auth()->user()->centroFormacion->regional_id)->get();
+        if ($authUser->hasRole(16)) {
+            $nodosTecnoParque = NodoTecnoparque::select('nodos_tecnoparque.id as value', 'nodos_tecnoparque.nombre as label')->join('centros_formacion', 'nodos_tecnoparque.centro_formacion_id', 'centros_formacion.id')->where('centros_formacion.regional_id', $authUser->centroFormacion->regional_id)->get();
         } else {
             $nodosTecnoParque = NodoTecnoparque::select('nodos_tecnoparque.id as value', 'nodos_tecnoparque.nombre as label')->join('centros_formacion', 'nodos_tecnoparque.centro_formacion_id', 'centros_formacion.id')->get();
         }

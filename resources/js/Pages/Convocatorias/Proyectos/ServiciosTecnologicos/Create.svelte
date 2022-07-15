@@ -17,6 +17,7 @@
     export let roles
     export let tiposProyectoSt
     export let sectoresProductivos
+    export let allowedToCreate
 
     $: $title = 'Crear proyecto de servicios tecnológicos'
 
@@ -25,9 +26,6 @@
      */
     let authUser = $page.props.auth.user
     let isSuperAdmin = checkRole(authUser, [1])
-
-    let permissionUserCreateEdit = checkPermissionByUser(authUser, [5])
-    let permissionCreateProyectoST = checkPermission(authUser, [5])
 
     let form = useForm({
         tipo_proyecto_st_id: null,
@@ -47,7 +45,7 @@
     }
 
     function submit() {
-        if (isSuperAdmin || permissionUserCreateEdit || permissionCreateProyectoST) {
+        if (allowedToCreate) {
             $form.post(route('convocatorias.servicios-tecnologicos.store', [convocatoria.id]))
         }
     }
@@ -58,9 +56,7 @@
         <div class="flex items-center justify-between lg:px-8 max-w-7xl mx-auto px-4 py-6 sm:px-6">
             <div>
                 <h1>
-                    {#if isSuperAdmin || permissionUserCreateEdit || permissionCreateProyectoST}
-                        <a use:inertia href={route('convocatorias.servicios-tecnologicos.index', [convocatoria.id])} class="text-violet-400 hover:text-violet-600"> Servicios tecnológicos </a>
-                    {/if}
+                    <a use:inertia href={route('convocatorias.servicios-tecnologicos.index', [convocatoria.id])} class="text-violet-400 hover:text-violet-600"> Servicios tecnológicos </a>
                     <span class="text-violet-400 font-medium">/</span>
                     Crear
                 </h1>
@@ -156,8 +152,8 @@
             </div>
         </fieldset>
 
-        <div class="px-8 py-4 bg-gray-100 border-t border-gray-200 flex items-center sticky bottom-0">
-            {#if isSuperAdmin || permissionUserCreateEdit || permissionCreateProyectoST}
+        <div class="shadow-inner bg-violet-200 border-violet-400 bottom-0 flex items-center justify-between mt-14 px-8 py-4 sticky">
+            {#if allowedToCreate}
                 <LoadingButton loading={$form.processing} class="ml-auto" type="submit">
                     {$_('Continue')}
                 </LoadingButton>

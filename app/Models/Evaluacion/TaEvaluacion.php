@@ -102,7 +102,9 @@ class TaEvaluacion extends Model
      */
     public static function getProyectosPorEvaluador($convocatoria)
     {
+        /** @var \App\Models\User */
         $authUser = Auth::user();
+
         if ($authUser->hasRole(1) || $authUser->hasRole(5)) { // Admin
             $ta = Ta::select('evaluaciones.id as evaluacion_id', 'users.nombre as nombre_user', 'evaluaciones.habilitado', 'evaluaciones.iniciado', 'evaluaciones.finalizado', 'evaluaciones.evaluacion_final', 'ta.id', 'ta.fecha_inicio', 'ta.fecha_finalizacion')
                 ->join('proyectos', 'ta.id', 'proyectos.id')

@@ -4,7 +4,6 @@
     import { route, checkRole, checkPermission } from '@/Utils'
     import { _ } from 'svelte-i18n'
 
-    import Input from '@/Shared/Input'
     import Label from '@/Shared/Label'
     import InputError from '@/Shared/InputError'
     import Button from '@/Shared/Button'
@@ -14,8 +13,6 @@
     import Textarea from '@/Shared/Textarea'
     import Dialog from '@/Shared/Dialog'
     import InfoMessage from '@/Shared/InfoMessage'
-    import Checkbox from '@smui/checkbox'
-    import FormField from '@smui/form-field'
 
     export let errors
     export let convocatoria
@@ -58,7 +55,7 @@
     })
 
     function submit() {
-        if (isSuperAdmin || (checkPermission(authUser, [3, 4, 6, 7, 9, 10, 12, 13, 18, 19]) && proyecto.modificable == true)) {
+        if (proyecto.allowed.to_update) {
             $form.put(route('convocatorias.proyectos.productos.update', [convocatoria.id, proyecto.id, producto.id]), {
                 preserveScroll: true,
             })
@@ -66,7 +63,7 @@
     }
 
     function destroy() {
-        if (isSuperAdmin || (checkPermission(authUser, [4, 7, 10, 13, 19]) && proyecto.modificable == true)) {
+        if (proyecto.allowed.to_update) {
             $form.delete(route('convocatorias.proyectos.productos.destroy', [convocatoria.id, proyecto.id, producto.id]))
         }
     }
@@ -89,9 +86,7 @@
         <div class="flex items-center justify-between lg:px-8 max-w-7xl mx-auto px-4 py-6 sm:px-6">
             <div>
                 <h1 class="overflow-ellipsis overflow-hidden w-breadcrumb-ellipsis whitespace-nowrap">
-                    {#if isSuperAdmin || checkPermission(authUser, [3, 4, 6, 7, 9, 10, 12, 13, 18, 19, 21, 14, 16, 15, 20])}
-                        <a use:inertia href={route('convocatorias.proyectos.productos.index', [convocatoria.id, proyecto.id])} class="text-violet-400 hover:text-violet-600"> Productos </a>
-                    {/if}
+                    <a use:inertia href={route('convocatorias.proyectos.productos.index', [convocatoria.id, proyecto.id])} class="text-violet-400 hover:text-violet-600"> Productos </a>
                     <span class="text-violet-400 font-medium">/</span>
                     {producto.nombre}
                 </h1>
@@ -101,9 +96,9 @@
 
     <div class="bg-white rounded shadow max-w-3xl">
         <form on:submit|preventDefault={submit}>
-            <fieldset class="p-8" disabled={isSuperAdmin || (checkPermission(authUser, [3, 4, 6, 7, 9, 10, 12, 13, 18, 19]) && proyecto.modificable == true) ? undefined : true}>
+            <fieldset class="p-8" disabled={proyecto.allowed.to_update ? undefined : true}>
                 {#if proyecto.codigo_linea_programatica == 70}
-                    <InfoMessage class="mb-10">
+                    <InfoMessage class="my-8">
                         <p>
                             <strong>Importante:</strong> Debe modifcar las fechas de ejecución, meta y las activiades a asociar.
                         </p>
@@ -113,13 +108,13 @@
                 <div class="mt-8 mb-8">
                     <Label class="text-center" required value="Fecha de ejecución" />
                     <div class="mt-4 flex items-start justify-around">
-                        <div class="mt-4 flex">
+                        <div class="mt-4 flex items-center">
                             <Label labelFor="fecha_inicio" value="Del" />
                             <div class="ml-4">
                                 <input id="fecha_inicio" type="date" class="mt-1 block w-full p-4" min={proyecto.fecha_inicio} max={proyecto.fecha_finalizacion} bind:value={$form.fecha_inicio} required />
                             </div>
                         </div>
-                        <div class="mt-4 flex">
+                        <div class="mt-4 flex items-center">
                             <Label labelFor="fecha_finalizacion" value="hasta" />
                             <div class="ml-4">
                                 <input id="fecha_finalizacion" type="date" class="mt-1 block w-full p-4" min={proyecto.fecha_inicio} max={proyecto.fecha_finalizacion} bind:value={$form.fecha_finalizacion} required />
@@ -135,7 +130,7 @@
 
                 <div class="mt-8">
                     {#if $form.tatp_servicio_tecnologico && proyecto.codigo_linea_programatica != 70}
-                        <InfoMessage>
+                        <InfoMessage class="my-8">
                             <p>
                                 Los productos pueden corresponder a bienes o servicios. Un bien es un objeto tangible, almacenable o transportable, mientras que el servicio es una prestación intangible.
                                 <br />
@@ -162,9 +157,9 @@
 
                         {#if proyecto.codigo_linea_programatica != 70}
                             {#if $form.tatp_servicio_tecnologico == true}
-                                <InfoMessage class="mb-2" message="Deber ser medible y con una fórmula. Por ejemplo: (# metodologías validadas/# metodologías totales) X 100" />
+                                <InfoMessage class="my-8" message="Deber ser medible y con una fórmula. Por ejemplo: (# metodologías validadas/# metodologías totales) X 100" />
                             {:else}
-                                <InfoMessage class="mb-2" message="Especifique los medios de verificación para validar los logros del proyecto." />
+                                <InfoMessage class="my-8" message="Especifique los medios de verificación para validar los logros del proyecto." />
                             {/if}
                         {/if}
                         <Textarea disabled={isSuperAdmin ? false : proyecto.codigo_linea_programatica == 70 ? true : false} maxlength="40000" id="indicador" error={errors.indicador} bind:value={$form.indicador} required />
@@ -192,9 +187,9 @@
 
                         {#if proyecto.codigo_linea_programatica != 70}
                             {#if proyecto.servicio_tecnologico}
-                                <InfoMessage message="Los medios de verificación corresponden a las evidencias y/o fuentes de información en las que está disponibles los registros, la información necesaria y suficiente. Dichos medios pueden ser documentos oficiales, informes, evaluaciones, encuestas, documentos o reportes internos que genera el proyecto, entre otros." />
+                                <InfoMessage class="my-8" message="Los medios de verificación corresponden a las evidencias y/o fuentes de información en las que está disponibles los registros, la información necesaria y suficiente. Dichos medios pueden ser documentos oficiales, informes, evaluaciones, encuestas, documentos o reportes internos que genera el proyecto, entre otros." />
                             {:else}
-                                <InfoMessage message="Especifique los medios de verificación para validar los logros del objetivo específico." />
+                                <InfoMessage class="my-8" message="Especifique los medios de verificación para validar los logros del objetivo específico." />
                             {/if}
                         {/if}
 
@@ -206,7 +201,7 @@
                     <div class="mt-8">
                         <Label required labelFor="nombre_indicador" value="Nombre del Indicador del producto" />
 
-                        <InfoMessage message="El indicador debe mantener una estructura coherente. Esta se compone de dos elementos: en primer lugar, debe ir el objeto a cuantificar, descrito por un sujeto y posteriormente la condición deseada, definida a través de un verbo en participio. Por ejemplo: Kilómetros de red vial nacional construidos." />
+                        <InfoMessage class="my-8" message="El indicador debe mantener una estructura coherente. Esta se compone de dos elementos: en primer lugar, debe ir el objeto a cuantificar, descrito por un sujeto y posteriormente la condición deseada, definida a través de un verbo en participio. Por ejemplo: Kilómetros de red vial nacional construidos." />
                         <Textarea maxlength="40000" id="nombre_indicador" error={errors.nombre_indicador} bind:value={$form.nombre_indicador} required />
                     </div>
 
@@ -214,6 +209,7 @@
                         <Label required labelFor="indicador" value="Fórmula del Indicador del producto" />
 
                         <InfoMessage
+                            class="my-8"
                             message="El método de cálculo debe ser una expresión matemática definida de manera adecuada y de fácil comprensión, es decir, deben quedar claras cuáles son las variables utilizadas. Los métodos de cálculo más comunes son el porcentaje, la tasa de variación, la razón y el número índice. Aunque éstos no son las únicas expresiones para los indicadores, sí son las más frecuentes."
                         />
                         <Textarea maxlength="40000" id="indicador" error={errors.indicador} bind:value={$form.indicador} required />
@@ -241,16 +237,26 @@
                     </div>
                 </div>
             </fieldset>
-            <div class="px-8 py-4 bg-gray-100 border-t border-gray-200 flex items-center sticky bottom-0">
-                {#if isSuperAdmin || (checkPermission(authUser, [4, 7, 10]) && proyecto.modificable == true && proyecto.codigo_linea_programatica != 70)}
+            <div class="shadow-inner bg-violet-200 border-violet-400 bottom-0 flex items-center justify-between mt-14 px-8 py-4 sticky">
+                <small class="flex items-center text-violet-700">
+                    <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 mr-2" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+                        <path stroke-linecap="round" stroke-linejoin="round" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z" />
+                    </svg>
+                    {producto.updated_at}
+                </small>
+
+                {#if proyecto.allowed.to_update && proyecto.codigo_linea_programatica != 70}
                     <button class="text-red-600 hover:underline text-left" tabindex="-1" type="button" on:click={() => (dialogOpen = true)}> Eliminar producto </button>
                 {/if}
-                {#if isSuperAdmin || (checkPermission(authUser, [3, 4, 6, 7, 9, 10, 12, 13, 18, 19]) && proyecto.modificable == true)}
-                    <LoadingButton loading={$form.processing} class="ml-auto" type="submit">Editar producto</LoadingButton>
+                {#if proyecto.allowed.to_update}
+                    <LoadingButton loading={$form.processing} class="ml-auto" type="submit">Guardar</LoadingButton>
+                {:else}
+                    <span class="inline-block ml-1.5"> El proyecto no se puede modificar </span>
                 {/if}
             </div>
         </form>
     </div>
+
     <Dialog bind:open={dialogOpen}>
         <div slot="title" class="flex items-center">
             <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 mr-2 text-red-500" fill="none" viewBox="0 0 24 24" stroke="currentColor">

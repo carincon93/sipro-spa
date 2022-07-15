@@ -99,7 +99,7 @@
                     <InfoMessage message={miembroEntidadAliada.autorizacion_datos ? 'Está persona autorizó el tratamiento de datos' : 'Está persona no autorizó el tratamiento de datos'} />
                 </div>
             </fieldset>
-            <div class="px-8 py-4 bg-gray-100 border-t border-gray-200 flex items-center sticky bottom-0">
+            <div class="shadow-inner bg-violet-200 border-violet-400 bottom-0 flex items-center justify-between mt-14 px-8 py-4 sticky">
                 {#if isSuperAdmin || (checkPermission(authUser, [4, 10]) && proyecto.modificable == true)}
                     <button class="text-red-600 hover:underline text-left" tabindex="-1" type="button" on:click={() => (dialogOpen = true)}> Eliminar miembro de la entidad aliada </button>
                 {/if}

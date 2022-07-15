@@ -5,9 +5,10 @@
     import Button from '@smui/button'
     import { onMount } from 'svelte'
 
+    export let style
+
     let menu
     let container
-    export let style
 
     $: props = {
         ...$$restProps,

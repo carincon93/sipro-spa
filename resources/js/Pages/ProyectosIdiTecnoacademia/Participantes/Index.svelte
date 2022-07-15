@@ -230,7 +230,7 @@
                                     </p>
                                 </td>
                                 <td class="border-t td-actions">
-                                    <DataTableMenu class={resultados.length < 4 ? 'z-50' : ''}>
+                                    <DataTableMenu class={resultados.length < 3 ? 'z-50' : ''}>
                                         <Item on:SMUI:action={() => showParticipante(resultado)}>
                                             <Text>Vincular</Text>
                                         </Item>
@@ -297,7 +297,7 @@
                             </p>
                         </td>
                         <td class="border-t td-actions">
-                            <DataTableMenu class={proyectoIdiTecnoacademia.participantes.length < 4 ? 'z-50' : ''}>
+                            <DataTableMenu class={proyectoIdiTecnoacademia.participantes.length < 3 ? 'z-50' : ''}>
                                 {#if isSuperAdmin || checkRole(authUser, [5, 10, 12, 22])}
                                     <Item on:SMUI:action={() => showParticipante(participante)}>
                                         <Text>Editar</Text>

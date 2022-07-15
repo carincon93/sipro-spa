@@ -37,7 +37,7 @@
     })
 
     function submit() {
-        if (isSuperAdmin || (checkPermission(authUser, [1, 5, 8, 11, 17]) && proyecto.modificable == true)) {
+        if (proyecto.allowed.to_update) {
             $form.post(route('convocatorias.proyectos.analisis-riesgos.store', [convocatoria.id, proyecto.id]))
         }
     }
@@ -48,9 +48,7 @@
         <div class="flex items-center justify-between lg:px-8 max-w-7xl mx-auto px-4 py-6 sm:px-6">
             <div>
                 <h1>
-                    {#if isSuperAdmin || checkPermission(authUser, [1, 5, 8, 11, 17])}
-                        <a use:inertia href={route('convocatorias.proyectos.analisis-riesgos.index', [convocatoria.id, proyecto.id])} class="text-violet-400 hover:text-violet-600">Análisis de riesgos</a>
-                    {/if}
+                    <a use:inertia href={route('convocatorias.proyectos.analisis-riesgos.index', [convocatoria.id, proyecto.id])} class="text-violet-400 hover:text-violet-600">Análisis de riesgos</a>
                     <span class="text-violet-400 font-medium">/</span>
                     Crear
                 </h1>
@@ -60,7 +58,7 @@
 
     <div class="bg-white rounded shadow max-w-3xl">
         <form on:submit|preventDefault={submit}>
-            <fieldset class="p-8" disabled={isSuperAdmin || (checkPermission(authUser, [1, 5, 8, 11, 17]) && proyecto.modificable == true) ? undefined : true}>
+            <fieldset class="p-8" disabled={proyecto.allowed.to_update ? undefined : true}>
                 <div class="mt-4">
                     <Label required class="mb-4" labelFor="nivel" value="Nivel de riesgo" />
                     <Select id="nivel" items={nivelesRiesgo} bind:selectedValue={$form.nivel} error={errors.nivel} autocomplete="off" placeholder="Seleccione el nivel del riesgo" required />
@@ -106,8 +104,8 @@
                     <Textarea label="Medidas de mitigación" maxlength="800" id="medidas_mitigacion" error={errors.medidas_mitigacion} bind:value={$form.medidas_mitigacion} required />
                 </div>
             </fieldset>
-            <div class="px-8 py-4 bg-gray-100 border-t border-gray-200 flex items-center sticky bottom-0">
-                {#if isSuperAdmin || (checkPermission(authUser, [1, 5, 8, 11, 17]) && proyecto.modificable == true)}
+            <div class="shadow-inner bg-violet-200 border-violet-400 bottom-0 flex items-center justify-between mt-14 px-8 py-4 sticky">
+                {#if proyecto.allowed.to_update}
                     <LoadingButton loading={$form.processing} class="ml-auto" tipo="submit">Crear análisis de riesgo</LoadingButton>
                 {/if}
             </div>

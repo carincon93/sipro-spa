@@ -1,6 +1,6 @@
 <script>
     import AuthenticatedLayout, { title } from '@/Layouts/Authenticated'
-    import { page } from '@inertiajs/inertia-svelte'
+    import { page, useForm } from '@inertiajs/inertia-svelte'
     import { route, checkRole, checkPermission, checkPermissionByUser } from '@/Utils'
     import { _ } from 'svelte-i18n'
     import { Inertia } from '@inertiajs/inertia'
@@ -11,9 +11,13 @@
     import { Item, Text } from '@smui/list'
     import DataTable from '@/Shared/DataTable'
     import Dialog from '@/Shared/Dialog'
+    import Label from '@/Shared/Label'
+    import Password from '@/Shared/Password'
 
     export let convocatoria
     export let culturaInnovacion
+    export let allowedToCreate
+    export let errors
 
     $title = 'Proyectos apropiación de la cultura de la innovación'
 
@@ -27,7 +31,22 @@
         estructuracion_proyectos: $page.props.filters.estructuracion_proyectos,
     }
 
-    let dialogOpen = true
+    let dialogEliminar = false
+
+    let deleteForm = useForm({
+        password: '',
+    })
+
+    let proyectoId = null
+    let allowedToDestroy = false
+    function destroy() {
+        if (allowedToDestroy && proyectoId) {
+            $deleteForm.delete(route('convocatorias.servicios-tecnologicos.destroy', [convocatoria.id, proyectoId]), {
+                onFinish: () => ((proyectoId = null), (dialogEliminar = false)),
+                preserveScroll: true,
+            })
+        }
+    }
 </script>
 
 <AuthenticatedLayout>
@@ -44,7 +63,7 @@
         </div>
 
         <div slot="actions">
-            {#if isSuperAdmin || (checkPermission(authUser, [11]) && convocatoria.fase == 1) || checkPermissionByUser(authUser, [11])}
+            {#if allowedToCreate}
                 <Button on:click={() => Inertia.visit(route('convocatorias.cultura-innovacion.create', [convocatoria.id]))} variant="raised">Crear proyecto Apropiación de la cultura de la innovación</Button>
             {/if}
         </div>
@@ -107,10 +126,16 @@
                         {/if}
                     </td>
                     <td class="border-t td-actions">
-                        <DataTableMenu class={culturaInnovacion.data.length < 4 ? 'z-50' : ''}>
-                            {#if isSuperAdmin || checkPermissionByUser(authUser, [11]) || checkPermission(authUser, [12, 13, 21])}
+                        <DataTableMenu class={culturaInnovacion.data.length < 3 ? 'z-50' : ''}>
+                            {#if proyecto.allowed.to_view}
                                 <Item on:SMUI:action={() => Inertia.visit(route('convocatorias.cultura-innovacion.edit', [convocatoria.id, id]))}>
                                     <Text>Ver detalles</Text>
+                                </Item>
+                            {/if}
+
+                            {#if proyecto.allowed.to_destroy}
+                                <Item on:SMUI:action={(() => (dialogEliminar = true), (proyectoId = id), (allowedToDestroy = proyecto.allowed.to_destroy))}>
+                                    <Text>Eliminar</Text>
                                 </Item>
                             {/if}
                         </DataTableMenu>
@@ -127,31 +152,29 @@
     </DataTable>
     <Pagination links={culturaInnovacion.links} />
 
-    {#if convocatoria.fase == 3}
-        <Dialog bind:open={dialogOpen} id="informacion">
-            <div slot="title" class="flex items-center flex-col mb-10">Importante</div>
-            <div slot="content">
-                <small>Octubre 14</small>
-
-                <hr class="mt-10 mb-10" />
-                <div>
-                    <p>Desde el 14 de octubre (13:00HH) hasta el 21 de octubre (23:59 HH) del 2021, se dará inicio la etapa de subsanación. Únicamente los proyectos que tienen un ítem a subsanar podrán realizar la edición del proyecto.</p>
-                </div>
-
-                <hr class="mt-10 mb-10" />
-                <div>
-                    <p>Revise cuales proyectos tienen el mensaje de <strong>Requiere ser subsanado</strong>, ingrese al proyecto y realice la respectiva subsanación. <br /> <img class="mx-auto" src={window.basePath + '/images/img-subsanacion.png'} alt="" /></p>
-                </div>
-                <hr class="mt-10 mb-10" />
-                <div>
-                    <p><strong>Tenga en cuenta:</strong> El estado final de los proyectos se conocerá cuando finalice la etapa de segunda evaluación (Estado Rechazado, pre – aprobado con observaciones y Preaprobado). Fechas segunda evaluación: 22 de octubre (13:00 HH) al 3 de noviembre (23:59 HH).</p>
-                </div>
+    <Dialog bind:open={dialogEliminar}>
+        <div slot="title">
+            <div class="text-center">Eliminar recurso</div>
+            <div class="relative bg-violet-100 text-violet-600 p-5 h-44 w-1/3 m-auto my-10" style="border-radius: 41% 59% 70% 30% / 32% 40% 60% 68% ;">
+                <figure>
+                    <img src="/images/eliminar.png" alt="" class="h-44 m-auto" />
+                </figure>
             </div>
-            <div slot="actions">
-                <div class="p-4">
-                    <Button variant="raised" on:click={() => (dialogOpen = false)}>Entendido</Button>
-                </div>
+            <div class="text-center">
+                ¿Está seguro (a) que desea eliminar este proyecto?<br />Una vez eliminado el proyecto, todos sus recursos y datos se eliminarán de forma permanente.
             </div>
-        </Dialog>
-    {/if}
+        </div>
+        <div slot="content">
+            <form on:submit|preventDefault={destroy} id="delete-tp" class="mt-24 mb-28">
+                <Label labelFor="password" value="Ingrese su contraseña para confirmar que desea eliminar permanentemente este proyecto" class="mb-4" />
+                <Password id="password" class="w-full" bind:value={$deleteForm.password} error={errors.password} required autocomplete="current-password" />
+            </form>
+        </div>
+        <div slot="actions">
+            <div class="p-4">
+                <Button on:click={() => (dialogEliminar = false)} variant={null}>Cancelar</Button>
+                <Button variant="raised" type="submit" form="delete-tp">Confirmar</Button>
+            </div>
+        </div>
+    </Dialog>
 </AuthenticatedLayout>

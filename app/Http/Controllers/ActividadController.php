@@ -58,7 +58,7 @@ class ActividadController extends Controller
 
         return Inertia::render('Convocatorias/Proyectos/Actividades/Index', [
             'convocatoria'      => $convocatoria->only('id', 'esta_activa', 'fase_formateada', 'fase', 'tipo_convocatoria', 'mostrar_recomendaciones'),
-            'proyecto'          => $proyecto->only('id', 'codigo_linea_programatica', 'precio_proyecto', 'modificable', 'metodologia', 'metodologia_local', 'en_subsanacion', 'evaluaciones', 'mostrar_recomendaciones', 'PdfVersiones', 'all_files'),
+            'proyecto'          => $proyecto->only('id', 'codigo_linea_programatica', 'precio_proyecto', 'modificable', 'metodologia', 'metodologia_local', 'en_subsanacion', 'evaluaciones', 'mostrar_recomendaciones', 'PdfVersiones', 'all_files', 'allowed'),
             'filters'           => request()->all('search'),
             'actividades'       => Actividad::whereIn(
                 'objetivo_especifico_id',
@@ -133,7 +133,7 @@ class ActividadController extends Controller
 
         return Inertia::render('Convocatorias/Proyectos/Actividades/Edit', [
             'convocatoria'                   => $convocatoria->only('id', 'esta_activa', 'fase_formateada', 'fase', 'tipo_convocatoria', 'min_fecha_inicio_proyectos', 'max_fecha_finalizacion_proyectos'),
-            'proyecto'                       => $proyecto->only('id', 'fecha_inicio', 'fecha_finalizacion', 'modificable', 'mostrar_recomendaciones', 'codigo_linea_programatica'),
+            'proyecto'                       => $proyecto->only('id', 'fecha_inicio', 'fecha_finalizacion', 'modificable', 'mostrar_recomendaciones', 'codigo_linea_programatica', 'allowed'),
             'actividad'                      => $actividad,
             'productos'                      => $productos,
             'productosRelacionados'          => $actividad->productos()->pluck('id'),

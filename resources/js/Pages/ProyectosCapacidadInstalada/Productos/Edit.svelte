@@ -72,7 +72,7 @@
                 <div class="mt-4">
                     <Select id="tipologia_minciencias" items={tipologiasMinciencias} bind:selectedValue={$form.tipologia_minciencias} error={errors.tipologia_minciencias} autocomplete="off" placeholder="Seleccione una tipología" required />
                 </div>
-                <div class="px-8 py-4 bg-gray-100 border-t border-gray-200 flex items-center justify-between sticky bottom-0">
+                <div class="shadow-inner bg-violet-200 border-violet-400 bottom-0 flex items-center justify-between mt-14 px-8 py-4 sticky">
                     {#if proyectoCapacidadInstalada.allowed.to_update}
                         <button class="text-red-600 hover:underline text-left" tabindex="-1" type="button" on:click={() => (dialogOpen = true)}> Eliminar producto </button>
                         <LoadingButton loading={$form.processing} class="ml-auto" type="submit">Editar producto</LoadingButton>

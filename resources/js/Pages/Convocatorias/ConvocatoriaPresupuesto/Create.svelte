@@ -36,9 +36,7 @@
         <div class="flex items-center justify-between lg:px-8 max-w-7xl mx-auto px-4 py-6 sm:px-6">
             <div>
                 <h1>
-                    {#if isSuperAdmin}
-                        <a use:inertia href={route('convocatorias.convocatoria-presupuesto.index', convocatoria.id)} class="text-violet-400 hover:text-violet-600"> Rubros presupuestales SENNOVA de la convocatoria </a>
-                    {/if}
+                    <a use:inertia href={route('convocatorias.convocatoria-presupuesto.index', convocatoria.id)} class="text-violet-400 hover:text-violet-600"> Rubros presupuestales SENNOVA de la convocatoria </a>
                     <span class="text-violet-400 font-medium">/</span>
                     Crear
                 </h1>
@@ -54,7 +52,7 @@
                     <Select id="presupuesto_sennova_id" items={presupuestosSennova} bind:selectedValue={$form.presupuesto_sennova_id} error={errors.presupuesto_sennova_id} autocomplete="off" placeholder="Seleccione un rubro presupuestal SENNOVA" required />
                 </div>
             </fieldset>
-            <div class="px-8 py-4 bg-gray-100 border-t border-gray-200 flex items-center sticky bottom-0">
+            <div class="shadow-inner bg-violet-200 border-violet-400 bottom-0 flex items-center justify-between mt-14 px-8 py-4 sticky">
                 {#if isSuperAdmin}
                     <LoadingButton loading={$form.processing} class="ml-auto" type="submit">Asociar rubro presupuestal SENNOVA</LoadingButton>
                 {/if}

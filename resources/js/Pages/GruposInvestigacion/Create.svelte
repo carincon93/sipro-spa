@@ -9,6 +9,7 @@
     import Label from '@/Shared/Label'
     import LoadingButton from '@/Shared/LoadingButton'
     import Select from '@/Shared/Select'
+    import InfoMessage from '@/Shared/InfoMessage'
     import SelectMulti from '@/Shared/SelectMulti'
     import DynamicList from '@/Shared/Dropdowns/DynamicList'
 
@@ -180,12 +181,12 @@
                     <Input label="Url" id="formato_gic_f_032" type="url" class="mt-1" error={errors.formato_gic_f_032} placeholder="Url https://www.google.com.co" bind:value={$form.formato_gic_f_032} required />
                 </div>
             </fieldset>
-            <div class="px-8 py-4 bg-gray-100 border-t border-gray-200 sticky bottom-0">
+            <div class="shadow-inner bg-violet-200 border-violet-400 bottom-0 mt-14 px-8 py-4 sticky">
+                <InfoMessage class="shadow mb-1"><strong>Nota: </strong>Después de crear el grupo de investigación será redirigido(a) a una nueva sección para añadir las líneas de investigación declaradas y el alineamiento con los programas de formación</InfoMessage>
                 {#if isSuperAdmin || checkRole(authUser, [4])}
-                    <div class="flex items-center">
+                    <div class="flex items-center justify-between">
                         <LoadingButton loading={$form.processing} class="ml-auto" type="submit">Crear grupo de investigación</LoadingButton>
                     </div>
-                    <p class="mt-4"><strong>Nota: </strong>Después de crear el grupo de investigación será redirigido(a) a una nueva sección para añadir las líneas de investigación declaradas y el alineamiento con los programas de formación</p>
                 {/if}
             </div>
         </form>

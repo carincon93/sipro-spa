@@ -47,7 +47,7 @@
                         </p>
                     </td>
                     <td class="border-t td-actions">
-                        <DataTableMenu class={lineasTecnoacademia.data.length < 4 ? 'z-50' : ''}>
+                        <DataTableMenu class={lineasTecnoacademia.data.length < 3 ? 'z-50' : ''}>
                             {#if isSuperAdmin}
                                 <Item on:SMUI:action={() => Inertia.visit(route('lineas-tecnoacademia.edit', lineaTecnoacademia.id))}>
                                     <Text>Ver detalles</Text>

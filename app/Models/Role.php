@@ -74,7 +74,10 @@ class Role extends SpatieRole
      */
     public static function getRolesByRol()
     {
-        if (Auth::user()->hasRole(4)) {
+        /** @var \App\Models\User */
+        $authUser = Auth::user();
+
+        if ($authUser->hasRole(4)) {
             $roles = Role::select('id', 'name')->where('name', 'ilike', '%proponente%')->orderBy('name')->get('id');
         } else {
             $roles = Role::select('id', 'name')->orderBy('name')->get('id');

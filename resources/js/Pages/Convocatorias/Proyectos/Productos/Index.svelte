@@ -88,17 +88,15 @@
     {#if showGantt || to_pdf}
         <Gantt
             items={productosGantt}
-            request={isSuperAdmin || checkPermission(authUser, [3, 4, 6, 7, 9, 10, 12, 13, 18, 19, 21, 14, 16, 15, 20])
-                ? {
-                      uri: 'convocatorias.proyectos.productos.edit',
-                      params: [convocatoria.id, proyecto.id],
-                  }
-                : null}
+            request={{
+                uri: 'convocatorias.proyectos.productos.edit',
+                params: [convocatoria.id, proyecto.id],
+            }}
         />
     {:else}
         <DataTable class="mt-20" routeParams={[convocatoria.id, proyecto.id]}>
             <div slot="actions">
-                {#if (isSuperAdmin && validacionResultados == null) || (checkPermission(authUser, [1, 5, 8, 11, 17]) && validacionResultados == null && proyecto.modificable == true && proyecto.codigo_linea_programatica != 70)}
+                {#if proyecto.allowed.to_update && validacionResultados == null && proyecto.modificable == true && proyecto.codigo_linea_programatica != 70}
                     <Button on:click={() => Inertia.visit(route('convocatorias.proyectos.productos.create', [convocatoria.id, proyecto.id]))} variant="raised">Crear producto</Button>
                 {/if}
             </div>
@@ -142,16 +140,10 @@
                         </td>
 
                         <td class="border-t td-actions">
-                            <DataTableMenu class={productos.data.length < 4 ? 'z-50' : ''}>
-                                {#if isSuperAdmin || checkPermission(authUser, [3, 4, 6, 7, 9, 10, 12, 13, 18, 19, 21, 14, 16, 15, 20])}
-                                    <Item on:SMUI:action={() => Inertia.visit(route('convocatorias.proyectos.productos.edit', [convocatoria.id, proyecto.id, producto.id]))}>
-                                        <Text>Ver detalles</Text>
-                                    </Item>
-                                {:else}
-                                    <Item>
-                                        <Text>No tiene permisos</Text>
-                                    </Item>
-                                {/if}
+                            <DataTableMenu class={productos.data.length < 3 ? 'z-50' : ''}>
+                                <Item on:SMUI:action={() => Inertia.visit(route('convocatorias.proyectos.productos.edit', [convocatoria.id, proyecto.id, producto.id]))}>
+                                    <Text>Ver detalles</Text>
+                                </Item>
                             </DataTableMenu>
                         </td>
                     </tr>

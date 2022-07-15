@@ -56,7 +56,7 @@
                         <p class="px-6 py-4">{new Date(usuario.last_activity * 1000).toLocaleDateString('es-ES', { year: 'numeric', month: 'long', day: 'numeric', hour: 'numeric', minute: 'numeric' })}</p>
                     </td>
                     <td class="border-t td-actions">
-                        <DataTableMenu class={usuarios.data.length < 4 ? 'z-50' : ''}>
+                        <DataTableMenu class={usuarios.data.length < 3 ? 'z-50' : ''}>
                             {#if isSuperAdmin || checkRole(authUser, [4, 21, 17, 18, 20, 19, 5])}
                                 <Item on:SMUI:action={() => Inertia.visit(route('users.edit', usuario.user_id))}>
                                     <Text>Ver detalles</Text>

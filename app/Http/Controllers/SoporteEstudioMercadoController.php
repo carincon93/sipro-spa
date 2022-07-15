@@ -33,7 +33,7 @@ class SoporteEstudioMercadoController extends Controller
         }
 
         return Inertia::render('Convocatorias/Proyectos/ProyectoPresupuesto/SoportesEstudioMercado/Index', [
-            'convocatoria'              => $convocatoria->only('id', 'esta_activa', 'fase_formateada', 'fase', 'tipo_convocatoria'),
+            'convocatoria'              => $convocatoria->only('id', 'esta_activa', 'fase_formateada', 'fase', 'tipo_convocatoria', 'allowed'),
             'proyecto'                  => $proyecto->only('id', 'modificable', 'mostrar_recomendaciones'),
             'proyectoPresupuesto'       => $presupuesto->load('convocatoriaPresupuesto.presupuestoSennova.usoPresupuestal'),
             'filters'                   => request()->all('search'),
@@ -60,7 +60,7 @@ class SoporteEstudioMercadoController extends Controller
 
         return Inertia::render('Convocatorias/Proyectos/ProyectoPresupuesto/SoportesEstudioMercado/Create', [
             'convocatoria'              => $convocatoria->only('id', 'esta_activa', 'fase_formateada', 'fase', 'tipo_convocatoria'),
-            'proyecto'                  => $proyecto->only('id', 'modificable', 'mostrar_recomendaciones'),
+            'proyecto'                  => $proyecto->only('id', 'modificable', 'mostrar_recomendaciones', 'allowed'),
             'proyectoPresupuesto'       => $presupuesto->load('convocatoriaPresupuesto.presupuestoSennova.usoPresupuestal'),
         ]);
     }
@@ -119,7 +119,7 @@ class SoporteEstudioMercadoController extends Controller
 
         return Inertia::render('Convocatorias/Proyectos/ProyectoPresupuesto/SoportesEstudioMercado/Edit', [
             'convocatoria'          => $convocatoria->only('id', 'esta_activa', 'fase_formateada', 'fase', 'tipo_convocatoria'),
-            'proyecto'              => $proyecto->only('id', 'modificable', 'mostrar_recomendaciones'),
+            'proyecto'              => $proyecto->only('id', 'modificable', 'mostrar_recomendaciones', 'allowed'),
             'proyectoPresupuesto'   => $presupuesto->load('convocatoriaPresupuesto.presupuestoSennova.usoPresupuestal'),
             'soporteEstudioMercado' => $soporte
         ]);
@@ -197,24 +197,5 @@ class SoporteEstudioMercadoController extends Controller
             'soportesEstudioMercado'    => $presupuesto->soportesEstudioMercado()->orderBy('id', 'ASC')
                 ->filterSoporteEstudioMercado(request()->only('search'))->paginate(),
         ]);
-    }
-
-    /**
-     * cleanFileName
-     *
-     * @param  mixed $nombre
-     * @return void
-     */
-    public function cleanFileName($codigoProyecto, $nombre, $archivo)
-    {
-        $cleanName = str_replace(' ', '', substr($nombre, 0, 30));
-        $cleanName = preg_replace('/[-`~!@#_$%\^&*()+={}[\]\\\\|;:\'",.><?\/]/', '', $cleanName);
-
-        $cleanProyectoCodigo = str_replace(' ', '', substr($codigoProyecto, 0, 30));
-        $cleanProyectoCodigo = preg_replace('/[-`~!@#_$%\^&*()+={}[\]\\\\|;:\'",.><?\/]/', '', $cleanProyectoCodigo);
-
-        $random    = Str::random(10);
-
-        return str_replace(array("\r", "\n"), '', "{$cleanProyectoCodigo}cod{$random}." . $archivo->extension());
     }
 }

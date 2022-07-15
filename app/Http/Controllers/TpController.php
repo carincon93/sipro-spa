@@ -15,6 +15,7 @@ use App\Models\Regional;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Gate;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Storage;
 use Inertia\Inertia;
@@ -29,9 +30,10 @@ class TpController extends Controller
     public function index(Convocatoria $convocatoria)
     {
         return Inertia::render('Convocatorias/Proyectos/Tp/Index', [
-            'convocatoria'  => $convocatoria->only('id', 'esta_activa', 'fase_formateada', 'fase', 'tipo_convocatoria', 'tipo_convocatoria'),
-            'filters'       => request()->all('search', 'estructuracion_proyectos'),
-            'tp'            => Tp::getProyectosPorRol($convocatoria)->appends(['search' => request()->search, 'estructuracion_proyectos' => request()->estructuracion_proyectos]),
+            'convocatoria'      => $convocatoria->only('id', 'esta_activa', 'fase_formateada', 'fase', 'tipo_convocatoria', 'tipo_convocatoria'),
+            'filters'           => request()->all('search', 'estructuracion_proyectos'),
+            'proyectosTp'       => Tp::getProyectosPorRol($convocatoria)->appends(['search' => request()->search, 'estructuracion_proyectos' => request()->estructuracion_proyectos]),
+            'allowedToCreate'   => Gate::inspect('formular-proyecto', [4, $convocatoria])->allowed()
         ]);
     }
 
@@ -44,8 +46,11 @@ class TpController extends Controller
     {
         $this->authorize('formular-proyecto', [4, $convocatoria]);
 
-        if (auth()->user()->hasRole(16)) {
-            $nodosTecnoParque = NodoTecnoparque::select('nodos_tecnoparque.id as value', 'nodos_tecnoparque.nombre as label')->join('centros_formacion', 'nodos_tecnoparque.centro_formacion_id', 'centros_formacion.id')->where('centros_formacion.regional_id', auth()->user()->centroFormacion->regional_id)->get();
+        /** @var \App\Models\User */
+        $authUser = Auth::user();
+
+        if ($authUser->hasRole(16)) {
+            $nodosTecnoParque = NodoTecnoparque::select('nodos_tecnoparque.id as value', 'nodos_tecnoparque.nombre as label')->join('centros_formacion', 'nodos_tecnoparque.centro_formacion_id', 'centros_formacion.id')->where('centros_formacion.regional_id', $authUser->centroFormacion->regional_id)->get();
         } else {
             $nodosTecnoParque = NodoTecnoparque::select('nodos_tecnoparque.id as value', 'nodos_tecnoparque.nombre as label')->join('centros_formacion', 'nodos_tecnoparque.centro_formacion_id', 'centros_formacion.id')->get();
         }
@@ -54,6 +59,7 @@ class TpController extends Controller
             'convocatoria'          => $convocatoria->only('id', 'esta_activa', 'fase_formateada', 'fase', 'tipo_convocatoria', 'min_fecha_inicio_proyectos_tp', 'max_fecha_finalizacion_proyectos_tp', 'fecha_maxima_tp'),
             'rolesTp'               => collect(json_decode(Storage::get('json/roles-sennova-tp.json'), true)),
             'nodosTecnoParque'      => $nodosTecnoParque,
+            'allowedToCreate'       => Gate::inspect('formular-proyecto', [4, $convocatoria])->allowed()
         ]);
     }
 
@@ -141,12 +147,13 @@ class TpController extends Controller
 
         $tp->load('proyecto.evaluaciones.tpEvaluacion');
 
-        $tp->codigo_linea_programatica = $tp->proyecto->lineaProgramatica->codigo;
-        $tp->precio_proyecto           = $tp->proyecto->precioProyecto;
+        $tp->codigo_linea_programatica      = $tp->proyecto->lineaProgramatica->codigo;
+        $tp->precio_proyecto                = $tp->proyecto->precioProyecto;
         $tp->proyecto->centroFormacion;
+        $tp->proyecto->allowed;
 
-        $tp->mostrar_recomendaciones = $tp->proyecto->mostrar_recomendaciones;
-        $tp->mostrar_requiere_subsanacion = $tp->proyecto->mostrar_requiere_subsanacion;
+        $tp->mostrar_recomendaciones        = $tp->proyecto->mostrar_recomendaciones;
+        $tp->mostrar_requiere_subsanacion   = $tp->proyecto->mostrar_requiere_subsanacion;
 
         return Inertia::render('Convocatorias/Proyectos/Tp/Edit', [
             'convocatoria'          => $convocatoria->only('id', 'esta_activa', 'fase_formateada', 'fase', 'tipo_convocatoria', 'min_fecha_inicio_proyectos_tp', 'max_fecha_finalizacion_proyectos_tp', 'fecha_maxima_tp', 'mostrar_recomendaciones'),
@@ -208,11 +215,7 @@ class TpController extends Controller
             return back()->with('error', 'Este proyecto no se puede eliminar.');
         }
 
-        $this->authorize('modificar-proyecto-autor', [$tp->proyecto]);
-
-        if ($convocatoria->fase != 1) {
-            return back()->with('error', 'Un proyecto finalizado no se puede eliminar.');
-        }
+        $this->authorize('eliminar-proyecto-autor', [$tp->proyecto]);
 
         if (!Hash::check($request->password, Auth::user()->password)) {
             return back()

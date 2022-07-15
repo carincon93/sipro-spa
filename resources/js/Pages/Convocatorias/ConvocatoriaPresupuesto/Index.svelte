@@ -77,7 +77,7 @@
                     </td>
 
                     <td class="border-t td-actions">
-                        <DataTableMenu class={convocatoriaPresupuesto.data.length < 4 ? 'z-50' : ''}>
+                        <DataTableMenu class={convocatoriaPresupuesto.data.length < 3 ? 'z-50' : ''}>
                             {#if isSuperAdmin}
                                 <Item on:SMUI:action={() => Inertia.visit(route('convocatorias.convocatoria-presupuesto.edit', [convocatoria.id, rubro.id]))}>
                                     <Text>Ver detalles</Text>

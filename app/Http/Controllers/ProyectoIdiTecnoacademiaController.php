@@ -18,6 +18,7 @@ use App\Models\TipoProductoIdi;
 use App\Models\User;
 use App\Rules\Email;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Storage;
 use Inertia\Inertia;
 
@@ -68,6 +69,9 @@ class ProyectoIdiTecnoacademiaController extends Controller
     public function store(ProyectoIdiTecnoacademiaRequest $request)
     {
         $this->authorize('crear-proyecto-idi-tecnoacademia');
+
+        /** @var \App\Models\User */
+        $authUser = Auth::user();
 
         $proyectoIdiTecnoacademia = new ProyectoIdiTecnoacademia();
         $proyectoIdiTecnoacademia->titulo                               = $request->titulo;
@@ -137,7 +141,7 @@ class ProyectoIdiTecnoacademiaController extends Controller
             $proyectoIdiTecnoacademia->beneficiados()->attach($request->beneficiados);
             $proyectoIdiTecnoacademia->lineas()->attach($request->tecnoacademia_linea_tecnoacademia_id);
 
-            $proyectoIdiTecnoacademia->participantes()->attach(auth()->user()->id, ['rol_sennova' => $request->rol_sennova['value'], 'cantidad_meses' => $request->cantidad_meses, 'cantidad_horas' => $request->cantidad_horas, 'autor_principal' => true]);
+            $proyectoIdiTecnoacademia->participantes()->attach($authUser->id, ['rol_sennova' => $request->rol_sennova['value'], 'cantidad_meses' => $request->cantidad_meses, 'cantidad_horas' => $request->cantidad_horas, 'autor_principal' => true]);
         }
 
         return redirect()->route('proyectos-idi-tecnoacademia.participantes.index', $proyectoIdiTecnoacademia)->with('success', 'El recurso se ha creado correctamente.');

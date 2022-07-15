@@ -26,7 +26,7 @@
 
 <AuthenticatedLayout>
     <DataTable class="mt-20" routeParams={[convocatoria.id]}>
-        <div slot="title">Apropiación de la cultura de la innovación</div>
+        <div slot="title">Evaluaciones de proyectos de apropiación de la cultura de la innovación</div>
 
         <thead slot="thead">
             <tr class="text-left font-bold">
@@ -66,7 +66,7 @@
                         </p>
                     </td>
                     <td class="border-t td-actions">
-                        <DataTableMenu class={culturaInnovacion.data.length < 4 ? 'z-50' : ''}>
+                        <DataTableMenu class={culturaInnovacion.data.length < 3 ? 'z-50' : ''}>
                             {#if isSuperAdmin || checkRole(authUser, [11, 5])}
                                 <Item on:SMUI:action={() => Inertia.visit(route('convocatorias.cultura-innovacion-evaluaciones.edit', [convocatoria.id, evaluacion_id]))}>
                                     <Text>

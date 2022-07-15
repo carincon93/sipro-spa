@@ -89,7 +89,7 @@
                     </td>
 
                     <td class="border-t td-actions">
-                        <DataTableMenu class={miembrosEntidadAliada.data.length < 4 ? 'z-50' : ''}>
+                        <DataTableMenu class={miembrosEntidadAliada.data.length < 3 ? 'z-50' : ''}>
                             {#if isSuperAdmin || checkPermission(authUser, [3, 4, 9, 10, 21, 14, 15])}
                                 <Item on:SMUI:action={() => Inertia.visit(route('convocatorias.proyectos.entidades-aliadas.miembros-entidad-aliada.edit', [convocatoria.id, proyecto.id, entidadAliada.id, miembroEntidadAliada.id]))}>
                                     <Text>Ver detalles</Text>

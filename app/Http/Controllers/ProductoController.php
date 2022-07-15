@@ -35,20 +35,6 @@ class ProductoController extends Controller
 
         $proyecto->load('evaluaciones.idiEvaluacion');
 
-        // if ($proyecto->ta()->exists()) {
-        //     foreach ($proyecto->efectosDirectos as $efectoDirecto) {
-        //         foreach ($efectoDirecto->resultados as $resultado) {
-        //             foreach ($resultado->productos as $producto) {
-        //                 $productoAprendices = $producto->where('resultado_id', $resultado->id)->where('nombre', 'like', '%aprendices matriculados de acuerdo con la meta establecida para el 2022.%')->first();
-
-        //                 if ($productoAprendices) {
-        //                     $productoAprendices->productoTaTp()->update(['valor_proyectado' => $proyecto->meta_aprendices . ' aprendices']);
-        //                 }
-        //             }
-        //         }
-        //     }
-        // }
-
         $resultado = $proyecto->efectosDirectos()->with('resultados')->get()->pluck('resultados')->flatten()->filter();
         $proyecto->codigo_linea_programatica = $proyecto->lineaProgramatica->codigo;
 
@@ -69,7 +55,7 @@ class ProductoController extends Controller
 
         return Inertia::render('Convocatorias/Proyectos/Productos/Index', [
             'convocatoria'          => $convocatoria->only('id', 'esta_activa', 'fase_formateada', 'fase', 'tipo_convocatoria', 'mostrar_recomendaciones'),
-            'proyecto'              => $proyecto->only('id', 'codigo_linea_programatica', 'precio_proyecto', 'modificable', 'en_subsanacion', 'evaluaciones', 'mostrar_recomendaciones', 'PdfVersiones', 'all_files'),
+            'proyecto'              => $proyecto->only('id', 'codigo_linea_programatica', 'precio_proyecto', 'modificable', 'en_subsanacion', 'evaluaciones', 'mostrar_recomendaciones', 'PdfVersiones', 'all_files', 'allowed'),
             'filters'               => request()->all('search'),
             'validacionResultados'  => $validacionResultados,
             'productos'             => Producto::whereIn(

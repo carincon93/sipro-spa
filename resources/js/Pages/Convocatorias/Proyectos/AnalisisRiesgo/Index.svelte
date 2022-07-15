@@ -73,7 +73,7 @@
         </div>
 
         <div slot="actions">
-            {#if isSuperAdmin || (checkPermission(authUser, [1, 5, 8, 11, 17]) && proyecto.modificable == true)}
+            {#if proyecto.allowed.to_update}
                 <Button on:click={() => Inertia.visit(route('convocatorias.proyectos.analisis-riesgos.create', [convocatoria.id, proyecto.id]))} variant="raised">Crear análisis de riesgos</Button>
             {/if}
         </div>
@@ -109,12 +109,10 @@
                     </td>
 
                     <td class="border-t td-actions">
-                        <DataTableMenu class={analisisRiesgos.data.length < 4 ? 'z-50' : ''}>
-                            {#if isSuperAdmin || checkPermission(authUser, [3, 4, 6, 7, 9, 10, 12, 13, 18, 19, 21, 14, 16, 15, 20])}
-                                <Item on:SMUI:action={() => Inertia.visit(route('convocatorias.proyectos.analisis-riesgos.edit', [convocatoria.id, proyecto.id, analisisRiesgo.id]))}>
-                                    <Text>Ver detalles</Text>
-                                </Item>
-                            {/if}
+                        <DataTableMenu class={analisisRiesgos.data.length < 3 ? 'z-50' : ''}>
+                            <Item on:SMUI:action={() => Inertia.visit(route('convocatorias.proyectos.analisis-riesgos.edit', [convocatoria.id, proyecto.id, analisisRiesgo.id]))}>
+                                <Text>Ver detalles</Text>
+                            </Item>
                         </DataTableMenu>
                     </td>
                 </tr>

@@ -103,8 +103,11 @@ class UserController extends Controller
     {
         $this->authorize('update', [User::class, $user]);
 
+        /** @var \App\Models\User */
+        $authUser = Auth::user();
+
         if ($request->notificacion) {
-            $notificacion = Auth::user()->unreadNotifications()->where('id', $request->notificacion)->first();
+            $notificacion = $authUser->unreadNotifications()->where('id', $request->notificacion)->first();
             if ($notificacion) {
                 $notificacion->markAsRead();
             }
@@ -193,14 +196,15 @@ class UserController extends Controller
      */
     public function showPerfil()
     {
-        $user = auth()->user();
+        /** @var \App\Models\User */
+        $authUser = Auth::user();
 
         return Inertia::render('Users/Perfil', [
-            'user'                  => $user,
+            'user'                  => $authUser,
             'tiposDocumento'        => json_decode(Storage::get('json/tipos-documento.json'), true),
             'tiposVinculacion'      => json_decode(Storage::get('json/tipos-vinculacion.json'), true),
-            'rolesRelacionados'     => $user->roles()->pluck('id'),
-            'permisosRelacionados'  => $user->permissions()->pluck('id'),
+            'rolesRelacionados'     => $authUser->roles()->pluck('id'),
+            'permisosRelacionados'  => $authUser->permissions()->pluck('id'),
             'roles'                 => Role::select('id', 'name')->where('name', 'ilike', "%Proponente%")->orWhere('name', 'ilike', "%Facilitador%")->get(),
         ]);
     }
@@ -214,9 +218,10 @@ class UserController extends Controller
      */
     public function changeUserProfile(UserProfileRequest $request)
     {
-        $user = auth()->user();
+        /** @var \App\Models\User */
+        $authUser = Auth::user();
 
-        $user->update(
+        $authUser->update(
             [
                 'nombre'               => $request->nombre,
                 'email'                => $request->email,
@@ -227,7 +232,7 @@ class UserController extends Controller
             ]
         );
 
-        $user->syncRoles($request->role_id);
+        $authUser->syncRoles($request->role_id);
 
         return back()->with('success', 'El recurso se ha actualizado correctamente.');
     }
@@ -244,9 +249,12 @@ class UserController extends Controller
             'password' => 'required|string|min:6|different:old_password|confirmed'
         ]);
 
-        if (Hash::check($request->get('old_password'), auth()->user()->password)) {
-            auth()->user()->password = Hash::make($request->get('password'));
-            auth()->user()->save();
+        /** @var \App\Models\User */
+        $authUser = Auth::user();
+
+        if (Hash::check($request->get('old_password'), $authUser->password)) {
+            $authUser->password = Hash::make($request->get('password'));
+            $authUser->save();
             $message = 'La contraseña se ha actualizado correctamente.';
             $status = 'success';
         } else {
@@ -265,9 +273,12 @@ class UserController extends Controller
      */
     public function showAllNotifications()
     {
+        /** @var \App\Models\User */
+        $authUser = Auth::user();
+
         return Inertia::render('Users/Notifications/Index', [
             'filters'           => request()->all('search'),
-            'notificaciones'    => Auth::user()->notifications()->paginate(15)
+            'notificaciones'    => $authUser->notifications()->paginate(15)
         ]);
     }
 
@@ -279,8 +290,11 @@ class UserController extends Controller
      */
     public function markAsReadNotification(Request $request)
     {
+        /** @var \App\Models\User */
+        $authUser = Auth::user();
+
         if ($request->notificacion) {
-            $notificacion = Auth::user()->unreadNotifications()->where('id', $request->notificacion)->first();
+            $notificacion = $authUser->unreadNotifications()->where('id', $request->notificacion)->first();
             if ($notificacion) {
                 $notificacion->markAsRead();
             }
@@ -291,7 +305,9 @@ class UserController extends Controller
 
     public function getNumeroNotificaciones()
     {
+        /** @var \App\Models\User */
         $authUser = Auth::user();
+
         return response()->json(['numeroNotificaciones' => $authUser->unreadNotifications()->count(), 'notificaciones' => $authUser->unreadNotifications()->orderBy('created_at', 'DESC')->take(3)->get()]);
     }
 

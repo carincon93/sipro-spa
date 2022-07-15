@@ -5,6 +5,7 @@ namespace App\Models\Evaluacion;
 use App\Models\Convocatoria;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Support\Facades\Gate;
 
 class Evaluacion extends Model
 {
@@ -22,7 +23,7 @@ class Evaluacion extends Model
      *
      * @var array
      */
-    protected $appends = ['total_evaluacion', 'validar_evaluacion', 'total_recomendaciones', 'verificar_estado_evaluacion', 'estado_proyecto_por_evaluador', 'causal_rechazo_idi'];
+    protected $appends = ['total_evaluacion', 'validar_evaluacion', 'total_recomendaciones', 'verificar_estado_evaluacion', 'estado_proyecto_por_evaluador', 'causal_rechazo_idi', 'allowed'];
 
     /**
      * The attributes that are mass assignable.
@@ -598,5 +599,14 @@ class Evaluacion extends Model
                 $query->where('servicios_tecnologicos_evaluaciones.updated_at', null);
             }
         });
+    }
+
+    public function getAllowedAttribute()
+    {
+        $allowedToView      = Gate::inspect('visualizar-evaluacion-autor', $this);
+        $allowedToUpdate    = Gate::inspect('modificar-evaluacion-autor', $this);
+        $allowedToDestroy   = $allowedToUpdate;
+
+        return collect(['to_view' => $allowedToView->allowed(), 'to_update' => $allowedToUpdate->allowed(), 'to_destroy' => $allowedToDestroy->allowed()]);
     }
 }

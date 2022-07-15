@@ -66,7 +66,7 @@
                             </p>
                         </td>
                         <td class="border-t td-actions">
-                            <DataTableMenu class={productos.data.length < 4 ? 'z-50' : ''}>
+                            <DataTableMenu class={productos.data.length < 3 ? 'z-50' : ''}>
                                 <Item on:SMUI:action={() => Inertia.visit(route('proyectos-capacidad-instalada.productos.edit', [proyectoCapacidadInstalada.id, producto.id]))}>
                                     <Text>Ver detalles</Text>
                                 </Item>

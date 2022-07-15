@@ -29,25 +29,25 @@
 
         <div slot="caption">
             <InfoMessage>
-                <div class="flex justify-between">
+                <div class="flex justify-between my-4">
                     Para modificar las reglas de negocio de los roles de Tecnoacademia haga clic en el siguiente botón:
 
                     <Button class="ml-4" on:click={() => Inertia.visit(route('reglas-roles-ta.index'))} variant="raised">Reglas - Roles TA</Button>
                 </div>
 
-                <div class="flex justify-between">
+                <div class="flex justify-between my-4">
                     Para modificar las reglas de negocio de los roles de Tecnoparque haga clic en el siguiente botón:
 
                     <Button class="ml-4" on:click={() => Inertia.visit(route('reglas-roles-tp.index'))} variant="raised">Reglas - Roles TP</Button>
                 </div>
 
-                <div class="flex justify-between">
+                <div class="flex justify-between my-4">
                     Para modificar las reglas de negocio de los roles de Servicios Tecnológicos haga clic en el siguiente botón:
 
                     <Button class="ml-4" on:click={() => Inertia.visit(route('reglas-roles-st.index'))} variant="raised">Reglas - Roles ST</Button>
                 </div>
 
-                <div class="flex justify-between">
+                <div class="flex justify-between my-4">
                     Para modificar las reglas de negocio de los roles de Cultura de la innovación haga clic en el siguiente botón:
 
                     <Button class="ml-4" on:click={() => Inertia.visit(route('reglas-roles-cultura.index'))} variant="raised">Reglas - Roles C. de la innovación</Button>
@@ -76,7 +76,7 @@
                         </p>
                     </td>
                     <td class="border-t td-actions">
-                        <DataTableMenu class={rolesSennova.data.length < 4 ? 'z-50' : ''}>
+                        <DataTableMenu class={rolesSennova.data.length < 3 ? 'z-50' : ''}>
                             {#if isSuperAdmin}
                                 <Item on:SMUI:action={() => Inertia.visit(route('roles-sennova.edit', rolSennova.id))}>
                                     <Text>Ver detalles</Text>

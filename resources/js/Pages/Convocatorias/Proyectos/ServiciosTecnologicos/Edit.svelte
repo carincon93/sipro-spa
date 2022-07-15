@@ -39,16 +39,6 @@
     let authUser = $page.props.auth.user
     let isSuperAdmin = checkRole(authUser, [1])
 
-    // Permiso asignado a usuarios específicos para crear proyectos ST / Proyecto modificable en verdadero
-    let permissionUserCreateEdit = checkPermissionByUser(authUser, [5]) && servicioTecnologico.proyecto.modificable == true
-    // Permiso asignado a usuarios específicos para crear proyectos ST / Proyecto modificable en verdadero y radicado en falso
-    let canUserDeleteProyectoST = permissionUserCreateEdit && servicioTecnologico.proyecto.radicado == false
-    // Verifica que el usuario tenga permisos de editar/eliminar proyectos ST / Proyecto modificable en verdadero
-    let canUpdateProyectoST = checkPermission(authUser, [6, 7]) && servicioTecnologico.proyecto.modificable == true
-    // Verifica que el usuario tenga permisos de eliminar proyectos ST / Proyecto modificable en verdadero y radicado en falso
-    let canDeleteProyectoST = checkPermission(authUser, [7]) && servicioTecnologico.proyecto.modificable == true && servicioTecnologico.proyecto.radicado == false
-
-    let dialogOpen = errors.password != undefined ? true : false
     let proyectoDialogOpen = true
 
     let resumenForm = useForm({
@@ -93,14 +83,14 @@
 
     async function syncColumnLong(column, form) {
         return new Promise((resolve) => {
-            if (isSuperAdmin || permissionUserCreateEdit || canUpdateProyectoST) {
+            if (servicioTecnologico.proyecto.allowed.to_update) {
                 //guardar
                 Inertia.put(
                     route('convocatorias.servicios-tecnologicos.updateLongColumn', [convocatoria.id, servicioTecnologico.id, column]),
                     { [column]: form[column] },
                     {
-                        onError: (resp) => (resolve(resp)),
-                        onFinish: () => (resolve({})),
+                        onError: (resp) => resolve(resp),
+                        onFinish: () => resolve({}),
                         preserveScroll: true,
                     },
                 )
@@ -111,7 +101,7 @@
     }
 
     function submit() {
-        if (isSuperAdmin || permissionUserCreateEdit || canUpdateProyectoST) {
+        if (servicioTecnologico.proyecto.allowed.to_update) {
             $form.put(route('convocatorias.servicios-tecnologicos.update', [convocatoria.id, servicioTecnologico.id]), {
                 preserveScroll: true,
             })
@@ -152,7 +142,7 @@
     </header>
 
     <form on:submit|preventDefault={submit}>
-        <fieldset class="p-8 divide-y" disabled={isSuperAdmin || permissionUserCreateEdit || canUpdateProyectoST ? undefined : true}>
+        <fieldset class="p-8 divide-y" disabled={servicioTecnologico.proyecto.allowed.to_update ? undefined : true}>
             <div class="py-24">
                 <Label
                     required
@@ -522,14 +512,18 @@
                 </div>
             {/if}
         </fieldset>
-        <div class="px-8 py-4 bg-gray-100 border-t border-gray-200 flex items-center justify-between sticky bottom-0">
-            {#if isSuperAdmin || canUserDeleteProyectoST || canDeleteProyectoST}
-                <button class="text-red-600 hover:underline text-left" tabindex="-1" type="button" on:click={() => (dialogOpen = true)}> Eliminar </button>
-            {/if}
-            {#if isSuperAdmin || permissionUserCreateEdit || canUpdateProyectoST}
-                <small>{servicioTecnologico.updated_at}</small>
+        <div class="shadow-inner bg-violet-200 border-violet-400 bottom-0 flex items-center justify-between mt-14 px-8 py-4 sticky">
+            <small class="flex items-center text-violet-700">
+                <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 mr-2" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+                    <path stroke-linecap="round" stroke-linejoin="round" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z" />
+                </svg>
+                {servicioTecnologico.updated_at}
+            </small>
 
+            {#if servicioTecnologico.proyecto.allowed.to_update}
                 <LoadingButton loading={$form.processing} type="submit">Guardar</LoadingButton>
+            {:else}
+                <span class="inline-block ml-1.5"> El proyecto no se puede modificar </span>
             {/if}
         </div>
     </form>
@@ -569,32 +563,9 @@
         <div slot="actions">
             <div class="p-4">
                 <Button on:click={() => (proyectoDialogOpen = false)} variant={null}>Omitir</Button>
-                {#if servicioTecnologico.proyecto.modificable}
+                {#if servicioTecnologico.proyecto.allowed.to_update}
                     <Button variant="raised" on:click={() => (proyectoDialogOpen = false)} on:click={() => Inertia.visit('#estructura-proyecto')}>Continuar diligenciando</Button>
                 {/if}
-            </div>
-        </div>
-    </Dialog>
-
-    <Dialog bind:open={dialogOpen}>
-        <div slot="title" class="flex items-center">
-            <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 mr-2 text-red-500" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-3L13.732 4c-.77-1.333-2.694-1.333-3.464 0L3.34 16c-.77 1.333.192 3 1.732 3z" />
-            </svg>
-            Eliminar recurso
-        </div>
-        <div slot="content">
-            <InfoMessage message="¿Está seguro (a) que desea eliminar este proyecto?<br />Una vez eliminado el proyecto, todos sus recursos y datos se eliminarán de forma permanente." />
-
-            <form on:submit|preventDefault={destroy} id="delete-servicio-tecnologico" class="mt-10 mb-28">
-                <Label labelFor="password" value="Ingrese su contraseña para confirmar que desea eliminar permanentemente este proyecto" class="mb-4" />
-                <Password id="password" class="w-full" bind:value={$deleteForm.password} error={errors.password} required autocomplete="current-password" />
-            </form>
-        </div>
-        <div slot="actions">
-            <div class="p-4">
-                <Button on:click={() => (dialogOpen = false)} variant={null}>Cancelar</Button>
-                <Button variant="raised" form="delete-servicio-tecnologico">Confirmar</Button>
             </div>
         </div>
     </Dialog>

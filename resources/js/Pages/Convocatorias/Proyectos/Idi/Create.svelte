@@ -17,6 +17,7 @@
     export let convocatoria
     export let roles
     export let centrosFormacion
+    export let allowedToCreate
 
     $: $title = 'Crear proyecto I+D+i'
 
@@ -48,7 +49,7 @@
     }
 
     function submit() {
-        if (isSuperAdmin || checkPermissionByUser(authUser, [1]) || checkPermission(authUser, [1])) {
+        if (allowedToCreate) {
             $form.post(route('convocatorias.idi.store', [convocatoria.id]))
         }
     }
@@ -59,9 +60,7 @@
         <div class="flex items-center justify-between lg:px-8 max-w-7xl mx-auto px-4 py-6 sm:px-6">
             <div>
                 <h1>
-                    {#if isSuperAdmin || checkPermissionByUser(authUser, [1]) || checkPermission(authUser, [1])}
-                        <a use:inertia href={route('convocatorias.idi.index', [convocatoria.id])} class="text-violet-400 hover:text-violet-600"> I+D+i </a>
-                    {/if}
+                    <a use:inertia href={route('convocatorias.idi.index', [convocatoria.id])} class="text-violet-400 hover:text-violet-600"> I+D+i </a>
                     <span class="text-violet-400 font-medium">/</span>
                     Crear
                 </h1>
@@ -250,8 +249,8 @@
             </div>
         </fieldset>
 
-        <div class="px-8 py-4 bg-gray-100 border-t border-gray-200 flex items-center sticky bottom-0">
-            {#if isSuperAdmin || checkPermissionByUser(authUser, [1]) || checkPermission(authUser, [1])}
+        <div class="shadow-inner bg-violet-200 border-violet-400 bottom-0 flex items-center justify-between mt-14 px-8 py-4 sticky">
+            {#if allowedToCreate}
                 <LoadingButton loading={$form.processing} class="ml-auto" type="submit">
                     {$_('Continue')}
                 </LoadingButton>

@@ -205,7 +205,9 @@ class Ta extends Model
      */
     public static function getProyectosPorRol($convocatoria)
     {
+        /** @var \App\Models\User */
         $authUser = Auth::user();
+
         if ($authUser->hasRole(1)) {
             $ta = Ta::select('ta.id', 'ta.fecha_inicio', 'ta.fecha_finalizacion')
                 ->join('proyectos', 'ta.id', 'proyectos.id')

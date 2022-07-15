@@ -44,7 +44,7 @@
     })
 
     function submit() {
-        if (isSuperAdmin || (checkPermission(authUser, [1, 5, 8, 11, 17]) && proyecto.modificable == true)) {
+        if (proyecto.allowed.to_update) {
             $form.post(route('convocatorias.proyectos.presupuesto.store', [convocatoria.id, proyecto.id]))
         }
     }
@@ -67,9 +67,7 @@
         <div class="flex items-center justify-between lg:px-8 max-w-7xl mx-auto px-4 py-6 sm:px-6">
             <div>
                 <h1>
-                    {#if isSuperAdmin || checkPermission(authUser, [1, 5, 8, 11, 17])}
-                        <a use:inertia href={route('convocatorias.proyectos.presupuesto.index', [convocatoria.id, proyecto.id])} class="text-violet-400 hover:text-violet-600"> Presupuestos </a>
-                    {/if}
+                    <a use:inertia href={route('convocatorias.proyectos.presupuesto.index', [convocatoria.id, proyecto.id])} class="text-violet-400 hover:text-violet-600"> Presupuestos </a>
                     <span class="text-violet-400 font-medium">/</span>
                     Crear
                 </h1>
@@ -80,7 +78,7 @@
     <div class={presupuestoSennova?.requiere_estudio_mercado || $form.codigo_uso_presupuestal == '020202008005096' ? 'flex' : ''}>
         <div class="bg-white rounded shadow max-w-3xl">
             <form on:submit|preventDefault={submit}>
-                <fieldset class="p-8" disabled={isSuperAdmin || (checkPermission(authUser, [1, 5, 8, 11, 17]) && proyecto.modificable == true) ? undefined : true}>
+                <fieldset class="p-8" disabled={proyecto.allowed.to_update ? undefined : true}>
                     <div class="mt-4">
                         <Label required labelFor="segundo_grupo_presupuestal_id" value="Homologable 2018" />
                         <DynamicList id="segundo_grupo_presupuestal_id" bind:value={$form.segundo_grupo_presupuestal_id} routeWebApi={route('web-api.segundo-grupo-presupuestal', proyecto.linea_programatica)} placeholder="Busque por el homologable 2018" message={errors.segundo_grupo_presupuestal_id} required />
@@ -176,11 +174,13 @@
                         </div>
                     {/if}
                 </fieldset>
-                <div class="px-8 py-4 bg-gray-100 border-t border-gray-200 flex items-center sticky bottom-0">
-                    {#if isSuperAdmin || (checkPermission(authUser, [1, 5, 8, 11, 17]) && proyecto.modificable == true)}
+                <div class="shadow-inner bg-violet-200 border-violet-400 bottom-0 flex items-center justify-between mt-14 px-8 py-4 sticky">
+                    {#if proyecto.allowed.to_update}
                         {#if $form.convocatoria_presupuesto_id != '' || $form.convocatoria_presupuesto_id != ''}
                             <LoadingButton loading={$form.processing} class="ml-auto" type="submit">Crear presupuesto</LoadingButton>
                         {/if}
+                    {:else}
+                        <span class="inline-block ml-1.5"> El proyecto no se puede modificar </span>
                     {/if}
                 </div>
             </form>

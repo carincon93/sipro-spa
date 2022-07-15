@@ -215,7 +215,9 @@ class CulturaInnovacion extends Model
      */
     public static function getProyectosPorRol($convocatoria)
     {
+        /** @var \App\Models\User */
         $authUser = Auth::user();
+
         if ($authUser->hasRole(1)) {
             $culturaInnovacion = CulturaInnovacion::select('cultura_innovacion.id', 'cultura_innovacion.titulo', 'cultura_innovacion.fecha_inicio', 'cultura_innovacion.fecha_finalizacion')
                 ->join('proyectos', 'cultura_innovacion.id', 'proyectos.id')

@@ -130,7 +130,7 @@
                 <Label class="mb-4" labelFor="calibracion_prox_year" value="¿Para el próximo año el equipo necesita calibración?" />
                 <Select id="calibracion_prox_year" items={opcionesSiNo} bind:selectedValue={inventarioEquiposInfo.calibracion_prox_year} autocomplete="off" placeholder="Seleccione una opción" />
             </div>
-            <div class="px-8 py-4 bg-gray-100 border-t border-gray-200 flex items-center sticky bottom-0" />
+            <div class="shadow-inner bg-violet-200 border-violet-400 bottom-0 flex items-center justify-between mt-14 px-8 py-4 sticky" />
         </form>
     </div>
 </AuthenticatedLayout>

@@ -11,6 +11,8 @@
     import Textarea from '@/Shared/Textarea'
     import SelectMulti from '@/Shared/SelectMulti'
     import InfoMessage from '@/Shared/InfoMessage'
+    import LoadingButton from '@/Shared/LoadingButton'
+    import Export2Word from '@/Shared/Export2Word'
 
     import Header from './Shared/Header'
     import Form from './Form'
@@ -44,6 +46,7 @@
 
     let proyectoDialogOpen = true
     let dialogGuardar = false
+    let exportComponent
 
     let programasFormacionConRegistro = []
     let programasFormacionSinRegistro = []
@@ -205,7 +208,6 @@
         {listaBeneficiados}
         {roles}
         {programasFormacion}
-        {dialogGuardar}
     >
         <div class="mt-44 grid grid-cols-1">
             <div>
@@ -306,16 +308,17 @@
             </div>
         </div>
 
-        <div class="px-8 py-4 bg-gray-100 border-t border-gray-200 flex items-center justify-between sticky bottom-0" slot="buttons">
-            <small class="block leading-tight">{proyectoCapacidadInstalada.updated_at}</small>
-
-            {#if proyectoCapacidadInstalada.allowed.to_update}
-                <Button on:click={() => (dialogGuardar = true)} loading={$form.processing} class="ml-auto" type="button">¿Desea guardar la información?</Button>
-            {:else}
-                <span class="inline-block"> El proyecto no se puede modificar </span>
-            {/if}
+        <div class="shadow-inner bg-violet-200 border-violet-400 bottom-0 flex items-center justify-between mt-14 px-8 py-4 sticky" slot="buttons">
+            <small class="flex items-center text-violet-700">
+                <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 mr-2" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+                    <path stroke-linecap="round" stroke-linejoin="round" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z" />
+                </svg>
+                {proyectoCapacidadInstalada.updated_at}
+            </small>
+            <Button on:click={() => (dialogGuardar = true)} class="ml-auto" type="button">¿Desea guardar la información?</Button>
         </div>
     </Form>
+
     <Dialog bind:open={proyectoDialogOpen} id="informacion">
         <div slot="title" class="flex items-center flex-col mt-4">
             <figure>
@@ -345,6 +348,152 @@
                 <Button on:click={() => (proyectoDialogOpen = false)} variant={null}>Omitir</Button>
                 {#if proyectoCapacidadInstalada.allowed.to_update}
                     <Button variant="raised" on:click={() => (proyectoDialogOpen = false)} on:click={() => Inertia.visit('#beneficia_a')}>Continuar diligenciando</Button>
+                {/if}
+            </div>
+        </div>
+    </Dialog>
+
+    <Dialog bind:open={dialogGuardar}>
+        <div slot="title">
+            <div class="m-auto relative text-violet-600">
+                <figure>
+                    <img src="/images/megaphone.png" alt="" class="m-auto w-20" />
+                </figure>
+            </div>
+        </div>
+        <div slot="header-info" class="ml-10 shadow-md">
+            <InfoMessage>
+                Se recomienda que antes de dar clic en el botón <strong>Guardar</strong> descargue el borrador en archivo Word. De esta manera si ocurre un error al guardar puede recuperar la información registrada. Luego de descargar el borrador de clic en el botón <strong>Guardar</strong>. Revise que se muestra un mensaje en verde que dice '<strong>
+                    El recurso se ha modificado correctamente</strong
+                >'. Si después de unos segundos no se muestra el mensaje y al recargar el aplicativo observa que la información no se ha guardado por favor envie un correo a <a href="mailto:sgpssipro@sena.edu.co" class="underline">sgpssipro@sena.edu.co</a>
+                desde una cuenta <strong>@sena.edu.co</strong> y describa detalladamente lo ocurrido (Importante adjuntar el borrador e indicar el código del proyecto).
+            </InfoMessage>
+        </div>
+        <div slot="content">
+            <Export2Word id="borrador" showButton={false} bind:this={exportComponent}>
+                <h1 class="font-black text-center my-10">Información del proyecto</h1>
+                <p style="white-space: pre-line; margin-bottom: 4rem">
+                    <strong>Centro de formación:</strong>
+                    {$form.centro_formacion_id ? $form.centro_formacion_id?.label : 'Sin información registrada'}
+                </p>
+                <p style="white-space: pre-line; margin-bottom: 4rem">
+                    <strong>Línea de investigación:</strong>
+                    {$form.linea_investigacion_id ? $form.linea_investigacion_id?.label : 'Sin información registrada'}
+                </p>
+                <p style="white-space: pre-line; margin-bottom: 4rem;">
+                    <strong>Semillero de investigación:</strong>
+                    {$form.semillero_investigacion_id ? $form.semillero_investigacion_id?.label : 'Sin información registrada'}
+                </p>
+                <p style="white-space: pre-line; margin-bottom: 4rem;">
+                    <strong>Área de conocimiento:</strong>
+                    {$form.area_conocimiento_id ? $form.area_conocimiento_id?.label : 'Sin información registrada'}
+                </p>
+                <p style="white-space: pre-line; margin-bottom: 4rem;">
+                    <strong>Subárea de conocimiento:</strong>
+                    {$form.subarea_conocimiento_id ? $form.subarea_conocimiento_id?.label : 'Sin información registrada'}
+                </p>
+                <p style="white-space: pre-line; margin-bottom: 4rem;">
+                    <strong>Disciplina de la subárea de conocimiento:</strong>
+                    {$form.disciplina_subarea_conocimiento_id ? $form.disciplina_subarea_conocimiento_id?.label : 'Sin información registrada'}
+                </p>
+                <p style="white-space: pre-line; margin-bottom: 4rem;">
+                    <strong>Red de conocimiento:</strong>
+                    {$form.red_conocimiento_id ? $form.red_conocimiento_id?.label : 'Sin información registrada'}
+                </p>
+                <p style="white-space: pre-line; margin-bottom: 4rem;">
+                    <strong>Actividad económica:</strong>
+                    {$form.actividad_economica_id ? $form.actividad_economica_id?.label : 'Sin información registrada'}
+                </p>
+                <p style="white-space: pre-line; margin-bottom: 4rem;">
+                    <strong>Tipo de proyecto:</strong>
+                    {$form.tipo_proyecto_capacidad_instalada_id ? $form.tipo_proyecto_capacidad_instalada_id?.label : 'Sin información registrada'}
+                </p>
+                <p style="white-space: pre-line; margin-bottom: 4rem;">
+                    <strong>Subtipo de proyecto:</strong>
+                    {$form.subtipo_proyecto_capacidad_instalada_id ? $form.subtipo_proyecto_capacidad_instalada_id?.label : 'Sin información registrada'}
+                </p>
+                <p style="white-space: pre-line; margin-bottom: 4rem;">
+                    <strong>Descripción llamativa que orienta el enfoque del proyecto, indica el cómo y el para qué:</strong>
+                    {$form.titulo ? $form.titulo : 'Sin información registrada'}
+                </p>
+                <p style="white-space: pre-line; margin-bottom: 4rem">
+                    <strong>Fecha de ejecución:</strong>
+                    Del {$form.fecha_inicio + ' hasta ' + $form.fecha_finalizacion}
+                </p>
+                <p style="white-space: pre-line; margin-bottom: 4rem">
+                    <strong>El proyecto beneficiará a:</strong>
+                    <br />
+                    {$form.beneficia_a ? $form.beneficia_a?.label : 'Sin información registrada'}
+                </p>
+                <p style="white-space: pre-line; margin-bottom: 4rem">
+                    <strong>Planteamiento del problema</strong>
+                    <br />
+                    {$formPlanteamientoProblema.planteamiento_problema ? $formPlanteamientoProblema.planteamiento_problema : 'Sin información registrada'}
+                </p>
+                <p style="white-space: pre-line; margin-bottom: 4rem">
+                    <strong>Justificación</strong>
+                    <br />
+                    {$formJustificacion.justificacion ? $formJustificacion.justificacion : 'Sin información registrada'}
+                </p>
+                <p style="white-space: pre-line; margin-bottom: 4rem">
+                    <strong>Objetivo general</strong>
+                    <br />
+                    {$formObjetivoGeneral.objetivo_general ? $formObjetivoGeneral.objetivo_general : 'Sin información registrada'}
+                </p>
+                <p style="white-space: pre-line; margin-bottom: 4rem">
+                    <strong>Metodología</strong>
+                    <br />
+                    {$formMetodologia.metodologia ? $formMetodologia.metodologia : 'Sin información registrada'}
+                </p>
+                <p style="white-space: pre-line; margin-bottom: 4rem">
+                    <strong>Materiales de formación a utilizar</strong>
+                    <br />
+                    {$formMaterialesFormacion.materiales_formacion_a_usar ? $formMaterialesFormacion.materiales_formacion_a_usar : 'Sin información registrada'}
+                </p>
+                <p style="white-space: pre-line; margin-bottom: 4rem">
+                    <strong>Nombre de los programas de formación con registro calificado:</strong>
+                    <br />
+                    {#if $form.programas_formacion_registro_calificado}
+                        {#each $form.programas_formacion_registro_calificado as programa_formacion}
+                            <br />
+                            {programa_formacion.label}
+                        {/each}
+                    {:else}
+                        Sin información registrada
+                    {/if}
+                </p>
+                <p style="white-space: pre-line; margin-bottom: 4rem">
+                    <strong>Nombre de los programas de formación a los cuales está asociado el proyecto:</strong>
+                    <br />
+                    {#if $form.programas_formacion_sin_registro_calificado}
+                        {#each $form.programas_formacion_sin_registro_calificado as programa_formacion}
+                            <br />
+                            {programa_formacion.label}
+                        {/each}
+                    {:else}
+                        Sin información registrada
+                    {/if}
+                </p>
+                <p style="white-space: pre-line; margin-bottom: 4rem">
+                    <strong>Conclusiones</strong>
+                    <br />
+                    {$formConclusiones.conclusiones ? $formConclusiones.conclusiones : 'Sin información registrada'}
+                </p>
+                <p style="white-space: pre-line; margin-bottom: 4rem; word-wrap: break-word;">
+                    <strong>Bibliografía</strong>
+                    <br />
+                    {$formBibliografia.bibliografia ? $formBibliografia.bibliografia : 'Sin información registrada'}
+                </p>
+            </Export2Word>
+        </div>
+        <div slot="actions">
+            <div class="p-4">
+                <Button on:click={() => (dialogGuardar = false)} variant={null}>Cancelar</Button>
+                <Button variant="raised" type="button" on:click={() => exportComponent.export2Word(proyectoCapacidadInstalada.codigo)}>Descargar borrador en Word</Button>
+                {#if proyectoCapacidadInstalada.allowed.to_update}
+                    <LoadingButton loading={$form.processing} form="capacidad-instalada-form">Guardar</LoadingButton>
+                {:else}
+                    <span class="inline-block ml-1.5"> El proyecto no se puede modificar </span>
                 {/if}
             </div>
         </div>

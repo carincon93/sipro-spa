@@ -92,7 +92,7 @@
                     </td>
 
                     <td class="border-t td-actions">
-                        <DataTableMenu class={ambientesModernizacion.data.length < 4 ? 'z-50' : ''}>
+                        <DataTableMenu class={ambientesModernizacion.data.length < 3 ? 'z-50' : ''}>
                             {#if isSuperAdmin || checkRole(authUser, [4])}
                                 <Item on:SMUI:action={() => configurarDialogoSeguimiento(ambienteModernizacion)}>
                                     <Text>Revisar seguimientos</Text>

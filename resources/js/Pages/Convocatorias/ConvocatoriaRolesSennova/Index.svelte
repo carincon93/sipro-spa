@@ -64,7 +64,7 @@
                     </td>
 
                     <td class="border-t td-actions">
-                        <DataTableMenu class={convocatoriaRolesSennova.data.length < 4 ? 'z-50' : ''}>
+                        <DataTableMenu class={convocatoriaRolesSennova.data.length < 3 ? 'z-50' : ''}>
                             {#if isSuperAdmin}
                                 <Item on:SMUI:action={() => Inertia.visit(route('convocatorias.convocatoria-rol-sennova.edit', [convocatoria.id, convocatoriaRolSennova.id]))}>
                                     <Text>Ver detalles</Text>

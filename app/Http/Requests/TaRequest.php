@@ -112,13 +112,13 @@ class TaRequest extends FormRequest
                     'diseno_curricular_id' => $this->diseno_curricular_id['value'],
                 ]);
             } else {
-                $programasDisCurricular = [];
+                $programasDisenoCurricular = [];
                 foreach ($this->diseno_curricular_id as $programaFormacion) {
                     if (is_array($programaFormacion)) {
-                        array_push($programasDisCurricular, $programaFormacion['value']);
+                        array_push($programasDisenoCurricular, $programaFormacion['value']);
                     }
                 }
-                $this->merge(['diseno_curricular_id' => $programasDisCurricular]);
+                $this->merge(['diseno_curricular_id' => $programasDisenoCurricular]);
             }
         }
 

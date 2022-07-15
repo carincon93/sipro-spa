@@ -13,6 +13,7 @@ use App\Models\CentroFormacion;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Gate;
 use Illuminate\Support\Facades\Storage;
 use Inertia\Inertia;
 
@@ -26,9 +27,10 @@ class IdiController extends Controller
     public function index(Convocatoria $convocatoria)
     {
         return Inertia::render('Convocatorias/Proyectos/Idi/Index', [
-            'convocatoria'  => $convocatoria->only('id', 'esta_activa', 'fase_formateada', 'fase', 'tipo_convocatoria', 'tipo_convocatoria'),
-            'filters'       => request()->all('search', 'estructuracion_proyectos'),
-            'idi'           => Idi::getProyectosPorRol($convocatoria)->appends(['search' => request()->search, 'estructuracion_proyectos' => request()->estructuracion_proyectos]),
+            'convocatoria'      => $convocatoria->only('id', 'esta_activa', 'fase_formateada', 'fase', 'tipo_convocatoria', 'tipo_convocatoria'),
+            'filters'           => request()->all('search', 'estructuracion_proyectos'),
+            'idi'               => Idi::getProyectosPorRol($convocatoria)->appends(['search' => request()->search, 'estructuracion_proyectos' => request()->estructuracion_proyectos]),
+            'allowedToCreate'   => Gate::inspect('formular-proyecto', [3, $convocatoria])->allowed()
         ]);
     }
 
@@ -41,8 +43,11 @@ class IdiController extends Controller
     {
         $this->authorize('formular-proyecto', [3, $convocatoria]);
 
-        if (auth()->user()->hasRole(6)) {
-            $centrosFormacion = CentroFormacion::selectRaw('centros_formacion.id as value, concat(centros_formacion.nombre, chr(10), \'∙ Código: \', centros_formacion.codigo) as label')->where('centros_formacion.regional_id', auth()->user()->centroFormacion->regional->id)->orderBy('centros_formacion.nombre', 'ASC')->get();
+        /** @var \App\Models\User */
+        $authUser = Auth::user();
+
+        if ($authUser->hasRole(6)) {
+            $centrosFormacion = CentroFormacion::selectRaw('centros_formacion.id as value, concat(centros_formacion.nombre, chr(10), \'∙ Código: \', centros_formacion.codigo) as label')->where('centros_formacion.regional_id', $authUser->centroFormacion->regional->id)->orderBy('centros_formacion.nombre', 'ASC')->get();
         } else {
             $centrosFormacion = CentroFormacion::selectRaw('centros_formacion.id as value, concat(centros_formacion.nombre, chr(10), \'∙ Código: \', centros_formacion.codigo) as label')->orderBy('centros_formacion.nombre', 'ASC')->get();
         }
@@ -50,7 +55,8 @@ class IdiController extends Controller
         return Inertia::render('Convocatorias/Proyectos/Idi/Create', [
             'convocatoria'      => $convocatoria->only('id', 'esta_activa', 'fase_formateada', 'fase', 'tipo_convocatoria', 'min_fecha_inicio_proyectos_idi', 'max_fecha_finalizacion_proyectos_idi', 'fecha_maxima_idi'),
             'roles'             => collect(json_decode(Storage::get('json/roles-sennova-idi.json'), true)),
-            'centrosFormacion'  => $centrosFormacion
+            'centrosFormacion'  => $centrosFormacion,
+            'allowedToCreate'   => Gate::inspect('formular-proyecto', [3, $convocatoria])->allowed()
         ]);
     }
 
@@ -238,11 +244,7 @@ class IdiController extends Controller
      */
     public function destroy(Request $request, Convocatoria $convocatoria, Idi $idi)
     {
-        $this->authorize('modificar-proyecto-autor', [$idi->proyecto]);
-
-        if ($idi->proyecto->radicado) {
-            return back()->with('error', 'Un proyecto finalizado no se puede eliminar.');
-        }
+        $this->authorize('eliminar-proyecto-autor', [$idi->proyecto]);
 
         if (!Hash::check($request->password, Auth::user()->password)) {
             return back()

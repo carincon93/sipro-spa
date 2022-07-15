@@ -56,7 +56,7 @@
                         </p>
                     </td>
                     <td class="border-t td-actions">
-                        <DataTableMenu class={tercerGrupoPresupuestal.data.length < 4 ? 'z-50' : ''}>
+                        <DataTableMenu class={tercerGrupoPresupuestal.data.length < 3 ? 'z-50' : ''}>
                             {#if isSuperAdmin}
                                 <Item on:SMUI:action={() => Inertia.visit(route('tercer-grupo-presupuestal.edit', rubro.id))}>
                                     <Text>Ver detalles</Text>

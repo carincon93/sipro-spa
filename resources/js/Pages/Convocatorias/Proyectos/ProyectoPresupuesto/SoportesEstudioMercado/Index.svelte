@@ -30,15 +30,11 @@
         <div class="flex items-center justify-between lg:px-8 max-w-7xl mx-auto px-4 py-6 sm:px-6">
             <div>
                 <h1 class="flex">
-                    {#if isSuperAdmin || checkPermission(authUser, [1, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 17, 18, 19, 14, 15, 16, 20, 21])}
-                        <a use:inertia href={route('convocatorias.proyectos.presupuesto.index', [convocatoria.id, proyecto.id])} class="text-violet-400 hover:text-violet-600 overflow-ellipsis overflow-hidden w-breadcrumb-ellipsis whitespace-nowrap inline-block"> Presupuesto </a>
-                    {/if}
+                    <a use:inertia href={route('convocatorias.proyectos.presupuesto.index', [convocatoria.id, proyecto.id])} class="text-violet-400 hover:text-violet-600 overflow-ellipsis overflow-hidden w-breadcrumb-ellipsis whitespace-nowrap inline-block"> Presupuesto </a>
                     <span class="text-violet-400 font-medium ml-2 mr-2">/</span>
-                    {#if isSuperAdmin || checkPermission(authUser, [1, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 17, 18, 19, 14, 15, 16, 20, 21])}
-                        <a use:inertia href={route('convocatorias.proyectos.presupuesto.edit', [convocatoria.id, proyecto.id, proyectoPresupuesto.id])} class="text-violet-400 hover:text-violet-600 overflow-ellipsis overflow-hidden w-breadcrumb-ellipsis whitespace-nowrap inline-block">
-                            {proyectoPresupuesto.convocatoria_presupuesto.presupuesto_sennova.uso_presupuestal.descripcion}
-                        </a>
-                    {/if}
+                    <a use:inertia href={route('convocatorias.proyectos.presupuesto.edit', [convocatoria.id, proyecto.id, proyectoPresupuesto.id])} class="text-violet-400 hover:text-violet-600 overflow-ellipsis overflow-hidden w-breadcrumb-ellipsis whitespace-nowrap inline-block">
+                        {proyectoPresupuesto.convocatoria_presupuesto.presupuesto_sennova.uso_presupuestal.descripcion}
+                    </a>
                     <span class="text-violet-400 font-medium ml-2 mr-2">/</span>
                     Soportes
                 </h1>
@@ -59,7 +55,7 @@
 
         <div>
             <div class="mb-6 flex justify-end items-center">
-                {#if isSuperAdmin || (checkPermission(authUser, [1, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 17, 18, 19]) && proyecto.modificable == true)}
+                {#if proyecto.allowed.to_update}
                     <Button on:click={() => Inertia.visit(route('convocatorias.proyectos.presupuesto.soportes.create', [convocatoria.id, proyecto.id, proyectoPresupuesto.id]))}>
                         <div>
                             <span>Crear</span>
@@ -91,16 +87,10 @@
                             </td>
 
                             <td class="border-t px-6 pt-6 pb-4">
-                                <DataTableMenu class={soportesEstudioMercado.data.length < 4 ? 'z-50' : ''}>
-                                    {#if isSuperAdmin || (checkPermission(authUser, [1, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 17, 18, 19, 14, 15, 16, 20, 21]) && proyecto.modificable == true)}
-                                        <Item on:SMUI:action={() => Inertia.visit(route('convocatorias.proyectos.presupuesto.soportes.edit', [convocatoria.id, proyecto.id, proyectoPresupuesto.id, soporte.id]))}>
-                                            <Text>Ver detalles</Text>
-                                        </Item>
-                                    {:else}
-                                        <Item>
-                                            <Text>No tiene permisos</Text>
-                                        </Item>
-                                    {/if}
+                                <DataTableMenu class={soportesEstudioMercado.data.length < 3 ? 'z-50' : ''}>
+                                    <Item on:SMUI:action={() => Inertia.visit(route('convocatorias.proyectos.presupuesto.soportes.edit', [convocatoria.id, proyecto.id, proyectoPresupuesto.id, soporte.id]))}>
+                                        <Text>Ver detalles</Text>
+                                    </Item>
                                 </DataTableMenu>
                             </td>
                         </tr>

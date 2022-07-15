@@ -215,7 +215,7 @@ class ProyectoController extends Controller
 
         return Inertia::render('Convocatorias/Proyectos/CadenaValor/Index', [
             'convocatoria'  => $convocatoria->only('id', 'esta_activa', 'fase_formateada', 'fase', 'tipo_convocatoria', 'tipo_convocatoria', 'mostrar_recomendaciones'),
-            'proyecto'      => $proyecto->only('id', 'codigo_linea_programatica', 'precio_proyecto', 'propuesta_sostenibilidad', 'propuesta_sostenibilidad_social', 'propuesta_sostenibilidad_ambiental', 'propuesta_sostenibilidad_financiera', 'modificable', 'en_subsanacion', 'evaluaciones', 'mostrar_recomendaciones', 'PdfVersiones', 'all_files'),
+            'proyecto'      => $proyecto->only('id', 'codigo_linea_programatica', 'precio_proyecto', 'propuesta_sostenibilidad', 'propuesta_sostenibilidad_social', 'propuesta_sostenibilidad_ambiental', 'propuesta_sostenibilidad_financiera', 'modificable', 'en_subsanacion', 'evaluaciones', 'mostrar_recomendaciones', 'PdfVersiones', 'all_files', 'allowed', 'updated_at'),
             'productos'     => $productos,
             'objetivos'     => $objetivos,
             'to_pdf'            => ($request->to_pdf == 1) ? true : false
@@ -508,7 +508,7 @@ class ProyectoController extends Controller
 
         return Inertia::render('Convocatorias/Proyectos/Summary', [
             'convocatoria'              => $convocatoria->only('id', 'esta_activa', 'fase_formateada', 'fase', 'tipo_convocatoria', 'min_fecha_inicio_proyectos', 'max_fecha_finalizacion_proyectos'),
-            'proyecto'                  => $proyecto->only('id', 'precio_proyecto', 'codigo_linea_programatica', 'logs', 'finalizado', 'modificable', 'habilitado_para_evaluar', 'max_valor_roles', 'max_valor_presupuesto', 'mostrar_recomendaciones', 'PdfVersiones', 'all_files'),
+            'proyecto'                  => $proyecto->only('id', 'precio_proyecto', 'codigo_linea_programatica', 'logs', 'finalizado', 'modificable', 'habilitado_para_evaluar', 'max_valor_roles', 'max_valor_presupuesto', 'mostrar_recomendaciones', 'PdfVersiones', 'all_files', 'allowed'),
             'problemaCentral'           => ProyectoValidationTrait::problemaCentral($proyecto),
             'efectosDirectos'           => ProyectoValidationTrait::efectosDirectos($proyecto),
             'causasIndirectas'          => ProyectoValidationTrait::causasIndirectas($proyecto),
@@ -747,6 +747,7 @@ class ProyectoController extends Controller
         $proyecto->participantes;
         $proyecto->programasFormacion;
         $proyecto->semillerosInvestigacion;
+        $proyecto->PdfVersiones;
 
         if ($proyecto->codigo_linea_programatica == 70) {
             return redirect()->route('convocatorias.ta.edit', [$convocatoria, $proyecto])->with('error', 'Esta línea programática no requiere de participantes');
@@ -765,11 +766,9 @@ class ProyectoController extends Controller
         $proyecto->load('participantes.centroFormacion.regional');
         $proyecto->load('semillerosInvestigacion.lineaInvestigacion.grupoInvestigacion');
 
-        $proyecto->PdfVersiones;
-
         return Inertia::render('Convocatorias/Proyectos/Participantes/Index', [
             'convocatoria'          => $convocatoria,
-            'proyecto'              => $proyecto->only('id', 'codigo_linea_programatica', 'precio_proyecto', 'modificable', 'diff_meses', 'participantes', 'semillerosInvestigacion', 'mostrar_recomendaciones', 'PdfVersiones', 'all_files'),
+            'proyecto'              => $proyecto->only('id', 'codigo_linea_programatica', 'precio_proyecto', 'modificable', 'diff_meses', 'participantes', 'semillerosInvestigacion', 'mostrar_recomendaciones', 'PdfVersiones', 'all_files', 'allowed'),
             'tiposDocumento'        => json_decode(Storage::get('json/tipos-documento.json'), true),
             'tiposVinculacion'      => json_decode(Storage::get('json/tipos-vinculacion.json'), true),
             'roles'                 => $rolesSennova,
@@ -856,6 +855,8 @@ class ProyectoController extends Controller
      */
     public function linkParticipante(ProponenteRequest $request, Convocatoria $convocatoria, Proyecto $proyecto)
     {
+        $this->authorize('modificar-proyecto-autor', [$proyecto]);
+
         $data = $request->only('cantidad_horas', 'cantidad_meses', 'rol_sennova');
 
         if (is_array($data['rol_sennova'])) {
@@ -886,6 +887,8 @@ class ProyectoController extends Controller
      */
     public function unlinkParticipante(Request $request, Convocatoria $convocatoria, Proyecto $proyecto)
     {
+        $this->authorize('modificar-proyecto-autor', [$proyecto]);
+
         $request->validate(['user_id' => 'required']);
 
         try {
@@ -910,6 +913,8 @@ class ProyectoController extends Controller
      */
     public function updateParticipante(ProponenteRequest $request, Convocatoria $convocatoria, Proyecto $proyecto)
     {
+        $this->authorize('modificar-proyecto-autor', [$proyecto]);
+
         $data = $request->only('cantidad_horas', 'cantidad_meses', 'rol_sennova');
 
         try {
@@ -935,7 +940,7 @@ class ProyectoController extends Controller
      */
     public function registerParticipante(NuevoProponenteRequest $request, Convocatoria $convocatoria, Proyecto $proyecto)
     {
-        $this->authorize('visualizar-proyecto-autor', $proyecto);
+        $this->authorize('modificar-proyecto-autor', [$proyecto]);
 
         $user = new User();
 
@@ -997,6 +1002,8 @@ class ProyectoController extends Controller
      */
     public function linkSemilleroInvestigacion(Request $request, Convocatoria $convocatoria, Proyecto $proyecto)
     {
+        $this->authorize('modificar-proyecto-autor', [$proyecto]);
+
         $request->validate(['semillero_investigacion_id' => 'required']);
 
         try {
@@ -1022,6 +1029,8 @@ class ProyectoController extends Controller
      */
     public function unlinkSemilleroInvestigacion(Request $request, Convocatoria $convocatoria, Proyecto $proyecto)
     {
+        $this->authorize('modificar-proyecto-autor', [$proyecto]);
+
         $request->validate(['semillero_investigacion_id' => 'required']);
 
         try {
@@ -1073,6 +1082,8 @@ class ProyectoController extends Controller
      */
     public function linkProgramaFormacion(Request $request, Convocatoria $convocatoria, Proyecto $proyecto)
     {
+        $this->authorize('modificar-proyecto-autor', [$proyecto]);
+
         $request->validate(['programa_formacion_id' => 'required']);
 
         try {
@@ -1098,6 +1109,8 @@ class ProyectoController extends Controller
      */
     public function unlinkProgramaFormacion(Request $request, Convocatoria $convocatoria, Proyecto $proyecto)
     {
+        $this->authorize('modificar-proyecto-autor', [$proyecto]);
+
         $request->validate(['programa_formacion_id' => 'required']);
 
         try {
@@ -1135,6 +1148,8 @@ class ProyectoController extends Controller
      */
     public function storeProgramaFormacion(ProgramaFormacionRequest $request, Convocatoria $convocatoria, Proyecto $proyecto)
     {
+        $this->authorize('modificar-proyecto-autor', [$proyecto]);
+
         $programaFormacion = new ProgramaFormacion();
         $programaFormacion->nombre              = $request->nombre;
         $programaFormacion->codigo              = $request->codigo;

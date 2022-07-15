@@ -60,7 +60,7 @@
                         </p>
                     </td>
                     <td class="border-t td-actions">
-                        <DataTableMenu class={reglasRolesTp.data.length < 4 ? 'z-50' : ''}>
+                        <DataTableMenu class={reglasRolesTp.data.length < 3 ? 'z-50' : ''}>
                             {#if isSuperAdmin}
                                 <Item on:SMUI:action={() => Inertia.visit(route('reglas-roles-tp.edit', reglaRolTp.id))}>
                                     <Text>Ver detalles</Text>

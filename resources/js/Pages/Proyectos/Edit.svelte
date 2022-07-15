@@ -189,7 +189,7 @@
                 {/if}
             </fieldset>
 
-            <div class="px-8 py-4 bg-gray-100 border-t border-gray-200 flex items-center sticky bottom-0">
+            <div class="shadow-inner bg-violet-200 border-violet-400 bottom-0 flex items-center justify-between mt-14 px-8 py-4 sticky">
                 {#if isSuperAdmin || checkRole(authUser, [20, 18, 19, 5, 17])}
                     <LoadingButton loading={$form.processing} class="ml-auto" type="submit">Guardar</LoadingButton>
                 {/if}

@@ -77,7 +77,7 @@
                     </td>
 
                     <td class="border-t td-actions">
-                        <DataTableMenu class={presupuestoSennova.data.length < 4 ? 'z-50' : ''}>
+                        <DataTableMenu class={presupuestoSennova.data.length < 3 ? 'z-50' : ''}>
                             {#if isSuperAdmin}
                                 <Item on:SMUI:action={() => Inertia.visit(route('presupuesto-sennova.edit', rubroPresupuestal.id))}>
                                     <Text>Ver detalles</Text>

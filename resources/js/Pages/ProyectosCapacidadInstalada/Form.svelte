@@ -7,23 +7,12 @@
     import Select from '@/Shared/Select'
     import InfoMessage from '@/Shared/InfoMessage'
     import Input from '@/Shared/Input'
-    import Dialog from '@/Shared/Dialog'
-    import Button from '@/Shared/Button'
-    import LoadingButton from '@/Shared/LoadingButton'
-    import Export2Word from '@/Shared/Export2Word'
 
     export let id
     export let submit
     export let proyectoCapacidadInstalada
     export let errors
     export let form
-    export let formPlanteamientoProblema
-    export let formJustificacion
-    export let formObjetivoGeneral
-    export let formMetodologia
-    export let formMaterialesFormacion
-    export let formConclusiones
-    export let formBibliografia
     export let centrosFormacion
     export let lineasInvestigacion
     export let semillerosInvestigacion = []
@@ -36,11 +25,7 @@
     export let subtiposProyectoCapacidadInstalada = []
     export let listaBeneficiados
     export let roles
-    export let dialogGuardar = false
     export let allowedToCreate
-    export let method = null
-
-    let exportComponent
 
     let oldLineaInvestigacionIdValue = null
     let arraySemillerosInvestigacion = semillerosInvestigacion
@@ -269,151 +254,7 @@
                 {/if}
             </div>
         </div>
+
+        <slot name="buttons" />
     </fieldset>
-
-    <slot name="buttons" />
 </form>
-
-<Dialog bind:open={dialogGuardar}>
-    <div slot="title">
-        <div class="relative bg-violet-100 text-violet-600 p-5 h-36 w-1/3 m-auto my-10" style="border-radius: 41% 59% 70% 30% / 32% 40% 60% 68% ;">
-            <figure>
-                <img src="/images/megaphone.png" alt="" class="m-auto" />
-            </figure>
-        </div>
-    </div>
-    <div slot="header-info" class="ml-4">
-        <InfoMessage>
-            Se recomienda que antes de dar clic en el botón <strong>Guardar</strong> descargue el borrador en archivo Word. De esta manera si ocurre un error al guardar puede recuperar la información registrada. Luego de descargar el borrador de clic en el botón <strong>Guardar</strong>. Revise que se muestra un mensaje en verde que dice '<strong>
-                El recurso se ha modificado correctamente</strong
-            >'. Si después de unos segundos no se muestra el mensaje y al recargar el aplicativo observa que la información no se ha guardado por favor envie un correo a <a href="mailto:sgpssipro@sena.edu.co" class="underline">sgpssipro@sena.edu.co</a>
-            desde una cuenta <strong>@sena.edu.co</strong> y describa detalladamente lo ocurrido (Importante adjuntar el borrador e indicar el código del proyecto).
-        </InfoMessage>
-    </div>
-    <div slot="content">
-        <Export2Word id="borrador" showButton={false} bind:this={exportComponent}>
-            <h1 class="font-black text-center my-10">Información del proyecto</h1>
-            <p style="white-space: pre-line; margin-bottom: 4rem">
-                <strong>Centro de formación:</strong>
-                {$form.centro_formacion_id?.label}
-            </p>
-            <p style="white-space: pre-line; margin-bottom: 4rem">
-                <strong>Línea de investigación:</strong>
-                {$form.linea_investigacion_id?.label}
-            </p>
-            <p style="white-space: pre-line; margin-bottom: 4rem;">
-                <strong>Semillero de investigación:</strong>
-                {$form.semillero_investigacion_id?.label}
-            </p>
-            <p style="white-space: pre-line; margin-bottom: 4rem;">
-                <strong>Área de conocimiento:</strong>
-                {$form.area_conocimiento_id?.label}
-            </p>
-            <p style="white-space: pre-line; margin-bottom: 4rem;">
-                <strong>Subárea de conocimiento:</strong>
-                {$form.subarea_conocimiento_id?.label}
-            </p>
-            <p style="white-space: pre-line; margin-bottom: 4rem;">
-                <strong>Disciplina de la subárea de conocimiento:</strong>
-                {$form.disciplina_subarea_conocimiento_id?.label}
-            </p>
-            <p style="white-space: pre-line; margin-bottom: 4rem;">
-                <strong>Red de conocimiento:</strong>
-                {$form.red_conocimiento_id?.label}
-            </p>
-            <p style="white-space: pre-line; margin-bottom: 4rem;">
-                <strong>Actividad económica:</strong>
-                {$form.actividad_economica_id?.label}
-            </p>
-            <p style="white-space: pre-line; margin-bottom: 4rem;">
-                <strong>Tipo de proyecto:</strong>
-                {$form.tipo_proyecto_capacidad_instalada_id?.label}
-            </p>
-            <p style="white-space: pre-line; margin-bottom: 4rem;">
-                <strong>Subtipo de proyecto:</strong>
-                {$form.subtipo_proyecto_capacidad_instalada_id?.label}
-            </p>
-            <p style="white-space: pre-line; margin-bottom: 4rem;">
-                <strong>Descripción llamativa que orienta el enfoque del proyecto, indica el cómo y el para qué:</strong>
-                {$form.titulo}
-            </p>
-            <p style="white-space: pre-line; margin-bottom: 4rem">
-                <strong>Fecha de ejecución:</strong>
-                Del {$form.fecha_inicio + ' hasta ' + $form.fecha_finalizacion}
-            </p>
-            <p style="white-space: pre-line; margin-bottom: 4rem">
-                <strong>El proyecto beneficiará a:</strong>
-                <br />
-                {$form.beneficia_a?.label}
-            </p>
-            <p style="white-space: pre-line; margin-bottom: 4rem">
-                <strong>Planteamiento del problema</strong>
-                <br />
-                {$formPlanteamientoProblema.planteamiento_problema}
-            </p>
-            <p style="white-space: pre-line; margin-bottom: 4rem">
-                <strong>Justificación</strong>
-                <br />
-                {$formJustificacion.justificacion}
-            </p>
-            <p style="white-space: pre-line; margin-bottom: 4rem">
-                <strong>Objetivo general</strong>
-                <br />
-                {$formObjetivoGeneral.objetivo_general}
-            </p>
-            <p style="white-space: pre-line; margin-bottom: 4rem">
-                <strong>Metodología</strong>
-                <br />
-                {$formMetodologia.metodologia}
-            </p>
-            <p style="white-space: pre-line; margin-bottom: 4rem">
-                <strong>Materiales de formación a utilizar</strong>
-                <br />
-                {$formMaterialesFormacion.materiales_formacion_a_usar}
-            </p>
-            <p style="white-space: pre-line; margin-bottom: 4rem">
-                <strong>Nombre de los programas de formación con registro calificado:</strong>
-                <br />
-                {#if $form.programas_formacion_registro_calificado}
-                    {#each $form.programas_formacion_registro_calificado as programa_formacion}
-                        <br />
-                        {programa_formacion.label}
-                    {/each}
-                {:else}
-                    Sin información registrada
-                {/if}
-            </p>
-            <p style="white-space: pre-line; margin-bottom: 4rem">
-                <strong>Nombre de los programas de formación a los cuales está asociado el proyecto:</strong>
-                <br />
-                {#if $form.programas_formacion_sin_registro_calificado}
-                    {#each $form.programas_formacion_sin_registro_calificado as programa_formacion}
-                        <br />
-                        {programa_formacion.label}
-                    {/each}
-                {:else}
-                    Sin información registrada
-                {/if}
-            </p>
-            <p style="white-space: pre-line; margin-bottom: 4rem">
-                <strong>Conclusiones</strong>
-                <br />
-                {$formConclusiones.conclusiones}
-            </p>
-            <p style="white-space: pre-line; margin-bottom: 4rem">
-                <strong>Bibliografía</strong>
-                <br />
-                {$formBibliografia.bibliografia}
-            </p>
-        </Export2Word>
-    </div>
-    <div slot="actions">
-        <div class="p-4">
-            <Button on:click={() => (dialogGuardar = false)} variant={null}>Cancelar</Button>
-            <Button variant="raised" type="button" on:click={() => exportComponent.export2Word(proyectoCapacidadInstalada.codigo)}>Descargar borrador en Word</Button>
-            {#if proyectoCapacidadInstalada?.allowed.to_update || allowedToCreate}
-                <LoadingButton loading={$form.processing} form="capacidad-instalada-form">Guardar</LoadingButton>
-            {/if}
-        </div>
-    </div>
-</Dialog>

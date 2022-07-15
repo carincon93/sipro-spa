@@ -31,7 +31,7 @@
 
     let sended = false
     function submit() {
-        if (isSuperAdmin || (checkPermission(authUser, [1, 3, 4, 8, 9, 10, 11, 12, 13, 17, 18, 19]) && proyecto.modificable == true)) {
+        if (proyecto.allowed.to_update) {
             sended = false
             try {
                 axios
@@ -46,7 +46,7 @@
     }
 
     function linkSemilleroInvestigacion(id) {
-        if (isSuperAdmin || (checkPermission(authUser, [1, 3, 4, 8, 9, 10, 11, 12, 13, 17, 18, 19]) && proyecto.modificable == true)) {
+        if (proyecto.allowed.to_update) {
             Inertia.post(
                 route('convocatorias.proyectos.participantes.semilleros-investigacion.link', {
                     proyecto: proyecto.id,
@@ -59,7 +59,7 @@
     }
 
     function removeSemilleroInvestigacion(id) {
-        if (isSuperAdmin || (checkPermission(authUser, [1, 3, 4, 8, 9, 10, 11, 12, 13, 17, 18, 19]) && proyecto.modificable == true)) {
+        if (proyecto.allowed.to_update) {
             Inertia.post(
                 route('convocatorias.proyectos.participantes.semilleros-investigacion.unlink', {
                     proyecto: proyecto.id,
@@ -76,7 +76,7 @@
     <h1 class="text-4xl text-center">Semilleros de investigación</h1>
     <p class="text-center w-1/3 m-auto mt-8">Realice la búsqueda de semilleros de investigación</p>
     <form on:submit|preventDefault={submit} on:input={() => (sended = false)}>
-        <fieldset disabled={isSuperAdmin || (checkPermission(authUser, [1, 3, 4, 8, 9, 10, 11, 12, 13, 17, 18, 19]) && proyecto.modificable == true) ? undefined : true}>
+        <fieldset disabled={proyecto.allowed.to_update ? undefined : true}>
             <div class="mt-4 flex flex-row">
                 <Input label="Escriba el nombre completo del semillero de investigación" id="search_semillero_investigacion" type="search" class="mt-1 m-auto block flex-1" bind:value={$form.search_semillero_investigacion} input$minLength="4" autocomplete="off" required />
                 <LoadingButton loading={$form.processing} class="m-auto ml-1" type="submit">Buscar</LoadingButton>
@@ -116,8 +116,8 @@
                                 </p>
                             </td>
                             <td class="border-t td-actions">
-                                <DataTableMenu class={resultados.length < 4 ? 'z-50' : ''}>
-                                    {#if isSuperAdmin || (checkPermission(authUser, [1, 3, 4, 8, 9, 10, 11, 12, 13, 17, 18, 19]) && proyecto.modificable == true)}
+                                <DataTableMenu class={resultados.length < 3 ? 'z-50' : ''}>
+                                    {#if proyecto.allowed.to_update}
                                         <Item on:SMUI:action={() => linkSemilleroInvestigacion(resultado.id)}>
                                             <Text>Vincular</Text>
                                         </Item>
@@ -172,8 +172,8 @@
                         </p>
                     </td>
                     <td class="border-t td-actions">
-                        <DataTableMenu class={proyecto.semillerosInvestigacion.length < 4 ? 'z-50' : ''}>
-                            {#if isSuperAdmin || (checkPermission(authUser, [1, 3, 4, 8, 9, 10, 11, 12, 13, 17, 18, 19]) && proyecto.modificable == true)}
+                        <DataTableMenu class={proyecto.semillerosInvestigacion.length < 3 ? 'z-50' : ''}>
+                            {#if proyecto.allowed.to_update}
                                 <Item on:SMUI:action={() => removeSemilleroInvestigacion(semilleroInvestigacion.id)}>
                                     <Text>Quitar</Text>
                                 </Item>

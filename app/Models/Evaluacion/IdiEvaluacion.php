@@ -134,29 +134,23 @@ class IdiEvaluacion extends Model
      */
     public static function getProyectosPorEvaluador($convocatoria)
     {
+        /** @var \App\Models\User */
         $authUser = Auth::user();
 
-        if ($authUser->hasRole(1) || $authUser->hasRole(18)) { // Admin
-            $idi = Idi::select('evaluaciones.id as evaluacion_id', 'evaluaciones.habilitado', 'evaluaciones.iniciado', 'evaluaciones.finalizado', 'idi.id', 'idi.titulo', 'idi.fecha_inicio', 'idi.fecha_finalizacion')
-                ->join('proyectos', 'idi.id', 'proyectos.id')
-                ->join('evaluaciones', 'evaluaciones.proyecto_id', 'proyectos.id')
-                ->where('proyectos.convocatoria_id', $convocatoria->id)
-                ->where('proyectos.en_evaluacion', true)
-                ->distinct()
-                ->orderBy('idi.id', 'ASC')
-                ->filterIdi(request()->only('search'))->paginate();
-        } else if ($authUser->hasRole(11)) { // Evaluador
-            $idi = Idi::select('evaluaciones.id as evaluacion_id', 'evaluaciones.habilitado', 'evaluaciones.iniciado', 'evaluaciones.finalizado', 'idi.id', 'idi.titulo', 'idi.fecha_inicio', 'idi.fecha_finalizacion')
-                ->join('proyectos', 'idi.id', 'proyectos.id')
-                ->join('evaluaciones', 'evaluaciones.proyecto_id', 'proyectos.id')
-                ->where('proyectos.convocatoria_id', $convocatoria->id)
-                ->where('evaluaciones.user_id', $authUser->id)
-                ->where('proyectos.en_evaluacion', true)
-                ->distinct()
-                ->orderBy('idi.id', 'ASC')
-                ->filterIdi(request()->only('search'))->paginate();
-        }
-        $idi->load('proyecto');
-        return $idi;
+        $evaluaciones = Evaluacion::select('evaluaciones.*')->join('proyectos', 'evaluaciones.proyecto_id', 'proyectos.id')
+            ->join('idi', 'proyectos.id', 'idi.id')
+            ->where(function ($query) use ($convocatoria, $authUser) {
+                $query->where('proyectos.convocatoria_id', $convocatoria->id);
+                $query->where('proyectos.en_evaluacion', true);
+                if ($authUser->hasRole(11) && !$authUser->hasRole(1)) {
+                    $query->where('evaluaciones.user_id', $authUser->id);
+                }
+            })
+            ->orderBy('idi.id', 'ASC')
+            ->paginate();
+
+        $evaluaciones->load('proyecto.idi');
+
+        return $evaluaciones;
     }
 }

@@ -108,7 +108,7 @@
     }
 
     function submitImpacto() {
-        if (isSuperAdmin || (checkPermission(authUser, [1, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 17, 18, 19]) && proyecto.modificable == true)) {
+        if (proyecto.allowed.to_update) {
             $formImpacto.post(
                 route('proyectos.impacto', {
                     proyecto: proyecto.id,
@@ -126,7 +126,7 @@
     }
 
     function destroyImpacto(impacto) {
-        if (isSuperAdmin || (checkPermission(authUser, [1, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 17, 18, 19]) && proyecto.modificable == true)) {
+        if (proyecto.allowed.to_update) {
             Inertia.post(route('proyectos.impacto.destroy', [proyecto.id, impacto.id]), [], { preserveScroll: true })
         }
     }
@@ -162,7 +162,7 @@
     }
 
     function submitResult() {
-        if (isSuperAdmin || (checkPermission(authUser, [1, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 17, 18, 19]) && proyecto.modificable == true)) {
+        if (proyecto.allowed.to_update) {
             $formResultado.post(
                 route('proyectos.resultado', {
                     proyecto: proyecto.id,
@@ -180,7 +180,7 @@
     }
 
     function destroyResultado(resultado) {
-        if (isSuperAdmin || (checkPermission(authUser, [1, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 17, 18, 19]) && proyecto.modificable == true)) {
+        if (proyecto.allowed.to_update) {
             Inertia.post(route('proyectos.resultado.destroy', [proyecto.id, resultado.id]), [], { preserveScroll: true })
         }
     }
@@ -205,7 +205,7 @@
     }
 
     function submitObjetivoGeneral() {
-        if (isSuperAdmin || (checkPermission(authUser, [1, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 17, 18, 19]) && proyecto.modificable == true)) {
+        if (proyecto.allowed.to_update) {
             $formObjetivoGeneral.post(route('proyectos.objetivo-general', proyecto.id), {
                 onSuccess: () => {
                     closeDialog()
@@ -241,7 +241,7 @@
     }
 
     function submitObjetivoEspecifico() {
-        if (isSuperAdmin || (checkPermission(authUser, [1, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 17, 18, 19]) && proyecto.modificable == true)) {
+        if (proyecto.allowed.to_update) {
             $formObjetivoEspecifico.post(
                 route('proyectos.objetivo-especifico', {
                     proyecto: proyecto.id,
@@ -259,7 +259,7 @@
     }
 
     function destroyObjetivoEspecifico(objetivoEspecifico) {
-        if (isSuperAdmin || (checkPermission(authUser, [1, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 17, 18, 19]) && proyecto.modificable == true)) {
+        if (proyecto.allowed.to_update) {
             Inertia.post(route('proyectos.objetivo-especifico.destroy', [proyecto.id, objetivoEspecifico.id]), [], { preserveScroll: true })
         }
     }
@@ -301,7 +301,7 @@
     // typeof resultadosFiltrados.find((item) => item.label == null) == 'object'
 
     function submitActividad() {
-        if (isSuperAdmin || (checkPermission(authUser, [1, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 17, 18, 19]) && proyecto.modificable == true)) {
+        if (proyecto.allowed.to_update) {
             if ((typeof resultadosFiltrados.find((item) => item.label == null) == 'object') == false) {
                 $formActividad.post(
                     route('proyectos.actividad', {
@@ -321,7 +321,7 @@
     }
 
     function destroyActividad(actividad) {
-        if (isSuperAdmin || (checkPermission(authUser, [1, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 17, 18, 19]) && proyecto.modificable == true)) {
+        if (proyecto.allowed.to_update) {
             Inertia.post(route('proyectos.actividad.destroy', [proyecto.id, actividad.id]), [], { preserveScroll: true })
         }
     }
@@ -545,7 +545,7 @@
                                                 {/if}
                                             </p>
                                         </div>
-                                        {#if efectoIndirecto.impacto.descripcion != null && proyecto.modificable && proyecto.codigo_linea_programatica != 70}
+                                        {#if efectoIndirecto.impacto.descripcion != null && proyecto.allowed.to_update && proyecto.codigo_linea_programatica != 70}
                                             <Dropdown class="absolute bottom-1.5" placement="bottom-end">
                                                 <div class="flex items-center cursor-pointer select-none group">
                                                     <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
@@ -607,7 +607,7 @@
                                             </p>
                                         </div>
                                     </div>
-                                    {#if resultado.descripcion != null && proyecto.modificable && proyecto.codigo_linea_programatica != 70}
+                                    {#if resultado.descripcion != null && proyecto.allowed.to_update && proyecto.codigo_linea_programatica != 70}
                                         <Dropdown class="absolute bottom-1.5" placement="bottom-end">
                                             <div class="flex items-center cursor-pointer select-none group">
                                                 <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
@@ -675,7 +675,7 @@
                                     {/if}
                                 </p>
                             </div>
-                            {#if causaDirecta.objetivo_especifico.descripcion != null && proyecto.modificable && proyecto.codigo_linea_programatica != 70}
+                            {#if causaDirecta.objetivo_especifico.descripcion != null && proyecto.allowed.to_update && proyecto.codigo_linea_programatica != 70}
                                 <Dropdown class="absolute bottom-1.5" placement="bottom-end">
                                     <div class="flex items-center cursor-pointer select-none group">
                                         <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
@@ -720,7 +720,7 @@
                                                 {/if}
                                             </p>
                                         </div>
-                                        {#if causaIndirecta.actividad.descripcion != null && proyecto.modificable && proyecto.codigo_linea_programatica != 70}
+                                        {#if causaIndirecta.actividad.descripcion != null && proyecto.allowed.to_update && proyecto.codigo_linea_programatica != 70}
                                             <Dropdown class="absolute bottom-1.5" placement="bottom-end">
                                                 <div class="flex items-center cursor-pointer select-none group">
                                                     <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
@@ -807,7 +807,7 @@
         </div>
         <div slot="content">
             {#if showActividadForm}
-                <InfoMessage class="mb-4">
+                <InfoMessage class="ml-10 mb-6">
                     Se debe evidenciar que la descripción de las actividades se realice de manera secuencial y de forma coherente con los productos a las cuales están asociadas para alcanzar el logro de cada uno de los objetivos específicos.
                     <br />
                     Las actividades deben redactarse en verbos en modo infinitivo, es decir, en palabras que expresen acciones y terminen en “ar”, “er” o “ir”, estos no deben hacer referencia a objetivos específicos o generales. Algunos ejemplos de verbos inadecuados para describir actividades son: apropiar, asegurar, colaborar, consolidar, desarrollar, fomentar, fortalecer, garantizar, implementar,
@@ -818,7 +818,7 @@
                     {actividadCausaIndirecta}
                 </p>
                 <form on:submit|preventDefault={submitActividad} id="actividad-form">
-                    <fieldset disabled={isSuperAdmin || (checkPermission(authUser, [1, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 17, 18, 19]) && proyecto.modificable == true) ? undefined : true}>
+                    <fieldset disabled={proyecto.allowed.to_update ? undefined : true}>
                         <div>
                             <Label labelFor="resultado_id" value="Resultado" />
                             <Select id="resultado_id" items={resultadosFiltrados} bind:selectedValue={$formActividad.resultado_id} error={errors.resultado_id} autocomplete="off" placeholder="Seleccione un resultado" required />
@@ -831,7 +831,7 @@
             {:else if showObjetivoEspecificoForm}
                 {#if causaDirectaObjetivoEspecifico != 'Sin información registrada'}
                     {#if proyecto.codigo_linea_programatica == 68}
-                        <InfoMessage class="mb-4">
+                        <InfoMessage class="ml-10 mb-6">
                             <p>
                                 Los objetivos específicos son los medios cuantificables que llevarán al cumplimiento del objetivo general. Estos surgen de pasar a positivo las causas directas identificadas en el árbol de problemas.
                                 <br />
@@ -840,7 +840,7 @@
                         </InfoMessage>
                     {/if}
                     <form on:submit|preventDefault={submitObjetivoEspecifico} id="objetivo-especifico-form">
-                        <fieldset disabled={isSuperAdmin || (checkPermission(authUser, [1, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 17, 18, 19]) && proyecto.modificable == true) ? undefined : true}>
+                        <fieldset disabled={proyecto.allowed.to_update ? undefined : true}>
                             <p class="block font-medium mb-2 text-gray-700 text-sm">Causa directa</p>
 
                             <p class="mb-20 whitespace-pre-line">
@@ -852,13 +852,13 @@
                         </fieldset>
                     </form>
                 {:else}
-                    <InfoMessage class="mb-4" message="Debe generar primero la causa directa en el árbol de problemas" />
+                    <InfoMessage class="ml-10 mb-6" message="Debe generar primero la causa directa en el árbol de problemas" />
                 {/if}
             {:else if showObjetivoGeneralForm}
                 <form on:submit|preventDefault={submitObjetivoGeneral} id="objetivo-general-form">
-                    <fieldset disabled={isSuperAdmin || (checkPermission(authUser, [1, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 17, 18, 19]) && proyecto.modificable == true) ? undefined : true}>
+                    <fieldset disabled={proyecto.allowed.to_update ? undefined : true}>
                         {#if proyecto.codigo_linea_programatica == 68}
-                            <InfoMessage class="mb-4">
+                            <InfoMessage class="ml-10 mb-6">
                                 <p>
                                     El objetivo general se origina al convertir en positivo el problema principal (tronco) identificado en el árbol de problemas.
                                     <br />
@@ -868,7 +868,7 @@
                                 </p>
                             </InfoMessage>
                         {:else}
-                            <InfoMessage class="mb-2" message="Establece que pretende alcanzar la investigación. Se inicia con un verbo en modo infinitivo, es medible y alcanzable. Responde al Qué, Cómo y el Para qué" />
+                            <InfoMessage class="ml-10 mb-6" message="Establece que pretende alcanzar la investigación. Se inicia con un verbo en modo infinitivo, es medible y alcanzable. Responde al Qué, Cómo y el Para qué" />
                         {/if}
                         <p class="block font-medium mb-2 text-gray-700 text-sm">Problema central</p>
 
@@ -883,7 +883,7 @@
                 </form>
             {:else if showResultadoForm}
                 {#if resultadoEfectoDirecto != 'Sin información registrada'}
-                    <InfoMessage class="mb-4">Se debe evidenciar que los resultados son directos, medibles y cuantificables que se alcanzarán con el desarrollo de cada uno de los objetivos específicos del proyecto.</InfoMessage>
+                    <InfoMessage class="ml-10 mb-6">Se debe evidenciar que los resultados son directos, medibles y cuantificables que se alcanzarán con el desarrollo de cada uno de los objetivos específicos del proyecto.</InfoMessage>
                     <p class="block font-medium mb-2 text-gray-700 text-sm">Efecto directo</p>
                     <p class="mb-20 whitespace-pre-line">
                         {resultadoEfectoDirecto}
@@ -897,7 +897,7 @@
                     </p>
 
                     <form on:submit|preventDefault={submitResult} id="resultado-form">
-                        <fieldset disabled={isSuperAdmin || (checkPermission(authUser, [1, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 17, 18, 19]) && proyecto.modificable == true) ? undefined : true}>
+                        <fieldset disabled={proyecto.allowed.to_update ? undefined : true}>
                             {#if proyecto.codigo_linea_programatica == 23 || proyecto.codigo_linea_programatica == 65 || proyecto.codigo_linea_programatica == 66 || proyecto.codigo_linea_programatica == 82}
                                 <div class="mb-10">
                                     <Input label="TRL" id="trl" type="number" input$max="9" input$min="1" class="block w-full" error={errors.trl} bind:value={$formResultado.trl} required />
@@ -909,10 +909,10 @@
                         </fieldset>
                     </form>
                 {:else}
-                    <InfoMessage class="mb-4" message="Debe generar primero el efecto directo en el árbol de problemas" />
+                    <InfoMessage class="ml-10 mb-6" message="Debe generar primero el efecto directo en el árbol de problemas" />
                 {/if}
             {:else if showImpactoForm}
-                <InfoMessage class="mb-4">Se busca medir la contribución potencial que genera el proyecto en los siguientes ámbitos: tecnológico, económico, ambiental, social, centro de formación, sector productivo</InfoMessage>
+                <InfoMessage class="ml-10 mb-6">Se busca medir la contribución potencial que genera el proyecto en los siguientes ámbitos: tecnológico, económico, ambiental, social, centro de formación, sector productivo</InfoMessage>
 
                 <p class="block font-medium mb-2 text-gray-700 text-sm">Efecto indirecto</p>
 
@@ -921,22 +921,24 @@
                 </p>
 
                 <form on:submit|preventDefault={submitImpacto} id="impacto-form">
-                    <fieldset disabled={isSuperAdmin || (checkPermission(authUser, [1, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 17, 18, 19]) && proyecto.modificable == true) ? undefined : true}>
+                    <fieldset disabled={proyecto.allowed.to_update ? undefined : true}>
                         <div class="mt-4">
                             <Label labelFor="tipo-impacto" value="Tipo" />
                             <Select id="tipo-impacto" items={tiposImpacto} bind:selectedValue={$formImpacto.tipo} error={errors.tipo} autocomplete="off" placeholder="Seleccione un tipo" required />
                             {#if $formImpacto.tipo?.value == 4}
                                 <InfoMessage
+                                    class="ml-10 mb-6"
                                     message="Se busca minimizar y/o evitar los impactos negativos sobre el medio ambiente, tales como contaminación del aire, contaminación de corrientes de agua naturales, ruido, destrucción del paisaje, separación de comunidades que operan como unidades, etc. Por otro lado, se busca identificar diversas acciones de impacto ambiental positivo, tales como: producción limpia y sustentable, protección medioambiental, uso de residuos y reciclaje."
                                 />
                             {:else if $formImpacto.tipo?.value == 2}
                                 <InfoMessage
+                                    class="ml-10 mb-6"
                                     message="Se busca medir la contribución potencial del proyecto en cualquiera de los siguientes ámbitos: generación y aplicación de nuevos conocimientos y tecnologías, desarrollo de infraestructura científico- tecnológica, articulación de diferentes proyectos para lograr un objetivo común, mejoramiento de la infraestructura, desarrollo de capacidades de gestión tecnológica."
                                 />
                             {:else if $formImpacto.tipo?.value == 5}
-                                <InfoMessage message="Se busca medir la contribución potencial del proyecto al desarrollo de la comunidad Sena (Aprendices, instructores y a la formación)" />
+                                <InfoMessage class="ml-10 mb-6" message="Se busca medir la contribución potencial del proyecto al desarrollo de la comunidad Sena (Aprendices, instructores y a la formación)" />
                             {:else if $formImpacto.tipo?.value == 6}
-                                <InfoMessage message="Se busca medir la contribución potencial del proyecto al desarrollo del sector productivo en concordancia con el sector priorizado de Colombia Productiva y a la mesa técnica a la que pertenece el proyecto." />
+                                <InfoMessage class="ml-10 mb-6" message="Se busca medir la contribución potencial del proyecto al desarrollo del sector productivo en concordancia con el sector priorizado de Colombia Productiva y a la mesa técnica a la que pertenece el proyecto." />
                             {/if}
                         </div>
                         <div class="mt-4">
@@ -952,14 +954,14 @@
                     <p class="mb-5">Para poder editar esta actividad, primero debe generar la causa indirecta en el árbol de problemas.</p>
 
                     {#if proyecto.codigo_linea_programatica == 68}
-                        <InfoMessage>Si el proyecto es de ST y hay actividades que no requieren de una causa indirecta por favor diríjase al Árbol de problemas y genere las causas indirectas con la siguiente descripción: <strong>N/A</strong></InfoMessage>
+                        <InfoMessage class="ml-10 mb-6">Si el proyecto es de ST y hay actividades que no requieren de una causa indirecta por favor diríjase al Árbol de problemas y genere las causas indirectas con la siguiente descripción: <strong>N/A</strong></InfoMessage>
                     {/if}
                 {/if}
             {/if}
         </div>
         <div slot="actions" class="flex w-full">
             <Button on:click={closeDialog} type="button" variant={null}>Cancelar</Button>
-            {#if (isSuperAdmin && formId) || (checkPermission(authUser, [1, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 17, 18, 19]) && proyecto.modificable == true && formId)}
+            {#if proyecto.allowed.to_update && formId}
                 <LoadingButton loading={$formImpacto.processing} class="btn-gray ml-auto" type="submit" form={formId}>Guardar</LoadingButton>
             {/if}
         </div>

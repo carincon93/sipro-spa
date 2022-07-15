@@ -217,6 +217,7 @@ class ProyectoCapacidadInstalada extends Model
      */
     public static function getProyectosPorRol()
     {
+        /** @var \App\Models\User */
         $authUser = Auth::user();
 
         if ($authUser->hasRole(1) || $authUser->getAllPermissions()->where('id', 22)->first()) { // Admin

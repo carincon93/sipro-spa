@@ -46,7 +46,7 @@
     $: $title = 'Finalizar proyecto'
 
     let dialogFinalizarProyecto = errors.password != undefined ? true : false
-    let sendProjectDialogOpen = errors.password != undefined ? true : false
+    let enviarProyectoDialogOpen = errors.password != undefined ? true : false
 
     /**
      * Validar si el usuario autenticado es SuperAdmin
@@ -60,8 +60,8 @@
         password: '',
     })
 
-    function finishProject() {
-        if (isSuperAdmin || checkPermissionByUser(authUser, [1, 5, 8, 11, 17]) || checkPermission(authUser, [1, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 17, 18, 19])) {
+    function finalizarProyecto() {
+        if (proyecto.allowed.to_update) {
             $form.put(route('convocatorias.proyectos.finish', [convocatoria.id, proyecto.id]), {
                 onFinish: () => {
                     $form.password = ''
@@ -76,14 +76,14 @@
         }
     }
 
-    function sendProject() {
+    function enviarProyecto() {
         if (isSuperAdmin || (checkRole(authUser, [4, 21]) && proyecto.finalizado == true)) {
             $form.put(route('convocatorias.proyectos.send', [convocatoria.id, proyecto.id]), {
                 onFinish: () => {
                     $form.password = ''
 
                     if (!errors.password) {
-                        sendProjectDialogOpen = false
+                        enviarProyectoDialogOpen = false
                     }
                 },
                 preserveScroll: true,
@@ -152,7 +152,7 @@
                 <Switch bind:checked={proyectoCompleto} />
                 {#if proyectoCompleto}
                     <br />
-                    <Button on:click={() => (sendProjectDialogOpen = true)} variant="raised" class="mt-10">Confirmar proyecto</Button>
+                    <Button on:click={() => (enviarProyectoDialogOpen = true)} variant="raised" class="mt-10">Confirmar proyecto</Button>
                     <br />
                     <small class="mb-2 mt-8">Si desea confirmar el proyecto de clic en <strong>Confirmar proyecto</strong> y a continuación, escriba la contraseña de su usuario.</small>
                 {:else if proyectoCompleto == false}
@@ -171,7 +171,7 @@
                     </form>
                 {/if}
             </InfoMessage>
-        {:else if isSuperAdmin || checkPermissionByUser(authUser, [1, 5, 8, 11, 17]) || checkPermission(authUser, [1, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 17, 18, 19])}
+        {:else if proyecto.allowed.to_update}
             {#if proyecto.finalizado == false && proyecto.modificable == true && generalidades && problemaCentral && efectosDirectos && efectosIndirectos && causasDirectas && causasIndirectas && objetivoGeneral && resultados && objetivosEspecificos && actividades && impactos && metodologia && propuestaSostenibilidad && productosActividades && resultadoProducto && analisisRiesgo && anexos && soportesEstudioMercado && estudiosMercadoArchivo}
                 {#if convocatoria.tipo_convocatoria == 1 || convocatoria.tipo_convocatoria == 3}
                     <InfoMessage class="mb-2" message="Si desea finalizar el proyecto de clic en <strong>Finalizar proyecto</strong> y a continuación, escriba la contraseña de su usuario. Se le notificará al dinamizador SENNOVA de su centro de formación para que haga la respectiva revisión y radicación del proyecto." />
@@ -314,7 +314,7 @@
         <div slot="content">
             <InfoMessage class="mb-2" message="¿Está seguro (a) que desea finalizar el proyecto?<br />Una vez finalizado el proyecto no se podrá modificar." />
 
-            <form on:submit|preventDefault={finishProject} id="finalizar-proyecto" class="mt-10 mb-28" on:load={($form.password = '')}>
+            <form on:submit|preventDefault={finalizarProyecto} id="finalizar-proyecto" class="mt-10 mb-28" on:load={($form.password = '')}>
                 <Label labelFor="password" value="Ingrese su contraseña para confirmar que desea finalizar este proyecto" class="mb-4" />
                 <Password id="password" class="w-full" bind:value={$form.password} error={errors.password} required autocomplete="current-password" />
             </form>
@@ -327,7 +327,7 @@
         </div>
     </Dialog>
 
-    <Dialog bind:open={sendProjectDialogOpen}>
+    <Dialog bind:open={enviarProyectoDialogOpen}>
         <div slot="title" class="flex items-center">
             <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 mr-2 text-red-500" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-3L13.732 4c-.77-1.333-2.694-1.333-3.464 0L3.34 16c-.77 1.333.192 3 1.732 3z" />
@@ -337,14 +337,14 @@
         <div slot="content">
             <InfoMessage class="mb-2" message="¿Está seguro (a) que desea confirmar el proyecto del proyecto?<br />Una vez confirmado el proyecto no se podrá modificar." />
 
-            <form on:submit|preventDefault={sendProject} id="confirmar-proyecto" class="mt-10 mb-28" on:load={($form.password = '')}>
+            <form on:submit|preventDefault={enviarProyecto} id="confirmar-proyecto" class="mt-10 mb-28" on:load={($form.password = '')}>
                 <Label labelFor="password" value="Ingrese su contraseña para confirmar el proyecto" class="mb-4" />
                 <Password id="password" class="w-full" bind:value={$form.password} error={errors.password} required autocomplete="current-password" />
             </form>
         </div>
         <div slot="actions">
             <div class="p-4">
-                <Button on:click={() => (sendProjectDialogOpen = false)} variant={null}>Cancelar</Button>
+                <Button on:click={() => (enviarProyectoDialogOpen = false)} variant={null}>Cancelar</Button>
                 <Button variant="raised" form="confirmar-proyecto">Confirmar proyecto</Button>
             </div>
         </div>

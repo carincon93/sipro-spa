@@ -16,7 +16,6 @@
     import DynamicList from '@/Shared/Dropdowns/DynamicList'
     import Textarea from '@/Shared/Textarea'
     import InfoMessage from '@/Shared/InfoMessage'
-    import Password from '@/Shared/Password'
     import SelectMulti from '@/Shared/SelectMulti'
     import Dialog from '@/Shared/Dialog'
     import Tags from '@/Shared/Tags'
@@ -32,7 +31,7 @@
     export let proyectoMunicipios
     export let proyectoMunicipiosImpactar
     export let proyectoProgramasFormacionArticulados
-    export let proyectoDisCurriculares
+    export let proyectoDisenosCurriculares
     export let disCurriculares
     export let programasFormacion
     export let tecnoAcademias
@@ -46,7 +45,6 @@
         { value: 2, label: 'No' },
     ]
 
-    let dialogOpen = errors.password != undefined ? true : false
     let proyectoDialogOpen = true
 
     let municipios = []
@@ -133,7 +131,7 @@
         tecnoacademia_linea_tecnoacademia_id: lineasTecnoacademiaRelacionadas,
         codigo_linea_programatica: null,
         programas_formacion_articulados: proyectoProgramasFormacionArticulados.length > 0 ? proyectoProgramasFormacionArticulados : null,
-        diseno_curricular_id: proyectoDisCurriculares.length > 0 ? proyectoDisCurriculares : null,
+        diseno_curricular_id: proyectoDisenosCurriculares.length > 0 ? proyectoDisenosCurriculares : null,
 
         otras_nuevas_instituciones: ta.otras_nuevas_instituciones,
         otras_nombre_instituciones_programas: ta.otras_nombre_instituciones_programas,
@@ -187,7 +185,7 @@
 
     async function syncColumnLong(column, form) {
         return new Promise((resolve) => {
-            if (isSuperAdmin || (checkPermissionByUser(authUser, [8]) && ta.proyecto.modificable == true) || (checkPermission(authUser, [9, 10]) && ta.proyecto.modificable == true)) {
+            if (ta.proyecto.allowed.to_update) {
                 //guardar
                 Inertia.put(
                     route('convocatorias.ta.updateLongColumn', [convocatoria.id, ta.id, column]),
@@ -205,7 +203,7 @@
     }
 
     function submit() {
-        if (isSuperAdmin || (checkPermission(authUser, [9, 10]) && ta.proyecto.modificable == true) || (checkPermissionByUser(authUser, [8]) && ta.proyecto.modificable == true)) {
+        if (ta.proyecto.allowed.to_update) {
             $form.put(route('convocatorias.ta.update', [convocatoria.id, ta.id]), {
                 preserveScroll: true,
             })
@@ -217,7 +215,7 @@
     })
 
     function destroy() {
-        if (isSuperAdmin || (checkPermission(authUser, [10]) && ta.proyecto.modificable == true && ta.proyecto.radicado == false) || (checkPermissionByUser(authUser, [8]) && ta.proyecto.modificable == true && ta.proyecto.radicado == false)) {
+        if (ta.proyecto.allowed.to_update) {
             $deleteForm.delete(route('convocatorias.ta.destroy', [convocatoria.id, ta.id]), {
                 preserveScroll: true,
             })
@@ -253,7 +251,7 @@
         centro_formacion_id: ta.proyecto.centro_formacion_id,
     })
     function submitProgramasFormacion() {
-        if (isSuperAdmin || (checkPermissionByUser(authUser, [8]) && ta.proyecto.modificable == true) || (checkPermission(authUser, [9, 10]) && ta.proyecto.modificable == true)) {
+        if (ta.proyecto.allowed.to_update) {
             $formProgramasFormacion.post(route('convocatorias.proyectos.programas-formacion.store', [convocatoria.id, ta.id]), {
                 onFinish: () => ((programasFormacionDialogOpen = false), $formProgramasFormacion.reset()),
                 preserveScroll: true,
@@ -261,14 +259,14 @@
         }
     }
 
-    let disCurricularDialogOpen = false
+    let disenoCurricularDialogOpen = false
     let formDisCurricular = useForm({
         nombre: '',
     })
-    function submitDisCurricular() {
-        if (isSuperAdmin || (checkPermissionByUser(authUser, [8]) && ta.proyecto.modificable == true) || (checkPermission(authUser, [9, 10]) && ta.proyecto.modificable == true)) {
+    function submitDisenoCurricular() {
+        if (ta.proyecto.allowed.to_update) {
             $formDisCurricular.post(route('convocatorias.proyectos.dis-curriculares.store', [convocatoria.id, ta.id]), {
-                onFinish: () => (disCurricularDialogOpen = false),
+                onFinish: () => (disenoCurricularDialogOpen = false),
                 preserveScroll: true,
             })
         }
@@ -281,10 +279,12 @@
     </header>
 
     <form on:submit|preventDefault={submit}>
-        <fieldset class="p-8 divide-y" disabled={isSuperAdmin || (checkPermissionByUser(authUser, [8]) && ta.proyecto.modificable == true) ? undefined : checkPermission(authUser, [9, 10]) && ta.proyecto.modificable == true ? undefined : true}>
+        <fieldset class="p-8 divide-y" disabled={ta.proyecto.allowed.to_update ? undefined : true}>
             <div class="py-24">
                 <p class="text-center">Fecha de ejecución</p>
-                <small class="text-red-400 block text-center"> * Campo obligatorio </small>
+                {#if ta.proyecto.allowed.to_update}
+                    <small class="text-red-400 block text-center"> * Campo obligatorio </small>
+                {/if}
                 <InfoMessage message={convocatoria.fecha_maxima_ta} class="my-5" />
 
                 <div class="mt-4 flex items-start justify-around">
@@ -670,7 +670,7 @@
                                 <br />
                                 Por último busque nuevamente en la lista y seleccione el programa recién creado.
                                 <br />
-                                <Button on:click={() => (disCurricularDialogOpen = true)} variant="raised" type="button">Añadir programa</Button>
+                                <Button on:click={() => (disenoCurricularDialogOpen = true)} variant="raised" type="button">Añadir programa</Button>
                             </InfoMessage>
                         </div>
                     </div>
@@ -827,14 +827,18 @@
                 {/if}
             </div>
         </fieldset>
-        <div class="px-8 py-4 bg-gray-100 border-t border-gray-200 flex items-center justify-between sticky bottom-0">
-            {#if isSuperAdmin || (checkPermission(authUser, [10]) && ta.proyecto.modificable == true && ta.proyecto.radicado == false) || (checkPermissionByUser(authUser, [8]) && ta.proyecto.modificable == true && ta.proyecto.radicado == false)}
-                <button class="text-red-600 hover:underline text-left" tabindex="-1" type="button" on:click={() => (dialogOpen = true)}> Eliminar </button>
-            {/if}
-            {#if isSuperAdmin || (checkPermission(authUser, [9, 10]) && ta.proyecto.modificable == true)}
-                <small>{ta.updated_at}</small>
+        <div class="shadow-inner bg-violet-200 border-violet-400 bottom-0 flex items-center justify-between mt-14 px-8 py-4 sticky">
+            <small class="flex items-center text-violet-700">
+                <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 mr-2" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+                    <path stroke-linecap="round" stroke-linejoin="round" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z" />
+                </svg>
+                {ta.updated_at}
+            </small>
 
+            {#if ta.proyecto.allowed.to_update}
                 <LoadingButton loading={$form.processing} type="submit">Guardar</LoadingButton>
+            {:else}
+                <span class="inline-block ml-1.5"> El proyecto no se puede modificar </span>
             {/if}
         </div>
     </form>
@@ -842,7 +846,7 @@
     <Dialog bind:open={programasFormacionDialogOpen} id="programas-formacion">
         <div slot="content">
             <form on:submit|preventDefault={submitProgramasFormacion} id="programas-formacion-form">
-                <fieldset class="p-8" disabled={isSuperAdmin || (checkPermission(authUser, [9, 10]) && ta.proyecto.modificable == true) ? undefined : true}>
+                <fieldset class="p-8" disabled={ta.proyecto.allowed.to_update ? undefined : true}>
                     <div class="mt-4">
                         <Input label="Nombre" id="nombre" type="text" class="mt-1" bind:value={$formProgramasFormacion.nombre} error={errors.nombre} required />
                     </div>
@@ -872,10 +876,10 @@
         </div>
     </Dialog>
 
-    <Dialog bind:open={disCurricularDialogOpen} id="dis-curricular">
+    <Dialog bind:open={disenoCurricularDialogOpen} id="dis-curricular">
         <div slot="content">
-            <form on:submit|preventDefault={submitDisCurricular} id="dis-curricular-form">
-                <fieldset class="p-8" disabled={isSuperAdmin || (checkPermission(authUser, [9, 10]) && ta.proyecto.modificable == true) ? undefined : true}>
+            <form on:submit|preventDefault={submitDisenoCurricular} id="dis-curricular-form">
+                <fieldset class="p-8" disabled={ta.proyecto.allowed.to_update ? undefined : true}>
                     <div>
                         <Label required class="mb-4" labelFor="nombre" value="Nombre del programa" />
                         <Textarea maxlength="40000" error={errors.nombre} bind:value={$formDisCurricular.nombre} required />
@@ -886,7 +890,7 @@
 
         <div slot="actions">
             <div class="p-4">
-                <Button on:click={() => (disCurricularDialogOpen = false)} variant={null}>Cancelar</Button>
+                <Button on:click={() => (disenoCurricularDialogOpen = false)} variant={null}>Cancelar</Button>
                 <Button variant="raised" form="dis-curricular-form">Crear programa</Button>
             </div>
         </div>
@@ -935,32 +939,9 @@
         <div slot="actions">
             <div class="p-4">
                 <Button on:click={() => (proyectoDialogOpen = false)} variant={null}>Omitir</Button>
-                {#if ta.proyecto.modificable}
+                {#if ta.proyecto.allowed.to_update}
                     <Button variant="raised" on:click={() => (proyectoDialogOpen = false)} on:click={() => Inertia.visit('#tecnoacademia_linea_tecnoacademia_id')}>Continuar diligenciando</Button>
                 {/if}
-            </div>
-        </div>
-    </Dialog>
-
-    <Dialog bind:open={dialogOpen}>
-        <div slot="title" class="flex items-center">
-            <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 mr-2 text-red-500" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-3L13.732 4c-.77-1.333-2.694-1.333-3.464 0L3.34 16c-.77 1.333.192 3 1.732 3z" />
-            </svg>
-            Eliminar recurso
-        </div>
-        <div slot="content">
-            <InfoMessage message="¿Está seguro (a) que desea eliminar este proyecto?<br />Una vez eliminado el proyecto, todos sus recursos y datos se eliminarán de forma permanente." />
-
-            <form on:submit|preventDefault={destroy} id="delete-ta" class="mt-10 mb-28">
-                <Label labelFor="password" value="Ingrese su contraseña para confirmar que desea eliminar permanentemente este proyecto" class="mb-4" />
-                <Password id="password" class="w-full" bind:value={$deleteForm.password} error={errors.password} required autocomplete="current-password" />
-            </form>
-        </div>
-        <div slot="actions">
-            <div class="p-4">
-                <Button on:click={() => (dialogOpen = false)} variant={null}>Cancelar</Button>
-                <Button variant="raised" form="delete-ta">Confirmar</Button>
             </div>
         </div>
     </Dialog>

@@ -47,7 +47,7 @@
                     <Textarea label="Descripción del resultado" maxlength="255" id="descripcion_resultado" error={errors.descripcion_resultado} bind:value={$form.descripcion_resultado} required />
                 </div>
             </fieldset>
-            <div class="px-8 py-4 bg-gray-100 border-t border-gray-200 flex items-center sticky bottom-0">
+            <div class="shadow-inner bg-violet-200 border-violet-400 bottom-0 flex items-center justify-between mt-14 px-8 py-4 sticky">
                 {#if proyectoCapacidadInstalada.allowed.to_update}
                     <LoadingButton loading={$form.processing} class="ml-auto" type="submit">Crear objetivo específico</LoadingButton>
                 {/if}

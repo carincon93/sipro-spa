@@ -46,9 +46,7 @@
         <div class="flex items-center justify-between lg:px-8 max-w-7xl mx-auto px-4 py-6 sm:px-6">
             <div>
                 <h1>
-                    {#if isSuperAdmin || checkPermission(authUser, [8])}
-                        <a use:inertia href={route('convocatorias.proyectos.edt.index', [convocatoria.id, proyecto.id])} class="text-violet-400 hover:text-violet-600">EDT</a>
-                    {/if}
+                    <a use:inertia href={route('convocatorias.proyectos.edt.index', [convocatoria.id, proyecto.id])} class="text-violet-400 hover:text-violet-600">EDT</a>
                     <span class="text-violet-400 font-medium">/</span>
                     Crear
                 </h1>
@@ -89,7 +87,7 @@
                     <Input label="Estrategia de comunicación" id="estrategia_comunicacion" type="text" class="mt-1" error={errors.estrategia_comunicacion} bind:value={$form.estrategia_comunicacion} required />
                 </div>
             </fieldset>
-            <div class="px-8 py-4 bg-gray-100 border-t border-gray-200 flex items-center sticky bottom-0">
+            <div class="shadow-inner bg-violet-200 border-violet-400 bottom-0 flex items-center justify-between mt-14 px-8 py-4 sticky">
                 {#if isSuperAdmin || (checkPermission(authUser, [8]) && proyecto.modificable == true)}
                     <LoadingButton loading={$form.processing} class="ml-auto" tipo="submit">Crear EDT</LoadingButton>
                 {/if}

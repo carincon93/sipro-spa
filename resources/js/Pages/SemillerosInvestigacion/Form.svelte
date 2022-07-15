@@ -134,28 +134,29 @@
         {/if}
     </fieldset>
 
-    <div class="px-8 py-4 bg-gray-100 border-t border-gray-200 flex items-center justify-between sticky bottom-0">
+    <div class="shadow-inner bg-violet-200 border-violet-400 bottom-0 flex items-center justify-between mt-14 px-8 py-4 sticky">
         {#if semilleroInvestigacion}
-            <small class="block leading-tight">{semilleroInvestigacion.updated_at}</small>
+            <small class="flex items-center text-violet-700">
+                <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 mr-2" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+                    <path stroke-linecap="round" stroke-linejoin="round" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z" />
+                </svg>
+                {semilleroInvestigacion.updated_at}
+            </small>
         {/if}
 
-        {#if semilleroInvestigacion?.allowed.to_update || allowedToCreate}
-            <Button on:click={() => (dialogGuardar = true)} loading={$form.processing} class="ml-auto" type="button">¿Desea guardar la información?</Button>
-        {:else}
-            <span class="inline-block"> El semillero no se puede modificar </span>
-        {/if}
+        <Button on:click={() => (dialogGuardar = true)} class="ml-auto" type="button">¿Desea guardar la información?</Button>
     </div>
 </form>
 
 <Dialog bind:open={dialogGuardar}>
     <div slot="title">
-        <div class="relative bg-violet-100 text-violet-600 p-5 h-36 w-1/3 m-auto my-10" style="border-radius: 41% 59% 70% 30% / 32% 40% 60% 68% ;">
+        <div class="m-auto relative text-violet-600">
             <figure>
-                <img src="/images/megaphone.png" alt="" class="m-auto" />
+                <img src="/images/megaphone.png" alt="" class="m-auto w-20" />
             </figure>
         </div>
     </div>
-    <div slot="header-info" class="ml-4">
+    <div slot="header-info" class="ml-10 shadow-md">
         <InfoMessage>
             Se recomienda que antes de dar clic en el botón <strong>Guardar</strong> descargue el borrador en archivo Word. De esta manera si ocurre un error al guardar puede recuperar la información registrada. Luego de descargar el borrador de clic en el botón <strong>Guardar</strong>. Revise que se muestra un mensaje en verde que dice '<strong>
                 El recurso se ha modificado correctamente</strong
@@ -168,53 +169,53 @@
             <h1 class="font-black text-center my-10">Información del semillero de investigación</h1>
             <p style="white-space: pre-line; margin-bottom: 4rem">
                 <strong>Nombre del semillero:</strong>
-                {$form.nombre}
+                {$form.nombre ? $form.nombre : 'Sin información registrada'}
             </p>
             <p style="white-space: pre-line; margin-bottom: 4rem">
                 <strong>Fecha creación del semillero:</strong>
-                {$form.fecha_creacion_semillero}
+                {$form.fecha_creacion_semillero ? $form.fecha_creacion_semillero : 'Sin información registrada'}
             </p>
             <p style="white-space: pre-line; margin-bottom: 4rem">
                 <strong>Línea de investigación principal:</strong>
-                {$form.linea_investigacion_id?.label}
+                {$form.linea_investigacion_id ? $form.linea_investigacion_id?.label : 'Sin información registrada'}
             </p>
             <p style="white-space: pre-line; margin-bottom: 4rem">
                 <strong>Nombre del líder del semillero:</strong>
-                {$form.nombre_lider_semillero}
+                {$form.nombre_lider_semillero ? $form.nombre_lider_semillero : 'Sin información registrada'}
             </p>
             <p style="white-space: pre-line; margin-bottom: 4rem">
                 <strong>Correo electrónico de contacto:</strong>
-                {$form.email_contacto}
+                {$form.email_contacto ? $form.email_contacto : 'Sin información registrada'}
             </p>
             <p style="white-space: pre-line; margin-bottom: 4rem">
                 <strong>Reconocimientos semillero de investigación:</strong>
-                {$form.reconocimientos_semillero_investigacion}
+                {$form.reconocimientos_semillero_investigacion ? $form.reconocimientos_semillero_investigacion : 'Sin información registrada'}
             </p>
             <p style="white-space: pre-line; margin-bottom: 4rem">
                 <strong>Visión:</strong>
-                {$form.vision}
+                {$form.vision ? $form.vision : 'Sin información registrada'}
             </p>
             <p style="white-space: pre-line; margin-bottom: 4rem">
                 <strong>Misión:</strong>
-                {$form.mision}
+                {$form.mision ? $form.mision : 'Sin información registrada'}
             </p>
             <p style="white-space: pre-line; margin-bottom: 4rem">
                 <strong>Objetivo general:</strong>
-                {$form.objetivo_general}
+                {$form.objetivo_general ? $form.objetivo_general : 'Sin información registrada'}
             </p>
             <p style="white-space: pre-line; margin-bottom: 4rem">
                 <strong>Objetivos específicos:</strong>
-                {$form.objetivos_especificos}
+                {$form.objetivos_especificos ? $form.objetivos_especificos : 'Sin información registrada'}
             </p>
             <p style="white-space: pre-line; margin-bottom: 4rem">
                 <strong>Link del semillero:</strong>
-                {$form.link_semillero}
+                {$form.link_semillero ? $form.link_semillero : 'Sin información registrada'}
             </p>
 
             <p style="white-space: pre-line; margin-bottom: 4rem">
                 <strong>¿Es semillero de TecnoAcademia?</strong>
                 <br />
-                {$form.es_semillero_tecnoacademia?.label}
+                {$form.es_semillero_tecnoacademia ? $form.es_semillero_tecnoacademia?.label : 'Sin información registrada'}
             </p>
 
             <p style="white-space: pre-line; margin-bottom: 4rem">
@@ -263,6 +264,8 @@
             <Button variant="raised" type="button" on:click={() => exportComponent.export2Word(semilleroInvestigacion.codigo)}>Descargar borrador en Word</Button>
             {#if semilleroInvestigacion?.allowed.to_update || allowedToCreate}
                 <LoadingButton loading={$form.processing} form="semillero-investigacion-form">Guardar</LoadingButton>
+            {:else}
+                <span class="inline-block ml-1.5"> El semillero no se puede modificar </span>
             {/if}
         </div>
     </div>

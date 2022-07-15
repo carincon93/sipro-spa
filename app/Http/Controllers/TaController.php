@@ -24,6 +24,7 @@ use App\Models\TematicaEstrategica;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Gate;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Storage;
 use Inertia\Inertia;
@@ -38,9 +39,11 @@ class TaController extends Controller
     public function index(Convocatoria $convocatoria)
     {
         return Inertia::render('Convocatorias/Proyectos/Ta/Index', [
-            'convocatoria'  => $convocatoria->only('id', 'esta_activa', 'fase_formateada', 'fase', 'tipo_convocatoria', 'tipo_convocatoria'),
-            'filters'       => request()->all('search', 'estructuracion_proyectos'),
-            'ta'            => Ta::getProyectosPorRol($convocatoria)->appends(['search' => request()->search, 'estructuracion_proyectos' => request()->estructuracion_proyectos]),
+            'convocatoria'      => $convocatoria->only('id', 'esta_activa', 'fase_formateada', 'fase', 'tipo_convocatoria', 'tipo_convocatoria'),
+            'filters'           => request()->all('search', 'estructuracion_proyectos'),
+            'proyectosTa'       => Ta::getProyectosPorRol($convocatoria)->appends(['search' => request()->search, 'estructuracion_proyectos' => request()->estructuracion_proyectos]),
+            'allowedToCreate'   => Gate::inspect('formular-proyecto', [5, $convocatoria])->allowed()
+
         ]);
     }
 
@@ -53,14 +56,17 @@ class TaController extends Controller
     {
         $this->authorize('formular-proyecto', [5, $convocatoria]);
 
-        if (auth()->user()->hasRole(12)) {
+        /** @var \App\Models\User */
+        $authUser = Auth::user();
+
+        if ($authUser->hasRole(12)) {
             $tecnoAcademias = Tecnoacademia::selectRaw("tecnoacademias.id as value, CASE modalidad
                 WHEN '1' THEN	concat(tecnoacademias.nombre, chr(10), '∙ Modalidad: itinerante', chr(10), '∙ Centro de formación: ', centros_formacion.nombre)
                 WHEN '2' THEN	concat(tecnoacademias.nombre, chr(10), '∙ Modalidad: itinerante - vehículo', chr(10), '∙ Centro de formación: ', centros_formacion.nombre)
                 WHEN '3' THEN	concat(tecnoacademias.nombre, chr(10), '∙ Modalidad: fija con extensión', chr(10), '∙ Centro de formación: ', centros_formacion.nombre)
             END as label, centros_formacion.id as centro_formacion_id")
                 ->join('centros_formacion', 'tecnoacademias.centro_formacion_id', 'centros_formacion.id')
-                ->where('tecnoacademias.centro_formacion_id', auth()->user()->centroFormacion->id)->get();
+                ->where('tecnoacademias.centro_formacion_id', $authUser->centroFormacion->id)->get();
         } else {
             $tecnoAcademias = $tecnoAcademias = Tecnoacademia::selectRaw("tecnoacademias.id as value, CASE modalidad
                 WHEN '1' THEN	concat(tecnoacademias.nombre, chr(10), '∙ Modalidad: itinerante', chr(10), '∙ Centro de formación: ', centros_formacion.nombre)
@@ -72,8 +78,9 @@ class TaController extends Controller
         }
 
         return Inertia::render('Convocatorias/Proyectos/Ta/Create', [
-            'convocatoria'   => $convocatoria->only('id', 'esta_activa', 'fase_formateada', 'fase', 'tipo_convocatoria', 'min_fecha_inicio_proyectos_ta', 'max_fecha_finalizacion_proyectos_ta', 'fecha_maxima_ta'),
-            'tecnoAcademias' => $tecnoAcademias
+            'convocatoria'      => $convocatoria->only('id', 'esta_activa', 'fase_formateada', 'fase', 'tipo_convocatoria', 'min_fecha_inicio_proyectos_ta', 'max_fecha_finalizacion_proyectos_ta', 'fecha_maxima_ta'),
+            'tecnoAcademias'    => $tecnoAcademias,
+            'allowedToCreate'   => Gate::inspect('formular-proyecto', [5, $convocatoria])->allowed()
         ]);
     }
 
@@ -161,6 +168,9 @@ class TaController extends Controller
     {
         $this->authorize('visualizar-proyecto-autor', [$ta->proyecto]);
 
+        /** @var \App\Models\User */
+        $authUser = Auth::user();
+
         $ta->load('proyecto.evaluaciones.taEvaluacion');
 
         $ta->codigo_linea_programatica = $ta->proyecto->lineaProgramatica->codigo;
@@ -170,14 +180,14 @@ class TaController extends Controller
         $ta->mostrar_recomendaciones = $ta->proyecto->mostrar_recomendaciones;
         $ta->mostrar_requiere_subsanacion = $ta->proyecto->mostrar_requiere_subsanacion;
 
-        if (auth()->user()->hasRole(12) && !auth()->user()->hasRole(5)) {
+        if ($authUser->hasRole(12) && !$authUser->hasRole(5)) {
             $tecnoAcademias = Tecnoacademia::selectRaw("tecnoacademias.id as value, CASE modalidad
                 WHEN '1' THEN	concat(tecnoacademias.nombre, chr(10), '∙ Modalidad: itinerante', chr(10), '∙ Centro de formación: ', centros_formacion.nombre)
                 WHEN '2' THEN	concat(tecnoacademias.nombre, chr(10), '∙ Modalidad: itinerante - vehículo', chr(10), '∙ Centro de formación: ', centros_formacion.nombre)
                 WHEN '3' THEN	concat(tecnoacademias.nombre, chr(10), '∙ Modalidad: fija con extensión', chr(10), '∙ Centro de formación: ', centros_formacion.nombre)
             END as label, centros_formacion.id as centro_formacion_id")
                 ->join('centros_formacion', 'tecnoacademias.centro_formacion_id', 'centros_formacion.id')
-                ->where('tecnoacademias.centro_formacion_id', auth()->user()->centroFormacion->id)->get();
+                ->where('tecnoacademias.centro_formacion_id', $authUser->centroFormacion->id)->get();
         } else {
             $tecnoAcademias = $tecnoAcademias = Tecnoacademia::selectRaw("tecnoacademias.id as value, CASE modalidad
                 WHEN '1' THEN	concat(tecnoacademias.nombre, chr(10), '∙ Modalidad: itinerante', chr(10), '∙ Centro de formación: ', centros_formacion.nombre)
@@ -198,7 +208,7 @@ class TaController extends Controller
             'proyectoMunicipios'                    => $ta->proyecto->municipios()->select('municipios.id as value', 'municipios.nombre as label', 'regionales.nombre as group', 'regionales.codigo')->join('regionales', 'regionales.id', 'municipios.regional_id')->get(),
             'proyectoMunicipiosImpactar'            => $ta->proyecto->municipiosAImpactar()->select('municipios.id as value', 'municipios.nombre as label', 'regionales.nombre as group', 'regionales.codigo')->join('regionales', 'regionales.id', 'municipios.regional_id')->get(),
             'proyectoProgramasFormacionArticulados' => $ta->proyecto->taProgramasFormacion()->selectRaw('id as value, concat(programas_formacion.nombre, chr(10), \'∙ Código: \', programas_formacion.codigo) as label')->where('programas_formacion.registro_calificado', true)->get(),
-            'proyectoDisenoCurriculares'            => $ta->proyecto->disenosCurriculares()->selectRaw('id as value, concat(nombre, \' ∙ Código: \', codigo) as label')->get(),
+            'proyectoDisenosCurriculares'           => $ta->proyecto->disenosCurriculares()->selectRaw('id as value, concat(nombre, \' ∙ Código: \', codigo) as label')->get(),
             'disenosCurriculares'                   => DisenoCurricular::selectRaw('id as value, concat(nombre, \' ∙ Código: \', codigo) as label')->get(),
             'programasFormacion'                    => ProgramaFormacion::selectRaw('id as value, concat(programas_formacion.nombre, chr(10), \'∙ Código: \', programas_formacion.codigo) as label')->where('centro_formacion_id', $ta->proyecto->centroFormacion->id)->orderBy('nombre', 'ASC')->get(),
             'tecnoAcademias'                        => $tecnoAcademias,
@@ -287,11 +297,7 @@ class TaController extends Controller
             return back()->with('error', 'Este proyecto no se puede eliminar.');
         }
 
-        $this->authorize('modificar-proyecto-autor', [$ta->proyecto]);
-
-        if ($convocatoria->fase != 1) {
-            return back()->with('error', 'Un proyecto finalizado no se puede eliminar.');
-        }
+        $this->authorize('eliminar-proyecto-autor', [$ta->proyecto]);
 
         if (!Hash::check($request->password, Auth::user()->password)) {
             return back()

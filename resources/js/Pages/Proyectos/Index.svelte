@@ -137,7 +137,7 @@
                     {/if}
 
                     <td class="border-t td-actions">
-                        <DataTableMenu class={proyectos.data.length < 4 ? 'z-50' : ''}>
+                        <DataTableMenu class={proyectos.data.length < 3 ? 'z-50' : ''}>
                             {#if isSuperAdmin || checkRole(authUser, [20, 18, 19, 5, 17])}
                                 <Item on:SMUI:action={() => Inertia.visit(route('proyectos.edit', [id]))}>
                                     <Text>Ver detalles</Text>

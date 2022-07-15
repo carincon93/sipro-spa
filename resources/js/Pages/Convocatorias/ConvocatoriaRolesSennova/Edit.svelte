@@ -107,7 +107,7 @@
                     <Textarea label="Mensaje (Regla de negocio)" maxlength="40000" id="mensaje" bind:value={$form.mensaje} error={errors.mensaje} />
                 </div>
             </fieldset>
-            <div class="px-8 py-4 bg-gray-100 border-t border-gray-200 flex items-center sticky bottom-0">
+            <div class="shadow-inner bg-violet-200 border-violet-400 bottom-0 flex items-center justify-between mt-14 px-8 py-4 sticky">
                 {#if isSuperAdmin}
                     <button class="text-red-600 hover:underline text-left" tabindex="-1" type="button" on:click={() => (dialogOpen = true)}> Eliminar rol SENNOVA </button>
                 {/if}

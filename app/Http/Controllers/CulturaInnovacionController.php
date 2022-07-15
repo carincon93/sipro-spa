@@ -15,6 +15,7 @@ use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Storage;
 use App\Http\Traits\ProyectoRolSennovaValidationTrait;
 use App\Models\CentroFormacion;
+use Illuminate\Support\Facades\Gate;
 use Inertia\Inertia;
 
 class CulturaInnovacionController extends Controller
@@ -30,6 +31,7 @@ class CulturaInnovacionController extends Controller
             'convocatoria'      => $convocatoria->only('id', 'esta_activa', 'fase_formateada', 'fase', 'tipo_convocatoria', 'fase'),
             'filters'           => request()->all('search', 'estructuracion_proyectos'),
             'culturaInnovacion' => CulturaInnovacion::getProyectosPorRol($convocatoria)->appends(['search' => request()->search, 'estructuracion_proyectos' => request()->estructuracion_proyectos]),
+            'allowedToCreate'   => Gate::inspect('formular-proyecto', [9, $convocatoria])->allowed()
         ]);
     }
 
@@ -42,8 +44,11 @@ class CulturaInnovacionController extends Controller
     {
         $this->authorize('formular-proyecto', [9, $convocatoria]);
 
-        if (auth()->user()->hasRole(15)) {
-            $centrosFormacion = CentroFormacion::selectRaw('centros_formacion.id as value, concat(centros_formacion.nombre, chr(10), \'∙ Código: \', centros_formacion.codigo) as label')->where('centros_formacion.regional_id', auth()->user()->centroFormacion->regional->id)->whereIn('centros_formacion.codigo', [9309, 9503, 9230, 9124, 9525, 9222, 9212, 9116, 9517, 9401, 9403, 9303, 9310, 9529, 9308, 9101])->orderBy('centros_formacion.nombre', 'ASC')->get();
+        /** @var \App\Models\User */
+        $authUser = Auth::user();
+
+        if ($authUser->hasRole(15)) {
+            $centrosFormacion = CentroFormacion::selectRaw('centros_formacion.id as value, concat(centros_formacion.nombre, chr(10), \'∙ Código: \', centros_formacion.codigo) as label')->where('centros_formacion.regional_id', $authUser->centroFormacion->regional->id)->whereIn('centros_formacion.codigo', [9309, 9503, 9230, 9124, 9525, 9222, 9212, 9116, 9517, 9401, 9403, 9303, 9310, 9529, 9308, 9101])->orderBy('centros_formacion.nombre', 'ASC')->get();
         } else {
             $centrosFormacion = CentroFormacion::selectRaw('centros_formacion.id as value, concat(centros_formacion.nombre, chr(10), \'∙ Código: \', centros_formacion.codigo) as label')->orderBy('centros_formacion.nombre', 'ASC')->get();
         }
@@ -51,7 +56,8 @@ class CulturaInnovacionController extends Controller
         return Inertia::render('Convocatorias/Proyectos/CulturaInnovacion/Create', [
             'convocatoria'      => $convocatoria->only('id', 'esta_activa', 'fase_formateada', 'fase', 'tipo_convocatoria', 'min_fecha_inicio_proyectos_cultura', 'max_fecha_finalizacion_proyectos_cultura', 'fecha_maxima_cultura'),
             'roles'             => collect(json_decode(Storage::get('json/roles-sennova-idi.json'), true)),
-            'centrosFormacion'  => $centrosFormacion
+            'centrosFormacion'  => $centrosFormacion,
+            'allowedToCreate'   => Gate::inspect('formular-proyecto', [9, $convocatoria])->allowed()
         ]);
     }
 
@@ -234,11 +240,7 @@ class CulturaInnovacionController extends Controller
      */
     public function destroy(Request $request, Convocatoria $convocatoria, CulturaInnovacion $culturaInnovacion)
     {
-        $this->authorize('modificar-proyecto-autor', [$culturaInnovacion->proyecto]);
-
-        if ($convocatoria->fase != 1) {
-            return back()->with('error', 'Un proyecto finalizado no se puede eliminar.');
-        }
+        $this->authorize('eliminar-proyecto-autor', [$culturaInnovacion->proyecto]);
 
         if (!Hash::check($request->password, Auth::user()->password)) {
             return back()

@@ -81,7 +81,7 @@
     }
 
     function submitEfectoIndirecto() {
-        if (isSuperAdmin || (checkPermission(authUser, [1, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 17, 18, 19]) && proyecto.modificable == true)) {
+        if (proyecto.allowed.to_update) {
             $formEfectoIndirecto.post(
                 route('proyectos.efecto-indirecto', {
                     proyecto: proyecto.id,
@@ -99,7 +99,7 @@
     }
 
     function destroyEfectoIndirecto(efectoIndirecto) {
-        if (isSuperAdmin || (checkPermission(authUser, [1, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 17, 18, 19]) && proyecto.modificable == true)) {
+        if (proyecto.allowed.to_update) {
             Inertia.post(route('proyectos.efecto-indirecto.destroy', [proyecto.id, efectoIndirecto.id]), [], { preserveScroll: true })
         }
     }
@@ -125,7 +125,7 @@
     }
 
     function submitEfectoDirecto() {
-        if (isSuperAdmin || (checkPermission(authUser, [1, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 17, 18, 19]) && proyecto.modificable == true)) {
+        if (proyecto.allowed.to_update) {
             $formEfectoDirecto.post(
                 route('proyectos.efecto-directo', {
                     proyecto: proyecto.id,
@@ -143,7 +143,7 @@
     }
 
     function destroyEfectoDirecto(efectoDirecto) {
-        if (isSuperAdmin || (checkPermission(authUser, [1, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 17, 18, 19]) && proyecto.modificable == true)) {
+        if (proyecto.allowed.to_update) {
             Inertia.post(route('proyectos.efecto-directo.destroy', [proyecto.id, efectoDirecto.id]), [], { preserveScroll: true })
         }
     }
@@ -172,7 +172,7 @@
     }
 
     function submitProblemaCentral() {
-        if (isSuperAdmin || (checkPermission(authUser, [1, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 17, 18, 19]) && proyecto.modificable == true)) {
+        if (proyecto.allowed.to_update) {
             $formProblemaCentral.post(route('proyectos.problema-central', proyecto.id), {
                 onSuccess: () => {
                     closeDialog()
@@ -204,7 +204,7 @@
     }
 
     function submitCausaDirecta() {
-        if (isSuperAdmin || (checkPermission(authUser, [1, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 17, 18, 19]) && proyecto.modificable == true)) {
+        if (proyecto.allowed.to_update) {
             $formCausaDirecta.post(
                 route('proyectos.causa-directa', {
                     proyecto: proyecto.id,
@@ -222,7 +222,7 @@
     }
 
     function destroyCausaDirecta(causaDirecta) {
-        if (isSuperAdmin || (checkPermission(authUser, [1, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 17, 18, 19]) && proyecto.modificable == true)) {
+        if (proyecto.allowed.to_update) {
             Inertia.post(route('proyectos.causa-directa.destroy', [proyecto.id, causaDirecta.id]), [], { preserveScroll: true })
         }
     }
@@ -256,7 +256,7 @@
     }
 
     function submitCausaIndirecta() {
-        if (isSuperAdmin || (checkPermission(authUser, [1, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 17, 18, 19]) && proyecto.modificable == true)) {
+        if (proyecto.allowed.to_update) {
             $formCausaIndirecta.post(
                 route('proyectos.causa-indirecta', {
                     proyecto: proyecto.id,
@@ -274,7 +274,7 @@
     }
 
     function destroyCausaIndirecta(causaIndirecta) {
-        if (isSuperAdmin || (checkPermission(authUser, [1, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 17, 18, 19]) && proyecto.modificable == true)) {
+        if (proyecto.allowed.to_update) {
             Inertia.post(route('proyectos.causa-indirecta.destroy', [proyecto.id, causaIndirecta.id]), [], { preserveScroll: true })
         }
     }
@@ -456,7 +456,7 @@
                                             {/if}
                                         </p>
                                     </div>
-                                    {#if proyecto.codigo_linea_programatica != 70}
+                                    {#if proyecto.codigo_linea_programatica != 70 && proyecto.allowed.to_update}
                                         <Dropdown class="absolute bottom-1.5" placement="bottom-end">
                                             <div class="flex items-center cursor-pointer select-none group">
                                                 <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
@@ -521,7 +521,7 @@
                                 {/if}
                             </p>
                         </div>
-                        {#if proyecto.codigo_linea_programatica != 70}
+                        {#if proyecto.codigo_linea_programatica != 70 && proyecto.allowed.to_update}
                             <Dropdown class="absolute bottom-1.5" placement="bottom-end">
                                 <div class="flex items-center cursor-pointer select-none group">
                                     <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
@@ -585,7 +585,7 @@
                                 {/if}
                             </p>
                         </div>
-                        {#if proyecto.codigo_linea_programatica != 70}
+                        {#if proyecto.codigo_linea_programatica != 70 && proyecto.allowed.to_update}
                             <Dropdown class="absolute bottom-1.5" placement="bottom-end">
                                 <div class="flex items-center cursor-pointer select-none group">
                                     <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
@@ -630,7 +630,7 @@
                                             {/if}
                                         </p>
                                     </div>
-                                    {#if proyecto.codigo_linea_programatica != 70}
+                                    {#if proyecto.codigo_linea_programatica != 70 && proyecto.allowed.to_update}
                                         <Dropdown class="absolute bottom-1.5" placement="bottom-end">
                                             <div class="flex items-center cursor-pointer select-none group">
                                                 <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
@@ -717,46 +717,46 @@
         <div slot="content">
             {#if showCausaIndirectaForm}
                 <form on:submit|preventDefault={submitCausaIndirecta} id="causa-indirecta">
-                    <fieldset disabled={isSuperAdmin || (checkPermission(authUser, [1, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 17, 18, 19]) && proyecto.modificable == true) ? undefined : true}>
+                    <fieldset disabled={proyecto.allowed.to_update ? undefined : true}>
                         <div class="mt-4">
-                            <InfoMessage class="mb-2" message="Son acciones o hechos que dan origen a las causas directas y que se encuentran a partir del segundo nivel, justamente debajo de las causas directas del árbol de problemas." />
+                            <InfoMessage class="ml-10 mb-6" message="Son acciones o hechos que dan origen a las causas directas y que se encuentran a partir del segundo nivel, justamente debajo de las causas directas del árbol de problemas." />
                             <Textarea disabled={isSuperAdmin ? false : proyecto.codigo_linea_programatica == 70 ? true : false} label="Descripción" maxlength="40000" id="causa-indirecta-descripcion" error={errors.descripcion} bind:value={$formCausaIndirecta.descripcion} required />
                         </div>
                     </fieldset>
                 </form>
             {:else if showCausaDirectaForm}
                 <form on:submit|preventDefault={submitCausaDirecta} id="causa-directa">
-                    <fieldset disabled={isSuperAdmin || (checkPermission(authUser, [1, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 17, 18, 19]) && proyecto.modificable == true) ? undefined : true}>
+                    <fieldset disabled={proyecto.allowed.to_update ? undefined : true}>
                         <div class="mt-4">
-                            <InfoMessage class="mb-2" message="Son las acciones o hechos concretos que generan o dan origen al problema central. Aparecen en la estructura del árbol en el primer nivel, inmediatamente abajo del problema central." />
+                            <InfoMessage class="ml-10 mb-6" message="Son las acciones o hechos concretos que generan o dan origen al problema central. Aparecen en la estructura del árbol en el primer nivel, inmediatamente abajo del problema central." />
                             <Textarea disabled={isSuperAdmin ? false : proyecto.codigo_linea_programatica == 70 ? true : false} label="Descripción" maxlength="40000" id="causa-directa-descripcion" error={errors.descripcion} bind:value={$formCausaDirecta.descripcion} required />
                         </div>
                     </fieldset>
                 </form>
             {:else if showEfectoIndirectoForm}
                 <form on:submit|preventDefault={submitEfectoIndirecto} id="efecto-indirecto">
-                    <fieldset disabled={isSuperAdmin || (checkPermission(authUser, [1, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 17, 18, 19]) && proyecto.modificable == true) ? undefined : true}>
+                    <fieldset disabled={proyecto.allowed.to_update ? undefined : true}>
                         <div class="mt-4">
-                            <InfoMessage class="mb-2" message="Corresponden a situaciones negativas generadas por los efectos directos." />
+                            <InfoMessage class="ml-10 mb-6" message="Corresponden a situaciones negativas generadas por los efectos directos." />
                             <Textarea disabled={isSuperAdmin ? false : proyecto.codigo_linea_programatica == 70 ? true : false} label="Descripción" maxlength="40000" id="efecto-directo-descripcion" error={errors.descripcion} bind:value={$formEfectoIndirecto.descripcion} required />
                         </div>
                     </fieldset>
                 </form>
             {:else if showProblemaCentralForm}
                 <form on:submit|preventDefault={submitProblemaCentral} id="problema-central">
-                    <fieldset disabled={isSuperAdmin || (checkPermission(authUser, [1, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 17, 18, 19]) && proyecto.modificable == true) ? undefined : true}>
+                    <fieldset disabled={proyecto.allowed.to_update ? undefined : true}>
                         {#if proyecto.codigo_linea_programatica != 68 && proyecto.codigo_linea_programatica != 70}
                             <div class="mt-10">
                                 <Label required class="mb-4" labelFor="identificacion_problema" value="Identificación y descripción del problema" />
                                 <InfoMessage
-                                    class="mb-2"
+                                    class="ml-10 mb-6"
                                     message="1. Descripción de la necesidad, problema u oportunidad identificada del plan tecnológico y/o agendas departamentales de innovación y competitividad.<br>2. Descripción del problema que se atiende con el proyecto, sustentado en el contexto, la caracterización, los datos, las estadísticas, de la regional, entre otros, citar toda la información consignada utilizando normas APA última edición. La información debe ser de fuentes primarias de información, ejemplo: Secretarías, DANE, Artículos científicos, entre otros."
                                 />
                                 <Textarea disabled={isSuperAdmin ? false : proyecto.codigo_linea_programatica == 70 ? true : false} label="Identificación y descripción del problema" maxlength="40000" id="identificacion_problema" error={errors.identificacion_problema} bind:value={$formProblemaCentral.identificacion_problema} required />
                             </div>
                             <div class="mt-10">
                                 <Label required class="mb-4" labelFor="justificacion_problema" value="Justificación" />
-                                <InfoMessage class="mb-2" message="Descripción de la solución al problema (descrito anteriormente) que se presenta en la regional, así como las consideraciones que justifican la elección del proyecto. De igual forma, describir la pertinencia y viabilidad del proyecto en el marco del impacto regional identificado en el instrumento de planeación." />
+                                <InfoMessage class="ml-10 mb-6" message="Descripción de la solución al problema (descrito anteriormente) que se presenta en la regional, así como las consideraciones que justifican la elección del proyecto. De igual forma, describir la pertinencia y viabilidad del proyecto en el marco del impacto regional identificado en el instrumento de planeación." />
 
                                 <Textarea disabled={isSuperAdmin ? false : proyecto.codigo_linea_programatica == 70 ? true : false} label="Justificación del problema" maxlength="5000" id="justificacion_problema" error={errors.justificacion_problema} bind:value={$formProblemaCentral.justificacion_problema} required />
                             </div>
@@ -765,7 +765,7 @@
                         <div class="mt-10">
                             <Label required class="mb-4" labelFor="problema_central" value="Problema central (tronco)" />
                             <InfoMessage
-                                class="mb-2"
+                                class="ml-10 mb-6"
                                 message="Para la redacción del problema central se debe tener en cuenta: a) Se debe referir a una situación existente, teniendo en cuenta la mayoría de los siguientes componentes: social, económico, tecnológico, ambiental. b) Su redacción debe ser una oración corta con sujeto, verbo y predicado. c) Se debe comprender con total claridad; el problema se debe formular mediante una oración clara y sin ambigüedades."
                             />
                             <Textarea disabled={isSuperAdmin ? false : proyecto.codigo_linea_programatica == 70 ? true : false} label="Problema central" maxlength="5000" id="problema_central" error={errors.problema_central} bind:value={$formProblemaCentral.problema_central} required />
@@ -774,9 +774,9 @@
                 </form>
             {:else if showEfectoDirectoForm}
                 <form on:submit|preventDefault={submitEfectoDirecto} id="efecto-directo">
-                    <fieldset disabled={isSuperAdmin || (checkPermission(authUser, [1, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 17, 18, 19]) && proyecto.modificable == true) ? undefined : true}>
+                    <fieldset disabled={proyecto.allowed.to_update ? undefined : true}>
                         <div class="mt-4">
-                            <InfoMessage class="mb-2" message="Son aquellos que caracterizan las consecuencias de la situación que existirá en caso de no ejecutarse el proyecto; es decir, si se mantiene inalterado el orden actual de las cosas." />
+                            <InfoMessage class="ml-10 mb-6" message="Son aquellos que caracterizan las consecuencias de la situación que existirá en caso de no ejecutarse el proyecto; es decir, si se mantiene inalterado el orden actual de las cosas." />
                             <Textarea disabled={isSuperAdmin ? false : proyecto.codigo_linea_programatica == 70 ? true : false} label="Descripción" maxlength="40000" id="efecto-directo-descripcion" error={errors.descripcion} bind:value={$formEfectoDirecto.descripcion} required />
                         </div>
                     </fieldset>
@@ -785,7 +785,7 @@
         </div>
         <div slot="actions" class="flex w-full">
             <Button on:click={closeDialog} type="button" variant={null}>Cancelar</Button>
-            {#if (isSuperAdmin && formId) || (checkPermission(authUser, [1, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 17, 18, 19]) && proyecto.modificable == true && formId)}
+            {#if proyecto.allowed.to_update && formId}
                 <LoadingButton loading={$formProblemaCentral.processing} class="ml-auto" type="submit" form={formId}>Guardar</LoadingButton>
             {/if}
         </div>

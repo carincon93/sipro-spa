@@ -54,7 +54,7 @@
                         </p>
                     </td>
                     <td class="border-t td-actions">
-                        <DataTableMenu class={reglasRolesCultura.data.length < 4 ? 'z-50' : ''}>
+                        <DataTableMenu class={reglasRolesCultura.data.length < 3 ? 'z-50' : ''}>
                             {#if isSuperAdmin}
                                 <Item on:SMUI:action={() => Inertia.visit(route('reglas-roles-cultura.edit', reglaRolCultura.id))}>
                                     <Text>Ver detalles</Text>

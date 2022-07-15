@@ -11,7 +11,7 @@
     import DataTable from '@/Shared/DataTable'
 
     export let convocatoria
-    export let idi
+    export let evaluaciones
 
     $title = 'Proyectos I+D+i'
 
@@ -24,7 +24,7 @@
 
 <AuthenticatedLayout>
     <DataTable class="mt-20" routeParams={[convocatoria.id]}>
-        <div slot="title">I+D+i</div>
+        <div slot="title">Evaluaciones de proyectos I+D+i</div>
 
         <thead slot="thead">
             <tr class="text-left font-bold">
@@ -37,45 +37,45 @@
         </thead>
 
         <tbody slot="tbody">
-            {#each idi.data as { evaluacion_id, proyecto, titulo, fecha_ejecucion, iniciado, habilitado, finalizado }}
+            {#each evaluaciones.data as evaluacion}
                 <tr class="hover:bg-gray-100 focus-within:bg-gray-100">
                     <td class="border-t">
                         <p class="px-6 py-4 focus:text-violet-500">
-                            {proyecto.codigo}
+                            {evaluacion.proyecto.codigo}
 
-                            {#if !habilitado}
+                            {#if !evaluacion.habilitado}
                                 <span class="block text-danger">Evaluación deshabilitada. No puede realizar la evaluación.</span>
                             {/if}
                         </p>
                     </td>
                     <td class="border-t">
                         <p class="px-6 py-4 focus:text-violet-500">
-                            {titulo}
+                            {evaluacion.proyecto.idi.titulo}
                         </p>
                     </td>
                     <td class="border-t">
                         <p class="px-6 py-4">
-                            {fecha_ejecucion}
+                            {evaluacion.proyecto.idi.fecha_ejecucion}
                         </p>
                     </td>
                     <td class="border-t">
                         <p class="px-6 py-4">
-                            {#if proyecto.modificable == true && proyecto.finalizado == false && proyecto.habilitado_para_evaluar == false}
+                            {#if evaluacion.proyecto.modificable == true && evaluacion.proyecto.finalizado == false && evaluacion.proyecto.habilitado_para_evaluar == false}
                                 El proyecto se encuentra en subsanación
                             {:else}
-                                {finalizado ? 'Evaluación finalizada' : iniciado ? 'Evaluación iniciada' : 'Sin evaluar'}
+                                {evaluacion.finalizado ? 'Evaluación finalizada' : evaluacion.iniciado ? 'Evaluación iniciada' : 'Sin evaluar'}
                             {/if}
                         </p>
                     </td>
                     <td class="border-t td-actions">
-                        <DataTableMenu class={idi.data.length < 4 ? 'z-50' : ''}>
-                            {#if isSuperAdmin || checkRole(authUser, [11, 5])}
-                                <Item on:SMUI:action={() => Inertia.visit(route('convocatorias.idi-evaluaciones.edit', [convocatoria.id, evaluacion_id]))}>
+                        <DataTableMenu class={evaluaciones.data.length < 3 ? 'z-50' : ''}>
+                            {#if evaluacion.allowed.to_view}
+                                <Item on:SMUI:action={() => Inertia.visit(route('convocatorias.idi-evaluaciones.edit', [convocatoria.id, evaluacion.id]))}>
                                     <Text>
-                                        {#if checkRole(authUser, [18])}
-                                            Verificar
-                                        {:else}
+                                        {#if evaluacion.allowed.to_update && !isSuperAdmin}
                                             Evaluar
+                                        {:else}
+                                            Ver detalles
                                         {/if}
                                     </Text>
                                 </Item>
@@ -85,12 +85,12 @@
                 </tr>
             {/each}
 
-            {#if idi.data.length === 0}
+            {#if evaluaciones.data.length === 0}
                 <tr>
                     <td class="border-t px-6 py-4" colspan="5"> Sin información registrada </td>
                 </tr>
             {/if}
         </tbody>
     </DataTable>
-    <Pagination links={idi.links} />
+    <Pagination links={evaluaciones.links} />
 </AuthenticatedLayout>

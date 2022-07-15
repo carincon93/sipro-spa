@@ -28,7 +28,7 @@
     })
 
     function submitReplicaPrimeraEval() {
-        if (isSuperAdmin || checkPermission(authUser, [1, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 17, 18, 19])) {
+        if (proyecto.allowed.to_update) {
             $formPrimeraEvaluacion.post(route('convocatorias.proyectos.update-comentarios', [convocatoria.id, evaluaciones[0].id]), {
                 preserveScroll: true,
             })
@@ -40,7 +40,7 @@
     })
 
     function submitReplicaSegundaEval() {
-        if (isSuperAdmin || checkPermission(authUser, [1, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 17, 18, 19])) {
+        if (proyecto.allowed.to_update) {
             $formSegundaEvaluacion.post(route('convocatorias.proyectos.update-comentarios', [convocatoria.id, evaluaciones[1].id]), {
                 preserveScroll: true,
             })
@@ -52,7 +52,7 @@
     })
 
     function submitReplicaTerceraEval() {
-        if (isSuperAdmin || checkPermission(authUser, [1, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 17, 18, 19])) {
+        if (proyecto.allowed.to_update) {
             $formTerceraEvaluacion.post(route('convocatorias.proyectos.update-comentarios', [convocatoria.id, evaluaciones[2].id]), {
                 preserveScroll: true,
             })
@@ -125,21 +125,23 @@
 
     {#if evaluaciones[0] && evaluaciones[0].habilitado}
         <form on:submit|preventDefault={submitReplicaPrimeraEval}>
-            <div class="mt-28">
-                <h1 class="font-black">Evaluador COD-{evaluaciones[0].id}</h1>
+            <fieldset disabled={proyecto.allowed.to_update ? undefined : true}>
+                <div class="mt-28">
+                    <h1 class="font-black">Evaluador COD-{evaluaciones[0].id}</h1>
 
-                <p class="whitespace-pre-line">
-                    {evaluaciones[0].comentario_evaluador ? evaluaciones[0].comentario_evaluador : 'Sin información registrada'}
-                </p>
+                    <p class="whitespace-pre-line">
+                        {evaluaciones[0].comentario_evaluador ? evaluaciones[0].comentario_evaluador : 'Sin información registrada'}
+                    </p>
 
-                <div class="mt-8 mb-8">
-                    <Label labelFor="replicas" value="Respuesta" />
+                    <div class="mt-8 mb-8">
+                        <Label labelFor="replicas" value="Respuesta" />
 
-                    <Textarea maxlength="40000" id="replicas" error={errors.replicas} bind:value={$formPrimeraEvaluacion.replicas} />
+                        <Textarea maxlength="40000" id="replicas" error={errors.replicas} bind:value={$formPrimeraEvaluacion.replicas} />
+                    </div>
                 </div>
-            </div>
+            </fieldset>
             <div class="py-4 flex items-center sticky bottom-0">
-                {#if isSuperAdmin || (checkPermission(authUser, [1, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 17, 18, 19]) && proyecto.finalizado == false)}
+                {#if proyecto.allowed.to_update}
                     <LoadingButton loading={$formPrimeraEvaluacion.processing} class="ml-auto" type="submit">Enviar comentario / resupuesta</LoadingButton>
                 {/if}
             </div>
@@ -150,21 +152,23 @@
         <hr class="mt-10 mb-10 border-black-200" />
 
         <form on:submit|preventDefault={submitReplicaSegundaEval}>
-            <div class="mt-28">
-                <h1 class="font-black">Evaluador COD-{evaluaciones[1].id}</h1>
+            <fieldset disabled={proyecto.allowed.to_update ? undefined : true}>
+                <div class="mt-28">
+                    <h1 class="font-black">Evaluador COD-{evaluaciones[1].id}</h1>
 
-                <p class="whitespace-pre-line">
-                    {evaluaciones[1].comentario_evaluador ? evaluaciones[1].comentario_evaluador : 'Sin información registrada'}
-                </p>
+                    <p class="whitespace-pre-line">
+                        {evaluaciones[1].comentario_evaluador ? evaluaciones[1].comentario_evaluador : 'Sin información registrada'}
+                    </p>
 
-                <div class="mt-8 mb-8">
-                    <Label labelFor="replicas" value="Respuesta" />
+                    <div class="mt-8 mb-8">
+                        <Label labelFor="replicas" value="Respuesta" />
 
-                    <Textarea maxlength="40000" id="replicas" error={errors.replicas} bind:value={$formSegundaEvaluacion.replicas} />
+                        <Textarea maxlength="40000" id="replicas" error={errors.replicas} bind:value={$formSegundaEvaluacion.replicas} />
+                    </div>
                 </div>
-            </div>
+            </fieldset>
             <div class="py-4 flex items-center sticky bottom-0">
-                {#if isSuperAdmin || (checkPermission(authUser, [1, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 17, 18, 19]) && proyecto.finalizado == false)}
+                {#if proyecto.allowed.to_update}
                     <LoadingButton loading={$formSegundaEvaluacion.processing} class="ml-auto" type="submit">Enviar comentario / resupuesta</LoadingButton>
                 {/if}
             </div>
@@ -175,21 +179,23 @@
         <hr class="mt-10 mb-10 border-black-200" />
 
         <form on:submit|preventDefault={submitReplicaTerceraEval}>
-            <div class="mt-28">
-                <h1 class="font-black">Evaluador COD-{evaluaciones[2].id}</h1>
+            <fieldset disabled={proyecto.allowed.to_update ? undefined : true}>
+                <div class="mt-28">
+                    <h1 class="font-black">Evaluador COD-{evaluaciones[2].id}</h1>
 
-                <p class="whitespace-pre-line">
-                    {evaluaciones[2].comentario_evaluador ? evaluaciones[2].comentario_evaluador : 'Sin información registrada'}
-                </p>
+                    <p class="whitespace-pre-line">
+                        {evaluaciones[2].comentario_evaluador ? evaluaciones[2].comentario_evaluador : 'Sin información registrada'}
+                    </p>
 
-                <div class="mt-8 mb-8">
-                    <Label labelFor="replicas" value="Respuesta" />
+                    <div class="mt-8 mb-8">
+                        <Label labelFor="replicas" value="Respuesta" />
 
-                    <Textarea maxlength="40000" id="replicas" error={errors.replicas} bind:value={$formTerceraEvaluacion.replicas} />
+                        <Textarea maxlength="40000" id="replicas" error={errors.replicas} bind:value={$formTerceraEvaluacion.replicas} />
+                    </div>
                 </div>
-            </div>
+            </fieldset>
             <div class="py-4  flex items-center sticky bottom-0">
-                {#if isSuperAdmin || (checkPermission(authUser, [1, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 17, 18, 19]) && proyecto.finalizado == false)}
+                {#if proyecto.allowed.to_update}
                     <LoadingButton loading={$formTerceraEvaluacion.processing} class="ml-auto" type="submit">Enviar comentario / resupuesta</LoadingButton>
                 {/if}
             </div>

@@ -53,7 +53,9 @@
             </div>
         </fieldset>
 
-        <div class="px-8 py-4 bg-gray-100 border-t border-gray-200 flex items-center justify-between sticky bottom-0">
+        <div class="shadow-inner bg-violet-200 border-violet-400 bottom-0 flex items-center justify-between mt-14 px-8 py-4 sticky">
+            <span class="inline-block"> Si finaliza el proyecto no se podrá modificar </span>
+
             {#if proyectoCapacidadInstalada.allowed.to_update}
                 <LoadingButton loading={$form.processing} class="ml-auto" type="submit">
                     {$_('Save')}

@@ -54,9 +54,7 @@
         <div class="flex items-center justify-between lg:px-8 max-w-7xl mx-auto px-4 py-6 sm:px-6">
             <div>
                 <h1>
-                    {#if isSuperAdmin || checkRole(authUser, [4, 21, 17, 18, 20, 19, 5])}
                         <a use:inertia href={route('users.index')} class="text-violet-400 hover:text-violet-600"> Usuarios </a>
-                    {/if}
                     <span class="text-violet-400 font-medium">/</span>
                     Crear
                 </h1>
@@ -202,7 +200,7 @@
                 El/la usuario(a) tiene rol Dinamizador(a) SENNOVA, al dar clic en 'Editar usuario' se configurará como dinamizador(a) del centro seleccionado
             </InfoMessage>
         {/if}
-        <div class="px-8 py-4 bg-gray-100 border-t border-gray-200 flex items-center sticky bottom-0">
+        <div class="shadow-inner bg-violet-200 border-violet-400 bottom-0 flex items-center justify-between mt-14 px-8 py-4 sticky">
             {#if isSuperAdmin || checkRole(authUser, [4, 21, 17, 18, 20, 19, 5])}
                 <LoadingButton loading={$form.processing} type="submit" bind:disabled={$form.autorizacion_datos}>Crear usuario</LoadingButton>
             {/if}

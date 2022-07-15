@@ -117,7 +117,7 @@
 
     async function syncColumnLong(column, form) {
         return new Promise((resolve) => {
-            if (isSuperAdmin || (checkPermissionByUser(authUser, [17]) && tp.proyecto.modificable == true) || (checkPermission(authUser, [18, 19]) && tp.proyecto.modificable == true)) {
+            if (tp.proyecto.allowed.to_update) {
                 //guardar
                 Inertia.put(
                     route('convocatorias.tp.updateLongColumn', [convocatoria.id, tp.id, column]),
@@ -135,7 +135,7 @@
     }
 
     function submit() {
-        if (isSuperAdmin || (checkPermission(authUser, [18, 19]) && tp.proyecto.modificable == true)) {
+        if (tp.proyecto.allowed.to_update) {
             $form.put(route('convocatorias.tp.update', [convocatoria.id, tp.id]), {
                 preserveScroll: true,
             })
@@ -153,7 +153,7 @@
     </header>
 
     <form on:submit|preventDefault={submit} id="tp-form">
-        <fieldset class="p-8 divide-y" disabled={isSuperAdmin || (checkPermissionByUser(authUser, [17]) && tp.proyecto.modificable == true) ? undefined : checkPermission(authUser, [18, 19]) && tp.proyecto.modificable == true ? undefined : true}>
+        <fieldset class="p-8 divide-y" disabled={tp.proyecto.allowed.to_update ? undefined : true}>
             <fieldset class="py-24" disabled>
                 <div class="grid grid-cols-2">
                     <div>
@@ -185,7 +185,9 @@
 
             <div class="py-24">
                 <p class="text-center">Fecha de ejecución</p>
-                <small class="text-red-400 block text-center"> * Campo obligatorio </small>
+                {#if tp.proyecto.allowed.to_update}
+                    <small class="text-red-400 block text-center"> * Campo obligatorio </small>
+                {/if}
                 <InfoMessage message={convocatoria.fecha_maxima_tp} class="my-5" />
 
                 <div class="mt-4 flex items-start justify-around">
@@ -491,11 +493,14 @@
                 </div>
             {/if}
         </fieldset>
-        <div class="px-8 py-4 bg-gray-100 border-t border-gray-200 flex items-center justify-between sticky bottom-0">
-            {#if isSuperAdmin || (checkPermission(authUser, [18, 19]) && tp.proyecto.modificable == true)}
-                <small>{tp.updated_at}</small>
-                <Button type="button" on:click={() => (dialogGuardar = true)}>Guardar</Button>
-            {/if}
+        <div class="shadow-inner bg-violet-200 border-violet-400 bottom-0 flex items-center justify-between mt-14 px-8 py-4 sticky">
+            <small class="flex items-center text-violet-700">
+                <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 mr-2" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+                    <path stroke-linecap="round" stroke-linejoin="round" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z" />
+                </svg>
+                {tp.updated_at}
+            </small>
+            <Button type="button" on:click={() => (dialogGuardar = true)}>¿Desea guardar la información?</Button>
         </div>
     </form>
 
@@ -541,7 +546,7 @@
         <div slot="actions">
             <div class="p-4">
                 <Button on:click={() => (proyectoDialogOpen = false)} variant={null}>Omitir</Button>
-                {#if tp.proyecto.modificable}
+                {#if tp.proyecto.allowed.to_update}
                     <Button variant="raised" on:click={() => (proyectoDialogOpen = false)} on:click={() => Inertia.visit('#nodo_tecnoparque_id')}>Continuar diligenciando</Button>
                 {/if}
             </div>
@@ -550,13 +555,13 @@
 
     <Dialog bind:open={dialogGuardar}>
         <div slot="title">
-            <div class="relative bg-violet-100 text-violet-600 p-5 h-36 w-1/3 m-auto my-10" style="border-radius: 41% 59% 70% 30% / 32% 40% 60% 68% ;">
+            <div class="m-auto relative text-violet-600">
                 <figure>
-                    <img src="/images/megaphone.png" alt="" class="m-auto" />
+                    <img src="/images/megaphone.png" alt="" class="m-auto w-20" />
                 </figure>
             </div>
         </div>
-        <div slot="header-info" class="ml-4">
+        <div slot="header-info" class="ml-10 shadow-md">
             <InfoMessage>
                 Se recomienda que antes de dar clic en el botón <strong>Guardar</strong> descargue el borrador en archivo Word. De esta manera si ocurre un error al guardar puede recuperar la información registrada. Luego de descargar el borrador de clic en el botón <strong>Guardar</strong>. Revise que se muestra un mensaje en verde que dice '<strong>
                     El recurso se ha modificado correctamente</strong
@@ -586,37 +591,37 @@
                 <p style="white-space: pre-line; margin-bottom: 4rem">
                     <strong>Resumen del proyecto</strong>
                     <br />
-                    {$resumenForm.resumen}
+                    {$resumenForm.resumen ? $resumenForm.resumen : 'Sin información registrada'}
                 </p>
                 <p style="white-space: pre-line; margin-bottom: 4rem">
                     <strong>Complemento - Resumen ejecutivo regional</strong>
                     <br />
-                    {$formResumenRegional.resumen_regional}
+                    {$formResumenRegional.resumen_regional ? $formResumenRegional.resumen_regional : 'Sin información registrada'}
                 </p>
                 <p style="white-space: pre-line; margin-bottom: 4rem">
                     <strong>Antecedentes</strong>
                     <br />
-                    {$formAntecedentes.antecedentes}
+                    {$formAntecedentes.antecedentes ? $formAntecedentes.antecedentes : 'Sin información registrada'}
                 </p>
                 <p style="white-space: pre-line; margin-bottom: 4rem">
                     <strong>Complemento - Antecedentes regional</strong>
                     <br />
-                    {$formAntecedentesRegional.antecedentes_regional}
+                    {$formAntecedentesRegional.antecedentes_regional ? $formAntecedentesRegional.antecedentes_regional : 'Sin información registrada'}
                 </p>
                 <p style="white-space: pre-line; margin-bottom: 4rem">
                     <strong>Descripción de retos y prioridades locales y regionales en los cuales el Tecnoparque tiene impacto</strong>
                     <br />
-                    {$formRetosOportunidades.retos_oportunidades}
+                    {$formRetosOportunidades.retos_oportunidades ? $formRetosOportunidades.retos_oportunidades : 'Sin información registrada'}
                 </p>
                 <p style="white-space: pre-line; margin-bottom: 4rem">
                     <strong>Justificación y pertinencia en el territorio</strong>
                     <br />
-                    {$formPertinenciaTerritorio.pertinencia_territorio}
+                    {$formPertinenciaTerritorio.pertinencia_territorio ? $formPertinenciaTerritorio.pertinencia_territorio : 'Sin información registrada'}
                 </p>
                 <p style="white-space: pre-line; margin-bottom: 4rem">
                     <strong>Marco conceptual</strong>
                     <br />
-                    {$formMarcoConceptual.marco_conceptual}
+                    {$formMarcoConceptual.marco_conceptual ? $formMarcoConceptual.marco_conceptual : 'Sin información registrada'}
                 </p>
                 <p style="white-space: pre-line; margin-bottom: 4rem">
                     <strong>Nombre de los municipios beneficiados:</strong>
@@ -633,17 +638,17 @@
                 <p style="white-space: pre-line; margin-bottom: 4rem">
                     <strong>Descripción del beneficio en los municipios</strong>
                     <br />
-                    {$formImpactoMunicipios.impacto_municipios}
+                    {$formImpactoMunicipios.impacto_municipios ? $formImpactoMunicipios.impacto_municipios : 'Sin información registrada'}
                 </p>
                 <p style="white-space: pre-line; margin-bottom: 4rem">
                     <strong>Impacto en el centro de formación</strong>
                     <br />
-                    {$formImpactoCentroFormacion.impacto_centro_formacion}
+                    {$formImpactoCentroFormacion.impacto_centro_formacion ? $formImpactoCentroFormacion.impacto_centro_formacion : 'Sin información registrada'}
                 </p>
-                <p style="white-space: pre-line; margin-bottom: 4rem">
+                <p style="white-space: pre-line; margin-bottom: 4rem; word-wrap: break-word">
                     <strong>Bibliografía</strong>
                     <br />
-                    {$formBibliografia.bibliografia}
+                    {$formBibliografia.bibliografia ? $formBibliografia.bibliografia : 'Sin información registrada'}
                 </p>
             </Export2Word>
         </div>
@@ -651,7 +656,11 @@
             <div class="p-4">
                 <Button on:click={() => (dialogGuardar = false)} variant={null}>Cancelar</Button>
                 <Button variant="raised" type="button" on:click={() => exportComponent.export2Word(tp.proyecto.codigo)}>Descargar borrador en Word</Button>
-                <LoadingButton loading={$form.processing} form="tp-form">Guardar</LoadingButton>
+                {#if tp.proyecto.allowed.to_update}
+                    <LoadingButton loading={$form.processing} form="tp-form">Guardar</LoadingButton>
+                {:else}
+                    <span class="inline-block ml-1.5"> El proyecto no se puede modificar </span>
+                {/if}
             </div>
         </div>
     </Dialog>

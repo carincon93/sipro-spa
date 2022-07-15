@@ -49,7 +49,7 @@
     })
 
     function submit() {
-        if (isSuperAdmin || (checkPermission(authUser, [3, 4, 6, 7, 9, 10, 12, 13, 18, 19]) && proyecto.modificable == true)) {
+        if (proyecto.allowed.to_update) {
             $form.put(route('convocatorias.proyectos.actividades.update', [convocatoria.id, proyecto.id, actividad.id]), {
                 preserveScroll: true,
             })
@@ -57,7 +57,7 @@
     }
 
     function destroy() {
-        if (isSuperAdmin || (checkPermission(authUser, [4, 7, 10, 13, 19]) && proyecto.modificable == true)) {
+        if (proyecto.allowed.to_update) {
             $form.delete(route('convocatorias.proyectos.actividades.destroy', [convocatoria.id, proyecto.id, actividad.id]))
         }
     }
@@ -68,9 +68,7 @@
         <div class="flex items-center justify-between lg:px-8 max-w-7xl mx-auto px-4 py-6 sm:px-6">
             <div>
                 <h1 class="overflow-ellipsis overflow-hidden w-breadcrumb-ellipsis whitespace-nowrap">
-                    {#if isSuperAdmin || checkPermission(authUser, [3, 4, 6, 7, 9, 10, 12, 13, 18, 19, 21, 14, 16, 15, 20])}
-                        <a use:inertia href={route('convocatorias.proyectos.actividades.index', [convocatoria.id, proyecto.id])} class="text-violet-400 hover:text-violet-600"> Actividades </a>
-                    {/if}
+                    <a use:inertia href={route('convocatorias.proyectos.actividades.index', [convocatoria.id, proyecto.id])} class="text-violet-400 hover:text-violet-600"> Actividades </a>
                     <span class="text-violet-400 font-medium">/</span>
                     {actividad.descripcion}
                 </h1>
@@ -80,7 +78,7 @@
 
     <div class="bg-white rounded shadow max-w-3xl">
         <form on:submit|preventDefault={submit}>
-            <fieldset class="p-8" disabled={isSuperAdmin || (checkPermission(authUser, [3, 4, 6, 7, 9, 10, 12, 13, 18, 19]) && proyecto.modificable == true) ? undefined : true}>
+            <fieldset class="p-8" disabled={proyecto.allowed.to_update ? undefined : true}>
                 <div class="mt-4">
                     <p class="text-center">Fecha de ejecución</p>
                     <div class="mt-4 flex items-start justify-around">
@@ -108,11 +106,14 @@
 
                 <h6 class="mt-20 mb-12 text-2xl">Rubros presupuestales</h6>
 
-                <InfoMessage>
+                <InfoMessage class="ml-10 mb-6">
                     Si la actividad no requiere asociar un rubro presupuestal. (Ej: Actividad de PQRS) <br /> Por favor, cambie la siguiente opción a <strong>No</strong>
-                    <Select items={opcionesSiNo} id="requiere_rubros" bind:selectedValue={$form.requiere_rubros} error={errors.requiere_rubros} autocomplete="off" placeholder="Seleccione una opción" required />
                     <hr class="mb-10" />
                     IMPORTANTE: Solo para actividades que no requieran asociar algún rubro presupuestal. Para el resto de actividades SI debe asociar un rubro para poder completar la<strong class="ml-1.5"> Cadena de valor</strong>.
+                    <div class="flex mt-4">
+                        <span class="font-black mr-2">Opción seleccionada:</span>
+                        <Select items={opcionesSiNo} id="requiere_rubros" bind:selectedValue={$form.requiere_rubros} error={errors.requiere_rubros} autocomplete="off" placeholder="Seleccione una opción" required />
+                    </div>
                 </InfoMessage>
                 {#if $form.requiere_rubros?.value == 1}
                     <div class="bg-white rounded shadow overflow-hidden">
@@ -120,7 +121,7 @@
                             <Label required class="mb-4" labelFor="proyecto_presupuesto_id" value="Relacione algún rubro" />
                             <InputError message={errors.proyecto_presupuesto_id} />
                         </div>
-                        {#if isSuperAdmin || proyecto.modificable == true}
+                        {#if isSuperAdmin || proyecto.allowed.to_update}
                             <div>
                                 {#each proyectoPresupuesto as presupuesto}
                                     <FormField class="border-b border-l">
@@ -187,13 +188,13 @@
                 {/if}
 
                 <h6 class="mt-20 mb-12 text-2xl">Roles</h6>
-                <InfoMessage>Si la actividad tiene un responsable por favor seleccione el rol de la siguiente lista</InfoMessage>
+                <InfoMessage class="ml-10 mb-6">Si la actividad tiene un responsable por favor seleccione el rol de la siguiente lista</InfoMessage>
                 <div class="bg-white rounded shadow overflow-hidden">
                     <div class="p-4">
                         <Label class="mb-4" labelFor="proyecto_rol_sennova_id" value="Relacione algún rol" />
                         <InputError message={errors.proyecto_rol_sennova_id} />
                     </div>
-                    {#if isSuperAdmin || proyecto.modificable == true}
+                    {#if isSuperAdmin || proyecto.allowed.to_update}
                         <div class="flex flex-col">
                             {#each proyectoRoles as rol}
                                 <FormField class="border-b border-l">
@@ -231,16 +232,25 @@
                     {/if}
                 </div>
             </fieldset>
-            <div class="px-8 py-4 bg-gray-100 border-t border-gray-200 flex items-center sticky bottom-0">
-                {#if isSuperAdmin || (checkPermission(authUser, [4, 7, 10, 13, 19]) && proyecto.modificable == true && proyecto.codigo_linea_programatica != 70)}
+            <div class="shadow-inner bg-violet-200 border-violet-400 bottom-0 flex items-center justify-between mt-14 px-8 py-4 sticky">
+                <small class="flex items-center text-violet-700">
+                    <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 mr-2" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+                        <path stroke-linecap="round" stroke-linejoin="round" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z" />
+                    </svg>
+                    {actividad.updated_at}
+                </small>
+                {#if proyecto.allowed.to_update && proyecto.codigo_linea_programatica != 70}
                     <button class="text-red-600 hover:underline text-left" tabindex="-1" type="button" on:click={() => (dialogOpen = true)}> Eliminar actividad </button>
                 {/if}
-                {#if isSuperAdmin || (checkPermission(authUser, [3, 4, 6, 7, 9, 10, 12, 13, 18, 19]) && proyecto.modificable == true)}
-                    <LoadingButton loading={$form.processing} class="ml-auto" type="submit">Editar actividad</LoadingButton>
+                {#if proyecto.allowed.to_update}
+                    <LoadingButton loading={$form.processing} class="ml-auto" type="submit">Guardar</LoadingButton>
+                {:else}
+                    <span class="inline-block ml-1.5"> El proyecto no se puede modificar </span>
                 {/if}
             </div>
         </form>
     </div>
+
     <Dialog bind:open={dialogOpen}>
         <div slot="title" class="flex items-center">
             <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 mr-2 text-red-500" fill="none" viewBox="0 0 24 24" stroke="currentColor">

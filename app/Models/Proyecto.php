@@ -2,9 +2,11 @@
 
 namespace App\Models;
 
+use Carbon\Carbon;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Gate;
 use Illuminate\Support\Facades\Storage;
 
 class Proyecto extends Model
@@ -23,7 +25,7 @@ class Proyecto extends Model
      *
      * @var array
      */
-    protected $appends = ['codigo', 'diff_meses', 'precio_proyecto', 'total_roles_sennova', 'fecha_inicio', 'fecha_finalizacion', 'estado_evaluacion_idi', 'estado_evaluacion_cultura_innovacion', 'estado_evaluacion_ta', 'estado_evaluacion_tp', 'estado_evaluacion_servicios_tecnologicos', 'cantidad_objetivos', 'total_proyecto_presupuesto_aprobado', 'total_roles_sennova_aprobado', 'precio_proyecto_aprobado', 'all_files'];
+    protected $appends = ['codigo', 'diff_meses', 'precio_proyecto', 'total_roles_sennova', 'fecha_inicio', 'fecha_finalizacion', 'estado_evaluacion_idi', 'estado_evaluacion_cultura_innovacion', 'estado_evaluacion_ta', 'estado_evaluacion_tp', 'estado_evaluacion_servicios_tecnologicos', 'cantidad_objetivos', 'total_proyecto_presupuesto_aprobado', 'total_roles_sennova_aprobado', 'precio_proyecto_aprobado', 'all_files', 'allowed'];
 
     /**
      * The attributes that are mass assignable.
@@ -335,13 +337,13 @@ class Proyecto extends Model
     }
 
     /**
-     * Relationship with DisCurricular
+     * Relationship with DisenoCurricular
      *
      * @return object
      */
-    public function disCurriculares()
+    public function disenosCurriculares()
     {
-        return $this->belongsToMany(DisCurricular::class, 'proyecto_diseno_curricular', 'proyecto_id', 'diseno_curricular_id');
+        return $this->belongsToMany(DisenoCurricular::class, 'proyecto_diseno_curricular', 'proyecto_id', 'diseno_curricular_id');
     }
 
     /**
@@ -1095,7 +1097,6 @@ class Proyecto extends Model
         return $dvst;
     }
 
-
     public function updateValoresProyecto()
     {
         $proyecto = $this;
@@ -1119,6 +1120,16 @@ class Proyecto extends Model
             default:
                 break;
         }
+    }
+
+    /**
+     * getUpdatedAtAttribute
+     *
+     * @return void
+     */
+    public function getUpdatedAtAttribute($value)
+    {
+        return "Última modificación de este formulario: " . Carbon::parse($value, 'UTC')->timezone('America/Bogota')->timezone('America/Bogota')->locale('es')->isoFormat('DD [de] MMMM [de] YYYY [a las] HH:mm:ss');
     }
 
     public function getAllFilesAttribute()
@@ -1147,5 +1158,14 @@ class Proyecto extends Model
         }
 
         return $collect;
+    }
+
+    public function getAllowedAttribute()
+    {
+        $allowedToView      = Gate::inspect('visualizar-proyecto-autor', $this);
+        $allowedToUpdate    = Gate::inspect('modificar-proyecto-autor', $this);
+        $allowedToDestroy   = Gate::inspect('eliminar-proyecto-autor', $this);
+
+        return collect(['to_view' => $allowedToView->allowed(), 'to_update' => $allowedToUpdate->allowed(), 'to_destroy' => $allowedToDestroy->allowed()]);
     }
 }

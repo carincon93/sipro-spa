@@ -70,7 +70,7 @@
                     {/if}
                 </div>
             </fieldset>
-            <div class="px-8 py-4 bg-gray-100 border-t border-gray-200 flex items-center sticky bottom-0">
+            <div class="shadow-inner bg-violet-200 border-violet-400 bottom-0 flex items-center justify-between mt-14 px-8 py-4 sticky">
                 <LoadingButton loading={$form.processing} type="submit" bind:disabled={$form.autorizacion_datos}>Notificar a la mesa de ayuda</LoadingButton>
             </div>
         </form>

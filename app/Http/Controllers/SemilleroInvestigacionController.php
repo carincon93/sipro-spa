@@ -28,7 +28,7 @@ class SemilleroInvestigacionController extends Controller
 
         return Inertia::render('SemillerosInvestigacion/Index', [
             'filters'                   => request()->all('search'),
-            'allowedToCreate'           => Gate::inspect('create', [SemilleroInvestigacion::class]),
+            'allowedToCreate'           => Gate::inspect('create', [SemilleroInvestigacion::class])->allowed(),
             'grupoInvestigacion'        => $grupoInvestigacion,
             'semillerosInvestigacion'   => SemilleroInvestigacion::select('semilleros_investigacion.id', 'semilleros_investigacion.nombre', 'semilleros_investigacion.codigo', 'semilleros_investigacion.linea_investigacion_id', 'lineas_investigacion.nombre as nombre_linea_principal')
                 ->join('lineas_investigacion', 'semilleros_investigacion.linea_investigacion_id', 'lineas_investigacion.id')
@@ -52,7 +52,7 @@ class SemilleroInvestigacionController extends Controller
             'lineasInvestigacion'   => LineaInvestigacion::select('id as value', 'nombre as label')->where('lineas_investigacion.grupo_investigacion_id', $grupoInvestigacion->id)->get(),
             'redesConocimiento'     => RedConocimiento::select('id as value', 'nombre as label')->get('id'),
             'programasFormacion'    => ProgramaFormacion::selectRaw('programas_formacion.id as value, CONCAT(programas_formacion.nombre, chr(10), \'∙ Código: \', programas_formacion.codigo) as label, linea_investigacion_programa_formacion.linea_investigacion_id as linea_investigacion_id')->join('linea_investigacion_programa_formacion', 'programas_formacion.id', 'linea_investigacion_programa_formacion.programa_formacion_id')->orderBy('programas_formacion.nombre', 'ASC')->get(),
-            'allowedToCreate'       => Gate::inspect('create', [SemilleroInvestigacion::class])
+            'allowedToCreate'       => Gate::inspect('create', [SemilleroInvestigacion::class])->allowed()
         ]);
     }
 
@@ -125,6 +125,7 @@ class SemilleroInvestigacionController extends Controller
             'grupoInvestigacion'                        => $grupoInvestigacion,
             'lineasInvestigacion'                       => LineaInvestigacion::select('id as value', 'nombre as label')->where('lineas_investigacion.grupo_investigacion_id', $grupoInvestigacion->id)->get(),
             'redesConocimiento'                         => RedConocimiento::select('id as value', 'nombre as label')->get('id'),
+            'programasFormacion'                        => ProgramaFormacion::selectRaw('programas_formacion.id as value, CONCAT(programas_formacion.nombre, chr(10), \'∙ Código: \', programas_formacion.codigo) as label, linea_investigacion_programa_formacion.linea_investigacion_id as linea_investigacion_id')->join('linea_investigacion_programa_formacion', 'programas_formacion.id', 'linea_investigacion_programa_formacion.programa_formacion_id')->orderBy('programas_formacion.nombre', 'ASC')->get(),
             'redesConocimientoSemilleroInvestigacion'   => $semilleroInvestigacion->redesConocimiento()->select('redes_conocimiento.id as value', 'redes_conocimiento.nombre as label')->get(),
             'programasFormacionSemilleroInvestigacion'  => $semilleroInvestigacion->programasFormacion()->select('programas_formacion.id as value', 'programas_formacion.nombre as label')->get(),
             'lineasInvestigacionSemilleroInvestigacion' => $semilleroInvestigacion->lineasInvestigacionArticulados()->select('lineas_investigacion.id as value', 'lineas_investigacion.nombre as label')->get(),

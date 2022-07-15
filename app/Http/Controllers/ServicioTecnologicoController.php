@@ -11,6 +11,7 @@ use App\Models\Proyecto;
 use App\Models\TipoProyectoSt;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Gate;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Storage;
 use Inertia\Inertia;
@@ -28,6 +29,7 @@ class ServicioTecnologicoController extends Controller
             'convocatoria'          => $convocatoria,
             'filters'               => request()->all('search', 'estructuracion_proyectos'),
             'serviciosTecnologicos' => ServicioTecnologico::getProyectosPorRol($convocatoria)->appends(['search' => request()->search, 'estructuracion_proyectos' => request()->estructuracion_proyectos]),
+            'allowedToCreate'       => Gate::inspect('formular-proyecto', [10, $convocatoria])->allowed()
         ]);
     }
 
@@ -40,7 +42,10 @@ class ServicioTecnologicoController extends Controller
     {
         $this->authorize('formular-proyecto', [10, $convocatoria]);
 
-        if (auth()->user()->hasRole(13)) {
+        /** @var \App\Models\User */
+        $authUser = Auth::user();
+
+        if ($authUser->hasRole(13)) {
             $tipoProyectoSt = TipoProyectoSt::selectRaw("tipos_proyecto_st.id as value, CASE subclasificacion
                 WHEN '1' THEN	concat(centros_formacion.nombre, chr(10), '∙ Automatización y TICs', chr(10), '∙ Mesa técnica: ', mesas_tecnicas.nombre)
                 WHEN '2' THEN	concat(centros_formacion.nombre, chr(10), '∙ Calibración', chr(10), '∙ Mesa técnica: ', mesas_tecnicas.nombre)
@@ -49,7 +54,7 @@ class ServicioTecnologicoController extends Controller
                 WHEN '5' THEN	concat(centros_formacion.nombre, chr(10), '∙ Fabricación especial', chr(10), '∙ Mesa técnica: ', mesas_tecnicas.nombre)
                 WHEN '6' THEN	concat(centros_formacion.nombre, chr(10), '∙ Seguridad y salud en el trabajo', chr(10), '∙ Mesa técnica: ', mesas_tecnicas.nombre)
                 WHEN '7' THEN	concat(centros_formacion.nombre, chr(10), '∙ Servicios de salud', chr(10), '∙ Mesa técnica: ', mesas_tecnicas.nombre)
-            END as label")->join('centros_formacion', 'tipos_proyecto_st.centro_formacion_id', 'centros_formacion.id')->join('mesas_tecnicas', 'tipos_proyecto_st.mesa_tecnica_id', 'mesas_tecnicas.id')->where('centros_formacion.regional_id', auth()->user()->centroFormacion->regional_id)->get();
+            END as label")->join('centros_formacion', 'tipos_proyecto_st.centro_formacion_id', 'centros_formacion.id')->join('mesas_tecnicas', 'tipos_proyecto_st.mesa_tecnica_id', 'mesas_tecnicas.id')->where('centros_formacion.regional_id', $authUser->centroFormacion->regional_id)->get();
         } else {
             $tipoProyectoSt = TipoProyectoSt::selectRaw("tipos_proyecto_st.id as value, CASE subclasificacion
                 WHEN '1' THEN	concat(centros_formacion.nombre, chr(10), '∙ Automatización y TICs', chr(10), '∙ Mesa técnica: ', mesas_tecnicas.nombre)
@@ -66,7 +71,9 @@ class ServicioTecnologicoController extends Controller
             'convocatoria'          => $convocatoria->only('id', 'esta_activa', 'fase_formateada', 'fase', 'tipo_convocatoria', 'min_fecha_inicio_proyectos_st', 'max_fecha_finalizacion_proyectos_st', 'fecha_maxima_st'),
             'roles'                 => collect(json_decode(Storage::get('json/roles-sennova-st.json'), true)),
             'sectoresProductivos'   => collect(json_decode(Storage::get('json/sectores-productivos.json'), true)),
-            'tiposProyectoSt'       => $tipoProyectoSt
+            'tiposProyectoSt'       => $tipoProyectoSt,
+            'allowedToCreate'       => Gate::inspect('formular-proyecto', [10, $convocatoria])->allowed()
+
         ]);
     }
 
@@ -145,6 +152,9 @@ class ServicioTecnologicoController extends Controller
     {
         $this->authorize('visualizar-proyecto-autor', [$servicioTecnologico->proyecto]);
 
+        /** @var \App\Models\User */
+        $authUser = Auth::user();
+
         $servicioTecnologico->load('proyecto.evaluaciones.servicioTecnologicoEvaluacion');
 
         $servicioTecnologico->codigo_linea_programatica = $servicioTecnologico->proyecto->lineaProgramatica->codigo;
@@ -154,7 +164,7 @@ class ServicioTecnologicoController extends Controller
         $servicioTecnologico->mostrar_recomendaciones = $servicioTecnologico->proyecto->mostrar_recomendaciones;
         $servicioTecnologico->mostrar_requiere_subsanacion = $servicioTecnologico->proyecto->mostrar_requiere_subsanacion;
 
-        if (auth()->user()->hasRole(13)) {
+        if ($authUser->hasRole(13)) {
             $tipoProyectoSt = TipoProyectoSt::selectRaw("tipos_proyecto_st.id as value, CASE subclasificacion
                 WHEN '1' THEN	concat(centros_formacion.nombre, chr(10), '∙ Automatización y TICs', chr(10), '∙ Mesa técnica: ', mesas_tecnicas.nombre)
                 WHEN '2' THEN	concat(centros_formacion.nombre, chr(10), '∙ Calibración', chr(10), '∙ Mesa técnica: ', mesas_tecnicas.nombre)
@@ -163,7 +173,7 @@ class ServicioTecnologicoController extends Controller
                 WHEN '5' THEN	concat(centros_formacion.nombre, chr(10), '∙ Fabricación especial', chr(10), '∙ Mesa técnica: ', mesas_tecnicas.nombre)
                 WHEN '6' THEN	concat(centros_formacion.nombre, chr(10), '∙ Seguridad y salud en el trabajo', chr(10), '∙ Mesa técnica: ', mesas_tecnicas.nombre)
                 WHEN '7' THEN	concat(centros_formacion.nombre, chr(10), '∙ Servicios de salud', chr(10), '∙ Mesa técnica: ', mesas_tecnicas.nombre)
-            END as label")->join('centros_formacion', 'tipos_proyecto_st.centro_formacion_id', 'centros_formacion.id')->join('mesas_tecnicas', 'tipos_proyecto_st.mesa_tecnica_id', 'mesas_tecnicas.id')->where('centros_formacion.regional_id', auth()->user()->centroFormacion->regional_id)->get();
+            END as label")->join('centros_formacion', 'tipos_proyecto_st.centro_formacion_id', 'centros_formacion.id')->join('mesas_tecnicas', 'tipos_proyecto_st.mesa_tecnica_id', 'mesas_tecnicas.id')->where('centros_formacion.regional_id', $authUser->centroFormacion->regional_id)->get();
         } else {
             $tipoProyectoSt = TipoProyectoSt::selectRaw("tipos_proyecto_st.id as value, CASE subclasificacion
                 WHEN '1' THEN	concat(centros_formacion.nombre, chr(10), '∙ Automatización y TICs', chr(10), '∙ Mesa técnica: ', mesas_tecnicas.nombre)
@@ -210,15 +220,6 @@ class ServicioTecnologicoController extends Controller
         return back()->with('success', 'El recurso se ha actualizado correctamente.');
     }
 
-    public function updateLongColumn(ServicioTecnologicoLongColumnRequest $request, Convocatoria $convocatoria, ServicioTecnologico $servicioTecnologico, $column)
-    {
-        $this->authorize('modificar-proyecto-autor', [$servicioTecnologico->proyecto]);
-
-        $servicioTecnologico->update($request->only($column));
-
-        return back();
-    }
-
     /**
      * Remove the specified resource from storage.
      *
@@ -227,11 +228,7 @@ class ServicioTecnologicoController extends Controller
      */
     public function destroy(Request $request, Convocatoria $convocatoria, ServicioTecnologico $servicioTecnologico)
     {
-        $this->authorize('modificar-proyecto-autor', [$servicioTecnologico->proyecto]);
-
-        if ($convocatoria->fase != 1) {
-            return back()->with('error', 'Un proyecto finalizado no se puede eliminar.');
-        }
+        $this->authorize('eliminar-proyecto-autor', [$servicioTecnologico->proyecto]);
 
         if (!Hash::check($request->password, Auth::user()->password)) {
             return back()
@@ -241,6 +238,15 @@ class ServicioTecnologicoController extends Controller
         $servicioTecnologico->proyecto()->delete();
 
         return redirect()->route('convocatorias.servicios-tecnologicos.index', [$convocatoria])->with('success', 'El recurso se ha eliminado correctamente.');
+    }
+
+    public function updateLongColumn(ServicioTecnologicoLongColumnRequest $request, Convocatoria $convocatoria, ServicioTecnologico $servicioTecnologico, $column)
+    {
+        $this->authorize('modificar-proyecto-autor', [$servicioTecnologico->proyecto]);
+
+        $servicioTecnologico->update($request->only($column));
+
+        return back();
     }
 
     /**

@@ -41,7 +41,7 @@
     })
 
     function submit() {
-        if (isSuperAdmin || (checkPermission(authUser, [3, 4, 6, 7, 9, 10, 12, 13, 18, 19]) && proyecto.modificable == true)) {
+        if (proyecto.allowed.to_update) {
             $form.put(route('convocatorias.proyectos.metodologia', [convocatoria.id, proyecto.id]), {
                 preserveScroll: true,
             })
@@ -57,7 +57,7 @@
     <h1 class="text-3xl m-24 text-center">Metodología</h1>
 
     <form on:submit|preventDefault={submit}>
-        <fieldset disabled={isSuperAdmin || (checkPermission(authUser, [3, 4, 6, 7, 9, 10, 12, 13, 18, 19]) && proyecto.modificable == true) ? undefined : true}>
+        <fieldset disabled={proyecto.allowed.to_update ? undefined : true}>
             <div class="mt-4">
                 <div>
                     <Label required class="mb-4" labelFor="metodologia" value="Metodología" />
@@ -108,8 +108,8 @@
                 </RecomendacionEvaluador>
             {/if}
         </fieldset>
-        <div class="py-4 bg-gray-100 border-t border-gray-200 flex items-center sticky bottom-0">
-            {#if isSuperAdmin || (checkPermission(authUser, [3, 4, 6, 7, 9, 10, 12, 13, 18, 19]) && proyecto.modificable == true)}
+        <div class="shadow-inner bg-violet-200 border-violet-400 bottom-0 flex items-center justify-between mt-14 px-8 py-4 sticky">
+            {#if proyecto.allowed.to_update}
                 <LoadingButton loading={$form.processing} class="ml-auto" type="submit">Guardar metodología</LoadingButton>
             {/if}
         </div>
@@ -145,20 +145,18 @@
     {/if}
 
     {#if showGantt}
-        <Button on:click={() => (showGantt = false)}>Ocultar diagrama de Gantt</Button>
+        <Button on:click={() => (showGantt = false)} class="mt-6">Ocultar diagrama de Gantt</Button>
     {:else}
-        <Button on:click={() => (showGantt = true)}>Visualizar diagrama de Gantt</Button>
+        <Button on:click={() => (showGantt = true)} class="mt-6">Visualizar diagrama de Gantt</Button>
     {/if}
 
     {#if showGantt || to_pdf}
         <Gantt
             items={actividadesGantt}
-            request={isSuperAdmin || checkPermission(authUser, [3, 4, 6, 7, 9, 10, 12, 13, 18, 19, 21, 14, 16, 15, 20])
-                ? {
-                      uri: 'convocatorias.proyectos.actividades.edit',
-                      params: [convocatoria.id, proyecto.id],
-                  }
-                : null}
+            request={{
+                uri: 'convocatorias.proyectos.actividades.edit',
+                params: [convocatoria.id, proyecto.id],
+            }}
         />
     {:else}
         <DataTable class="mt-20" routeParams={[convocatoria.id, proyecto.id]}>
@@ -196,16 +194,10 @@
                         </td>
 
                         <td class="border-t td-actions">
-                            <DataTableMenu class={actividades.data.length < 4 ? 'z-50' : ''}>
-                                {#if isSuperAdmin || checkPermission(authUser, [3, 4, 6, 7, 9, 10, 12, 13, 18, 19, 21, 14, 16, 15, 20])}
-                                    <Item on:SMUI:action={() => Inertia.visit(route('convocatorias.proyectos.actividades.edit', [convocatoria.id, proyecto.id, actividad.id]))}>
-                                        <Text>Ver detalles</Text>
-                                    </Item>
-                                {:else}
-                                    <Item>
-                                        <Text>No tiene permisos</Text>
-                                    </Item>
-                                {/if}
+                            <DataTableMenu class={actividades.data.length < 3 ? 'z-50' : ''}>
+                                <Item on:SMUI:action={() => Inertia.visit(route('convocatorias.proyectos.actividades.edit', [convocatoria.id, proyecto.id, actividad.id]))}>
+                                    <Text>Ver detalles</Text>
+                                </Item>
                             </DataTableMenu>
                         </td>
                     </tr>

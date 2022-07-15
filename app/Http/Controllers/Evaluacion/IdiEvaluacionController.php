@@ -5,10 +5,8 @@ namespace App\Http\Controllers\Evaluacion;
 use App\Models\Evaluacion\IdiEvaluacion;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Evaluacion\IdiEvaluacionRequest;
-use App\Models\CentroFormacion;
 use App\Models\Convocatoria;
 use App\Models\MesaSectorial;
-use App\Models\Proyecto;
 use App\Models\Tecnoacademia;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Storage;
@@ -26,7 +24,7 @@ class IdiEvaluacionController extends Controller
         return Inertia::render('Convocatorias/Evaluaciones/Idi/Index', [
             'convocatoria'  => $convocatoria->only('id', 'esta_activa', 'fase_formateada', 'fase', 'tipo_convocatoria', 'tipo_convocatoria'),
             'filters'       => request()->all('search'),
-            'idi'           => IdiEvaluacion::getProyectosPorEvaluador($convocatoria)->appends(['search' => request()->search]),
+            'evaluaciones'  => IdiEvaluacion::getProyectosPorEvaluador($convocatoria)->appends(['search' => request()->search]),
         ]);
     }
 

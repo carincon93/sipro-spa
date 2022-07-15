@@ -79,7 +79,7 @@
                     </td>
 
                     <td class="border-t td-actions">
-                        <DataTableMenu class={inventarioEquipos.data.length < 4 ? 'z-50' : ''}>
+                        <DataTableMenu class={inventarioEquipos.data.length < 3 ? 'z-50' : ''}>
                             {#if isSuperAdmin || checkPermission(authUser, [6, 7, 16])}
                                 <Item on:SMUI:action={() => Inertia.visit(route('convocatorias.proyectos.inventario-equipos.edit', [convocatoria.id, proyecto.id, inventarioEquipo.id]))}>
                                     <Text>Ver detalles</Text>

@@ -10,6 +10,7 @@ use App\Models\DisenoCurricular;
 use App\Models\Regional;
 use App\Models\Tecnoacademia;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 use Inertia\Inertia;
 
 class TaEvaluacionController extends Controller
@@ -70,6 +71,9 @@ class TaEvaluacionController extends Controller
     {
         $this->authorize('visualizar-evaluacion-autor', $taEvaluacion->evaluacion);
 
+        /** @var \App\Models\User */
+        $authUser = Auth::user();
+
         $taEvaluacion->evaluacion->proyecto;
         $ta = $taEvaluacion->evaluacion->proyecto->ta;
         $ta->proyecto->pdfVersiones;
@@ -77,14 +81,14 @@ class TaEvaluacionController extends Controller
         $ta->proyecto->precio_proyecto           = $ta->proyecto->precioProyecto;
         $ta->proyecto->centroFormacion;
 
-        if (auth()->user()->hasRole(12)) {
+        if ($authUser->hasRole(12)) {
             $tecnoAcademias = Tecnoacademia::selectRaw("tecnoacademias.id as value, CASE modalidad
                 WHEN '1' THEN	concat(tecnoacademias.nombre, chr(10), '∙ Modalidad: itinerante', chr(10), '∙ Centro de formación: ', centros_formacion.nombre)
                 WHEN '2' THEN	concat(tecnoacademias.nombre, chr(10), '∙ Modalidad: itinerante - vehículo', chr(10), '∙ Centro de formación: ', centros_formacion.nombre)
                 WHEN '3' THEN	concat(tecnoacademias.nombre, chr(10), '∙ Modalidad: fija con extensión', chr(10), '∙ Centro de formación: ', centros_formacion.nombre)
             END as label, centros_formacion.id as centro_formacion_id")
                 ->join('centros_formacion', 'tecnoacademias.centro_formacion_id', 'centros_formacion.id')
-                ->where('tecnoacademias.centro_formacion_id', auth()->user()->centroFormacion->id)->get();
+                ->where('tecnoacademias.centro_formacion_id', $authUser->centroFormacion->id)->get();
         } else {
             $tecnoAcademias = $tecnoAcademias = Tecnoacademia::selectRaw("tecnoacademias.id as value, CASE modalidad
                 WHEN '1' THEN	concat(tecnoacademias.nombre, chr(10), '∙ Modalidad: itinerante', chr(10), '∙ Centro de formación: ', centros_formacion.nombre)

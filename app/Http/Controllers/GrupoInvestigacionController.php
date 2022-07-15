@@ -6,6 +6,7 @@ use App\Http\Requests\GrupoInvestigacionRequest;
 use App\Models\GrupoInvestigacion;
 use App\Models\RedConocimiento;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Str;
 use Inertia\Inertia;
@@ -21,10 +22,13 @@ class GrupoInvestigacionController extends Controller
     {
         $this->authorize('viewAny', [GrupoInvestigacion::class]);
 
+        /** @var \App\Models\User */
+        $authUser = Auth::user();
+
         return Inertia::render('GruposInvestigacion/Index', [
             'filters'                               => request()->all('search'),
             'gruposInvestigacion'                   => GrupoInvestigacion::select('grupos_investigacion.id', 'grupos_investigacion.nombre', 'grupos_investigacion.centro_formacion_id')->with('centroFormacion.regional')->filterGrupoInvestigacion(request()->only('search', 'grupoInvestigacion'))->orderBy('grupos_investigacion.nombre', 'ASC')->paginate(),
-            'gruposInvestigacionCentroFormacion'    => GrupoInvestigacion::select('grupos_investigacion.id', 'grupos_investigacion.nombre', 'grupos_investigacion.centro_formacion_id')->where('grupos_investigacion.centro_formacion_id', auth()->user()->centro_formacion_id)->with('centroFormacion.regional')->get()
+            'gruposInvestigacionCentroFormacion'    => GrupoInvestigacion::select('grupos_investigacion.id', 'grupos_investigacion.nombre', 'grupos_investigacion.centro_formacion_id')->where('grupos_investigacion.centro_formacion_id', $authUser->centro_formacion_id)->with('centroFormacion.regional')->get()
         ]);
     }
 

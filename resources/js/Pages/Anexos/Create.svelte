@@ -45,9 +45,7 @@
         <div class="flex items-center justify-between lg:px-8 max-w-7xl mx-auto px-4 py-6 sm:px-6">
             <div>
                 <h1>
-                    {#if isSuperAdmin}
-                        <a use:inertia href={route('anexos.index')} class="text-violet-400 hover:text-violet-600"> Anexos </a>
-                    {/if}
+                    <a use:inertia href={route('anexos.index')} class="text-violet-400 hover:text-violet-600"> Anexos </a>
                     <span class="text-violet-400 font-medium">/</span>
                     Crear
                 </h1>
@@ -100,7 +98,7 @@
                     </div>
                 </div>
             </fieldset>
-            <div class="px-8 py-4 bg-gray-100 border-t border-gray-200 flex items-center sticky bottom-0">
+            <div class="shadow-inner bg-violet-200 border-violet-400 bottom-0 flex items-center justify-between mt-14 px-8 py-4 sticky">
                 {#if isSuperAdmin}
                     <LoadingButton loading={$form.processing} class="ml-auto" type="submit">Crear anexo</LoadingButton>
                 {/if}

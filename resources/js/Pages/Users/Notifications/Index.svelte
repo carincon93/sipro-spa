@@ -83,7 +83,7 @@
                         </div>
                     </td>
                     <td class="border-t td-actions">
-                        <DataTableMenu class={notificaciones.data.length < 4 ? 'z-50' : ''}>
+                        <DataTableMenu class={notificaciones.data.length < 3 ? 'z-50' : ''}>
                             {#if notificacion.data.action}
                                 <Item on:SMUI:action={() => Inertia.visit(notificacion.data.action)}>
                                     <Text>Ver detalles</Text>

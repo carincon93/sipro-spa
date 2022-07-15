@@ -165,7 +165,9 @@ class ServicioTecnologicoEvaluacion extends Model
      */
     public static function getProyectosPorEvaluador($convocatoria)
     {
+        /** @var \App\Models\User */
         $authUser = Auth::user();
+
         if ($authUser->hasRole(1) || $authUser->hasRole(19)) { // Admin
             $serviciosTecnologicos = ServicioTecnologico::select('evaluaciones.id as evaluacion_id', 'evaluaciones.habilitado', 'evaluaciones.iniciado', 'evaluaciones.finalizado', 'servicios_tecnologicos.id', 'servicios_tecnologicos.titulo', 'servicios_tecnologicos.fecha_inicio', 'servicios_tecnologicos.fecha_finalizacion')
                 ->join('proyectos', 'servicios_tecnologicos.id', 'proyectos.id')

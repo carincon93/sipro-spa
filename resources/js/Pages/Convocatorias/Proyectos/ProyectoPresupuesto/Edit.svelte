@@ -58,7 +58,7 @@
     })
 
     function submit() {
-        if (isSuperAdmin || (checkPermission(authUser, [3, 4, 6, 7, 9, 10, 12, 13, 18, 19]) && proyecto.modificable == true)) {
+        if (proyecto.allowed.to_update) {
             $form.post(route('convocatorias.proyectos.presupuesto.update', [convocatoria.id, proyecto.id, proyectoPresupuesto.id]), {
                 preserveScroll: true,
             })
@@ -66,7 +66,7 @@
     }
 
     function destroy() {
-        if (isSuperAdmin || (checkPermission(authUser, [4, 7, 10, 13, 19]) && proyecto.modificable == true)) {
+        if (proyecto.allowed.to_update) {
             $form.delete(route('convocatorias.proyectos.presupuesto.destroy', [convocatoria.id, proyecto.id, proyectoPresupuesto.id]))
         }
     }
@@ -90,9 +90,7 @@
         <div class="flex items-center justify-between lg:px-8 max-w-7xl mx-auto px-4 py-6 sm:px-6">
             <div>
                 <h1 class="overflow-ellipsis overflow-hidden w-breadcrumb-ellipsis whitespace-nowrap">
-                    {#if isSuperAdmin || checkPermission(authUser, [3, 4, 6, 7, 9, 10, 12, 13, 18, 19, 21, 14, 16, 15, 20])}
-                        <a use:inertia href={route('convocatorias.proyectos.presupuesto.index', [convocatoria.id, proyecto.id])} class="text-violet-400 hover:text-violet-600"> Presupuesto </a>
-                    {/if}
+                    <a use:inertia href={route('convocatorias.proyectos.presupuesto.index', [convocatoria.id, proyecto.id])} class="text-violet-400 hover:text-violet-600"> Presupuesto </a>
                     <span class="text-violet-400 font-medium">/</span>
                     {proyectoPresupuesto.convocatoria_presupuesto.presupuesto_sennova.uso_presupuestal.descripcion}
                 </h1>
@@ -120,7 +118,7 @@
                 </RecomendacionEvaluador>
             {/if}
             <form on:submit|preventDefault={submit} id="form-proyecto-presupuesto" class="bg-white rounded shadow">
-                <fieldset class="p-8" disabled={isSuperAdmin || (checkPermission(authUser, [3, 4, 6, 7, 9, 10, 12, 13, 18, 19]) && proyecto.modificable == true) ? undefined : true}>
+                <fieldset class="p-8" disabled={proyecto.allowed.to_update ? undefined : true}>
                     <div class="mt-4">
                         <Label required labelFor="segundo_grupo_presupuestal_id" value="Homologable 2018" />
                         <DynamicList id="segundo_grupo_presupuestal_id" bind:value={$form.segundo_grupo_presupuestal_id} routeWebApi={route('web-api.segundo-grupo-presupuestal', proyecto.linea_programatica)} placeholder="Busque por el homologable 2018" message={errors.segundo_grupo_presupuestal_id} required />
@@ -220,15 +218,20 @@
                     {/if}
                 </fieldset>
 
-                <div class="px-8 py-4 bg-gray-100 border-t border-gray-200 flex items-center sticky bottom-0">
-                    {#if isSuperAdmin || (checkPermission(authUser, [4, 7, 10, 13, 19]) && proyecto.modificable == true)}
+                <div class="shadow-inner bg-violet-200 border-violet-400 bottom-0 flex items-center justify-between mt-14 px-8 py-4 sticky">
+                    <small class="flex items-center text-violet-700">
+                        <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 mr-2" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+                            <path stroke-linecap="round" stroke-linejoin="round" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z" />
+                        </svg>
+                        {proyectoPresupuesto.updated_at}
+                    </small>
+                    {#if proyecto.allowed.to_update}
                         <button class="text-red-600 hover:underline text-left" tabindex="-1" type="button" on:click={() => (dialogOpen = true)}> Eliminar ítem </button>
-                    {/if}
-
-                    {#if isSuperAdmin || (checkPermission(authUser, [3, 4, 6, 7, 9, 10, 12, 13, 18, 19]) && proyecto.modificable == true)}
                         {#if $form.convocatoria_presupuesto_id != '' || $form.convocatoria_presupuesto_id != ''}
-                            <LoadingButton loading={$form.processing} class="ml-auto" type="submit">Editar presupuesto</LoadingButton>
+                            <LoadingButton loading={$form.processing} class="ml-auto" type="submit">Guardar</LoadingButton>
                         {/if}
+                    {:else}
+                        <span class="inline-block ml-1.5"> El proyecto no se puede modificar </span>
                     {/if}
                 </div>
             </form>

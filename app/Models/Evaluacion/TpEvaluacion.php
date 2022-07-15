@@ -98,7 +98,9 @@ class TpEvaluacion extends Model
      */
     public static function getProyectosPorEvaluador($convocatoria)
     {
+        /** @var \App\Models\User */
         $authUser = Auth::user();
+
         if ($authUser->hasRole(1) || $authUser->hasRole(17)) { // Admin
             $tp = Tp::select('evaluaciones.id as evaluacion_id', 'evaluaciones.habilitado', 'evaluaciones.iniciado', 'evaluaciones.finalizado', 'tp.id', 'tp.nodo_tecnoparque_id', 'tp.fecha_inicio', 'tp.fecha_finalizacion')
                 ->join('proyectos', 'tp.id', 'proyectos.id')
