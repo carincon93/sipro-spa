@@ -3468,9 +3468,9 @@ ___CSS_LOADER_EXPORT___.push([module.id, "@charset \"UTF-8\";\n:root{--tagify-dd
 
 /***/ }),
 
-/***/ "./node_modules/css-loader/dist/cjs.js??ruleSet[1].rules[6].oneOf[1].use[1]!./node_modules/postcss-loader/dist/cjs.js??ruleSet[1].rules[6].oneOf[1].use[2]!./node_modules/svelte-loader/index.js?cssPath=D:/www/sipro-spa/node_modules/svelte-select/src/Item.svelte.30.css!./node_modules/svelte-select/src/Item.svelte":
+/***/ "./node_modules/css-loader/dist/cjs.js??ruleSet[1].rules[6].oneOf[1].use[1]!./node_modules/postcss-loader/dist/cjs.js??ruleSet[1].rules[6].oneOf[1].use[2]!./node_modules/svelte-loader/index.js?cssPath=D:/www/sipro-spa/node_modules/svelte-select/src/Item.svelte.27.css!./node_modules/svelte-select/src/Item.svelte":
 /*!*******************************************************************************************************************************************************************************************************************************************************************************************************************************!*\
-  !*** ./node_modules/css-loader/dist/cjs.js??ruleSet[1].rules[6].oneOf[1].use[1]!./node_modules/postcss-loader/dist/cjs.js??ruleSet[1].rules[6].oneOf[1].use[2]!./node_modules/svelte-loader/index.js?cssPath=D:/www/sipro-spa/node_modules/svelte-select/src/Item.svelte.30.css!./node_modules/svelte-select/src/Item.svelte ***!
+  !*** ./node_modules/css-loader/dist/cjs.js??ruleSet[1].rules[6].oneOf[1].use[1]!./node_modules/postcss-loader/dist/cjs.js??ruleSet[1].rules[6].oneOf[1].use[2]!./node_modules/svelte-loader/index.js?cssPath=D:/www/sipro-spa/node_modules/svelte-select/src/Item.svelte.27.css!./node_modules/svelte-select/src/Item.svelte ***!
   \*******************************************************************************************************************************************************************************************************************************************************************************************************************************/
 /***/ ((module, __webpack_exports__, __webpack_require__) => {
 
@@ -3492,9 +3492,9 @@ ___CSS_LOADER_EXPORT___.push([module.id, ".item.svelte-bdnybl{cursor:default;hei
 
 /***/ }),
 
-/***/ "./node_modules/css-loader/dist/cjs.js??ruleSet[1].rules[6].oneOf[1].use[1]!./node_modules/postcss-loader/dist/cjs.js??ruleSet[1].rules[6].oneOf[1].use[2]!./node_modules/svelte-loader/index.js?cssPath=D:/www/sipro-spa/node_modules/svelte-select/src/List.svelte.27.css!./node_modules/svelte-select/src/List.svelte":
+/***/ "./node_modules/css-loader/dist/cjs.js??ruleSet[1].rules[6].oneOf[1].use[1]!./node_modules/postcss-loader/dist/cjs.js??ruleSet[1].rules[6].oneOf[1].use[2]!./node_modules/svelte-loader/index.js?cssPath=D:/www/sipro-spa/node_modules/svelte-select/src/List.svelte.30.css!./node_modules/svelte-select/src/List.svelte":
 /*!*******************************************************************************************************************************************************************************************************************************************************************************************************************************!*\
-  !*** ./node_modules/css-loader/dist/cjs.js??ruleSet[1].rules[6].oneOf[1].use[1]!./node_modules/postcss-loader/dist/cjs.js??ruleSet[1].rules[6].oneOf[1].use[2]!./node_modules/svelte-loader/index.js?cssPath=D:/www/sipro-spa/node_modules/svelte-select/src/List.svelte.27.css!./node_modules/svelte-select/src/List.svelte ***!
+  !*** ./node_modules/css-loader/dist/cjs.js??ruleSet[1].rules[6].oneOf[1].use[1]!./node_modules/postcss-loader/dist/cjs.js??ruleSet[1].rules[6].oneOf[1].use[2]!./node_modules/svelte-loader/index.js?cssPath=D:/www/sipro-spa/node_modules/svelte-select/src/List.svelte.30.css!./node_modules/svelte-select/src/List.svelte ***!
   \*******************************************************************************************************************************************************************************************************************************************************************************************************************************/
 /***/ ((module, __webpack_exports__, __webpack_require__) => {
 
@@ -3516,9 +3516,9 @@ ___CSS_LOADER_EXPORT___.push([module.id, ".listContainer.svelte-ux0sbr{box-shado
 
 /***/ }),
 
-/***/ "./node_modules/css-loader/dist/cjs.js??ruleSet[1].rules[6].oneOf[1].use[1]!./node_modules/postcss-loader/dist/cjs.js??ruleSet[1].rules[6].oneOf[1].use[2]!./node_modules/svelte-loader/index.js?cssPath=D:/www/sipro-spa/node_modules/svelte-select/src/MultiSelection.svelte.29.css!./node_modules/svelte-select/src/MultiSelection.svelte":
+/***/ "./node_modules/css-loader/dist/cjs.js??ruleSet[1].rules[6].oneOf[1].use[1]!./node_modules/postcss-loader/dist/cjs.js??ruleSet[1].rules[6].oneOf[1].use[2]!./node_modules/svelte-loader/index.js?cssPath=D:/www/sipro-spa/node_modules/svelte-select/src/MultiSelection.svelte.28.css!./node_modules/svelte-select/src/MultiSelection.svelte":
 /*!***************************************************************************************************************************************************************************************************************************************************************************************************************************************************!*\
-  !*** ./node_modules/css-loader/dist/cjs.js??ruleSet[1].rules[6].oneOf[1].use[1]!./node_modules/postcss-loader/dist/cjs.js??ruleSet[1].rules[6].oneOf[1].use[2]!./node_modules/svelte-loader/index.js?cssPath=D:/www/sipro-spa/node_modules/svelte-select/src/MultiSelection.svelte.29.css!./node_modules/svelte-select/src/MultiSelection.svelte ***!
+  !*** ./node_modules/css-loader/dist/cjs.js??ruleSet[1].rules[6].oneOf[1].use[1]!./node_modules/postcss-loader/dist/cjs.js??ruleSet[1].rules[6].oneOf[1].use[2]!./node_modules/svelte-loader/index.js?cssPath=D:/www/sipro-spa/node_modules/svelte-select/src/MultiSelection.svelte.28.css!./node_modules/svelte-select/src/MultiSelection.svelte ***!
   \***************************************************************************************************************************************************************************************************************************************************************************************************************************************************/
 /***/ ((module, __webpack_exports__, __webpack_require__) => {
 
@@ -3564,9 +3564,9 @@ ___CSS_LOADER_EXPORT___.push([module.id, ".selectContainer.svelte-17qb5ew.svelte
 
 /***/ }),
 
-/***/ "./node_modules/css-loader/dist/cjs.js??ruleSet[1].rules[6].oneOf[1].use[1]!./node_modules/postcss-loader/dist/cjs.js??ruleSet[1].rules[6].oneOf[1].use[2]!./node_modules/svelte-loader/index.js?cssPath=D:/www/sipro-spa/node_modules/svelte-select/src/Selection.svelte.28.css!./node_modules/svelte-select/src/Selection.svelte":
+/***/ "./node_modules/css-loader/dist/cjs.js??ruleSet[1].rules[6].oneOf[1].use[1]!./node_modules/postcss-loader/dist/cjs.js??ruleSet[1].rules[6].oneOf[1].use[2]!./node_modules/svelte-loader/index.js?cssPath=D:/www/sipro-spa/node_modules/svelte-select/src/Selection.svelte.29.css!./node_modules/svelte-select/src/Selection.svelte":
 /*!*****************************************************************************************************************************************************************************************************************************************************************************************************************************************!*\
-  !*** ./node_modules/css-loader/dist/cjs.js??ruleSet[1].rules[6].oneOf[1].use[1]!./node_modules/postcss-loader/dist/cjs.js??ruleSet[1].rules[6].oneOf[1].use[2]!./node_modules/svelte-loader/index.js?cssPath=D:/www/sipro-spa/node_modules/svelte-select/src/Selection.svelte.28.css!./node_modules/svelte-select/src/Selection.svelte ***!
+  !*** ./node_modules/css-loader/dist/cjs.js??ruleSet[1].rules[6].oneOf[1].use[1]!./node_modules/postcss-loader/dist/cjs.js??ruleSet[1].rules[6].oneOf[1].use[2]!./node_modules/svelte-loader/index.js?cssPath=D:/www/sipro-spa/node_modules/svelte-select/src/Selection.svelte.29.css!./node_modules/svelte-select/src/Selection.svelte ***!
   \*****************************************************************************************************************************************************************************************************************************************************************************************************************************************/
 /***/ ((module, __webpack_exports__, __webpack_require__) => {
 
@@ -3612,9 +3612,9 @@ ___CSS_LOADER_EXPORT___.push([module.id, "svelte-virtual-list-viewport.svelte-p6
 
 /***/ }),
 
-/***/ "./node_modules/css-loader/dist/cjs.js??ruleSet[1].rules[6].oneOf[1].use[1]!./node_modules/postcss-loader/dist/cjs.js??ruleSet[1].rules[6].oneOf[1].use[2]!./node_modules/svelte-loader/index.js?cssPath=D:/www/sipro-spa/resources/js/Shared/Button.svelte.12.css!./resources/js/Shared/Button.svelte":
+/***/ "./node_modules/css-loader/dist/cjs.js??ruleSet[1].rules[6].oneOf[1].use[1]!./node_modules/postcss-loader/dist/cjs.js??ruleSet[1].rules[6].oneOf[1].use[2]!./node_modules/svelte-loader/index.js?cssPath=D:/www/sipro-spa/resources/js/Shared/Button.svelte.11.css!./resources/js/Shared/Button.svelte":
 /*!*************************************************************************************************************************************************************************************************************************************************************************************************************!*\
-  !*** ./node_modules/css-loader/dist/cjs.js??ruleSet[1].rules[6].oneOf[1].use[1]!./node_modules/postcss-loader/dist/cjs.js??ruleSet[1].rules[6].oneOf[1].use[2]!./node_modules/svelte-loader/index.js?cssPath=D:/www/sipro-spa/resources/js/Shared/Button.svelte.12.css!./resources/js/Shared/Button.svelte ***!
+  !*** ./node_modules/css-loader/dist/cjs.js??ruleSet[1].rules[6].oneOf[1].use[1]!./node_modules/postcss-loader/dist/cjs.js??ruleSet[1].rules[6].oneOf[1].use[2]!./node_modules/svelte-loader/index.js?cssPath=D:/www/sipro-spa/resources/js/Shared/Button.svelte.11.css!./resources/js/Shared/Button.svelte ***!
   \*************************************************************************************************************************************************************************************************************************************************************************************************************/
 /***/ ((module, __webpack_exports__, __webpack_require__) => {
 
@@ -3636,9 +3636,9 @@ ___CSS_LOADER_EXPORT___.push([module.id, ".mdc-button{height:auto;min-height:36p
 
 /***/ }),
 
-/***/ "./node_modules/css-loader/dist/cjs.js??ruleSet[1].rules[6].oneOf[1].use[1]!./node_modules/postcss-loader/dist/cjs.js??ruleSet[1].rules[6].oneOf[1].use[2]!./node_modules/svelte-loader/index.js?cssPath=D:/www/sipro-spa/resources/js/Shared/LoadingButton.svelte.11.css!./resources/js/Shared/LoadingButton.svelte":
+/***/ "./node_modules/css-loader/dist/cjs.js??ruleSet[1].rules[6].oneOf[1].use[1]!./node_modules/postcss-loader/dist/cjs.js??ruleSet[1].rules[6].oneOf[1].use[2]!./node_modules/svelte-loader/index.js?cssPath=D:/www/sipro-spa/resources/js/Shared/LoadingButton.svelte.14.css!./resources/js/Shared/LoadingButton.svelte":
 /*!***************************************************************************************************************************************************************************************************************************************************************************************************************************!*\
-  !*** ./node_modules/css-loader/dist/cjs.js??ruleSet[1].rules[6].oneOf[1].use[1]!./node_modules/postcss-loader/dist/cjs.js??ruleSet[1].rules[6].oneOf[1].use[2]!./node_modules/svelte-loader/index.js?cssPath=D:/www/sipro-spa/resources/js/Shared/LoadingButton.svelte.11.css!./resources/js/Shared/LoadingButton.svelte ***!
+  !*** ./node_modules/css-loader/dist/cjs.js??ruleSet[1].rules[6].oneOf[1].use[1]!./node_modules/postcss-loader/dist/cjs.js??ruleSet[1].rules[6].oneOf[1].use[2]!./node_modules/svelte-loader/index.js?cssPath=D:/www/sipro-spa/resources/js/Shared/LoadingButton.svelte.14.css!./resources/js/Shared/LoadingButton.svelte ***!
   \***************************************************************************************************************************************************************************************************************************************************************************************************************************/
 /***/ ((module, __webpack_exports__, __webpack_require__) => {
 
@@ -3660,9 +3660,9 @@ ___CSS_LOADER_EXPORT___.push([module.id, ".mdc-button{height:auto;min-height:36p
 
 /***/ }),
 
-/***/ "./node_modules/css-loader/dist/cjs.js??ruleSet[1].rules[6].oneOf[1].use[1]!./node_modules/postcss-loader/dist/cjs.js??ruleSet[1].rules[6].oneOf[1].use[2]!./node_modules/svelte-loader/index.js?cssPath=D:/www/sipro-spa/resources/js/Shared/Select.svelte.58.css!./resources/js/Shared/Select.svelte":
+/***/ "./node_modules/css-loader/dist/cjs.js??ruleSet[1].rules[6].oneOf[1].use[1]!./node_modules/postcss-loader/dist/cjs.js??ruleSet[1].rules[6].oneOf[1].use[2]!./node_modules/svelte-loader/index.js?cssPath=D:/www/sipro-spa/resources/js/Shared/Select.svelte.15.css!./resources/js/Shared/Select.svelte":
 /*!*************************************************************************************************************************************************************************************************************************************************************************************************************!*\
-  !*** ./node_modules/css-loader/dist/cjs.js??ruleSet[1].rules[6].oneOf[1].use[1]!./node_modules/postcss-loader/dist/cjs.js??ruleSet[1].rules[6].oneOf[1].use[2]!./node_modules/svelte-loader/index.js?cssPath=D:/www/sipro-spa/resources/js/Shared/Select.svelte.58.css!./resources/js/Shared/Select.svelte ***!
+  !*** ./node_modules/css-loader/dist/cjs.js??ruleSet[1].rules[6].oneOf[1].use[1]!./node_modules/postcss-loader/dist/cjs.js??ruleSet[1].rules[6].oneOf[1].use[2]!./node_modules/svelte-loader/index.js?cssPath=D:/www/sipro-spa/resources/js/Shared/Select.svelte.15.css!./resources/js/Shared/Select.svelte ***!
   \*************************************************************************************************************************************************************************************************************************************************************************************************************/
 /***/ ((module, __webpack_exports__, __webpack_require__) => {
 
@@ -3684,9 +3684,9 @@ ___CSS_LOADER_EXPORT___.push([module.id, ".items .listItem{border-bottom:1px sol
 
 /***/ }),
 
-/***/ "./node_modules/css-loader/dist/cjs.js??ruleSet[1].rules[6].oneOf[1].use[1]!./node_modules/postcss-loader/dist/cjs.js??ruleSet[1].rules[6].oneOf[1].use[2]!./node_modules/svelte-loader/index.js?cssPath=D:/www/sipro-spa/resources/js/Shared/SelectMulti.svelte.18.css!./resources/js/Shared/SelectMulti.svelte":
+/***/ "./node_modules/css-loader/dist/cjs.js??ruleSet[1].rules[6].oneOf[1].use[1]!./node_modules/postcss-loader/dist/cjs.js??ruleSet[1].rules[6].oneOf[1].use[2]!./node_modules/svelte-loader/index.js?cssPath=D:/www/sipro-spa/resources/js/Shared/SelectMulti.svelte.17.css!./resources/js/Shared/SelectMulti.svelte":
 /*!***********************************************************************************************************************************************************************************************************************************************************************************************************************!*\
-  !*** ./node_modules/css-loader/dist/cjs.js??ruleSet[1].rules[6].oneOf[1].use[1]!./node_modules/postcss-loader/dist/cjs.js??ruleSet[1].rules[6].oneOf[1].use[2]!./node_modules/svelte-loader/index.js?cssPath=D:/www/sipro-spa/resources/js/Shared/SelectMulti.svelte.18.css!./resources/js/Shared/SelectMulti.svelte ***!
+  !*** ./node_modules/css-loader/dist/cjs.js??ruleSet[1].rules[6].oneOf[1].use[1]!./node_modules/postcss-loader/dist/cjs.js??ruleSet[1].rules[6].oneOf[1].use[2]!./node_modules/svelte-loader/index.js?cssPath=D:/www/sipro-spa/resources/js/Shared/SelectMulti.svelte.17.css!./resources/js/Shared/SelectMulti.svelte ***!
   \***********************************************************************************************************************************************************************************************************************************************************************************************************************/
 /***/ ((module, __webpack_exports__, __webpack_require__) => {
 
@@ -3708,9 +3708,9 @@ ___CSS_LOADER_EXPORT___.push([module.id, ".items .listItem{border-bottom:1px sol
 
 /***/ }),
 
-/***/ "./node_modules/css-loader/dist/cjs.js??ruleSet[1].rules[6].oneOf[1].use[1]!./node_modules/postcss-loader/dist/cjs.js??ruleSet[1].rules[6].oneOf[1].use[2]!./node_modules/svelte-loader/index.js?cssPath=D:/www/sipro-spa/resources/js/Shared/Tags.svelte.17.css!./resources/js/Shared/Tags.svelte":
+/***/ "./node_modules/css-loader/dist/cjs.js??ruleSet[1].rules[6].oneOf[1].use[1]!./node_modules/postcss-loader/dist/cjs.js??ruleSet[1].rules[6].oneOf[1].use[2]!./node_modules/svelte-loader/index.js?cssPath=D:/www/sipro-spa/resources/js/Shared/Tags.svelte.18.css!./resources/js/Shared/Tags.svelte":
 /*!*********************************************************************************************************************************************************************************************************************************************************************************************************!*\
-  !*** ./node_modules/css-loader/dist/cjs.js??ruleSet[1].rules[6].oneOf[1].use[1]!./node_modules/postcss-loader/dist/cjs.js??ruleSet[1].rules[6].oneOf[1].use[2]!./node_modules/svelte-loader/index.js?cssPath=D:/www/sipro-spa/resources/js/Shared/Tags.svelte.17.css!./resources/js/Shared/Tags.svelte ***!
+  !*** ./node_modules/css-loader/dist/cjs.js??ruleSet[1].rules[6].oneOf[1].use[1]!./node_modules/postcss-loader/dist/cjs.js??ruleSet[1].rules[6].oneOf[1].use[2]!./node_modules/svelte-loader/index.js?cssPath=D:/www/sipro-spa/resources/js/Shared/Tags.svelte.18.css!./resources/js/Shared/Tags.svelte ***!
   \*********************************************************************************************************************************************************************************************************************************************************************************************************/
 /***/ ((module, __webpack_exports__, __webpack_require__) => {
 
@@ -25428,9 +25428,9 @@ var update = _style_loader_dist_runtime_injectStylesIntoStyleTag_js__WEBPACK_IMP
 
 /***/ }),
 
-/***/ "./node_modules/svelte-select/src/Item.svelte.30.css!=!./node_modules/svelte-loader/index.js?cssPath=D:/www/sipro-spa/node_modules/svelte-select/src/Item.svelte.30.css!./node_modules/svelte-select/src/Item.svelte":
+/***/ "./node_modules/svelte-select/src/Item.svelte.27.css!=!./node_modules/svelte-loader/index.js?cssPath=D:/www/sipro-spa/node_modules/svelte-select/src/Item.svelte.27.css!./node_modules/svelte-select/src/Item.svelte":
 /*!***************************************************************************************************************************************************************************************************************************!*\
-  !*** ./node_modules/svelte-select/src/Item.svelte.30.css!=!./node_modules/svelte-loader/index.js?cssPath=D:/www/sipro-spa/node_modules/svelte-select/src/Item.svelte.30.css!./node_modules/svelte-select/src/Item.svelte ***!
+  !*** ./node_modules/svelte-select/src/Item.svelte.27.css!=!./node_modules/svelte-loader/index.js?cssPath=D:/www/sipro-spa/node_modules/svelte-select/src/Item.svelte.27.css!./node_modules/svelte-select/src/Item.svelte ***!
   \***************************************************************************************************************************************************************************************************************************/
 /***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
 
@@ -25441,7 +25441,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ });
 /* harmony import */ var _style_loader_dist_runtime_injectStylesIntoStyleTag_js__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! !../../style-loader/dist/runtime/injectStylesIntoStyleTag.js */ "./node_modules/style-loader/dist/runtime/injectStylesIntoStyleTag.js");
 /* harmony import */ var _style_loader_dist_runtime_injectStylesIntoStyleTag_js__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_style_loader_dist_runtime_injectStylesIntoStyleTag_js__WEBPACK_IMPORTED_MODULE_0__);
-/* harmony import */ var _css_loader_dist_cjs_js_ruleSet_1_rules_6_oneOf_1_use_1_postcss_loader_dist_cjs_js_ruleSet_1_rules_6_oneOf_1_use_2_svelte_loader_index_js_cssPath_D_www_sipro_spa_node_modules_svelte_select_src_Item_svelte_30_css_Item_svelte__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! !!../../css-loader/dist/cjs.js??ruleSet[1].rules[6].oneOf[1].use[1]!../../postcss-loader/dist/cjs.js??ruleSet[1].rules[6].oneOf[1].use[2]!../../svelte-loader/index.js?cssPath=D:/www/sipro-spa/node_modules/svelte-select/src/Item.svelte.30.css!./Item.svelte */ "./node_modules/css-loader/dist/cjs.js??ruleSet[1].rules[6].oneOf[1].use[1]!./node_modules/postcss-loader/dist/cjs.js??ruleSet[1].rules[6].oneOf[1].use[2]!./node_modules/svelte-loader/index.js?cssPath=D:/www/sipro-spa/node_modules/svelte-select/src/Item.svelte.30.css!./node_modules/svelte-select/src/Item.svelte");
+/* harmony import */ var _css_loader_dist_cjs_js_ruleSet_1_rules_6_oneOf_1_use_1_postcss_loader_dist_cjs_js_ruleSet_1_rules_6_oneOf_1_use_2_svelte_loader_index_js_cssPath_D_www_sipro_spa_node_modules_svelte_select_src_Item_svelte_27_css_Item_svelte__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! !!../../css-loader/dist/cjs.js??ruleSet[1].rules[6].oneOf[1].use[1]!../../postcss-loader/dist/cjs.js??ruleSet[1].rules[6].oneOf[1].use[2]!../../svelte-loader/index.js?cssPath=D:/www/sipro-spa/node_modules/svelte-select/src/Item.svelte.27.css!./Item.svelte */ "./node_modules/css-loader/dist/cjs.js??ruleSet[1].rules[6].oneOf[1].use[1]!./node_modules/postcss-loader/dist/cjs.js??ruleSet[1].rules[6].oneOf[1].use[2]!./node_modules/svelte-loader/index.js?cssPath=D:/www/sipro-spa/node_modules/svelte-select/src/Item.svelte.27.css!./node_modules/svelte-select/src/Item.svelte");
 
             
 
@@ -25450,17 +25450,17 @@ var options = {};
 options.insert = "head";
 options.singleton = false;
 
-var update = _style_loader_dist_runtime_injectStylesIntoStyleTag_js__WEBPACK_IMPORTED_MODULE_0___default()(_css_loader_dist_cjs_js_ruleSet_1_rules_6_oneOf_1_use_1_postcss_loader_dist_cjs_js_ruleSet_1_rules_6_oneOf_1_use_2_svelte_loader_index_js_cssPath_D_www_sipro_spa_node_modules_svelte_select_src_Item_svelte_30_css_Item_svelte__WEBPACK_IMPORTED_MODULE_1__["default"], options);
+var update = _style_loader_dist_runtime_injectStylesIntoStyleTag_js__WEBPACK_IMPORTED_MODULE_0___default()(_css_loader_dist_cjs_js_ruleSet_1_rules_6_oneOf_1_use_1_postcss_loader_dist_cjs_js_ruleSet_1_rules_6_oneOf_1_use_2_svelte_loader_index_js_cssPath_D_www_sipro_spa_node_modules_svelte_select_src_Item_svelte_27_css_Item_svelte__WEBPACK_IMPORTED_MODULE_1__["default"], options);
 
 
 
-/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (_css_loader_dist_cjs_js_ruleSet_1_rules_6_oneOf_1_use_1_postcss_loader_dist_cjs_js_ruleSet_1_rules_6_oneOf_1_use_2_svelte_loader_index_js_cssPath_D_www_sipro_spa_node_modules_svelte_select_src_Item_svelte_30_css_Item_svelte__WEBPACK_IMPORTED_MODULE_1__["default"].locals || {});
+/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (_css_loader_dist_cjs_js_ruleSet_1_rules_6_oneOf_1_use_1_postcss_loader_dist_cjs_js_ruleSet_1_rules_6_oneOf_1_use_2_svelte_loader_index_js_cssPath_D_www_sipro_spa_node_modules_svelte_select_src_Item_svelte_27_css_Item_svelte__WEBPACK_IMPORTED_MODULE_1__["default"].locals || {});
 
 /***/ }),
 
-/***/ "./node_modules/svelte-select/src/List.svelte.27.css!=!./node_modules/svelte-loader/index.js?cssPath=D:/www/sipro-spa/node_modules/svelte-select/src/List.svelte.27.css!./node_modules/svelte-select/src/List.svelte":
+/***/ "./node_modules/svelte-select/src/List.svelte.30.css!=!./node_modules/svelte-loader/index.js?cssPath=D:/www/sipro-spa/node_modules/svelte-select/src/List.svelte.30.css!./node_modules/svelte-select/src/List.svelte":
 /*!***************************************************************************************************************************************************************************************************************************!*\
-  !*** ./node_modules/svelte-select/src/List.svelte.27.css!=!./node_modules/svelte-loader/index.js?cssPath=D:/www/sipro-spa/node_modules/svelte-select/src/List.svelte.27.css!./node_modules/svelte-select/src/List.svelte ***!
+  !*** ./node_modules/svelte-select/src/List.svelte.30.css!=!./node_modules/svelte-loader/index.js?cssPath=D:/www/sipro-spa/node_modules/svelte-select/src/List.svelte.30.css!./node_modules/svelte-select/src/List.svelte ***!
   \***************************************************************************************************************************************************************************************************************************/
 /***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
 
@@ -25471,7 +25471,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ });
 /* harmony import */ var _style_loader_dist_runtime_injectStylesIntoStyleTag_js__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! !../../style-loader/dist/runtime/injectStylesIntoStyleTag.js */ "./node_modules/style-loader/dist/runtime/injectStylesIntoStyleTag.js");
 /* harmony import */ var _style_loader_dist_runtime_injectStylesIntoStyleTag_js__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_style_loader_dist_runtime_injectStylesIntoStyleTag_js__WEBPACK_IMPORTED_MODULE_0__);
-/* harmony import */ var _css_loader_dist_cjs_js_ruleSet_1_rules_6_oneOf_1_use_1_postcss_loader_dist_cjs_js_ruleSet_1_rules_6_oneOf_1_use_2_svelte_loader_index_js_cssPath_D_www_sipro_spa_node_modules_svelte_select_src_List_svelte_27_css_List_svelte__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! !!../../css-loader/dist/cjs.js??ruleSet[1].rules[6].oneOf[1].use[1]!../../postcss-loader/dist/cjs.js??ruleSet[1].rules[6].oneOf[1].use[2]!../../svelte-loader/index.js?cssPath=D:/www/sipro-spa/node_modules/svelte-select/src/List.svelte.27.css!./List.svelte */ "./node_modules/css-loader/dist/cjs.js??ruleSet[1].rules[6].oneOf[1].use[1]!./node_modules/postcss-loader/dist/cjs.js??ruleSet[1].rules[6].oneOf[1].use[2]!./node_modules/svelte-loader/index.js?cssPath=D:/www/sipro-spa/node_modules/svelte-select/src/List.svelte.27.css!./node_modules/svelte-select/src/List.svelte");
+/* harmony import */ var _css_loader_dist_cjs_js_ruleSet_1_rules_6_oneOf_1_use_1_postcss_loader_dist_cjs_js_ruleSet_1_rules_6_oneOf_1_use_2_svelte_loader_index_js_cssPath_D_www_sipro_spa_node_modules_svelte_select_src_List_svelte_30_css_List_svelte__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! !!../../css-loader/dist/cjs.js??ruleSet[1].rules[6].oneOf[1].use[1]!../../postcss-loader/dist/cjs.js??ruleSet[1].rules[6].oneOf[1].use[2]!../../svelte-loader/index.js?cssPath=D:/www/sipro-spa/node_modules/svelte-select/src/List.svelte.30.css!./List.svelte */ "./node_modules/css-loader/dist/cjs.js??ruleSet[1].rules[6].oneOf[1].use[1]!./node_modules/postcss-loader/dist/cjs.js??ruleSet[1].rules[6].oneOf[1].use[2]!./node_modules/svelte-loader/index.js?cssPath=D:/www/sipro-spa/node_modules/svelte-select/src/List.svelte.30.css!./node_modules/svelte-select/src/List.svelte");
 
             
 
@@ -25480,17 +25480,17 @@ var options = {};
 options.insert = "head";
 options.singleton = false;
 
-var update = _style_loader_dist_runtime_injectStylesIntoStyleTag_js__WEBPACK_IMPORTED_MODULE_0___default()(_css_loader_dist_cjs_js_ruleSet_1_rules_6_oneOf_1_use_1_postcss_loader_dist_cjs_js_ruleSet_1_rules_6_oneOf_1_use_2_svelte_loader_index_js_cssPath_D_www_sipro_spa_node_modules_svelte_select_src_List_svelte_27_css_List_svelte__WEBPACK_IMPORTED_MODULE_1__["default"], options);
+var update = _style_loader_dist_runtime_injectStylesIntoStyleTag_js__WEBPACK_IMPORTED_MODULE_0___default()(_css_loader_dist_cjs_js_ruleSet_1_rules_6_oneOf_1_use_1_postcss_loader_dist_cjs_js_ruleSet_1_rules_6_oneOf_1_use_2_svelte_loader_index_js_cssPath_D_www_sipro_spa_node_modules_svelte_select_src_List_svelte_30_css_List_svelte__WEBPACK_IMPORTED_MODULE_1__["default"], options);
 
 
 
-/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (_css_loader_dist_cjs_js_ruleSet_1_rules_6_oneOf_1_use_1_postcss_loader_dist_cjs_js_ruleSet_1_rules_6_oneOf_1_use_2_svelte_loader_index_js_cssPath_D_www_sipro_spa_node_modules_svelte_select_src_List_svelte_27_css_List_svelte__WEBPACK_IMPORTED_MODULE_1__["default"].locals || {});
+/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (_css_loader_dist_cjs_js_ruleSet_1_rules_6_oneOf_1_use_1_postcss_loader_dist_cjs_js_ruleSet_1_rules_6_oneOf_1_use_2_svelte_loader_index_js_cssPath_D_www_sipro_spa_node_modules_svelte_select_src_List_svelte_30_css_List_svelte__WEBPACK_IMPORTED_MODULE_1__["default"].locals || {});
 
 /***/ }),
 
-/***/ "./node_modules/svelte-select/src/MultiSelection.svelte.29.css!=!./node_modules/svelte-loader/index.js?cssPath=D:/www/sipro-spa/node_modules/svelte-select/src/MultiSelection.svelte.29.css!./node_modules/svelte-select/src/MultiSelection.svelte":
+/***/ "./node_modules/svelte-select/src/MultiSelection.svelte.28.css!=!./node_modules/svelte-loader/index.js?cssPath=D:/www/sipro-spa/node_modules/svelte-select/src/MultiSelection.svelte.28.css!./node_modules/svelte-select/src/MultiSelection.svelte":
 /*!*********************************************************************************************************************************************************************************************************************************************************!*\
-  !*** ./node_modules/svelte-select/src/MultiSelection.svelte.29.css!=!./node_modules/svelte-loader/index.js?cssPath=D:/www/sipro-spa/node_modules/svelte-select/src/MultiSelection.svelte.29.css!./node_modules/svelte-select/src/MultiSelection.svelte ***!
+  !*** ./node_modules/svelte-select/src/MultiSelection.svelte.28.css!=!./node_modules/svelte-loader/index.js?cssPath=D:/www/sipro-spa/node_modules/svelte-select/src/MultiSelection.svelte.28.css!./node_modules/svelte-select/src/MultiSelection.svelte ***!
   \*********************************************************************************************************************************************************************************************************************************************************/
 /***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
 
@@ -25501,7 +25501,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ });
 /* harmony import */ var _style_loader_dist_runtime_injectStylesIntoStyleTag_js__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! !../../style-loader/dist/runtime/injectStylesIntoStyleTag.js */ "./node_modules/style-loader/dist/runtime/injectStylesIntoStyleTag.js");
 /* harmony import */ var _style_loader_dist_runtime_injectStylesIntoStyleTag_js__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_style_loader_dist_runtime_injectStylesIntoStyleTag_js__WEBPACK_IMPORTED_MODULE_0__);
-/* harmony import */ var _css_loader_dist_cjs_js_ruleSet_1_rules_6_oneOf_1_use_1_postcss_loader_dist_cjs_js_ruleSet_1_rules_6_oneOf_1_use_2_svelte_loader_index_js_cssPath_D_www_sipro_spa_node_modules_svelte_select_src_MultiSelection_svelte_29_css_MultiSelection_svelte__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! !!../../css-loader/dist/cjs.js??ruleSet[1].rules[6].oneOf[1].use[1]!../../postcss-loader/dist/cjs.js??ruleSet[1].rules[6].oneOf[1].use[2]!../../svelte-loader/index.js?cssPath=D:/www/sipro-spa/node_modules/svelte-select/src/MultiSelection.svelte.29.css!./MultiSelection.svelte */ "./node_modules/css-loader/dist/cjs.js??ruleSet[1].rules[6].oneOf[1].use[1]!./node_modules/postcss-loader/dist/cjs.js??ruleSet[1].rules[6].oneOf[1].use[2]!./node_modules/svelte-loader/index.js?cssPath=D:/www/sipro-spa/node_modules/svelte-select/src/MultiSelection.svelte.29.css!./node_modules/svelte-select/src/MultiSelection.svelte");
+/* harmony import */ var _css_loader_dist_cjs_js_ruleSet_1_rules_6_oneOf_1_use_1_postcss_loader_dist_cjs_js_ruleSet_1_rules_6_oneOf_1_use_2_svelte_loader_index_js_cssPath_D_www_sipro_spa_node_modules_svelte_select_src_MultiSelection_svelte_28_css_MultiSelection_svelte__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! !!../../css-loader/dist/cjs.js??ruleSet[1].rules[6].oneOf[1].use[1]!../../postcss-loader/dist/cjs.js??ruleSet[1].rules[6].oneOf[1].use[2]!../../svelte-loader/index.js?cssPath=D:/www/sipro-spa/node_modules/svelte-select/src/MultiSelection.svelte.28.css!./MultiSelection.svelte */ "./node_modules/css-loader/dist/cjs.js??ruleSet[1].rules[6].oneOf[1].use[1]!./node_modules/postcss-loader/dist/cjs.js??ruleSet[1].rules[6].oneOf[1].use[2]!./node_modules/svelte-loader/index.js?cssPath=D:/www/sipro-spa/node_modules/svelte-select/src/MultiSelection.svelte.28.css!./node_modules/svelte-select/src/MultiSelection.svelte");
 
             
 
@@ -25510,11 +25510,11 @@ var options = {};
 options.insert = "head";
 options.singleton = false;
 
-var update = _style_loader_dist_runtime_injectStylesIntoStyleTag_js__WEBPACK_IMPORTED_MODULE_0___default()(_css_loader_dist_cjs_js_ruleSet_1_rules_6_oneOf_1_use_1_postcss_loader_dist_cjs_js_ruleSet_1_rules_6_oneOf_1_use_2_svelte_loader_index_js_cssPath_D_www_sipro_spa_node_modules_svelte_select_src_MultiSelection_svelte_29_css_MultiSelection_svelte__WEBPACK_IMPORTED_MODULE_1__["default"], options);
+var update = _style_loader_dist_runtime_injectStylesIntoStyleTag_js__WEBPACK_IMPORTED_MODULE_0___default()(_css_loader_dist_cjs_js_ruleSet_1_rules_6_oneOf_1_use_1_postcss_loader_dist_cjs_js_ruleSet_1_rules_6_oneOf_1_use_2_svelte_loader_index_js_cssPath_D_www_sipro_spa_node_modules_svelte_select_src_MultiSelection_svelte_28_css_MultiSelection_svelte__WEBPACK_IMPORTED_MODULE_1__["default"], options);
 
 
 
-/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (_css_loader_dist_cjs_js_ruleSet_1_rules_6_oneOf_1_use_1_postcss_loader_dist_cjs_js_ruleSet_1_rules_6_oneOf_1_use_2_svelte_loader_index_js_cssPath_D_www_sipro_spa_node_modules_svelte_select_src_MultiSelection_svelte_29_css_MultiSelection_svelte__WEBPACK_IMPORTED_MODULE_1__["default"].locals || {});
+/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (_css_loader_dist_cjs_js_ruleSet_1_rules_6_oneOf_1_use_1_postcss_loader_dist_cjs_js_ruleSet_1_rules_6_oneOf_1_use_2_svelte_loader_index_js_cssPath_D_www_sipro_spa_node_modules_svelte_select_src_MultiSelection_svelte_28_css_MultiSelection_svelte__WEBPACK_IMPORTED_MODULE_1__["default"].locals || {});
 
 /***/ }),
 
@@ -25548,9 +25548,9 @@ var update = _style_loader_dist_runtime_injectStylesIntoStyleTag_js__WEBPACK_IMP
 
 /***/ }),
 
-/***/ "./node_modules/svelte-select/src/Selection.svelte.28.css!=!./node_modules/svelte-loader/index.js?cssPath=D:/www/sipro-spa/node_modules/svelte-select/src/Selection.svelte.28.css!./node_modules/svelte-select/src/Selection.svelte":
+/***/ "./node_modules/svelte-select/src/Selection.svelte.29.css!=!./node_modules/svelte-loader/index.js?cssPath=D:/www/sipro-spa/node_modules/svelte-select/src/Selection.svelte.29.css!./node_modules/svelte-select/src/Selection.svelte":
 /*!******************************************************************************************************************************************************************************************************************************************!*\
-  !*** ./node_modules/svelte-select/src/Selection.svelte.28.css!=!./node_modules/svelte-loader/index.js?cssPath=D:/www/sipro-spa/node_modules/svelte-select/src/Selection.svelte.28.css!./node_modules/svelte-select/src/Selection.svelte ***!
+  !*** ./node_modules/svelte-select/src/Selection.svelte.29.css!=!./node_modules/svelte-loader/index.js?cssPath=D:/www/sipro-spa/node_modules/svelte-select/src/Selection.svelte.29.css!./node_modules/svelte-select/src/Selection.svelte ***!
   \******************************************************************************************************************************************************************************************************************************************/
 /***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
 
@@ -25561,7 +25561,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ });
 /* harmony import */ var _style_loader_dist_runtime_injectStylesIntoStyleTag_js__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! !../../style-loader/dist/runtime/injectStylesIntoStyleTag.js */ "./node_modules/style-loader/dist/runtime/injectStylesIntoStyleTag.js");
 /* harmony import */ var _style_loader_dist_runtime_injectStylesIntoStyleTag_js__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_style_loader_dist_runtime_injectStylesIntoStyleTag_js__WEBPACK_IMPORTED_MODULE_0__);
-/* harmony import */ var _css_loader_dist_cjs_js_ruleSet_1_rules_6_oneOf_1_use_1_postcss_loader_dist_cjs_js_ruleSet_1_rules_6_oneOf_1_use_2_svelte_loader_index_js_cssPath_D_www_sipro_spa_node_modules_svelte_select_src_Selection_svelte_28_css_Selection_svelte__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! !!../../css-loader/dist/cjs.js??ruleSet[1].rules[6].oneOf[1].use[1]!../../postcss-loader/dist/cjs.js??ruleSet[1].rules[6].oneOf[1].use[2]!../../svelte-loader/index.js?cssPath=D:/www/sipro-spa/node_modules/svelte-select/src/Selection.svelte.28.css!./Selection.svelte */ "./node_modules/css-loader/dist/cjs.js??ruleSet[1].rules[6].oneOf[1].use[1]!./node_modules/postcss-loader/dist/cjs.js??ruleSet[1].rules[6].oneOf[1].use[2]!./node_modules/svelte-loader/index.js?cssPath=D:/www/sipro-spa/node_modules/svelte-select/src/Selection.svelte.28.css!./node_modules/svelte-select/src/Selection.svelte");
+/* harmony import */ var _css_loader_dist_cjs_js_ruleSet_1_rules_6_oneOf_1_use_1_postcss_loader_dist_cjs_js_ruleSet_1_rules_6_oneOf_1_use_2_svelte_loader_index_js_cssPath_D_www_sipro_spa_node_modules_svelte_select_src_Selection_svelte_29_css_Selection_svelte__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! !!../../css-loader/dist/cjs.js??ruleSet[1].rules[6].oneOf[1].use[1]!../../postcss-loader/dist/cjs.js??ruleSet[1].rules[6].oneOf[1].use[2]!../../svelte-loader/index.js?cssPath=D:/www/sipro-spa/node_modules/svelte-select/src/Selection.svelte.29.css!./Selection.svelte */ "./node_modules/css-loader/dist/cjs.js??ruleSet[1].rules[6].oneOf[1].use[1]!./node_modules/postcss-loader/dist/cjs.js??ruleSet[1].rules[6].oneOf[1].use[2]!./node_modules/svelte-loader/index.js?cssPath=D:/www/sipro-spa/node_modules/svelte-select/src/Selection.svelte.29.css!./node_modules/svelte-select/src/Selection.svelte");
 
             
 
@@ -25570,11 +25570,11 @@ var options = {};
 options.insert = "head";
 options.singleton = false;
 
-var update = _style_loader_dist_runtime_injectStylesIntoStyleTag_js__WEBPACK_IMPORTED_MODULE_0___default()(_css_loader_dist_cjs_js_ruleSet_1_rules_6_oneOf_1_use_1_postcss_loader_dist_cjs_js_ruleSet_1_rules_6_oneOf_1_use_2_svelte_loader_index_js_cssPath_D_www_sipro_spa_node_modules_svelte_select_src_Selection_svelte_28_css_Selection_svelte__WEBPACK_IMPORTED_MODULE_1__["default"], options);
+var update = _style_loader_dist_runtime_injectStylesIntoStyleTag_js__WEBPACK_IMPORTED_MODULE_0___default()(_css_loader_dist_cjs_js_ruleSet_1_rules_6_oneOf_1_use_1_postcss_loader_dist_cjs_js_ruleSet_1_rules_6_oneOf_1_use_2_svelte_loader_index_js_cssPath_D_www_sipro_spa_node_modules_svelte_select_src_Selection_svelte_29_css_Selection_svelte__WEBPACK_IMPORTED_MODULE_1__["default"], options);
 
 
 
-/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (_css_loader_dist_cjs_js_ruleSet_1_rules_6_oneOf_1_use_1_postcss_loader_dist_cjs_js_ruleSet_1_rules_6_oneOf_1_use_2_svelte_loader_index_js_cssPath_D_www_sipro_spa_node_modules_svelte_select_src_Selection_svelte_28_css_Selection_svelte__WEBPACK_IMPORTED_MODULE_1__["default"].locals || {});
+/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (_css_loader_dist_cjs_js_ruleSet_1_rules_6_oneOf_1_use_1_postcss_loader_dist_cjs_js_ruleSet_1_rules_6_oneOf_1_use_2_svelte_loader_index_js_cssPath_D_www_sipro_spa_node_modules_svelte_select_src_Selection_svelte_29_css_Selection_svelte__WEBPACK_IMPORTED_MODULE_1__["default"].locals || {});
 
 /***/ }),
 
@@ -25608,9 +25608,9 @@ var update = _style_loader_dist_runtime_injectStylesIntoStyleTag_js__WEBPACK_IMP
 
 /***/ }),
 
-/***/ "./resources/js/Shared/Button.svelte.12.css!=!./node_modules/svelte-loader/index.js?cssPath=D:/www/sipro-spa/resources/js/Shared/Button.svelte.12.css!./resources/js/Shared/Button.svelte":
+/***/ "./resources/js/Shared/Button.svelte.11.css!=!./node_modules/svelte-loader/index.js?cssPath=D:/www/sipro-spa/resources/js/Shared/Button.svelte.11.css!./resources/js/Shared/Button.svelte":
 /*!************************************************************************************************************************************************************************************************!*\
-  !*** ./resources/js/Shared/Button.svelte.12.css!=!./node_modules/svelte-loader/index.js?cssPath=D:/www/sipro-spa/resources/js/Shared/Button.svelte.12.css!./resources/js/Shared/Button.svelte ***!
+  !*** ./resources/js/Shared/Button.svelte.11.css!=!./node_modules/svelte-loader/index.js?cssPath=D:/www/sipro-spa/resources/js/Shared/Button.svelte.11.css!./resources/js/Shared/Button.svelte ***!
   \************************************************************************************************************************************************************************************************/
 /***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
 
@@ -25621,7 +25621,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ });
 /* harmony import */ var _node_modules_style_loader_dist_runtime_injectStylesIntoStyleTag_js__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! !../../../node_modules/style-loader/dist/runtime/injectStylesIntoStyleTag.js */ "./node_modules/style-loader/dist/runtime/injectStylesIntoStyleTag.js");
 /* harmony import */ var _node_modules_style_loader_dist_runtime_injectStylesIntoStyleTag_js__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_node_modules_style_loader_dist_runtime_injectStylesIntoStyleTag_js__WEBPACK_IMPORTED_MODULE_0__);
-/* harmony import */ var _node_modules_css_loader_dist_cjs_js_ruleSet_1_rules_6_oneOf_1_use_1_node_modules_postcss_loader_dist_cjs_js_ruleSet_1_rules_6_oneOf_1_use_2_node_modules_svelte_loader_index_js_cssPath_D_www_sipro_spa_resources_js_Shared_Button_svelte_12_css_Button_svelte__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! !!../../../node_modules/css-loader/dist/cjs.js??ruleSet[1].rules[6].oneOf[1].use[1]!../../../node_modules/postcss-loader/dist/cjs.js??ruleSet[1].rules[6].oneOf[1].use[2]!../../../node_modules/svelte-loader/index.js?cssPath=D:/www/sipro-spa/resources/js/Shared/Button.svelte.12.css!./Button.svelte */ "./node_modules/css-loader/dist/cjs.js??ruleSet[1].rules[6].oneOf[1].use[1]!./node_modules/postcss-loader/dist/cjs.js??ruleSet[1].rules[6].oneOf[1].use[2]!./node_modules/svelte-loader/index.js?cssPath=D:/www/sipro-spa/resources/js/Shared/Button.svelte.12.css!./resources/js/Shared/Button.svelte");
+/* harmony import */ var _node_modules_css_loader_dist_cjs_js_ruleSet_1_rules_6_oneOf_1_use_1_node_modules_postcss_loader_dist_cjs_js_ruleSet_1_rules_6_oneOf_1_use_2_node_modules_svelte_loader_index_js_cssPath_D_www_sipro_spa_resources_js_Shared_Button_svelte_11_css_Button_svelte__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! !!../../../node_modules/css-loader/dist/cjs.js??ruleSet[1].rules[6].oneOf[1].use[1]!../../../node_modules/postcss-loader/dist/cjs.js??ruleSet[1].rules[6].oneOf[1].use[2]!../../../node_modules/svelte-loader/index.js?cssPath=D:/www/sipro-spa/resources/js/Shared/Button.svelte.11.css!./Button.svelte */ "./node_modules/css-loader/dist/cjs.js??ruleSet[1].rules[6].oneOf[1].use[1]!./node_modules/postcss-loader/dist/cjs.js??ruleSet[1].rules[6].oneOf[1].use[2]!./node_modules/svelte-loader/index.js?cssPath=D:/www/sipro-spa/resources/js/Shared/Button.svelte.11.css!./resources/js/Shared/Button.svelte");
 
             
 
@@ -25630,17 +25630,17 @@ var options = {};
 options.insert = "head";
 options.singleton = false;
 
-var update = _node_modules_style_loader_dist_runtime_injectStylesIntoStyleTag_js__WEBPACK_IMPORTED_MODULE_0___default()(_node_modules_css_loader_dist_cjs_js_ruleSet_1_rules_6_oneOf_1_use_1_node_modules_postcss_loader_dist_cjs_js_ruleSet_1_rules_6_oneOf_1_use_2_node_modules_svelte_loader_index_js_cssPath_D_www_sipro_spa_resources_js_Shared_Button_svelte_12_css_Button_svelte__WEBPACK_IMPORTED_MODULE_1__["default"], options);
+var update = _node_modules_style_loader_dist_runtime_injectStylesIntoStyleTag_js__WEBPACK_IMPORTED_MODULE_0___default()(_node_modules_css_loader_dist_cjs_js_ruleSet_1_rules_6_oneOf_1_use_1_node_modules_postcss_loader_dist_cjs_js_ruleSet_1_rules_6_oneOf_1_use_2_node_modules_svelte_loader_index_js_cssPath_D_www_sipro_spa_resources_js_Shared_Button_svelte_11_css_Button_svelte__WEBPACK_IMPORTED_MODULE_1__["default"], options);
 
 
 
-/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (_node_modules_css_loader_dist_cjs_js_ruleSet_1_rules_6_oneOf_1_use_1_node_modules_postcss_loader_dist_cjs_js_ruleSet_1_rules_6_oneOf_1_use_2_node_modules_svelte_loader_index_js_cssPath_D_www_sipro_spa_resources_js_Shared_Button_svelte_12_css_Button_svelte__WEBPACK_IMPORTED_MODULE_1__["default"].locals || {});
+/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (_node_modules_css_loader_dist_cjs_js_ruleSet_1_rules_6_oneOf_1_use_1_node_modules_postcss_loader_dist_cjs_js_ruleSet_1_rules_6_oneOf_1_use_2_node_modules_svelte_loader_index_js_cssPath_D_www_sipro_spa_resources_js_Shared_Button_svelte_11_css_Button_svelte__WEBPACK_IMPORTED_MODULE_1__["default"].locals || {});
 
 /***/ }),
 
-/***/ "./resources/js/Shared/LoadingButton.svelte.11.css!=!./node_modules/svelte-loader/index.js?cssPath=D:/www/sipro-spa/resources/js/Shared/LoadingButton.svelte.11.css!./resources/js/Shared/LoadingButton.svelte":
+/***/ "./resources/js/Shared/LoadingButton.svelte.14.css!=!./node_modules/svelte-loader/index.js?cssPath=D:/www/sipro-spa/resources/js/Shared/LoadingButton.svelte.14.css!./resources/js/Shared/LoadingButton.svelte":
 /*!*********************************************************************************************************************************************************************************************************************!*\
-  !*** ./resources/js/Shared/LoadingButton.svelte.11.css!=!./node_modules/svelte-loader/index.js?cssPath=D:/www/sipro-spa/resources/js/Shared/LoadingButton.svelte.11.css!./resources/js/Shared/LoadingButton.svelte ***!
+  !*** ./resources/js/Shared/LoadingButton.svelte.14.css!=!./node_modules/svelte-loader/index.js?cssPath=D:/www/sipro-spa/resources/js/Shared/LoadingButton.svelte.14.css!./resources/js/Shared/LoadingButton.svelte ***!
   \*********************************************************************************************************************************************************************************************************************/
 /***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
 
@@ -25651,7 +25651,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ });
 /* harmony import */ var _node_modules_style_loader_dist_runtime_injectStylesIntoStyleTag_js__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! !../../../node_modules/style-loader/dist/runtime/injectStylesIntoStyleTag.js */ "./node_modules/style-loader/dist/runtime/injectStylesIntoStyleTag.js");
 /* harmony import */ var _node_modules_style_loader_dist_runtime_injectStylesIntoStyleTag_js__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_node_modules_style_loader_dist_runtime_injectStylesIntoStyleTag_js__WEBPACK_IMPORTED_MODULE_0__);
-/* harmony import */ var _node_modules_css_loader_dist_cjs_js_ruleSet_1_rules_6_oneOf_1_use_1_node_modules_postcss_loader_dist_cjs_js_ruleSet_1_rules_6_oneOf_1_use_2_node_modules_svelte_loader_index_js_cssPath_D_www_sipro_spa_resources_js_Shared_LoadingButton_svelte_11_css_LoadingButton_svelte__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! !!../../../node_modules/css-loader/dist/cjs.js??ruleSet[1].rules[6].oneOf[1].use[1]!../../../node_modules/postcss-loader/dist/cjs.js??ruleSet[1].rules[6].oneOf[1].use[2]!../../../node_modules/svelte-loader/index.js?cssPath=D:/www/sipro-spa/resources/js/Shared/LoadingButton.svelte.11.css!./LoadingButton.svelte */ "./node_modules/css-loader/dist/cjs.js??ruleSet[1].rules[6].oneOf[1].use[1]!./node_modules/postcss-loader/dist/cjs.js??ruleSet[1].rules[6].oneOf[1].use[2]!./node_modules/svelte-loader/index.js?cssPath=D:/www/sipro-spa/resources/js/Shared/LoadingButton.svelte.11.css!./resources/js/Shared/LoadingButton.svelte");
+/* harmony import */ var _node_modules_css_loader_dist_cjs_js_ruleSet_1_rules_6_oneOf_1_use_1_node_modules_postcss_loader_dist_cjs_js_ruleSet_1_rules_6_oneOf_1_use_2_node_modules_svelte_loader_index_js_cssPath_D_www_sipro_spa_resources_js_Shared_LoadingButton_svelte_14_css_LoadingButton_svelte__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! !!../../../node_modules/css-loader/dist/cjs.js??ruleSet[1].rules[6].oneOf[1].use[1]!../../../node_modules/postcss-loader/dist/cjs.js??ruleSet[1].rules[6].oneOf[1].use[2]!../../../node_modules/svelte-loader/index.js?cssPath=D:/www/sipro-spa/resources/js/Shared/LoadingButton.svelte.14.css!./LoadingButton.svelte */ "./node_modules/css-loader/dist/cjs.js??ruleSet[1].rules[6].oneOf[1].use[1]!./node_modules/postcss-loader/dist/cjs.js??ruleSet[1].rules[6].oneOf[1].use[2]!./node_modules/svelte-loader/index.js?cssPath=D:/www/sipro-spa/resources/js/Shared/LoadingButton.svelte.14.css!./resources/js/Shared/LoadingButton.svelte");
 
             
 
@@ -25660,17 +25660,17 @@ var options = {};
 options.insert = "head";
 options.singleton = false;
 
-var update = _node_modules_style_loader_dist_runtime_injectStylesIntoStyleTag_js__WEBPACK_IMPORTED_MODULE_0___default()(_node_modules_css_loader_dist_cjs_js_ruleSet_1_rules_6_oneOf_1_use_1_node_modules_postcss_loader_dist_cjs_js_ruleSet_1_rules_6_oneOf_1_use_2_node_modules_svelte_loader_index_js_cssPath_D_www_sipro_spa_resources_js_Shared_LoadingButton_svelte_11_css_LoadingButton_svelte__WEBPACK_IMPORTED_MODULE_1__["default"], options);
+var update = _node_modules_style_loader_dist_runtime_injectStylesIntoStyleTag_js__WEBPACK_IMPORTED_MODULE_0___default()(_node_modules_css_loader_dist_cjs_js_ruleSet_1_rules_6_oneOf_1_use_1_node_modules_postcss_loader_dist_cjs_js_ruleSet_1_rules_6_oneOf_1_use_2_node_modules_svelte_loader_index_js_cssPath_D_www_sipro_spa_resources_js_Shared_LoadingButton_svelte_14_css_LoadingButton_svelte__WEBPACK_IMPORTED_MODULE_1__["default"], options);
 
 
 
-/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (_node_modules_css_loader_dist_cjs_js_ruleSet_1_rules_6_oneOf_1_use_1_node_modules_postcss_loader_dist_cjs_js_ruleSet_1_rules_6_oneOf_1_use_2_node_modules_svelte_loader_index_js_cssPath_D_www_sipro_spa_resources_js_Shared_LoadingButton_svelte_11_css_LoadingButton_svelte__WEBPACK_IMPORTED_MODULE_1__["default"].locals || {});
+/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (_node_modules_css_loader_dist_cjs_js_ruleSet_1_rules_6_oneOf_1_use_1_node_modules_postcss_loader_dist_cjs_js_ruleSet_1_rules_6_oneOf_1_use_2_node_modules_svelte_loader_index_js_cssPath_D_www_sipro_spa_resources_js_Shared_LoadingButton_svelte_14_css_LoadingButton_svelte__WEBPACK_IMPORTED_MODULE_1__["default"].locals || {});
 
 /***/ }),
 
-/***/ "./resources/js/Shared/Select.svelte.58.css!=!./node_modules/svelte-loader/index.js?cssPath=D:/www/sipro-spa/resources/js/Shared/Select.svelte.58.css!./resources/js/Shared/Select.svelte":
+/***/ "./resources/js/Shared/Select.svelte.15.css!=!./node_modules/svelte-loader/index.js?cssPath=D:/www/sipro-spa/resources/js/Shared/Select.svelte.15.css!./resources/js/Shared/Select.svelte":
 /*!************************************************************************************************************************************************************************************************!*\
-  !*** ./resources/js/Shared/Select.svelte.58.css!=!./node_modules/svelte-loader/index.js?cssPath=D:/www/sipro-spa/resources/js/Shared/Select.svelte.58.css!./resources/js/Shared/Select.svelte ***!
+  !*** ./resources/js/Shared/Select.svelte.15.css!=!./node_modules/svelte-loader/index.js?cssPath=D:/www/sipro-spa/resources/js/Shared/Select.svelte.15.css!./resources/js/Shared/Select.svelte ***!
   \************************************************************************************************************************************************************************************************/
 /***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
 
@@ -25681,7 +25681,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ });
 /* harmony import */ var _node_modules_style_loader_dist_runtime_injectStylesIntoStyleTag_js__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! !../../../node_modules/style-loader/dist/runtime/injectStylesIntoStyleTag.js */ "./node_modules/style-loader/dist/runtime/injectStylesIntoStyleTag.js");
 /* harmony import */ var _node_modules_style_loader_dist_runtime_injectStylesIntoStyleTag_js__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_node_modules_style_loader_dist_runtime_injectStylesIntoStyleTag_js__WEBPACK_IMPORTED_MODULE_0__);
-/* harmony import */ var _node_modules_css_loader_dist_cjs_js_ruleSet_1_rules_6_oneOf_1_use_1_node_modules_postcss_loader_dist_cjs_js_ruleSet_1_rules_6_oneOf_1_use_2_node_modules_svelte_loader_index_js_cssPath_D_www_sipro_spa_resources_js_Shared_Select_svelte_58_css_Select_svelte__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! !!../../../node_modules/css-loader/dist/cjs.js??ruleSet[1].rules[6].oneOf[1].use[1]!../../../node_modules/postcss-loader/dist/cjs.js??ruleSet[1].rules[6].oneOf[1].use[2]!../../../node_modules/svelte-loader/index.js?cssPath=D:/www/sipro-spa/resources/js/Shared/Select.svelte.58.css!./Select.svelte */ "./node_modules/css-loader/dist/cjs.js??ruleSet[1].rules[6].oneOf[1].use[1]!./node_modules/postcss-loader/dist/cjs.js??ruleSet[1].rules[6].oneOf[1].use[2]!./node_modules/svelte-loader/index.js?cssPath=D:/www/sipro-spa/resources/js/Shared/Select.svelte.58.css!./resources/js/Shared/Select.svelte");
+/* harmony import */ var _node_modules_css_loader_dist_cjs_js_ruleSet_1_rules_6_oneOf_1_use_1_node_modules_postcss_loader_dist_cjs_js_ruleSet_1_rules_6_oneOf_1_use_2_node_modules_svelte_loader_index_js_cssPath_D_www_sipro_spa_resources_js_Shared_Select_svelte_15_css_Select_svelte__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! !!../../../node_modules/css-loader/dist/cjs.js??ruleSet[1].rules[6].oneOf[1].use[1]!../../../node_modules/postcss-loader/dist/cjs.js??ruleSet[1].rules[6].oneOf[1].use[2]!../../../node_modules/svelte-loader/index.js?cssPath=D:/www/sipro-spa/resources/js/Shared/Select.svelte.15.css!./Select.svelte */ "./node_modules/css-loader/dist/cjs.js??ruleSet[1].rules[6].oneOf[1].use[1]!./node_modules/postcss-loader/dist/cjs.js??ruleSet[1].rules[6].oneOf[1].use[2]!./node_modules/svelte-loader/index.js?cssPath=D:/www/sipro-spa/resources/js/Shared/Select.svelte.15.css!./resources/js/Shared/Select.svelte");
 
             
 
@@ -25690,17 +25690,17 @@ var options = {};
 options.insert = "head";
 options.singleton = false;
 
-var update = _node_modules_style_loader_dist_runtime_injectStylesIntoStyleTag_js__WEBPACK_IMPORTED_MODULE_0___default()(_node_modules_css_loader_dist_cjs_js_ruleSet_1_rules_6_oneOf_1_use_1_node_modules_postcss_loader_dist_cjs_js_ruleSet_1_rules_6_oneOf_1_use_2_node_modules_svelte_loader_index_js_cssPath_D_www_sipro_spa_resources_js_Shared_Select_svelte_58_css_Select_svelte__WEBPACK_IMPORTED_MODULE_1__["default"], options);
+var update = _node_modules_style_loader_dist_runtime_injectStylesIntoStyleTag_js__WEBPACK_IMPORTED_MODULE_0___default()(_node_modules_css_loader_dist_cjs_js_ruleSet_1_rules_6_oneOf_1_use_1_node_modules_postcss_loader_dist_cjs_js_ruleSet_1_rules_6_oneOf_1_use_2_node_modules_svelte_loader_index_js_cssPath_D_www_sipro_spa_resources_js_Shared_Select_svelte_15_css_Select_svelte__WEBPACK_IMPORTED_MODULE_1__["default"], options);
 
 
 
-/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (_node_modules_css_loader_dist_cjs_js_ruleSet_1_rules_6_oneOf_1_use_1_node_modules_postcss_loader_dist_cjs_js_ruleSet_1_rules_6_oneOf_1_use_2_node_modules_svelte_loader_index_js_cssPath_D_www_sipro_spa_resources_js_Shared_Select_svelte_58_css_Select_svelte__WEBPACK_IMPORTED_MODULE_1__["default"].locals || {});
+/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (_node_modules_css_loader_dist_cjs_js_ruleSet_1_rules_6_oneOf_1_use_1_node_modules_postcss_loader_dist_cjs_js_ruleSet_1_rules_6_oneOf_1_use_2_node_modules_svelte_loader_index_js_cssPath_D_www_sipro_spa_resources_js_Shared_Select_svelte_15_css_Select_svelte__WEBPACK_IMPORTED_MODULE_1__["default"].locals || {});
 
 /***/ }),
 
-/***/ "./resources/js/Shared/SelectMulti.svelte.18.css!=!./node_modules/svelte-loader/index.js?cssPath=D:/www/sipro-spa/resources/js/Shared/SelectMulti.svelte.18.css!./resources/js/Shared/SelectMulti.svelte":
+/***/ "./resources/js/Shared/SelectMulti.svelte.17.css!=!./node_modules/svelte-loader/index.js?cssPath=D:/www/sipro-spa/resources/js/Shared/SelectMulti.svelte.17.css!./resources/js/Shared/SelectMulti.svelte":
 /*!***************************************************************************************************************************************************************************************************************!*\
-  !*** ./resources/js/Shared/SelectMulti.svelte.18.css!=!./node_modules/svelte-loader/index.js?cssPath=D:/www/sipro-spa/resources/js/Shared/SelectMulti.svelte.18.css!./resources/js/Shared/SelectMulti.svelte ***!
+  !*** ./resources/js/Shared/SelectMulti.svelte.17.css!=!./node_modules/svelte-loader/index.js?cssPath=D:/www/sipro-spa/resources/js/Shared/SelectMulti.svelte.17.css!./resources/js/Shared/SelectMulti.svelte ***!
   \***************************************************************************************************************************************************************************************************************/
 /***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
 
@@ -25711,7 +25711,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ });
 /* harmony import */ var _node_modules_style_loader_dist_runtime_injectStylesIntoStyleTag_js__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! !../../../node_modules/style-loader/dist/runtime/injectStylesIntoStyleTag.js */ "./node_modules/style-loader/dist/runtime/injectStylesIntoStyleTag.js");
 /* harmony import */ var _node_modules_style_loader_dist_runtime_injectStylesIntoStyleTag_js__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_node_modules_style_loader_dist_runtime_injectStylesIntoStyleTag_js__WEBPACK_IMPORTED_MODULE_0__);
-/* harmony import */ var _node_modules_css_loader_dist_cjs_js_ruleSet_1_rules_6_oneOf_1_use_1_node_modules_postcss_loader_dist_cjs_js_ruleSet_1_rules_6_oneOf_1_use_2_node_modules_svelte_loader_index_js_cssPath_D_www_sipro_spa_resources_js_Shared_SelectMulti_svelte_18_css_SelectMulti_svelte__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! !!../../../node_modules/css-loader/dist/cjs.js??ruleSet[1].rules[6].oneOf[1].use[1]!../../../node_modules/postcss-loader/dist/cjs.js??ruleSet[1].rules[6].oneOf[1].use[2]!../../../node_modules/svelte-loader/index.js?cssPath=D:/www/sipro-spa/resources/js/Shared/SelectMulti.svelte.18.css!./SelectMulti.svelte */ "./node_modules/css-loader/dist/cjs.js??ruleSet[1].rules[6].oneOf[1].use[1]!./node_modules/postcss-loader/dist/cjs.js??ruleSet[1].rules[6].oneOf[1].use[2]!./node_modules/svelte-loader/index.js?cssPath=D:/www/sipro-spa/resources/js/Shared/SelectMulti.svelte.18.css!./resources/js/Shared/SelectMulti.svelte");
+/* harmony import */ var _node_modules_css_loader_dist_cjs_js_ruleSet_1_rules_6_oneOf_1_use_1_node_modules_postcss_loader_dist_cjs_js_ruleSet_1_rules_6_oneOf_1_use_2_node_modules_svelte_loader_index_js_cssPath_D_www_sipro_spa_resources_js_Shared_SelectMulti_svelte_17_css_SelectMulti_svelte__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! !!../../../node_modules/css-loader/dist/cjs.js??ruleSet[1].rules[6].oneOf[1].use[1]!../../../node_modules/postcss-loader/dist/cjs.js??ruleSet[1].rules[6].oneOf[1].use[2]!../../../node_modules/svelte-loader/index.js?cssPath=D:/www/sipro-spa/resources/js/Shared/SelectMulti.svelte.17.css!./SelectMulti.svelte */ "./node_modules/css-loader/dist/cjs.js??ruleSet[1].rules[6].oneOf[1].use[1]!./node_modules/postcss-loader/dist/cjs.js??ruleSet[1].rules[6].oneOf[1].use[2]!./node_modules/svelte-loader/index.js?cssPath=D:/www/sipro-spa/resources/js/Shared/SelectMulti.svelte.17.css!./resources/js/Shared/SelectMulti.svelte");
 
             
 
@@ -25720,17 +25720,17 @@ var options = {};
 options.insert = "head";
 options.singleton = false;
 
-var update = _node_modules_style_loader_dist_runtime_injectStylesIntoStyleTag_js__WEBPACK_IMPORTED_MODULE_0___default()(_node_modules_css_loader_dist_cjs_js_ruleSet_1_rules_6_oneOf_1_use_1_node_modules_postcss_loader_dist_cjs_js_ruleSet_1_rules_6_oneOf_1_use_2_node_modules_svelte_loader_index_js_cssPath_D_www_sipro_spa_resources_js_Shared_SelectMulti_svelte_18_css_SelectMulti_svelte__WEBPACK_IMPORTED_MODULE_1__["default"], options);
+var update = _node_modules_style_loader_dist_runtime_injectStylesIntoStyleTag_js__WEBPACK_IMPORTED_MODULE_0___default()(_node_modules_css_loader_dist_cjs_js_ruleSet_1_rules_6_oneOf_1_use_1_node_modules_postcss_loader_dist_cjs_js_ruleSet_1_rules_6_oneOf_1_use_2_node_modules_svelte_loader_index_js_cssPath_D_www_sipro_spa_resources_js_Shared_SelectMulti_svelte_17_css_SelectMulti_svelte__WEBPACK_IMPORTED_MODULE_1__["default"], options);
 
 
 
-/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (_node_modules_css_loader_dist_cjs_js_ruleSet_1_rules_6_oneOf_1_use_1_node_modules_postcss_loader_dist_cjs_js_ruleSet_1_rules_6_oneOf_1_use_2_node_modules_svelte_loader_index_js_cssPath_D_www_sipro_spa_resources_js_Shared_SelectMulti_svelte_18_css_SelectMulti_svelte__WEBPACK_IMPORTED_MODULE_1__["default"].locals || {});
+/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (_node_modules_css_loader_dist_cjs_js_ruleSet_1_rules_6_oneOf_1_use_1_node_modules_postcss_loader_dist_cjs_js_ruleSet_1_rules_6_oneOf_1_use_2_node_modules_svelte_loader_index_js_cssPath_D_www_sipro_spa_resources_js_Shared_SelectMulti_svelte_17_css_SelectMulti_svelte__WEBPACK_IMPORTED_MODULE_1__["default"].locals || {});
 
 /***/ }),
 
-/***/ "./resources/js/Shared/Tags.svelte.17.css!=!./node_modules/svelte-loader/index.js?cssPath=D:/www/sipro-spa/resources/js/Shared/Tags.svelte.17.css!./resources/js/Shared/Tags.svelte":
+/***/ "./resources/js/Shared/Tags.svelte.18.css!=!./node_modules/svelte-loader/index.js?cssPath=D:/www/sipro-spa/resources/js/Shared/Tags.svelte.18.css!./resources/js/Shared/Tags.svelte":
 /*!******************************************************************************************************************************************************************************************!*\
-  !*** ./resources/js/Shared/Tags.svelte.17.css!=!./node_modules/svelte-loader/index.js?cssPath=D:/www/sipro-spa/resources/js/Shared/Tags.svelte.17.css!./resources/js/Shared/Tags.svelte ***!
+  !*** ./resources/js/Shared/Tags.svelte.18.css!=!./node_modules/svelte-loader/index.js?cssPath=D:/www/sipro-spa/resources/js/Shared/Tags.svelte.18.css!./resources/js/Shared/Tags.svelte ***!
   \******************************************************************************************************************************************************************************************/
 /***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
 
@@ -25741,7 +25741,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ });
 /* harmony import */ var _node_modules_style_loader_dist_runtime_injectStylesIntoStyleTag_js__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! !../../../node_modules/style-loader/dist/runtime/injectStylesIntoStyleTag.js */ "./node_modules/style-loader/dist/runtime/injectStylesIntoStyleTag.js");
 /* harmony import */ var _node_modules_style_loader_dist_runtime_injectStylesIntoStyleTag_js__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_node_modules_style_loader_dist_runtime_injectStylesIntoStyleTag_js__WEBPACK_IMPORTED_MODULE_0__);
-/* harmony import */ var _node_modules_css_loader_dist_cjs_js_ruleSet_1_rules_6_oneOf_1_use_1_node_modules_postcss_loader_dist_cjs_js_ruleSet_1_rules_6_oneOf_1_use_2_node_modules_svelte_loader_index_js_cssPath_D_www_sipro_spa_resources_js_Shared_Tags_svelte_17_css_Tags_svelte__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! !!../../../node_modules/css-loader/dist/cjs.js??ruleSet[1].rules[6].oneOf[1].use[1]!../../../node_modules/postcss-loader/dist/cjs.js??ruleSet[1].rules[6].oneOf[1].use[2]!../../../node_modules/svelte-loader/index.js?cssPath=D:/www/sipro-spa/resources/js/Shared/Tags.svelte.17.css!./Tags.svelte */ "./node_modules/css-loader/dist/cjs.js??ruleSet[1].rules[6].oneOf[1].use[1]!./node_modules/postcss-loader/dist/cjs.js??ruleSet[1].rules[6].oneOf[1].use[2]!./node_modules/svelte-loader/index.js?cssPath=D:/www/sipro-spa/resources/js/Shared/Tags.svelte.17.css!./resources/js/Shared/Tags.svelte");
+/* harmony import */ var _node_modules_css_loader_dist_cjs_js_ruleSet_1_rules_6_oneOf_1_use_1_node_modules_postcss_loader_dist_cjs_js_ruleSet_1_rules_6_oneOf_1_use_2_node_modules_svelte_loader_index_js_cssPath_D_www_sipro_spa_resources_js_Shared_Tags_svelte_18_css_Tags_svelte__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! !!../../../node_modules/css-loader/dist/cjs.js??ruleSet[1].rules[6].oneOf[1].use[1]!../../../node_modules/postcss-loader/dist/cjs.js??ruleSet[1].rules[6].oneOf[1].use[2]!../../../node_modules/svelte-loader/index.js?cssPath=D:/www/sipro-spa/resources/js/Shared/Tags.svelte.18.css!./Tags.svelte */ "./node_modules/css-loader/dist/cjs.js??ruleSet[1].rules[6].oneOf[1].use[1]!./node_modules/postcss-loader/dist/cjs.js??ruleSet[1].rules[6].oneOf[1].use[2]!./node_modules/svelte-loader/index.js?cssPath=D:/www/sipro-spa/resources/js/Shared/Tags.svelte.18.css!./resources/js/Shared/Tags.svelte");
 
             
 
@@ -25750,11 +25750,11 @@ var options = {};
 options.insert = "head";
 options.singleton = false;
 
-var update = _node_modules_style_loader_dist_runtime_injectStylesIntoStyleTag_js__WEBPACK_IMPORTED_MODULE_0___default()(_node_modules_css_loader_dist_cjs_js_ruleSet_1_rules_6_oneOf_1_use_1_node_modules_postcss_loader_dist_cjs_js_ruleSet_1_rules_6_oneOf_1_use_2_node_modules_svelte_loader_index_js_cssPath_D_www_sipro_spa_resources_js_Shared_Tags_svelte_17_css_Tags_svelte__WEBPACK_IMPORTED_MODULE_1__["default"], options);
+var update = _node_modules_style_loader_dist_runtime_injectStylesIntoStyleTag_js__WEBPACK_IMPORTED_MODULE_0___default()(_node_modules_css_loader_dist_cjs_js_ruleSet_1_rules_6_oneOf_1_use_1_node_modules_postcss_loader_dist_cjs_js_ruleSet_1_rules_6_oneOf_1_use_2_node_modules_svelte_loader_index_js_cssPath_D_www_sipro_spa_resources_js_Shared_Tags_svelte_18_css_Tags_svelte__WEBPACK_IMPORTED_MODULE_1__["default"], options);
 
 
 
-/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (_node_modules_css_loader_dist_cjs_js_ruleSet_1_rules_6_oneOf_1_use_1_node_modules_postcss_loader_dist_cjs_js_ruleSet_1_rules_6_oneOf_1_use_2_node_modules_svelte_loader_index_js_cssPath_D_www_sipro_spa_resources_js_Shared_Tags_svelte_17_css_Tags_svelte__WEBPACK_IMPORTED_MODULE_1__["default"].locals || {});
+/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (_node_modules_css_loader_dist_cjs_js_ruleSet_1_rules_6_oneOf_1_use_1_node_modules_postcss_loader_dist_cjs_js_ruleSet_1_rules_6_oneOf_1_use_2_node_modules_svelte_loader_index_js_cssPath_D_www_sipro_spa_resources_js_Shared_Tags_svelte_18_css_Tags_svelte__WEBPACK_IMPORTED_MODULE_1__["default"].locals || {});
 
 /***/ }),
 
@@ -35239,7 +35239,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var svelte_internal__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! svelte/internal */ "./node_modules/svelte/internal/index.mjs");
 /* harmony import */ var D_www_sipro_spa_node_modules_svelte_loader_lib_hot_api_js__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./node_modules/svelte-loader/lib/hot-api.js */ "./node_modules/svelte-loader/lib/hot-api.js");
 /* harmony import */ var D_www_sipro_spa_node_modules_svelte_hmr_runtime_proxy_adapter_dom_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./node_modules/svelte-hmr/runtime/proxy-adapter-dom.js */ "./node_modules/svelte-hmr/runtime/proxy-adapter-dom.js");
-/* harmony import */ var D_www_sipro_spa_node_modules_svelte_select_src_Item_svelte_30_css_svelte_loader_cssPath_D_www_sipro_spa_node_modules_svelte_select_src_Item_svelte_30_css_D_www_sipro_spa_node_modules_svelte_select_src_Item_svelte__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./node_modules/svelte-select/src/Item.svelte.30.css!=!svelte-loader?cssPath=D:/www/sipro-spa/node_modules/svelte-select/src/Item.svelte.30.css!./node_modules/svelte-select/src/Item.svelte */ "./node_modules/svelte-select/src/Item.svelte.30.css!=!./node_modules/svelte-loader/index.js?cssPath=D:/www/sipro-spa/node_modules/svelte-select/src/Item.svelte.30.css!./node_modules/svelte-select/src/Item.svelte");
+/* harmony import */ var D_www_sipro_spa_node_modules_svelte_select_src_Item_svelte_27_css_svelte_loader_cssPath_D_www_sipro_spa_node_modules_svelte_select_src_Item_svelte_27_css_D_www_sipro_spa_node_modules_svelte_select_src_Item_svelte__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./node_modules/svelte-select/src/Item.svelte.27.css!=!svelte-loader?cssPath=D:/www/sipro-spa/node_modules/svelte-select/src/Item.svelte.27.css!./node_modules/svelte-select/src/Item.svelte */ "./node_modules/svelte-select/src/Item.svelte.27.css!=!./node_modules/svelte-loader/index.js?cssPath=D:/www/sipro-spa/node_modules/svelte-select/src/Item.svelte.27.css!./node_modules/svelte-select/src/Item.svelte");
 /* module decorator */ module = __webpack_require__.hmd(module);
 /* node_modules\svelte-select\src\Item.svelte generated by Svelte v3.49.0 */
 
@@ -35364,7 +35364,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _VirtualList_svelte__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./VirtualList.svelte */ "./node_modules/svelte-select/src/VirtualList.svelte");
 /* harmony import */ var D_www_sipro_spa_node_modules_svelte_loader_lib_hot_api_js__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./node_modules/svelte-loader/lib/hot-api.js */ "./node_modules/svelte-loader/lib/hot-api.js");
 /* harmony import */ var D_www_sipro_spa_node_modules_svelte_hmr_runtime_proxy_adapter_dom_js__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ./node_modules/svelte-hmr/runtime/proxy-adapter-dom.js */ "./node_modules/svelte-hmr/runtime/proxy-adapter-dom.js");
-/* harmony import */ var D_www_sipro_spa_node_modules_svelte_select_src_List_svelte_27_css_svelte_loader_cssPath_D_www_sipro_spa_node_modules_svelte_select_src_List_svelte_27_css_D_www_sipro_spa_node_modules_svelte_select_src_List_svelte__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ./node_modules/svelte-select/src/List.svelte.27.css!=!svelte-loader?cssPath=D:/www/sipro-spa/node_modules/svelte-select/src/List.svelte.27.css!./node_modules/svelte-select/src/List.svelte */ "./node_modules/svelte-select/src/List.svelte.27.css!=!./node_modules/svelte-loader/index.js?cssPath=D:/www/sipro-spa/node_modules/svelte-select/src/List.svelte.27.css!./node_modules/svelte-select/src/List.svelte");
+/* harmony import */ var D_www_sipro_spa_node_modules_svelte_select_src_List_svelte_30_css_svelte_loader_cssPath_D_www_sipro_spa_node_modules_svelte_select_src_List_svelte_30_css_D_www_sipro_spa_node_modules_svelte_select_src_List_svelte__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ./node_modules/svelte-select/src/List.svelte.30.css!=!svelte-loader?cssPath=D:/www/sipro-spa/node_modules/svelte-select/src/List.svelte.30.css!./node_modules/svelte-select/src/List.svelte */ "./node_modules/svelte-select/src/List.svelte.30.css!=!./node_modules/svelte-loader/index.js?cssPath=D:/www/sipro-spa/node_modules/svelte-select/src/List.svelte.30.css!./node_modules/svelte-select/src/List.svelte");
 /* module decorator */ module = __webpack_require__.hmd(module);
 /* node_modules\svelte-select\src\List.svelte generated by Svelte v3.49.0 */
 
@@ -36358,7 +36358,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var svelte__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! svelte */ "./node_modules/svelte/index.mjs");
 /* harmony import */ var D_www_sipro_spa_node_modules_svelte_loader_lib_hot_api_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./node_modules/svelte-loader/lib/hot-api.js */ "./node_modules/svelte-loader/lib/hot-api.js");
 /* harmony import */ var D_www_sipro_spa_node_modules_svelte_hmr_runtime_proxy_adapter_dom_js__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./node_modules/svelte-hmr/runtime/proxy-adapter-dom.js */ "./node_modules/svelte-hmr/runtime/proxy-adapter-dom.js");
-/* harmony import */ var D_www_sipro_spa_node_modules_svelte_select_src_MultiSelection_svelte_29_css_svelte_loader_cssPath_D_www_sipro_spa_node_modules_svelte_select_src_MultiSelection_svelte_29_css_D_www_sipro_spa_node_modules_svelte_select_src_MultiSelection_svelte__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./node_modules/svelte-select/src/MultiSelection.svelte.29.css!=!svelte-loader?cssPath=D:/www/sipro-spa/node_modules/svelte-select/src/MultiSelection.svelte.29.css!./node_modules/svelte-select/src/MultiSelection.svelte */ "./node_modules/svelte-select/src/MultiSelection.svelte.29.css!=!./node_modules/svelte-loader/index.js?cssPath=D:/www/sipro-spa/node_modules/svelte-select/src/MultiSelection.svelte.29.css!./node_modules/svelte-select/src/MultiSelection.svelte");
+/* harmony import */ var D_www_sipro_spa_node_modules_svelte_select_src_MultiSelection_svelte_28_css_svelte_loader_cssPath_D_www_sipro_spa_node_modules_svelte_select_src_MultiSelection_svelte_28_css_D_www_sipro_spa_node_modules_svelte_select_src_MultiSelection_svelte__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./node_modules/svelte-select/src/MultiSelection.svelte.28.css!=!svelte-loader?cssPath=D:/www/sipro-spa/node_modules/svelte-select/src/MultiSelection.svelte.28.css!./node_modules/svelte-select/src/MultiSelection.svelte */ "./node_modules/svelte-select/src/MultiSelection.svelte.28.css!=!./node_modules/svelte-loader/index.js?cssPath=D:/www/sipro-spa/node_modules/svelte-select/src/MultiSelection.svelte.28.css!./node_modules/svelte-select/src/MultiSelection.svelte");
 /* module decorator */ module = __webpack_require__.hmd(module);
 /* node_modules\svelte-select\src\MultiSelection.svelte generated by Svelte v3.49.0 */
 
@@ -38341,7 +38341,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var svelte_internal__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! svelte/internal */ "./node_modules/svelte/internal/index.mjs");
 /* harmony import */ var D_www_sipro_spa_node_modules_svelte_loader_lib_hot_api_js__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./node_modules/svelte-loader/lib/hot-api.js */ "./node_modules/svelte-loader/lib/hot-api.js");
 /* harmony import */ var D_www_sipro_spa_node_modules_svelte_hmr_runtime_proxy_adapter_dom_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./node_modules/svelte-hmr/runtime/proxy-adapter-dom.js */ "./node_modules/svelte-hmr/runtime/proxy-adapter-dom.js");
-/* harmony import */ var D_www_sipro_spa_node_modules_svelte_select_src_Selection_svelte_28_css_svelte_loader_cssPath_D_www_sipro_spa_node_modules_svelte_select_src_Selection_svelte_28_css_D_www_sipro_spa_node_modules_svelte_select_src_Selection_svelte__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./node_modules/svelte-select/src/Selection.svelte.28.css!=!svelte-loader?cssPath=D:/www/sipro-spa/node_modules/svelte-select/src/Selection.svelte.28.css!./node_modules/svelte-select/src/Selection.svelte */ "./node_modules/svelte-select/src/Selection.svelte.28.css!=!./node_modules/svelte-loader/index.js?cssPath=D:/www/sipro-spa/node_modules/svelte-select/src/Selection.svelte.28.css!./node_modules/svelte-select/src/Selection.svelte");
+/* harmony import */ var D_www_sipro_spa_node_modules_svelte_select_src_Selection_svelte_29_css_svelte_loader_cssPath_D_www_sipro_spa_node_modules_svelte_select_src_Selection_svelte_29_css_D_www_sipro_spa_node_modules_svelte_select_src_Selection_svelte__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./node_modules/svelte-select/src/Selection.svelte.29.css!=!svelte-loader?cssPath=D:/www/sipro-spa/node_modules/svelte-select/src/Selection.svelte.29.css!./node_modules/svelte-select/src/Selection.svelte */ "./node_modules/svelte-select/src/Selection.svelte.29.css!=!./node_modules/svelte-loader/index.js?cssPath=D:/www/sipro-spa/node_modules/svelte-select/src/Selection.svelte.29.css!./node_modules/svelte-select/src/Selection.svelte");
 /* module decorator */ module = __webpack_require__.hmd(module);
 /* node_modules\svelte-select\src\Selection.svelte generated by Svelte v3.49.0 */
 
@@ -38906,26 +38906,38 @@ function get_each_context_4(ctx, list, i) {
 
 function get_each_context_5(ctx, list, i) {
 	const child_ctx = ctx.slice();
-	child_ctx[137] = list[i];
+	child_ctx[146] = list[i];
 	return child_ctx;
 }
 
 function get_each_context_6(ctx, list, i) {
 	const child_ctx = ctx.slice();
-	child_ctx[148] = list[i];
+	child_ctx[149] = list[i];
 	return child_ctx;
 }
 
 function get_each_context_7(ctx, list, i) {
 	const child_ctx = ctx.slice();
-	child_ctx[151] = list[i].id;
-	child_ctx[152] = list[i].nombre;
-	child_ctx[154] = i;
+	child_ctx[143] = list[i];
+	return child_ctx;
+}
+
+function get_each_context_8(ctx, list, i) {
+	const child_ctx = ctx.slice();
+	child_ctx[154] = list[i];
+	return child_ctx;
+}
+
+function get_each_context_9(ctx, list, i) {
+	const child_ctx = ctx.slice();
+	child_ctx[157] = list[i].id;
+	child_ctx[158] = list[i].nombre;
+	child_ctx[160] = i;
 	return child_ctx;
 }
 
 // (119:8) {#if allowedToCreate}
-function create_if_block_23(ctx) {
+function create_if_block_25(ctx) {
 	let div2;
 	let div0;
 	let label0;
@@ -39087,7 +39099,7 @@ function create_if_block_23(ctx) {
 }
 
 // (162:8) {#if $form.area_conocimiento_id}
-function create_if_block_22(ctx) {
+function create_if_block_24(ctx) {
 	let div2;
 	let div0;
 	let label;
@@ -39179,7 +39191,7 @@ function create_if_block_22(ctx) {
 }
 
 // (172:8) {#if $form.subarea_conocimiento_id}
-function create_if_block_21(ctx) {
+function create_if_block_23(ctx) {
 	let div2;
 	let div0;
 	let label;
@@ -39270,7 +39282,7 @@ function create_if_block_21(ctx) {
 }
 
 // (210:8) {#if $form.centro_formacion_id?.value}
-function create_if_block_20(ctx) {
+function create_if_block_22(ctx) {
 	let div2;
 	let div0;
 	let label;
@@ -39362,7 +39374,7 @@ function create_if_block_20(ctx) {
 }
 
 // (229:8) {#if $form.alineado_mesas_sectoriales?.value == 1}
-function create_if_block_19(ctx) {
+function create_if_block_21(ctx) {
 	let div3;
 	let inputerror;
 	let t0;
@@ -39378,11 +39390,11 @@ function create_if_block_19(ctx) {
 			}
 		});
 
-	let each_value_7 = /*mesasSectoriales*/ ctx[20];
+	let each_value_9 = /*mesasSectoriales*/ ctx[20];
 	let each_blocks = [];
 
-	for (let i = 0; i < each_value_7.length; i += 1) {
-		each_blocks[i] = create_each_block_7(get_each_context_7(ctx, each_value_7, i));
+	for (let i = 0; i < each_value_9.length; i += 1) {
+		each_blocks[i] = create_each_block_9(get_each_context_9(ctx, each_value_9, i));
 	}
 
 	const out = i => (0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.transition_out)(each_blocks[i], 1, 1, () => {
@@ -39432,17 +39444,17 @@ function create_if_block_19(ctx) {
 			inputerror.$set(inputerror_changes);
 
 			if (dirty[0] & /*mesasSectoriales*/ 1048576 | dirty[1] & /*$form*/ 128) {
-				each_value_7 = /*mesasSectoriales*/ ctx[20];
+				each_value_9 = /*mesasSectoriales*/ ctx[20];
 				let i;
 
-				for (i = 0; i < each_value_7.length; i += 1) {
-					const child_ctx = get_each_context_7(ctx, each_value_7, i);
+				for (i = 0; i < each_value_9.length; i += 1) {
+					const child_ctx = get_each_context_9(ctx, each_value_9, i);
 
 					if (each_blocks[i]) {
 						each_blocks[i].p(child_ctx, dirty);
 						(0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.transition_in)(each_blocks[i], 1);
 					} else {
-						each_blocks[i] = create_each_block_7(child_ctx);
+						each_blocks[i] = create_each_block_9(child_ctx);
 						each_blocks[i].c();
 						(0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.transition_in)(each_blocks[i], 1);
 						each_blocks[i].m(div1, null);
@@ -39451,7 +39463,7 @@ function create_if_block_19(ctx) {
 
 				(0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.group_outros)();
 
-				for (i = each_value_7.length; i < each_blocks.length; i += 1) {
+				for (i = each_value_9.length; i < each_blocks.length; i += 1) {
 					out(i);
 				}
 
@@ -39462,7 +39474,7 @@ function create_if_block_19(ctx) {
 			if (current) return;
 			(0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.transition_in)(inputerror.$$.fragment, local);
 
-			for (let i = 0; i < each_value_7.length; i += 1) {
+			for (let i = 0; i < each_value_9.length; i += 1) {
 				(0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.transition_in)(each_blocks[i]);
 			}
 
@@ -39497,7 +39509,7 @@ function create_default_slot_13(ctx) {
 		/*checkbox_group_binding*/ ctx[75](value);
 	}
 
-	let checkbox_props = { value: /*id*/ ctx[151] };
+	let checkbox_props = { value: /*id*/ ctx[157] };
 
 	if (/*$form*/ ctx[38].mesa_sectorial_id !== void 0) {
 		checkbox_props.group = /*$form*/ ctx[38].mesa_sectorial_id;
@@ -39518,7 +39530,7 @@ function create_default_slot_13(ctx) {
 		},
 		p(ctx, dirty) {
 			const checkbox_changes = {};
-			if (dirty[0] & /*mesasSectoriales*/ 1048576) checkbox_changes.value = /*id*/ ctx[151];
+			if (dirty[0] & /*mesasSectoriales*/ 1048576) checkbox_changes.value = /*id*/ ctx[157];
 
 			if (!updating_group && dirty[1] & /*$form*/ 128) {
 				updating_group = true;
@@ -39547,7 +39559,7 @@ function create_default_slot_13(ctx) {
 // (243:32) 
 function create_label_slot(ctx) {
 	let span;
-	let t_value = /*nombre*/ ctx[152] + "";
+	let t_value = /*nombre*/ ctx[158] + "";
 	let t;
 
 	return {
@@ -39561,7 +39573,7 @@ function create_label_slot(ctx) {
 			(0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.append)(span, t);
 		},
 		p(ctx, dirty) {
-			if (dirty[0] & /*mesasSectoriales*/ 1048576 && t_value !== (t_value = /*nombre*/ ctx[152] + "")) (0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.set_data)(t, t_value);
+			if (dirty[0] & /*mesasSectoriales*/ 1048576 && t_value !== (t_value = /*nombre*/ ctx[158] + "")) (0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.set_data)(t, t_value);
 		},
 		d(detaching) {
 			if (detaching) (0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.detach)(span);
@@ -39570,7 +39582,7 @@ function create_label_slot(ctx) {
 }
 
 // (240:24) {#each mesasSectoriales as { id, nombre }
-function create_each_block_7(ctx) {
+function create_each_block_9(ctx) {
 	let formfield;
 	let current;
 
@@ -39595,7 +39607,7 @@ function create_each_block_7(ctx) {
 		p(ctx, dirty) {
 			const formfield_changes = {};
 
-			if (dirty[0] & /*mesasSectoriales*/ 1048576 | dirty[1] & /*$form*/ 128 | dirty[5] & /*$$scope*/ 1) {
+			if (dirty[0] & /*mesasSectoriales*/ 1048576 | dirty[1] & /*$form*/ 128 | dirty[5] & /*$$scope*/ 64) {
 				formfield_changes.$$scope = { dirty, ctx };
 			}
 
@@ -39617,7 +39629,7 @@ function create_each_block_7(ctx) {
 }
 
 // (260:8) {#if !allowedToCreate}
-function create_if_block_12(ctx) {
+function create_if_block_14(ctx) {
 	let div2;
 	let div0;
 	let label0;
@@ -39839,7 +39851,7 @@ function create_if_block_12(ctx) {
 
 	input0 = new _Shared_Input__WEBPACK_IMPORTED_MODULE_13__["default"]({ props: input0_props });
 	svelte_internal__WEBPACK_IMPORTED_MODULE_0__.binding_callbacks.push(() => (0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.bind)(input0, 'value', input0_value_binding));
-	let if_block0 = /*$form*/ ctx[38].financiado_anteriormente?.value == 1 && create_if_block_18(ctx);
+	let if_block0 = /*$form*/ ctx[38].financiado_anteriormente?.value == 1 && create_if_block_20(ctx);
 
 	label1 = new _Shared_Label__WEBPACK_IMPORTED_MODULE_11__["default"]({
 			props: {
@@ -39869,7 +39881,7 @@ function create_if_block_12(ctx) {
 
 	select0 = new _Shared_Select__WEBPACK_IMPORTED_MODULE_12__["default"]({ props: select0_props });
 	svelte_internal__WEBPACK_IMPORTED_MODULE_0__.binding_callbacks.push(() => (0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.bind)(select0, 'selectedValue', select0_selectedValue_binding_2));
-	let if_block1 = (/*$form*/ ctx[38].estado_general_maquinaria?.value == 2 || /*$form*/ ctx[38].estado_general_maquinaria?.value == 3) && create_if_block_17(ctx);
+	let if_block1 = (/*$form*/ ctx[38].estado_general_maquinaria?.value == 2 || /*$form*/ ctx[38].estado_general_maquinaria?.value == 3) && create_if_block_19(ctx);
 
 	label2 = new _Shared_Label__WEBPACK_IMPORTED_MODULE_11__["default"]({
 			props: {
@@ -39899,7 +39911,7 @@ function create_if_block_12(ctx) {
 
 	select1 = new _Shared_Select__WEBPACK_IMPORTED_MODULE_12__["default"]({ props: select1_props });
 	svelte_internal__WEBPACK_IMPORTED_MODULE_0__.binding_callbacks.push(() => (0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.bind)(select1, 'selectedValue', select1_selectedValue_binding_2));
-	const if_block_creators = [create_if_block_15, create_if_block_16];
+	const if_block_creators = [create_if_block_17, create_if_block_18];
 	const if_blocks = [];
 
 	function select_block_type(ctx, dirty) {
@@ -39940,7 +39952,7 @@ function create_if_block_12(ctx) {
 
 	select2 = new _Shared_Select__WEBPACK_IMPORTED_MODULE_12__["default"]({ props: select2_props });
 	svelte_internal__WEBPACK_IMPORTED_MODULE_0__.binding_callbacks.push(() => (0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.bind)(select2, 'selectedValue', select2_selectedValue_binding_1));
-	let if_block3 = /*$form*/ ctx[38].ambiente_activo_procesos_idi?.value == 1 && create_if_block_14(ctx);
+	let if_block3 = /*$form*/ ctx[38].ambiente_activo_procesos_idi?.value == 1 && create_if_block_16(ctx);
 
 	label4 = new _Shared_Label__WEBPACK_IMPORTED_MODULE_11__["default"]({
 			props: {
@@ -39970,7 +39982,7 @@ function create_if_block_12(ctx) {
 
 	select3 = new _Shared_Select__WEBPACK_IMPORTED_MODULE_12__["default"]({ props: select3_props });
 	svelte_internal__WEBPACK_IMPORTED_MODULE_0__.binding_callbacks.push(() => (0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.bind)(select3, 'selectedValue', select3_selectedValue_binding_1));
-	let if_block4 = /*$form*/ ctx[38].ambiente_formacion_complementaria?.value == 1 && create_if_block_13(ctx);
+	let if_block4 = /*$form*/ ctx[38].ambiente_formacion_complementaria?.value == 1 && create_if_block_15(ctx);
 
 	label5 = new _Shared_Label__WEBPACK_IMPORTED_MODULE_11__["default"]({
 			props: {
@@ -40867,7 +40879,7 @@ function create_if_block_12(ctx) {
 						(0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.transition_in)(if_block0, 1);
 					}
 				} else {
-					if_block0 = create_if_block_18(ctx);
+					if_block0 = create_if_block_20(ctx);
 					if_block0.c();
 					(0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.transition_in)(if_block0, 1);
 					if_block0.m(t2.parentNode, t2);
@@ -40902,7 +40914,7 @@ function create_if_block_12(ctx) {
 						(0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.transition_in)(if_block1, 1);
 					}
 				} else {
-					if_block1 = create_if_block_17(ctx);
+					if_block1 = create_if_block_19(ctx);
 					if_block1.c();
 					(0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.transition_in)(if_block1, 1);
 					if_block1.m(t5.parentNode, t5);
@@ -40983,7 +40995,7 @@ function create_if_block_12(ctx) {
 						(0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.transition_in)(if_block3, 1);
 					}
 				} else {
-					if_block3 = create_if_block_14(ctx);
+					if_block3 = create_if_block_16(ctx);
 					if_block3.c();
 					(0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.transition_in)(if_block3, 1);
 					if_block3.m(t11.parentNode, t11);
@@ -41018,7 +41030,7 @@ function create_if_block_12(ctx) {
 						(0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.transition_in)(if_block4, 1);
 					}
 				} else {
-					if_block4 = create_if_block_13(ctx);
+					if_block4 = create_if_block_15(ctx);
 					if_block4.c();
 					(0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.transition_in)(if_block4, 1);
 					if_block4.m(t14.parentNode, t14);
@@ -41045,7 +41057,7 @@ function create_if_block_12(ctx) {
 			input1.$set(input1_changes);
 			const infomessage0_changes = {};
 
-			if (dirty[5] & /*$$scope*/ 1) {
+			if (dirty[5] & /*$$scope*/ 64) {
 				infomessage0_changes.$$scope = { dirty, ctx };
 			}
 
@@ -41062,7 +41074,7 @@ function create_if_block_12(ctx) {
 			input2.$set(input2_changes);
 			const infomessage1_changes = {};
 
-			if (dirty[5] & /*$$scope*/ 1) {
+			if (dirty[5] & /*$$scope*/ 64) {
 				infomessage1_changes.$$scope = { dirty, ctx };
 			}
 
@@ -41199,7 +41211,7 @@ function create_if_block_12(ctx) {
 			tags.$set(tags_changes);
 			const infomessage2_changes = {};
 
-			if (dirty[5] & /*$$scope*/ 1) {
+			if (dirty[5] & /*$$scope*/ 64) {
 				infomessage2_changes.$$scope = { dirty, ctx };
 			}
 
@@ -41453,7 +41465,7 @@ function create_if_block_12(ctx) {
 }
 
 // (270:12) {#if $form.financiado_anteriormente?.value == 1}
-function create_if_block_18(ctx) {
+function create_if_block_20(ctx) {
 	let div2;
 	let div0;
 	let label;
@@ -41544,7 +41556,7 @@ function create_if_block_18(ctx) {
 }
 
 // (290:12) {#if $form.estado_general_maquinaria?.value == 2 || $form.estado_general_maquinaria?.value == 3}
-function create_if_block_17(ctx) {
+function create_if_block_19(ctx) {
 	let div2;
 	let div0;
 	let label;
@@ -41633,8 +41645,8 @@ function create_if_block_17(ctx) {
 	};
 }
 
-// (328:56) 
-function create_if_block_16(ctx) {
+// (338:56) 
+function create_if_block_18(ctx) {
 	let div2;
 	let div0;
 	let label;
@@ -41723,8 +41735,8 @@ function create_if_block_16(ctx) {
 	};
 }
 
-// (310:12) {#if $form.ambiente_activo?.value == 1}
-function create_if_block_15(ctx) {
+// (320:12) {#if $form.ambiente_activo?.value == 1}
+function create_if_block_17(ctx) {
 	let div2;
 	let div0;
 	let label0;
@@ -41900,8 +41912,8 @@ function create_if_block_15(ctx) {
 	};
 }
 
-// (348:12) {#if $form.ambiente_activo_procesos_idi?.value == 1}
-function create_if_block_14(ctx) {
+// (368:12) {#if $form.ambiente_activo_procesos_idi?.value == 1}
+function create_if_block_16(ctx) {
 	let div2;
 	let div0;
 	let label0;
@@ -42102,7 +42114,7 @@ function create_if_block_14(ctx) {
 			tags.$set(tags_changes);
 			const infomessage_changes = {};
 
-			if (dirty[5] & /*$$scope*/ 1) {
+			if (dirty[5] & /*$$scope*/ 64) {
 				infomessage_changes.$$scope = { dirty, ctx };
 			}
 
@@ -42157,7 +42169,7 @@ function create_if_block_14(ctx) {
 	};
 }
 
-// (364:24) <InfoMessage>
+// (384:24) <InfoMessage>
 function create_default_slot_12(ctx) {
 	let t;
 
@@ -42174,8 +42186,8 @@ function create_default_slot_12(ctx) {
 	};
 }
 
-// (387:12) {#if $form.ambiente_formacion_complementaria?.value == 1}
-function create_if_block_13(ctx) {
+// (407:12) {#if $form.ambiente_formacion_complementaria?.value == 1}
+function create_if_block_15(ctx) {
 	let div2;
 	let div0;
 	let label0;
@@ -42520,7 +42532,7 @@ function create_if_block_13(ctx) {
 			tags0.$set(tags0_changes);
 			const infomessage0_changes = {};
 
-			if (dirty[5] & /*$$scope*/ 1) {
+			if (dirty[5] & /*$$scope*/ 64) {
 				infomessage0_changes.$$scope = { dirty, ctx };
 			}
 
@@ -42547,7 +42559,7 @@ function create_if_block_13(ctx) {
 			tags1.$set(tags1_changes);
 			const infomessage1_changes = {};
 
-			if (dirty[5] & /*$$scope*/ 1) {
+			if (dirty[5] & /*$$scope*/ 64) {
 				infomessage1_changes.$$scope = { dirty, ctx };
 			}
 
@@ -42610,7 +42622,7 @@ function create_if_block_13(ctx) {
 	};
 }
 
-// (412:24) <InfoMessage>
+// (432:24) <InfoMessage>
 function create_default_slot_11(ctx) {
 	let t;
 
@@ -42627,7 +42639,7 @@ function create_default_slot_11(ctx) {
 	};
 }
 
-// (431:24) <InfoMessage>
+// (451:24) <InfoMessage>
 function create_default_slot_10(ctx) {
 	let t;
 
@@ -42644,7 +42656,7 @@ function create_default_slot_10(ctx) {
 	};
 }
 
-// (442:20) <InfoMessage>
+// (462:20) <InfoMessage>
 function create_default_slot_9(ctx) {
 	let t0;
 	let a;
@@ -42674,7 +42686,7 @@ function create_default_slot_9(ctx) {
 	};
 }
 
-// (452:20) <InfoMessage>
+// (472:20) <InfoMessage>
 function create_default_slot_8(ctx) {
 	let t0;
 	let a;
@@ -42704,7 +42716,7 @@ function create_default_slot_8(ctx) {
 	};
 }
 
-// (572:20) <InfoMessage>
+// (684:20) <InfoMessage>
 function create_default_slot_7(ctx) {
 	let t;
 
@@ -42721,8 +42733,8 @@ function create_default_slot_7(ctx) {
 	};
 }
 
-// (600:8) {#if ambienteModernizacion}
-function create_if_block_11(ctx) {
+// (721:8) {#if ambienteModernizacion}
+function create_if_block_13(ctx) {
 	let small;
 	let svg;
 	let path;
@@ -42764,8 +42776,8 @@ function create_if_block_11(ctx) {
 	};
 }
 
-// (614:8) {:else}
-function create_else_block_7(ctx) {
+// (735:8) {:else}
+function create_else_block_9(ctx) {
 	let span;
 
 	return {
@@ -42786,8 +42798,8 @@ function create_else_block_7(ctx) {
 	};
 }
 
-// (611:34) 
-function create_if_block_10(ctx) {
+// (732:34) 
+function create_if_block_12(ctx) {
 	let span;
 	let t;
 	let loadingbutton;
@@ -42818,7 +42830,7 @@ function create_if_block_10(ctx) {
 			const loadingbutton_changes = {};
 			if (dirty[1] & /*$form*/ 128) loadingbutton_changes.loading = /*$form*/ ctx[38].processing;
 
-			if (dirty[5] & /*$$scope*/ 1) {
+			if (dirty[5] & /*$$scope*/ 64) {
 				loadingbutton_changes.$$scope = { dirty, ctx };
 			}
 
@@ -42841,8 +42853,8 @@ function create_if_block_10(ctx) {
 	};
 }
 
-// (609:8) {#if ambienteModernizacion?.allowed.to_update}
-function create_if_block_9(ctx) {
+// (730:8) {#if ambienteModernizacion?.allowed.to_update}
+function create_if_block_11(ctx) {
 	let button;
 	let current;
 
@@ -42868,7 +42880,7 @@ function create_if_block_9(ctx) {
 		p(ctx, dirty) {
 			const button_changes = {};
 
-			if (dirty[5] & /*$$scope*/ 1) {
+			if (dirty[5] & /*$$scope*/ 64) {
 				button_changes.$$scope = { dirty, ctx };
 			}
 
@@ -42889,7 +42901,7 @@ function create_if_block_9(ctx) {
 	};
 }
 
-// (613:12) <LoadingButton loading={$form.processing} form="semillero-investigacion-form">
+// (734:12) <LoadingButton loading={$form.processing} form="semillero-investigacion-form">
 function create_default_slot_6(ctx) {
 	let t;
 
@@ -42906,7 +42918,7 @@ function create_default_slot_6(ctx) {
 	};
 }
 
-// (610:12) <Button on:click={() => (dialogGuardar = true)} class="ml-auto" type="button">
+// (731:12) <Button on:click={() => (dialogGuardar = true)} class="ml-auto" type="button">
 function create_default_slot_5(ctx) {
 	let t;
 
@@ -42923,7 +42935,7 @@ function create_default_slot_5(ctx) {
 	};
 }
 
-// (620:0) {#if ambienteModernizacion?.allowed.to_update}
+// (741:0) {#if ambienteModernizacion?.allowed.to_update}
 function create_if_block(ctx) {
 	let dialog;
 	let updating_open;
@@ -42961,7 +42973,7 @@ function create_if_block(ctx) {
 		p(ctx, dirty) {
 			const dialog_changes = {};
 
-			if (dirty[0] & /*ambienteModernizacion*/ 262144 | dirty[1] & /*$form, allowedToCreate, exportComponent, dialogGuardar, $formObservacionesGeneralesAmbiente, $formCoberturaPerntinenciaFormacion, $formTransferenciaTecnologias, $formFortalecimientoProgramasFormacion, $formValorAgregadoEntidades, $formIncorporacionNuevosConocimientos, $formCreacionEmpresas, $formGeneracionEmpleo, $formProductividadBeneficiarios, $formPertinenciaSectorProductivo, $formImpactoProcesosFormacion, $formJustificacionAmbienteInactivo, $formRazonEstadoGeneral*/ 2097031 | dirty[5] & /*$$scope*/ 1) {
+			if (dirty[0] & /*ambienteModernizacion*/ 262144 | dirty[1] & /*$form, allowedToCreate, exportComponent, dialogGuardar, $formObservacionesGeneralesAmbiente, $formCoberturaPerntinenciaFormacion, $formTransferenciaTecnologias, $formFortalecimientoProgramasFormacion, $formValorAgregadoEntidades, $formIncorporacionNuevosConocimientos, $formCreacionEmpresas, $formGeneracionEmpleo, $formProductividadBeneficiarios, $formPertinenciaSectorProductivo, $formImpactoProcesosFormacion, $formJustificacionAmbienteInactivo, $formRazonEstadoGeneral*/ 2097031 | dirty[5] & /*$$scope*/ 64) {
 				dialog_changes.$$scope = { dirty, ctx };
 			}
 
@@ -42988,7 +43000,7 @@ function create_if_block(ctx) {
 	};
 }
 
-// (622:8) 
+// (743:8) 
 function create_title_slot(ctx) {
 	let div1;
 
@@ -43008,7 +43020,7 @@ function create_title_slot(ctx) {
 	};
 }
 
-// (630:12) <InfoMessage>
+// (751:12) <InfoMessage>
 function create_default_slot_4(ctx) {
 	let t0;
 	let strong0;
@@ -43073,7 +43085,7 @@ function create_default_slot_4(ctx) {
 	};
 }
 
-// (629:8) 
+// (750:8) 
 function create_header_info_slot(ctx) {
 	let div;
 	let infomessage;
@@ -43101,7 +43113,7 @@ function create_header_info_slot(ctx) {
 		p(ctx, dirty) {
 			const infomessage_changes = {};
 
-			if (dirty[5] & /*$$scope*/ 1) {
+			if (dirty[5] & /*$$scope*/ 64) {
 				infomessage_changes.$$scope = { dirty, ctx };
 			}
 
@@ -43123,11 +43135,11 @@ function create_header_info_slot(ctx) {
 	};
 }
 
-// (706:20) {#each $form.mesa_sectorial_id as mesaSectorial}
-function create_each_block_6(ctx) {
+// (827:20) {#each $form.mesa_sectorial_id as mesaSectorial}
+function create_each_block_8(ctx) {
 	let li;
 	let t0;
-	let t1_value = /*mesaSectorial*/ ctx[148] + "";
+	let t1_value = /*mesaSectorial*/ ctx[154] + "";
 	let t1;
 
 	return {
@@ -43142,7 +43154,7 @@ function create_each_block_6(ctx) {
 			(0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.append)(li, t1);
 		},
 		p(ctx, dirty) {
-			if (dirty[1] & /*$form*/ 128 && t1_value !== (t1_value = /*mesaSectorial*/ ctx[148] + "")) (0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.set_data)(t1, t1_value);
+			if (dirty[1] & /*$form*/ 128 && t1_value !== (t1_value = /*mesaSectorial*/ ctx[154] + "")) (0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.set_data)(t1, t1_value);
 		},
 		d(detaching) {
 			if (detaching) (0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.detach)(li);
@@ -43150,7 +43162,211 @@ function create_each_block_6(ctx) {
 	};
 }
 
-// (727:16) {:else}
+// (848:16) {:else}
+function create_else_block_8(ctx) {
+	let p;
+
+	return {
+		c() {
+			p = (0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.element)("p");
+			p.textContent = "Sin información registrada";
+			(0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.set_style)(p, "margin-bottom", "4rem");
+		},
+		m(target, anchor) {
+			(0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.insert)(target, p, anchor);
+		},
+		p: svelte_internal__WEBPACK_IMPORTED_MODULE_0__.noop,
+		d(detaching) {
+			if (detaching) (0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.detach)(p);
+		}
+	};
+}
+
+// (842:16) {#if $form.codigos_proyectos_id}
+function create_if_block_10(ctx) {
+	let ul;
+	let each_value_7 = /*$form*/ ctx[38].codigos_proyectos_id;
+	let each_blocks = [];
+
+	for (let i = 0; i < each_value_7.length; i += 1) {
+		each_blocks[i] = create_each_block_7(get_each_context_7(ctx, each_value_7, i));
+	}
+
+	return {
+		c() {
+			ul = (0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.element)("ul");
+
+			for (let i = 0; i < each_blocks.length; i += 1) {
+				each_blocks[i].c();
+			}
+
+			(0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.set_style)(ul, "margin-bottom", "4rem");
+		},
+		m(target, anchor) {
+			(0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.insert)(target, ul, anchor);
+
+			for (let i = 0; i < each_blocks.length; i += 1) {
+				each_blocks[i].m(ul, null);
+			}
+		},
+		p(ctx, dirty) {
+			if (dirty[1] & /*$form*/ 128) {
+				each_value_7 = /*$form*/ ctx[38].codigos_proyectos_id;
+				let i;
+
+				for (i = 0; i < each_value_7.length; i += 1) {
+					const child_ctx = get_each_context_7(ctx, each_value_7, i);
+
+					if (each_blocks[i]) {
+						each_blocks[i].p(child_ctx, dirty);
+					} else {
+						each_blocks[i] = create_each_block_7(child_ctx);
+						each_blocks[i].c();
+						each_blocks[i].m(ul, null);
+					}
+				}
+
+				for (; i < each_blocks.length; i += 1) {
+					each_blocks[i].d(1);
+				}
+
+				each_blocks.length = each_value_7.length;
+			}
+		},
+		d(detaching) {
+			if (detaching) (0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.detach)(ul);
+			(0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.destroy_each)(each_blocks, detaching);
+		}
+	};
+}
+
+// (844:24) {#each $form.codigos_proyectos_id as codigoProyecto}
+function create_each_block_7(ctx) {
+	let li;
+	let t_value = /*codigoProyecto*/ ctx[143].label + "";
+	let t;
+
+	return {
+		c() {
+			li = (0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.element)("li");
+			t = (0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.text)(t_value);
+		},
+		m(target, anchor) {
+			(0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.insert)(target, li, anchor);
+			(0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.append)(li, t);
+		},
+		p(ctx, dirty) {
+			if (dirty[1] & /*$form*/ 128 && t_value !== (t_value = /*codigoProyecto*/ ctx[143].label + "")) (0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.set_data)(t, t_value);
+		},
+		d(detaching) {
+			if (detaching) (0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.detach)(li);
+		}
+	};
+}
+
+// (872:16) {:else}
+function create_else_block_7(ctx) {
+	let p;
+
+	return {
+		c() {
+			p = (0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.element)("p");
+			p.textContent = "Sin información registrada";
+			(0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.set_style)(p, "margin-bottom", "4rem");
+		},
+		m(target, anchor) {
+			(0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.insert)(target, p, anchor);
+		},
+		p: svelte_internal__WEBPACK_IMPORTED_MODULE_0__.noop,
+		d(detaching) {
+			if (detaching) (0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.detach)(p);
+		}
+	};
+}
+
+// (866:16) {#if $form.programas_formacion_calificados}
+function create_if_block_9(ctx) {
+	let ul;
+	let each_value_6 = /*$form*/ ctx[38].programas_formacion_calificados;
+	let each_blocks = [];
+
+	for (let i = 0; i < each_value_6.length; i += 1) {
+		each_blocks[i] = create_each_block_6(get_each_context_6(ctx, each_value_6, i));
+	}
+
+	return {
+		c() {
+			ul = (0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.element)("ul");
+
+			for (let i = 0; i < each_blocks.length; i += 1) {
+				each_blocks[i].c();
+			}
+
+			(0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.set_style)(ul, "margin-bottom", "4rem");
+		},
+		m(target, anchor) {
+			(0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.insert)(target, ul, anchor);
+
+			for (let i = 0; i < each_blocks.length; i += 1) {
+				each_blocks[i].m(ul, null);
+			}
+		},
+		p(ctx, dirty) {
+			if (dirty[1] & /*$form*/ 128) {
+				each_value_6 = /*$form*/ ctx[38].programas_formacion_calificados;
+				let i;
+
+				for (i = 0; i < each_value_6.length; i += 1) {
+					const child_ctx = get_each_context_6(ctx, each_value_6, i);
+
+					if (each_blocks[i]) {
+						each_blocks[i].p(child_ctx, dirty);
+					} else {
+						each_blocks[i] = create_each_block_6(child_ctx);
+						each_blocks[i].c();
+						each_blocks[i].m(ul, null);
+					}
+				}
+
+				for (; i < each_blocks.length; i += 1) {
+					each_blocks[i].d(1);
+				}
+
+				each_blocks.length = each_value_6.length;
+			}
+		},
+		d(detaching) {
+			if (detaching) (0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.detach)(ul);
+			(0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.destroy_each)(each_blocks, detaching);
+		}
+	};
+}
+
+// (868:24) {#each $form.programas_formacion_calificados as programaFormacionCalificado}
+function create_each_block_6(ctx) {
+	let li;
+	let t_value = /*programaFormacionCalificado*/ ctx[149].label + "";
+	let t;
+
+	return {
+		c() {
+			li = (0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.element)("li");
+			t = (0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.text)(t_value);
+		},
+		m(target, anchor) {
+			(0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.insert)(target, li, anchor);
+			(0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.append)(li, t);
+		},
+		p(ctx, dirty) {
+			if (dirty[1] & /*$form*/ 128 && t_value !== (t_value = /*programaFormacionCalificado*/ ctx[149].label + "")) (0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.set_data)(t, t_value);
+		},
+		d(detaching) {
+			if (detaching) (0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.detach)(li);
+		}
+	};
+}
+
+// (884:16) {:else}
 function create_else_block_6(ctx) {
 	let p;
 
@@ -43170,10 +43386,10 @@ function create_else_block_6(ctx) {
 	};
 }
 
-// (721:16) {#if $form.codigos_proyectos_id}
+// (878:16) {#if $form.programas_formacion}
 function create_if_block_8(ctx) {
 	let ul;
-	let each_value_5 = /*$form*/ ctx[38].codigos_proyectos_id;
+	let each_value_5 = /*$form*/ ctx[38].programas_formacion;
 	let each_blocks = [];
 
 	for (let i = 0; i < each_value_5.length; i += 1) {
@@ -43199,7 +43415,7 @@ function create_if_block_8(ctx) {
 		},
 		p(ctx, dirty) {
 			if (dirty[1] & /*$form*/ 128) {
-				each_value_5 = /*$form*/ ctx[38].codigos_proyectos_id;
+				each_value_5 = /*$form*/ ctx[38].programas_formacion;
 				let i;
 
 				for (i = 0; i < each_value_5.length; i += 1) {
@@ -43228,10 +43444,10 @@ function create_if_block_8(ctx) {
 	};
 }
 
-// (723:24) {#each $form.codigos_proyectos_id as codigoProyecto}
+// (880:24) {#each $form.programas_formacion as programaFormacion}
 function create_each_block_5(ctx) {
 	let li;
-	let t_value = /*codigoProyecto*/ ctx[137].label + "";
+	let t_value = /*programaFormacion*/ ctx[146].label + "";
 	let t;
 
 	return {
@@ -43244,7 +43460,7 @@ function create_each_block_5(ctx) {
 			(0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.append)(li, t);
 		},
 		p(ctx, dirty) {
-			if (dirty[1] & /*$form*/ 128 && t_value !== (t_value = /*codigoProyecto*/ ctx[137].label + "")) (0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.set_data)(t, t_value);
+			if (dirty[1] & /*$form*/ 128 && t_value !== (t_value = /*programaFormacion*/ ctx[146].label + "")) (0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.set_data)(t, t_value);
 		},
 		d(detaching) {
 			if (detaching) (0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.detach)(li);
@@ -43252,7 +43468,7 @@ function create_each_block_5(ctx) {
 	};
 }
 
-// (751:16) {:else}
+// (908:16) {:else}
 function create_else_block_5(ctx) {
 	let p;
 
@@ -43272,10 +43488,10 @@ function create_else_block_5(ctx) {
 	};
 }
 
-// (745:16) {#if $form.programas_formacion_calificados}
+// (902:16) {#if JSON.parse($form.cod_proyectos_beneficiados)?.length > 0}
 function create_if_block_7(ctx) {
 	let ul;
-	let each_value_4 = /*$form*/ ctx[38].programas_formacion_calificados;
+	let each_value_4 = JSON.parse(/*$form*/ ctx[38].cod_proyectos_beneficiados);
 	let each_blocks = [];
 
 	for (let i = 0; i < each_value_4.length; i += 1) {
@@ -43301,7 +43517,7 @@ function create_if_block_7(ctx) {
 		},
 		p(ctx, dirty) {
 			if (dirty[1] & /*$form*/ 128) {
-				each_value_4 = /*$form*/ ctx[38].programas_formacion_calificados;
+				each_value_4 = JSON.parse(/*$form*/ ctx[38].cod_proyectos_beneficiados);
 				let i;
 
 				for (i = 0; i < each_value_4.length; i += 1) {
@@ -43330,10 +43546,10 @@ function create_if_block_7(ctx) {
 	};
 }
 
-// (747:24) {#each $form.programas_formacion_calificados as programaFormacionCalificado}
+// (904:24) {#each JSON.parse($form.cod_proyectos_beneficiados) as codigoProyecto}
 function create_each_block_4(ctx) {
 	let li;
-	let t_value = /*programaFormacionCalificado*/ ctx[143].label + "";
+	let t_value = /*codigoProyecto*/ ctx[143].value + "";
 	let t;
 
 	return {
@@ -43346,7 +43562,7 @@ function create_each_block_4(ctx) {
 			(0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.append)(li, t);
 		},
 		p(ctx, dirty) {
-			if (dirty[1] & /*$form*/ 128 && t_value !== (t_value = /*programaFormacionCalificado*/ ctx[143].label + "")) (0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.set_data)(t, t_value);
+			if (dirty[1] & /*$form*/ 128 && t_value !== (t_value = /*codigoProyecto*/ ctx[143].value + "")) (0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.set_data)(t, t_value);
 		},
 		d(detaching) {
 			if (detaching) (0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.detach)(li);
@@ -43354,7 +43570,7 @@ function create_each_block_4(ctx) {
 	};
 }
 
-// (763:16) {:else}
+// (920:16) {:else}
 function create_else_block_4(ctx) {
 	let p;
 
@@ -43374,10 +43590,10 @@ function create_else_block_4(ctx) {
 	};
 }
 
-// (757:16) {#if $form.programas_formacion}
+// (914:16) {#if $form.semilleros_investigacion_id}
 function create_if_block_6(ctx) {
 	let ul;
-	let each_value_3 = /*$form*/ ctx[38].programas_formacion;
+	let each_value_3 = /*$form*/ ctx[38].semilleros_investigacion_id;
 	let each_blocks = [];
 
 	for (let i = 0; i < each_value_3.length; i += 1) {
@@ -43403,7 +43619,7 @@ function create_if_block_6(ctx) {
 		},
 		p(ctx, dirty) {
 			if (dirty[1] & /*$form*/ 128) {
-				each_value_3 = /*$form*/ ctx[38].programas_formacion;
+				each_value_3 = /*$form*/ ctx[38].semilleros_investigacion_id;
 				let i;
 
 				for (i = 0; i < each_value_3.length; i += 1) {
@@ -43432,10 +43648,10 @@ function create_if_block_6(ctx) {
 	};
 }
 
-// (759:24) {#each $form.programas_formacion as programaFormacion}
+// (916:24) {#each $form.semilleros_investigacion_id as semilleroInvestigacion}
 function create_each_block_3(ctx) {
 	let li;
-	let t_value = /*programaFormacion*/ ctx[140].label + "";
+	let t_value = /*semilleroInvestigacion*/ ctx[140].label + "";
 	let t;
 
 	return {
@@ -43448,7 +43664,7 @@ function create_each_block_3(ctx) {
 			(0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.append)(li, t);
 		},
 		p(ctx, dirty) {
-			if (dirty[1] & /*$form*/ 128 && t_value !== (t_value = /*programaFormacion*/ ctx[140].label + "")) (0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.set_data)(t, t_value);
+			if (dirty[1] & /*$form*/ 128 && t_value !== (t_value = /*semilleroInvestigacion*/ ctx[140].label + "")) (0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.set_data)(t, t_value);
 		},
 		d(detaching) {
 			if (detaching) (0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.detach)(li);
@@ -43456,7 +43672,7 @@ function create_each_block_3(ctx) {
 	};
 }
 
-// (787:16) {:else}
+// (944:16) {:else}
 function create_else_block_3(ctx) {
 	let p;
 
@@ -43476,10 +43692,10 @@ function create_else_block_3(ctx) {
 	};
 }
 
-// (781:16) {#if JSON.parse($form.cod_proyectos_beneficiados)?.length > 0}
+// (938:16) {#if JSON.parse($form.datos_empresa)?.length > 0}
 function create_if_block_5(ctx) {
 	let ul;
-	let each_value_2 = JSON.parse(/*$form*/ ctx[38].cod_proyectos_beneficiados);
+	let each_value_2 = JSON.parse(/*$form*/ ctx[38].datos_empresa);
 	let each_blocks = [];
 
 	for (let i = 0; i < each_value_2.length; i += 1) {
@@ -43505,7 +43721,7 @@ function create_if_block_5(ctx) {
 		},
 		p(ctx, dirty) {
 			if (dirty[1] & /*$form*/ 128) {
-				each_value_2 = JSON.parse(/*$form*/ ctx[38].cod_proyectos_beneficiados);
+				each_value_2 = JSON.parse(/*$form*/ ctx[38].datos_empresa);
 				let i;
 
 				for (i = 0; i < each_value_2.length; i += 1) {
@@ -43534,10 +43750,10 @@ function create_if_block_5(ctx) {
 	};
 }
 
-// (783:24) {#each JSON.parse($form.cod_proyectos_beneficiados) as codigoProyecto}
+// (940:24) {#each JSON.parse($form.datos_empresa) as empresa}
 function create_each_block_2(ctx) {
 	let li;
-	let t_value = /*codigoProyecto*/ ctx[137].value + "";
+	let t_value = /*empresa*/ ctx[137].value + "";
 	let t;
 
 	return {
@@ -43550,7 +43766,7 @@ function create_each_block_2(ctx) {
 			(0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.append)(li, t);
 		},
 		p(ctx, dirty) {
-			if (dirty[1] & /*$form*/ 128 && t_value !== (t_value = /*codigoProyecto*/ ctx[137].value + "")) (0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.set_data)(t, t_value);
+			if (dirty[1] & /*$form*/ 128 && t_value !== (t_value = /*empresa*/ ctx[137].value + "")) (0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.set_data)(t, t_value);
 		},
 		d(detaching) {
 			if (detaching) (0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.detach)(li);
@@ -43558,7 +43774,7 @@ function create_each_block_2(ctx) {
 	};
 }
 
-// (815:16) {:else}
+// (960:16) {:else}
 function create_else_block_2(ctx) {
 	let p;
 
@@ -43578,10 +43794,10 @@ function create_else_block_2(ctx) {
 	};
 }
 
-// (809:16) {#if JSON.parse($form.datos_empresa)?.length > 0}
+// (954:16) {#if JSON.parse($form.cursos_complementarios)?.length > 0}
 function create_if_block_4(ctx) {
 	let ul;
-	let each_value_1 = JSON.parse(/*$form*/ ctx[38].datos_empresa);
+	let each_value_1 = JSON.parse(/*$form*/ ctx[38].cursos_complementarios);
 	let each_blocks = [];
 
 	for (let i = 0; i < each_value_1.length; i += 1) {
@@ -43607,7 +43823,7 @@ function create_if_block_4(ctx) {
 		},
 		p(ctx, dirty) {
 			if (dirty[1] & /*$form*/ 128) {
-				each_value_1 = JSON.parse(/*$form*/ ctx[38].datos_empresa);
+				each_value_1 = JSON.parse(/*$form*/ ctx[38].cursos_complementarios);
 				let i;
 
 				for (i = 0; i < each_value_1.length; i += 1) {
@@ -43636,10 +43852,10 @@ function create_if_block_4(ctx) {
 	};
 }
 
-// (811:24) {#each JSON.parse($form.datos_empresa) as empresa}
+// (956:24) {#each JSON.parse($form.cursos_complementarios) as curso}
 function create_each_block_1(ctx) {
 	let li;
-	let t_value = /*empresa*/ ctx[134].value + "";
+	let t_value = /*curso*/ ctx[134].value + "";
 	let t;
 
 	return {
@@ -43652,7 +43868,7 @@ function create_each_block_1(ctx) {
 			(0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.append)(li, t);
 		},
 		p(ctx, dirty) {
-			if (dirty[1] & /*$form*/ 128 && t_value !== (t_value = /*empresa*/ ctx[134].value + "")) (0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.set_data)(t, t_value);
+			if (dirty[1] & /*$form*/ 128 && t_value !== (t_value = /*curso*/ ctx[134].value + "")) (0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.set_data)(t, t_value);
 		},
 		d(detaching) {
 			if (detaching) (0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.detach)(li);
@@ -43660,7 +43876,7 @@ function create_each_block_1(ctx) {
 	};
 }
 
-// (891:16) {:else}
+// (1028:16) {:else}
 function create_else_block_1(ctx) {
 	let p;
 
@@ -43680,7 +43896,7 @@ function create_else_block_1(ctx) {
 	};
 }
 
-// (885:16) {#if JSON.parse($form.palabras_clave_ambiente)?.length > 0}
+// (1022:16) {#if JSON.parse($form.palabras_clave_ambiente)?.length > 0}
 function create_if_block_3(ctx) {
 	let ul;
 	let each_value = JSON.parse(/*$form*/ ctx[38].palabras_clave_ambiente);
@@ -43738,7 +43954,7 @@ function create_if_block_3(ctx) {
 	};
 }
 
-// (887:24) {#each JSON.parse($form.palabras_clave_ambiente) as palabraClave}
+// (1024:24) {#each JSON.parse($form.palabras_clave_ambiente) as palabraClave}
 function create_each_block(ctx) {
 	let li;
 	let t_value = /*palabraClave*/ ctx[131].value + "";
@@ -43762,7 +43978,7 @@ function create_each_block(ctx) {
 	};
 }
 
-// (638:12) <Export2Word id="borrador" showButton={false} bind:this={exportComponent}>
+// (759:12) <Export2Word id="borrador" showButton={false} bind:this={exportComponent}>
 function create_default_slot_3(ctx) {
 	let h1;
 	let t1;
@@ -43993,285 +44209,290 @@ function create_default_slot_3(ctx) {
 	let t105;
 	let p25;
 	let t107;
-	let show_if_2;
+	let show_if_3;
 	let t108;
 	let p26;
-	let strong26;
 	let t110;
-
-	let t111_value = (/*$form*/ ctx[38].semilleros_investigacion_id
-	? /*$form*/ ctx[38].semilleros_investigacion_id?.label
-	: 'Sin información registrada') + "";
-
 	let t111;
-	let t112;
 	let p27;
 	let strong27;
-	let t114;
+	let t113;
 
-	let t115_value = (/*$form*/ ctx[38].ambiente_formacion_complementaria
+	let t114_value = (/*$form*/ ctx[38].ambiente_formacion_complementaria
 	? /*$form*/ ctx[38].ambiente_formacion_complementaria?.label
 	: 'Sin información registrada') + "";
 
+	let t114;
 	let t115;
-	let t116;
 	let p28;
 	let strong28;
-	let t118;
+	let t117;
 
-	let t119_value = (/*$form*/ ctx[38].numero_total_cursos_comp
+	let t118_value = (/*$form*/ ctx[38].numero_total_cursos_comp
 	? /*$form*/ ctx[38].numero_total_cursos_comp
 	: 'Sin información registrada') + "";
 
+	let t118;
 	let t119;
-	let t120;
 	let p29;
 	let strong29;
-	let t122;
+	let t121;
 
-	let t123_value = (/*$form*/ ctx[38].numero_cursos_empresas
+	let t122_value = (/*$form*/ ctx[38].numero_cursos_empresas
 	? /*$form*/ ctx[38].numero_cursos_empresas
 	: 'Sin información registrada') + "";
 
+	let t122;
 	let t123;
-	let t124;
 	let p30;
+	let t125;
+	let show_if_2;
 	let t126;
-	let show_if_1;
-	let t127;
 	let p31;
 	let strong31;
-	let t129;
+	let t128;
 
-	let t130_value = (/*$form*/ ctx[38].numero_personas_certificadas
+	let t129_value = (/*$form*/ ctx[38].numero_personas_certificadas
 	? /*$form*/ ctx[38].numero_personas_certificadas
 	: 'Sin información registrada') + "";
 
+	let t129;
 	let t130;
-	let t131;
 	let p32;
-	let strong32;
+	let t132;
+	let show_if_1;
 	let t133;
-
-	let t134_value = (/*$form*/ ctx[38].cursos_complementarios
-	? /*$form*/ ctx[38].cursos_complementarios
-	: 'Sin información registrada') + "";
-
-	let t134;
-	let t135;
 	let p33;
 	let strong33;
-	let t137;
+	let t135;
 
-	let t138_value = (/*$form*/ ctx[38].coordenada_latitud_ambiente
+	let t136_value = (/*$form*/ ctx[38].coordenada_latitud_ambiente
 	? /*$form*/ ctx[38].coordenada_latitud_ambiente
 	: 'Sin información registrada') + "";
 
-	let t138;
-	let t139;
+	let t136;
+	let t137;
 	let p34;
 	let strong34;
-	let t141;
+	let t139;
 
-	let t142_value = (/*$form*/ ctx[38].coordenada_longitud_ambiente
+	let t140_value = (/*$form*/ ctx[38].coordenada_longitud_ambiente
 	? /*$form*/ ctx[38].coordenada_longitud_ambiente
 	: 'Sin información registrada') + "";
 
-	let t142;
-	let t143;
+	let t140;
+	let t141;
 	let p35;
 	let strong35;
-	let t145;
+	let t143;
 
-	let t146_value = (/*$formImpactoProcesosFormacion*/ ctx[41].impacto_procesos_formacion
+	let t144_value = (/*$formImpactoProcesosFormacion*/ ctx[41].impacto_procesos_formacion
 	? /*$formImpactoProcesosFormacion*/ ctx[41].impacto_procesos_formacion
 	: 'Sin información registrada') + "";
 
-	let t146;
-	let t147;
+	let t144;
+	let t145;
 	let p36;
 	let strong36;
-	let t149;
+	let t147;
 
-	let t150_value = (/*$formPertinenciaSectorProductivo*/ ctx[42].pertinencia_sector_productivo
+	let t148_value = (/*$formPertinenciaSectorProductivo*/ ctx[42].pertinencia_sector_productivo
 	? /*$formPertinenciaSectorProductivo*/ ctx[42].pertinencia_sector_productivo
 	: 'Sin información registrada') + "";
 
-	let t150;
-	let t151;
+	let t148;
+	let t149;
 	let p37;
 	let strong37;
-	let t153;
+	let t151;
 
-	let t154_value = (/*$form*/ ctx[38].numero_publicaciones
+	let t152_value = (/*$form*/ ctx[38].numero_publicaciones
 	? /*$form*/ ctx[38].numero_publicaciones
 	: 'Sin información registrada') + "";
 
-	let t154;
-	let t155;
+	let t152;
+	let t153;
 	let p38;
 	let strong38;
-	let t157;
+	let t155;
 
-	let t158_value = (/*$form*/ ctx[38].numero_aprendices_beneficiados
+	let t156_value = (/*$form*/ ctx[38].numero_aprendices_beneficiados
 	? /*$form*/ ctx[38].numero_aprendices_beneficiados
 	: 'Sin información registrada') + "";
 
-	let t158;
-	let t159;
+	let t156;
+	let t157;
 	let p39;
 	let strong39;
-	let t161;
+	let t159;
 
-	let t162_value = (/*$formProductividadBeneficiarios*/ ctx[43].productividad_beneficiarios
+	let t160_value = (/*$formProductividadBeneficiarios*/ ctx[43].productividad_beneficiarios
 	? /*$formProductividadBeneficiarios*/ ctx[43].productividad_beneficiarios
 	: 'Sin información registrada') + "";
 
-	let t162;
-	let t163;
+	let t160;
+	let t161;
 	let p40;
 	let strong40;
-	let t165;
+	let t163;
 
-	let t166_value = (/*$formGeneracionEmpleo*/ ctx[44].generacion_empleo
+	let t164_value = (/*$formGeneracionEmpleo*/ ctx[44].generacion_empleo
 	? /*$formGeneracionEmpleo*/ ctx[44].generacion_empleo
 	: 'Sin información registrada') + "";
 
-	let t166;
-	let t167;
+	let t164;
+	let t165;
 	let p41;
 	let strong41;
-	let t169;
+	let t167;
 
-	let t170_value = (/*$formCreacionEmpresas*/ ctx[45].creacion_empresas
+	let t168_value = (/*$formCreacionEmpresas*/ ctx[45].creacion_empresas
 	? /*$formCreacionEmpresas*/ ctx[45].creacion_empresas
 	: 'Sin información registrada') + "";
 
-	let t170;
-	let t171;
+	let t168;
+	let t169;
 	let p42;
 	let strong42;
-	let t173;
+	let t171;
 
-	let t174_value = (/*$formIncorporacionNuevosConocimientos*/ ctx[46].incorporacion_nuevos_conocimientos
+	let t172_value = (/*$formIncorporacionNuevosConocimientos*/ ctx[46].incorporacion_nuevos_conocimientos
 	? /*$formIncorporacionNuevosConocimientos*/ ctx[46].incorporacion_nuevos_conocimientos
 	: 'Sin información registrada') + "";
 
-	let t174;
-	let t175;
+	let t172;
+	let t173;
 	let p43;
 	let strong43;
-	let t177;
+	let t175;
 
-	let t178_value = (/*$formValorAgregadoEntidades*/ ctx[47].valor_agregado_entidades
+	let t176_value = (/*$formValorAgregadoEntidades*/ ctx[47].valor_agregado_entidades
 	? /*$formValorAgregadoEntidades*/ ctx[47].valor_agregado_entidades
 	: 'Sin información registrada') + "";
 
-	let t178;
-	let t179;
+	let t176;
+	let t177;
 	let p44;
 	let strong44;
-	let t181;
+	let t179;
 
-	let t182_value = (/*$formFortalecimientoProgramasFormacion*/ ctx[48].fortalecimiento_programas_formacion
+	let t180_value = (/*$formFortalecimientoProgramasFormacion*/ ctx[48].fortalecimiento_programas_formacion
 	? /*$formFortalecimientoProgramasFormacion*/ ctx[48].fortalecimiento_programas_formacion
 	: 'Sin información registrada') + "";
 
-	let t182;
-	let t183;
+	let t180;
+	let t181;
 	let p45;
 	let strong45;
-	let t185;
+	let t183;
 
-	let t186_value = (/*$formTransferenciaTecnologias*/ ctx[49].transferencia_tecnologias
+	let t184_value = (/*$formTransferenciaTecnologias*/ ctx[49].transferencia_tecnologias
 	? /*$formTransferenciaTecnologias*/ ctx[49].transferencia_tecnologias
 	: 'Sin información registrada') + "";
 
-	let t186;
-	let t187;
+	let t184;
+	let t185;
 	let p46;
 	let strong46;
-	let t189;
+	let t187;
 
-	let t190_value = (/*$formCoberturaPerntinenciaFormacion*/ ctx[50].cobertura_perntinencia_formacion
+	let t188_value = (/*$formCoberturaPerntinenciaFormacion*/ ctx[50].cobertura_perntinencia_formacion
 	? /*$formCoberturaPerntinenciaFormacion*/ ctx[50].cobertura_perntinencia_formacion
 	: 'Sin información registrada') + "";
 
-	let t190;
-	let t191;
+	let t188;
+	let t189;
 	let p47;
-	let t193;
+	let t191;
 	let show_if;
-	let t194;
+	let t192;
 	let p48;
 	let strong48;
-	let t196;
+	let t194;
 
-	let t197_value = (/*$formObservacionesGeneralesAmbiente*/ ctx[51].observaciones_generales_ambiente
+	let t195_value = (/*$formObservacionesGeneralesAmbiente*/ ctx[51].observaciones_generales_ambiente
 	? /*$formObservacionesGeneralesAmbiente*/ ctx[51].observaciones_generales_ambiente
 	: 'Sin información registrada') + "";
 
-	let t197;
-	let each_value_6 = /*$form*/ ctx[38].mesa_sectorial_id;
+	let t195;
+	let each_value_8 = /*$form*/ ctx[38].mesa_sectorial_id;
 	let each_blocks = [];
 
-	for (let i = 0; i < each_value_6.length; i += 1) {
-		each_blocks[i] = create_each_block_6(get_each_context_6(ctx, each_value_6, i));
+	for (let i = 0; i < each_value_8.length; i += 1) {
+		each_blocks[i] = create_each_block_8(get_each_context_8(ctx, each_value_8, i));
 	}
 
 	function select_block_type_3(ctx, dirty) {
-		if (/*$form*/ ctx[38].codigos_proyectos_id) return create_if_block_8;
-		return create_else_block_6;
+		if (/*$form*/ ctx[38].codigos_proyectos_id) return create_if_block_10;
+		return create_else_block_8;
 	}
 
 	let current_block_type = select_block_type_3(ctx, [-1, -1, -1, -1, -1, -1]);
 	let if_block0 = current_block_type(ctx);
 
 	function select_block_type_4(ctx, dirty) {
-		if (/*$form*/ ctx[38].programas_formacion_calificados) return create_if_block_7;
-		return create_else_block_5;
+		if (/*$form*/ ctx[38].programas_formacion_calificados) return create_if_block_9;
+		return create_else_block_7;
 	}
 
 	let current_block_type_1 = select_block_type_4(ctx, [-1, -1, -1, -1, -1, -1]);
 	let if_block1 = current_block_type_1(ctx);
 
 	function select_block_type_5(ctx, dirty) {
-		if (/*$form*/ ctx[38].programas_formacion) return create_if_block_6;
-		return create_else_block_4;
+		if (/*$form*/ ctx[38].programas_formacion) return create_if_block_8;
+		return create_else_block_6;
 	}
 
 	let current_block_type_2 = select_block_type_5(ctx, [-1, -1, -1, -1, -1, -1]);
 	let if_block2 = current_block_type_2(ctx);
 
 	function select_block_type_6(ctx, dirty) {
-		if (dirty[1] & /*$form*/ 128) show_if_2 = null;
-		if (show_if_2 == null) show_if_2 = !!(JSON.parse(/*$form*/ ctx[38].cod_proyectos_beneficiados)?.length > 0);
-		if (show_if_2) return create_if_block_5;
-		return create_else_block_3;
+		if (dirty[1] & /*$form*/ 128) show_if_3 = null;
+		if (show_if_3 == null) show_if_3 = !!(JSON.parse(/*$form*/ ctx[38].cod_proyectos_beneficiados)?.length > 0);
+		if (show_if_3) return create_if_block_7;
+		return create_else_block_5;
 	}
 
 	let current_block_type_3 = select_block_type_6(ctx, [-1, -1, -1, -1, -1, -1]);
 	let if_block3 = current_block_type_3(ctx);
 
 	function select_block_type_7(ctx, dirty) {
-		if (dirty[1] & /*$form*/ 128) show_if_1 = null;
-		if (show_if_1 == null) show_if_1 = !!(JSON.parse(/*$form*/ ctx[38].datos_empresa)?.length > 0);
-		if (show_if_1) return create_if_block_4;
-		return create_else_block_2;
+		if (/*$form*/ ctx[38].semilleros_investigacion_id) return create_if_block_6;
+		return create_else_block_4;
 	}
 
 	let current_block_type_4 = select_block_type_7(ctx, [-1, -1, -1, -1, -1, -1]);
 	let if_block4 = current_block_type_4(ctx);
 
 	function select_block_type_8(ctx, dirty) {
+		if (dirty[1] & /*$form*/ 128) show_if_2 = null;
+		if (show_if_2 == null) show_if_2 = !!(JSON.parse(/*$form*/ ctx[38].datos_empresa)?.length > 0);
+		if (show_if_2) return create_if_block_5;
+		return create_else_block_3;
+	}
+
+	let current_block_type_5 = select_block_type_8(ctx, [-1, -1, -1, -1, -1, -1]);
+	let if_block5 = current_block_type_5(ctx);
+
+	function select_block_type_9(ctx, dirty) {
+		if (dirty[1] & /*$form*/ 128) show_if_1 = null;
+		if (show_if_1 == null) show_if_1 = !!(JSON.parse(/*$form*/ ctx[38].cursos_complementarios)?.length > 0);
+		if (show_if_1) return create_if_block_4;
+		return create_else_block_2;
+	}
+
+	let current_block_type_6 = select_block_type_9(ctx, [-1, -1, -1, -1, -1, -1]);
+	let if_block6 = current_block_type_6(ctx);
+
+	function select_block_type_10(ctx, dirty) {
 		if (dirty[1] & /*$form*/ 128) show_if = null;
 		if (show_if == null) show_if = !!(JSON.parse(/*$form*/ ctx[38].palabras_clave_ambiente)?.length > 0);
 		if (show_if) return create_if_block_3;
 		return create_else_block_1;
 	}
 
-	let current_block_type_5 = select_block_type_8(ctx, [-1, -1, -1, -1, -1, -1]);
-	let if_block5 = current_block_type_5(ctx);
+	let current_block_type_7 = select_block_type_10(ctx, [-1, -1, -1, -1, -1, -1]);
+	let if_block7 = current_block_type_7(ctx);
 
 	return {
 		c() {
@@ -44446,140 +44667,138 @@ function create_default_slot_3(ctx) {
 			if_block3.c();
 			t108 = (0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.space)();
 			p26 = (0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.element)("p");
-			strong26 = (0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.element)("strong");
-			strong26.textContent = "Si la respuesta anterior fue afirmativa, relacione los semilleros de investigación beneficiados con el ambiente modernizado por Sennova:";
+			p26.innerHTML = `<strong>Si la respuesta anterior fue afirmativa, relacione los semilleros de investigación beneficiados con el ambiente modernizado por Sennova:</strong>`;
 			t110 = (0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.space)();
-			t111 = (0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.text)(t111_value);
-			t112 = (0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.space)();
+			if_block4.c();
+			t111 = (0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.space)();
 			p27 = (0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.element)("p");
 			strong27 = (0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.element)("strong");
 			strong27.textContent = "17. ¿El ambiente de formación ha generado formación complementaria después de la modernización con Sennova?";
-			t114 = (0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.space)();
-			t115 = (0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.text)(t115_value);
-			t116 = (0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.space)();
+			t113 = (0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.space)();
+			t114 = (0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.text)(t114_value);
+			t115 = (0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.space)();
 			p28 = (0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.element)("p");
 			strong28 = (0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.element)("strong");
 			strong28.textContent = "Si la respuesta anterior fue afirmativa, relacione el número total de cursos complementarios que se ha brindado formación complementaria:";
-			t118 = (0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.space)();
-			t119 = (0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.text)(t119_value);
-			t120 = (0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.space)();
+			t117 = (0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.space)();
+			t118 = (0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.text)(t118_value);
+			t119 = (0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.space)();
 			p29 = (0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.element)("p");
 			strong29 = (0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.element)("strong");
 			strong29.textContent = "Si la respuesta anterior fue afirmativa, relacione el número de cursos complementarios a empresas que se ha brindado formación complementaria:";
-			t122 = (0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.space)();
-			t123 = (0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.text)(t123_value);
-			t124 = (0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.space)();
+			t121 = (0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.space)();
+			t122 = (0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.text)(t122_value);
+			t123 = (0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.space)();
 			p30 = (0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.element)("p");
 			p30.innerHTML = `<strong>Si la respuesta anterior fue afirmativa, relacione el NIT y nombre de las empresas (cuando aplique) que se ha brindada formación complementaria:</strong>`;
+			t125 = (0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.space)();
+			if_block5.c();
 			t126 = (0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.space)();
-			if_block4.c();
-			t127 = (0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.space)();
 			p31 = (0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.element)("p");
 			strong31 = (0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.element)("strong");
 			strong31.textContent = "Si la respuesta anterior fue afirmativa, relacione el número total de personas certificadas de las empresas que se ha brindado formación complementaria:";
-			t129 = (0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.space)();
-			t130 = (0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.text)(t130_value);
-			t131 = (0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.space)();
+			t128 = (0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.space)();
+			t129 = (0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.text)(t129_value);
+			t130 = (0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.space)();
 			p32 = (0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.element)("p");
-			strong32 = (0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.element)("strong");
-			strong32.textContent = "Si la respuesta anterior fue afirmativa, relacione los códigos y nombres Sena de cada curso de formación complementario:";
+			p32.innerHTML = `<strong>Si la respuesta anterior fue afirmativa, relacione los códigos y nombres Sena de cada curso de formación complementario:</strong>`;
+			t132 = (0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.space)();
+			if_block6.c();
 			t133 = (0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.space)();
-			t134 = (0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.text)(t134_value);
-			t135 = (0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.space)();
 			p33 = (0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.element)("p");
 			strong33 = (0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.element)("strong");
 			strong33.textContent = "18. Diligencie la coordenada latitud (W) del ambiente de formación modernizado por Sennova (generado en Google maps). Ejemplo: -74.062916:";
+			t135 = (0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.space)();
+			t136 = (0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.text)(t136_value);
 			t137 = (0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.space)();
-			t138 = (0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.text)(t138_value);
-			t139 = (0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.space)();
 			p34 = (0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.element)("p");
 			strong34 = (0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.element)("strong");
 			strong34.textContent = "19. Diligencie la coordenada longitud (N) del ambiente de formación modernizado por Sennova (generado en Google maps). Ejemplo: 4.643244:";
+			t139 = (0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.space)();
+			t140 = (0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.text)(t140_value);
 			t141 = (0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.space)();
-			t142 = (0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.text)(t142_value);
-			t143 = (0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.space)();
 			p35 = (0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.element)("p");
 			strong35 = (0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.element)("strong");
 			strong35.textContent = "20. Describa el impacto generado en los procesos de formación:";
+			t143 = (0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.space)();
+			t144 = (0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.text)(t144_value);
 			t145 = (0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.space)();
-			t146 = (0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.text)(t146_value);
-			t147 = (0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.space)();
 			p36 = (0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.element)("p");
 			strong36 = (0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.element)("strong");
 			strong36.textContent = "21. Describa la pertinencia obtenida con el sector productivo:";
+			t147 = (0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.space)();
+			t148 = (0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.text)(t148_value);
 			t149 = (0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.space)();
-			t150 = (0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.text)(t150_value);
-			t151 = (0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.space)();
 			p37 = (0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.element)("p");
 			strong37 = (0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.element)("strong");
 			strong37.textContent = "22. Relacione el número de publicaciones derivadas con el ambiente de aprendizaje después de ejecutar el proyecto de modernización SENNOVA:";
+			t151 = (0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.space)();
+			t152 = (0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.text)(t152_value);
 			t153 = (0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.space)();
-			t154 = (0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.text)(t154_value);
-			t155 = (0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.space)();
 			p38 = (0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.element)("p");
 			strong38 = (0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.element)("strong");
 			strong38.textContent = "23. Relacione el número de aprendices beneficiados con el ambiente de aprendizaje después de ejecutar el proyecto de modernización SENNOVA:";
+			t155 = (0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.space)();
+			t156 = (0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.text)(t156_value);
 			t157 = (0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.space)();
-			t158 = (0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.text)(t158_value);
-			t159 = (0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.space)();
 			p39 = (0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.element)("p");
 			strong39 = (0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.element)("strong");
 			strong39.textContent = "24. Productividad y competitividad del (los) beneficiario(s) final(es) del proyecto:";
+			t159 = (0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.space)();
+			t160 = (0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.text)(t160_value);
 			t161 = (0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.space)();
-			t162 = (0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.text)(t162_value);
-			t163 = (0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.space)();
 			p40 = (0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.element)("p");
 			strong40 = (0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.element)("strong");
 			strong40.textContent = "25. Generación o mantenimiento de empleo por parte del (los) beneficiario(s) del proyecto:";
+			t163 = (0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.space)();
+			t164 = (0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.text)(t164_value);
 			t165 = (0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.space)();
-			t166 = (0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.text)(t166_value);
-			t167 = (0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.space)();
 			p41 = (0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.element)("p");
 			strong41 = (0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.element)("strong");
 			strong41.textContent = "26. Creación de nuevas empresas y diseño y desarrollo de nuevos productos, procesos o servicios:";
+			t167 = (0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.space)();
+			t168 = (0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.text)(t168_value);
 			t169 = (0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.space)();
-			t170 = (0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.text)(t170_value);
-			t171 = (0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.space)();
 			p42 = (0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.element)("p");
 			strong42 = (0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.element)("strong");
 			strong42.textContent = "27. Incorporación de nuevos conocimientos y competencias laborales en el talento humano en la(s) empresa(s) beneficiaria(s) del proyecto:";
+			t171 = (0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.space)();
+			t172 = (0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.text)(t172_value);
 			t173 = (0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.space)();
-			t174 = (0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.text)(t174_value);
-			t175 = (0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.space)();
 			p43 = (0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.element)("p");
 			strong43 = (0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.element)("strong");
 			strong43.textContent = "28. Generación de valor agregado en la(s) entidad(es) beneficiaria(s) del proyecto:";
+			t175 = (0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.space)();
+			t176 = (0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.text)(t176_value);
 			t177 = (0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.space)();
-			t178 = (0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.text)(t178_value);
-			t179 = (0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.space)();
 			p44 = (0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.element)("p");
 			strong44 = (0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.element)("strong");
 			strong44.textContent = "29. Fortalecimiento de programas de formación del Sena:";
+			t179 = (0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.space)();
+			t180 = (0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.text)(t180_value);
 			t181 = (0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.space)();
-			t182 = (0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.text)(t182_value);
-			t183 = (0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.space)();
 			p45 = (0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.element)("p");
 			strong45 = (0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.element)("strong");
 			strong45.textContent = "30. Transferencia de tecnologías al Sena y a los sectores productivos relacionados:";
+			t183 = (0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.space)();
+			t184 = (0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.text)(t184_value);
 			t185 = (0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.space)();
-			t186 = (0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.text)(t186_value);
-			t187 = (0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.space)();
 			p46 = (0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.element)("p");
 			strong46 = (0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.element)("strong");
 			strong46.textContent = "31. Cobertura, calidad y pertinencia de la formación:";
+			t187 = (0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.space)();
+			t188 = (0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.text)(t188_value);
 			t189 = (0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.space)();
-			t190 = (0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.text)(t190_value);
-			t191 = (0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.space)();
 			p47 = (0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.element)("p");
 			p47.innerHTML = `<strong>32. Palabras claves relacionadas con el ambiente de formación modernizado por Sennova:</strong>`;
-			t193 = (0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.space)();
-			if_block5.c();
-			t194 = (0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.space)();
+			t191 = (0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.space)();
+			if_block7.c();
+			t192 = (0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.space)();
 			p48 = (0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.element)("p");
 			strong48 = (0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.element)("strong");
 			strong48.textContent = "33. Observaciones generales del ambiente modernizado por Sennova:";
-			t196 = (0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.space)();
-			t197 = (0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.text)(t197_value);
+			t194 = (0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.space)();
+			t195 = (0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.text)(t195_value);
 			(0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.attr)(h1, "class", "font-black text-center my-10");
 			(0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.attr)(p0, "class", "capitalize");
 			(0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.set_style)(p0, "white-space", "pre-line");
@@ -44631,7 +44850,6 @@ function create_default_slot_3(ctx) {
 			(0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.set_style)(p24, "margin-bottom", "4rem");
 			(0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.set_style)(p25, "white-space", "pre-line");
 			(0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.set_style)(p26, "white-space", "pre-line");
-			(0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.set_style)(p26, "margin-bottom", "4rem");
 			(0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.set_style)(p27, "white-space", "pre-line");
 			(0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.set_style)(p27, "margin-bottom", "4rem");
 			(0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.set_style)(p28, "white-space", "pre-line");
@@ -44642,7 +44860,6 @@ function create_default_slot_3(ctx) {
 			(0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.set_style)(p31, "white-space", "pre-line");
 			(0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.set_style)(p31, "margin-bottom", "4rem");
 			(0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.set_style)(p32, "white-space", "pre-line");
-			(0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.set_style)(p32, "margin-bottom", "4rem");
 			(0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.set_style)(p33, "white-space", "pre-line");
 			(0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.set_style)(p33, "margin-bottom", "4rem");
 			(0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.set_style)(p34, "white-space", "pre-line");
@@ -44820,117 +45037,115 @@ function create_default_slot_3(ctx) {
 			if_block3.m(target, anchor);
 			(0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.insert)(target, t108, anchor);
 			(0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.insert)(target, p26, anchor);
-			(0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.append)(p26, strong26);
-			(0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.append)(p26, t110);
-			(0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.append)(p26, t111);
-			(0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.insert)(target, t112, anchor);
+			(0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.insert)(target, t110, anchor);
+			if_block4.m(target, anchor);
+			(0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.insert)(target, t111, anchor);
 			(0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.insert)(target, p27, anchor);
 			(0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.append)(p27, strong27);
+			(0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.append)(p27, t113);
 			(0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.append)(p27, t114);
-			(0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.append)(p27, t115);
-			(0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.insert)(target, t116, anchor);
+			(0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.insert)(target, t115, anchor);
 			(0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.insert)(target, p28, anchor);
 			(0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.append)(p28, strong28);
+			(0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.append)(p28, t117);
 			(0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.append)(p28, t118);
-			(0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.append)(p28, t119);
-			(0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.insert)(target, t120, anchor);
+			(0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.insert)(target, t119, anchor);
 			(0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.insert)(target, p29, anchor);
 			(0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.append)(p29, strong29);
+			(0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.append)(p29, t121);
 			(0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.append)(p29, t122);
-			(0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.append)(p29, t123);
-			(0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.insert)(target, t124, anchor);
+			(0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.insert)(target, t123, anchor);
 			(0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.insert)(target, p30, anchor);
+			(0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.insert)(target, t125, anchor);
+			if_block5.m(target, anchor);
 			(0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.insert)(target, t126, anchor);
-			if_block4.m(target, anchor);
-			(0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.insert)(target, t127, anchor);
 			(0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.insert)(target, p31, anchor);
 			(0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.append)(p31, strong31);
+			(0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.append)(p31, t128);
 			(0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.append)(p31, t129);
-			(0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.append)(p31, t130);
-			(0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.insert)(target, t131, anchor);
+			(0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.insert)(target, t130, anchor);
 			(0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.insert)(target, p32, anchor);
-			(0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.append)(p32, strong32);
-			(0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.append)(p32, t133);
-			(0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.append)(p32, t134);
-			(0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.insert)(target, t135, anchor);
+			(0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.insert)(target, t132, anchor);
+			if_block6.m(target, anchor);
+			(0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.insert)(target, t133, anchor);
 			(0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.insert)(target, p33, anchor);
 			(0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.append)(p33, strong33);
-			(0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.append)(p33, t137);
-			(0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.append)(p33, t138);
-			(0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.insert)(target, t139, anchor);
+			(0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.append)(p33, t135);
+			(0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.append)(p33, t136);
+			(0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.insert)(target, t137, anchor);
 			(0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.insert)(target, p34, anchor);
 			(0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.append)(p34, strong34);
-			(0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.append)(p34, t141);
-			(0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.append)(p34, t142);
-			(0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.insert)(target, t143, anchor);
+			(0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.append)(p34, t139);
+			(0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.append)(p34, t140);
+			(0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.insert)(target, t141, anchor);
 			(0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.insert)(target, p35, anchor);
 			(0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.append)(p35, strong35);
-			(0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.append)(p35, t145);
-			(0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.append)(p35, t146);
-			(0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.insert)(target, t147, anchor);
+			(0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.append)(p35, t143);
+			(0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.append)(p35, t144);
+			(0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.insert)(target, t145, anchor);
 			(0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.insert)(target, p36, anchor);
 			(0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.append)(p36, strong36);
-			(0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.append)(p36, t149);
-			(0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.append)(p36, t150);
-			(0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.insert)(target, t151, anchor);
+			(0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.append)(p36, t147);
+			(0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.append)(p36, t148);
+			(0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.insert)(target, t149, anchor);
 			(0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.insert)(target, p37, anchor);
 			(0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.append)(p37, strong37);
-			(0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.append)(p37, t153);
-			(0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.append)(p37, t154);
-			(0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.insert)(target, t155, anchor);
+			(0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.append)(p37, t151);
+			(0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.append)(p37, t152);
+			(0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.insert)(target, t153, anchor);
 			(0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.insert)(target, p38, anchor);
 			(0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.append)(p38, strong38);
-			(0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.append)(p38, t157);
-			(0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.append)(p38, t158);
-			(0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.insert)(target, t159, anchor);
+			(0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.append)(p38, t155);
+			(0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.append)(p38, t156);
+			(0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.insert)(target, t157, anchor);
 			(0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.insert)(target, p39, anchor);
 			(0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.append)(p39, strong39);
-			(0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.append)(p39, t161);
-			(0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.append)(p39, t162);
-			(0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.insert)(target, t163, anchor);
+			(0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.append)(p39, t159);
+			(0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.append)(p39, t160);
+			(0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.insert)(target, t161, anchor);
 			(0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.insert)(target, p40, anchor);
 			(0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.append)(p40, strong40);
-			(0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.append)(p40, t165);
-			(0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.append)(p40, t166);
-			(0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.insert)(target, t167, anchor);
+			(0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.append)(p40, t163);
+			(0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.append)(p40, t164);
+			(0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.insert)(target, t165, anchor);
 			(0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.insert)(target, p41, anchor);
 			(0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.append)(p41, strong41);
-			(0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.append)(p41, t169);
-			(0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.append)(p41, t170);
-			(0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.insert)(target, t171, anchor);
+			(0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.append)(p41, t167);
+			(0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.append)(p41, t168);
+			(0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.insert)(target, t169, anchor);
 			(0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.insert)(target, p42, anchor);
 			(0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.append)(p42, strong42);
-			(0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.append)(p42, t173);
-			(0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.append)(p42, t174);
-			(0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.insert)(target, t175, anchor);
+			(0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.append)(p42, t171);
+			(0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.append)(p42, t172);
+			(0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.insert)(target, t173, anchor);
 			(0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.insert)(target, p43, anchor);
 			(0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.append)(p43, strong43);
-			(0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.append)(p43, t177);
-			(0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.append)(p43, t178);
-			(0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.insert)(target, t179, anchor);
+			(0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.append)(p43, t175);
+			(0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.append)(p43, t176);
+			(0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.insert)(target, t177, anchor);
 			(0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.insert)(target, p44, anchor);
 			(0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.append)(p44, strong44);
-			(0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.append)(p44, t181);
-			(0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.append)(p44, t182);
-			(0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.insert)(target, t183, anchor);
+			(0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.append)(p44, t179);
+			(0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.append)(p44, t180);
+			(0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.insert)(target, t181, anchor);
 			(0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.insert)(target, p45, anchor);
 			(0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.append)(p45, strong45);
-			(0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.append)(p45, t185);
-			(0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.append)(p45, t186);
-			(0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.insert)(target, t187, anchor);
+			(0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.append)(p45, t183);
+			(0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.append)(p45, t184);
+			(0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.insert)(target, t185, anchor);
 			(0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.insert)(target, p46, anchor);
 			(0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.append)(p46, strong46);
-			(0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.append)(p46, t189);
-			(0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.append)(p46, t190);
-			(0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.insert)(target, t191, anchor);
+			(0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.append)(p46, t187);
+			(0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.append)(p46, t188);
+			(0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.insert)(target, t189, anchor);
 			(0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.insert)(target, p47, anchor);
-			(0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.insert)(target, t193, anchor);
-			if_block5.m(target, anchor);
-			(0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.insert)(target, t194, anchor);
+			(0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.insert)(target, t191, anchor);
+			if_block7.m(target, anchor);
+			(0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.insert)(target, t192, anchor);
 			(0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.insert)(target, p48, anchor);
 			(0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.append)(p48, strong48);
-			(0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.append)(p48, t196);
-			(0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.append)(p48, t197);
+			(0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.append)(p48, t194);
+			(0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.append)(p48, t195);
 		},
 		p(ctx, dirty) {
 			if (dirty[0] & /*ambienteModernizacion*/ 262144 && t4_value !== (t4_value = /*ambienteModernizacion*/ ctx[18]?.seguimiento_ambiente_modernizacion.centro_formacion.regional.nombre + "")) (0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.set_data)(t4, t4_value);
@@ -44981,16 +45196,16 @@ function create_default_slot_3(ctx) {
 			: 'Sin información registrada') + "")) (0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.set_data)(t62, t62_value);
 
 			if (dirty[1] & /*$form*/ 128) {
-				each_value_6 = /*$form*/ ctx[38].mesa_sectorial_id;
+				each_value_8 = /*$form*/ ctx[38].mesa_sectorial_id;
 				let i;
 
-				for (i = 0; i < each_value_6.length; i += 1) {
-					const child_ctx = get_each_context_6(ctx, each_value_6, i);
+				for (i = 0; i < each_value_8.length; i += 1) {
+					const child_ctx = get_each_context_8(ctx, each_value_8, i);
 
 					if (each_blocks[i]) {
 						each_blocks[i].p(child_ctx, dirty);
 					} else {
-						each_blocks[i] = create_each_block_6(child_ctx);
+						each_blocks[i] = create_each_block_8(child_ctx);
 						each_blocks[i].c();
 						each_blocks[i].m(ul, null);
 					}
@@ -45000,7 +45215,7 @@ function create_default_slot_3(ctx) {
 					each_blocks[i].d(1);
 				}
 
-				each_blocks.length = each_value_6.length;
+				each_blocks.length = each_value_8.length;
 			}
 
 			if (dirty[1] & /*$form*/ 128 && t67_value !== (t67_value = (/*$form*/ ctx[38].financiado_anteriormente
@@ -45083,22 +45298,6 @@ function create_default_slot_3(ctx) {
 				}
 			}
 
-			if (dirty[1] & /*$form*/ 128 && t111_value !== (t111_value = (/*$form*/ ctx[38].semilleros_investigacion_id
-			? /*$form*/ ctx[38].semilleros_investigacion_id?.label
-			: 'Sin información registrada') + "")) (0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.set_data)(t111, t111_value);
-
-			if (dirty[1] & /*$form*/ 128 && t115_value !== (t115_value = (/*$form*/ ctx[38].ambiente_formacion_complementaria
-			? /*$form*/ ctx[38].ambiente_formacion_complementaria?.label
-			: 'Sin información registrada') + "")) (0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.set_data)(t115, t115_value);
-
-			if (dirty[1] & /*$form*/ 128 && t119_value !== (t119_value = (/*$form*/ ctx[38].numero_total_cursos_comp
-			? /*$form*/ ctx[38].numero_total_cursos_comp
-			: 'Sin información registrada') + "")) (0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.set_data)(t119, t119_value);
-
-			if (dirty[1] & /*$form*/ 128 && t123_value !== (t123_value = (/*$form*/ ctx[38].numero_cursos_empresas
-			? /*$form*/ ctx[38].numero_cursos_empresas
-			: 'Sin información registrada') + "")) (0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.set_data)(t123, t123_value);
-
 			if (current_block_type_4 === (current_block_type_4 = select_block_type_7(ctx, dirty)) && if_block4) {
 				if_block4.p(ctx, dirty);
 			} else {
@@ -45107,73 +45306,21 @@ function create_default_slot_3(ctx) {
 
 				if (if_block4) {
 					if_block4.c();
-					if_block4.m(t127.parentNode, t127);
+					if_block4.m(t111.parentNode, t111);
 				}
 			}
 
-			if (dirty[1] & /*$form*/ 128 && t130_value !== (t130_value = (/*$form*/ ctx[38].numero_personas_certificadas
-			? /*$form*/ ctx[38].numero_personas_certificadas
-			: 'Sin información registrada') + "")) (0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.set_data)(t130, t130_value);
+			if (dirty[1] & /*$form*/ 128 && t114_value !== (t114_value = (/*$form*/ ctx[38].ambiente_formacion_complementaria
+			? /*$form*/ ctx[38].ambiente_formacion_complementaria?.label
+			: 'Sin información registrada') + "")) (0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.set_data)(t114, t114_value);
 
-			if (dirty[1] & /*$form*/ 128 && t134_value !== (t134_value = (/*$form*/ ctx[38].cursos_complementarios
-			? /*$form*/ ctx[38].cursos_complementarios
-			: 'Sin información registrada') + "")) (0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.set_data)(t134, t134_value);
+			if (dirty[1] & /*$form*/ 128 && t118_value !== (t118_value = (/*$form*/ ctx[38].numero_total_cursos_comp
+			? /*$form*/ ctx[38].numero_total_cursos_comp
+			: 'Sin información registrada') + "")) (0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.set_data)(t118, t118_value);
 
-			if (dirty[1] & /*$form*/ 128 && t138_value !== (t138_value = (/*$form*/ ctx[38].coordenada_latitud_ambiente
-			? /*$form*/ ctx[38].coordenada_latitud_ambiente
-			: 'Sin información registrada') + "")) (0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.set_data)(t138, t138_value);
-
-			if (dirty[1] & /*$form*/ 128 && t142_value !== (t142_value = (/*$form*/ ctx[38].coordenada_longitud_ambiente
-			? /*$form*/ ctx[38].coordenada_longitud_ambiente
-			: 'Sin información registrada') + "")) (0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.set_data)(t142, t142_value);
-
-			if (dirty[1] & /*$formImpactoProcesosFormacion*/ 1024 && t146_value !== (t146_value = (/*$formImpactoProcesosFormacion*/ ctx[41].impacto_procesos_formacion
-			? /*$formImpactoProcesosFormacion*/ ctx[41].impacto_procesos_formacion
-			: 'Sin información registrada') + "")) (0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.set_data)(t146, t146_value);
-
-			if (dirty[1] & /*$formPertinenciaSectorProductivo*/ 2048 && t150_value !== (t150_value = (/*$formPertinenciaSectorProductivo*/ ctx[42].pertinencia_sector_productivo
-			? /*$formPertinenciaSectorProductivo*/ ctx[42].pertinencia_sector_productivo
-			: 'Sin información registrada') + "")) (0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.set_data)(t150, t150_value);
-
-			if (dirty[1] & /*$form*/ 128 && t154_value !== (t154_value = (/*$form*/ ctx[38].numero_publicaciones
-			? /*$form*/ ctx[38].numero_publicaciones
-			: 'Sin información registrada') + "")) (0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.set_data)(t154, t154_value);
-
-			if (dirty[1] & /*$form*/ 128 && t158_value !== (t158_value = (/*$form*/ ctx[38].numero_aprendices_beneficiados
-			? /*$form*/ ctx[38].numero_aprendices_beneficiados
-			: 'Sin información registrada') + "")) (0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.set_data)(t158, t158_value);
-
-			if (dirty[1] & /*$formProductividadBeneficiarios*/ 4096 && t162_value !== (t162_value = (/*$formProductividadBeneficiarios*/ ctx[43].productividad_beneficiarios
-			? /*$formProductividadBeneficiarios*/ ctx[43].productividad_beneficiarios
-			: 'Sin información registrada') + "")) (0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.set_data)(t162, t162_value);
-
-			if (dirty[1] & /*$formGeneracionEmpleo*/ 8192 && t166_value !== (t166_value = (/*$formGeneracionEmpleo*/ ctx[44].generacion_empleo
-			? /*$formGeneracionEmpleo*/ ctx[44].generacion_empleo
-			: 'Sin información registrada') + "")) (0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.set_data)(t166, t166_value);
-
-			if (dirty[1] & /*$formCreacionEmpresas*/ 16384 && t170_value !== (t170_value = (/*$formCreacionEmpresas*/ ctx[45].creacion_empresas
-			? /*$formCreacionEmpresas*/ ctx[45].creacion_empresas
-			: 'Sin información registrada') + "")) (0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.set_data)(t170, t170_value);
-
-			if (dirty[1] & /*$formIncorporacionNuevosConocimientos*/ 32768 && t174_value !== (t174_value = (/*$formIncorporacionNuevosConocimientos*/ ctx[46].incorporacion_nuevos_conocimientos
-			? /*$formIncorporacionNuevosConocimientos*/ ctx[46].incorporacion_nuevos_conocimientos
-			: 'Sin información registrada') + "")) (0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.set_data)(t174, t174_value);
-
-			if (dirty[1] & /*$formValorAgregadoEntidades*/ 65536 && t178_value !== (t178_value = (/*$formValorAgregadoEntidades*/ ctx[47].valor_agregado_entidades
-			? /*$formValorAgregadoEntidades*/ ctx[47].valor_agregado_entidades
-			: 'Sin información registrada') + "")) (0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.set_data)(t178, t178_value);
-
-			if (dirty[1] & /*$formFortalecimientoProgramasFormacion*/ 131072 && t182_value !== (t182_value = (/*$formFortalecimientoProgramasFormacion*/ ctx[48].fortalecimiento_programas_formacion
-			? /*$formFortalecimientoProgramasFormacion*/ ctx[48].fortalecimiento_programas_formacion
-			: 'Sin información registrada') + "")) (0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.set_data)(t182, t182_value);
-
-			if (dirty[1] & /*$formTransferenciaTecnologias*/ 262144 && t186_value !== (t186_value = (/*$formTransferenciaTecnologias*/ ctx[49].transferencia_tecnologias
-			? /*$formTransferenciaTecnologias*/ ctx[49].transferencia_tecnologias
-			: 'Sin información registrada') + "")) (0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.set_data)(t186, t186_value);
-
-			if (dirty[1] & /*$formCoberturaPerntinenciaFormacion*/ 524288 && t190_value !== (t190_value = (/*$formCoberturaPerntinenciaFormacion*/ ctx[50].cobertura_perntinencia_formacion
-			? /*$formCoberturaPerntinenciaFormacion*/ ctx[50].cobertura_perntinencia_formacion
-			: 'Sin información registrada') + "")) (0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.set_data)(t190, t190_value);
+			if (dirty[1] & /*$form*/ 128 && t122_value !== (t122_value = (/*$form*/ ctx[38].numero_cursos_empresas
+			? /*$form*/ ctx[38].numero_cursos_empresas
+			: 'Sin información registrada') + "")) (0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.set_data)(t122, t122_value);
 
 			if (current_block_type_5 === (current_block_type_5 = select_block_type_8(ctx, dirty)) && if_block5) {
 				if_block5.p(ctx, dirty);
@@ -45183,13 +45330,97 @@ function create_default_slot_3(ctx) {
 
 				if (if_block5) {
 					if_block5.c();
-					if_block5.m(t194.parentNode, t194);
+					if_block5.m(t126.parentNode, t126);
 				}
 			}
 
-			if (dirty[1] & /*$formObservacionesGeneralesAmbiente*/ 1048576 && t197_value !== (t197_value = (/*$formObservacionesGeneralesAmbiente*/ ctx[51].observaciones_generales_ambiente
+			if (dirty[1] & /*$form*/ 128 && t129_value !== (t129_value = (/*$form*/ ctx[38].numero_personas_certificadas
+			? /*$form*/ ctx[38].numero_personas_certificadas
+			: 'Sin información registrada') + "")) (0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.set_data)(t129, t129_value);
+
+			if (current_block_type_6 === (current_block_type_6 = select_block_type_9(ctx, dirty)) && if_block6) {
+				if_block6.p(ctx, dirty);
+			} else {
+				if_block6.d(1);
+				if_block6 = current_block_type_6(ctx);
+
+				if (if_block6) {
+					if_block6.c();
+					if_block6.m(t133.parentNode, t133);
+				}
+			}
+
+			if (dirty[1] & /*$form*/ 128 && t136_value !== (t136_value = (/*$form*/ ctx[38].coordenada_latitud_ambiente
+			? /*$form*/ ctx[38].coordenada_latitud_ambiente
+			: 'Sin información registrada') + "")) (0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.set_data)(t136, t136_value);
+
+			if (dirty[1] & /*$form*/ 128 && t140_value !== (t140_value = (/*$form*/ ctx[38].coordenada_longitud_ambiente
+			? /*$form*/ ctx[38].coordenada_longitud_ambiente
+			: 'Sin información registrada') + "")) (0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.set_data)(t140, t140_value);
+
+			if (dirty[1] & /*$formImpactoProcesosFormacion*/ 1024 && t144_value !== (t144_value = (/*$formImpactoProcesosFormacion*/ ctx[41].impacto_procesos_formacion
+			? /*$formImpactoProcesosFormacion*/ ctx[41].impacto_procesos_formacion
+			: 'Sin información registrada') + "")) (0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.set_data)(t144, t144_value);
+
+			if (dirty[1] & /*$formPertinenciaSectorProductivo*/ 2048 && t148_value !== (t148_value = (/*$formPertinenciaSectorProductivo*/ ctx[42].pertinencia_sector_productivo
+			? /*$formPertinenciaSectorProductivo*/ ctx[42].pertinencia_sector_productivo
+			: 'Sin información registrada') + "")) (0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.set_data)(t148, t148_value);
+
+			if (dirty[1] & /*$form*/ 128 && t152_value !== (t152_value = (/*$form*/ ctx[38].numero_publicaciones
+			? /*$form*/ ctx[38].numero_publicaciones
+			: 'Sin información registrada') + "")) (0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.set_data)(t152, t152_value);
+
+			if (dirty[1] & /*$form*/ 128 && t156_value !== (t156_value = (/*$form*/ ctx[38].numero_aprendices_beneficiados
+			? /*$form*/ ctx[38].numero_aprendices_beneficiados
+			: 'Sin información registrada') + "")) (0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.set_data)(t156, t156_value);
+
+			if (dirty[1] & /*$formProductividadBeneficiarios*/ 4096 && t160_value !== (t160_value = (/*$formProductividadBeneficiarios*/ ctx[43].productividad_beneficiarios
+			? /*$formProductividadBeneficiarios*/ ctx[43].productividad_beneficiarios
+			: 'Sin información registrada') + "")) (0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.set_data)(t160, t160_value);
+
+			if (dirty[1] & /*$formGeneracionEmpleo*/ 8192 && t164_value !== (t164_value = (/*$formGeneracionEmpleo*/ ctx[44].generacion_empleo
+			? /*$formGeneracionEmpleo*/ ctx[44].generacion_empleo
+			: 'Sin información registrada') + "")) (0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.set_data)(t164, t164_value);
+
+			if (dirty[1] & /*$formCreacionEmpresas*/ 16384 && t168_value !== (t168_value = (/*$formCreacionEmpresas*/ ctx[45].creacion_empresas
+			? /*$formCreacionEmpresas*/ ctx[45].creacion_empresas
+			: 'Sin información registrada') + "")) (0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.set_data)(t168, t168_value);
+
+			if (dirty[1] & /*$formIncorporacionNuevosConocimientos*/ 32768 && t172_value !== (t172_value = (/*$formIncorporacionNuevosConocimientos*/ ctx[46].incorporacion_nuevos_conocimientos
+			? /*$formIncorporacionNuevosConocimientos*/ ctx[46].incorporacion_nuevos_conocimientos
+			: 'Sin información registrada') + "")) (0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.set_data)(t172, t172_value);
+
+			if (dirty[1] & /*$formValorAgregadoEntidades*/ 65536 && t176_value !== (t176_value = (/*$formValorAgregadoEntidades*/ ctx[47].valor_agregado_entidades
+			? /*$formValorAgregadoEntidades*/ ctx[47].valor_agregado_entidades
+			: 'Sin información registrada') + "")) (0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.set_data)(t176, t176_value);
+
+			if (dirty[1] & /*$formFortalecimientoProgramasFormacion*/ 131072 && t180_value !== (t180_value = (/*$formFortalecimientoProgramasFormacion*/ ctx[48].fortalecimiento_programas_formacion
+			? /*$formFortalecimientoProgramasFormacion*/ ctx[48].fortalecimiento_programas_formacion
+			: 'Sin información registrada') + "")) (0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.set_data)(t180, t180_value);
+
+			if (dirty[1] & /*$formTransferenciaTecnologias*/ 262144 && t184_value !== (t184_value = (/*$formTransferenciaTecnologias*/ ctx[49].transferencia_tecnologias
+			? /*$formTransferenciaTecnologias*/ ctx[49].transferencia_tecnologias
+			: 'Sin información registrada') + "")) (0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.set_data)(t184, t184_value);
+
+			if (dirty[1] & /*$formCoberturaPerntinenciaFormacion*/ 524288 && t188_value !== (t188_value = (/*$formCoberturaPerntinenciaFormacion*/ ctx[50].cobertura_perntinencia_formacion
+			? /*$formCoberturaPerntinenciaFormacion*/ ctx[50].cobertura_perntinencia_formacion
+			: 'Sin información registrada') + "")) (0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.set_data)(t188, t188_value);
+
+			if (current_block_type_7 === (current_block_type_7 = select_block_type_10(ctx, dirty)) && if_block7) {
+				if_block7.p(ctx, dirty);
+			} else {
+				if_block7.d(1);
+				if_block7 = current_block_type_7(ctx);
+
+				if (if_block7) {
+					if_block7.c();
+					if_block7.m(t192.parentNode, t192);
+				}
+			}
+
+			if (dirty[1] & /*$formObservacionesGeneralesAmbiente*/ 1048576 && t195_value !== (t195_value = (/*$formObservacionesGeneralesAmbiente*/ ctx[51].observaciones_generales_ambiente
 			? /*$formObservacionesGeneralesAmbiente*/ ctx[51].observaciones_generales_ambiente
-			: 'Sin información registrada') + "")) (0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.set_data)(t197, t197_value);
+			: 'Sin información registrada') + "")) (0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.set_data)(t195, t195_value);
 		},
 		d(detaching) {
 			if (detaching) (0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.detach)(h1);
@@ -45258,59 +45489,63 @@ function create_default_slot_3(ctx) {
 			if_block3.d(detaching);
 			if (detaching) (0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.detach)(t108);
 			if (detaching) (0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.detach)(p26);
-			if (detaching) (0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.detach)(t112);
-			if (detaching) (0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.detach)(p27);
-			if (detaching) (0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.detach)(t116);
-			if (detaching) (0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.detach)(p28);
-			if (detaching) (0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.detach)(t120);
-			if (detaching) (0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.detach)(p29);
-			if (detaching) (0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.detach)(t124);
-			if (detaching) (0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.detach)(p30);
-			if (detaching) (0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.detach)(t126);
+			if (detaching) (0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.detach)(t110);
 			if_block4.d(detaching);
-			if (detaching) (0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.detach)(t127);
-			if (detaching) (0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.detach)(p31);
-			if (detaching) (0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.detach)(t131);
-			if (detaching) (0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.detach)(p32);
-			if (detaching) (0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.detach)(t135);
-			if (detaching) (0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.detach)(p33);
-			if (detaching) (0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.detach)(t139);
-			if (detaching) (0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.detach)(p34);
-			if (detaching) (0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.detach)(t143);
-			if (detaching) (0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.detach)(p35);
-			if (detaching) (0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.detach)(t147);
-			if (detaching) (0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.detach)(p36);
-			if (detaching) (0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.detach)(t151);
-			if (detaching) (0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.detach)(p37);
-			if (detaching) (0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.detach)(t155);
-			if (detaching) (0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.detach)(p38);
-			if (detaching) (0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.detach)(t159);
-			if (detaching) (0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.detach)(p39);
-			if (detaching) (0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.detach)(t163);
-			if (detaching) (0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.detach)(p40);
-			if (detaching) (0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.detach)(t167);
-			if (detaching) (0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.detach)(p41);
-			if (detaching) (0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.detach)(t171);
-			if (detaching) (0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.detach)(p42);
-			if (detaching) (0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.detach)(t175);
-			if (detaching) (0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.detach)(p43);
-			if (detaching) (0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.detach)(t179);
-			if (detaching) (0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.detach)(p44);
-			if (detaching) (0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.detach)(t183);
-			if (detaching) (0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.detach)(p45);
-			if (detaching) (0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.detach)(t187);
-			if (detaching) (0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.detach)(p46);
-			if (detaching) (0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.detach)(t191);
-			if (detaching) (0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.detach)(p47);
-			if (detaching) (0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.detach)(t193);
+			if (detaching) (0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.detach)(t111);
+			if (detaching) (0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.detach)(p27);
+			if (detaching) (0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.detach)(t115);
+			if (detaching) (0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.detach)(p28);
+			if (detaching) (0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.detach)(t119);
+			if (detaching) (0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.detach)(p29);
+			if (detaching) (0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.detach)(t123);
+			if (detaching) (0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.detach)(p30);
+			if (detaching) (0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.detach)(t125);
 			if_block5.d(detaching);
-			if (detaching) (0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.detach)(t194);
+			if (detaching) (0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.detach)(t126);
+			if (detaching) (0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.detach)(p31);
+			if (detaching) (0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.detach)(t130);
+			if (detaching) (0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.detach)(p32);
+			if (detaching) (0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.detach)(t132);
+			if_block6.d(detaching);
+			if (detaching) (0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.detach)(t133);
+			if (detaching) (0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.detach)(p33);
+			if (detaching) (0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.detach)(t137);
+			if (detaching) (0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.detach)(p34);
+			if (detaching) (0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.detach)(t141);
+			if (detaching) (0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.detach)(p35);
+			if (detaching) (0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.detach)(t145);
+			if (detaching) (0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.detach)(p36);
+			if (detaching) (0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.detach)(t149);
+			if (detaching) (0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.detach)(p37);
+			if (detaching) (0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.detach)(t153);
+			if (detaching) (0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.detach)(p38);
+			if (detaching) (0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.detach)(t157);
+			if (detaching) (0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.detach)(p39);
+			if (detaching) (0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.detach)(t161);
+			if (detaching) (0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.detach)(p40);
+			if (detaching) (0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.detach)(t165);
+			if (detaching) (0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.detach)(p41);
+			if (detaching) (0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.detach)(t169);
+			if (detaching) (0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.detach)(p42);
+			if (detaching) (0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.detach)(t173);
+			if (detaching) (0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.detach)(p43);
+			if (detaching) (0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.detach)(t177);
+			if (detaching) (0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.detach)(p44);
+			if (detaching) (0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.detach)(t181);
+			if (detaching) (0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.detach)(p45);
+			if (detaching) (0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.detach)(t185);
+			if (detaching) (0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.detach)(p46);
+			if (detaching) (0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.detach)(t189);
+			if (detaching) (0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.detach)(p47);
+			if (detaching) (0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.detach)(t191);
+			if_block7.d(detaching);
+			if (detaching) (0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.detach)(t192);
 			if (detaching) (0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.detach)(p48);
 		}
 	};
 }
 
-// (637:8) 
+// (758:8) 
 function create_content_slot(ctx) {
 	let div;
 	let export2word;
@@ -45340,7 +45575,7 @@ function create_content_slot(ctx) {
 		p(ctx, dirty) {
 			const export2word_changes = {};
 
-			if (dirty[0] & /*ambienteModernizacion*/ 262144 | dirty[1] & /*$formObservacionesGeneralesAmbiente, $form, $formCoberturaPerntinenciaFormacion, $formTransferenciaTecnologias, $formFortalecimientoProgramasFormacion, $formValorAgregadoEntidades, $formIncorporacionNuevosConocimientos, $formCreacionEmpresas, $formGeneracionEmpleo, $formProductividadBeneficiarios, $formPertinenciaSectorProductivo, $formImpactoProcesosFormacion, $formJustificacionAmbienteInactivo, $formRazonEstadoGeneral*/ 2097024 | dirty[5] & /*$$scope*/ 1) {
+			if (dirty[0] & /*ambienteModernizacion*/ 262144 | dirty[1] & /*$formObservacionesGeneralesAmbiente, $form, $formCoberturaPerntinenciaFormacion, $formTransferenciaTecnologias, $formFortalecimientoProgramasFormacion, $formValorAgregadoEntidades, $formIncorporacionNuevosConocimientos, $formCreacionEmpresas, $formGeneracionEmpleo, $formProductividadBeneficiarios, $formPertinenciaSectorProductivo, $formImpactoProcesosFormacion, $formJustificacionAmbienteInactivo, $formRazonEstadoGeneral*/ 2097024 | dirty[5] & /*$$scope*/ 64) {
 				export2word_changes.$$scope = { dirty, ctx };
 			}
 
@@ -45363,7 +45598,7 @@ function create_content_slot(ctx) {
 	};
 }
 
-// (902:16) <Button on:click={() => (dialogGuardar = false)} variant={null}>
+// (1039:16) <Button on:click={() => (dialogGuardar = false)} variant={null}>
 function create_default_slot_2(ctx) {
 	let t;
 
@@ -45380,7 +45615,7 @@ function create_default_slot_2(ctx) {
 	};
 }
 
-// (903:16) {#if ambienteModernizacion}
+// (1040:16) {#if ambienteModernizacion}
 function create_if_block_1(ctx) {
 	let button;
 	let t;
@@ -45427,7 +45662,7 @@ function create_if_block_1(ctx) {
 		p(ctx, dirty) {
 			const button_changes = {};
 
-			if (dirty[5] & /*$$scope*/ 1) {
+			if (dirty[5] & /*$$scope*/ 64) {
 				button_changes.$$scope = { dirty, ctx };
 			}
 
@@ -45478,7 +45713,7 @@ function create_if_block_1(ctx) {
 	};
 }
 
-// (904:20) <Button variant="raised" type="button" on:click={() => exportComponent.export2Word(ambienteModernizacion.seguimiento_ambiente_modernizacion.codigo)}>
+// (1041:20) <Button variant="raised" type="button" on:click={() => exportComponent.export2Word(ambienteModernizacion.seguimiento_ambiente_modernizacion.codigo)}>
 function create_default_slot_1(ctx) {
 	let t;
 
@@ -45495,7 +45730,7 @@ function create_default_slot_1(ctx) {
 	};
 }
 
-// (907:20) {:else}
+// (1044:20) {:else}
 function create_else_block(ctx) {
 	let span;
 
@@ -45517,7 +45752,7 @@ function create_else_block(ctx) {
 	};
 }
 
-// (905:20) {#if ambienteModernizacion?.allowed.to_update || allowedToCreate}
+// (1042:20) {#if ambienteModernizacion?.allowed.to_update || allowedToCreate}
 function create_if_block_2(ctx) {
 	let loadingbutton;
 	let current;
@@ -45543,7 +45778,7 @@ function create_if_block_2(ctx) {
 			const loadingbutton_changes = {};
 			if (dirty[1] & /*$form*/ 128) loadingbutton_changes.loading = /*$form*/ ctx[38].processing;
 
-			if (dirty[5] & /*$$scope*/ 1) {
+			if (dirty[5] & /*$$scope*/ 64) {
 				loadingbutton_changes.$$scope = { dirty, ctx };
 			}
 
@@ -45564,7 +45799,7 @@ function create_if_block_2(ctx) {
 	};
 }
 
-// (906:24) <LoadingButton loading={$form.processing} form="semillero-investigacion-form">
+// (1043:24) <LoadingButton loading={$form.processing} form="semillero-investigacion-form">
 function create_default_slot(ctx) {
 	let t;
 
@@ -45581,7 +45816,7 @@ function create_default_slot(ctx) {
 	};
 }
 
-// (900:8) 
+// (1037:8) 
 function create_actions_slot(ctx) {
 	let div1;
 	let div0;
@@ -45621,7 +45856,7 @@ function create_actions_slot(ctx) {
 		p(ctx, dirty) {
 			const button_changes = {};
 
-			if (dirty[5] & /*$$scope*/ 1) {
+			if (dirty[5] & /*$$scope*/ 64) {
 				button_changes.$$scope = { dirty, ctx };
 			}
 
@@ -45754,7 +45989,7 @@ function create_fragment(ctx) {
 	let current;
 	let mounted;
 	let dispose;
-	let if_block0 = /*allowedToCreate*/ ctx[31] && create_if_block_23(ctx);
+	let if_block0 = /*allowedToCreate*/ ctx[31] && create_if_block_25(ctx);
 
 	label0 = new _Shared_Label__WEBPACK_IMPORTED_MODULE_11__["default"]({
 			props: {
@@ -45845,8 +46080,8 @@ function create_fragment(ctx) {
 
 	select1 = new _Shared_Select__WEBPACK_IMPORTED_MODULE_12__["default"]({ props: select1_props });
 	svelte_internal__WEBPACK_IMPORTED_MODULE_0__.binding_callbacks.push(() => (0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.bind)(select1, 'selectedValue', select1_selectedValue_binding_1));
-	let if_block1 = /*$form*/ ctx[38].area_conocimiento_id && create_if_block_22(ctx);
-	let if_block2 = /*$form*/ ctx[38].subarea_conocimiento_id && create_if_block_21(ctx);
+	let if_block1 = /*$form*/ ctx[38].area_conocimiento_id && create_if_block_24(ctx);
+	let if_block2 = /*$form*/ ctx[38].subarea_conocimiento_id && create_if_block_23(ctx);
 
 	label3 = new _Shared_Label__WEBPACK_IMPORTED_MODULE_11__["default"]({
 			props: {
@@ -45934,7 +46169,7 @@ function create_fragment(ctx) {
 
 	select4 = new _Shared_Select__WEBPACK_IMPORTED_MODULE_12__["default"]({ props: select4_props });
 	svelte_internal__WEBPACK_IMPORTED_MODULE_0__.binding_callbacks.push(() => (0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.bind)(select4, 'selectedValue', select4_selectedValue_binding));
-	let if_block3 = /*$form*/ ctx[38].centro_formacion_id?.value && create_if_block_20(ctx);
+	let if_block3 = /*$form*/ ctx[38].centro_formacion_id?.value && create_if_block_22(ctx);
 
 	label6 = new _Shared_Label__WEBPACK_IMPORTED_MODULE_11__["default"]({
 			props: {
@@ -45964,7 +46199,7 @@ function create_fragment(ctx) {
 
 	select5 = new _Shared_Select__WEBPACK_IMPORTED_MODULE_12__["default"]({ props: select5_props });
 	svelte_internal__WEBPACK_IMPORTED_MODULE_0__.binding_callbacks.push(() => (0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.bind)(select5, 'selectedValue', select5_selectedValue_binding));
-	let if_block4 = /*$form*/ ctx[38].alineado_mesas_sectoriales?.value == 1 && create_if_block_19(ctx);
+	let if_block4 = /*$form*/ ctx[38].alineado_mesas_sectoriales?.value == 1 && create_if_block_21(ctx);
 
 	label7 = new _Shared_Label__WEBPACK_IMPORTED_MODULE_11__["default"]({
 			props: {
@@ -45994,9 +46229,9 @@ function create_fragment(ctx) {
 
 	select6 = new _Shared_Select__WEBPACK_IMPORTED_MODULE_12__["default"]({ props: select6_props });
 	svelte_internal__WEBPACK_IMPORTED_MODULE_0__.binding_callbacks.push(() => (0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.bind)(select6, 'selectedValue', select6_selectedValue_binding));
-	let if_block5 = !/*allowedToCreate*/ ctx[31] && create_if_block_12(ctx);
-	let if_block6 = /*ambienteModernizacion*/ ctx[18] && create_if_block_11(ctx);
-	const if_block_creators = [create_if_block_9, create_if_block_10, create_else_block_7];
+	let if_block5 = !/*allowedToCreate*/ ctx[31] && create_if_block_14(ctx);
+	let if_block6 = /*ambienteModernizacion*/ ctx[18] && create_if_block_13(ctx);
+	const if_block_creators = [create_if_block_11, create_if_block_12, create_else_block_9];
 	const if_blocks = [];
 
 	function select_block_type_1(ctx, dirty) {
@@ -46106,7 +46341,7 @@ function create_fragment(ctx) {
 			? undefined
 			: true;
 
-			(0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.attr)(div22, "class", "shadow-inner bg-violet-200 border-violet-400 bottom-0 flex items-center justify-between mt-14 px-8 py-4 sticky");
+			(0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.attr)(div22, "class", "shadow-inner bg-violet-200 border-violet-400 flex items-center justify-between mt-14 px-8 py-4");
 			(0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.attr)(form_1, "id", "semillero-investigacion-form");
 		},
 		m(target, anchor) {
@@ -46209,7 +46444,7 @@ function create_fragment(ctx) {
 						(0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.transition_in)(if_block0, 1);
 					}
 				} else {
-					if_block0 = create_if_block_23(ctx);
+					if_block0 = create_if_block_25(ctx);
 					if_block0.c();
 					(0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.transition_in)(if_block0, 1);
 					if_block0.m(fieldset, t0);
@@ -46269,7 +46504,7 @@ function create_fragment(ctx) {
 						(0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.transition_in)(if_block1, 1);
 					}
 				} else {
-					if_block1 = create_if_block_22(ctx);
+					if_block1 = create_if_block_24(ctx);
 					if_block1.c();
 					(0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.transition_in)(if_block1, 1);
 					if_block1.m(fieldset, t9);
@@ -46292,7 +46527,7 @@ function create_fragment(ctx) {
 						(0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.transition_in)(if_block2, 1);
 					}
 				} else {
-					if_block2 = create_if_block_21(ctx);
+					if_block2 = create_if_block_23(ctx);
 					if_block2.c();
 					(0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.transition_in)(if_block2, 1);
 					if_block2.m(fieldset, t10);
@@ -46349,7 +46584,7 @@ function create_fragment(ctx) {
 						(0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.transition_in)(if_block3, 1);
 					}
 				} else {
-					if_block3 = create_if_block_20(ctx);
+					if_block3 = create_if_block_22(ctx);
 					if_block3.c();
 					(0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.transition_in)(if_block3, 1);
 					if_block3.m(fieldset, t17);
@@ -46384,7 +46619,7 @@ function create_fragment(ctx) {
 						(0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.transition_in)(if_block4, 1);
 					}
 				} else {
-					if_block4 = create_if_block_19(ctx);
+					if_block4 = create_if_block_21(ctx);
 					if_block4.c();
 					(0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.transition_in)(if_block4, 1);
 					if_block4.m(fieldset, t20);
@@ -46419,7 +46654,7 @@ function create_fragment(ctx) {
 						(0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.transition_in)(if_block5, 1);
 					}
 				} else {
-					if_block5 = create_if_block_12(ctx);
+					if_block5 = create_if_block_14(ctx);
 					if_block5.c();
 					(0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.transition_in)(if_block5, 1);
 					if_block5.m(fieldset, null);
@@ -46444,7 +46679,7 @@ function create_fragment(ctx) {
 				if (if_block6) {
 					if_block6.p(ctx, dirty);
 				} else {
-					if_block6 = create_if_block_11(ctx);
+					if_block6 = create_if_block_13(ctx);
 					if_block6.c();
 					if_block6.m(div22, t24);
 				}
@@ -46901,7 +47136,9 @@ function instance($$self, $$props, $$invalidate) {
 		}
 	}
 
-	const blur_handler = () => syncColumnLong('razon_estado_general', $formRazonEstadoGeneral);
+	const blur_handler = () => {
+		(syncColumnLong('razon_estado_general', $formRazonEstadoGeneral), (0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.set_store_value)(form, $form.razon_estado_general = $formRazonEstadoGeneral.razon_estado_general, $form));
+	};
 
 	function select1_selectedValue_binding_2(value) {
 		if ($$self.$$.not_equal($form.ambiente_activo, value)) {
@@ -46931,7 +47168,9 @@ function instance($$self, $$props, $$invalidate) {
 		}
 	}
 
-	const blur_handler_1 = () => syncColumnLong('justificacion_ambiente_inactivo', $formJustificacionAmbienteInactivo);
+	const blur_handler_1 = () => {
+		(syncColumnLong('justificacion_ambiente_inactivo', $formJustificacionAmbienteInactivo), (0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.set_store_value)(form, $form.justificacion_ambiente_inactivo = $formJustificacionAmbienteInactivo.justificacion_ambiente_inactivo, $form));
+	};
 
 	function select2_selectedValue_binding_1(value) {
 		if ($$self.$$.not_equal($form.ambiente_activo_procesos_idi, value)) {
@@ -47024,7 +47263,9 @@ function instance($$self, $$props, $$invalidate) {
 		}
 	}
 
-	const blur_handler_2 = () => syncColumnLong('impacto_procesos_formacion', $formImpactoProcesosFormacion);
+	const blur_handler_2 = () => {
+		(syncColumnLong('impacto_procesos_formacion', $formImpactoProcesosFormacion), (0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.set_store_value)(form, $form.impacto_procesos_formacion = $formImpactoProcesosFormacion.impacto_procesos_formacion, $form));
+	};
 
 	function textarea1_value_binding(value) {
 		if ($$self.$$.not_equal($formPertinenciaSectorProductivo.pertinencia_sector_productivo, value)) {
@@ -47033,7 +47274,9 @@ function instance($$self, $$props, $$invalidate) {
 		}
 	}
 
-	const blur_handler_3 = () => syncColumnLong('pertinencia_sector_productivo', $formPertinenciaSectorProductivo);
+	const blur_handler_3 = () => {
+		(syncColumnLong('pertinencia_sector_productivo', $formPertinenciaSectorProductivo), (0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.set_store_value)(form, $form.pertinencia_sector_productivo = $formPertinenciaSectorProductivo.pertinencia_sector_productivo, $form));
+	};
 
 	function input3_value_binding(value) {
 		if ($$self.$$.not_equal($form.numero_publicaciones, value)) {
@@ -47056,7 +47299,9 @@ function instance($$self, $$props, $$invalidate) {
 		}
 	}
 
-	const blur_handler_4 = () => syncColumnLong('productividad_beneficiarios', $formProductividadBeneficiarios);
+	const blur_handler_4 = () => {
+		(syncColumnLong('productividad_beneficiarios', $formProductividadBeneficiarios), (0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.set_store_value)(form, $form.productividad_beneficiarios = $formProductividadBeneficiarios.productividad_beneficiarios, $form));
+	};
 
 	function textarea3_value_binding(value) {
 		if ($$self.$$.not_equal($formGeneracionEmpleo.generacion_empleo, value)) {
@@ -47065,7 +47310,9 @@ function instance($$self, $$props, $$invalidate) {
 		}
 	}
 
-	const blur_handler_5 = () => syncColumnLong('generacion_empleo', $formGeneracionEmpleo);
+	const blur_handler_5 = () => {
+		(syncColumnLong('generacion_empleo', $formGeneracionEmpleo), (0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.set_store_value)(form, $form.generacion_empleo = $formGeneracionEmpleo.generacion_empleo, $form));
+	};
 
 	function textarea4_value_binding(value) {
 		if ($$self.$$.not_equal($formCreacionEmpresas.creacion_empresas, value)) {
@@ -47074,7 +47321,9 @@ function instance($$self, $$props, $$invalidate) {
 		}
 	}
 
-	const blur_handler_6 = () => syncColumnLong('creacion_empresas', $formCreacionEmpresas);
+	const blur_handler_6 = () => {
+		(syncColumnLong('creacion_empresas', $formCreacionEmpresas), (0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.set_store_value)(form, $form.creacion_empresas = $formCreacionEmpresas.creacion_empresas, $form));
+	};
 
 	function textarea5_value_binding(value) {
 		if ($$self.$$.not_equal($formIncorporacionNuevosConocimientos.incorporacion_nuevos_conocimientos, value)) {
@@ -47083,7 +47332,9 @@ function instance($$self, $$props, $$invalidate) {
 		}
 	}
 
-	const blur_handler_7 = () => syncColumnLong('incorporacion_nuevos_conocimientos', $formIncorporacionNuevosConocimientos);
+	const blur_handler_7 = () => {
+		(syncColumnLong('incorporacion_nuevos_conocimientos', $formIncorporacionNuevosConocimientos), (0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.set_store_value)(form, $form.incorporacion_nuevos_conocimientos = $formIncorporacionNuevosConocimientos.incorporacion_nuevos_conocimientos, $form));
+	};
 
 	function textarea6_value_binding(value) {
 		if ($$self.$$.not_equal($formValorAgregadoEntidades.valor_agregado_entidades, value)) {
@@ -47092,7 +47343,9 @@ function instance($$self, $$props, $$invalidate) {
 		}
 	}
 
-	const blur_handler_8 = () => syncColumnLong('valor_agregado_entidades', $formValorAgregadoEntidades);
+	const blur_handler_8 = () => {
+		(syncColumnLong('valor_agregado_entidades', $formValorAgregadoEntidades), (0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.set_store_value)(form, $form.valor_agregado_entidades = $formValorAgregadoEntidades.valor_agregado_entidades, $form));
+	};
 
 	function textarea7_value_binding(value) {
 		if ($$self.$$.not_equal($formFortalecimientoProgramasFormacion.fortalecimiento_programas_formacion, value)) {
@@ -47101,7 +47354,9 @@ function instance($$self, $$props, $$invalidate) {
 		}
 	}
 
-	const blur_handler_9 = () => syncColumnLong('fortalecimiento_programas_formacion', $formFortalecimientoProgramasFormacion);
+	const blur_handler_9 = () => {
+		(syncColumnLong('fortalecimiento_programas_formacion', $formFortalecimientoProgramasFormacion), (0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.set_store_value)(form, $form.fortalecimiento_programas_formacion = $formFortalecimientoProgramasFormacion.fortalecimiento_programas_formacion, $form));
+	};
 
 	function textarea8_value_binding(value) {
 		if ($$self.$$.not_equal($formTransferenciaTecnologias.transferencia_tecnologias, value)) {
@@ -47110,7 +47365,9 @@ function instance($$self, $$props, $$invalidate) {
 		}
 	}
 
-	const blur_handler_10 = () => syncColumnLong('transferencia_tecnologias', $formTransferenciaTecnologias);
+	const blur_handler_10 = () => {
+		(syncColumnLong('transferencia_tecnologias', $formTransferenciaTecnologias), (0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.set_store_value)(form, $form.transferencia_tecnologias = $formTransferenciaTecnologias.transferencia_tecnologias, $form));
+	};
 
 	function textarea9_value_binding(value) {
 		if ($$self.$$.not_equal($formCoberturaPerntinenciaFormacion.cobertura_perntinencia_formacion, value)) {
@@ -47119,7 +47376,9 @@ function instance($$self, $$props, $$invalidate) {
 		}
 	}
 
-	const blur_handler_11 = () => syncColumnLong('cobertura_perntinencia_formacion', $formCoberturaPerntinenciaFormacion);
+	const blur_handler_11 = () => {
+		(syncColumnLong('cobertura_perntinencia_formacion', $formCoberturaPerntinenciaFormacion), (0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.set_store_value)(form, $form.cobertura_perntinencia_formacion = $formCoberturaPerntinenciaFormacion.cobertura_perntinencia_formacion, $form));
+	};
 
 	function tags_tags_binding_1(value) {
 		if ($$self.$$.not_equal($form.palabras_clave_ambiente, value)) {
@@ -47135,7 +47394,10 @@ function instance($$self, $$props, $$invalidate) {
 		}
 	}
 
-	const blur_handler_12 = () => syncColumnLong('observaciones_generales_ambiente', $formObservacionesGeneralesAmbiente);
+	const blur_handler_12 = () => {
+		(syncColumnLong('observaciones_generales_ambiente', $formObservacionesGeneralesAmbiente), (0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.set_store_value)(form, $form.observaciones_generales_ambiente = $formObservacionesGeneralesAmbiente.observaciones_generales_ambiente, $form));
+	};
+
 	const func_3 = event => submitFiles(event);
 
 	function file_value_binding(value) {
@@ -47409,7 +47671,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _smui_button__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @smui/button */ "./node_modules/@smui/button/index.js");
 /* harmony import */ var D_www_sipro_spa_node_modules_svelte_loader_lib_hot_api_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./node_modules/svelte-loader/lib/hot-api.js */ "./node_modules/svelte-loader/lib/hot-api.js");
 /* harmony import */ var D_www_sipro_spa_node_modules_svelte_hmr_runtime_proxy_adapter_dom_js__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./node_modules/svelte-hmr/runtime/proxy-adapter-dom.js */ "./node_modules/svelte-hmr/runtime/proxy-adapter-dom.js");
-/* harmony import */ var D_www_sipro_spa_resources_js_Shared_Button_svelte_12_css_svelte_loader_cssPath_D_www_sipro_spa_resources_js_Shared_Button_svelte_12_css_D_www_sipro_spa_resources_js_Shared_Button_svelte__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./resources/js/Shared/Button.svelte.12.css!=!svelte-loader?cssPath=D:/www/sipro-spa/resources/js/Shared/Button.svelte.12.css!./resources/js/Shared/Button.svelte */ "./resources/js/Shared/Button.svelte.12.css!=!./node_modules/svelte-loader/index.js?cssPath=D:/www/sipro-spa/resources/js/Shared/Button.svelte.12.css!./resources/js/Shared/Button.svelte");
+/* harmony import */ var D_www_sipro_spa_resources_js_Shared_Button_svelte_11_css_svelte_loader_cssPath_D_www_sipro_spa_resources_js_Shared_Button_svelte_11_css_D_www_sipro_spa_resources_js_Shared_Button_svelte__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./resources/js/Shared/Button.svelte.11.css!=!svelte-loader?cssPath=D:/www/sipro-spa/resources/js/Shared/Button.svelte.11.css!./resources/js/Shared/Button.svelte */ "./resources/js/Shared/Button.svelte.11.css!=!./node_modules/svelte-loader/index.js?cssPath=D:/www/sipro-spa/resources/js/Shared/Button.svelte.11.css!./resources/js/Shared/Button.svelte");
 /* module decorator */ module = __webpack_require__.hmd(module);
 /* resources\js\Shared\Button.svelte generated by Svelte v3.49.0 */
 
@@ -49789,7 +50051,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _smui_button__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @smui/button */ "./node_modules/@smui/button/index.js");
 /* harmony import */ var D_www_sipro_spa_node_modules_svelte_loader_lib_hot_api_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./node_modules/svelte-loader/lib/hot-api.js */ "./node_modules/svelte-loader/lib/hot-api.js");
 /* harmony import */ var D_www_sipro_spa_node_modules_svelte_hmr_runtime_proxy_adapter_dom_js__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./node_modules/svelte-hmr/runtime/proxy-adapter-dom.js */ "./node_modules/svelte-hmr/runtime/proxy-adapter-dom.js");
-/* harmony import */ var D_www_sipro_spa_resources_js_Shared_LoadingButton_svelte_11_css_svelte_loader_cssPath_D_www_sipro_spa_resources_js_Shared_LoadingButton_svelte_11_css_D_www_sipro_spa_resources_js_Shared_LoadingButton_svelte__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./resources/js/Shared/LoadingButton.svelte.11.css!=!svelte-loader?cssPath=D:/www/sipro-spa/resources/js/Shared/LoadingButton.svelte.11.css!./resources/js/Shared/LoadingButton.svelte */ "./resources/js/Shared/LoadingButton.svelte.11.css!=!./node_modules/svelte-loader/index.js?cssPath=D:/www/sipro-spa/resources/js/Shared/LoadingButton.svelte.11.css!./resources/js/Shared/LoadingButton.svelte");
+/* harmony import */ var D_www_sipro_spa_resources_js_Shared_LoadingButton_svelte_14_css_svelte_loader_cssPath_D_www_sipro_spa_resources_js_Shared_LoadingButton_svelte_14_css_D_www_sipro_spa_resources_js_Shared_LoadingButton_svelte__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./resources/js/Shared/LoadingButton.svelte.14.css!=!svelte-loader?cssPath=D:/www/sipro-spa/resources/js/Shared/LoadingButton.svelte.14.css!./resources/js/Shared/LoadingButton.svelte */ "./resources/js/Shared/LoadingButton.svelte.14.css!=!./node_modules/svelte-loader/index.js?cssPath=D:/www/sipro-spa/resources/js/Shared/LoadingButton.svelte.14.css!./resources/js/Shared/LoadingButton.svelte");
 /* module decorator */ module = __webpack_require__.hmd(module);
 /* resources\js\Shared\LoadingButton.svelte generated by Svelte v3.49.0 */
 
@@ -50054,7 +50316,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var svelte_select__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! svelte-select */ "./node_modules/svelte-select/src/Select.svelte");
 /* harmony import */ var D_www_sipro_spa_node_modules_svelte_loader_lib_hot_api_js__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ./node_modules/svelte-loader/lib/hot-api.js */ "./node_modules/svelte-loader/lib/hot-api.js");
 /* harmony import */ var D_www_sipro_spa_node_modules_svelte_hmr_runtime_proxy_adapter_dom_js__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ./node_modules/svelte-hmr/runtime/proxy-adapter-dom.js */ "./node_modules/svelte-hmr/runtime/proxy-adapter-dom.js");
-/* harmony import */ var D_www_sipro_spa_resources_js_Shared_Select_svelte_58_css_svelte_loader_cssPath_D_www_sipro_spa_resources_js_Shared_Select_svelte_58_css_D_www_sipro_spa_resources_js_Shared_Select_svelte__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! ./resources/js/Shared/Select.svelte.58.css!=!svelte-loader?cssPath=D:/www/sipro-spa/resources/js/Shared/Select.svelte.58.css!./resources/js/Shared/Select.svelte */ "./resources/js/Shared/Select.svelte.58.css!=!./node_modules/svelte-loader/index.js?cssPath=D:/www/sipro-spa/resources/js/Shared/Select.svelte.58.css!./resources/js/Shared/Select.svelte");
+/* harmony import */ var D_www_sipro_spa_resources_js_Shared_Select_svelte_15_css_svelte_loader_cssPath_D_www_sipro_spa_resources_js_Shared_Select_svelte_15_css_D_www_sipro_spa_resources_js_Shared_Select_svelte__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! ./resources/js/Shared/Select.svelte.15.css!=!svelte-loader?cssPath=D:/www/sipro-spa/resources/js/Shared/Select.svelte.15.css!./resources/js/Shared/Select.svelte */ "./resources/js/Shared/Select.svelte.15.css!=!./node_modules/svelte-loader/index.js?cssPath=D:/www/sipro-spa/resources/js/Shared/Select.svelte.15.css!./resources/js/Shared/Select.svelte");
 /* module decorator */ module = __webpack_require__.hmd(module);
 /* resources\js\Shared\Select.svelte generated by Svelte v3.49.0 */
 
@@ -50275,7 +50537,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _Shared_InputError__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! @/Shared/InputError */ "./resources/js/Shared/InputError.svelte");
 /* harmony import */ var D_www_sipro_spa_node_modules_svelte_loader_lib_hot_api_js__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ./node_modules/svelte-loader/lib/hot-api.js */ "./node_modules/svelte-loader/lib/hot-api.js");
 /* harmony import */ var D_www_sipro_spa_node_modules_svelte_hmr_runtime_proxy_adapter_dom_js__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ./node_modules/svelte-hmr/runtime/proxy-adapter-dom.js */ "./node_modules/svelte-hmr/runtime/proxy-adapter-dom.js");
-/* harmony import */ var D_www_sipro_spa_resources_js_Shared_SelectMulti_svelte_18_css_svelte_loader_cssPath_D_www_sipro_spa_resources_js_Shared_SelectMulti_svelte_18_css_D_www_sipro_spa_resources_js_Shared_SelectMulti_svelte__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! ./resources/js/Shared/SelectMulti.svelte.18.css!=!svelte-loader?cssPath=D:/www/sipro-spa/resources/js/Shared/SelectMulti.svelte.18.css!./resources/js/Shared/SelectMulti.svelte */ "./resources/js/Shared/SelectMulti.svelte.18.css!=!./node_modules/svelte-loader/index.js?cssPath=D:/www/sipro-spa/resources/js/Shared/SelectMulti.svelte.18.css!./resources/js/Shared/SelectMulti.svelte");
+/* harmony import */ var D_www_sipro_spa_resources_js_Shared_SelectMulti_svelte_17_css_svelte_loader_cssPath_D_www_sipro_spa_resources_js_Shared_SelectMulti_svelte_17_css_D_www_sipro_spa_resources_js_Shared_SelectMulti_svelte__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! ./resources/js/Shared/SelectMulti.svelte.17.css!=!svelte-loader?cssPath=D:/www/sipro-spa/resources/js/Shared/SelectMulti.svelte.17.css!./resources/js/Shared/SelectMulti.svelte */ "./resources/js/Shared/SelectMulti.svelte.17.css!=!./node_modules/svelte-loader/index.js?cssPath=D:/www/sipro-spa/resources/js/Shared/SelectMulti.svelte.17.css!./resources/js/Shared/SelectMulti.svelte");
 /* module decorator */ module = __webpack_require__.hmd(module);
 /* resources\js\Shared\SelectMulti.svelte generated by Svelte v3.49.0 */
 
@@ -50478,7 +50740,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var svelte__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! svelte */ "./node_modules/svelte/index.mjs");
 /* harmony import */ var D_www_sipro_spa_node_modules_svelte_loader_lib_hot_api_js__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ./node_modules/svelte-loader/lib/hot-api.js */ "./node_modules/svelte-loader/lib/hot-api.js");
 /* harmony import */ var D_www_sipro_spa_node_modules_svelte_hmr_runtime_proxy_adapter_dom_js__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ./node_modules/svelte-hmr/runtime/proxy-adapter-dom.js */ "./node_modules/svelte-hmr/runtime/proxy-adapter-dom.js");
-/* harmony import */ var D_www_sipro_spa_resources_js_Shared_Tags_svelte_17_css_svelte_loader_cssPath_D_www_sipro_spa_resources_js_Shared_Tags_svelte_17_css_D_www_sipro_spa_resources_js_Shared_Tags_svelte__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! ./resources/js/Shared/Tags.svelte.17.css!=!svelte-loader?cssPath=D:/www/sipro-spa/resources/js/Shared/Tags.svelte.17.css!./resources/js/Shared/Tags.svelte */ "./resources/js/Shared/Tags.svelte.17.css!=!./node_modules/svelte-loader/index.js?cssPath=D:/www/sipro-spa/resources/js/Shared/Tags.svelte.17.css!./resources/js/Shared/Tags.svelte");
+/* harmony import */ var D_www_sipro_spa_resources_js_Shared_Tags_svelte_18_css_svelte_loader_cssPath_D_www_sipro_spa_resources_js_Shared_Tags_svelte_18_css_D_www_sipro_spa_resources_js_Shared_Tags_svelte__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! ./resources/js/Shared/Tags.svelte.18.css!=!svelte-loader?cssPath=D:/www/sipro-spa/resources/js/Shared/Tags.svelte.18.css!./resources/js/Shared/Tags.svelte */ "./resources/js/Shared/Tags.svelte.18.css!=!./node_modules/svelte-loader/index.js?cssPath=D:/www/sipro-spa/resources/js/Shared/Tags.svelte.18.css!./resources/js/Shared/Tags.svelte");
 /* module decorator */ module = __webpack_require__.hmd(module);
 /* resources\js\Shared\Tags.svelte generated by Svelte v3.49.0 */
 

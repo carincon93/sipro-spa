@@ -132,6 +132,20 @@
 
     let form = useForm({
         _method: 'put',
+        razon_estado_general: $formRazonEstadoGeneral.razon_estado_general,
+        justificacion_ambiente_inactivo: $formJustificacionAmbienteInactivo.justificacion_ambiente_inactivo,
+        impacto_procesos_formacion: $formImpactoProcesosFormacion.impacto_procesos_formacion,
+        pertinencia_sector_productivo: $formPertinenciaSectorProductivo.pertinencia_sector_productivo,
+        productividad_beneficiarios: $formProductividadBeneficiarios.productividad_beneficiarios,
+        generacion_empleo: $formGeneracionEmpleo.generacion_empleo,
+        creacion_empresas: $formCreacionEmpresas.creacion_empresas,
+        incorporacion_nuevos_conocimientos: $formIncorporacionNuevosConocimientos.incorporacion_nuevos_conocimientos,
+        valor_agregado_entidades: $formValorAgregadoEntidades.valor_agregado_entidades,
+        fortalecimiento_programas_formacion: $formFortalecimientoProgramasFormacion.fortalecimiento_programas_formacion,
+        transferencia_tecnologias: $formTransferenciaTecnologias.transferencia_tecnologias,
+        cobertura_perntinencia_formacion: $formCoberturaPerntinenciaFormacion.cobertura_perntinencia_formacion,
+        observaciones_generales_ambiente: $formObservacionesGeneralesAmbiente.observaciones_generales_ambiente,
+
         nombre_ambiente: ambienteModernizacion.nombre_ambiente,
         codigo_proyecto_sgps_id: {
             value: ambienteModernizacion.seguimiento_ambiente_modernizacion.codigo_proyecto_sgps_id,

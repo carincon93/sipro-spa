@@ -231,29 +231,43 @@ class AmbienteModernizacionController extends Controller
         /** @var \App\Models\User */
         $authUser = Auth::user();
 
-        $ambienteModernizacion->alineado_mesas_sectoriales          = $request->alineado_mesas_sectoriales;
-        $ambienteModernizacion->financiado_anteriormente            = $request->financiado_anteriormente;
-        $ambienteModernizacion->estado_general_maquinaria           = $request->estado_general_maquinaria;
-        $ambienteModernizacion->razon_estado_general                = $request->estado_general_maquinaria == '1' ? null : $request->razon_estado_general;
-        $ambienteModernizacion->ambiente_activo                     = $request->ambiente_activo;
-        $ambienteModernizacion->justificacion_ambiente_inactivo     = $request->ambiente_activo ? null : $request->justificacion_ambiente_inactivo;
-        $ambienteModernizacion->ambiente_activo_procesos_idi        = $request->ambiente_activo_procesos_idi;
-        $ambienteModernizacion->numero_proyectos_beneficiados       = $request->ambiente_activo_procesos_idi == 1 ? $request->numero_proyectos_beneficiados : 0;
-        $ambienteModernizacion->ambiente_formacion_complementaria   = $request->ambiente_formacion_complementaria;
-        $ambienteModernizacion->numero_total_cursos_comp            = $request->ambiente_formacion_complementaria == 1 ? $request->numero_total_cursos_comp : 0;
-        $ambienteModernizacion->numero_cursos_empresas              = $request->ambiente_formacion_complementaria == 1 ? $request->numero_cursos_empresas : 0;
-        $ambienteModernizacion->datos_empresa                       = $request->ambiente_formacion_complementaria == 1 ? $request->datos_empresa : null;
-        $ambienteModernizacion->cursos_complementarios              = $request->ambiente_formacion_complementaria == 1 ? $request->cursos_complementarios : null;
-        $ambienteModernizacion->coordenada_latitud_ambiente         = $request->coordenada_latitud_ambiente;
-        $ambienteModernizacion->coordenada_longitud_ambiente        = $request->coordenada_longitud_ambiente;
-        $ambienteModernizacion->palabras_clave_ambiente             = $request->palabras_clave_ambiente;
+        $ambienteModernizacion->alineado_mesas_sectoriales              = $request->alineado_mesas_sectoriales;
+        $ambienteModernizacion->financiado_anteriormente                = $request->financiado_anteriormente;
+        $ambienteModernizacion->estado_general_maquinaria               = $request->estado_general_maquinaria;
+        $ambienteModernizacion->razon_estado_general                    = $request->estado_general_maquinaria == '1' ? null : $request->razon_estado_general;
+        $ambienteModernizacion->ambiente_activo                         = $request->ambiente_activo;
+        $ambienteModernizacion->justificacion_ambiente_inactivo         = $request->ambiente_activo ? null : $request->justificacion_ambiente_inactivo;
+        $ambienteModernizacion->ambiente_activo_procesos_idi            = $request->ambiente_activo_procesos_idi;
+        $ambienteModernizacion->numero_proyectos_beneficiados           = $request->ambiente_activo_procesos_idi == 1 ? $request->numero_proyectos_beneficiados : 0;
+        $ambienteModernizacion->ambiente_formacion_complementaria       = $request->ambiente_formacion_complementaria;
+        $ambienteModernizacion->numero_total_cursos_comp                = $request->ambiente_formacion_complementaria == 1 ? $request->numero_total_cursos_comp : 0;
+        $ambienteModernizacion->numero_cursos_empresas                  = $request->ambiente_formacion_complementaria == 1 ? $request->numero_cursos_empresas : 0;
+        $ambienteModernizacion->datos_empresa                           = $request->ambiente_formacion_complementaria == 1 ? $request->datos_empresa : null;
+        $ambienteModernizacion->cursos_complementarios                  = $request->ambiente_formacion_complementaria == 1 ? $request->cursos_complementarios : null;
+        $ambienteModernizacion->coordenada_latitud_ambiente             = $request->coordenada_latitud_ambiente;
+        $ambienteModernizacion->coordenada_longitud_ambiente            = $request->coordenada_longitud_ambiente;
+        $ambienteModernizacion->palabras_clave_ambiente                 = $request->palabras_clave_ambiente;
 
-        $ambienteModernizacion->numero_personas_certificadas        = $request->numero_personas_certificadas;
-        $ambienteModernizacion->numero_tecnicas_tecnologias         = $request->numero_tecnicas_tecnologias;
-        $ambienteModernizacion->numero_publicaciones                = $request->numero_publicaciones;
-        $ambienteModernizacion->numero_aprendices_beneficiados      = $request->numero_aprendices_beneficiados;
+        $ambienteModernizacion->razon_estado_general                    = $request->razon_estado_general;
+        $ambienteModernizacion->justificacion_ambiente_inactivo         = $request->justificacion_ambiente_inactivo;
+        $ambienteModernizacion->impacto_procesos_formacion              = $request->impacto_procesos_formacion;
+        $ambienteModernizacion->pertinencia_sector_productivo           = $request->pertinencia_sector_productivo;
+        $ambienteModernizacion->productividad_beneficiarios             = $request->productividad_beneficiarios;
+        $ambienteModernizacion->generacion_empleo                       = $request->generacion_empleo;
+        $ambienteModernizacion->creacion_empresas                       = $request->creacion_empresas;
+        $ambienteModernizacion->incorporacion_nuevos_conocimientos      = $request->incorporacion_nuevos_conocimientos;
+        $ambienteModernizacion->valor_agregado_entidades                = $request->valor_agregado_entidades;
+        $ambienteModernizacion->fortalecimiento_programas_formacion     = $request->fortalecimiento_programas_formacion;
+        $ambienteModernizacion->transferencia_tecnologias               = $request->transferencia_tecnologias;
+        $ambienteModernizacion->cobertura_perntinencia_formacion        = $request->cobertura_perntinencia_formacion;
+        $ambienteModernizacion->observaciones_generales_ambiente        = $request->observaciones_generales_ambiente;
 
-        $ambienteModernizacion->cod_proyectos_beneficiados          = $request->cod_proyectos_beneficiados;
+        $ambienteModernizacion->numero_personas_certificadas            = $request->numero_personas_certificadas;
+        $ambienteModernizacion->numero_tecnicas_tecnologias             = $request->numero_tecnicas_tecnologias;
+        $ambienteModernizacion->numero_publicaciones                    = $request->numero_publicaciones;
+        $ambienteModernizacion->numero_aprendices_beneficiados          = $request->numero_aprendices_beneficiados;
+
+        $ambienteModernizacion->cod_proyectos_beneficiados              = $request->cod_proyectos_beneficiados;
 
         $ambienteModernizacion->redConocimiento()->associate($request->red_conocimiento_id);
         $ambienteModernizacion->lineaInvestigacion()->associate($request->linea_investigacion_id);
@@ -374,8 +388,7 @@ class AmbienteModernizacionController extends Controller
         $ambienteModernizacion->load(
             'mesasSectoriales',
             'codigosProyectosSgps',
-            'programasFormacionCalificados',
-            'programasFormacionNoCalificados',
+            'programasFormacion',
             'semillerosInvestigacion'
         );
 

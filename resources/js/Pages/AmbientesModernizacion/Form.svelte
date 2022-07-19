@@ -293,7 +293,17 @@
                         <Label required class="mb-4" labelFor="razon_estado_general" value="14. Si la respuesta anterior fue regular o malo, describa la razón. Para mayor especificidad listar máquina por máquina para identificación a partir del tiempo de vida útil." />
                     </div>
                     <div>
-                        <Textarea label="Razón" maxlength="40000" id="razon_estado_general" error={errors.razon_estado_general} bind:value={$formRazonEstadoGeneral.razon_estado_general} required on:blur={() => syncColumnLong('razon_estado_general', $formRazonEstadoGeneral)} />
+                        <Textarea
+                            label="Razón"
+                            maxlength="40000"
+                            id="razon_estado_general"
+                            error={errors.razon_estado_general}
+                            bind:value={$formRazonEstadoGeneral.razon_estado_general}
+                            required
+                            on:blur={() => {
+                                syncColumnLong('razon_estado_general', $formRazonEstadoGeneral), ($form.razon_estado_general = $formRazonEstadoGeneral.razon_estado_general)
+                            }}
+                        />
                     </div>
                 </div>
             {/if}
@@ -331,7 +341,17 @@
                         <Label required class="mb-4" labelFor="justificacion_ambiente_inactivo" value="Si la respuesta anterior fue negativa, justifique la respuesta" />
                     </div>
                     <div>
-                        <Textarea label="Justificación" maxlength="4000" id="justificacion_ambiente_inactivo" error={errors.justificacion_ambiente_inactivo} bind:value={$formJustificacionAmbienteInactivo.justificacion_ambiente_inactivo} required on:blur={() => syncColumnLong('justificacion_ambiente_inactivo', $formJustificacionAmbienteInactivo)} />
+                        <Textarea
+                            label="Justificación"
+                            maxlength="4000"
+                            id="justificacion_ambiente_inactivo"
+                            error={errors.justificacion_ambiente_inactivo}
+                            bind:value={$formJustificacionAmbienteInactivo.justificacion_ambiente_inactivo}
+                            required
+                            on:blur={() => {
+                                syncColumnLong('justificacion_ambiente_inactivo', $formJustificacionAmbienteInactivo), ($form.justificacion_ambiente_inactivo = $formJustificacionAmbienteInactivo.justificacion_ambiente_inactivo)
+                            }}
+                        />
                     </div>
                 </div>
             {/if}
@@ -458,7 +478,17 @@
                     <Label required class="mb-4" labelFor="impacto_procesos_formacion" value="20. Describa el impacto generado en los procesos de formación" />
                 </div>
                 <div>
-                    <Textarea label="Impacto" maxlength="4000" id="impacto_procesos_formacion" error={errors.impacto_procesos_formacion} bind:value={$formImpactoProcesosFormacion.impacto_procesos_formacion} required on:blur={() => syncColumnLong('impacto_procesos_formacion', $formImpactoProcesosFormacion)} />
+                    <Textarea
+                        label="Impacto"
+                        maxlength="4000"
+                        id="impacto_procesos_formacion"
+                        error={errors.impacto_procesos_formacion}
+                        bind:value={$formImpactoProcesosFormacion.impacto_procesos_formacion}
+                        required
+                        on:blur={() => {
+                            syncColumnLong('impacto_procesos_formacion', $formImpactoProcesosFormacion), ($form.impacto_procesos_formacion = $formImpactoProcesosFormacion.impacto_procesos_formacion)
+                        }}
+                    />
                 </div>
             </div>
 
@@ -467,7 +497,17 @@
                     <Label required class="mb-4" labelFor="pertinencia_sector_productivo" value="21. Describa la pertinencia obtenida con el sector productivo" />
                 </div>
                 <div>
-                    <Textarea label="Pertinencia" maxlength="4000" id="pertinencia_sector_productivo" error={errors.pertinencia_sector_productivo} bind:value={$formPertinenciaSectorProductivo.pertinencia_sector_productivo} required on:blur={() => syncColumnLong('pertinencia_sector_productivo', $formPertinenciaSectorProductivo)} />
+                    <Textarea
+                        label="Pertinencia"
+                        maxlength="4000"
+                        id="pertinencia_sector_productivo"
+                        error={errors.pertinencia_sector_productivo}
+                        bind:value={$formPertinenciaSectorProductivo.pertinencia_sector_productivo}
+                        required
+                        on:blur={() => {
+                            syncColumnLong('pertinencia_sector_productivo', $formPertinenciaSectorProductivo), ($form.pertinencia_sector_productivo = $formPertinenciaSectorProductivo.pertinencia_sector_productivo)
+                        }}
+                    />
                 </div>
             </div>
 
@@ -496,7 +536,16 @@
                     <Label class="mb-4" labelFor="productividad_beneficiarios" value="24. Productividad y competitividad del (los) beneficiario(s) final(es) del proyecto." />
                 </div>
                 <div>
-                    <Textarea label="Descripción" maxlength="4000" id="productividad_beneficiarios" error={errors.productividad_beneficiarios} bind:value={$formProductividadBeneficiarios.productividad_beneficiarios} on:blur={() => syncColumnLong('productividad_beneficiarios', $formProductividadBeneficiarios)} />
+                    <Textarea
+                        label="Descripción"
+                        maxlength="4000"
+                        id="productividad_beneficiarios"
+                        error={errors.productividad_beneficiarios}
+                        bind:value={$formProductividadBeneficiarios.productividad_beneficiarios}
+                        on:blur={() => {
+                            syncColumnLong('productividad_beneficiarios', $formProductividadBeneficiarios), ($form.productividad_beneficiarios = $formProductividadBeneficiarios.productividad_beneficiarios)
+                        }}
+                    />
                 </div>
             </div>
 
@@ -505,7 +554,16 @@
                     <Label class="mb-4" labelFor="generacion_empleo" value="25. Generación o mantenimiento de empleo por parte del (los) beneficiario(s) del proyecto." />
                 </div>
                 <div>
-                    <Textarea label="Descripción" maxlength="4000" id="generacion_empleo" error={errors.generacion_empleo} bind:value={$formGeneracionEmpleo.generacion_empleo} on:blur={() => syncColumnLong('generacion_empleo', $formGeneracionEmpleo)} />
+                    <Textarea
+                        label="Descripción"
+                        maxlength="4000"
+                        id="generacion_empleo"
+                        error={errors.generacion_empleo}
+                        bind:value={$formGeneracionEmpleo.generacion_empleo}
+                        on:blur={() => {
+                            syncColumnLong('generacion_empleo', $formGeneracionEmpleo), ($form.generacion_empleo = $formGeneracionEmpleo.generacion_empleo)
+                        }}
+                    />
                 </div>
             </div>
 
@@ -514,7 +572,16 @@
                     <Label class="mb-4" labelFor="creacion_empresas" value="26. Creación de nuevas empresas y diseño y desarrollo de nuevos productos, procesos o servicios" />
                 </div>
                 <div>
-                    <Textarea label="Descripción" maxlength="4000" id="creacion_empresas" error={errors.creacion_empresas} bind:value={$formCreacionEmpresas.creacion_empresas} on:blur={() => syncColumnLong('creacion_empresas', $formCreacionEmpresas)} />
+                    <Textarea
+                        label="Descripción"
+                        maxlength="4000"
+                        id="creacion_empresas"
+                        error={errors.creacion_empresas}
+                        bind:value={$formCreacionEmpresas.creacion_empresas}
+                        on:blur={() => {
+                            syncColumnLong('creacion_empresas', $formCreacionEmpresas), ($form.creacion_empresas = $formCreacionEmpresas.creacion_empresas)
+                        }}
+                    />
                 </div>
             </div>
 
@@ -523,7 +590,16 @@
                     <Label class="mb-4" labelFor="incorporacion_nuevos_conocimientos" value="27. Incorporación de nuevos conocimientos y competencias laborales en el talento humano en la(s) empresa(s) beneficiaria(s) del proyecto" />
                 </div>
                 <div>
-                    <Textarea label="Descripción" maxlength="4000" id="incorporacion_nuevos_conocimientos" error={errors.incorporacion_nuevos_conocimientos} bind:value={$formIncorporacionNuevosConocimientos.incorporacion_nuevos_conocimientos} on:blur={() => syncColumnLong('incorporacion_nuevos_conocimientos', $formIncorporacionNuevosConocimientos)} />
+                    <Textarea
+                        label="Descripción"
+                        maxlength="4000"
+                        id="incorporacion_nuevos_conocimientos"
+                        error={errors.incorporacion_nuevos_conocimientos}
+                        bind:value={$formIncorporacionNuevosConocimientos.incorporacion_nuevos_conocimientos}
+                        on:blur={() => {
+                            syncColumnLong('incorporacion_nuevos_conocimientos', $formIncorporacionNuevosConocimientos), ($form.incorporacion_nuevos_conocimientos = $formIncorporacionNuevosConocimientos.incorporacion_nuevos_conocimientos)
+                        }}
+                    />
                 </div>
             </div>
 
@@ -532,7 +608,16 @@
                     <Label class="mb-4" labelFor="valor_agregado_entidades" value="28. Generación de valor agregado en la(s) entidad(es) beneficiaria(s) del proyecto" />
                 </div>
                 <div>
-                    <Textarea label="Descripción" maxlength="4000" id="valor_agregado_entidades" error={errors.valor_agregado_entidades} bind:value={$formValorAgregadoEntidades.valor_agregado_entidades} on:blur={() => syncColumnLong('valor_agregado_entidades', $formValorAgregadoEntidades)} />
+                    <Textarea
+                        label="Descripción"
+                        maxlength="4000"
+                        id="valor_agregado_entidades"
+                        error={errors.valor_agregado_entidades}
+                        bind:value={$formValorAgregadoEntidades.valor_agregado_entidades}
+                        on:blur={() => {
+                            syncColumnLong('valor_agregado_entidades', $formValorAgregadoEntidades), ($form.valor_agregado_entidades = $formValorAgregadoEntidades.valor_agregado_entidades)
+                        }}
+                    />
                 </div>
             </div>
 
@@ -541,7 +626,16 @@
                     <Label class="mb-4" labelFor="fortalecimiento_programas_formacion" value="29. Fortalecimiento de programas de formación del Sena" />
                 </div>
                 <div>
-                    <Textarea label="Descripción" maxlength="4000" id="fortalecimiento_programas_formacion" error={errors.fortalecimiento_programas_formacion} bind:value={$formFortalecimientoProgramasFormacion.fortalecimiento_programas_formacion} on:blur={() => syncColumnLong('fortalecimiento_programas_formacion', $formFortalecimientoProgramasFormacion)} />
+                    <Textarea
+                        label="Descripción"
+                        maxlength="4000"
+                        id="fortalecimiento_programas_formacion"
+                        error={errors.fortalecimiento_programas_formacion}
+                        bind:value={$formFortalecimientoProgramasFormacion.fortalecimiento_programas_formacion}
+                        on:blur={() => {
+                            syncColumnLong('fortalecimiento_programas_formacion', $formFortalecimientoProgramasFormacion), ($form.fortalecimiento_programas_formacion = $formFortalecimientoProgramasFormacion.fortalecimiento_programas_formacion)
+                        }}
+                    />
                 </div>
             </div>
 
@@ -550,7 +644,16 @@
                     <Label class="mb-4" labelFor="transferencia_tecnologias" value="30. Transferencia de tecnologías al Sena y a los sectores productivos relacionados" />
                 </div>
                 <div>
-                    <Textarea label="Descripción" maxlength="4000" id="transferencia_tecnologias" error={errors.transferencia_tecnologias} bind:value={$formTransferenciaTecnologias.transferencia_tecnologias} on:blur={() => syncColumnLong('transferencia_tecnologias', $formTransferenciaTecnologias)} />
+                    <Textarea
+                        label="Descripción"
+                        maxlength="4000"
+                        id="transferencia_tecnologias"
+                        error={errors.transferencia_tecnologias}
+                        bind:value={$formTransferenciaTecnologias.transferencia_tecnologias}
+                        on:blur={() => {
+                            syncColumnLong('transferencia_tecnologias', $formTransferenciaTecnologias), ($form.transferencia_tecnologias = $formTransferenciaTecnologias.transferencia_tecnologias)
+                        }}
+                    />
                 </div>
             </div>
 
@@ -559,7 +662,16 @@
                     <Label class="mb-4" labelFor="cobertura_perntinencia_formacion" value="31. Cobertura, calidad y pertinencia de la formación" />
                 </div>
                 <div>
-                    <Textarea label="Descripción" maxlength="4000" id="cobertura_perntinencia_formacion" error={errors.cobertura_perntinencia_formacion} bind:value={$formCoberturaPerntinenciaFormacion.cobertura_perntinencia_formacion} on:blur={() => syncColumnLong('cobertura_perntinencia_formacion', $formCoberturaPerntinenciaFormacion)} />
+                    <Textarea
+                        label="Descripción"
+                        maxlength="4000"
+                        id="cobertura_perntinencia_formacion"
+                        error={errors.cobertura_perntinencia_formacion}
+                        bind:value={$formCoberturaPerntinenciaFormacion.cobertura_perntinencia_formacion}
+                        on:blur={() => {
+                            syncColumnLong('cobertura_perntinencia_formacion', $formCoberturaPerntinenciaFormacion), ($form.cobertura_perntinencia_formacion = $formCoberturaPerntinenciaFormacion.cobertura_perntinencia_formacion)
+                        }}
+                    />
                 </div>
             </div>
 
@@ -578,7 +690,16 @@
                     <Label class="mb-4" labelFor="observaciones_generales_ambiente" value="33. Observaciones generales del ambiente modernizado por Sennova" />
                 </div>
                 <div>
-                    <Textarea label="Observaciones" maxlength="4000" id="observaciones_generales_ambiente" bind:value={$formObservacionesGeneralesAmbiente.observaciones_generales_ambiente} on:blur={() => syncColumnLong('observaciones_generales_ambiente', $formObservacionesGeneralesAmbiente)} error={errors.observaciones_generales_ambiente} />
+                    <Textarea
+                        label="Observaciones"
+                        maxlength="4000"
+                        id="observaciones_generales_ambiente"
+                        bind:value={$formObservacionesGeneralesAmbiente.observaciones_generales_ambiente}
+                        on:blur={() => {
+                            syncColumnLong('observaciones_generales_ambiente', $formObservacionesGeneralesAmbiente), ($form.observaciones_generales_ambiente = $formObservacionesGeneralesAmbiente.observaciones_generales_ambiente)
+                        }}
+                        error={errors.observaciones_generales_ambiente}
+                    />
                 </div>
             </div>
 
@@ -596,7 +717,7 @@
             </div>
         {/if}
     </fieldset>
-    <div class="shadow-inner bg-violet-200 border-violet-400 bottom-0 flex items-center justify-between mt-14 px-8 py-4 sticky">
+    <div class="shadow-inner bg-violet-200 border-violet-400 flex items-center justify-between mt-14 px-8 py-4">
         {#if ambienteModernizacion}
             <small class="flex items-center text-violet-700">
                 <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 mr-2" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
@@ -787,10 +908,18 @@
                 {:else}
                     <p style="margin-bottom: 4rem">Sin información registrada</p>
                 {/if}
-                <p style="white-space: pre-line; margin-bottom: 4rem">
+                <p style="white-space: pre-line">
                     <strong>Si la respuesta anterior fue afirmativa, relacione los semilleros de investigación beneficiados con el ambiente modernizado por Sennova:</strong>
-                    {$form.semilleros_investigacion_id ? $form.semilleros_investigacion_id?.label : 'Sin información registrada'}
                 </p>
+                {#if $form.semilleros_investigacion_id}
+                    <ul style="margin-bottom: 4rem">
+                        {#each $form.semilleros_investigacion_id as semilleroInvestigacion}
+                            <li>{semilleroInvestigacion.label}</li>
+                        {/each}
+                    </ul>
+                {:else}
+                    <p style="margin-bottom: 4rem">Sin información registrada</p>
+                {/if}
                 <p style="white-space: pre-line; margin-bottom: 4rem">
                     <strong>17. ¿El ambiente de formación ha generado formación complementaria después de la modernización con Sennova?</strong>
                     {$form.ambiente_formacion_complementaria ? $form.ambiente_formacion_complementaria?.label : 'Sin información registrada'}
@@ -819,10 +948,18 @@
                     <strong>Si la respuesta anterior fue afirmativa, relacione el número total de personas certificadas de las empresas que se ha brindado formación complementaria:</strong>
                     {$form.numero_personas_certificadas ? $form.numero_personas_certificadas : 'Sin información registrada'}
                 </p>
-                <p style="white-space: pre-line; margin-bottom: 4rem">
+                <p style="white-space: pre-line">
                     <strong>Si la respuesta anterior fue afirmativa, relacione los códigos y nombres Sena de cada curso de formación complementario:</strong>
-                    {$form.cursos_complementarios ? $form.cursos_complementarios : 'Sin información registrada'}
                 </p>
+                {#if JSON.parse($form.cursos_complementarios)?.length > 0}
+                    <ul style="margin-bottom: 4rem">
+                        {#each JSON.parse($form.cursos_complementarios) as curso}
+                            <li>{curso.value}</li>
+                        {/each}
+                    </ul>
+                {:else}
+                    <p style="margin-bottom: 4rem">Sin información registrada</p>
+                {/if}
                 <p style="white-space: pre-line; margin-bottom: 4rem">
                     <strong>18. Diligencie la coordenada latitud (W) del ambiente de formación modernizado por Sennova (generado en Google maps). Ejemplo: -74.062916:</strong>
                     {$form.coordenada_latitud_ambiente ? $form.coordenada_latitud_ambiente : 'Sin información registrada'}

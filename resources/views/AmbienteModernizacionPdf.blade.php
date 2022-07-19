@@ -367,7 +367,7 @@
                     </td>
                     <td width="60%">
                         <ul>
-                            @forelse ($ambienteModernizacion->programasFormacionCalificados as $programaFormacion)
+                            @forelse ($ambienteModernizacion->programasFormacion()->where('registro_calificado', true)->get() as $programaFormacion)
                                 <li>
                                     {{ $programaFormacion->nombre }}
                                     <br>
@@ -386,7 +386,7 @@
                     </td>
                     <td width="60%">
                         <ul>
-                            @forelse ($ambienteModernizacion->programasFormacionNoCalificados as $programaFormacion)
+                            @forelse ($ambienteModernizacion->programasFormacion()->where('registro_calificado', false)->get() as $programaFormacion)
                                 <li>
                                     {{ $programaFormacion->nombre }}
                                     <br>
@@ -431,15 +431,17 @@
                     </td>
                     <td width="60%">
                         <ul>
-                            @forelse ($ambienteModernizacion->programasFormacionCalificados as $programaFormacion)
-                                <li>
-                                    {{ $programaFormacion->nombre }}
-                                    <br>
-                                    {{ $programaFormacion->codigo }}
-                                </li>
-                            @empty
+                            @if ($ambienteModernizacion->cod_proyectos_beneficiados)
+                                @forelse (json_decode($ambienteModernizacion->cod_proyectos_beneficiados) as $proyectoBeneficiado)
+                                    <li>
+                                        {{ $proyectoBeneficiado->value }}
+                                    </li>
+                                @empty
+                                    <li>Sin información registrada</li>
+                                @endforelse
+                            @else
                                 <li>Sin información registrada</li>
-                            @endforelse
+                            @endif
                         </ul>
                     </td>
                 </tr>
