@@ -24,7 +24,7 @@ class ProponenteRequest extends FormRequest
     public function rules()
     {
         return [
-            'user_id'           => ['required', 'integer', 'exists:users,id'],
+            'user_id'           => ['required', 'integer', 'min:0', 'max:2147483647', 'exists:users,id'],
             'rol_sennova'       => ['required', 'min:0', 'max:2147483647', 'integer'],
             'cantidad_horas'    => ['required', 'numeric', 'min:1', 'max:168'],
             'cantidad_meses'    => ['required', 'numeric', 'min:1', 'max:11.5'],

@@ -51,7 +51,7 @@ class ProyectoIdiTecnoacademiaRequest extends FormRequest
                 'fuente_recursos'                           => ['required', 'string', 'max:255'],
                 'presupuesto'                               => ['required', 'numeric', 'min:0'],
                 'hace_parte_de_semillero'                   => ['required', 'boolean'],
-                'estado_proyecto'                           => ['required', 'integer', 'min:0'],
+                'estado_proyecto'                           => ['required', 'integer', 'min:0', 'max:2147483647'],
                 'poblacion_beneficiada'                     => ['required', 'string'],
                 'otra_poblacion_beneficiada'                => ['nullable', 'string'],
                 'nombre_centro_programa'                    => ['required', 'string', 'max:255'],
@@ -88,13 +88,19 @@ class ProyectoIdiTecnoacademiaRequest extends FormRequest
                 'fuente_recursos'                           => ['required', 'string', 'max:255'],
                 'presupuesto'                               => ['required', 'numeric', 'min:0'],
                 'hace_parte_de_semillero'                   => ['required', 'boolean'],
-                'estado_proyecto'                           => ['required', 'integer', 'min:0'],
+                'estado_proyecto'                           => ['required', 'integer', 'min:0', 'max:2147483647'],
                 'poblacion_beneficiada'                     => ['required', 'string'],
                 'otra_poblacion_beneficiada'                => ['nullable', 'string'],
                 'nombre_centro_programa'                    => ['required', 'string', 'max:255'],
+<<<<<<< HEAD
                 'pdf_proyecto'                              => ['required', 'file', 'max:10000000', 'mimetypes:application/pdf'],
                 'documentos_resultados'                     => ['nullable', 'file', 'max:10000000'],
                 'municipios*'                               => ['required', 'integer', 'exists:municipios,id'],
+=======
+                'pdf_proyecto'                              => ['required', 'string', 'url'],
+                'documentos_resultados'                     => ['nullable', 'string', 'url'],
+                'municipios*'                               => ['required', 'integer', 'min:0', 'max:2147483647', 'exists:municipios,id'],
+>>>>>>> cristian
                 'beneficiados'                              => ['required', 'array'],
             ];
         }

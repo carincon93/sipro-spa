@@ -51,7 +51,7 @@ class IdiRequest extends FormRequest
                 'objetivo_muestreo'                         => ['nullable', 'max:191'],
                 'recoleccion_especimenes'                   => ['required', 'min:1', 'max:2', 'integer'],
                 // 'bibliografia'                              => ['required', 'string'],
-                'numero_aprendices'                         => ['required', 'min:0', 'max:9999', 'integer'],
+                'numero_aprendices'                         => ['required', 'min:0', 'max:2147483647', 'integer'],
                 'municipios*'                               => ['required', 'integer', 'exists:municipios,id'],
                 'programas_formacion*'                      => ['required', 'integer', 'exists:programas_formacion,id'],
                 'programas_formacion_articulados*'          => ['nullable', 'integer', 'exists:programas_formacion_articulados,id'],

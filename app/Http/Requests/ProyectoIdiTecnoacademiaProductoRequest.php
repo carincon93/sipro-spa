@@ -26,7 +26,7 @@ class ProyectoIdiTecnoacademiaProductoRequest extends FormRequest
         return [
             'tipo_producto_idi_id'  => ['required', 'min:0', 'max:2147483647', 'exists:tipos_producto_idi,id'],
             'fecha_realizacion'     => ['nullable', 'date', 'date_format:Y-m-d'],
-            'estado'                => ['required', 'integer', 'min:0'],
+            'estado'                => ['required', 'integer', 'min:0', 'max:2147483647'],
             'lugar'                 => ['nullable', 'string', 'max:255'],
             'descripcion'           => ['required', 'string'],
             'link'                  => ['nullable', 'url', 'string'],

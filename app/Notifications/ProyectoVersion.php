@@ -7,7 +7,7 @@ use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Notifications\Messages\MailMessage;
 use Illuminate\Notifications\Notification;
 
-class ProjectoVersion extends Notification
+class ProyectoVersion extends Notification
 {
     use Queueable;
 

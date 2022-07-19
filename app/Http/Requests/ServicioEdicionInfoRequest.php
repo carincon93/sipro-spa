@@ -24,7 +24,7 @@ class ServicioEdicionInfoRequest extends FormRequest
     public function rules()
     {
         return [
-            'servicio_edicion_info' => ['exclude_if:numero_items,null', 'exclude_if:codigo_uso_presupuestal,2010100600203101', 'required_if:codigo_uso_presupuestal,2020200800901', 'integer'],
+            'servicio_edicion_info' => ['exclude_if:numero_items,null', 'exclude_if:codigo_uso_presupuestal,2010100600203101', 'required_if:codigo_uso_presupuestal,2020200800901', 'integer', 'min:0', 'max:32767'],
         ];
     }
 

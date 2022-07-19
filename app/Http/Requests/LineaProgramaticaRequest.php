@@ -28,7 +28,7 @@ class LineaProgramaticaRequest extends FormRequest
             'codigo'                => ['required', 'min:0', 'max:2147483647', 'integer'],
             'descripcion'           => ['required'],
             'categoria_proyecto'    => ['required', 'max:191'],
-            'activadores*'          => ['required', 'integer', 'exists:users,id'],
+            'activadores*'          => ['required', 'integer', 'min:0', 'max:2147483647', 'exists:users,id'],
         ];
     }
 

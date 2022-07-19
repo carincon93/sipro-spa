@@ -24,13 +24,13 @@ class ArticulacionSennovaRequest extends FormRequest
     public function rules()
     {
         return [
-            'lineas_investigacion*'             => ['required', 'integer', 'exists:lineas_investigacion,id'],
-            'grupos_investigacion*'             => ['required', 'integer', 'exists:grupos_investigacion,id'],
-            'semilleros_investigacion*'         => ['required', 'integer', 'exists:semilleros_investigacion,id'],
-            'disciplinas_subarea_conocimiento*' => ['required', 'integer', 'exists:disciplinas_subarea_conocimiento,id'],
-            'redes_conocimiento*'               => ['required', 'integer', 'exists:redes_conocimiento,id'],
-            'tematicas_estrategicas*'           => ['required', 'integer', 'exists:tematicas_estrategicas,id'],
-            'actividades_economicas*'           => ['required', 'integer', 'exists:actividades_economicas,id'],
+            'lineas_investigacion*'             => ['required', 'integer', 'min:0', 'max:2147483647', 'exists:lineas_investigacion,id'],
+            'grupos_investigacion*'             => ['required', 'integer', 'min:0', 'max:2147483647', 'exists:grupos_investigacion,id'],
+            'semilleros_investigacion*'         => ['required', 'integer', 'min:0', 'max:2147483647', 'exists:semilleros_investigacion,id'],
+            'disciplinas_subarea_conocimiento*' => ['required', 'integer', 'min:0', 'max:2147483647', 'exists:disciplinas_subarea_conocimiento,id'],
+            'redes_conocimiento*'               => ['required', 'integer', 'min:0', 'max:2147483647', 'exists:redes_conocimiento,id'],
+            'tematicas_estrategicas*'           => ['required', 'integer', 'min:0', 'max:2147483647', 'exists:tematicas_estrategicas,id'],
+            'actividades_economicas*'           => ['required', 'integer', 'min:0', 'max:2147483647', 'exists:actividades_economicas,id'],
             'articulacion_semillero'            => ['required', 'min:0', 'max:2', 'integer'],
             'semilleros_en_formalizacion'       => ['nullable', 'json'],
         ];

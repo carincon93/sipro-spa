@@ -712,13 +712,17 @@
                 </td>
                 <td width="60%">
                     <ul>
-                        @forelse (json_decode($ambienteModernizacion->palabras_clave_ambiente) as $palabraClave)
-                            <li>
-                                {{ $palabraClave->value }}
-                            </li>
-                        @empty
+                        @if ($ambienteModernizacion->palabras_clave_ambiente)
+                            @forelse (json_decode($ambienteModernizacion->palabras_clave_ambiente) as $palabraClave)
+                                <li>
+                                    {{ $palabraClave->value }}
+                                </li>
+                            @empty
+                                <li>Sin información registrada</li>
+                            @endforelse
+                        @else
                             <li>Sin información registrada</li>
-                        @endforelse
+                        @endif
                     </ul>
                 </td>
             </tr>
@@ -756,52 +760,57 @@
         @forelse ($ambienteModernizacion->equiposAmbienteModernizacion as $equipo)
             <table width="100%" border="1" cellspacing="0" cellpadding="10" style="margin-top: 10px;">
                 <tr>
-                    <td width="20%">
+                    <td width="40%">
                         <p style="font-weight: bold;">Número de inventario SENA del equipo o maquina</p>
-                        <br>
                         <p>{{ $equipo->numero_inventario_equipo }}</p>
-                    </td>
-                    <td width="20%">
+
+                        <br>
                         <p style="font-weight: bold;">Nombre del equipo o maquina</p>
-                        <br>
                         <p>{{ $equipo->nombre_equipo }}</p>
-                    </td>
-                    <td width="20%">
-                        <p style="font-weight: bold;">Marca</p>
+
                         <br>
-                        <p>{{ $equipo->marca }}</p>
-                    </td>
-                    <td width="20%">
-                        <p style="font-weight: bold;">Descripción general técnica del equipo o maquina</p>
-                        <br>
-                        <p>{{ $equipo->descripcion_tecnica_equipo }}</p>
-                    </td>
-                    <td width="20%">
                         <p style="font-weight: bold;">Promedio de horas de uso al año</p>
-                        <br>
                         <p>{{ $equipo->horas_promedio_uso }}</p>
-                    </td>
-                </tr>
-                <tr>
-                    <td width="25%">
-                        <p style="font-weight: bold;">Estado del equipo o maquina</p>
+
                         <br>
-                        <p>{{ ($equipo->estado_equipo == 1 ? 'Bueno' : $equipo->estado_equipo == 2) ? 'Regular' : 'Malo' }}</p>
-                    </td>
-                    <td width="25%">
-                        <p style="font-weight: bold;">¿El equipo o maquina está en funcionamiento?</p>
+                        <p style="font-weight: bold;">Marca</p>
+                        <p>{{ $equipo->marca }}</p>
+
+                        <p style="font-weight: bold;">Año de adquisición del equipo o maquina</p>
+                        <p>{{ $equipo->year_adquisicion }}</p>
+
                         <br>
-                        <p>{{ $equipo->equipo_en_funcionamiento ? 'Si' : 'No' }}</p>
-                    </td>
-                    <td width="25%">
-                        <p style="font-weight: bold;">¿Con qué frecuencia requiere mantenimiento el equipo o maquina?</p>
+                        <p style="font-weight: bold;">Nombre del cuentadante</p>
+                        <p>{{ $equipo->nombre_cuentadante }}</p>
+
                         <br>
-                        <p>{{ $equipo->frecuencia_mantenimiento }}</p>
+                        <p style="font-weight: bold;">Cédula del cuentadante</p>
+                        <p>{{ $equipo->cedula_cuentadante }}</p>
+
+                        <br>
+                        <p style="font-weight: bold;">Rol del cuentadante</p>
+                        <p>{{ $equipo->rol_cuentadante }}</p>
                     </td>
-                    <td width="25%">
+
+                    <td width="60%">
+                        <p style="font-weight: bold;">Descripción general técnica del equipo o maquina</p>
+                        <p>{{ $equipo->descripcion_tecnica_equipo }}</p>
+
+                        <br>
                         <p style="font-weight: bold;">Observaciones generales</p>
-                        <br>
                         <p>{{ $equipo->observaciones_generales }}</p>
+
+                        <br>
+                        <p style="font-weight: bold;">Estado del equipo o maquina</p>
+                        <p>{{ ($equipo->estado_equipo == 1 ? 'Bueno' : $equipo->estado_equipo == 2) ? 'Regular' : 'Malo' }}</p>
+
+                        <br>
+                        <p style="font-weight: bold;">¿El equipo o maquina está en funcionamiento?</p>
+                        <p>{{ $equipo->equipo_en_funcionamiento ? 'Si' : 'No' }}</p>
+
+                        <br>
+                        <p style="font-weight: bold;">¿Con qué frecuencia requiere mantenimiento el equipo o maquina?</p>
+                        <p>{{ $equipo->frecuencia_mantenimiento }}</p>
                     </td>
                 </tr>
             </table>

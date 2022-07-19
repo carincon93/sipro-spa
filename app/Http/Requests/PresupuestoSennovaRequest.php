@@ -24,11 +24,11 @@ class PresupuestoSennovaRequest extends FormRequest
     public function rules()
     {
         return [
-            'primer_grupo_presupuestal_id'     => ['required', 'min:0', 'max:2147483647999', 'integer', 'exists:primer_grupo_presupuestal,id'],
-            'segundo_grupo_presupuestal_id'    => ['required', 'min:0', 'max:2147483647999', 'integer', 'exists:segundo_grupo_presupuestal,id'],
-            'tercer_grupo_presupuestal_id'     => ['required', 'min:0', 'max:2147483647999', 'integer', 'exists:tercer_grupo_presupuestal,id'],
-            'uso_presupuestal_id'              => ['required', 'min:0', 'max:2147483647999', 'integer', 'exists:usos_presupuestales,id'],
-            'linea_programatica_id'            => ['required', 'min:0', 'max:2147483647999', 'integer', 'exists:lineas_programaticas,id'],
+            'primer_grupo_presupuestal_id'     => ['required', 'min:0', 'max:2147483647', 'integer', 'exists:primer_grupo_presupuestal,id'],
+            'segundo_grupo_presupuestal_id'    => ['required', 'min:0', 'max:2147483647', 'integer', 'exists:segundo_grupo_presupuestal,id'],
+            'tercer_grupo_presupuestal_id'     => ['required', 'min:0', 'max:2147483647', 'integer', 'exists:tercer_grupo_presupuestal,id'],
+            'uso_presupuestal_id'              => ['required', 'min:0', 'max:2147483647', 'integer', 'exists:usos_presupuestales,id'],
+            'linea_programatica_id'            => ['required', 'min:0', 'max:2147483647', 'integer', 'exists:lineas_programaticas,id'],
             'requiere_estudio_mercado'         => ['required', 'boolean'],
             'sumar_al_presupuesto'             => ['required', 'boolean'],
             'mensaje'                          => ['nullable', 'string'],

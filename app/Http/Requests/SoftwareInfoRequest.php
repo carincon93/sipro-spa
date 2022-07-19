@@ -25,9 +25,8 @@ class SoftwareInfoRequest extends FormRequest
     {
         return [
             'proyecto_presupuesto_id'   => ['required', 'min:0', 'max:2147483647', 'integer', 'exists:proyecto_presupuesto,id'],
-            'tipo_licencia'             => ['required', 'integer'],
-            'tipo_licencia'             => ['required', 'integer'],
-            'tipo_software'             => ['required', 'integer'],
+            'tipo_licencia'             => ['required', 'integer', 'min:0', 'max:32767'],
+            'tipo_software'             => ['required', 'integer', 'min:0', 'max:32767'],
             'fecha_inicio'              => ['required', 'date', 'date_format:Y-m-d', 'before:fecha_finalizacion'],
             'fecha_finalizacion'        => ['required', 'date', 'date_format:Y-m-d', 'after:fecha_inicio'],
         ];

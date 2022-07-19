@@ -57,19 +57,19 @@ class PdfController extends Controller
         $base64CadenaValor      = PdfController::takeScreenshot(route('convocatorias.proyectos.cadena-valor', ['proyecto' => $proyecto->id, 'convocatoria' => $convocatoria->id]));
 
         $pdf = PDF::loadView('Convocatorias.Proyectos.ResumenPdf', [
-            'convocatoria' => $convocatoria,
-            'proyecto' => $proyecto,
-            'datos' => $datos,
-            'tipoProyectoSt' => $tipoProyectoSt,
-            'base64Arbolproblemas' => $base64Arbolproblemas,
-            'base64Arbolobjetivos' => $base64Arbolobjetivos,
-            'base64GantProductos' => $base64GantProductos,
-            'base64GantActividades' => $base64GantActividades,
-            'base64CadenaValor' => $base64CadenaValor,
-            'proyectoAnexo' => $proyecto->proyectoAnexo()->select('proyecto_anexo.id', 'proyecto_anexo.anexo_id', 'proyecto_anexo.archivo', 'anexos.nombre')
+            'convocatoria'              => $convocatoria,
+            'proyecto'                  => $proyecto,
+            'datos'                     => $datos,
+            'tipoProyectoSt'            => $tipoProyectoSt,
+            'base64Arbolproblemas'      => $base64Arbolproblemas,
+            'base64Arbolobjetivos'      => $base64Arbolobjetivos,
+            'base64GantProductos'       => $base64GantProductos,
+            'base64GantActividades'     => $base64GantActividades,
+            'base64CadenaValor'         => $base64CadenaValor,
+            'proyectoAnexo'             => $proyecto->proyectoAnexo()->select('proyecto_anexo.id', 'proyecto_anexo.anexo_id', 'proyecto_anexo.archivo', 'anexos.nombre')
                 ->join('anexos', 'proyecto_anexo.anexo_id', 'anexos.id')->get(),
-            'rolesSennova' => $rolesSennova,
-            'tiposImpacto'    => collect(json_decode(Storage::get('json/tipos-impacto.json'), true)),
+            'rolesSennova'              => $rolesSennova,
+            'tiposImpacto'              => collect(json_decode(Storage::get('json/tipos-impacto.json'), true)),
             'estadosInventarioEquipos'  => collect(json_decode(Storage::get('json/estados-inventario-equipos.json'), true)),
             'tiposLicencia'             => collect(json_decode(Storage::get('json/tipos-licencia-software.json'), true)),
             'opcionesServiciosEdicion'  => collect(json_decode(Storage::get('json/opciones-servicios-edicion.json'), true)),

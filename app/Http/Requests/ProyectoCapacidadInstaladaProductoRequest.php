@@ -25,8 +25,8 @@ class ProyectoCapacidadInstaladaProductoRequest extends FormRequest
     {
         return [
             'descripcion'           => ['required', 'string'],
-            'resultado_id'          => ['required', 'min:0', 'max:2147483647999', 'integer', 'exists:proyectos_capacidad_resultado,id'],
-            'tipologia_minciencias' => ['required', 'integer']
+            'resultado_id'          => ['required', 'min:0', 'max:2147483647', 'integer', 'exists:proyectos_capacidad_resultado,id'],
+            'tipologia_minciencias' => ['required', 'integer', 'min:0', 'max:2147483647']
         ];
     }
 

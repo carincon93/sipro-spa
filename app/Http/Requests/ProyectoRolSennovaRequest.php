@@ -27,7 +27,7 @@ class ProyectoRolSennovaRequest extends FormRequest
             'convocatoria_rol_sennova_id'   => ['required', 'min:0', 'max:2147483647', 'integer', 'exists:convocatoria_rol_sennova,id'],
             'descripcion'                   => ['required'],
             'numero_meses'                  => ['required', 'min:0', 'max:12'],
-            'numero_roles'                  => ['required', 'min:0', 'max:999', 'integer']
+            'numero_roles'                  => ['required', 'min:0', 'max:32767', 'integer']
         ];
     }
 
@@ -38,7 +38,7 @@ class ProyectoRolSennovaRequest extends FormRequest
      */
     protected function prepareForValidation()
     {
-        if( is_array($this->convocatoria_rol_sennova_id) ) {
+        if (is_array($this->convocatoria_rol_sennova_id)) {
             $this->merge([
                 'convocatoria_rol_sennova_id' => $this->convocatoria_rol_sennova_id['value'],
             ]);
