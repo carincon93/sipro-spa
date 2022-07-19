@@ -65,7 +65,7 @@ class SemilleroInvestigacionPolicy
      */
     public function update(User $user, SemilleroInvestigacion $semilleroInvestigacion)
     {
-        if ($user->hasRole([20, 18, 19, 5, 17]) || $user->hasRole(4) && $user->dinamizadorCentroFormacion->id == $semilleroInvestigacion->lineaInvestigacion->grupoInvestigacion->centroFormacion->id || $user->hasRole(21) && $user->centroFormacion->id == $semilleroInvestigacion->lineaInvestigacion->grupoInvestigacion->centroFormacion->id) {
+        if ($user->hasRole([20, 18, 19, 5, 17]) || $user->hasRole(4) && $semilleroInvestigacion->lineaInvestigacion()->exists() && $user->dinamizadorCentroFormacion->id == $semilleroInvestigacion->lineaInvestigacion->grupoInvestigacion->centroFormacion->id || $user->hasRole(21) && $semilleroInvestigacion->lineaInvestigacion()->exists() && $user->centroFormacion->id == $semilleroInvestigacion->lineaInvestigacion->grupoInvestigacion->centroFormacion->id) {
             return true;
         }
 

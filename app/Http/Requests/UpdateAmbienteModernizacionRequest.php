@@ -42,7 +42,7 @@ class UpdateAmbienteModernizacionRequest extends FormRequest
             'estado_general_maquinaria'             => ['required', 'integer'],
             'ambiente_activo'                       => ['required', 'boolean'],
             'programas_formacion_calificados'       => ['required_if:ambiente_activo,1', 'nullable'],
-            'programas_formacion'                   => ['required_if:ambiente_activo,1', 'nullable'],
+            'programas_formacion'                   => ['nullable'],
             'numero_proyectos_beneficiados'         => ['required_if:ambiente_activo_procesos_idi,1', 'nullable', 'integer', 'min:0', 'max:32767'],
             'ambiente_formacion_complementaria'     => ['required', 'boolean'],
             'numero_total_cursos_comp'              => ['required_if:ambiente_formacion_complementaria,1', 'nullable', 'integer', 'min:0', 'max:32767'],
@@ -51,7 +51,6 @@ class UpdateAmbienteModernizacionRequest extends FormRequest
             'cursos_complementarios'                => ['required_if:ambiente_formacion_complementaria,1', 'nullable', 'json'],
             'coordenada_latitud_ambiente'           => ['required', 'string'],
             'coordenada_longitud_ambiente'          => ['required', 'string'],
-            'soporte_fotos_ambiente'                => ['nullable', 'max:191'],
             'palabras_clave_ambiente'               => ['required', 'json'],
             'observaciones_generales_ambiente'      => ['nullable', 'string'],
             'numero_personas_certificadas'          => ['required_if:ambiente_formacion_complementaria,1', 'nullable', 'integer', 'min:0', 'max:2147483647999'],
@@ -76,6 +75,36 @@ class UpdateAmbienteModernizacionRequest extends FormRequest
      */
     protected function prepareForValidation()
     {
+        if (is_array($this->disciplina_subarea_conocimiento_id)) {
+            $this->merge([
+                'disciplina_subarea_conocimiento_id' => $this->disciplina_subarea_conocimiento_id['value'],
+            ]);
+        }
+
+        if (is_array($this->actividad_economica_id)) {
+            $this->merge([
+                'actividad_economica_id' => $this->actividad_economica_id['value'],
+            ]);
+        }
+
+        if (is_array($this->linea_investigacion_id)) {
+            $this->merge([
+                'linea_investigacion_id' => $this->linea_investigacion_id['value'],
+            ]);
+        }
+
+        if (is_array($this->red_conocimiento_id)) {
+            $this->merge([
+                'red_conocimiento_id' => $this->red_conocimiento_id['value'],
+            ]);
+        }
+
+        if (is_array($this->tematica_estrategica_id)) {
+            $this->merge([
+                'tematica_estrategica_id' => $this->tematica_estrategica_id['value'],
+            ]);
+        }
+
         if (is_array($this->codigo_proyecto_sgps_id)) {
             $this->merge([
                 'codigo_proyecto_sgps_id' => $this->codigo_proyecto_sgps_id['value'],
@@ -190,6 +219,10 @@ class UpdateAmbienteModernizacionRequest extends FormRequest
                 }
                 $this->merge(['programas_formacion' => $programas_formacion]);
             }
+        } else {
+            $this->merge([
+                'programas_formacion' => [],
+            ]);
         }
     }
 }

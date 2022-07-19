@@ -5,6 +5,7 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Carbon\Carbon;
+use Illuminate\Support\Facades\Gate;
 
 class AmbienteModernizacion extends Model
 {
@@ -22,7 +23,7 @@ class AmbienteModernizacion extends Model
      *
      * @var array
      */
-    protected $appends = ['year_modernizacion', 'fecha_seguimiento', 'estado'];
+    protected $appends = ['year_modernizacion', 'fecha_seguimiento', 'estado', 'ruta_final_sharepoint', 'allowed'];
 
     /**
      * The attributes that are mass assignable.
@@ -208,19 +209,9 @@ class AmbienteModernizacion extends Model
      *
      * @return object
      */
-    public function programasFormacionCalificados()
+    public function programasFormacion()
     {
-        return $this->belongsToMany(ProgramaFormacion::class, 'ambiente_modernizacion_programa_calificado', 'ambiente_modernizacion_id', 'programa_formacion_calificado_id');
-    }
-
-    /**
-     * Relationship with ProgramaFormacionArticulado
-     *
-     * @return object
-     */
-    public function programasFormacionNoCalificados()
-    {
-        return $this->belongsToMany(ProgramaFormacionArticulado::class, 'ambiente_modernizacion_programa_sin_calificado', 'ambiente_modernizacion_id', 'programa_formacion_sin_calificado_id');
+        return $this->belongsToMany(ProgramaFormacion::class, 'ambiente_modernizacion_programa_formacion', 'ambiente_modernizacion_id', 'programa_formacion_id');
     }
 
     /**
@@ -247,6 +238,16 @@ class AmbienteModernizacion extends Model
         });
     }
 
+    /**
+     * getUpdatedAtAttribute
+     *
+     * @return void
+     */
+    public function getUpdatedAtAttribute($value)
+    {
+        return "Última modificación de este formulario: " . Carbon::parse($value, 'UTC')->timezone('America/Bogota')->timezone('America/Bogota')->locale('es')->isoFormat('DD [de] MMMM [de] YYYY [a las] HH:mm:ss');
+    }
+
     public function getYearModernizacionAttribute()
     {
         return date('Y', strtotime($this->created_at));
@@ -265,5 +266,40 @@ class AmbienteModernizacion extends Model
     public function getEstadoAttribute()
     {
         return $this->seguimientoAmbienteModernizacion->getNumeroSeguimientos();
+    }
+
+    public function getNombreCarpetaSharepointAttribute()
+    {
+        return trim(preg_replace('/[^A-Za-z0-9\-ÁÉÍÓÚáéíóúÑñ]/', ' ', mb_strtoupper($this->seguimientoAmbienteModernizacion->codigo)));
+    }
+
+    public function getRutaFinalSharepointAttribute()
+    {
+        $ruta = '';
+        if ($this->seguimientoAmbienteModernizacion) {
+            $ruta = trim($this->seguimientoAmbienteModernizacion->centroFormacion->nombre_carpeta_sharepoint . '/SEGUIMIENTOS-POSTCIERRE-AMBIENTES-MODERNZIACION/' . $this->nombre_carpeta_sharepoint);
+        }
+
+        return $ruta;
+    }
+
+    /**
+     *
+     * @return string
+     */
+    public function filename($path)
+    {
+        $pathExplode = explode("/", $this->{$path});
+
+        return end($pathExplode);
+    }
+
+    public function getAllowedAttribute()
+    {
+        $allowedToView      = Gate::inspect('view', [AmbienteModernizacion::class, $this]);
+        $allowedToUpdate    = Gate::inspect('update', [AmbienteModernizacion::class, $this]);
+        $allowedToDestroy   = Gate::inspect('delete', [AmbienteModernizacion::class, $this]);
+
+        return collect(['to_view' => $allowedToView->allowed(), 'to_update' => $allowedToUpdate->allowed(), 'to_destroy' => $allowedToDestroy->allowed()]);
     }
 }

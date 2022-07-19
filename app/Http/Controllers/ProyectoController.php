@@ -642,7 +642,10 @@ class ProyectoController extends Controller
      */
     public function finalizarEvaluacion(Request $request, Convocatoria $convocatoria, Evaluacion $evaluacion)
     {
-        if (!Hash::check($request->password, Auth::user()->password)) {
+        /** @var \App\Models\User */
+        $authUser = Auth::user();
+
+        if (!Hash::check($request->password, $authUser->password)) {
             return back()
                 ->withErrors(['password' => __('The password is incorrect.')]);
         }
@@ -652,7 +655,7 @@ class ProyectoController extends Controller
         $evaluacion->modificable = false;
         $evaluacion->save();
 
-        Auth::user()->notify(new EvaluacionFinalizada($convocatoria, $evaluacion->proyecto));
+        $authUser->notify(new EvaluacionFinalizada($convocatoria, $evaluacion->proyecto));
 
         return back()->with('success', 'La evaluación ha sido finalizada correctamente.');
     }
@@ -667,7 +670,10 @@ class ProyectoController extends Controller
     {
         $this->authorize('visualizar-proyecto-autor', [$proyecto]);
 
-        if (!Hash::check($request->password, Auth::user()->password)) {
+        /** @var \App\Models\User */
+        $authUser = Auth::user();
+
+        if (!Hash::check($request->password, $authUser->password)) {
             return back()
                 ->withErrors(['password' => __('The password is incorrect.')]);
         }
@@ -694,11 +700,13 @@ class ProyectoController extends Controller
     {
         $this->authorize('validar-dinamizador', [$proyecto]);
 
-        if (!Hash::check($request->password, Auth::user()->password)) {
+        /** @var \App\Models\User */
+        $authUser = Auth::user();
+
+        if (!Hash::check($request->password, $authUser->password)) {
             return back()
                 ->withErrors(['password' => __('The password is incorrect.')]);
         }
-
 
         $proyecto->habilitado_para_evaluar = true;
         $proyecto->finalizado = true;
@@ -706,7 +714,7 @@ class ProyectoController extends Controller
         $proyecto->save();
 
         $user = $proyecto->participantes()->where('es_formulador', true)->first();
-        $user->notify(new ProyectoConfirmado($proyecto, Auth::user()));
+        $user->notify(new ProyectoConfirmado($proyecto, $authUser));
 
         return back()->with('success', 'Se ha confirmado el proyecto correctamente.');
     }

@@ -30,7 +30,7 @@
     {#if sinContador == true}
         <Textarea {disabled} textarea bind:value {label} {...props} on:input />
     {:else}
-        <Textarea {disabled} textarea input$maxlength={maxlength} bind:value {label} {...props} on:input>
+        <Textarea {disabled} textarea input$maxlength={maxlength} bind:value {label} {...props} on:input on:blur>
             <CharacterCounter slot="internalCounter">0 / {maxlength}</CharacterCounter>
         </Textarea>
     {/if}

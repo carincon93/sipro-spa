@@ -18,7 +18,7 @@ class AmbienteModernizacionPolicy
      */
     public function viewAny(User $user)
     {
-        return false;
+        return true;
 
         if ($user->hasRole([4])) {
             return true;
@@ -49,7 +49,7 @@ class AmbienteModernizacionPolicy
      */
     public function create(User $user)
     {
-        return false;
+        return true;
 
         if ($user->hasRole([4])) {
             return true;
@@ -65,7 +65,7 @@ class AmbienteModernizacionPolicy
      */
     public function update(User $user, AmbienteModernizacion $ambienteModernizacion)
     {
-        return false;
+        return true;
 
         if ($user->hasRole(4) && $user->id == $ambienteModernizacion->dinamizador_sennova_id && $ambienteModernizacion->finalizado == false) {
             return true;
@@ -81,7 +81,7 @@ class AmbienteModernizacionPolicy
      */
     public function delete(User $user, AmbienteModernizacion $ambienteModernizacion)
     {
-        return false;
+        return true;
 
         if ($user->hasRole(4) && $user->id == $ambienteModernizacion->dinamizador_sennova_id && $ambienteModernizacion->finalizado == false) {
             return true;

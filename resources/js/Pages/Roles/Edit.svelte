@@ -55,9 +55,7 @@
         <div class="flex items-center justify-between lg:px-8 max-w-7xl mx-auto px-4 py-6 sm:px-6">
             <div>
                 <h1 class="overflow-ellipsis overflow-hidden w-breadcrumb-ellipsis whitespace-nowrap">
-                    {#if isSuperAdmin}
-                        <a use:inertia href={route('roles.index')} class="text-violet-400 hover:text-violet-600"> Roles de sistema </a>
-                    {/if}
+                    <a use:inertia href={route('roles.index')} class="text-violet-400 hover:text-violet-600"> Roles de sistema </a>
                     <span class="text-violet-400 font-medium">/</span>
                     {role.name}
                 </h1>

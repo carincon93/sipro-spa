@@ -7,14 +7,14 @@
 
     import Button from '@/Shared/Button'
     import Dialog from '@/Shared/Dialog'
-    import InfoMessage from '@/Shared/InfoMessage'
+
+    let dialogOpen = true
+    let allowed = $page.props.allowed
 
     $title = 'Panel de control'
 
     let authUser = $page.props.auth.user
     let isSuperAdmin = checkRole(authUser, [1])
-
-    let dialogOpen = true
 </script>
 
 <AuthenticatedLayout>
@@ -122,7 +122,7 @@
                 <a use:inertia class="bg-white overflow-hidden shadow-sm sm:rounded-lg px-6 py-2 hover:bg-violet-500 hover:text-white h-52 flex justify-around items-center flex-col" href={route('roles.index')}>Roles de sistema</a>
             {/if}
 
-            {#if isSuperAdmin}
+            {#if allowed.ambientes_modernizacion}
                 <a use:inertia class="bg-white overflow-hidden shadow-sm sm:rounded-lg px-6 py-2 hover:bg-violet-500 hover:text-white h-52 flex justify-around items-center flex-col text-center" href={route('ambientes-modernizacion.index')}>Seguimiento post cierre - Ambientes de modernización SENNOVA</a>
             {/if}
 

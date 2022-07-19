@@ -28,6 +28,8 @@ class ProgramaFormacion extends Model
         'codigo',
         'modalidad',
         'nivel_formacion',
+        'registro_calificado',
+        'tipo'
     ];
 
     /**

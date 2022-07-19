@@ -9,6 +9,7 @@
     export let id = ''
     export let error
     export let required
+    export let selectFunctions
     export let placeholder
     export let autocomplete
     export let items = []
@@ -47,7 +48,9 @@
     {isMulti}
     {isSearchable}
     {groupBy}
-    on:select={(e) => handleSelect(e)}
+    on:select={(e) => {
+        handleSelect(e), selectFunctions?.map((item) => item(e))
+    }}
     on:clear={() => (selectedValue = null)}
     noOptionsMessage="No hay ítems, por favor revise los filtros"
 />

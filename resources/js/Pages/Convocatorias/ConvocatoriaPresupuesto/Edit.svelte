@@ -51,9 +51,7 @@
         <div class="flex items-center justify-between lg:px-8 max-w-7xl mx-auto px-4 py-6 sm:px-6">
             <div>
                 <h1 class="overflow-ellipsis overflow-hidden w-breadcrumb-ellipsis whitespace-nowrap">
-                    {#if isSuperAdmin}
-                        <a use:inertia href={route('convocatorias.convocatoria-presupuesto.index', convocatoria.id)} class="text-violet-400 hover:text-violet-600"> Rubros presupuestales SENNOVA de convocatoria</a>
-                    {/if}
+                    <a use:inertia href={route('convocatorias.convocatoria-presupuesto.index', convocatoria.id)} class="text-violet-400 hover:text-violet-600"> Rubros presupuestales SENNOVA de convocatoria</a>
                     <span class="text-violet-400 font-medium">/</span>
                     {convocatoriaPresupuesto.presupuesto_sennova.codigo}
                 </h1>

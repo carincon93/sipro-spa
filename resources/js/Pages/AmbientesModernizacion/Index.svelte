@@ -15,6 +15,7 @@
 
     export let ambientesModernizacion
     export let codigosSgpsFaltantes
+    export let allowedToCreate
 
     let seguimientosDialog = false
 
@@ -35,6 +36,20 @@
         seguimientoId = ambienteModernizacion.seguimiento_ambiente_modernizacion.id
         seguimientosDialog = true
     }
+
+    let ambienteModernizacionId
+    let dialogEliminar = false
+    let allowedToDestroy
+    function destroy() {
+        if (allowedToDestroy) {
+            Inertia.delete(route('ambientes-modernizacion.destroy', ambienteModernizacionId), {
+                preserveScroll: true,
+                onFinish: () => {
+                    dialogEliminar = false
+                },
+            })
+        }
+    }
 </script>
 
 <AuthenticatedLayout>
@@ -54,7 +69,7 @@
     </InfoMessage>
     <DataTable class="mt-20">
         <div slot="actions">
-            {#if isSuperAdmin || checkRole(authUser, [4])}
+            {#if allowedToCreate}
                 <Button on:click={() => Inertia.visit(route('ambientes-modernizacion.create'))} variant="raised">Crear seguimiento ambiente de modernización</Button>
             {/if}
         </div>
@@ -93,9 +108,13 @@
 
                     <td class="border-t td-actions">
                         <DataTableMenu class={ambientesModernizacion.data.length < 3 ? 'z-50' : ''}>
-                            {#if isSuperAdmin || checkRole(authUser, [4])}
-                                <Item on:SMUI:action={() => configurarDialogoSeguimiento(ambienteModernizacion)}>
-                                    <Text>Revisar seguimientos</Text>
+                            <Item on:SMUI:action={() => configurarDialogoSeguimiento(ambienteModernizacion)}>
+                                <Text>Revisar seguimientos</Text>
+                            </Item>
+
+                            {#if ambienteModernizacion.allowed.to_destroy}
+                                <Item on:SMUI:action={() => ((ambienteModernizacionId = ambienteModernizacion.id), (dialogEliminar = true), (allowedToDestroy = ambienteModernizacion.allowed.to_destroy))}>
+                                    <Text>Eliminar</Text>
                                 </Item>
                             {/if}
                         </DataTableMenu>
@@ -125,6 +144,27 @@
             <div class="p-4">
                 <Button on:click={() => ((seguimientosDialog = false), (seguimientoId = null))} variant={null}>Cancelar</Button>
                 <Button on:click={() => Inertia.visit(route('ambientes-modernizacion.create', 'seguimiento_id=' + seguimientoId))} variant="raised">Asociar seguimiento ambiente de modernización</Button>
+            </div>
+        </div>
+    </Dialog>
+
+    <Dialog bind:open={dialogEliminar}>
+        <div slot="title">
+            <div class="text-center">Eliminar recurso</div>
+            <div class="relative bg-violet-100 text-violet-600 p-5 h-44 w-1/3 m-auto my-10" style="border-radius: 41% 59% 70% 30% / 32% 40% 60% 68% ;">
+                <figure>
+                    <img src="/images/eliminar.png" alt="" class="h-44 m-auto" />
+                </figure>
+            </div>
+            <div class="text-center">
+                ¿Está seguro (a) que desea eliminar este proyecto?<br />Una vez eliminado el proyecto, todos sus recursos y datos se eliminarán de forma permanente.
+            </div>
+        </div>
+        <div slot="content" />
+        <div slot="actions">
+            <div class="p-4">
+                <Button on:click={() => (dialogEliminar = false)} variant={null}>Cancelar</Button>
+                <Button variant="raised" type="button" on:click={() => destroy()}>Confirmar</Button>
             </div>
         </div>
     </Dialog>

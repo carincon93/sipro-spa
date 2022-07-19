@@ -58,9 +58,7 @@
         <div class="flex items-center justify-between lg:px-8 max-w-7xl mx-auto px-4 py-6 sm:px-6">
             <div>
                 <h1 class="overflow-ellipsis overflow-hidden w-breadcrumb-ellipsis whitespace-nowrap">
-                    {#if isSuperAdmin || checkRole(authUser, [11, 5])}
-                        <a use:inertia href={route('convocatorias.evaluaciones.productos', [convocatoria.id, evaluacion.id])} class="text-violet-400 hover:text-violet-600"> Productos </a>
-                    {/if}
+                    <a use:inertia href={route('convocatorias.evaluaciones.productos', [convocatoria.id, evaluacion.id])} class="text-violet-400 hover:text-violet-600"> Productos </a>
                     <span class="text-violet-400 font-medium">/</span>
                     {producto.nombre}
                 </h1>

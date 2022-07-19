@@ -46,7 +46,6 @@ use App\Http\Controllers\TecnoacademiaController;
 use App\Http\Controllers\LineaTecnoacademiaController;
 use App\Http\Controllers\MesaSectorialController;
 use App\Http\Controllers\ServicioTecnologicoController;
-use App\Http\Controllers\HelpDeskController;
 use App\Http\Controllers\CulturaInnovacionController;
 use App\Http\Controllers\DisenoCurricularController;
 use App\Http\Controllers\EdtController;
@@ -64,6 +63,7 @@ use App\Http\Controllers\SoporteEstudioMercadoController;
 use App\Http\Controllers\PdfController;
 use App\Http\Controllers\ProyectoIdiTecnoacademiaController;
 use App\Http\Controllers\ReporteController;
+use App\Http\Controllers\HelpDeskController;
 
 /*
 |--------------------------------------------------------------------------
@@ -698,6 +698,8 @@ Route::middleware(['auth', 'verified'])->group(function () {
      */
     Route::put('ambientes-modernizacion/{ambiente_modernizacion}/column/{column}', [AmbienteModernizacionController::class, 'updateLongColumn'])->name('ambientes-modernizacion.updateLongColumn');
     Route::get('ambientes-modernizacion/{ambiente_modernizacion}/download', [AmbienteModernizacionController::class, 'download'])->name('ambientes-modernizacion.download');
+    Route::get('ambientes-modernizacion/{ambiente_modernizacion}/download-file-sharepoint/{tipo_archivo}', [AmbienteModernizacionController::class, 'downloadFileSharepoint'])->name('ambientes-modernizacion.download-file-sharepoint');
+    Route::post('ambientes-modernizacion/{ambiente_modernizacion}/guardar-archivos', [AmbienteModernizacionController::class, 'saveFilesSharepoint'])->name('ambientes-modernizacion.guardar-archivos');
     Route::post('ambientes-modernizacion/{ambiente_modernizacion}/equipos-ambiente-modernizacion/store', [AmbienteModernizacionController::class, 'equiposStore'])->name('equipos-ambiente-modernizacion.store');
     Route::delete('ambientes-modernizacion/equipos-ambiente-modernizacion/{equipo_ambiente_modernizacion}/destroy', [AmbienteModernizacionController::class, 'destroyEquipo'])->name('equipos-ambiente-modernizacion.destroy');
     Route::resource('ambientes-modernizacion', AmbienteModernizacionController::class)->parameters(['ambientes-modernizacion' => 'ambiente-modernizacion'])->except(['show']);

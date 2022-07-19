@@ -32,7 +32,6 @@ class StoreAmbienteModernizacionRequest extends FormRequest
             'mesa_sectorial_id*'                    => ['nullable', 'min:0', 'max:2147483647999', 'integer', 'exists:mesas_sectoriales,id'],
             'tipologia_ambiente_id'                 => ['required', 'min:0', 'max:2147483647999', 'integer', 'exists:tipologias_ambientes,id'],
             'financiado_anteriormente'              => ['required', 'boolean'],
-            'codigos_proyectos_id'                  => ['required_if:financiado_anteriormente,1'],
             'nombre_ambiente'                       => ['required', 'string'],
             'alineado_mesas_sectoriales'            => ['required', 'boolean'],
         ];
@@ -45,6 +44,36 @@ class StoreAmbienteModernizacionRequest extends FormRequest
      */
     protected function prepareForValidation()
     {
+        if (is_array($this->disciplina_subarea_conocimiento_id)) {
+            $this->merge([
+                'disciplina_subarea_conocimiento_id' => $this->disciplina_subarea_conocimiento_id['value'],
+            ]);
+        }
+
+        if (is_array($this->actividad_economica_id)) {
+            $this->merge([
+                'actividad_economica_id' => $this->actividad_economica_id['value'],
+            ]);
+        }
+
+        if (is_array($this->linea_investigacion_id)) {
+            $this->merge([
+                'linea_investigacion_id' => $this->linea_investigacion_id['value'],
+            ]);
+        }
+
+        if (is_array($this->red_conocimiento_id)) {
+            $this->merge([
+                'red_conocimiento_id' => $this->red_conocimiento_id['value'],
+            ]);
+        }
+
+        if (is_array($this->tematica_estrategica_id)) {
+            $this->merge([
+                'tematica_estrategica_id' => $this->tematica_estrategica_id['value'],
+            ]);
+        }
+
         if (is_array($this->codigo_proyecto_sgps_id)) {
             $this->merge([
                 'codigo_proyecto_sgps_id' => $this->codigo_proyecto_sgps_id['value'],
@@ -73,28 +102,6 @@ class StoreAmbienteModernizacionRequest extends FormRequest
             $this->merge([
                 'mesa_sectorial_id' => $this->mesa_sectorial_id = null,
             ]);
-        }
-
-        if (is_array($this->estado_general_maquinaria)) {
-            $this->merge([
-                'estado_general_maquinaria' => $this->estado_general_maquinaria['value'],
-            ]);
-        }
-
-        if (is_array($this->codigos_proyectos_id)) {
-            if (isset($this->codigos_proyectos_id['value']) && is_numeric($this->codigos_proyectos_id['value'])) {
-                $this->merge([
-                    'codigos_proyectos_id' => $this->codigos_proyectos_id['value'],
-                ]);
-            } else {
-                $codigos_proyectos_id = [];
-                foreach ($this->codigos_proyectos_id as $codigo) {
-                    if (is_array($codigo)) {
-                        array_push($codigos_proyectos_id, $codigo['value']);
-                    }
-                }
-                $this->merge(['codigos_proyectos_id' => $codigos_proyectos_id]);
-            }
         }
     }
 }

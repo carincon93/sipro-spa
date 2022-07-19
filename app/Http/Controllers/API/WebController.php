@@ -28,7 +28,6 @@ use App\Models\LineaTecnoacademia;
 use App\Models\Municipio;
 use App\Models\NodoTecnoparque;
 use App\Models\ProgramaFormacion;
-use App\Models\ProgramaFormacionArticulado;
 use App\Models\Proyecto;
 use App\Models\SemilleroInvestigacion;
 use App\Models\SubareaConocimiento;

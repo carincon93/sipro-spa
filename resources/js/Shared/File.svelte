@@ -11,6 +11,7 @@
     export let error
     export let maxSize
     export let route
+    export let change
     export let showInput = (route && valueDb) || valueDb ? false : true
 
     let input
@@ -50,7 +51,16 @@
         {/if}
 
         {#if showInput}
-            <input {...props} type="file" class="w-full bg-white p-2 border rounded-md" {id} on:change={(event) => update(event)} required={$$restProps.required ? 'required' : undefined} />
+            <input
+                {...props}
+                type="file"
+                class="w-full bg-white p-2 border rounded-md"
+                {id}
+                on:change={(event) => {
+                    update(event), change?.map((item) => item(event))
+                }}
+                required={$$restProps.required ? 'required' : undefined}
+            />
 
             {#if maxSize}
                 <InfoMessage>

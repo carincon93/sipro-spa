@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Helpers\AppHelper;
 use App\Models\AmbienteModernizacion;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\StoreAmbienteModernizacionRequest;
@@ -9,11 +10,13 @@ use App\Http\Requests\EquipoAmbienteModernizacionRequest;
 use App\Http\Requests\UpdateAmbienteModernizacionRequest;
 use App\Models\ActividadEconomica;
 use App\Models\AreaConocimiento;
+use App\Models\CentroFormacion;
 use App\Models\CodigoProyectoSgps;
 use App\Models\DisciplinaSubareaConocimiento;
 use App\Models\EquipoAmbienteModernizacion;
 use App\Models\LineaInvestigacion;
 use App\Models\MesaSectorial;
+use App\Models\ProgramaFormacion;
 use App\Models\RedConocimiento;
 use App\Models\SeguimientoAmbienteModernizacion;
 use App\Models\SemilleroInvestigacion;
@@ -25,6 +28,8 @@ use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Storage;
 use Inertia\Inertia;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Gate;
+use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Str;
 use PDF;
 
@@ -41,18 +46,18 @@ class AmbienteModernizacionController extends Controller
 
         /** @var \App\Models\User */
         $authUser = Auth::user();
-        $codigosSgps = CodigoProyectoSgps::select('seguimientos_ambiente_modernizacion.codigo_proyecto_sgps_id', 'codigos_proyectos_sgps.codigo_sgps', 'codigos_proyectos_sgps.titulo', 'codigos_proyectos_sgps.year_ejecucion')->leftJoin('seguimientos_ambiente_modernizacion', 'codigos_proyectos_sgps.id', 'seguimientos_ambiente_modernizacion.codigo_proyecto_sgps_id')
-            ->join('lineas_programaticas', 'codigos_proyectos_sgps.linea_programatica_id', 'lineas_programaticas.id')
-            ->where('lineas_programaticas.codigo', 23)
-            ->where('codigos_proyectos_sgps.centro_formacion_id', $authUser->centro_formacion_id)
-            ->where('seguimientos_ambiente_modernizacion.codigo_proyecto_sgps_id', NULL)
-            ->get();
 
         return Inertia::render('AmbientesModernizacion/Index', [
             'filters'                   => request()->all('search'),
             'ambientesModernizacion'    => AmbienteModernizacion::distinct('seguimiento_ambiente_modernizacion_id')->with('seguimientoAmbienteModernizacion.ambientesModernizacion', 'seguimientoAmbienteModernizacion.centroFormacion.regional')->orderBy('seguimiento_ambiente_modernizacion_id', 'ASC')
                 ->filterAmbienteModernizacion(request()->only('search'))->paginate(),
-            'codigosSgpsFaltantes'      => $codigosSgps
+            'codigosSgpsFaltantes'      => CodigoProyectoSgps::select('seguimientos_ambiente_modernizacion.codigo_proyecto_sgps_id', 'codigos_proyectos_sgps.codigo_sgps', 'codigos_proyectos_sgps.titulo', 'codigos_proyectos_sgps.year_ejecucion')->leftJoin('seguimientos_ambiente_modernizacion', 'codigos_proyectos_sgps.id', 'seguimientos_ambiente_modernizacion.codigo_proyecto_sgps_id')
+                ->join('lineas_programaticas', 'codigos_proyectos_sgps.linea_programatica_id', 'lineas_programaticas.id')
+                ->where('lineas_programaticas.codigo', 23)
+                ->where('codigos_proyectos_sgps.centro_formacion_id', $authUser->centro_formacion_id)
+                ->where('seguimientos_ambiente_modernizacion.codigo_proyecto_sgps_id', NULL)
+                ->get(),
+            'allowedToCreate'           => Gate::inspect('create', [AmbienteModernizacion::class])->allowed()
         ]);
     }
 
@@ -80,17 +85,15 @@ class AmbienteModernizacionController extends Controller
         /** @var \App\Models\User */
         $authUser = Auth::user();
 
-        $codigosSgps = CodigoProyectoSgps::selectRaw('codigos_proyectos_sgps.id as value, concat(codigos_proyectos_sgps.titulo, chr(10), \'∙ Código: SGPS-\', codigos_proyectos_sgps.codigo_sgps, chr(10), \'∙ Año: \', codigos_proyectos_sgps.year_ejecucion) as label')->leftJoin('seguimientos_ambiente_modernizacion', 'codigos_proyectos_sgps.id', 'seguimientos_ambiente_modernizacion.codigo_proyecto_sgps_id')
-            ->join('lineas_programaticas', 'codigos_proyectos_sgps.linea_programatica_id', 'lineas_programaticas.id')
-            ->where('lineas_programaticas.codigo', 23)
-            ->where('codigos_proyectos_sgps.centro_formacion_id', $authUser->centro_formacion_id)
-            ->where('seguimientos_ambiente_modernizacion.codigo_proyecto_sgps_id', NULL)
-            ->get();
-
         return Inertia::render('AmbientesModernizacion/Create', [
-            'centroFormacionId'                 => $authUser->centro_formacion_id,
             'seguimientoId'                     => $seguimientoId,
-            'codigosSgps'                       => $codigosSgps,
+            'centrosFormacion'                  => CentroFormacion::select('centros_formacion.id as value', 'centros_formacion.nombre as label')->orderBy('centros_formacion.nombre', 'ASC')->get(),
+            'codigosSgps'                       => CodigoProyectoSgps::selectRaw('codigos_proyectos_sgps.id as value, concat(codigos_proyectos_sgps.titulo, chr(10), \'∙ Código: SGPS-\', codigos_proyectos_sgps.codigo_sgps, chr(10), \'∙ Año: \', codigos_proyectos_sgps.year_ejecucion) as label')->leftJoin('seguimientos_ambiente_modernizacion', 'codigos_proyectos_sgps.id', 'seguimientos_ambiente_modernizacion.codigo_proyecto_sgps_id')
+                ->join('lineas_programaticas', 'codigos_proyectos_sgps.linea_programatica_id', 'lineas_programaticas.id')
+                ->where('lineas_programaticas.codigo', 23)
+                ->where('codigos_proyectos_sgps.centro_formacion_id', $authUser->centro_formacion_id)
+                ->where('seguimientos_ambiente_modernizacion.codigo_proyecto_sgps_id', NULL)
+                ->get(),
             'tipologiasAmbientes'               => TipologiaAmbiente::select('tipologias_ambientes.id as value', 'tipologias_ambientes.tipo as label')->orderBy('tipologias_ambientes.tipo', 'ASC')->get(),
             'mesasSectoriales'                  => MesaSectorial::select('id', 'nombre')->get('id'),
             'semillerosInvestigacion'           => SemilleroInvestigacion::select('semilleros_investigacion.nombre as label', 'semilleros_investigacion.id as value')->join('lineas_investigacion', 'semilleros_investigacion.linea_investigacion_id', 'lineas_investigacion.id')->join('grupos_investigacion', 'lineas_investigacion.grupo_investigacion_id', 'grupos_investigacion.id')->where('grupos_investigacion.centro_formacion_id', '=', $authUser->centroFormacion->id)->get(),
@@ -101,6 +104,7 @@ class AmbienteModernizacionController extends Controller
             'actividadesEconomicas'             => ActividadEconomica::select('actividades_economicas.id as value', 'actividades_economicas.nombre as label')->orderBy('nombre', 'ASC')->get(),
             'lineasInvestigacion'               => LineaInvestigacion::selectRaw('lineas_investigacion.id as value, concat(lineas_investigacion.nombre, chr(10), \'∙ Grupo de investigación: \', grupos_investigacion.nombre, chr(10)) as label, centros_formacion.id as centro_formacion_id')->join('grupos_investigacion', 'lineas_investigacion.grupo_investigacion_id', 'grupos_investigacion.id')->join('centros_formacion', 'grupos_investigacion.centro_formacion_id', 'centros_formacion.id')->join('regionales', 'centros_formacion.regional_id', 'regionales.id')->get(),
             'tematicasEstrategicas'             => TematicaEstrategica::select('tematicas_estrategicas.id as value', 'tematicas_estrategicas.nombre as label')->orderBy('tematicas_estrategicas.nombre', 'ASC')->get(),
+            'allowedToCreate'                   => Gate::inspect('create', [AmbienteModernizacion::class])->allowed()
         ]);
     }
 
@@ -130,24 +134,6 @@ class AmbienteModernizacionController extends Controller
         $ambienteModernizacion->nombre_ambiente                     = $request->nombre_ambiente;
         $ambienteModernizacion->alineado_mesas_sectoriales          = $request->alineado_mesas_sectoriales;
         $ambienteModernizacion->financiado_anteriormente            = $request->financiado_anteriormente;
-        $ambienteModernizacion->estado_general_maquinaria           = $request->estado_general_maquinaria;
-        $ambienteModernizacion->razon_estado_general                = $request->razon_estado_general;
-        $ambienteModernizacion->ambiente_activo                     = $request->ambiente_activo;
-        $ambienteModernizacion->justificacion_ambiente_inactivo     = $request->justificacion_ambiente_inactivo;
-        $ambienteModernizacion->ambiente_activo_procesos_idi        = $request->ambiente_activo_procesos_idi;
-        $ambienteModernizacion->numero_proyectos_beneficiados       = $request->numero_proyectos_beneficiados;
-        $ambienteModernizacion->ambiente_formacion_complementaria   = $request->ambiente_formacion_complementaria;
-        $ambienteModernizacion->numero_total_cursos_comp            = $request->numero_total_cursos_comp;
-        $ambienteModernizacion->numero_cursos_empresas              = $request->numero_cursos_empresas;
-        $ambienteModernizacion->datos_empresa                       = $request->datos_empresa;
-        $ambienteModernizacion->cursos_complementarios              = $request->cursos_complementarios;
-        $ambienteModernizacion->coordenada_latitud_ambiente         = $request->coordenada_latitud_ambiente;
-        $ambienteModernizacion->coordenada_longitud_ambiente        = $request->coordenada_longitud_ambiente;
-        $ambienteModernizacion->impacto_procesos_formacion          = $request->impacto_procesos_formacion;
-        $ambienteModernizacion->pertinencia_sector_productivo       = $request->pertinencia_sector_productivo;
-        $ambienteModernizacion->palabras_clave_ambiente             = $request->palabras_clave_ambiente;
-        $ambienteModernizacion->observaciones_generales_ambiente    = $request->observaciones_generales_ambiente;
-        $ambienteModernizacion->soporte_fotos_ambiente              = $request->soporte_fotos_ambiente;
 
         $ambienteModernizacion->redConocimiento()->associate($request->red_conocimiento_id);
         $ambienteModernizacion->lineaInvestigacion()->associate($request->linea_investigacion_id);
@@ -161,10 +147,6 @@ class AmbienteModernizacionController extends Controller
         $ambienteModernizacion->save();
 
         $ambienteModernizacion->mesasSectoriales()->sync($request->mesa_sectorial_id);
-        $ambienteModernizacion->codigosProyectosSgps()->sync($request->codigos_proyectos_id);
-        $ambienteModernizacion->programasFormacionCalificados()->sync($request->programas_formacion_calificados);
-        $ambienteModernizacion->programasFormacionNoCalificados()->sync($request->programas_formacion);
-        $ambienteModernizacion->semillerosInvestigacion()->sync($request->semilleros_investigacion_id);
 
         return redirect()->route('ambientes-modernizacion.edit', $ambienteModernizacion)->with('success', 'El recurso se ha creado correctamente.');
     }
@@ -191,31 +173,45 @@ class AmbienteModernizacionController extends Controller
         $this->authorize('update', [AmbienteModernizacion::class, $ambienteModernizacion]);
 
         $ambienteModernizacion->seguimientoAmbienteModernizacion;
+        $ambienteModernizacion->seguimientoAmbienteModernizacion->codigoProyectoSgps;
         $ambienteModernizacion->disciplinaSubareaConocimiento->subareaConocimiento->areaConocimiento;
         $ambienteModernizacion->seguimientoAmbienteModernizacion->centroFormacion->regional;
 
-        $codigosSgps = [];
-
         /** @var \App\Models\User */
         $authUser = Auth::user();
-        if ($authUser->hasRole([4])) {
-            $codigosSgps = CodigoProyectoSgps::selectRaw('codigos_proyectos_sgps.id as value, concat(codigos_proyectos_sgps.titulo, chr(10), \'∙ Código: SGPS-\', codigos_proyectos_sgps.codigo_sgps, chr(10), \'∙ Año: \', codigos_proyectos_sgps.year_ejecucion) as label')->join('lineas_programaticas', 'codigos_proyectos_sgps.linea_programatica_id', 'lineas_programaticas.id')->where('lineas_programaticas.codigo', 23)->where('codigos_proyectos_sgps.centro_formacion_id', $authUser->centro_formacion_id)->orderBy('codigos_proyectos_sgps.codigo_sgps', 'ASC')->get();
-        } else {
-            $codigosSgps = CodigoProyectoSgps::selectRaw('codigos_proyectos_sgps.id as value, concat(codigos_proyectos_sgps.titulo, chr(10), \'∙ Código: SGPS-\', codigos_proyectos_sgps.codigo_sgps, chr(10), \'∙ Año: \', codigos_proyectos_sgps.year_ejecucion) as label')->join('lineas_programaticas', 'codigos_proyectos_sgps.linea_programatica_id', 'lineas_programaticas.id')->where('lineas_programaticas.codigo', 23)->orderBy('codigos_proyectos_sgps.codigo_sgps', 'ASC')->get();
-        }
 
         return Inertia::render('AmbientesModernizacion/Edit', [
             'centroFormacionId'                             => $authUser->centro_formacion_id,
             'ambienteModernizacion'                         => $ambienteModernizacion,
-            'codigosSgps'                                   => $codigosSgps,
+            'codigosSgps'                                   => CodigoProyectoSgps::selectRaw('codigos_proyectos_sgps.id as value, concat(codigos_proyectos_sgps.titulo, chr(10), \'∙ Código: SGPS-\', codigos_proyectos_sgps.codigo_sgps, chr(10), \'∙ Año: \', codigos_proyectos_sgps.year_ejecucion) as label')
+                ->leftJoin('seguimientos_ambiente_modernizacion', 'codigos_proyectos_sgps.id', 'seguimientos_ambiente_modernizacion.codigo_proyecto_sgps_id')
+                ->join('lineas_programaticas', 'codigos_proyectos_sgps.linea_programatica_id', 'lineas_programaticas.id')
+                ->where(function ($query) use ($authUser) {
+                    $query->where('lineas_programaticas.codigo', 23);
+                    if (!$authUser->hasRole([4])) {
+                        $query->where('codigos_proyectos_sgps.centro_formacion_id', $authUser->centro_formacion_id);
+                    }
+                    $query->where('seguimientos_ambiente_modernizacion.codigo_proyecto_sgps_id', NULL);
+                })
+                ->get(),
             'tipologiasAmbientes'                           => TipologiaAmbiente::select('tipologias_ambientes.id as value', 'tipologias_ambientes.tipo as label')->orderBy('tipologias_ambientes.tipo', 'ASC')->get(),
             'mesasSectoriales'                              => MesaSectorial::select('id', 'nombre')->get('id'),
             'semillerosInvestigacion'                       => SemilleroInvestigacion::select('semilleros_investigacion.nombre as label', 'semilleros_investigacion.id as value')->join('lineas_investigacion', 'semilleros_investigacion.linea_investigacion_id', 'lineas_investigacion.id')->join('grupos_investigacion', 'lineas_investigacion.grupo_investigacion_id', 'grupos_investigacion.id')->where('grupos_investigacion.centro_formacion_id', '=', $authUser->centroFormacion->id)->get(),
+            'areasConocimiento'                             => AreaConocimiento::select('areas_conocimiento.id as value', 'areas_conocimiento.nombre as label')->orderBy('nombre', 'ASC')->get(),
+            'subareasConocimiento'                          => SubareaConocimiento::select('subareas_conocimiento.id as value', 'subareas_conocimiento.nombre as label', 'area_conocimiento_id')->orderBy('nombre', 'ASC')->get(),
+            'disciplinasSubareaConocimiento'                => DisciplinaSubareaConocimiento::select('disciplinas_subarea_conocimiento.id as value', 'disciplinas_subarea_conocimiento.nombre as label', 'subarea_conocimiento_id')->orderBy('nombre', 'ASC')->get(),
+            'redesConocimiento'                             => RedConocimiento::select('redes_conocimiento.id as value', 'redes_conocimiento.nombre as label')->orderBy('nombre', 'ASC')->get(),
+            'actividadesEconomicas'                         => ActividadEconomica::select('actividades_economicas.id as value', 'actividades_economicas.nombre as label')->orderBy('nombre', 'ASC')->get(),
+            'lineasInvestigacion'                           => LineaInvestigacion::selectRaw('lineas_investigacion.id as value, concat(lineas_investigacion.nombre, chr(10), \'∙ Grupo de investigación: \', grupos_investigacion.nombre, chr(10)) as label, centros_formacion.id as centro_formacion_id')->join('grupos_investigacion', 'lineas_investigacion.grupo_investigacion_id', 'grupos_investigacion.id')->join('centros_formacion', 'grupos_investigacion.centro_formacion_id', 'centros_formacion.id')->join('regionales', 'centros_formacion.regional_id', 'regionales.id')->get(),
+            'tematicasEstrategicas'                         => TematicaEstrategica::select('tematicas_estrategicas.id as value', 'tematicas_estrategicas.nombre as label')->orderBy('tematicas_estrategicas.nombre', 'ASC')->get(),
+            'programasFormacionConRegistro'                 => ProgramaFormacion::selectRaw('programas_formacion.id as value, concat(programas_formacion.nombre, chr(10), \'∙ Código: \', programas_formacion.codigo) as label, programas_formacion.centro_formacion_id')->where('programas_formacion.registro_calificado', true)->where('programas_formacion.centro_formacion_id', $ambienteModernizacion->seguimientoAmbienteModernizacion->centro_formacion_id)->orderBy('programas_formacion.nombre', 'ASC')->get(),
+            'programasFormacionSinRegistro'                 => ProgramaFormacion::selectRaw('programas_formacion.id as value, concat(programas_formacion.nombre, chr(10), \'∙ Código: \', programas_formacion.codigo) as label, programas_formacion.centro_formacion_id')->where('programas_formacion.registro_calificado', false)->where('programas_formacion.centro_formacion_id', $ambienteModernizacion->seguimientoAmbienteModernizacion->centro_formacion_id)->orderBy('programas_formacion.nombre', 'ASC')->get(),
             'codigosProyectosRelacionados'                  => $ambienteModernizacion->codigosProyectosSgps()->selectRaw('codigos_proyectos_sgps.id as value, concat(codigos_proyectos_sgps.titulo, chr(10), \'∙ Código: \', codigos_proyectos_sgps.codigo_sgps) as label')->get(),
-            'programasFormacionCalificadosRelacionados'     => $ambienteModernizacion->programasFormacionCalificados()->selectRaw('programas_formacion.id as value, concat(programas_formacion.nombre, chr(10), \'∙ Código: \', programas_formacion.codigo) as label')->get(),
-            'programasFormacionNoCalificadosRelacionados'   => $ambienteModernizacion->programasFormacionNoCalificados()->selectRaw('programas_formacion_articulados.id as value, concat(programas_formacion_articulados.nombre, chr(10), \'∙ Código: \', programas_formacion_articulados.codigo) as label')->get(),
+            'programasFormacionCalificadosRelacionados'     => $ambienteModernizacion->programasFormacion()->selectRaw('programas_formacion.id as value, concat(programas_formacion.nombre, chr(10), \'∙ Código: \', programas_formacion.codigo) as label')->where('programas_formacion.registro_calificado', true)->get(),
+            'programasFormacionNoCalificadosRelacionados'   => $ambienteModernizacion->programasFormacion()->selectRaw('programas_formacion.id as value, concat(programas_formacion.nombre, chr(10), \'∙ Código: \', programas_formacion.codigo) as label')->where('programas_formacion.registro_calificado', false)->get(),
             'semillerosRelacionados'                        => $ambienteModernizacion->semillerosInvestigacion()->select('semilleros_investigacion.nombre as label', 'semilleros_investigacion.id as value')->get(),
             'mesasSectorialesRelacionadas'                  => $ambienteModernizacion->mesasSectoriales()->pluck('id'),
+
             'equiposAmbienteModernizacion'                  => EquipoAmbienteModernizacion::where('ambiente_modernizacion_id', $ambienteModernizacion->id)->get(),
         ]);
     }
@@ -250,7 +246,6 @@ class AmbienteModernizacionController extends Controller
         $ambienteModernizacion->coordenada_latitud_ambiente         = $request->coordenada_latitud_ambiente;
         $ambienteModernizacion->coordenada_longitud_ambiente        = $request->coordenada_longitud_ambiente;
         $ambienteModernizacion->palabras_clave_ambiente             = $request->palabras_clave_ambiente;
-        $ambienteModernizacion->soporte_fotos_ambiente              = $request->soporte_fotos_ambiente;
 
         $ambienteModernizacion->numero_personas_certificadas        = $request->numero_personas_certificadas;
         $ambienteModernizacion->numero_tecnicas_tecnologias         = $request->numero_tecnicas_tecnologias;
@@ -273,8 +268,7 @@ class AmbienteModernizacionController extends Controller
 
         $request->alineado_mesas_sectoriales == 1 ? $ambienteModernizacion->mesasSectoriales()->sync($request->mesa_sectorial_id) : $ambienteModernizacion->mesasSectoriales()->detach();
         $request->financiado_anteriormente == 1 ? $ambienteModernizacion->codigosProyectosSgps()->sync($request->codigos_proyectos_id) : $ambienteModernizacion->codigosProyectosSgps()->detach();
-        $request->ambiente_activo == 1 ? $ambienteModernizacion->programasFormacionCalificados()->sync($request->programas_formacion_calificados) : $ambienteModernizacion->programasFormacionCalificados()->detach();
-        $request->ambiente_activo == 1 ? $ambienteModernizacion->programasFormacionNoCalificados()->sync($request->programas_formacion) : $ambienteModernizacion->programasFormacionNoCalificados()->detach();
+        $request->ambiente_activo == 1 ? $ambienteModernizacion->programasFormacion()->sync(array_merge($request->programas_formacion_calificados, $request->programas_formacion)) : null;
         $request->ambiente_activo_procesos_idi == 1 ? $ambienteModernizacion->semillerosInvestigacion()->sync($request->semilleros_investigacion_id) : $ambienteModernizacion->semillerosInvestigacion()->detach();
 
         return redirect()->back()->with('success', 'El recurso se ha actualizado correctamente.');
@@ -428,8 +422,52 @@ class AmbienteModernizacionController extends Controller
 
     public function updateLongColumn(Request $request, AmbienteModernizacion $ambienteModernizacion, $column)
     {
-        $ambienteModernizacion->update($request->only($column));
+        try {
+            $ambienteModernizacion->update($request->only($column));
+            return back();
+        } catch (\Throwable $th) {
+            Log::debug('test');
+            dd($th);
+        }
+    }
 
-        return back();
+    public function saveFilesSharepoint(Request $request, AmbienteModernizacion $ambienteModernizacion)
+    {
+        $request->validate([
+            'soporte_fotos_ambiente' => 'nullable|file|max:10240',
+        ]);
+
+        $status = AppHelper::checkFolderAndCreate($ambienteModernizacion->ruta_final_sharepoint);
+        $success = null;
+
+        if ($request->hasFile('soporte_fotos_ambiente') && $status == true) {
+            $fileNameSoporteFotosAmbiente = AppHelper::cleanFileName($request->nombre . 'soporte_fotos_ambiente', $request->soporte_fotos_ambiente);
+            AppHelper::deleteFile($ambienteModernizacion->soporte_fotos_ambiente);
+
+            $fileNameSoporteFotosAmbiente = AppHelper::uploadFile($ambienteModernizacion->ruta_final_sharepoint, $request->soporte_fotos_ambiente, $fileNameSoporteFotosAmbiente);
+
+            $ambienteModernizacion->update(['soporte_fotos_ambiente' => $fileNameSoporteFotosAmbiente]);
+
+            $success = true;
+        }
+
+        if ($success) {
+            return back()->with('success', 'El archivo se ha cargado correctamente');
+        } else {
+            return back()->with('error', 'No se ha podido cargar el archivo. Por favor vuelva a intentar');
+        }
+    }
+
+    public function downloadFileSharepoint(AmbienteModernizacion $ambienteModernizacion, $tipoArchivo)
+    {
+        $fileName = '';
+
+        $fileName = $ambienteModernizacion->filename($tipoArchivo);
+
+        if ($fileName) {
+            AppHelper::downloadFile($ambienteModernizacion->ruta_final_sharepoint, $fileName);
+        } else {
+            return redirect()->route('ambientes-modernizacion.edit', [$ambienteModernizacion])->with('error', 'No se encontró el archivo.');
+        }
     }
 }

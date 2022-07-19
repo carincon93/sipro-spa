@@ -42,6 +42,8 @@
     onMount(() => {
         body.classList.remove('mdc-dialog-scroll-lock')
     })
+
+    let allowed = $page.props.allowed
 </script>
 
 <svelte:head>
@@ -248,7 +250,7 @@
                 <Button on:click={() => Inertia.visit(route('roles.index'))} variant={route().current('roles.*') ? 'raised' : 'outlined'} class="p-2">Roles de sistema</Button>
             {/if}
 
-            {#if isSuperAdmin}
+            {#if allowed.ambientes_modernizacion}
                 <Button on:click={() => Inertia.visit(route('ambientes-modernizacion.index'))} variant={route().current('ambientes-modernizacion.*') ? 'raised' : 'outlined'} class="p-2">Seguimiento post cierre - Ambientes de modernización SENNOVA</Button>
             {/if}
 
