@@ -37,26 +37,11 @@
         sumar_al_presupuesto: presupuestoSennova.sumar_al_presupuesto,
         mensaje: presupuestoSennova.mensaje,
         habilitado: presupuestoSennova.habilitado,
-        primer_grupo_presupuestal_id: {
-            value: presupuestoSennova.primer_grupo_presupuestal_id,
-            label: primerGrupoPresupuestal.find((item) => item.value == presupuestoSennova.primer_grupo_presupuestal_id)?.label,
-        },
-        segundo_grupo_presupuestal_id: {
-            value: presupuestoSennova.segundo_grupo_presupuestal_id,
-            label: segundoGrupoPresupuestal.find((item) => item.value == presupuestoSennova.segundo_grupo_presupuestal_id)?.label,
-        },
-        tercer_grupo_presupuestal_id: {
-            value: presupuestoSennova.tercer_grupo_presupuestal_id,
-            label: tercerGrupoPresupuestal.find((item) => item.value == presupuestoSennova.tercer_grupo_presupuestal_id)?.label,
-        },
-        uso_presupuestal_id: {
-            value: presupuestoSennova.uso_presupuestal_id,
-            label: usosPresupuestales.find((item) => item.value == presupuestoSennova.uso_presupuestal_id)?.label,
-        },
-        linea_programatica_id: {
-            value: presupuestoSennova.linea_programatica_id,
-            label: lineasProgramaticas.find((item) => item.value == presupuestoSennova.linea_programatica_id)?.label,
-        },
+        primer_grupo_presupuestal_id: presupuestoSennova.primer_grupo_presupuestal_id,
+        segundo_grupo_presupuestal_id: presupuestoSennova.segundo_grupo_presupuestal_id,
+        tercer_grupo_presupuestal_id: presupuestoSennova.tercer_grupo_presupuestal_id,
+        uso_presupuestal_id: presupuestoSennova.uso_presupuestal_id,
+        linea_programatica_id: presupuestoSennova.linea_programatica_id,
     })
 
     function submit() {
@@ -79,7 +64,7 @@
         <div class="flex items-center justify-between lg:px-8 max-w-7xl mx-auto px-4 py-6 sm:px-6">
             <div>
                 <h1 class="overflow-ellipsis overflow-hidden w-breadcrumb-ellipsis whitespace-nowrap">
-                        <a use:inertia href={route('presupuesto-sennova.index')} class="text-violet-400 hover:text-violet-600"> Presupuesto SENNOVA </a>
+                    <a use:inertia href={route('presupuesto-sennova.index')} class="text-violet-400 hover:text-violet-600"> Presupuesto SENNOVA </a>
                     <span class="text-violet-400 font-medium">/</span>
                     Editar presupuesto SENNOVA
                 </h1>

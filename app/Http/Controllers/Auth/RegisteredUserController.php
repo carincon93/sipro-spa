@@ -30,9 +30,10 @@ class RegisteredUserController extends Controller
     public function create()
     {
         return Inertia::render('Auth/Register', [
-            'roles'               => Role::select('id', 'name')->where('name', 'ilike', "%Proponente%")->orWhere('name', 'ilike', "%Facilitador%")->orWhere('name', 'ilike', "%Evaluador%")->get(),
-            'tiposDocumento'      => json_decode(Storage::get('json/tipos-documento.json'), true),
-            'tiposVinculacion'    => json_decode(Storage::get('json/tipos-vinculacion.json'), true),
+            'centrosFormacion'      => CentroFormacion::selectRaw('centros_formacion.id as value, concat(centros_formacion.nombre, chr(10), \'∙ Código: \', centros_formacion.codigo, chr(10), \'∙ Regional: \', regionales.nombre) as label')->join('regionales', 'centros_formacion.regional_id', 'regionales.id')->orderBy('centros_formacion.nombre', 'ASC')->get(),
+            'roles'                 => Role::select('id', 'name')->where('name', 'ilike', "%Proponente%")->orWhere('name', 'ilike', "%Facilitador%")->orWhere('name', 'ilike', "%Evaluador%")->get(),
+            'tiposDocumento'        => json_decode(Storage::get('json/tipos-documento.json'), true),
+            'tiposVinculacion'      => json_decode(Storage::get('json/tipos-vinculacion.json'), true),
         ]);
     }
 
@@ -64,54 +65,6 @@ class RegisteredUserController extends Controller
         $user->syncRoles($request->role_id);
 
         event(new Registered($user));
-
-        // $users = null;
-        // if ($user->whereHas('roles', function (Builder $query) use ($user) {
-        //     return $query->where('name', 'ilike', '%proponente i+d+i%')->where('users.id', $user->id);
-        // })->first()) {
-        //     $users = User::whereHas('roles', function (Builder $query) {
-        //         return $query->where('name', 'ilike', '%activador i+d+i%');
-        //     })->get();
-        // }
-
-        // if ($user->whereHas('roles', function (Builder $query) use ($user) {
-        //     return $query->where('name', 'ilike', '%proponente cultura de la innovación%')->where('users.id', $user->id);
-        // })->first()) {
-        //     $users = User::whereHas('roles', function (Builder $query) {
-        //         return $query->where('name', 'ilike', '%activador cultura de la innovación%');
-        //     })->get();
-        // }
-
-        // if ($user->whereHas('roles', function (Builder $query) use ($user) {
-        //     return $query->where('name', 'ilike', '%proponente tecnoacademia%')->where('users.id', $user->id);
-        // })->first()) {
-        //     $users = User::whereHas('roles', function (Builder $query) {
-        //         return $query->where('name', 'ilike', '%activador tecnoacademia%');
-        //     })->get();
-        // }
-
-        // if ($user->whereHas('roles', function (Builder $query) use ($user) {
-        //     return $query->where('name', 'ilike', '%proponente tecnoparque%')->where('users.id', $user->id);
-        // })->first()) {
-        //     $users = User::whereHas('roles', function (Builder $query) {
-        //         return $query->where('name', 'ilike', '%activador tecnoparque%');
-        //     })->get();
-        // }
-
-        // if ($user->whereHas('roles', function (Builder $query) use ($user) {
-        //     return $query->where('name', 'ilike', '%proponente servicios tecnológicos%')->where('users.id', $user->id);
-        // })->first()) {
-        //     $users = User::whereHas('roles', function (Builder $query) {
-        //         return $query->where('name', 'ilike', '%activador servicios tecnológicos%');
-        //     })->get();
-        // }
-
-        // if ($users) {
-        //     Notification::send($users, new NuevoUsuario($user));
-        // }
-
-        // $centroFormacion = CentroFormacion::find($request->centro_formacion_id);
-        // $centroFormacion->dinamizadorSennova->notify(new NuevoUsuario($user));
 
         return redirect(RouteServiceProvider::HOME);
     }

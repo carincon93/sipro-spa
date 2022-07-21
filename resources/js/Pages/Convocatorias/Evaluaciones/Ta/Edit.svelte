@@ -4,13 +4,11 @@
     import { route, checkRole, checkPermission, monthDiff } from '@/Utils'
     import { _ } from 'svelte-i18n'
     import axios from 'axios'
-    import { onMount } from 'svelte'
 
     import Button from '@/Shared/Button'
     import Label from '@/Shared/Label'
     import LoadingButton from '@/Shared/LoadingButton'
     import EvaluationStepper from '@/Shared/EvaluationStepper'
-    import DynamicList from '@/Shared/Dropdowns/DynamicList'
     import Textarea from '@/Shared/Textarea'
     import InfoMessage from '@/Shared/InfoMessage'
     import SelectMulti from '@/Shared/SelectMulti'
@@ -24,15 +22,18 @@
     export let ta
     export let taEvaluacion
     export let regionales
-    export let lineasTecnoacademiaRelacionadas
-    export let tecnoacademiaRelacionada
+    export let municipios
+    export let lineasProgramaticas
+    export let lineasTecnoacademia
+    export let disenosCurriculares
     export let proyectoMunicipios
-    export let proyectoMunicipiosImpactar
-    export let proyectoProgramasFormacionArticulados
-    export let proyectoDisCurriculares
-    export let disCurriculares
-    export let tecnoAcademias
     export let otrasEvaluaciones
+    export let programasFormacionSinRegistroCalificado
+    export let proyectoMunicipiosImpactar
+    export let tecnoacademiaRelacionada
+    export let disenosCurricularesRelacionados
+    export let lineasTecnoacademiaRelacionadas
+    export let programasFormacionSinRegistroRelacionados
 
     $: $title = ta ? ta.titulo : null
 
@@ -44,7 +45,6 @@
     let dialogSegundaEvaluacion = convocatoria.fase == 4 ? true : false
     let proyectoDialogOpen = taEvaluacion.evaluacion.clausula_confidencialidad == false ? true : false
 
-    let municipios = []
     let codigoLineaProgramatica
 
     $: if (codigoLineaProgramatica) {
@@ -83,23 +83,14 @@
         proyectos_macro: ta.proyectos_macro,
         lineas_medulares_centro: ta.lineas_medulares_centro,
         lineas_tecnologicas_centro: ta.lineas_tecnologicas_centro,
-        proyeccion_nuevas_instituciones: {
-            value: ta.proyeccion_nuevas_instituciones,
-            label: opcionesSiNo.find((item) => item.value == ta.proyeccion_nuevas_instituciones)?.label,
-        },
-        proyeccion_articulacion_media: {
-            value: ta.proyeccion_articulacion_media,
-            label: opcionesSiNo.find((item) => item.value == ta.proyeccion_articulacion_media)?.label,
-        },
+        proyeccion_nuevas_instituciones: ta.proyeccion_nuevas_instituciones,
+        proyeccion_articulacion_media: ta.proyeccion_articulacion_media,
         bibliografia: ta.bibliografia,
-        tecnoacademia_id: {
-            value: tecnoacademiaRelacionada,
-            label: tecnoAcademias.find((item) => item.value == tecnoacademiaRelacionada)?.label,
-        },
+        tecnoacademia_id: tecnoacademiaRelacionada,
         tecnoacademia_linea_tecnoacademia_id: lineasTecnoacademiaRelacionadas,
         codigo_linea_programatica: null,
-        programas_formacion_articulados: proyectoProgramasFormacionArticulados.length > 0 ? proyectoProgramasFormacionArticulados : null,
-        diseno_curricular_id: proyectoDisCurriculares.length > 0 ? proyectoDisCurriculares : null,
+        programas_formacion_articulados: programasFormacionSinRegistroRelacionados.length > 0 ? programasFormacionSinRegistroRelacionados : null,
+        diseno_curricular_id: disenosCurricularesRelacionados.length > 0 ? disenosCurricularesRelacionados : null,
     }
 
     let regionalIEArticulacion
@@ -142,12 +133,6 @@
             })
     }
 
-    onMount(() => {
-        getMunicipios()
-        getProgramasFormacionArticular()
-        getLineasTecnoacademia()
-    })
-
     let form = useForm({
         clausula_confidencialidad: taEvaluacion.evaluacion.clausula_confidencialidad,
         resumen_regional_comentario: taEvaluacion.resumen_regional_comentario,
@@ -189,6 +174,7 @@
         normas_apa_comentario: taEvaluacion.normas_apa_comentario,
         normas_apa_requiere_comentario: taEvaluacion.normas_apa_comentario == null ? true : false,
     })
+
     function submit() {
         if (isSuperAdmin || (checkRole(authUser, [11, 5]) && taEvaluacion.evaluacion.finalizado == false && taEvaluacion.evaluacion.habilitado == true && taEvaluacion.evaluacion.modificable == true)) {
             $form.put(route('convocatorias.ta-evaluaciones.update', [convocatoria.id, taEvaluacion.id]), {
@@ -197,31 +183,8 @@
         }
     }
 
-    async function getMunicipios() {
-        let res = await axios.get(route('web-api.municipios'))
-        if (res.status == '200') {
-            municipios = res.data
-        }
-    }
-
     $: if (taInfo.fecha_inicio && taInfo.fecha_finalizacion) {
         taInfo.max_meses_ejecucion = monthDiff(taInfo.fecha_inicio, taInfo.fecha_finalizacion)
-    }
-
-    let programasFormacionArticular
-    async function getProgramasFormacionArticular() {
-        let res = await axios.get(route('web-api.programas-formacion', ta.proyecto.centro_formacion_id))
-        if (res.status == '200') {
-            programasFormacionArticular = res.data
-        }
-    }
-
-    let lineasTecnoaAcademia
-    async function getLineasTecnoacademia() {
-        let res = await axios.get(route('web-api.tecnoacademias.lineas-tecnoacademia', [tecnoacademiaRelacionada.id]))
-        if (res.status == '200') {
-            lineasTecnoaAcademia = res.data
-        }
     }
 </script>
 
@@ -280,7 +243,7 @@
                     <Label class="mb-4" labelFor="linea_programatica_id" value="Código dependencia presupuestal (SIIF)" />
                 </div>
                 <div>
-                    <DynamicList disabled={true} id="linea_programatica_id" bind:value={taInfo.linea_programatica_id} routeWebApi={route('web-api.lineas-programaticas', 1)} classes="evaluacion-select min-h" placeholder="Busque por el nombre de la línea programática" message={errors.linea_programatica_id} />
+                    <Select id="linea_programatica_id" items={lineasProgramaticas} bind:selectedValue={taInfo.linea_programatica_id} autocomplete="off" placeholder="Seleccione una línea programática" />
                 </div>
             </div>
             <div class="mt-44 grid grid-cols-2">
@@ -310,24 +273,13 @@
                 </div>
             </div>
         </fieldset>
-        {#if taInfo.tecnoacademia_id && lineasTecnoaAcademia}
+        {#if taInfo.tecnoacademia_id && lineasTecnoacademia}
             <div class="mt-44 grid grid-cols-2">
                 <div>
                     <Label class="mb-4" labelFor="tecnoacademia_linea_tecnoacademia_id" value="Líneas temáticas a ejecutar en la vigencia del proyecto:" />
                 </div>
                 <div>
-                    <SelectMulti classes="evaluacion-select-multi" disabled={true} id="tecnoacademia_linea_tecnoacademia_id" bind:selectedValue={taInfo.tecnoacademia_linea_tecnoacademia_id} items={lineasTecnoaAcademia} isMulti={true} placeholder="Buscar por el nombre de la línea" />
-                    {#if lineasTecnoaAcademia?.length == 0}
-                        <div>
-                            <p>Parece que no se han encontrado elementos, por favor haga clic en <strong>Refrescar</strong></p>
-                            <button on:click={getLineasTecnoacademia} type="button" class="flex underline">
-                                <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 mr-2" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 4v5h.582m15.356 2A8.001 8.001 0 004.582 9m0 0H9m11 11v-5h-.581m0 0a8.003 8.003 0 01-15.357-2m15.357 2H15" />
-                                </svg>
-                                Refrescar
-                            </button>
-                        </div>
-                    {/if}
+                    <SelectMulti classes="evaluacion-select-multi" disabled={true} id="tecnoacademia_linea_tecnoacademia_id" bind:selectedValue={taInfo.tecnoacademia_linea_tecnoacademia_id} items={lineasTecnoacademia} isMulti={true} placeholder="Buscar por el nombre de la línea" />
                 </div>
             </div>
         {/if}
@@ -645,18 +597,7 @@
                 <Label class="mb-4" labelFor="programas_formacion_articulados" value="Programas de articulación con la Media con los cuales se espera dar continuidad a la ruta de formación de los aprendices de la TecnoAcademia" />
             </div>
             <div>
-                <SelectMulti classes="evaluacion-select-multi" disabled={true} id="programas_formacion_articulados" bind:selectedValue={taInfo.programas_formacion_articulados} items={programasFormacionArticular} isMulti={true} placeholder="Buscar por el nombre del programa de formación" />
-                {#if programasFormacionArticular?.length == 0}
-                    <div>
-                        <p>Parece que no se han encontrado elementos, por favor haga clic en <strong>Refrescar</strong></p>
-                        <button on:click={getProgramasFormacionArticular} type="button" class="flex underline">
-                            <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 mr-2" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 4v5h.582m15.356 2A8.001 8.001 0 004.582 9m0 0H9m11 11v-5h-.581m0 0a8.003 8.003 0 01-15.357-2m15.357 2H15" />
-                            </svg>
-                            Refrescar
-                        </button>
-                    </div>
-                {/if}
+                <SelectMulti classes="evaluacion-select-multi" disabled={true} id="programas_formacion_articulados" bind:selectedValue={taInfo.programas_formacion_articulados} items={programasFormacionSinRegistroCalificado} isMulti={true} placeholder="Buscar por el nombre del programa de formación" />
             </div>
         </div>
 
@@ -701,7 +642,7 @@
                 <Label class="mb-4" labelFor="diseno_curricular_id" value="Programas a ejecutar en la vigencia del proyecto:" />
             </div>
             <div>
-                <SelectMulti classes="evaluacion-select-multi" disabled={true} id="diseno_curricular_id" bind:selectedValue={taInfo.diseno_curricular_id} items={disCurriculares} isMulti={true} placeholder="Buscar por el nombre del programa de formación" />
+                <SelectMulti classes="evaluacion-select-multi" disabled={true} id="diseno_curricular_id" bind:selectedValue={taInfo.diseno_curricular_id} items={disenosCurriculares} isMulti={true} placeholder="Buscar por el nombre del programa de formación" />
             </div>
         </div>
 

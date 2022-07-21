@@ -8938,9 +8938,9 @@ ___CSS_LOADER_EXPORT___.push([module.id, "@charset \"UTF-8\";\n:root{--tagify-dd
 
 /***/ }),
 
-/***/ "./node_modules/css-loader/dist/cjs.js??ruleSet[1].rules[6].oneOf[1].use[1]!./node_modules/postcss-loader/dist/cjs.js??ruleSet[1].rules[6].oneOf[1].use[2]!./node_modules/svelte-loader/index.js?cssPath=D:/www/sipro-spa/node_modules/svelte-loading-spinners/dist/BarLoader.svelte.40.css!./node_modules/svelte-loading-spinners/dist/BarLoader.svelte":
+/***/ "./node_modules/css-loader/dist/cjs.js??ruleSet[1].rules[6].oneOf[1].use[1]!./node_modules/postcss-loader/dist/cjs.js??ruleSet[1].rules[6].oneOf[1].use[2]!./node_modules/svelte-loader/index.js?cssPath=D:/www/sipro-spa/node_modules/svelte-loading-spinners/dist/BarLoader.svelte.39.css!./node_modules/svelte-loading-spinners/dist/BarLoader.svelte":
 /*!***************************************************************************************************************************************************************************************************************************************************************************************************************************************************************!*\
-  !*** ./node_modules/css-loader/dist/cjs.js??ruleSet[1].rules[6].oneOf[1].use[1]!./node_modules/postcss-loader/dist/cjs.js??ruleSet[1].rules[6].oneOf[1].use[2]!./node_modules/svelte-loader/index.js?cssPath=D:/www/sipro-spa/node_modules/svelte-loading-spinners/dist/BarLoader.svelte.40.css!./node_modules/svelte-loading-spinners/dist/BarLoader.svelte ***!
+  !*** ./node_modules/css-loader/dist/cjs.js??ruleSet[1].rules[6].oneOf[1].use[1]!./node_modules/postcss-loader/dist/cjs.js??ruleSet[1].rules[6].oneOf[1].use[2]!./node_modules/svelte-loader/index.js?cssPath=D:/www/sipro-spa/node_modules/svelte-loading-spinners/dist/BarLoader.svelte.39.css!./node_modules/svelte-loading-spinners/dist/BarLoader.svelte ***!
   \***************************************************************************************************************************************************************************************************************************************************************************************************************************************************************/
 /***/ ((module, __webpack_exports__, __webpack_require__) => {
 
@@ -9010,9 +9010,9 @@ ___CSS_LOADER_EXPORT___.push([module.id, ".circle.svelte-14upwad{height:var(--si
 
 /***/ }),
 
-/***/ "./node_modules/css-loader/dist/cjs.js??ruleSet[1].rules[6].oneOf[1].use[1]!./node_modules/postcss-loader/dist/cjs.js??ruleSet[1].rules[6].oneOf[1].use[2]!./node_modules/svelte-loader/index.js?cssPath=D:/www/sipro-spa/node_modules/svelte-loading-spinners/dist/Circle2.svelte.36.css!./node_modules/svelte-loading-spinners/dist/Circle2.svelte":
+/***/ "./node_modules/css-loader/dist/cjs.js??ruleSet[1].rules[6].oneOf[1].use[1]!./node_modules/postcss-loader/dist/cjs.js??ruleSet[1].rules[6].oneOf[1].use[2]!./node_modules/svelte-loader/index.js?cssPath=D:/www/sipro-spa/node_modules/svelte-loading-spinners/dist/Circle2.svelte.31.css!./node_modules/svelte-loading-spinners/dist/Circle2.svelte":
 /*!***********************************************************************************************************************************************************************************************************************************************************************************************************************************************************!*\
-  !*** ./node_modules/css-loader/dist/cjs.js??ruleSet[1].rules[6].oneOf[1].use[1]!./node_modules/postcss-loader/dist/cjs.js??ruleSet[1].rules[6].oneOf[1].use[2]!./node_modules/svelte-loader/index.js?cssPath=D:/www/sipro-spa/node_modules/svelte-loading-spinners/dist/Circle2.svelte.36.css!./node_modules/svelte-loading-spinners/dist/Circle2.svelte ***!
+  !*** ./node_modules/css-loader/dist/cjs.js??ruleSet[1].rules[6].oneOf[1].use[1]!./node_modules/postcss-loader/dist/cjs.js??ruleSet[1].rules[6].oneOf[1].use[2]!./node_modules/svelte-loader/index.js?cssPath=D:/www/sipro-spa/node_modules/svelte-loading-spinners/dist/Circle2.svelte.31.css!./node_modules/svelte-loading-spinners/dist/Circle2.svelte ***!
   \***********************************************************************************************************************************************************************************************************************************************************************************************************************************************************/
 /***/ ((module, __webpack_exports__, __webpack_require__) => {
 
@@ -9034,9 +9034,9 @@ ___CSS_LOADER_EXPORT___.push([module.id, ".circle.svelte-1vclic6{width:var(--siz
 
 /***/ }),
 
-/***/ "./node_modules/css-loader/dist/cjs.js??ruleSet[1].rules[6].oneOf[1].use[1]!./node_modules/postcss-loader/dist/cjs.js??ruleSet[1].rules[6].oneOf[1].use[2]!./node_modules/svelte-loader/index.js?cssPath=D:/www/sipro-spa/node_modules/svelte-loading-spinners/dist/Circle3.svelte.33.css!./node_modules/svelte-loading-spinners/dist/Circle3.svelte":
+/***/ "./node_modules/css-loader/dist/cjs.js??ruleSet[1].rules[6].oneOf[1].use[1]!./node_modules/postcss-loader/dist/cjs.js??ruleSet[1].rules[6].oneOf[1].use[2]!./node_modules/svelte-loader/index.js?cssPath=D:/www/sipro-spa/node_modules/svelte-loading-spinners/dist/Circle3.svelte.36.css!./node_modules/svelte-loading-spinners/dist/Circle3.svelte":
 /*!***********************************************************************************************************************************************************************************************************************************************************************************************************************************************************!*\
-  !*** ./node_modules/css-loader/dist/cjs.js??ruleSet[1].rules[6].oneOf[1].use[1]!./node_modules/postcss-loader/dist/cjs.js??ruleSet[1].rules[6].oneOf[1].use[2]!./node_modules/svelte-loader/index.js?cssPath=D:/www/sipro-spa/node_modules/svelte-loading-spinners/dist/Circle3.svelte.33.css!./node_modules/svelte-loading-spinners/dist/Circle3.svelte ***!
+  !*** ./node_modules/css-loader/dist/cjs.js??ruleSet[1].rules[6].oneOf[1].use[1]!./node_modules/postcss-loader/dist/cjs.js??ruleSet[1].rules[6].oneOf[1].use[2]!./node_modules/svelte-loader/index.js?cssPath=D:/www/sipro-spa/node_modules/svelte-loading-spinners/dist/Circle3.svelte.36.css!./node_modules/svelte-loading-spinners/dist/Circle3.svelte ***!
   \***********************************************************************************************************************************************************************************************************************************************************************************************************************************************************/
 /***/ ((module, __webpack_exports__, __webpack_require__) => {
 
@@ -9058,9 +9058,9 @@ ___CSS_LOADER_EXPORT___.push([module.id, ".wrapper.svelte-1vf8im1{width:var(--si
 
 /***/ }),
 
-/***/ "./node_modules/css-loader/dist/cjs.js??ruleSet[1].rules[6].oneOf[1].use[1]!./node_modules/postcss-loader/dist/cjs.js??ruleSet[1].rules[6].oneOf[1].use[2]!./node_modules/svelte-loader/index.js?cssPath=D:/www/sipro-spa/node_modules/svelte-loading-spinners/dist/Clock.svelte.52.css!./node_modules/svelte-loading-spinners/dist/Clock.svelte":
+/***/ "./node_modules/css-loader/dist/cjs.js??ruleSet[1].rules[6].oneOf[1].use[1]!./node_modules/postcss-loader/dist/cjs.js??ruleSet[1].rules[6].oneOf[1].use[2]!./node_modules/svelte-loader/index.js?cssPath=D:/www/sipro-spa/node_modules/svelte-loading-spinners/dist/Clock.svelte.53.css!./node_modules/svelte-loading-spinners/dist/Clock.svelte":
 /*!*******************************************************************************************************************************************************************************************************************************************************************************************************************************************************!*\
-  !*** ./node_modules/css-loader/dist/cjs.js??ruleSet[1].rules[6].oneOf[1].use[1]!./node_modules/postcss-loader/dist/cjs.js??ruleSet[1].rules[6].oneOf[1].use[2]!./node_modules/svelte-loader/index.js?cssPath=D:/www/sipro-spa/node_modules/svelte-loading-spinners/dist/Clock.svelte.52.css!./node_modules/svelte-loading-spinners/dist/Clock.svelte ***!
+  !*** ./node_modules/css-loader/dist/cjs.js??ruleSet[1].rules[6].oneOf[1].use[1]!./node_modules/postcss-loader/dist/cjs.js??ruleSet[1].rules[6].oneOf[1].use[2]!./node_modules/svelte-loader/index.js?cssPath=D:/www/sipro-spa/node_modules/svelte-loading-spinners/dist/Clock.svelte.53.css!./node_modules/svelte-loading-spinners/dist/Clock.svelte ***!
   \*******************************************************************************************************************************************************************************************************************************************************************************************************************************************************/
 /***/ ((module, __webpack_exports__, __webpack_require__) => {
 
@@ -9082,9 +9082,9 @@ ___CSS_LOADER_EXPORT___.push([module.id, "div.svelte-1cgj772{position:relative;w
 
 /***/ }),
 
-/***/ "./node_modules/css-loader/dist/cjs.js??ruleSet[1].rules[6].oneOf[1].use[1]!./node_modules/postcss-loader/dist/cjs.js??ruleSet[1].rules[6].oneOf[1].use[2]!./node_modules/svelte-loader/index.js?cssPath=D:/www/sipro-spa/node_modules/svelte-loading-spinners/dist/Diamonds.svelte.55.css!./node_modules/svelte-loading-spinners/dist/Diamonds.svelte":
+/***/ "./node_modules/css-loader/dist/cjs.js??ruleSet[1].rules[6].oneOf[1].use[1]!./node_modules/postcss-loader/dist/cjs.js??ruleSet[1].rules[6].oneOf[1].use[2]!./node_modules/svelte-loader/index.js?cssPath=D:/www/sipro-spa/node_modules/svelte-loading-spinners/dist/Diamonds.svelte.54.css!./node_modules/svelte-loading-spinners/dist/Diamonds.svelte":
 /*!*************************************************************************************************************************************************************************************************************************************************************************************************************************************************************!*\
-  !*** ./node_modules/css-loader/dist/cjs.js??ruleSet[1].rules[6].oneOf[1].use[1]!./node_modules/postcss-loader/dist/cjs.js??ruleSet[1].rules[6].oneOf[1].use[2]!./node_modules/svelte-loader/index.js?cssPath=D:/www/sipro-spa/node_modules/svelte-loading-spinners/dist/Diamonds.svelte.55.css!./node_modules/svelte-loading-spinners/dist/Diamonds.svelte ***!
+  !*** ./node_modules/css-loader/dist/cjs.js??ruleSet[1].rules[6].oneOf[1].use[1]!./node_modules/postcss-loader/dist/cjs.js??ruleSet[1].rules[6].oneOf[1].use[2]!./node_modules/svelte-loader/index.js?cssPath=D:/www/sipro-spa/node_modules/svelte-loading-spinners/dist/Diamonds.svelte.54.css!./node_modules/svelte-loading-spinners/dist/Diamonds.svelte ***!
   \*************************************************************************************************************************************************************************************************************************************************************************************************************************************************************/
 /***/ ((module, __webpack_exports__, __webpack_require__) => {
 
@@ -9106,9 +9106,9 @@ ___CSS_LOADER_EXPORT___.push([module.id, "span.svelte-evhfle{width:var(--size);h
 
 /***/ }),
 
-/***/ "./node_modules/css-loader/dist/cjs.js??ruleSet[1].rules[6].oneOf[1].use[1]!./node_modules/postcss-loader/dist/cjs.js??ruleSet[1].rules[6].oneOf[1].use[2]!./node_modules/svelte-loader/index.js?cssPath=D:/www/sipro-spa/node_modules/svelte-loading-spinners/dist/DoubleBounce.svelte.38.css!./node_modules/svelte-loading-spinners/dist/DoubleBounce.svelte":
+/***/ "./node_modules/css-loader/dist/cjs.js??ruleSet[1].rules[6].oneOf[1].use[1]!./node_modules/postcss-loader/dist/cjs.js??ruleSet[1].rules[6].oneOf[1].use[2]!./node_modules/svelte-loader/index.js?cssPath=D:/www/sipro-spa/node_modules/svelte-loading-spinners/dist/DoubleBounce.svelte.34.css!./node_modules/svelte-loading-spinners/dist/DoubleBounce.svelte":
 /*!*********************************************************************************************************************************************************************************************************************************************************************************************************************************************************************!*\
-  !*** ./node_modules/css-loader/dist/cjs.js??ruleSet[1].rules[6].oneOf[1].use[1]!./node_modules/postcss-loader/dist/cjs.js??ruleSet[1].rules[6].oneOf[1].use[2]!./node_modules/svelte-loader/index.js?cssPath=D:/www/sipro-spa/node_modules/svelte-loading-spinners/dist/DoubleBounce.svelte.38.css!./node_modules/svelte-loading-spinners/dist/DoubleBounce.svelte ***!
+  !*** ./node_modules/css-loader/dist/cjs.js??ruleSet[1].rules[6].oneOf[1].use[1]!./node_modules/postcss-loader/dist/cjs.js??ruleSet[1].rules[6].oneOf[1].use[2]!./node_modules/svelte-loader/index.js?cssPath=D:/www/sipro-spa/node_modules/svelte-loading-spinners/dist/DoubleBounce.svelte.34.css!./node_modules/svelte-loading-spinners/dist/DoubleBounce.svelte ***!
   \*********************************************************************************************************************************************************************************************************************************************************************************************************************************************************************/
 /***/ ((module, __webpack_exports__, __webpack_require__) => {
 
@@ -9130,9 +9130,9 @@ ___CSS_LOADER_EXPORT___.push([module.id, ".wrapper.svelte-h1a2xs{position:relati
 
 /***/ }),
 
-/***/ "./node_modules/css-loader/dist/cjs.js??ruleSet[1].rules[6].oneOf[1].use[1]!./node_modules/postcss-loader/dist/cjs.js??ruleSet[1].rules[6].oneOf[1].use[2]!./node_modules/svelte-loader/index.js?cssPath=D:/www/sipro-spa/node_modules/svelte-loading-spinners/dist/Firework.svelte.46.css!./node_modules/svelte-loading-spinners/dist/Firework.svelte":
+/***/ "./node_modules/css-loader/dist/cjs.js??ruleSet[1].rules[6].oneOf[1].use[1]!./node_modules/postcss-loader/dist/cjs.js??ruleSet[1].rules[6].oneOf[1].use[2]!./node_modules/svelte-loader/index.js?cssPath=D:/www/sipro-spa/node_modules/svelte-loading-spinners/dist/Firework.svelte.43.css!./node_modules/svelte-loading-spinners/dist/Firework.svelte":
 /*!*************************************************************************************************************************************************************************************************************************************************************************************************************************************************************!*\
-  !*** ./node_modules/css-loader/dist/cjs.js??ruleSet[1].rules[6].oneOf[1].use[1]!./node_modules/postcss-loader/dist/cjs.js??ruleSet[1].rules[6].oneOf[1].use[2]!./node_modules/svelte-loader/index.js?cssPath=D:/www/sipro-spa/node_modules/svelte-loading-spinners/dist/Firework.svelte.46.css!./node_modules/svelte-loading-spinners/dist/Firework.svelte ***!
+  !*** ./node_modules/css-loader/dist/cjs.js??ruleSet[1].rules[6].oneOf[1].use[1]!./node_modules/postcss-loader/dist/cjs.js??ruleSet[1].rules[6].oneOf[1].use[2]!./node_modules/svelte-loader/index.js?cssPath=D:/www/sipro-spa/node_modules/svelte-loading-spinners/dist/Firework.svelte.43.css!./node_modules/svelte-loading-spinners/dist/Firework.svelte ***!
   \*************************************************************************************************************************************************************************************************************************************************************************************************************************************************************/
 /***/ ((module, __webpack_exports__, __webpack_require__) => {
 
@@ -9154,9 +9154,9 @@ ___CSS_LOADER_EXPORT___.push([module.id, ".wrapper.svelte-1x2s7pr{width:calc(var
 
 /***/ }),
 
-/***/ "./node_modules/css-loader/dist/cjs.js??ruleSet[1].rules[6].oneOf[1].use[1]!./node_modules/postcss-loader/dist/cjs.js??ruleSet[1].rules[6].oneOf[1].use[2]!./node_modules/svelte-loader/index.js?cssPath=D:/www/sipro-spa/node_modules/svelte-loading-spinners/dist/GoogleSpin.svelte.41.css!./node_modules/svelte-loading-spinners/dist/GoogleSpin.svelte":
+/***/ "./node_modules/css-loader/dist/cjs.js??ruleSet[1].rules[6].oneOf[1].use[1]!./node_modules/postcss-loader/dist/cjs.js??ruleSet[1].rules[6].oneOf[1].use[2]!./node_modules/svelte-loader/index.js?cssPath=D:/www/sipro-spa/node_modules/svelte-loading-spinners/dist/GoogleSpin.svelte.33.css!./node_modules/svelte-loading-spinners/dist/GoogleSpin.svelte":
 /*!*****************************************************************************************************************************************************************************************************************************************************************************************************************************************************************!*\
-  !*** ./node_modules/css-loader/dist/cjs.js??ruleSet[1].rules[6].oneOf[1].use[1]!./node_modules/postcss-loader/dist/cjs.js??ruleSet[1].rules[6].oneOf[1].use[2]!./node_modules/svelte-loader/index.js?cssPath=D:/www/sipro-spa/node_modules/svelte-loading-spinners/dist/GoogleSpin.svelte.41.css!./node_modules/svelte-loading-spinners/dist/GoogleSpin.svelte ***!
+  !*** ./node_modules/css-loader/dist/cjs.js??ruleSet[1].rules[6].oneOf[1].use[1]!./node_modules/postcss-loader/dist/cjs.js??ruleSet[1].rules[6].oneOf[1].use[2]!./node_modules/svelte-loader/index.js?cssPath=D:/www/sipro-spa/node_modules/svelte-loading-spinners/dist/GoogleSpin.svelte.33.css!./node_modules/svelte-loading-spinners/dist/GoogleSpin.svelte ***!
   \*****************************************************************************************************************************************************************************************************************************************************************************************************************************************************************/
 /***/ ((module, __webpack_exports__, __webpack_require__) => {
 
@@ -9178,9 +9178,9 @@ ___CSS_LOADER_EXPORT___.push([module.id, ".svelte-1exboqr{overflow:hidden;positi
 
 /***/ }),
 
-/***/ "./node_modules/css-loader/dist/cjs.js??ruleSet[1].rules[6].oneOf[1].use[1]!./node_modules/postcss-loader/dist/cjs.js??ruleSet[1].rules[6].oneOf[1].use[2]!./node_modules/svelte-loader/index.js?cssPath=D:/www/sipro-spa/node_modules/svelte-loading-spinners/dist/Jellyfish.svelte.44.css!./node_modules/svelte-loading-spinners/dist/Jellyfish.svelte":
+/***/ "./node_modules/css-loader/dist/cjs.js??ruleSet[1].rules[6].oneOf[1].use[1]!./node_modules/postcss-loader/dist/cjs.js??ruleSet[1].rules[6].oneOf[1].use[2]!./node_modules/svelte-loader/index.js?cssPath=D:/www/sipro-spa/node_modules/svelte-loading-spinners/dist/Jellyfish.svelte.47.css!./node_modules/svelte-loading-spinners/dist/Jellyfish.svelte":
 /*!***************************************************************************************************************************************************************************************************************************************************************************************************************************************************************!*\
-  !*** ./node_modules/css-loader/dist/cjs.js??ruleSet[1].rules[6].oneOf[1].use[1]!./node_modules/postcss-loader/dist/cjs.js??ruleSet[1].rules[6].oneOf[1].use[2]!./node_modules/svelte-loader/index.js?cssPath=D:/www/sipro-spa/node_modules/svelte-loading-spinners/dist/Jellyfish.svelte.44.css!./node_modules/svelte-loading-spinners/dist/Jellyfish.svelte ***!
+  !*** ./node_modules/css-loader/dist/cjs.js??ruleSet[1].rules[6].oneOf[1].use[1]!./node_modules/postcss-loader/dist/cjs.js??ruleSet[1].rules[6].oneOf[1].use[2]!./node_modules/svelte-loader/index.js?cssPath=D:/www/sipro-spa/node_modules/svelte-loading-spinners/dist/Jellyfish.svelte.47.css!./node_modules/svelte-loading-spinners/dist/Jellyfish.svelte ***!
   \***************************************************************************************************************************************************************************************************************************************************************************************************************************************************************/
 /***/ ((module, __webpack_exports__, __webpack_require__) => {
 
@@ -9202,9 +9202,9 @@ ___CSS_LOADER_EXPORT___.push([module.id, ".wrapper.svelte-1v1mfqa{position:relat
 
 /***/ }),
 
-/***/ "./node_modules/css-loader/dist/cjs.js??ruleSet[1].rules[6].oneOf[1].use[1]!./node_modules/postcss-loader/dist/cjs.js??ruleSet[1].rules[6].oneOf[1].use[2]!./node_modules/svelte-loader/index.js?cssPath=D:/www/sipro-spa/node_modules/svelte-loading-spinners/dist/Jumper.svelte.39.css!./node_modules/svelte-loading-spinners/dist/Jumper.svelte":
+/***/ "./node_modules/css-loader/dist/cjs.js??ruleSet[1].rules[6].oneOf[1].use[1]!./node_modules/postcss-loader/dist/cjs.js??ruleSet[1].rules[6].oneOf[1].use[2]!./node_modules/svelte-loader/index.js?cssPath=D:/www/sipro-spa/node_modules/svelte-loading-spinners/dist/Jumper.svelte.42.css!./node_modules/svelte-loading-spinners/dist/Jumper.svelte":
 /*!*********************************************************************************************************************************************************************************************************************************************************************************************************************************************************!*\
-  !*** ./node_modules/css-loader/dist/cjs.js??ruleSet[1].rules[6].oneOf[1].use[1]!./node_modules/postcss-loader/dist/cjs.js??ruleSet[1].rules[6].oneOf[1].use[2]!./node_modules/svelte-loader/index.js?cssPath=D:/www/sipro-spa/node_modules/svelte-loading-spinners/dist/Jumper.svelte.39.css!./node_modules/svelte-loading-spinners/dist/Jumper.svelte ***!
+  !*** ./node_modules/css-loader/dist/cjs.js??ruleSet[1].rules[6].oneOf[1].use[1]!./node_modules/postcss-loader/dist/cjs.js??ruleSet[1].rules[6].oneOf[1].use[2]!./node_modules/svelte-loader/index.js?cssPath=D:/www/sipro-spa/node_modules/svelte-loading-spinners/dist/Jumper.svelte.42.css!./node_modules/svelte-loading-spinners/dist/Jumper.svelte ***!
   \*********************************************************************************************************************************************************************************************************************************************************************************************************************************************************/
 /***/ ((module, __webpack_exports__, __webpack_require__) => {
 
@@ -9226,9 +9226,9 @@ ___CSS_LOADER_EXPORT___.push([module.id, ".wrapper.svelte-1cy66mt{width:var(--si
 
 /***/ }),
 
-/***/ "./node_modules/css-loader/dist/cjs.js??ruleSet[1].rules[6].oneOf[1].use[1]!./node_modules/postcss-loader/dist/cjs.js??ruleSet[1].rules[6].oneOf[1].use[2]!./node_modules/svelte-loader/index.js?cssPath=D:/www/sipro-spa/node_modules/svelte-loading-spinners/dist/Moon.svelte.54.css!./node_modules/svelte-loading-spinners/dist/Moon.svelte":
+/***/ "./node_modules/css-loader/dist/cjs.js??ruleSet[1].rules[6].oneOf[1].use[1]!./node_modules/postcss-loader/dist/cjs.js??ruleSet[1].rules[6].oneOf[1].use[2]!./node_modules/svelte-loader/index.js?cssPath=D:/www/sipro-spa/node_modules/svelte-loading-spinners/dist/Moon.svelte.52.css!./node_modules/svelte-loading-spinners/dist/Moon.svelte":
 /*!*****************************************************************************************************************************************************************************************************************************************************************************************************************************************************!*\
-  !*** ./node_modules/css-loader/dist/cjs.js??ruleSet[1].rules[6].oneOf[1].use[1]!./node_modules/postcss-loader/dist/cjs.js??ruleSet[1].rules[6].oneOf[1].use[2]!./node_modules/svelte-loader/index.js?cssPath=D:/www/sipro-spa/node_modules/svelte-loading-spinners/dist/Moon.svelte.54.css!./node_modules/svelte-loading-spinners/dist/Moon.svelte ***!
+  !*** ./node_modules/css-loader/dist/cjs.js??ruleSet[1].rules[6].oneOf[1].use[1]!./node_modules/postcss-loader/dist/cjs.js??ruleSet[1].rules[6].oneOf[1].use[2]!./node_modules/svelte-loader/index.js?cssPath=D:/www/sipro-spa/node_modules/svelte-loading-spinners/dist/Moon.svelte.52.css!./node_modules/svelte-loading-spinners/dist/Moon.svelte ***!
   \*****************************************************************************************************************************************************************************************************************************************************************************************************************************************************/
 /***/ ((module, __webpack_exports__, __webpack_require__) => {
 
@@ -9250,9 +9250,9 @@ ___CSS_LOADER_EXPORT___.push([module.id, ".wrapper.svelte-nlgli4{height:var(--si
 
 /***/ }),
 
-/***/ "./node_modules/css-loader/dist/cjs.js??ruleSet[1].rules[6].oneOf[1].use[1]!./node_modules/postcss-loader/dist/cjs.js??ruleSet[1].rules[6].oneOf[1].use[2]!./node_modules/svelte-loader/index.js?cssPath=D:/www/sipro-spa/node_modules/svelte-loading-spinners/dist/Plane.svelte.53.css!./node_modules/svelte-loading-spinners/dist/Plane.svelte":
+/***/ "./node_modules/css-loader/dist/cjs.js??ruleSet[1].rules[6].oneOf[1].use[1]!./node_modules/postcss-loader/dist/cjs.js??ruleSet[1].rules[6].oneOf[1].use[2]!./node_modules/svelte-loader/index.js?cssPath=D:/www/sipro-spa/node_modules/svelte-loading-spinners/dist/Plane.svelte.51.css!./node_modules/svelte-loading-spinners/dist/Plane.svelte":
 /*!*******************************************************************************************************************************************************************************************************************************************************************************************************************************************************!*\
-  !*** ./node_modules/css-loader/dist/cjs.js??ruleSet[1].rules[6].oneOf[1].use[1]!./node_modules/postcss-loader/dist/cjs.js??ruleSet[1].rules[6].oneOf[1].use[2]!./node_modules/svelte-loader/index.js?cssPath=D:/www/sipro-spa/node_modules/svelte-loading-spinners/dist/Plane.svelte.53.css!./node_modules/svelte-loading-spinners/dist/Plane.svelte ***!
+  !*** ./node_modules/css-loader/dist/cjs.js??ruleSet[1].rules[6].oneOf[1].use[1]!./node_modules/postcss-loader/dist/cjs.js??ruleSet[1].rules[6].oneOf[1].use[2]!./node_modules/svelte-loader/index.js?cssPath=D:/www/sipro-spa/node_modules/svelte-loading-spinners/dist/Plane.svelte.51.css!./node_modules/svelte-loading-spinners/dist/Plane.svelte ***!
   \*******************************************************************************************************************************************************************************************************************************************************************************************************************************************************/
 /***/ ((module, __webpack_exports__, __webpack_require__) => {
 
@@ -9274,9 +9274,9 @@ ___CSS_LOADER_EXPORT___.push([module.id, ".wrapper.svelte-1sqavxm.svelte-1sqavxm
 
 /***/ }),
 
-/***/ "./node_modules/css-loader/dist/cjs.js??ruleSet[1].rules[6].oneOf[1].use[1]!./node_modules/postcss-loader/dist/cjs.js??ruleSet[1].rules[6].oneOf[1].use[2]!./node_modules/svelte-loader/index.js?cssPath=D:/www/sipro-spa/node_modules/svelte-loading-spinners/dist/Pulse.svelte.49.css!./node_modules/svelte-loading-spinners/dist/Pulse.svelte":
+/***/ "./node_modules/css-loader/dist/cjs.js??ruleSet[1].rules[6].oneOf[1].use[1]!./node_modules/postcss-loader/dist/cjs.js??ruleSet[1].rules[6].oneOf[1].use[2]!./node_modules/svelte-loader/index.js?cssPath=D:/www/sipro-spa/node_modules/svelte-loading-spinners/dist/Pulse.svelte.44.css!./node_modules/svelte-loading-spinners/dist/Pulse.svelte":
 /*!*******************************************************************************************************************************************************************************************************************************************************************************************************************************************************!*\
-  !*** ./node_modules/css-loader/dist/cjs.js??ruleSet[1].rules[6].oneOf[1].use[1]!./node_modules/postcss-loader/dist/cjs.js??ruleSet[1].rules[6].oneOf[1].use[2]!./node_modules/svelte-loader/index.js?cssPath=D:/www/sipro-spa/node_modules/svelte-loading-spinners/dist/Pulse.svelte.49.css!./node_modules/svelte-loading-spinners/dist/Pulse.svelte ***!
+  !*** ./node_modules/css-loader/dist/cjs.js??ruleSet[1].rules[6].oneOf[1].use[1]!./node_modules/postcss-loader/dist/cjs.js??ruleSet[1].rules[6].oneOf[1].use[2]!./node_modules/svelte-loader/index.js?cssPath=D:/www/sipro-spa/node_modules/svelte-loading-spinners/dist/Pulse.svelte.44.css!./node_modules/svelte-loading-spinners/dist/Pulse.svelte ***!
   \*******************************************************************************************************************************************************************************************************************************************************************************************************************************************************/
 /***/ ((module, __webpack_exports__, __webpack_require__) => {
 
@@ -9298,9 +9298,9 @@ ___CSS_LOADER_EXPORT___.push([module.id, ".wrapper.svelte-446r86{position:relati
 
 /***/ }),
 
-/***/ "./node_modules/css-loader/dist/cjs.js??ruleSet[1].rules[6].oneOf[1].use[1]!./node_modules/postcss-loader/dist/cjs.js??ruleSet[1].rules[6].oneOf[1].use[2]!./node_modules/svelte-loader/index.js?cssPath=D:/www/sipro-spa/node_modules/svelte-loading-spinners/dist/Rainbow.svelte.45.css!./node_modules/svelte-loading-spinners/dist/Rainbow.svelte":
+/***/ "./node_modules/css-loader/dist/cjs.js??ruleSet[1].rules[6].oneOf[1].use[1]!./node_modules/postcss-loader/dist/cjs.js??ruleSet[1].rules[6].oneOf[1].use[2]!./node_modules/svelte-loader/index.js?cssPath=D:/www/sipro-spa/node_modules/svelte-loading-spinners/dist/Rainbow.svelte.40.css!./node_modules/svelte-loading-spinners/dist/Rainbow.svelte":
 /*!***********************************************************************************************************************************************************************************************************************************************************************************************************************************************************!*\
-  !*** ./node_modules/css-loader/dist/cjs.js??ruleSet[1].rules[6].oneOf[1].use[1]!./node_modules/postcss-loader/dist/cjs.js??ruleSet[1].rules[6].oneOf[1].use[2]!./node_modules/svelte-loader/index.js?cssPath=D:/www/sipro-spa/node_modules/svelte-loading-spinners/dist/Rainbow.svelte.45.css!./node_modules/svelte-loading-spinners/dist/Rainbow.svelte ***!
+  !*** ./node_modules/css-loader/dist/cjs.js??ruleSet[1].rules[6].oneOf[1].use[1]!./node_modules/postcss-loader/dist/cjs.js??ruleSet[1].rules[6].oneOf[1].use[2]!./node_modules/svelte-loader/index.js?cssPath=D:/www/sipro-spa/node_modules/svelte-loading-spinners/dist/Rainbow.svelte.40.css!./node_modules/svelte-loading-spinners/dist/Rainbow.svelte ***!
   \***********************************************************************************************************************************************************************************************************************************************************************************************************************************************************/
 /***/ ((module, __webpack_exports__, __webpack_require__) => {
 
@@ -9322,9 +9322,9 @@ ___CSS_LOADER_EXPORT___.push([module.id, ".wrapper.svelte-1fuumrt{width:var(--si
 
 /***/ }),
 
-/***/ "./node_modules/css-loader/dist/cjs.js??ruleSet[1].rules[6].oneOf[1].use[1]!./node_modules/postcss-loader/dist/cjs.js??ruleSet[1].rules[6].oneOf[1].use[2]!./node_modules/svelte-loader/index.js?cssPath=D:/www/sipro-spa/node_modules/svelte-loading-spinners/dist/RingLoader.svelte.47.css!./node_modules/svelte-loading-spinners/dist/RingLoader.svelte":
+/***/ "./node_modules/css-loader/dist/cjs.js??ruleSet[1].rules[6].oneOf[1].use[1]!./node_modules/postcss-loader/dist/cjs.js??ruleSet[1].rules[6].oneOf[1].use[2]!./node_modules/svelte-loader/index.js?cssPath=D:/www/sipro-spa/node_modules/svelte-loading-spinners/dist/RingLoader.svelte.41.css!./node_modules/svelte-loading-spinners/dist/RingLoader.svelte":
 /*!*****************************************************************************************************************************************************************************************************************************************************************************************************************************************************************!*\
-  !*** ./node_modules/css-loader/dist/cjs.js??ruleSet[1].rules[6].oneOf[1].use[1]!./node_modules/postcss-loader/dist/cjs.js??ruleSet[1].rules[6].oneOf[1].use[2]!./node_modules/svelte-loader/index.js?cssPath=D:/www/sipro-spa/node_modules/svelte-loading-spinners/dist/RingLoader.svelte.47.css!./node_modules/svelte-loading-spinners/dist/RingLoader.svelte ***!
+  !*** ./node_modules/css-loader/dist/cjs.js??ruleSet[1].rules[6].oneOf[1].use[1]!./node_modules/postcss-loader/dist/cjs.js??ruleSet[1].rules[6].oneOf[1].use[2]!./node_modules/svelte-loader/index.js?cssPath=D:/www/sipro-spa/node_modules/svelte-loading-spinners/dist/RingLoader.svelte.41.css!./node_modules/svelte-loading-spinners/dist/RingLoader.svelte ***!
   \*****************************************************************************************************************************************************************************************************************************************************************************************************************************************************************/
 /***/ ((module, __webpack_exports__, __webpack_require__) => {
 
@@ -9346,9 +9346,9 @@ ___CSS_LOADER_EXPORT___.push([module.id, ".wrapper.svelte-17ey38u{position:relat
 
 /***/ }),
 
-/***/ "./node_modules/css-loader/dist/cjs.js??ruleSet[1].rules[6].oneOf[1].use[1]!./node_modules/postcss-loader/dist/cjs.js??ruleSet[1].rules[6].oneOf[1].use[2]!./node_modules/svelte-loader/index.js?cssPath=D:/www/sipro-spa/node_modules/svelte-loading-spinners/dist/ScaleOut.svelte.34.css!./node_modules/svelte-loading-spinners/dist/ScaleOut.svelte":
+/***/ "./node_modules/css-loader/dist/cjs.js??ruleSet[1].rules[6].oneOf[1].use[1]!./node_modules/postcss-loader/dist/cjs.js??ruleSet[1].rules[6].oneOf[1].use[2]!./node_modules/svelte-loader/index.js?cssPath=D:/www/sipro-spa/node_modules/svelte-loading-spinners/dist/ScaleOut.svelte.37.css!./node_modules/svelte-loading-spinners/dist/ScaleOut.svelte":
 /*!*************************************************************************************************************************************************************************************************************************************************************************************************************************************************************!*\
-  !*** ./node_modules/css-loader/dist/cjs.js??ruleSet[1].rules[6].oneOf[1].use[1]!./node_modules/postcss-loader/dist/cjs.js??ruleSet[1].rules[6].oneOf[1].use[2]!./node_modules/svelte-loader/index.js?cssPath=D:/www/sipro-spa/node_modules/svelte-loading-spinners/dist/ScaleOut.svelte.34.css!./node_modules/svelte-loading-spinners/dist/ScaleOut.svelte ***!
+  !*** ./node_modules/css-loader/dist/cjs.js??ruleSet[1].rules[6].oneOf[1].use[1]!./node_modules/postcss-loader/dist/cjs.js??ruleSet[1].rules[6].oneOf[1].use[2]!./node_modules/svelte-loader/index.js?cssPath=D:/www/sipro-spa/node_modules/svelte-loading-spinners/dist/ScaleOut.svelte.37.css!./node_modules/svelte-loading-spinners/dist/ScaleOut.svelte ***!
   \*************************************************************************************************************************************************************************************************************************************************************************************************************************************************************/
 /***/ ((module, __webpack_exports__, __webpack_require__) => {
 
@@ -9418,9 +9418,9 @@ ___CSS_LOADER_EXPORT___.push([module.id, ".wrapper.svelte-1wp57lu{width:var(--si
 
 /***/ }),
 
-/***/ "./node_modules/css-loader/dist/cjs.js??ruleSet[1].rules[6].oneOf[1].use[1]!./node_modules/postcss-loader/dist/cjs.js??ruleSet[1].rules[6].oneOf[1].use[2]!./node_modules/svelte-loader/index.js?cssPath=D:/www/sipro-spa/node_modules/svelte-loading-spinners/dist/Square.svelte.51.css!./node_modules/svelte-loading-spinners/dist/Square.svelte":
+/***/ "./node_modules/css-loader/dist/cjs.js??ruleSet[1].rules[6].oneOf[1].use[1]!./node_modules/postcss-loader/dist/cjs.js??ruleSet[1].rules[6].oneOf[1].use[2]!./node_modules/svelte-loader/index.js?cssPath=D:/www/sipro-spa/node_modules/svelte-loading-spinners/dist/Square.svelte.49.css!./node_modules/svelte-loading-spinners/dist/Square.svelte":
 /*!*********************************************************************************************************************************************************************************************************************************************************************************************************************************************************!*\
-  !*** ./node_modules/css-loader/dist/cjs.js??ruleSet[1].rules[6].oneOf[1].use[1]!./node_modules/postcss-loader/dist/cjs.js??ruleSet[1].rules[6].oneOf[1].use[2]!./node_modules/svelte-loader/index.js?cssPath=D:/www/sipro-spa/node_modules/svelte-loading-spinners/dist/Square.svelte.51.css!./node_modules/svelte-loading-spinners/dist/Square.svelte ***!
+  !*** ./node_modules/css-loader/dist/cjs.js??ruleSet[1].rules[6].oneOf[1].use[1]!./node_modules/postcss-loader/dist/cjs.js??ruleSet[1].rules[6].oneOf[1].use[2]!./node_modules/svelte-loader/index.js?cssPath=D:/www/sipro-spa/node_modules/svelte-loading-spinners/dist/Square.svelte.49.css!./node_modules/svelte-loading-spinners/dist/Square.svelte ***!
   \*********************************************************************************************************************************************************************************************************************************************************************************************************************************************************/
 /***/ ((module, __webpack_exports__, __webpack_require__) => {
 
@@ -9442,9 +9442,9 @@ ___CSS_LOADER_EXPORT___.push([module.id, ".square.svelte-btmyrn{height:var(--siz
 
 /***/ }),
 
-/***/ "./node_modules/css-loader/dist/cjs.js??ruleSet[1].rules[6].oneOf[1].use[1]!./node_modules/postcss-loader/dist/cjs.js??ruleSet[1].rules[6].oneOf[1].use[2]!./node_modules/svelte-loader/index.js?cssPath=D:/www/sipro-spa/node_modules/svelte-loading-spinners/dist/Stretch.svelte.37.css!./node_modules/svelte-loading-spinners/dist/Stretch.svelte":
+/***/ "./node_modules/css-loader/dist/cjs.js??ruleSet[1].rules[6].oneOf[1].use[1]!./node_modules/postcss-loader/dist/cjs.js??ruleSet[1].rules[6].oneOf[1].use[2]!./node_modules/svelte-loader/index.js?cssPath=D:/www/sipro-spa/node_modules/svelte-loading-spinners/dist/Stretch.svelte.38.css!./node_modules/svelte-loading-spinners/dist/Stretch.svelte":
 /*!***********************************************************************************************************************************************************************************************************************************************************************************************************************************************************!*\
-  !*** ./node_modules/css-loader/dist/cjs.js??ruleSet[1].rules[6].oneOf[1].use[1]!./node_modules/postcss-loader/dist/cjs.js??ruleSet[1].rules[6].oneOf[1].use[2]!./node_modules/svelte-loader/index.js?cssPath=D:/www/sipro-spa/node_modules/svelte-loading-spinners/dist/Stretch.svelte.37.css!./node_modules/svelte-loading-spinners/dist/Stretch.svelte ***!
+  !*** ./node_modules/css-loader/dist/cjs.js??ruleSet[1].rules[6].oneOf[1].use[1]!./node_modules/postcss-loader/dist/cjs.js??ruleSet[1].rules[6].oneOf[1].use[2]!./node_modules/svelte-loader/index.js?cssPath=D:/www/sipro-spa/node_modules/svelte-loading-spinners/dist/Stretch.svelte.38.css!./node_modules/svelte-loading-spinners/dist/Stretch.svelte ***!
   \***********************************************************************************************************************************************************************************************************************************************************************************************************************************************************/
 /***/ ((module, __webpack_exports__, __webpack_require__) => {
 
@@ -9466,9 +9466,9 @@ ___CSS_LOADER_EXPORT___.push([module.id, ".wrapper.svelte-1uxpkwt{height:var(--s
 
 /***/ }),
 
-/***/ "./node_modules/css-loader/dist/cjs.js??ruleSet[1].rules[6].oneOf[1].use[1]!./node_modules/postcss-loader/dist/cjs.js??ruleSet[1].rules[6].oneOf[1].use[2]!./node_modules/svelte-loader/index.js?cssPath=D:/www/sipro-spa/node_modules/svelte-loading-spinners/dist/SyncLoader.svelte.42.css!./node_modules/svelte-loading-spinners/dist/SyncLoader.svelte":
+/***/ "./node_modules/css-loader/dist/cjs.js??ruleSet[1].rules[6].oneOf[1].use[1]!./node_modules/postcss-loader/dist/cjs.js??ruleSet[1].rules[6].oneOf[1].use[2]!./node_modules/svelte-loader/index.js?cssPath=D:/www/sipro-spa/node_modules/svelte-loading-spinners/dist/SyncLoader.svelte.46.css!./node_modules/svelte-loading-spinners/dist/SyncLoader.svelte":
 /*!*****************************************************************************************************************************************************************************************************************************************************************************************************************************************************************!*\
-  !*** ./node_modules/css-loader/dist/cjs.js??ruleSet[1].rules[6].oneOf[1].use[1]!./node_modules/postcss-loader/dist/cjs.js??ruleSet[1].rules[6].oneOf[1].use[2]!./node_modules/svelte-loader/index.js?cssPath=D:/www/sipro-spa/node_modules/svelte-loading-spinners/dist/SyncLoader.svelte.42.css!./node_modules/svelte-loading-spinners/dist/SyncLoader.svelte ***!
+  !*** ./node_modules/css-loader/dist/cjs.js??ruleSet[1].rules[6].oneOf[1].use[1]!./node_modules/postcss-loader/dist/cjs.js??ruleSet[1].rules[6].oneOf[1].use[2]!./node_modules/svelte-loader/index.js?cssPath=D:/www/sipro-spa/node_modules/svelte-loading-spinners/dist/SyncLoader.svelte.46.css!./node_modules/svelte-loading-spinners/dist/SyncLoader.svelte ***!
   \*****************************************************************************************************************************************************************************************************************************************************************************************************************************************************************/
 /***/ ((module, __webpack_exports__, __webpack_require__) => {
 
@@ -9490,9 +9490,9 @@ ___CSS_LOADER_EXPORT___.push([module.id, ".wrapper.svelte-14w6xk7{height:var(--s
 
 /***/ }),
 
-/***/ "./node_modules/css-loader/dist/cjs.js??ruleSet[1].rules[6].oneOf[1].use[1]!./node_modules/postcss-loader/dist/cjs.js??ruleSet[1].rules[6].oneOf[1].use[2]!./node_modules/svelte-loader/index.js?cssPath=D:/www/sipro-spa/node_modules/svelte-loading-spinners/dist/Wave.svelte.43.css!./node_modules/svelte-loading-spinners/dist/Wave.svelte":
+/***/ "./node_modules/css-loader/dist/cjs.js??ruleSet[1].rules[6].oneOf[1].use[1]!./node_modules/postcss-loader/dist/cjs.js??ruleSet[1].rules[6].oneOf[1].use[2]!./node_modules/svelte-loader/index.js?cssPath=D:/www/sipro-spa/node_modules/svelte-loading-spinners/dist/Wave.svelte.45.css!./node_modules/svelte-loading-spinners/dist/Wave.svelte":
 /*!*****************************************************************************************************************************************************************************************************************************************************************************************************************************************************!*\
-  !*** ./node_modules/css-loader/dist/cjs.js??ruleSet[1].rules[6].oneOf[1].use[1]!./node_modules/postcss-loader/dist/cjs.js??ruleSet[1].rules[6].oneOf[1].use[2]!./node_modules/svelte-loader/index.js?cssPath=D:/www/sipro-spa/node_modules/svelte-loading-spinners/dist/Wave.svelte.43.css!./node_modules/svelte-loading-spinners/dist/Wave.svelte ***!
+  !*** ./node_modules/css-loader/dist/cjs.js??ruleSet[1].rules[6].oneOf[1].use[1]!./node_modules/postcss-loader/dist/cjs.js??ruleSet[1].rules[6].oneOf[1].use[2]!./node_modules/svelte-loader/index.js?cssPath=D:/www/sipro-spa/node_modules/svelte-loading-spinners/dist/Wave.svelte.45.css!./node_modules/svelte-loading-spinners/dist/Wave.svelte ***!
   \*****************************************************************************************************************************************************************************************************************************************************************************************************************************************************/
 /***/ ((module, __webpack_exports__, __webpack_require__) => {
 
@@ -9514,9 +9514,9 @@ ___CSS_LOADER_EXPORT___.push([module.id, ".wrapper.svelte-8cmcz4{position:relati
 
 /***/ }),
 
-/***/ "./node_modules/css-loader/dist/cjs.js??ruleSet[1].rules[6].oneOf[1].use[1]!./node_modules/postcss-loader/dist/cjs.js??ruleSet[1].rules[6].oneOf[1].use[2]!./node_modules/svelte-loader/index.js?cssPath=D:/www/sipro-spa/node_modules/svelte-select/src/Item.svelte.27.css!./node_modules/svelte-select/src/Item.svelte":
+/***/ "./node_modules/css-loader/dist/cjs.js??ruleSet[1].rules[6].oneOf[1].use[1]!./node_modules/postcss-loader/dist/cjs.js??ruleSet[1].rules[6].oneOf[1].use[2]!./node_modules/svelte-loader/index.js?cssPath=D:/www/sipro-spa/node_modules/svelte-select/src/Item.svelte.29.css!./node_modules/svelte-select/src/Item.svelte":
 /*!*******************************************************************************************************************************************************************************************************************************************************************************************************************************!*\
-  !*** ./node_modules/css-loader/dist/cjs.js??ruleSet[1].rules[6].oneOf[1].use[1]!./node_modules/postcss-loader/dist/cjs.js??ruleSet[1].rules[6].oneOf[1].use[2]!./node_modules/svelte-loader/index.js?cssPath=D:/www/sipro-spa/node_modules/svelte-select/src/Item.svelte.27.css!./node_modules/svelte-select/src/Item.svelte ***!
+  !*** ./node_modules/css-loader/dist/cjs.js??ruleSet[1].rules[6].oneOf[1].use[1]!./node_modules/postcss-loader/dist/cjs.js??ruleSet[1].rules[6].oneOf[1].use[2]!./node_modules/svelte-loader/index.js?cssPath=D:/www/sipro-spa/node_modules/svelte-select/src/Item.svelte.29.css!./node_modules/svelte-select/src/Item.svelte ***!
   \*******************************************************************************************************************************************************************************************************************************************************************************************************************************/
 /***/ ((module, __webpack_exports__, __webpack_require__) => {
 
@@ -9538,9 +9538,9 @@ ___CSS_LOADER_EXPORT___.push([module.id, ".item.svelte-bdnybl{cursor:default;hei
 
 /***/ }),
 
-/***/ "./node_modules/css-loader/dist/cjs.js??ruleSet[1].rules[6].oneOf[1].use[1]!./node_modules/postcss-loader/dist/cjs.js??ruleSet[1].rules[6].oneOf[1].use[2]!./node_modules/svelte-loader/index.js?cssPath=D:/www/sipro-spa/node_modules/svelte-select/src/List.svelte.30.css!./node_modules/svelte-select/src/List.svelte":
+/***/ "./node_modules/css-loader/dist/cjs.js??ruleSet[1].rules[6].oneOf[1].use[1]!./node_modules/postcss-loader/dist/cjs.js??ruleSet[1].rules[6].oneOf[1].use[2]!./node_modules/svelte-loader/index.js?cssPath=D:/www/sipro-spa/node_modules/svelte-select/src/List.svelte.27.css!./node_modules/svelte-select/src/List.svelte":
 /*!*******************************************************************************************************************************************************************************************************************************************************************************************************************************!*\
-  !*** ./node_modules/css-loader/dist/cjs.js??ruleSet[1].rules[6].oneOf[1].use[1]!./node_modules/postcss-loader/dist/cjs.js??ruleSet[1].rules[6].oneOf[1].use[2]!./node_modules/svelte-loader/index.js?cssPath=D:/www/sipro-spa/node_modules/svelte-select/src/List.svelte.30.css!./node_modules/svelte-select/src/List.svelte ***!
+  !*** ./node_modules/css-loader/dist/cjs.js??ruleSet[1].rules[6].oneOf[1].use[1]!./node_modules/postcss-loader/dist/cjs.js??ruleSet[1].rules[6].oneOf[1].use[2]!./node_modules/svelte-loader/index.js?cssPath=D:/www/sipro-spa/node_modules/svelte-select/src/List.svelte.27.css!./node_modules/svelte-select/src/List.svelte ***!
   \*******************************************************************************************************************************************************************************************************************************************************************************************************************************/
 /***/ ((module, __webpack_exports__, __webpack_require__) => {
 
@@ -9586,9 +9586,9 @@ ___CSS_LOADER_EXPORT___.push([module.id, ".multiSelectItem.svelte-14r1jr2.svelte
 
 /***/ }),
 
-/***/ "./node_modules/css-loader/dist/cjs.js??ruleSet[1].rules[6].oneOf[1].use[1]!./node_modules/postcss-loader/dist/cjs.js??ruleSet[1].rules[6].oneOf[1].use[2]!./node_modules/svelte-loader/index.js?cssPath=D:/www/sipro-spa/node_modules/svelte-select/src/Select.svelte.26.css!./node_modules/svelte-select/src/Select.svelte":
+/***/ "./node_modules/css-loader/dist/cjs.js??ruleSet[1].rules[6].oneOf[1].use[1]!./node_modules/postcss-loader/dist/cjs.js??ruleSet[1].rules[6].oneOf[1].use[2]!./node_modules/svelte-loader/index.js?cssPath=D:/www/sipro-spa/node_modules/svelte-select/src/Select.svelte.25.css!./node_modules/svelte-select/src/Select.svelte":
 /*!***********************************************************************************************************************************************************************************************************************************************************************************************************************************!*\
-  !*** ./node_modules/css-loader/dist/cjs.js??ruleSet[1].rules[6].oneOf[1].use[1]!./node_modules/postcss-loader/dist/cjs.js??ruleSet[1].rules[6].oneOf[1].use[2]!./node_modules/svelte-loader/index.js?cssPath=D:/www/sipro-spa/node_modules/svelte-select/src/Select.svelte.26.css!./node_modules/svelte-select/src/Select.svelte ***!
+  !*** ./node_modules/css-loader/dist/cjs.js??ruleSet[1].rules[6].oneOf[1].use[1]!./node_modules/postcss-loader/dist/cjs.js??ruleSet[1].rules[6].oneOf[1].use[2]!./node_modules/svelte-loader/index.js?cssPath=D:/www/sipro-spa/node_modules/svelte-select/src/Select.svelte.25.css!./node_modules/svelte-select/src/Select.svelte ***!
   \***********************************************************************************************************************************************************************************************************************************************************************************************************************************/
 /***/ ((module, __webpack_exports__, __webpack_require__) => {
 
@@ -9610,9 +9610,9 @@ ___CSS_LOADER_EXPORT___.push([module.id, ".selectContainer.svelte-17qb5ew.svelte
 
 /***/ }),
 
-/***/ "./node_modules/css-loader/dist/cjs.js??ruleSet[1].rules[6].oneOf[1].use[1]!./node_modules/postcss-loader/dist/cjs.js??ruleSet[1].rules[6].oneOf[1].use[2]!./node_modules/svelte-loader/index.js?cssPath=D:/www/sipro-spa/node_modules/svelte-select/src/Selection.svelte.29.css!./node_modules/svelte-select/src/Selection.svelte":
+/***/ "./node_modules/css-loader/dist/cjs.js??ruleSet[1].rules[6].oneOf[1].use[1]!./node_modules/postcss-loader/dist/cjs.js??ruleSet[1].rules[6].oneOf[1].use[2]!./node_modules/svelte-loader/index.js?cssPath=D:/www/sipro-spa/node_modules/svelte-select/src/Selection.svelte.26.css!./node_modules/svelte-select/src/Selection.svelte":
 /*!*****************************************************************************************************************************************************************************************************************************************************************************************************************************************!*\
-  !*** ./node_modules/css-loader/dist/cjs.js??ruleSet[1].rules[6].oneOf[1].use[1]!./node_modules/postcss-loader/dist/cjs.js??ruleSet[1].rules[6].oneOf[1].use[2]!./node_modules/svelte-loader/index.js?cssPath=D:/www/sipro-spa/node_modules/svelte-select/src/Selection.svelte.29.css!./node_modules/svelte-select/src/Selection.svelte ***!
+  !*** ./node_modules/css-loader/dist/cjs.js??ruleSet[1].rules[6].oneOf[1].use[1]!./node_modules/postcss-loader/dist/cjs.js??ruleSet[1].rules[6].oneOf[1].use[2]!./node_modules/svelte-loader/index.js?cssPath=D:/www/sipro-spa/node_modules/svelte-select/src/Selection.svelte.26.css!./node_modules/svelte-select/src/Selection.svelte ***!
   \*****************************************************************************************************************************************************************************************************************************************************************************************************************************************/
 /***/ ((module, __webpack_exports__, __webpack_require__) => {
 
@@ -9634,9 +9634,9 @@ ___CSS_LOADER_EXPORT___.push([module.id, ".selection.svelte-ch6bh7{text-overflow
 
 /***/ }),
 
-/***/ "./node_modules/css-loader/dist/cjs.js??ruleSet[1].rules[6].oneOf[1].use[1]!./node_modules/postcss-loader/dist/cjs.js??ruleSet[1].rules[6].oneOf[1].use[2]!./node_modules/svelte-loader/index.js?cssPath=D:/www/sipro-spa/node_modules/svelte-select/src/VirtualList.svelte.31.css!./node_modules/svelte-select/src/VirtualList.svelte":
+/***/ "./node_modules/css-loader/dist/cjs.js??ruleSet[1].rules[6].oneOf[1].use[1]!./node_modules/postcss-loader/dist/cjs.js??ruleSet[1].rules[6].oneOf[1].use[2]!./node_modules/svelte-loader/index.js?cssPath=D:/www/sipro-spa/node_modules/svelte-select/src/VirtualList.svelte.30.css!./node_modules/svelte-select/src/VirtualList.svelte":
 /*!*********************************************************************************************************************************************************************************************************************************************************************************************************************************************!*\
-  !*** ./node_modules/css-loader/dist/cjs.js??ruleSet[1].rules[6].oneOf[1].use[1]!./node_modules/postcss-loader/dist/cjs.js??ruleSet[1].rules[6].oneOf[1].use[2]!./node_modules/svelte-loader/index.js?cssPath=D:/www/sipro-spa/node_modules/svelte-select/src/VirtualList.svelte.31.css!./node_modules/svelte-select/src/VirtualList.svelte ***!
+  !*** ./node_modules/css-loader/dist/cjs.js??ruleSet[1].rules[6].oneOf[1].use[1]!./node_modules/postcss-loader/dist/cjs.js??ruleSet[1].rules[6].oneOf[1].use[2]!./node_modules/svelte-loader/index.js?cssPath=D:/www/sipro-spa/node_modules/svelte-select/src/VirtualList.svelte.30.css!./node_modules/svelte-select/src/VirtualList.svelte ***!
   \*********************************************************************************************************************************************************************************************************************************************************************************************************************************************/
 /***/ ((module, __webpack_exports__, __webpack_require__) => {
 
@@ -9658,9 +9658,9 @@ ___CSS_LOADER_EXPORT___.push([module.id, "svelte-virtual-list-viewport.svelte-p6
 
 /***/ }),
 
-/***/ "./node_modules/css-loader/dist/cjs.js??ruleSet[1].rules[6].oneOf[1].use[1]!./node_modules/postcss-loader/dist/cjs.js??ruleSet[1].rules[6].oneOf[1].use[2]!./node_modules/svelte-loader/index.js?cssPath=D:/www/sipro-spa/resources/js/Layouts/Authenticated.svelte.13.css!./resources/js/Layouts/Authenticated.svelte":
+/***/ "./node_modules/css-loader/dist/cjs.js??ruleSet[1].rules[6].oneOf[1].use[1]!./node_modules/postcss-loader/dist/cjs.js??ruleSet[1].rules[6].oneOf[1].use[2]!./node_modules/svelte-loader/index.js?cssPath=D:/www/sipro-spa/resources/js/Layouts/Authenticated.svelte.11.css!./resources/js/Layouts/Authenticated.svelte":
 /*!*****************************************************************************************************************************************************************************************************************************************************************************************************************************!*\
-  !*** ./node_modules/css-loader/dist/cjs.js??ruleSet[1].rules[6].oneOf[1].use[1]!./node_modules/postcss-loader/dist/cjs.js??ruleSet[1].rules[6].oneOf[1].use[2]!./node_modules/svelte-loader/index.js?cssPath=D:/www/sipro-spa/resources/js/Layouts/Authenticated.svelte.13.css!./resources/js/Layouts/Authenticated.svelte ***!
+  !*** ./node_modules/css-loader/dist/cjs.js??ruleSet[1].rules[6].oneOf[1].use[1]!./node_modules/postcss-loader/dist/cjs.js??ruleSet[1].rules[6].oneOf[1].use[2]!./node_modules/svelte-loader/index.js?cssPath=D:/www/sipro-spa/resources/js/Layouts/Authenticated.svelte.11.css!./resources/js/Layouts/Authenticated.svelte ***!
   \*****************************************************************************************************************************************************************************************************************************************************************************************************************************/
 /***/ ((module, __webpack_exports__, __webpack_require__) => {
 
@@ -9682,9 +9682,9 @@ ___CSS_LOADER_EXPORT___.push([module.id, ".tada.svelte-14m9tit{-webkit-animation
 
 /***/ }),
 
-/***/ "./node_modules/css-loader/dist/cjs.js??ruleSet[1].rules[6].oneOf[1].use[1]!./node_modules/postcss-loader/dist/cjs.js??ruleSet[1].rules[6].oneOf[1].use[2]!./node_modules/svelte-loader/index.js?cssPath=D:/www/sipro-spa/resources/js/Shared/Button.svelte.11.css!./resources/js/Shared/Button.svelte":
+/***/ "./node_modules/css-loader/dist/cjs.js??ruleSet[1].rules[6].oneOf[1].use[1]!./node_modules/postcss-loader/dist/cjs.js??ruleSet[1].rules[6].oneOf[1].use[2]!./node_modules/svelte-loader/index.js?cssPath=D:/www/sipro-spa/resources/js/Shared/Button.svelte.15.css!./resources/js/Shared/Button.svelte":
 /*!*************************************************************************************************************************************************************************************************************************************************************************************************************!*\
-  !*** ./node_modules/css-loader/dist/cjs.js??ruleSet[1].rules[6].oneOf[1].use[1]!./node_modules/postcss-loader/dist/cjs.js??ruleSet[1].rules[6].oneOf[1].use[2]!./node_modules/svelte-loader/index.js?cssPath=D:/www/sipro-spa/resources/js/Shared/Button.svelte.11.css!./resources/js/Shared/Button.svelte ***!
+  !*** ./node_modules/css-loader/dist/cjs.js??ruleSet[1].rules[6].oneOf[1].use[1]!./node_modules/postcss-loader/dist/cjs.js??ruleSet[1].rules[6].oneOf[1].use[2]!./node_modules/svelte-loader/index.js?cssPath=D:/www/sipro-spa/resources/js/Shared/Button.svelte.15.css!./resources/js/Shared/Button.svelte ***!
   \*************************************************************************************************************************************************************************************************************************************************************************************************************/
 /***/ ((module, __webpack_exports__, __webpack_require__) => {
 
@@ -9706,9 +9706,9 @@ ___CSS_LOADER_EXPORT___.push([module.id, ".mdc-button{height:auto;min-height:36p
 
 /***/ }),
 
-/***/ "./node_modules/css-loader/dist/cjs.js??ruleSet[1].rules[6].oneOf[1].use[1]!./node_modules/postcss-loader/dist/cjs.js??ruleSet[1].rules[6].oneOf[1].use[2]!./node_modules/svelte-loader/index.js?cssPath=D:/www/sipro-spa/resources/js/Shared/FlashMessages.svelte.23.css!./resources/js/Shared/FlashMessages.svelte":
+/***/ "./node_modules/css-loader/dist/cjs.js??ruleSet[1].rules[6].oneOf[1].use[1]!./node_modules/postcss-loader/dist/cjs.js??ruleSet[1].rules[6].oneOf[1].use[2]!./node_modules/svelte-loader/index.js?cssPath=D:/www/sipro-spa/resources/js/Shared/FlashMessages.svelte.22.css!./resources/js/Shared/FlashMessages.svelte":
 /*!***************************************************************************************************************************************************************************************************************************************************************************************************************************!*\
-  !*** ./node_modules/css-loader/dist/cjs.js??ruleSet[1].rules[6].oneOf[1].use[1]!./node_modules/postcss-loader/dist/cjs.js??ruleSet[1].rules[6].oneOf[1].use[2]!./node_modules/svelte-loader/index.js?cssPath=D:/www/sipro-spa/resources/js/Shared/FlashMessages.svelte.23.css!./resources/js/Shared/FlashMessages.svelte ***!
+  !*** ./node_modules/css-loader/dist/cjs.js??ruleSet[1].rules[6].oneOf[1].use[1]!./node_modules/postcss-loader/dist/cjs.js??ruleSet[1].rules[6].oneOf[1].use[2]!./node_modules/svelte-loader/index.js?cssPath=D:/www/sipro-spa/resources/js/Shared/FlashMessages.svelte.22.css!./resources/js/Shared/FlashMessages.svelte ***!
   \***************************************************************************************************************************************************************************************************************************************************************************************************************************/
 /***/ ((module, __webpack_exports__, __webpack_require__) => {
 
@@ -9730,9 +9730,9 @@ ___CSS_LOADER_EXPORT___.push([module.id, ".z-index-full.svelte-193iq1{z-index:99
 
 /***/ }),
 
-/***/ "./node_modules/css-loader/dist/cjs.js??ruleSet[1].rules[6].oneOf[1].use[1]!./node_modules/postcss-loader/dist/cjs.js??ruleSet[1].rules[6].oneOf[1].use[2]!./node_modules/svelte-loader/index.js?cssPath=D:/www/sipro-spa/resources/js/Shared/LoadingButton.svelte.14.css!./resources/js/Shared/LoadingButton.svelte":
+/***/ "./node_modules/css-loader/dist/cjs.js??ruleSet[1].rules[6].oneOf[1].use[1]!./node_modules/postcss-loader/dist/cjs.js??ruleSet[1].rules[6].oneOf[1].use[2]!./node_modules/svelte-loader/index.js?cssPath=D:/www/sipro-spa/resources/js/Shared/LoadingButton.svelte.12.css!./resources/js/Shared/LoadingButton.svelte":
 /*!***************************************************************************************************************************************************************************************************************************************************************************************************************************!*\
-  !*** ./node_modules/css-loader/dist/cjs.js??ruleSet[1].rules[6].oneOf[1].use[1]!./node_modules/postcss-loader/dist/cjs.js??ruleSet[1].rules[6].oneOf[1].use[2]!./node_modules/svelte-loader/index.js?cssPath=D:/www/sipro-spa/resources/js/Shared/LoadingButton.svelte.14.css!./resources/js/Shared/LoadingButton.svelte ***!
+  !*** ./node_modules/css-loader/dist/cjs.js??ruleSet[1].rules[6].oneOf[1].use[1]!./node_modules/postcss-loader/dist/cjs.js??ruleSet[1].rules[6].oneOf[1].use[2]!./node_modules/svelte-loader/index.js?cssPath=D:/www/sipro-spa/resources/js/Shared/LoadingButton.svelte.12.css!./resources/js/Shared/LoadingButton.svelte ***!
   \***************************************************************************************************************************************************************************************************************************************************************************************************************************/
 /***/ ((module, __webpack_exports__, __webpack_require__) => {
 
@@ -9754,9 +9754,9 @@ ___CSS_LOADER_EXPORT___.push([module.id, ".mdc-button{height:auto;min-height:36p
 
 /***/ }),
 
-/***/ "./node_modules/css-loader/dist/cjs.js??ruleSet[1].rules[6].oneOf[1].use[1]!./node_modules/postcss-loader/dist/cjs.js??ruleSet[1].rules[6].oneOf[1].use[2]!./node_modules/svelte-loader/index.js?cssPath=D:/www/sipro-spa/resources/js/Shared/Select.svelte.15.css!./resources/js/Shared/Select.svelte":
+/***/ "./node_modules/css-loader/dist/cjs.js??ruleSet[1].rules[6].oneOf[1].use[1]!./node_modules/postcss-loader/dist/cjs.js??ruleSet[1].rules[6].oneOf[1].use[2]!./node_modules/svelte-loader/index.js?cssPath=D:/www/sipro-spa/resources/js/Shared/Select.svelte.14.css!./resources/js/Shared/Select.svelte":
 /*!*************************************************************************************************************************************************************************************************************************************************************************************************************!*\
-  !*** ./node_modules/css-loader/dist/cjs.js??ruleSet[1].rules[6].oneOf[1].use[1]!./node_modules/postcss-loader/dist/cjs.js??ruleSet[1].rules[6].oneOf[1].use[2]!./node_modules/svelte-loader/index.js?cssPath=D:/www/sipro-spa/resources/js/Shared/Select.svelte.15.css!./resources/js/Shared/Select.svelte ***!
+  !*** ./node_modules/css-loader/dist/cjs.js??ruleSet[1].rules[6].oneOf[1].use[1]!./node_modules/postcss-loader/dist/cjs.js??ruleSet[1].rules[6].oneOf[1].use[2]!./node_modules/svelte-loader/index.js?cssPath=D:/www/sipro-spa/resources/js/Shared/Select.svelte.14.css!./resources/js/Shared/Select.svelte ***!
   \*************************************************************************************************************************************************************************************************************************************************************************************************************/
 /***/ ((module, __webpack_exports__, __webpack_require__) => {
 
@@ -9778,9 +9778,9 @@ ___CSS_LOADER_EXPORT___.push([module.id, ".items .listItem{border-bottom:1px sol
 
 /***/ }),
 
-/***/ "./node_modules/css-loader/dist/cjs.js??ruleSet[1].rules[6].oneOf[1].use[1]!./node_modules/postcss-loader/dist/cjs.js??ruleSet[1].rules[6].oneOf[1].use[2]!./node_modules/svelte-loader/index.js?cssPath=D:/www/sipro-spa/resources/js/Shared/SelectMulti.svelte.17.css!./resources/js/Shared/SelectMulti.svelte":
+/***/ "./node_modules/css-loader/dist/cjs.js??ruleSet[1].rules[6].oneOf[1].use[1]!./node_modules/postcss-loader/dist/cjs.js??ruleSet[1].rules[6].oneOf[1].use[2]!./node_modules/svelte-loader/index.js?cssPath=D:/www/sipro-spa/resources/js/Shared/SelectMulti.svelte.16.css!./resources/js/Shared/SelectMulti.svelte":
 /*!***********************************************************************************************************************************************************************************************************************************************************************************************************************!*\
-  !*** ./node_modules/css-loader/dist/cjs.js??ruleSet[1].rules[6].oneOf[1].use[1]!./node_modules/postcss-loader/dist/cjs.js??ruleSet[1].rules[6].oneOf[1].use[2]!./node_modules/svelte-loader/index.js?cssPath=D:/www/sipro-spa/resources/js/Shared/SelectMulti.svelte.17.css!./resources/js/Shared/SelectMulti.svelte ***!
+  !*** ./node_modules/css-loader/dist/cjs.js??ruleSet[1].rules[6].oneOf[1].use[1]!./node_modules/postcss-loader/dist/cjs.js??ruleSet[1].rules[6].oneOf[1].use[2]!./node_modules/svelte-loader/index.js?cssPath=D:/www/sipro-spa/resources/js/Shared/SelectMulti.svelte.16.css!./resources/js/Shared/SelectMulti.svelte ***!
   \***********************************************************************************************************************************************************************************************************************************************************************************************************************/
 /***/ ((module, __webpack_exports__, __webpack_require__) => {
 
@@ -9802,9 +9802,9 @@ ___CSS_LOADER_EXPORT___.push([module.id, ".items .listItem{border-bottom:1px sol
 
 /***/ }),
 
-/***/ "./node_modules/css-loader/dist/cjs.js??ruleSet[1].rules[6].oneOf[1].use[1]!./node_modules/postcss-loader/dist/cjs.js??ruleSet[1].rules[6].oneOf[1].use[2]!./node_modules/svelte-loader/index.js?cssPath=D:/www/sipro-spa/resources/js/Shared/Tags.svelte.18.css!./resources/js/Shared/Tags.svelte":
+/***/ "./node_modules/css-loader/dist/cjs.js??ruleSet[1].rules[6].oneOf[1].use[1]!./node_modules/postcss-loader/dist/cjs.js??ruleSet[1].rules[6].oneOf[1].use[2]!./node_modules/svelte-loader/index.js?cssPath=D:/www/sipro-spa/resources/js/Shared/Tags.svelte.17.css!./resources/js/Shared/Tags.svelte":
 /*!*********************************************************************************************************************************************************************************************************************************************************************************************************!*\
-  !*** ./node_modules/css-loader/dist/cjs.js??ruleSet[1].rules[6].oneOf[1].use[1]!./node_modules/postcss-loader/dist/cjs.js??ruleSet[1].rules[6].oneOf[1].use[2]!./node_modules/svelte-loader/index.js?cssPath=D:/www/sipro-spa/resources/js/Shared/Tags.svelte.18.css!./resources/js/Shared/Tags.svelte ***!
+  !*** ./node_modules/css-loader/dist/cjs.js??ruleSet[1].rules[6].oneOf[1].use[1]!./node_modules/postcss-loader/dist/cjs.js??ruleSet[1].rules[6].oneOf[1].use[2]!./node_modules/svelte-loader/index.js?cssPath=D:/www/sipro-spa/resources/js/Shared/Tags.svelte.17.css!./resources/js/Shared/Tags.svelte ***!
   \*********************************************************************************************************************************************************************************************************************************************************************************************************/
 /***/ ((module, __webpack_exports__, __webpack_require__) => {
 
@@ -31522,9 +31522,9 @@ var update = _style_loader_dist_runtime_injectStylesIntoStyleTag_js__WEBPACK_IMP
 
 /***/ }),
 
-/***/ "./node_modules/svelte-loading-spinners/dist/BarLoader.svelte.40.css!=!./node_modules/svelte-loader/index.js?cssPath=D:/www/sipro-spa/node_modules/svelte-loading-spinners/dist/BarLoader.svelte.40.css!./node_modules/svelte-loading-spinners/dist/BarLoader.svelte":
+/***/ "./node_modules/svelte-loading-spinners/dist/BarLoader.svelte.39.css!=!./node_modules/svelte-loader/index.js?cssPath=D:/www/sipro-spa/node_modules/svelte-loading-spinners/dist/BarLoader.svelte.39.css!./node_modules/svelte-loading-spinners/dist/BarLoader.svelte":
 /*!***************************************************************************************************************************************************************************************************************************************************************************!*\
-  !*** ./node_modules/svelte-loading-spinners/dist/BarLoader.svelte.40.css!=!./node_modules/svelte-loader/index.js?cssPath=D:/www/sipro-spa/node_modules/svelte-loading-spinners/dist/BarLoader.svelte.40.css!./node_modules/svelte-loading-spinners/dist/BarLoader.svelte ***!
+  !*** ./node_modules/svelte-loading-spinners/dist/BarLoader.svelte.39.css!=!./node_modules/svelte-loader/index.js?cssPath=D:/www/sipro-spa/node_modules/svelte-loading-spinners/dist/BarLoader.svelte.39.css!./node_modules/svelte-loading-spinners/dist/BarLoader.svelte ***!
   \***************************************************************************************************************************************************************************************************************************************************************************/
 /***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
 
@@ -31535,7 +31535,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ });
 /* harmony import */ var _style_loader_dist_runtime_injectStylesIntoStyleTag_js__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! !../../style-loader/dist/runtime/injectStylesIntoStyleTag.js */ "./node_modules/style-loader/dist/runtime/injectStylesIntoStyleTag.js");
 /* harmony import */ var _style_loader_dist_runtime_injectStylesIntoStyleTag_js__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_style_loader_dist_runtime_injectStylesIntoStyleTag_js__WEBPACK_IMPORTED_MODULE_0__);
-/* harmony import */ var _css_loader_dist_cjs_js_ruleSet_1_rules_6_oneOf_1_use_1_postcss_loader_dist_cjs_js_ruleSet_1_rules_6_oneOf_1_use_2_svelte_loader_index_js_cssPath_D_www_sipro_spa_node_modules_svelte_loading_spinners_dist_BarLoader_svelte_40_css_BarLoader_svelte__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! !!../../css-loader/dist/cjs.js??ruleSet[1].rules[6].oneOf[1].use[1]!../../postcss-loader/dist/cjs.js??ruleSet[1].rules[6].oneOf[1].use[2]!../../svelte-loader/index.js?cssPath=D:/www/sipro-spa/node_modules/svelte-loading-spinners/dist/BarLoader.svelte.40.css!./BarLoader.svelte */ "./node_modules/css-loader/dist/cjs.js??ruleSet[1].rules[6].oneOf[1].use[1]!./node_modules/postcss-loader/dist/cjs.js??ruleSet[1].rules[6].oneOf[1].use[2]!./node_modules/svelte-loader/index.js?cssPath=D:/www/sipro-spa/node_modules/svelte-loading-spinners/dist/BarLoader.svelte.40.css!./node_modules/svelte-loading-spinners/dist/BarLoader.svelte");
+/* harmony import */ var _css_loader_dist_cjs_js_ruleSet_1_rules_6_oneOf_1_use_1_postcss_loader_dist_cjs_js_ruleSet_1_rules_6_oneOf_1_use_2_svelte_loader_index_js_cssPath_D_www_sipro_spa_node_modules_svelte_loading_spinners_dist_BarLoader_svelte_39_css_BarLoader_svelte__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! !!../../css-loader/dist/cjs.js??ruleSet[1].rules[6].oneOf[1].use[1]!../../postcss-loader/dist/cjs.js??ruleSet[1].rules[6].oneOf[1].use[2]!../../svelte-loader/index.js?cssPath=D:/www/sipro-spa/node_modules/svelte-loading-spinners/dist/BarLoader.svelte.39.css!./BarLoader.svelte */ "./node_modules/css-loader/dist/cjs.js??ruleSet[1].rules[6].oneOf[1].use[1]!./node_modules/postcss-loader/dist/cjs.js??ruleSet[1].rules[6].oneOf[1].use[2]!./node_modules/svelte-loader/index.js?cssPath=D:/www/sipro-spa/node_modules/svelte-loading-spinners/dist/BarLoader.svelte.39.css!./node_modules/svelte-loading-spinners/dist/BarLoader.svelte");
 
             
 
@@ -31544,11 +31544,11 @@ var options = {};
 options.insert = "head";
 options.singleton = false;
 
-var update = _style_loader_dist_runtime_injectStylesIntoStyleTag_js__WEBPACK_IMPORTED_MODULE_0___default()(_css_loader_dist_cjs_js_ruleSet_1_rules_6_oneOf_1_use_1_postcss_loader_dist_cjs_js_ruleSet_1_rules_6_oneOf_1_use_2_svelte_loader_index_js_cssPath_D_www_sipro_spa_node_modules_svelte_loading_spinners_dist_BarLoader_svelte_40_css_BarLoader_svelte__WEBPACK_IMPORTED_MODULE_1__["default"], options);
+var update = _style_loader_dist_runtime_injectStylesIntoStyleTag_js__WEBPACK_IMPORTED_MODULE_0___default()(_css_loader_dist_cjs_js_ruleSet_1_rules_6_oneOf_1_use_1_postcss_loader_dist_cjs_js_ruleSet_1_rules_6_oneOf_1_use_2_svelte_loader_index_js_cssPath_D_www_sipro_spa_node_modules_svelte_loading_spinners_dist_BarLoader_svelte_39_css_BarLoader_svelte__WEBPACK_IMPORTED_MODULE_1__["default"], options);
 
 
 
-/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (_css_loader_dist_cjs_js_ruleSet_1_rules_6_oneOf_1_use_1_postcss_loader_dist_cjs_js_ruleSet_1_rules_6_oneOf_1_use_2_svelte_loader_index_js_cssPath_D_www_sipro_spa_node_modules_svelte_loading_spinners_dist_BarLoader_svelte_40_css_BarLoader_svelte__WEBPACK_IMPORTED_MODULE_1__["default"].locals || {});
+/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (_css_loader_dist_cjs_js_ruleSet_1_rules_6_oneOf_1_use_1_postcss_loader_dist_cjs_js_ruleSet_1_rules_6_oneOf_1_use_2_svelte_loader_index_js_cssPath_D_www_sipro_spa_node_modules_svelte_loading_spinners_dist_BarLoader_svelte_39_css_BarLoader_svelte__WEBPACK_IMPORTED_MODULE_1__["default"].locals || {});
 
 /***/ }),
 
@@ -31612,9 +31612,9 @@ var update = _style_loader_dist_runtime_injectStylesIntoStyleTag_js__WEBPACK_IMP
 
 /***/ }),
 
-/***/ "./node_modules/svelte-loading-spinners/dist/Circle2.svelte.36.css!=!./node_modules/svelte-loader/index.js?cssPath=D:/www/sipro-spa/node_modules/svelte-loading-spinners/dist/Circle2.svelte.36.css!./node_modules/svelte-loading-spinners/dist/Circle2.svelte":
+/***/ "./node_modules/svelte-loading-spinners/dist/Circle2.svelte.31.css!=!./node_modules/svelte-loader/index.js?cssPath=D:/www/sipro-spa/node_modules/svelte-loading-spinners/dist/Circle2.svelte.31.css!./node_modules/svelte-loading-spinners/dist/Circle2.svelte":
 /*!*********************************************************************************************************************************************************************************************************************************************************************!*\
-  !*** ./node_modules/svelte-loading-spinners/dist/Circle2.svelte.36.css!=!./node_modules/svelte-loader/index.js?cssPath=D:/www/sipro-spa/node_modules/svelte-loading-spinners/dist/Circle2.svelte.36.css!./node_modules/svelte-loading-spinners/dist/Circle2.svelte ***!
+  !*** ./node_modules/svelte-loading-spinners/dist/Circle2.svelte.31.css!=!./node_modules/svelte-loader/index.js?cssPath=D:/www/sipro-spa/node_modules/svelte-loading-spinners/dist/Circle2.svelte.31.css!./node_modules/svelte-loading-spinners/dist/Circle2.svelte ***!
   \*********************************************************************************************************************************************************************************************************************************************************************/
 /***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
 
@@ -31625,7 +31625,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ });
 /* harmony import */ var _style_loader_dist_runtime_injectStylesIntoStyleTag_js__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! !../../style-loader/dist/runtime/injectStylesIntoStyleTag.js */ "./node_modules/style-loader/dist/runtime/injectStylesIntoStyleTag.js");
 /* harmony import */ var _style_loader_dist_runtime_injectStylesIntoStyleTag_js__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_style_loader_dist_runtime_injectStylesIntoStyleTag_js__WEBPACK_IMPORTED_MODULE_0__);
-/* harmony import */ var _css_loader_dist_cjs_js_ruleSet_1_rules_6_oneOf_1_use_1_postcss_loader_dist_cjs_js_ruleSet_1_rules_6_oneOf_1_use_2_svelte_loader_index_js_cssPath_D_www_sipro_spa_node_modules_svelte_loading_spinners_dist_Circle2_svelte_36_css_Circle2_svelte__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! !!../../css-loader/dist/cjs.js??ruleSet[1].rules[6].oneOf[1].use[1]!../../postcss-loader/dist/cjs.js??ruleSet[1].rules[6].oneOf[1].use[2]!../../svelte-loader/index.js?cssPath=D:/www/sipro-spa/node_modules/svelte-loading-spinners/dist/Circle2.svelte.36.css!./Circle2.svelte */ "./node_modules/css-loader/dist/cjs.js??ruleSet[1].rules[6].oneOf[1].use[1]!./node_modules/postcss-loader/dist/cjs.js??ruleSet[1].rules[6].oneOf[1].use[2]!./node_modules/svelte-loader/index.js?cssPath=D:/www/sipro-spa/node_modules/svelte-loading-spinners/dist/Circle2.svelte.36.css!./node_modules/svelte-loading-spinners/dist/Circle2.svelte");
+/* harmony import */ var _css_loader_dist_cjs_js_ruleSet_1_rules_6_oneOf_1_use_1_postcss_loader_dist_cjs_js_ruleSet_1_rules_6_oneOf_1_use_2_svelte_loader_index_js_cssPath_D_www_sipro_spa_node_modules_svelte_loading_spinners_dist_Circle2_svelte_31_css_Circle2_svelte__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! !!../../css-loader/dist/cjs.js??ruleSet[1].rules[6].oneOf[1].use[1]!../../postcss-loader/dist/cjs.js??ruleSet[1].rules[6].oneOf[1].use[2]!../../svelte-loader/index.js?cssPath=D:/www/sipro-spa/node_modules/svelte-loading-spinners/dist/Circle2.svelte.31.css!./Circle2.svelte */ "./node_modules/css-loader/dist/cjs.js??ruleSet[1].rules[6].oneOf[1].use[1]!./node_modules/postcss-loader/dist/cjs.js??ruleSet[1].rules[6].oneOf[1].use[2]!./node_modules/svelte-loader/index.js?cssPath=D:/www/sipro-spa/node_modules/svelte-loading-spinners/dist/Circle2.svelte.31.css!./node_modules/svelte-loading-spinners/dist/Circle2.svelte");
 
             
 
@@ -31634,17 +31634,17 @@ var options = {};
 options.insert = "head";
 options.singleton = false;
 
-var update = _style_loader_dist_runtime_injectStylesIntoStyleTag_js__WEBPACK_IMPORTED_MODULE_0___default()(_css_loader_dist_cjs_js_ruleSet_1_rules_6_oneOf_1_use_1_postcss_loader_dist_cjs_js_ruleSet_1_rules_6_oneOf_1_use_2_svelte_loader_index_js_cssPath_D_www_sipro_spa_node_modules_svelte_loading_spinners_dist_Circle2_svelte_36_css_Circle2_svelte__WEBPACK_IMPORTED_MODULE_1__["default"], options);
+var update = _style_loader_dist_runtime_injectStylesIntoStyleTag_js__WEBPACK_IMPORTED_MODULE_0___default()(_css_loader_dist_cjs_js_ruleSet_1_rules_6_oneOf_1_use_1_postcss_loader_dist_cjs_js_ruleSet_1_rules_6_oneOf_1_use_2_svelte_loader_index_js_cssPath_D_www_sipro_spa_node_modules_svelte_loading_spinners_dist_Circle2_svelte_31_css_Circle2_svelte__WEBPACK_IMPORTED_MODULE_1__["default"], options);
 
 
 
-/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (_css_loader_dist_cjs_js_ruleSet_1_rules_6_oneOf_1_use_1_postcss_loader_dist_cjs_js_ruleSet_1_rules_6_oneOf_1_use_2_svelte_loader_index_js_cssPath_D_www_sipro_spa_node_modules_svelte_loading_spinners_dist_Circle2_svelte_36_css_Circle2_svelte__WEBPACK_IMPORTED_MODULE_1__["default"].locals || {});
+/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (_css_loader_dist_cjs_js_ruleSet_1_rules_6_oneOf_1_use_1_postcss_loader_dist_cjs_js_ruleSet_1_rules_6_oneOf_1_use_2_svelte_loader_index_js_cssPath_D_www_sipro_spa_node_modules_svelte_loading_spinners_dist_Circle2_svelte_31_css_Circle2_svelte__WEBPACK_IMPORTED_MODULE_1__["default"].locals || {});
 
 /***/ }),
 
-/***/ "./node_modules/svelte-loading-spinners/dist/Circle3.svelte.33.css!=!./node_modules/svelte-loader/index.js?cssPath=D:/www/sipro-spa/node_modules/svelte-loading-spinners/dist/Circle3.svelte.33.css!./node_modules/svelte-loading-spinners/dist/Circle3.svelte":
+/***/ "./node_modules/svelte-loading-spinners/dist/Circle3.svelte.36.css!=!./node_modules/svelte-loader/index.js?cssPath=D:/www/sipro-spa/node_modules/svelte-loading-spinners/dist/Circle3.svelte.36.css!./node_modules/svelte-loading-spinners/dist/Circle3.svelte":
 /*!*********************************************************************************************************************************************************************************************************************************************************************!*\
-  !*** ./node_modules/svelte-loading-spinners/dist/Circle3.svelte.33.css!=!./node_modules/svelte-loader/index.js?cssPath=D:/www/sipro-spa/node_modules/svelte-loading-spinners/dist/Circle3.svelte.33.css!./node_modules/svelte-loading-spinners/dist/Circle3.svelte ***!
+  !*** ./node_modules/svelte-loading-spinners/dist/Circle3.svelte.36.css!=!./node_modules/svelte-loader/index.js?cssPath=D:/www/sipro-spa/node_modules/svelte-loading-spinners/dist/Circle3.svelte.36.css!./node_modules/svelte-loading-spinners/dist/Circle3.svelte ***!
   \*********************************************************************************************************************************************************************************************************************************************************************/
 /***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
 
@@ -31655,7 +31655,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ });
 /* harmony import */ var _style_loader_dist_runtime_injectStylesIntoStyleTag_js__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! !../../style-loader/dist/runtime/injectStylesIntoStyleTag.js */ "./node_modules/style-loader/dist/runtime/injectStylesIntoStyleTag.js");
 /* harmony import */ var _style_loader_dist_runtime_injectStylesIntoStyleTag_js__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_style_loader_dist_runtime_injectStylesIntoStyleTag_js__WEBPACK_IMPORTED_MODULE_0__);
-/* harmony import */ var _css_loader_dist_cjs_js_ruleSet_1_rules_6_oneOf_1_use_1_postcss_loader_dist_cjs_js_ruleSet_1_rules_6_oneOf_1_use_2_svelte_loader_index_js_cssPath_D_www_sipro_spa_node_modules_svelte_loading_spinners_dist_Circle3_svelte_33_css_Circle3_svelte__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! !!../../css-loader/dist/cjs.js??ruleSet[1].rules[6].oneOf[1].use[1]!../../postcss-loader/dist/cjs.js??ruleSet[1].rules[6].oneOf[1].use[2]!../../svelte-loader/index.js?cssPath=D:/www/sipro-spa/node_modules/svelte-loading-spinners/dist/Circle3.svelte.33.css!./Circle3.svelte */ "./node_modules/css-loader/dist/cjs.js??ruleSet[1].rules[6].oneOf[1].use[1]!./node_modules/postcss-loader/dist/cjs.js??ruleSet[1].rules[6].oneOf[1].use[2]!./node_modules/svelte-loader/index.js?cssPath=D:/www/sipro-spa/node_modules/svelte-loading-spinners/dist/Circle3.svelte.33.css!./node_modules/svelte-loading-spinners/dist/Circle3.svelte");
+/* harmony import */ var _css_loader_dist_cjs_js_ruleSet_1_rules_6_oneOf_1_use_1_postcss_loader_dist_cjs_js_ruleSet_1_rules_6_oneOf_1_use_2_svelte_loader_index_js_cssPath_D_www_sipro_spa_node_modules_svelte_loading_spinners_dist_Circle3_svelte_36_css_Circle3_svelte__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! !!../../css-loader/dist/cjs.js??ruleSet[1].rules[6].oneOf[1].use[1]!../../postcss-loader/dist/cjs.js??ruleSet[1].rules[6].oneOf[1].use[2]!../../svelte-loader/index.js?cssPath=D:/www/sipro-spa/node_modules/svelte-loading-spinners/dist/Circle3.svelte.36.css!./Circle3.svelte */ "./node_modules/css-loader/dist/cjs.js??ruleSet[1].rules[6].oneOf[1].use[1]!./node_modules/postcss-loader/dist/cjs.js??ruleSet[1].rules[6].oneOf[1].use[2]!./node_modules/svelte-loader/index.js?cssPath=D:/www/sipro-spa/node_modules/svelte-loading-spinners/dist/Circle3.svelte.36.css!./node_modules/svelte-loading-spinners/dist/Circle3.svelte");
 
             
 
@@ -31664,17 +31664,17 @@ var options = {};
 options.insert = "head";
 options.singleton = false;
 
-var update = _style_loader_dist_runtime_injectStylesIntoStyleTag_js__WEBPACK_IMPORTED_MODULE_0___default()(_css_loader_dist_cjs_js_ruleSet_1_rules_6_oneOf_1_use_1_postcss_loader_dist_cjs_js_ruleSet_1_rules_6_oneOf_1_use_2_svelte_loader_index_js_cssPath_D_www_sipro_spa_node_modules_svelte_loading_spinners_dist_Circle3_svelte_33_css_Circle3_svelte__WEBPACK_IMPORTED_MODULE_1__["default"], options);
+var update = _style_loader_dist_runtime_injectStylesIntoStyleTag_js__WEBPACK_IMPORTED_MODULE_0___default()(_css_loader_dist_cjs_js_ruleSet_1_rules_6_oneOf_1_use_1_postcss_loader_dist_cjs_js_ruleSet_1_rules_6_oneOf_1_use_2_svelte_loader_index_js_cssPath_D_www_sipro_spa_node_modules_svelte_loading_spinners_dist_Circle3_svelte_36_css_Circle3_svelte__WEBPACK_IMPORTED_MODULE_1__["default"], options);
 
 
 
-/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (_css_loader_dist_cjs_js_ruleSet_1_rules_6_oneOf_1_use_1_postcss_loader_dist_cjs_js_ruleSet_1_rules_6_oneOf_1_use_2_svelte_loader_index_js_cssPath_D_www_sipro_spa_node_modules_svelte_loading_spinners_dist_Circle3_svelte_33_css_Circle3_svelte__WEBPACK_IMPORTED_MODULE_1__["default"].locals || {});
+/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (_css_loader_dist_cjs_js_ruleSet_1_rules_6_oneOf_1_use_1_postcss_loader_dist_cjs_js_ruleSet_1_rules_6_oneOf_1_use_2_svelte_loader_index_js_cssPath_D_www_sipro_spa_node_modules_svelte_loading_spinners_dist_Circle3_svelte_36_css_Circle3_svelte__WEBPACK_IMPORTED_MODULE_1__["default"].locals || {});
 
 /***/ }),
 
-/***/ "./node_modules/svelte-loading-spinners/dist/Clock.svelte.52.css!=!./node_modules/svelte-loader/index.js?cssPath=D:/www/sipro-spa/node_modules/svelte-loading-spinners/dist/Clock.svelte.52.css!./node_modules/svelte-loading-spinners/dist/Clock.svelte":
+/***/ "./node_modules/svelte-loading-spinners/dist/Clock.svelte.53.css!=!./node_modules/svelte-loader/index.js?cssPath=D:/www/sipro-spa/node_modules/svelte-loading-spinners/dist/Clock.svelte.53.css!./node_modules/svelte-loading-spinners/dist/Clock.svelte":
 /*!***************************************************************************************************************************************************************************************************************************************************************!*\
-  !*** ./node_modules/svelte-loading-spinners/dist/Clock.svelte.52.css!=!./node_modules/svelte-loader/index.js?cssPath=D:/www/sipro-spa/node_modules/svelte-loading-spinners/dist/Clock.svelte.52.css!./node_modules/svelte-loading-spinners/dist/Clock.svelte ***!
+  !*** ./node_modules/svelte-loading-spinners/dist/Clock.svelte.53.css!=!./node_modules/svelte-loader/index.js?cssPath=D:/www/sipro-spa/node_modules/svelte-loading-spinners/dist/Clock.svelte.53.css!./node_modules/svelte-loading-spinners/dist/Clock.svelte ***!
   \***************************************************************************************************************************************************************************************************************************************************************/
 /***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
 
@@ -31685,7 +31685,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ });
 /* harmony import */ var _style_loader_dist_runtime_injectStylesIntoStyleTag_js__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! !../../style-loader/dist/runtime/injectStylesIntoStyleTag.js */ "./node_modules/style-loader/dist/runtime/injectStylesIntoStyleTag.js");
 /* harmony import */ var _style_loader_dist_runtime_injectStylesIntoStyleTag_js__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_style_loader_dist_runtime_injectStylesIntoStyleTag_js__WEBPACK_IMPORTED_MODULE_0__);
-/* harmony import */ var _css_loader_dist_cjs_js_ruleSet_1_rules_6_oneOf_1_use_1_postcss_loader_dist_cjs_js_ruleSet_1_rules_6_oneOf_1_use_2_svelte_loader_index_js_cssPath_D_www_sipro_spa_node_modules_svelte_loading_spinners_dist_Clock_svelte_52_css_Clock_svelte__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! !!../../css-loader/dist/cjs.js??ruleSet[1].rules[6].oneOf[1].use[1]!../../postcss-loader/dist/cjs.js??ruleSet[1].rules[6].oneOf[1].use[2]!../../svelte-loader/index.js?cssPath=D:/www/sipro-spa/node_modules/svelte-loading-spinners/dist/Clock.svelte.52.css!./Clock.svelte */ "./node_modules/css-loader/dist/cjs.js??ruleSet[1].rules[6].oneOf[1].use[1]!./node_modules/postcss-loader/dist/cjs.js??ruleSet[1].rules[6].oneOf[1].use[2]!./node_modules/svelte-loader/index.js?cssPath=D:/www/sipro-spa/node_modules/svelte-loading-spinners/dist/Clock.svelte.52.css!./node_modules/svelte-loading-spinners/dist/Clock.svelte");
+/* harmony import */ var _css_loader_dist_cjs_js_ruleSet_1_rules_6_oneOf_1_use_1_postcss_loader_dist_cjs_js_ruleSet_1_rules_6_oneOf_1_use_2_svelte_loader_index_js_cssPath_D_www_sipro_spa_node_modules_svelte_loading_spinners_dist_Clock_svelte_53_css_Clock_svelte__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! !!../../css-loader/dist/cjs.js??ruleSet[1].rules[6].oneOf[1].use[1]!../../postcss-loader/dist/cjs.js??ruleSet[1].rules[6].oneOf[1].use[2]!../../svelte-loader/index.js?cssPath=D:/www/sipro-spa/node_modules/svelte-loading-spinners/dist/Clock.svelte.53.css!./Clock.svelte */ "./node_modules/css-loader/dist/cjs.js??ruleSet[1].rules[6].oneOf[1].use[1]!./node_modules/postcss-loader/dist/cjs.js??ruleSet[1].rules[6].oneOf[1].use[2]!./node_modules/svelte-loader/index.js?cssPath=D:/www/sipro-spa/node_modules/svelte-loading-spinners/dist/Clock.svelte.53.css!./node_modules/svelte-loading-spinners/dist/Clock.svelte");
 
             
 
@@ -31694,17 +31694,17 @@ var options = {};
 options.insert = "head";
 options.singleton = false;
 
-var update = _style_loader_dist_runtime_injectStylesIntoStyleTag_js__WEBPACK_IMPORTED_MODULE_0___default()(_css_loader_dist_cjs_js_ruleSet_1_rules_6_oneOf_1_use_1_postcss_loader_dist_cjs_js_ruleSet_1_rules_6_oneOf_1_use_2_svelte_loader_index_js_cssPath_D_www_sipro_spa_node_modules_svelte_loading_spinners_dist_Clock_svelte_52_css_Clock_svelte__WEBPACK_IMPORTED_MODULE_1__["default"], options);
+var update = _style_loader_dist_runtime_injectStylesIntoStyleTag_js__WEBPACK_IMPORTED_MODULE_0___default()(_css_loader_dist_cjs_js_ruleSet_1_rules_6_oneOf_1_use_1_postcss_loader_dist_cjs_js_ruleSet_1_rules_6_oneOf_1_use_2_svelte_loader_index_js_cssPath_D_www_sipro_spa_node_modules_svelte_loading_spinners_dist_Clock_svelte_53_css_Clock_svelte__WEBPACK_IMPORTED_MODULE_1__["default"], options);
 
 
 
-/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (_css_loader_dist_cjs_js_ruleSet_1_rules_6_oneOf_1_use_1_postcss_loader_dist_cjs_js_ruleSet_1_rules_6_oneOf_1_use_2_svelte_loader_index_js_cssPath_D_www_sipro_spa_node_modules_svelte_loading_spinners_dist_Clock_svelte_52_css_Clock_svelte__WEBPACK_IMPORTED_MODULE_1__["default"].locals || {});
+/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (_css_loader_dist_cjs_js_ruleSet_1_rules_6_oneOf_1_use_1_postcss_loader_dist_cjs_js_ruleSet_1_rules_6_oneOf_1_use_2_svelte_loader_index_js_cssPath_D_www_sipro_spa_node_modules_svelte_loading_spinners_dist_Clock_svelte_53_css_Clock_svelte__WEBPACK_IMPORTED_MODULE_1__["default"].locals || {});
 
 /***/ }),
 
-/***/ "./node_modules/svelte-loading-spinners/dist/Diamonds.svelte.55.css!=!./node_modules/svelte-loader/index.js?cssPath=D:/www/sipro-spa/node_modules/svelte-loading-spinners/dist/Diamonds.svelte.55.css!./node_modules/svelte-loading-spinners/dist/Diamonds.svelte":
+/***/ "./node_modules/svelte-loading-spinners/dist/Diamonds.svelte.54.css!=!./node_modules/svelte-loader/index.js?cssPath=D:/www/sipro-spa/node_modules/svelte-loading-spinners/dist/Diamonds.svelte.54.css!./node_modules/svelte-loading-spinners/dist/Diamonds.svelte":
 /*!************************************************************************************************************************************************************************************************************************************************************************!*\
-  !*** ./node_modules/svelte-loading-spinners/dist/Diamonds.svelte.55.css!=!./node_modules/svelte-loader/index.js?cssPath=D:/www/sipro-spa/node_modules/svelte-loading-spinners/dist/Diamonds.svelte.55.css!./node_modules/svelte-loading-spinners/dist/Diamonds.svelte ***!
+  !*** ./node_modules/svelte-loading-spinners/dist/Diamonds.svelte.54.css!=!./node_modules/svelte-loader/index.js?cssPath=D:/www/sipro-spa/node_modules/svelte-loading-spinners/dist/Diamonds.svelte.54.css!./node_modules/svelte-loading-spinners/dist/Diamonds.svelte ***!
   \************************************************************************************************************************************************************************************************************************************************************************/
 /***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
 
@@ -31715,7 +31715,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ });
 /* harmony import */ var _style_loader_dist_runtime_injectStylesIntoStyleTag_js__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! !../../style-loader/dist/runtime/injectStylesIntoStyleTag.js */ "./node_modules/style-loader/dist/runtime/injectStylesIntoStyleTag.js");
 /* harmony import */ var _style_loader_dist_runtime_injectStylesIntoStyleTag_js__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_style_loader_dist_runtime_injectStylesIntoStyleTag_js__WEBPACK_IMPORTED_MODULE_0__);
-/* harmony import */ var _css_loader_dist_cjs_js_ruleSet_1_rules_6_oneOf_1_use_1_postcss_loader_dist_cjs_js_ruleSet_1_rules_6_oneOf_1_use_2_svelte_loader_index_js_cssPath_D_www_sipro_spa_node_modules_svelte_loading_spinners_dist_Diamonds_svelte_55_css_Diamonds_svelte__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! !!../../css-loader/dist/cjs.js??ruleSet[1].rules[6].oneOf[1].use[1]!../../postcss-loader/dist/cjs.js??ruleSet[1].rules[6].oneOf[1].use[2]!../../svelte-loader/index.js?cssPath=D:/www/sipro-spa/node_modules/svelte-loading-spinners/dist/Diamonds.svelte.55.css!./Diamonds.svelte */ "./node_modules/css-loader/dist/cjs.js??ruleSet[1].rules[6].oneOf[1].use[1]!./node_modules/postcss-loader/dist/cjs.js??ruleSet[1].rules[6].oneOf[1].use[2]!./node_modules/svelte-loader/index.js?cssPath=D:/www/sipro-spa/node_modules/svelte-loading-spinners/dist/Diamonds.svelte.55.css!./node_modules/svelte-loading-spinners/dist/Diamonds.svelte");
+/* harmony import */ var _css_loader_dist_cjs_js_ruleSet_1_rules_6_oneOf_1_use_1_postcss_loader_dist_cjs_js_ruleSet_1_rules_6_oneOf_1_use_2_svelte_loader_index_js_cssPath_D_www_sipro_spa_node_modules_svelte_loading_spinners_dist_Diamonds_svelte_54_css_Diamonds_svelte__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! !!../../css-loader/dist/cjs.js??ruleSet[1].rules[6].oneOf[1].use[1]!../../postcss-loader/dist/cjs.js??ruleSet[1].rules[6].oneOf[1].use[2]!../../svelte-loader/index.js?cssPath=D:/www/sipro-spa/node_modules/svelte-loading-spinners/dist/Diamonds.svelte.54.css!./Diamonds.svelte */ "./node_modules/css-loader/dist/cjs.js??ruleSet[1].rules[6].oneOf[1].use[1]!./node_modules/postcss-loader/dist/cjs.js??ruleSet[1].rules[6].oneOf[1].use[2]!./node_modules/svelte-loader/index.js?cssPath=D:/www/sipro-spa/node_modules/svelte-loading-spinners/dist/Diamonds.svelte.54.css!./node_modules/svelte-loading-spinners/dist/Diamonds.svelte");
 
             
 
@@ -31724,17 +31724,17 @@ var options = {};
 options.insert = "head";
 options.singleton = false;
 
-var update = _style_loader_dist_runtime_injectStylesIntoStyleTag_js__WEBPACK_IMPORTED_MODULE_0___default()(_css_loader_dist_cjs_js_ruleSet_1_rules_6_oneOf_1_use_1_postcss_loader_dist_cjs_js_ruleSet_1_rules_6_oneOf_1_use_2_svelte_loader_index_js_cssPath_D_www_sipro_spa_node_modules_svelte_loading_spinners_dist_Diamonds_svelte_55_css_Diamonds_svelte__WEBPACK_IMPORTED_MODULE_1__["default"], options);
+var update = _style_loader_dist_runtime_injectStylesIntoStyleTag_js__WEBPACK_IMPORTED_MODULE_0___default()(_css_loader_dist_cjs_js_ruleSet_1_rules_6_oneOf_1_use_1_postcss_loader_dist_cjs_js_ruleSet_1_rules_6_oneOf_1_use_2_svelte_loader_index_js_cssPath_D_www_sipro_spa_node_modules_svelte_loading_spinners_dist_Diamonds_svelte_54_css_Diamonds_svelte__WEBPACK_IMPORTED_MODULE_1__["default"], options);
 
 
 
-/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (_css_loader_dist_cjs_js_ruleSet_1_rules_6_oneOf_1_use_1_postcss_loader_dist_cjs_js_ruleSet_1_rules_6_oneOf_1_use_2_svelte_loader_index_js_cssPath_D_www_sipro_spa_node_modules_svelte_loading_spinners_dist_Diamonds_svelte_55_css_Diamonds_svelte__WEBPACK_IMPORTED_MODULE_1__["default"].locals || {});
+/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (_css_loader_dist_cjs_js_ruleSet_1_rules_6_oneOf_1_use_1_postcss_loader_dist_cjs_js_ruleSet_1_rules_6_oneOf_1_use_2_svelte_loader_index_js_cssPath_D_www_sipro_spa_node_modules_svelte_loading_spinners_dist_Diamonds_svelte_54_css_Diamonds_svelte__WEBPACK_IMPORTED_MODULE_1__["default"].locals || {});
 
 /***/ }),
 
-/***/ "./node_modules/svelte-loading-spinners/dist/DoubleBounce.svelte.38.css!=!./node_modules/svelte-loader/index.js?cssPath=D:/www/sipro-spa/node_modules/svelte-loading-spinners/dist/DoubleBounce.svelte.38.css!./node_modules/svelte-loading-spinners/dist/DoubleBounce.svelte":
+/***/ "./node_modules/svelte-loading-spinners/dist/DoubleBounce.svelte.34.css!=!./node_modules/svelte-loader/index.js?cssPath=D:/www/sipro-spa/node_modules/svelte-loading-spinners/dist/DoubleBounce.svelte.34.css!./node_modules/svelte-loading-spinners/dist/DoubleBounce.svelte":
 /*!************************************************************************************************************************************************************************************************************************************************************************************!*\
-  !*** ./node_modules/svelte-loading-spinners/dist/DoubleBounce.svelte.38.css!=!./node_modules/svelte-loader/index.js?cssPath=D:/www/sipro-spa/node_modules/svelte-loading-spinners/dist/DoubleBounce.svelte.38.css!./node_modules/svelte-loading-spinners/dist/DoubleBounce.svelte ***!
+  !*** ./node_modules/svelte-loading-spinners/dist/DoubleBounce.svelte.34.css!=!./node_modules/svelte-loader/index.js?cssPath=D:/www/sipro-spa/node_modules/svelte-loading-spinners/dist/DoubleBounce.svelte.34.css!./node_modules/svelte-loading-spinners/dist/DoubleBounce.svelte ***!
   \************************************************************************************************************************************************************************************************************************************************************************************/
 /***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
 
@@ -31745,7 +31745,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ });
 /* harmony import */ var _style_loader_dist_runtime_injectStylesIntoStyleTag_js__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! !../../style-loader/dist/runtime/injectStylesIntoStyleTag.js */ "./node_modules/style-loader/dist/runtime/injectStylesIntoStyleTag.js");
 /* harmony import */ var _style_loader_dist_runtime_injectStylesIntoStyleTag_js__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_style_loader_dist_runtime_injectStylesIntoStyleTag_js__WEBPACK_IMPORTED_MODULE_0__);
-/* harmony import */ var _css_loader_dist_cjs_js_ruleSet_1_rules_6_oneOf_1_use_1_postcss_loader_dist_cjs_js_ruleSet_1_rules_6_oneOf_1_use_2_svelte_loader_index_js_cssPath_D_www_sipro_spa_node_modules_svelte_loading_spinners_dist_DoubleBounce_svelte_38_css_DoubleBounce_svelte__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! !!../../css-loader/dist/cjs.js??ruleSet[1].rules[6].oneOf[1].use[1]!../../postcss-loader/dist/cjs.js??ruleSet[1].rules[6].oneOf[1].use[2]!../../svelte-loader/index.js?cssPath=D:/www/sipro-spa/node_modules/svelte-loading-spinners/dist/DoubleBounce.svelte.38.css!./DoubleBounce.svelte */ "./node_modules/css-loader/dist/cjs.js??ruleSet[1].rules[6].oneOf[1].use[1]!./node_modules/postcss-loader/dist/cjs.js??ruleSet[1].rules[6].oneOf[1].use[2]!./node_modules/svelte-loader/index.js?cssPath=D:/www/sipro-spa/node_modules/svelte-loading-spinners/dist/DoubleBounce.svelte.38.css!./node_modules/svelte-loading-spinners/dist/DoubleBounce.svelte");
+/* harmony import */ var _css_loader_dist_cjs_js_ruleSet_1_rules_6_oneOf_1_use_1_postcss_loader_dist_cjs_js_ruleSet_1_rules_6_oneOf_1_use_2_svelte_loader_index_js_cssPath_D_www_sipro_spa_node_modules_svelte_loading_spinners_dist_DoubleBounce_svelte_34_css_DoubleBounce_svelte__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! !!../../css-loader/dist/cjs.js??ruleSet[1].rules[6].oneOf[1].use[1]!../../postcss-loader/dist/cjs.js??ruleSet[1].rules[6].oneOf[1].use[2]!../../svelte-loader/index.js?cssPath=D:/www/sipro-spa/node_modules/svelte-loading-spinners/dist/DoubleBounce.svelte.34.css!./DoubleBounce.svelte */ "./node_modules/css-loader/dist/cjs.js??ruleSet[1].rules[6].oneOf[1].use[1]!./node_modules/postcss-loader/dist/cjs.js??ruleSet[1].rules[6].oneOf[1].use[2]!./node_modules/svelte-loader/index.js?cssPath=D:/www/sipro-spa/node_modules/svelte-loading-spinners/dist/DoubleBounce.svelte.34.css!./node_modules/svelte-loading-spinners/dist/DoubleBounce.svelte");
 
             
 
@@ -31754,17 +31754,17 @@ var options = {};
 options.insert = "head";
 options.singleton = false;
 
-var update = _style_loader_dist_runtime_injectStylesIntoStyleTag_js__WEBPACK_IMPORTED_MODULE_0___default()(_css_loader_dist_cjs_js_ruleSet_1_rules_6_oneOf_1_use_1_postcss_loader_dist_cjs_js_ruleSet_1_rules_6_oneOf_1_use_2_svelte_loader_index_js_cssPath_D_www_sipro_spa_node_modules_svelte_loading_spinners_dist_DoubleBounce_svelte_38_css_DoubleBounce_svelte__WEBPACK_IMPORTED_MODULE_1__["default"], options);
+var update = _style_loader_dist_runtime_injectStylesIntoStyleTag_js__WEBPACK_IMPORTED_MODULE_0___default()(_css_loader_dist_cjs_js_ruleSet_1_rules_6_oneOf_1_use_1_postcss_loader_dist_cjs_js_ruleSet_1_rules_6_oneOf_1_use_2_svelte_loader_index_js_cssPath_D_www_sipro_spa_node_modules_svelte_loading_spinners_dist_DoubleBounce_svelte_34_css_DoubleBounce_svelte__WEBPACK_IMPORTED_MODULE_1__["default"], options);
 
 
 
-/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (_css_loader_dist_cjs_js_ruleSet_1_rules_6_oneOf_1_use_1_postcss_loader_dist_cjs_js_ruleSet_1_rules_6_oneOf_1_use_2_svelte_loader_index_js_cssPath_D_www_sipro_spa_node_modules_svelte_loading_spinners_dist_DoubleBounce_svelte_38_css_DoubleBounce_svelte__WEBPACK_IMPORTED_MODULE_1__["default"].locals || {});
+/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (_css_loader_dist_cjs_js_ruleSet_1_rules_6_oneOf_1_use_1_postcss_loader_dist_cjs_js_ruleSet_1_rules_6_oneOf_1_use_2_svelte_loader_index_js_cssPath_D_www_sipro_spa_node_modules_svelte_loading_spinners_dist_DoubleBounce_svelte_34_css_DoubleBounce_svelte__WEBPACK_IMPORTED_MODULE_1__["default"].locals || {});
 
 /***/ }),
 
-/***/ "./node_modules/svelte-loading-spinners/dist/Firework.svelte.46.css!=!./node_modules/svelte-loader/index.js?cssPath=D:/www/sipro-spa/node_modules/svelte-loading-spinners/dist/Firework.svelte.46.css!./node_modules/svelte-loading-spinners/dist/Firework.svelte":
+/***/ "./node_modules/svelte-loading-spinners/dist/Firework.svelte.43.css!=!./node_modules/svelte-loader/index.js?cssPath=D:/www/sipro-spa/node_modules/svelte-loading-spinners/dist/Firework.svelte.43.css!./node_modules/svelte-loading-spinners/dist/Firework.svelte":
 /*!************************************************************************************************************************************************************************************************************************************************************************!*\
-  !*** ./node_modules/svelte-loading-spinners/dist/Firework.svelte.46.css!=!./node_modules/svelte-loader/index.js?cssPath=D:/www/sipro-spa/node_modules/svelte-loading-spinners/dist/Firework.svelte.46.css!./node_modules/svelte-loading-spinners/dist/Firework.svelte ***!
+  !*** ./node_modules/svelte-loading-spinners/dist/Firework.svelte.43.css!=!./node_modules/svelte-loader/index.js?cssPath=D:/www/sipro-spa/node_modules/svelte-loading-spinners/dist/Firework.svelte.43.css!./node_modules/svelte-loading-spinners/dist/Firework.svelte ***!
   \************************************************************************************************************************************************************************************************************************************************************************/
 /***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
 
@@ -31775,7 +31775,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ });
 /* harmony import */ var _style_loader_dist_runtime_injectStylesIntoStyleTag_js__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! !../../style-loader/dist/runtime/injectStylesIntoStyleTag.js */ "./node_modules/style-loader/dist/runtime/injectStylesIntoStyleTag.js");
 /* harmony import */ var _style_loader_dist_runtime_injectStylesIntoStyleTag_js__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_style_loader_dist_runtime_injectStylesIntoStyleTag_js__WEBPACK_IMPORTED_MODULE_0__);
-/* harmony import */ var _css_loader_dist_cjs_js_ruleSet_1_rules_6_oneOf_1_use_1_postcss_loader_dist_cjs_js_ruleSet_1_rules_6_oneOf_1_use_2_svelte_loader_index_js_cssPath_D_www_sipro_spa_node_modules_svelte_loading_spinners_dist_Firework_svelte_46_css_Firework_svelte__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! !!../../css-loader/dist/cjs.js??ruleSet[1].rules[6].oneOf[1].use[1]!../../postcss-loader/dist/cjs.js??ruleSet[1].rules[6].oneOf[1].use[2]!../../svelte-loader/index.js?cssPath=D:/www/sipro-spa/node_modules/svelte-loading-spinners/dist/Firework.svelte.46.css!./Firework.svelte */ "./node_modules/css-loader/dist/cjs.js??ruleSet[1].rules[6].oneOf[1].use[1]!./node_modules/postcss-loader/dist/cjs.js??ruleSet[1].rules[6].oneOf[1].use[2]!./node_modules/svelte-loader/index.js?cssPath=D:/www/sipro-spa/node_modules/svelte-loading-spinners/dist/Firework.svelte.46.css!./node_modules/svelte-loading-spinners/dist/Firework.svelte");
+/* harmony import */ var _css_loader_dist_cjs_js_ruleSet_1_rules_6_oneOf_1_use_1_postcss_loader_dist_cjs_js_ruleSet_1_rules_6_oneOf_1_use_2_svelte_loader_index_js_cssPath_D_www_sipro_spa_node_modules_svelte_loading_spinners_dist_Firework_svelte_43_css_Firework_svelte__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! !!../../css-loader/dist/cjs.js??ruleSet[1].rules[6].oneOf[1].use[1]!../../postcss-loader/dist/cjs.js??ruleSet[1].rules[6].oneOf[1].use[2]!../../svelte-loader/index.js?cssPath=D:/www/sipro-spa/node_modules/svelte-loading-spinners/dist/Firework.svelte.43.css!./Firework.svelte */ "./node_modules/css-loader/dist/cjs.js??ruleSet[1].rules[6].oneOf[1].use[1]!./node_modules/postcss-loader/dist/cjs.js??ruleSet[1].rules[6].oneOf[1].use[2]!./node_modules/svelte-loader/index.js?cssPath=D:/www/sipro-spa/node_modules/svelte-loading-spinners/dist/Firework.svelte.43.css!./node_modules/svelte-loading-spinners/dist/Firework.svelte");
 
             
 
@@ -31784,17 +31784,17 @@ var options = {};
 options.insert = "head";
 options.singleton = false;
 
-var update = _style_loader_dist_runtime_injectStylesIntoStyleTag_js__WEBPACK_IMPORTED_MODULE_0___default()(_css_loader_dist_cjs_js_ruleSet_1_rules_6_oneOf_1_use_1_postcss_loader_dist_cjs_js_ruleSet_1_rules_6_oneOf_1_use_2_svelte_loader_index_js_cssPath_D_www_sipro_spa_node_modules_svelte_loading_spinners_dist_Firework_svelte_46_css_Firework_svelte__WEBPACK_IMPORTED_MODULE_1__["default"], options);
+var update = _style_loader_dist_runtime_injectStylesIntoStyleTag_js__WEBPACK_IMPORTED_MODULE_0___default()(_css_loader_dist_cjs_js_ruleSet_1_rules_6_oneOf_1_use_1_postcss_loader_dist_cjs_js_ruleSet_1_rules_6_oneOf_1_use_2_svelte_loader_index_js_cssPath_D_www_sipro_spa_node_modules_svelte_loading_spinners_dist_Firework_svelte_43_css_Firework_svelte__WEBPACK_IMPORTED_MODULE_1__["default"], options);
 
 
 
-/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (_css_loader_dist_cjs_js_ruleSet_1_rules_6_oneOf_1_use_1_postcss_loader_dist_cjs_js_ruleSet_1_rules_6_oneOf_1_use_2_svelte_loader_index_js_cssPath_D_www_sipro_spa_node_modules_svelte_loading_spinners_dist_Firework_svelte_46_css_Firework_svelte__WEBPACK_IMPORTED_MODULE_1__["default"].locals || {});
+/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (_css_loader_dist_cjs_js_ruleSet_1_rules_6_oneOf_1_use_1_postcss_loader_dist_cjs_js_ruleSet_1_rules_6_oneOf_1_use_2_svelte_loader_index_js_cssPath_D_www_sipro_spa_node_modules_svelte_loading_spinners_dist_Firework_svelte_43_css_Firework_svelte__WEBPACK_IMPORTED_MODULE_1__["default"].locals || {});
 
 /***/ }),
 
-/***/ "./node_modules/svelte-loading-spinners/dist/GoogleSpin.svelte.41.css!=!./node_modules/svelte-loader/index.js?cssPath=D:/www/sipro-spa/node_modules/svelte-loading-spinners/dist/GoogleSpin.svelte.41.css!./node_modules/svelte-loading-spinners/dist/GoogleSpin.svelte":
+/***/ "./node_modules/svelte-loading-spinners/dist/GoogleSpin.svelte.33.css!=!./node_modules/svelte-loader/index.js?cssPath=D:/www/sipro-spa/node_modules/svelte-loading-spinners/dist/GoogleSpin.svelte.33.css!./node_modules/svelte-loading-spinners/dist/GoogleSpin.svelte":
 /*!******************************************************************************************************************************************************************************************************************************************************************************!*\
-  !*** ./node_modules/svelte-loading-spinners/dist/GoogleSpin.svelte.41.css!=!./node_modules/svelte-loader/index.js?cssPath=D:/www/sipro-spa/node_modules/svelte-loading-spinners/dist/GoogleSpin.svelte.41.css!./node_modules/svelte-loading-spinners/dist/GoogleSpin.svelte ***!
+  !*** ./node_modules/svelte-loading-spinners/dist/GoogleSpin.svelte.33.css!=!./node_modules/svelte-loader/index.js?cssPath=D:/www/sipro-spa/node_modules/svelte-loading-spinners/dist/GoogleSpin.svelte.33.css!./node_modules/svelte-loading-spinners/dist/GoogleSpin.svelte ***!
   \******************************************************************************************************************************************************************************************************************************************************************************/
 /***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
 
@@ -31805,7 +31805,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ });
 /* harmony import */ var _style_loader_dist_runtime_injectStylesIntoStyleTag_js__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! !../../style-loader/dist/runtime/injectStylesIntoStyleTag.js */ "./node_modules/style-loader/dist/runtime/injectStylesIntoStyleTag.js");
 /* harmony import */ var _style_loader_dist_runtime_injectStylesIntoStyleTag_js__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_style_loader_dist_runtime_injectStylesIntoStyleTag_js__WEBPACK_IMPORTED_MODULE_0__);
-/* harmony import */ var _css_loader_dist_cjs_js_ruleSet_1_rules_6_oneOf_1_use_1_postcss_loader_dist_cjs_js_ruleSet_1_rules_6_oneOf_1_use_2_svelte_loader_index_js_cssPath_D_www_sipro_spa_node_modules_svelte_loading_spinners_dist_GoogleSpin_svelte_41_css_GoogleSpin_svelte__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! !!../../css-loader/dist/cjs.js??ruleSet[1].rules[6].oneOf[1].use[1]!../../postcss-loader/dist/cjs.js??ruleSet[1].rules[6].oneOf[1].use[2]!../../svelte-loader/index.js?cssPath=D:/www/sipro-spa/node_modules/svelte-loading-spinners/dist/GoogleSpin.svelte.41.css!./GoogleSpin.svelte */ "./node_modules/css-loader/dist/cjs.js??ruleSet[1].rules[6].oneOf[1].use[1]!./node_modules/postcss-loader/dist/cjs.js??ruleSet[1].rules[6].oneOf[1].use[2]!./node_modules/svelte-loader/index.js?cssPath=D:/www/sipro-spa/node_modules/svelte-loading-spinners/dist/GoogleSpin.svelte.41.css!./node_modules/svelte-loading-spinners/dist/GoogleSpin.svelte");
+/* harmony import */ var _css_loader_dist_cjs_js_ruleSet_1_rules_6_oneOf_1_use_1_postcss_loader_dist_cjs_js_ruleSet_1_rules_6_oneOf_1_use_2_svelte_loader_index_js_cssPath_D_www_sipro_spa_node_modules_svelte_loading_spinners_dist_GoogleSpin_svelte_33_css_GoogleSpin_svelte__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! !!../../css-loader/dist/cjs.js??ruleSet[1].rules[6].oneOf[1].use[1]!../../postcss-loader/dist/cjs.js??ruleSet[1].rules[6].oneOf[1].use[2]!../../svelte-loader/index.js?cssPath=D:/www/sipro-spa/node_modules/svelte-loading-spinners/dist/GoogleSpin.svelte.33.css!./GoogleSpin.svelte */ "./node_modules/css-loader/dist/cjs.js??ruleSet[1].rules[6].oneOf[1].use[1]!./node_modules/postcss-loader/dist/cjs.js??ruleSet[1].rules[6].oneOf[1].use[2]!./node_modules/svelte-loader/index.js?cssPath=D:/www/sipro-spa/node_modules/svelte-loading-spinners/dist/GoogleSpin.svelte.33.css!./node_modules/svelte-loading-spinners/dist/GoogleSpin.svelte");
 
             
 
@@ -31814,17 +31814,17 @@ var options = {};
 options.insert = "head";
 options.singleton = false;
 
-var update = _style_loader_dist_runtime_injectStylesIntoStyleTag_js__WEBPACK_IMPORTED_MODULE_0___default()(_css_loader_dist_cjs_js_ruleSet_1_rules_6_oneOf_1_use_1_postcss_loader_dist_cjs_js_ruleSet_1_rules_6_oneOf_1_use_2_svelte_loader_index_js_cssPath_D_www_sipro_spa_node_modules_svelte_loading_spinners_dist_GoogleSpin_svelte_41_css_GoogleSpin_svelte__WEBPACK_IMPORTED_MODULE_1__["default"], options);
+var update = _style_loader_dist_runtime_injectStylesIntoStyleTag_js__WEBPACK_IMPORTED_MODULE_0___default()(_css_loader_dist_cjs_js_ruleSet_1_rules_6_oneOf_1_use_1_postcss_loader_dist_cjs_js_ruleSet_1_rules_6_oneOf_1_use_2_svelte_loader_index_js_cssPath_D_www_sipro_spa_node_modules_svelte_loading_spinners_dist_GoogleSpin_svelte_33_css_GoogleSpin_svelte__WEBPACK_IMPORTED_MODULE_1__["default"], options);
 
 
 
-/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (_css_loader_dist_cjs_js_ruleSet_1_rules_6_oneOf_1_use_1_postcss_loader_dist_cjs_js_ruleSet_1_rules_6_oneOf_1_use_2_svelte_loader_index_js_cssPath_D_www_sipro_spa_node_modules_svelte_loading_spinners_dist_GoogleSpin_svelte_41_css_GoogleSpin_svelte__WEBPACK_IMPORTED_MODULE_1__["default"].locals || {});
+/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (_css_loader_dist_cjs_js_ruleSet_1_rules_6_oneOf_1_use_1_postcss_loader_dist_cjs_js_ruleSet_1_rules_6_oneOf_1_use_2_svelte_loader_index_js_cssPath_D_www_sipro_spa_node_modules_svelte_loading_spinners_dist_GoogleSpin_svelte_33_css_GoogleSpin_svelte__WEBPACK_IMPORTED_MODULE_1__["default"].locals || {});
 
 /***/ }),
 
-/***/ "./node_modules/svelte-loading-spinners/dist/Jellyfish.svelte.44.css!=!./node_modules/svelte-loader/index.js?cssPath=D:/www/sipro-spa/node_modules/svelte-loading-spinners/dist/Jellyfish.svelte.44.css!./node_modules/svelte-loading-spinners/dist/Jellyfish.svelte":
+/***/ "./node_modules/svelte-loading-spinners/dist/Jellyfish.svelte.47.css!=!./node_modules/svelte-loader/index.js?cssPath=D:/www/sipro-spa/node_modules/svelte-loading-spinners/dist/Jellyfish.svelte.47.css!./node_modules/svelte-loading-spinners/dist/Jellyfish.svelte":
 /*!***************************************************************************************************************************************************************************************************************************************************************************!*\
-  !*** ./node_modules/svelte-loading-spinners/dist/Jellyfish.svelte.44.css!=!./node_modules/svelte-loader/index.js?cssPath=D:/www/sipro-spa/node_modules/svelte-loading-spinners/dist/Jellyfish.svelte.44.css!./node_modules/svelte-loading-spinners/dist/Jellyfish.svelte ***!
+  !*** ./node_modules/svelte-loading-spinners/dist/Jellyfish.svelte.47.css!=!./node_modules/svelte-loader/index.js?cssPath=D:/www/sipro-spa/node_modules/svelte-loading-spinners/dist/Jellyfish.svelte.47.css!./node_modules/svelte-loading-spinners/dist/Jellyfish.svelte ***!
   \***************************************************************************************************************************************************************************************************************************************************************************/
 /***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
 
@@ -31835,7 +31835,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ });
 /* harmony import */ var _style_loader_dist_runtime_injectStylesIntoStyleTag_js__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! !../../style-loader/dist/runtime/injectStylesIntoStyleTag.js */ "./node_modules/style-loader/dist/runtime/injectStylesIntoStyleTag.js");
 /* harmony import */ var _style_loader_dist_runtime_injectStylesIntoStyleTag_js__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_style_loader_dist_runtime_injectStylesIntoStyleTag_js__WEBPACK_IMPORTED_MODULE_0__);
-/* harmony import */ var _css_loader_dist_cjs_js_ruleSet_1_rules_6_oneOf_1_use_1_postcss_loader_dist_cjs_js_ruleSet_1_rules_6_oneOf_1_use_2_svelte_loader_index_js_cssPath_D_www_sipro_spa_node_modules_svelte_loading_spinners_dist_Jellyfish_svelte_44_css_Jellyfish_svelte__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! !!../../css-loader/dist/cjs.js??ruleSet[1].rules[6].oneOf[1].use[1]!../../postcss-loader/dist/cjs.js??ruleSet[1].rules[6].oneOf[1].use[2]!../../svelte-loader/index.js?cssPath=D:/www/sipro-spa/node_modules/svelte-loading-spinners/dist/Jellyfish.svelte.44.css!./Jellyfish.svelte */ "./node_modules/css-loader/dist/cjs.js??ruleSet[1].rules[6].oneOf[1].use[1]!./node_modules/postcss-loader/dist/cjs.js??ruleSet[1].rules[6].oneOf[1].use[2]!./node_modules/svelte-loader/index.js?cssPath=D:/www/sipro-spa/node_modules/svelte-loading-spinners/dist/Jellyfish.svelte.44.css!./node_modules/svelte-loading-spinners/dist/Jellyfish.svelte");
+/* harmony import */ var _css_loader_dist_cjs_js_ruleSet_1_rules_6_oneOf_1_use_1_postcss_loader_dist_cjs_js_ruleSet_1_rules_6_oneOf_1_use_2_svelte_loader_index_js_cssPath_D_www_sipro_spa_node_modules_svelte_loading_spinners_dist_Jellyfish_svelte_47_css_Jellyfish_svelte__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! !!../../css-loader/dist/cjs.js??ruleSet[1].rules[6].oneOf[1].use[1]!../../postcss-loader/dist/cjs.js??ruleSet[1].rules[6].oneOf[1].use[2]!../../svelte-loader/index.js?cssPath=D:/www/sipro-spa/node_modules/svelte-loading-spinners/dist/Jellyfish.svelte.47.css!./Jellyfish.svelte */ "./node_modules/css-loader/dist/cjs.js??ruleSet[1].rules[6].oneOf[1].use[1]!./node_modules/postcss-loader/dist/cjs.js??ruleSet[1].rules[6].oneOf[1].use[2]!./node_modules/svelte-loader/index.js?cssPath=D:/www/sipro-spa/node_modules/svelte-loading-spinners/dist/Jellyfish.svelte.47.css!./node_modules/svelte-loading-spinners/dist/Jellyfish.svelte");
 
             
 
@@ -31844,17 +31844,17 @@ var options = {};
 options.insert = "head";
 options.singleton = false;
 
-var update = _style_loader_dist_runtime_injectStylesIntoStyleTag_js__WEBPACK_IMPORTED_MODULE_0___default()(_css_loader_dist_cjs_js_ruleSet_1_rules_6_oneOf_1_use_1_postcss_loader_dist_cjs_js_ruleSet_1_rules_6_oneOf_1_use_2_svelte_loader_index_js_cssPath_D_www_sipro_spa_node_modules_svelte_loading_spinners_dist_Jellyfish_svelte_44_css_Jellyfish_svelte__WEBPACK_IMPORTED_MODULE_1__["default"], options);
+var update = _style_loader_dist_runtime_injectStylesIntoStyleTag_js__WEBPACK_IMPORTED_MODULE_0___default()(_css_loader_dist_cjs_js_ruleSet_1_rules_6_oneOf_1_use_1_postcss_loader_dist_cjs_js_ruleSet_1_rules_6_oneOf_1_use_2_svelte_loader_index_js_cssPath_D_www_sipro_spa_node_modules_svelte_loading_spinners_dist_Jellyfish_svelte_47_css_Jellyfish_svelte__WEBPACK_IMPORTED_MODULE_1__["default"], options);
 
 
 
-/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (_css_loader_dist_cjs_js_ruleSet_1_rules_6_oneOf_1_use_1_postcss_loader_dist_cjs_js_ruleSet_1_rules_6_oneOf_1_use_2_svelte_loader_index_js_cssPath_D_www_sipro_spa_node_modules_svelte_loading_spinners_dist_Jellyfish_svelte_44_css_Jellyfish_svelte__WEBPACK_IMPORTED_MODULE_1__["default"].locals || {});
+/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (_css_loader_dist_cjs_js_ruleSet_1_rules_6_oneOf_1_use_1_postcss_loader_dist_cjs_js_ruleSet_1_rules_6_oneOf_1_use_2_svelte_loader_index_js_cssPath_D_www_sipro_spa_node_modules_svelte_loading_spinners_dist_Jellyfish_svelte_47_css_Jellyfish_svelte__WEBPACK_IMPORTED_MODULE_1__["default"].locals || {});
 
 /***/ }),
 
-/***/ "./node_modules/svelte-loading-spinners/dist/Jumper.svelte.39.css!=!./node_modules/svelte-loader/index.js?cssPath=D:/www/sipro-spa/node_modules/svelte-loading-spinners/dist/Jumper.svelte.39.css!./node_modules/svelte-loading-spinners/dist/Jumper.svelte":
+/***/ "./node_modules/svelte-loading-spinners/dist/Jumper.svelte.42.css!=!./node_modules/svelte-loader/index.js?cssPath=D:/www/sipro-spa/node_modules/svelte-loading-spinners/dist/Jumper.svelte.42.css!./node_modules/svelte-loading-spinners/dist/Jumper.svelte":
 /*!******************************************************************************************************************************************************************************************************************************************************************!*\
-  !*** ./node_modules/svelte-loading-spinners/dist/Jumper.svelte.39.css!=!./node_modules/svelte-loader/index.js?cssPath=D:/www/sipro-spa/node_modules/svelte-loading-spinners/dist/Jumper.svelte.39.css!./node_modules/svelte-loading-spinners/dist/Jumper.svelte ***!
+  !*** ./node_modules/svelte-loading-spinners/dist/Jumper.svelte.42.css!=!./node_modules/svelte-loader/index.js?cssPath=D:/www/sipro-spa/node_modules/svelte-loading-spinners/dist/Jumper.svelte.42.css!./node_modules/svelte-loading-spinners/dist/Jumper.svelte ***!
   \******************************************************************************************************************************************************************************************************************************************************************/
 /***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
 
@@ -31865,7 +31865,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ });
 /* harmony import */ var _style_loader_dist_runtime_injectStylesIntoStyleTag_js__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! !../../style-loader/dist/runtime/injectStylesIntoStyleTag.js */ "./node_modules/style-loader/dist/runtime/injectStylesIntoStyleTag.js");
 /* harmony import */ var _style_loader_dist_runtime_injectStylesIntoStyleTag_js__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_style_loader_dist_runtime_injectStylesIntoStyleTag_js__WEBPACK_IMPORTED_MODULE_0__);
-/* harmony import */ var _css_loader_dist_cjs_js_ruleSet_1_rules_6_oneOf_1_use_1_postcss_loader_dist_cjs_js_ruleSet_1_rules_6_oneOf_1_use_2_svelte_loader_index_js_cssPath_D_www_sipro_spa_node_modules_svelte_loading_spinners_dist_Jumper_svelte_39_css_Jumper_svelte__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! !!../../css-loader/dist/cjs.js??ruleSet[1].rules[6].oneOf[1].use[1]!../../postcss-loader/dist/cjs.js??ruleSet[1].rules[6].oneOf[1].use[2]!../../svelte-loader/index.js?cssPath=D:/www/sipro-spa/node_modules/svelte-loading-spinners/dist/Jumper.svelte.39.css!./Jumper.svelte */ "./node_modules/css-loader/dist/cjs.js??ruleSet[1].rules[6].oneOf[1].use[1]!./node_modules/postcss-loader/dist/cjs.js??ruleSet[1].rules[6].oneOf[1].use[2]!./node_modules/svelte-loader/index.js?cssPath=D:/www/sipro-spa/node_modules/svelte-loading-spinners/dist/Jumper.svelte.39.css!./node_modules/svelte-loading-spinners/dist/Jumper.svelte");
+/* harmony import */ var _css_loader_dist_cjs_js_ruleSet_1_rules_6_oneOf_1_use_1_postcss_loader_dist_cjs_js_ruleSet_1_rules_6_oneOf_1_use_2_svelte_loader_index_js_cssPath_D_www_sipro_spa_node_modules_svelte_loading_spinners_dist_Jumper_svelte_42_css_Jumper_svelte__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! !!../../css-loader/dist/cjs.js??ruleSet[1].rules[6].oneOf[1].use[1]!../../postcss-loader/dist/cjs.js??ruleSet[1].rules[6].oneOf[1].use[2]!../../svelte-loader/index.js?cssPath=D:/www/sipro-spa/node_modules/svelte-loading-spinners/dist/Jumper.svelte.42.css!./Jumper.svelte */ "./node_modules/css-loader/dist/cjs.js??ruleSet[1].rules[6].oneOf[1].use[1]!./node_modules/postcss-loader/dist/cjs.js??ruleSet[1].rules[6].oneOf[1].use[2]!./node_modules/svelte-loader/index.js?cssPath=D:/www/sipro-spa/node_modules/svelte-loading-spinners/dist/Jumper.svelte.42.css!./node_modules/svelte-loading-spinners/dist/Jumper.svelte");
 
             
 
@@ -31874,17 +31874,17 @@ var options = {};
 options.insert = "head";
 options.singleton = false;
 
-var update = _style_loader_dist_runtime_injectStylesIntoStyleTag_js__WEBPACK_IMPORTED_MODULE_0___default()(_css_loader_dist_cjs_js_ruleSet_1_rules_6_oneOf_1_use_1_postcss_loader_dist_cjs_js_ruleSet_1_rules_6_oneOf_1_use_2_svelte_loader_index_js_cssPath_D_www_sipro_spa_node_modules_svelte_loading_spinners_dist_Jumper_svelte_39_css_Jumper_svelte__WEBPACK_IMPORTED_MODULE_1__["default"], options);
+var update = _style_loader_dist_runtime_injectStylesIntoStyleTag_js__WEBPACK_IMPORTED_MODULE_0___default()(_css_loader_dist_cjs_js_ruleSet_1_rules_6_oneOf_1_use_1_postcss_loader_dist_cjs_js_ruleSet_1_rules_6_oneOf_1_use_2_svelte_loader_index_js_cssPath_D_www_sipro_spa_node_modules_svelte_loading_spinners_dist_Jumper_svelte_42_css_Jumper_svelte__WEBPACK_IMPORTED_MODULE_1__["default"], options);
 
 
 
-/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (_css_loader_dist_cjs_js_ruleSet_1_rules_6_oneOf_1_use_1_postcss_loader_dist_cjs_js_ruleSet_1_rules_6_oneOf_1_use_2_svelte_loader_index_js_cssPath_D_www_sipro_spa_node_modules_svelte_loading_spinners_dist_Jumper_svelte_39_css_Jumper_svelte__WEBPACK_IMPORTED_MODULE_1__["default"].locals || {});
+/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (_css_loader_dist_cjs_js_ruleSet_1_rules_6_oneOf_1_use_1_postcss_loader_dist_cjs_js_ruleSet_1_rules_6_oneOf_1_use_2_svelte_loader_index_js_cssPath_D_www_sipro_spa_node_modules_svelte_loading_spinners_dist_Jumper_svelte_42_css_Jumper_svelte__WEBPACK_IMPORTED_MODULE_1__["default"].locals || {});
 
 /***/ }),
 
-/***/ "./node_modules/svelte-loading-spinners/dist/Moon.svelte.54.css!=!./node_modules/svelte-loader/index.js?cssPath=D:/www/sipro-spa/node_modules/svelte-loading-spinners/dist/Moon.svelte.54.css!./node_modules/svelte-loading-spinners/dist/Moon.svelte":
+/***/ "./node_modules/svelte-loading-spinners/dist/Moon.svelte.52.css!=!./node_modules/svelte-loader/index.js?cssPath=D:/www/sipro-spa/node_modules/svelte-loading-spinners/dist/Moon.svelte.52.css!./node_modules/svelte-loading-spinners/dist/Moon.svelte":
 /*!************************************************************************************************************************************************************************************************************************************************************!*\
-  !*** ./node_modules/svelte-loading-spinners/dist/Moon.svelte.54.css!=!./node_modules/svelte-loader/index.js?cssPath=D:/www/sipro-spa/node_modules/svelte-loading-spinners/dist/Moon.svelte.54.css!./node_modules/svelte-loading-spinners/dist/Moon.svelte ***!
+  !*** ./node_modules/svelte-loading-spinners/dist/Moon.svelte.52.css!=!./node_modules/svelte-loader/index.js?cssPath=D:/www/sipro-spa/node_modules/svelte-loading-spinners/dist/Moon.svelte.52.css!./node_modules/svelte-loading-spinners/dist/Moon.svelte ***!
   \************************************************************************************************************************************************************************************************************************************************************/
 /***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
 
@@ -31895,7 +31895,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ });
 /* harmony import */ var _style_loader_dist_runtime_injectStylesIntoStyleTag_js__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! !../../style-loader/dist/runtime/injectStylesIntoStyleTag.js */ "./node_modules/style-loader/dist/runtime/injectStylesIntoStyleTag.js");
 /* harmony import */ var _style_loader_dist_runtime_injectStylesIntoStyleTag_js__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_style_loader_dist_runtime_injectStylesIntoStyleTag_js__WEBPACK_IMPORTED_MODULE_0__);
-/* harmony import */ var _css_loader_dist_cjs_js_ruleSet_1_rules_6_oneOf_1_use_1_postcss_loader_dist_cjs_js_ruleSet_1_rules_6_oneOf_1_use_2_svelte_loader_index_js_cssPath_D_www_sipro_spa_node_modules_svelte_loading_spinners_dist_Moon_svelte_54_css_Moon_svelte__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! !!../../css-loader/dist/cjs.js??ruleSet[1].rules[6].oneOf[1].use[1]!../../postcss-loader/dist/cjs.js??ruleSet[1].rules[6].oneOf[1].use[2]!../../svelte-loader/index.js?cssPath=D:/www/sipro-spa/node_modules/svelte-loading-spinners/dist/Moon.svelte.54.css!./Moon.svelte */ "./node_modules/css-loader/dist/cjs.js??ruleSet[1].rules[6].oneOf[1].use[1]!./node_modules/postcss-loader/dist/cjs.js??ruleSet[1].rules[6].oneOf[1].use[2]!./node_modules/svelte-loader/index.js?cssPath=D:/www/sipro-spa/node_modules/svelte-loading-spinners/dist/Moon.svelte.54.css!./node_modules/svelte-loading-spinners/dist/Moon.svelte");
+/* harmony import */ var _css_loader_dist_cjs_js_ruleSet_1_rules_6_oneOf_1_use_1_postcss_loader_dist_cjs_js_ruleSet_1_rules_6_oneOf_1_use_2_svelte_loader_index_js_cssPath_D_www_sipro_spa_node_modules_svelte_loading_spinners_dist_Moon_svelte_52_css_Moon_svelte__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! !!../../css-loader/dist/cjs.js??ruleSet[1].rules[6].oneOf[1].use[1]!../../postcss-loader/dist/cjs.js??ruleSet[1].rules[6].oneOf[1].use[2]!../../svelte-loader/index.js?cssPath=D:/www/sipro-spa/node_modules/svelte-loading-spinners/dist/Moon.svelte.52.css!./Moon.svelte */ "./node_modules/css-loader/dist/cjs.js??ruleSet[1].rules[6].oneOf[1].use[1]!./node_modules/postcss-loader/dist/cjs.js??ruleSet[1].rules[6].oneOf[1].use[2]!./node_modules/svelte-loader/index.js?cssPath=D:/www/sipro-spa/node_modules/svelte-loading-spinners/dist/Moon.svelte.52.css!./node_modules/svelte-loading-spinners/dist/Moon.svelte");
 
             
 
@@ -31904,17 +31904,17 @@ var options = {};
 options.insert = "head";
 options.singleton = false;
 
-var update = _style_loader_dist_runtime_injectStylesIntoStyleTag_js__WEBPACK_IMPORTED_MODULE_0___default()(_css_loader_dist_cjs_js_ruleSet_1_rules_6_oneOf_1_use_1_postcss_loader_dist_cjs_js_ruleSet_1_rules_6_oneOf_1_use_2_svelte_loader_index_js_cssPath_D_www_sipro_spa_node_modules_svelte_loading_spinners_dist_Moon_svelte_54_css_Moon_svelte__WEBPACK_IMPORTED_MODULE_1__["default"], options);
+var update = _style_loader_dist_runtime_injectStylesIntoStyleTag_js__WEBPACK_IMPORTED_MODULE_0___default()(_css_loader_dist_cjs_js_ruleSet_1_rules_6_oneOf_1_use_1_postcss_loader_dist_cjs_js_ruleSet_1_rules_6_oneOf_1_use_2_svelte_loader_index_js_cssPath_D_www_sipro_spa_node_modules_svelte_loading_spinners_dist_Moon_svelte_52_css_Moon_svelte__WEBPACK_IMPORTED_MODULE_1__["default"], options);
 
 
 
-/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (_css_loader_dist_cjs_js_ruleSet_1_rules_6_oneOf_1_use_1_postcss_loader_dist_cjs_js_ruleSet_1_rules_6_oneOf_1_use_2_svelte_loader_index_js_cssPath_D_www_sipro_spa_node_modules_svelte_loading_spinners_dist_Moon_svelte_54_css_Moon_svelte__WEBPACK_IMPORTED_MODULE_1__["default"].locals || {});
+/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (_css_loader_dist_cjs_js_ruleSet_1_rules_6_oneOf_1_use_1_postcss_loader_dist_cjs_js_ruleSet_1_rules_6_oneOf_1_use_2_svelte_loader_index_js_cssPath_D_www_sipro_spa_node_modules_svelte_loading_spinners_dist_Moon_svelte_52_css_Moon_svelte__WEBPACK_IMPORTED_MODULE_1__["default"].locals || {});
 
 /***/ }),
 
-/***/ "./node_modules/svelte-loading-spinners/dist/Plane.svelte.53.css!=!./node_modules/svelte-loader/index.js?cssPath=D:/www/sipro-spa/node_modules/svelte-loading-spinners/dist/Plane.svelte.53.css!./node_modules/svelte-loading-spinners/dist/Plane.svelte":
+/***/ "./node_modules/svelte-loading-spinners/dist/Plane.svelte.51.css!=!./node_modules/svelte-loader/index.js?cssPath=D:/www/sipro-spa/node_modules/svelte-loading-spinners/dist/Plane.svelte.51.css!./node_modules/svelte-loading-spinners/dist/Plane.svelte":
 /*!***************************************************************************************************************************************************************************************************************************************************************!*\
-  !*** ./node_modules/svelte-loading-spinners/dist/Plane.svelte.53.css!=!./node_modules/svelte-loader/index.js?cssPath=D:/www/sipro-spa/node_modules/svelte-loading-spinners/dist/Plane.svelte.53.css!./node_modules/svelte-loading-spinners/dist/Plane.svelte ***!
+  !*** ./node_modules/svelte-loading-spinners/dist/Plane.svelte.51.css!=!./node_modules/svelte-loader/index.js?cssPath=D:/www/sipro-spa/node_modules/svelte-loading-spinners/dist/Plane.svelte.51.css!./node_modules/svelte-loading-spinners/dist/Plane.svelte ***!
   \***************************************************************************************************************************************************************************************************************************************************************/
 /***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
 
@@ -31925,7 +31925,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ });
 /* harmony import */ var _style_loader_dist_runtime_injectStylesIntoStyleTag_js__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! !../../style-loader/dist/runtime/injectStylesIntoStyleTag.js */ "./node_modules/style-loader/dist/runtime/injectStylesIntoStyleTag.js");
 /* harmony import */ var _style_loader_dist_runtime_injectStylesIntoStyleTag_js__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_style_loader_dist_runtime_injectStylesIntoStyleTag_js__WEBPACK_IMPORTED_MODULE_0__);
-/* harmony import */ var _css_loader_dist_cjs_js_ruleSet_1_rules_6_oneOf_1_use_1_postcss_loader_dist_cjs_js_ruleSet_1_rules_6_oneOf_1_use_2_svelte_loader_index_js_cssPath_D_www_sipro_spa_node_modules_svelte_loading_spinners_dist_Plane_svelte_53_css_Plane_svelte__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! !!../../css-loader/dist/cjs.js??ruleSet[1].rules[6].oneOf[1].use[1]!../../postcss-loader/dist/cjs.js??ruleSet[1].rules[6].oneOf[1].use[2]!../../svelte-loader/index.js?cssPath=D:/www/sipro-spa/node_modules/svelte-loading-spinners/dist/Plane.svelte.53.css!./Plane.svelte */ "./node_modules/css-loader/dist/cjs.js??ruleSet[1].rules[6].oneOf[1].use[1]!./node_modules/postcss-loader/dist/cjs.js??ruleSet[1].rules[6].oneOf[1].use[2]!./node_modules/svelte-loader/index.js?cssPath=D:/www/sipro-spa/node_modules/svelte-loading-spinners/dist/Plane.svelte.53.css!./node_modules/svelte-loading-spinners/dist/Plane.svelte");
+/* harmony import */ var _css_loader_dist_cjs_js_ruleSet_1_rules_6_oneOf_1_use_1_postcss_loader_dist_cjs_js_ruleSet_1_rules_6_oneOf_1_use_2_svelte_loader_index_js_cssPath_D_www_sipro_spa_node_modules_svelte_loading_spinners_dist_Plane_svelte_51_css_Plane_svelte__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! !!../../css-loader/dist/cjs.js??ruleSet[1].rules[6].oneOf[1].use[1]!../../postcss-loader/dist/cjs.js??ruleSet[1].rules[6].oneOf[1].use[2]!../../svelte-loader/index.js?cssPath=D:/www/sipro-spa/node_modules/svelte-loading-spinners/dist/Plane.svelte.51.css!./Plane.svelte */ "./node_modules/css-loader/dist/cjs.js??ruleSet[1].rules[6].oneOf[1].use[1]!./node_modules/postcss-loader/dist/cjs.js??ruleSet[1].rules[6].oneOf[1].use[2]!./node_modules/svelte-loader/index.js?cssPath=D:/www/sipro-spa/node_modules/svelte-loading-spinners/dist/Plane.svelte.51.css!./node_modules/svelte-loading-spinners/dist/Plane.svelte");
 
             
 
@@ -31934,17 +31934,17 @@ var options = {};
 options.insert = "head";
 options.singleton = false;
 
-var update = _style_loader_dist_runtime_injectStylesIntoStyleTag_js__WEBPACK_IMPORTED_MODULE_0___default()(_css_loader_dist_cjs_js_ruleSet_1_rules_6_oneOf_1_use_1_postcss_loader_dist_cjs_js_ruleSet_1_rules_6_oneOf_1_use_2_svelte_loader_index_js_cssPath_D_www_sipro_spa_node_modules_svelte_loading_spinners_dist_Plane_svelte_53_css_Plane_svelte__WEBPACK_IMPORTED_MODULE_1__["default"], options);
+var update = _style_loader_dist_runtime_injectStylesIntoStyleTag_js__WEBPACK_IMPORTED_MODULE_0___default()(_css_loader_dist_cjs_js_ruleSet_1_rules_6_oneOf_1_use_1_postcss_loader_dist_cjs_js_ruleSet_1_rules_6_oneOf_1_use_2_svelte_loader_index_js_cssPath_D_www_sipro_spa_node_modules_svelte_loading_spinners_dist_Plane_svelte_51_css_Plane_svelte__WEBPACK_IMPORTED_MODULE_1__["default"], options);
 
 
 
-/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (_css_loader_dist_cjs_js_ruleSet_1_rules_6_oneOf_1_use_1_postcss_loader_dist_cjs_js_ruleSet_1_rules_6_oneOf_1_use_2_svelte_loader_index_js_cssPath_D_www_sipro_spa_node_modules_svelte_loading_spinners_dist_Plane_svelte_53_css_Plane_svelte__WEBPACK_IMPORTED_MODULE_1__["default"].locals || {});
+/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (_css_loader_dist_cjs_js_ruleSet_1_rules_6_oneOf_1_use_1_postcss_loader_dist_cjs_js_ruleSet_1_rules_6_oneOf_1_use_2_svelte_loader_index_js_cssPath_D_www_sipro_spa_node_modules_svelte_loading_spinners_dist_Plane_svelte_51_css_Plane_svelte__WEBPACK_IMPORTED_MODULE_1__["default"].locals || {});
 
 /***/ }),
 
-/***/ "./node_modules/svelte-loading-spinners/dist/Pulse.svelte.49.css!=!./node_modules/svelte-loader/index.js?cssPath=D:/www/sipro-spa/node_modules/svelte-loading-spinners/dist/Pulse.svelte.49.css!./node_modules/svelte-loading-spinners/dist/Pulse.svelte":
+/***/ "./node_modules/svelte-loading-spinners/dist/Pulse.svelte.44.css!=!./node_modules/svelte-loader/index.js?cssPath=D:/www/sipro-spa/node_modules/svelte-loading-spinners/dist/Pulse.svelte.44.css!./node_modules/svelte-loading-spinners/dist/Pulse.svelte":
 /*!***************************************************************************************************************************************************************************************************************************************************************!*\
-  !*** ./node_modules/svelte-loading-spinners/dist/Pulse.svelte.49.css!=!./node_modules/svelte-loader/index.js?cssPath=D:/www/sipro-spa/node_modules/svelte-loading-spinners/dist/Pulse.svelte.49.css!./node_modules/svelte-loading-spinners/dist/Pulse.svelte ***!
+  !*** ./node_modules/svelte-loading-spinners/dist/Pulse.svelte.44.css!=!./node_modules/svelte-loader/index.js?cssPath=D:/www/sipro-spa/node_modules/svelte-loading-spinners/dist/Pulse.svelte.44.css!./node_modules/svelte-loading-spinners/dist/Pulse.svelte ***!
   \***************************************************************************************************************************************************************************************************************************************************************/
 /***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
 
@@ -31955,7 +31955,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ });
 /* harmony import */ var _style_loader_dist_runtime_injectStylesIntoStyleTag_js__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! !../../style-loader/dist/runtime/injectStylesIntoStyleTag.js */ "./node_modules/style-loader/dist/runtime/injectStylesIntoStyleTag.js");
 /* harmony import */ var _style_loader_dist_runtime_injectStylesIntoStyleTag_js__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_style_loader_dist_runtime_injectStylesIntoStyleTag_js__WEBPACK_IMPORTED_MODULE_0__);
-/* harmony import */ var _css_loader_dist_cjs_js_ruleSet_1_rules_6_oneOf_1_use_1_postcss_loader_dist_cjs_js_ruleSet_1_rules_6_oneOf_1_use_2_svelte_loader_index_js_cssPath_D_www_sipro_spa_node_modules_svelte_loading_spinners_dist_Pulse_svelte_49_css_Pulse_svelte__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! !!../../css-loader/dist/cjs.js??ruleSet[1].rules[6].oneOf[1].use[1]!../../postcss-loader/dist/cjs.js??ruleSet[1].rules[6].oneOf[1].use[2]!../../svelte-loader/index.js?cssPath=D:/www/sipro-spa/node_modules/svelte-loading-spinners/dist/Pulse.svelte.49.css!./Pulse.svelte */ "./node_modules/css-loader/dist/cjs.js??ruleSet[1].rules[6].oneOf[1].use[1]!./node_modules/postcss-loader/dist/cjs.js??ruleSet[1].rules[6].oneOf[1].use[2]!./node_modules/svelte-loader/index.js?cssPath=D:/www/sipro-spa/node_modules/svelte-loading-spinners/dist/Pulse.svelte.49.css!./node_modules/svelte-loading-spinners/dist/Pulse.svelte");
+/* harmony import */ var _css_loader_dist_cjs_js_ruleSet_1_rules_6_oneOf_1_use_1_postcss_loader_dist_cjs_js_ruleSet_1_rules_6_oneOf_1_use_2_svelte_loader_index_js_cssPath_D_www_sipro_spa_node_modules_svelte_loading_spinners_dist_Pulse_svelte_44_css_Pulse_svelte__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! !!../../css-loader/dist/cjs.js??ruleSet[1].rules[6].oneOf[1].use[1]!../../postcss-loader/dist/cjs.js??ruleSet[1].rules[6].oneOf[1].use[2]!../../svelte-loader/index.js?cssPath=D:/www/sipro-spa/node_modules/svelte-loading-spinners/dist/Pulse.svelte.44.css!./Pulse.svelte */ "./node_modules/css-loader/dist/cjs.js??ruleSet[1].rules[6].oneOf[1].use[1]!./node_modules/postcss-loader/dist/cjs.js??ruleSet[1].rules[6].oneOf[1].use[2]!./node_modules/svelte-loader/index.js?cssPath=D:/www/sipro-spa/node_modules/svelte-loading-spinners/dist/Pulse.svelte.44.css!./node_modules/svelte-loading-spinners/dist/Pulse.svelte");
 
             
 
@@ -31964,17 +31964,17 @@ var options = {};
 options.insert = "head";
 options.singleton = false;
 
-var update = _style_loader_dist_runtime_injectStylesIntoStyleTag_js__WEBPACK_IMPORTED_MODULE_0___default()(_css_loader_dist_cjs_js_ruleSet_1_rules_6_oneOf_1_use_1_postcss_loader_dist_cjs_js_ruleSet_1_rules_6_oneOf_1_use_2_svelte_loader_index_js_cssPath_D_www_sipro_spa_node_modules_svelte_loading_spinners_dist_Pulse_svelte_49_css_Pulse_svelte__WEBPACK_IMPORTED_MODULE_1__["default"], options);
+var update = _style_loader_dist_runtime_injectStylesIntoStyleTag_js__WEBPACK_IMPORTED_MODULE_0___default()(_css_loader_dist_cjs_js_ruleSet_1_rules_6_oneOf_1_use_1_postcss_loader_dist_cjs_js_ruleSet_1_rules_6_oneOf_1_use_2_svelte_loader_index_js_cssPath_D_www_sipro_spa_node_modules_svelte_loading_spinners_dist_Pulse_svelte_44_css_Pulse_svelte__WEBPACK_IMPORTED_MODULE_1__["default"], options);
 
 
 
-/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (_css_loader_dist_cjs_js_ruleSet_1_rules_6_oneOf_1_use_1_postcss_loader_dist_cjs_js_ruleSet_1_rules_6_oneOf_1_use_2_svelte_loader_index_js_cssPath_D_www_sipro_spa_node_modules_svelte_loading_spinners_dist_Pulse_svelte_49_css_Pulse_svelte__WEBPACK_IMPORTED_MODULE_1__["default"].locals || {});
+/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (_css_loader_dist_cjs_js_ruleSet_1_rules_6_oneOf_1_use_1_postcss_loader_dist_cjs_js_ruleSet_1_rules_6_oneOf_1_use_2_svelte_loader_index_js_cssPath_D_www_sipro_spa_node_modules_svelte_loading_spinners_dist_Pulse_svelte_44_css_Pulse_svelte__WEBPACK_IMPORTED_MODULE_1__["default"].locals || {});
 
 /***/ }),
 
-/***/ "./node_modules/svelte-loading-spinners/dist/Rainbow.svelte.45.css!=!./node_modules/svelte-loader/index.js?cssPath=D:/www/sipro-spa/node_modules/svelte-loading-spinners/dist/Rainbow.svelte.45.css!./node_modules/svelte-loading-spinners/dist/Rainbow.svelte":
+/***/ "./node_modules/svelte-loading-spinners/dist/Rainbow.svelte.40.css!=!./node_modules/svelte-loader/index.js?cssPath=D:/www/sipro-spa/node_modules/svelte-loading-spinners/dist/Rainbow.svelte.40.css!./node_modules/svelte-loading-spinners/dist/Rainbow.svelte":
 /*!*********************************************************************************************************************************************************************************************************************************************************************!*\
-  !*** ./node_modules/svelte-loading-spinners/dist/Rainbow.svelte.45.css!=!./node_modules/svelte-loader/index.js?cssPath=D:/www/sipro-spa/node_modules/svelte-loading-spinners/dist/Rainbow.svelte.45.css!./node_modules/svelte-loading-spinners/dist/Rainbow.svelte ***!
+  !*** ./node_modules/svelte-loading-spinners/dist/Rainbow.svelte.40.css!=!./node_modules/svelte-loader/index.js?cssPath=D:/www/sipro-spa/node_modules/svelte-loading-spinners/dist/Rainbow.svelte.40.css!./node_modules/svelte-loading-spinners/dist/Rainbow.svelte ***!
   \*********************************************************************************************************************************************************************************************************************************************************************/
 /***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
 
@@ -31985,7 +31985,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ });
 /* harmony import */ var _style_loader_dist_runtime_injectStylesIntoStyleTag_js__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! !../../style-loader/dist/runtime/injectStylesIntoStyleTag.js */ "./node_modules/style-loader/dist/runtime/injectStylesIntoStyleTag.js");
 /* harmony import */ var _style_loader_dist_runtime_injectStylesIntoStyleTag_js__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_style_loader_dist_runtime_injectStylesIntoStyleTag_js__WEBPACK_IMPORTED_MODULE_0__);
-/* harmony import */ var _css_loader_dist_cjs_js_ruleSet_1_rules_6_oneOf_1_use_1_postcss_loader_dist_cjs_js_ruleSet_1_rules_6_oneOf_1_use_2_svelte_loader_index_js_cssPath_D_www_sipro_spa_node_modules_svelte_loading_spinners_dist_Rainbow_svelte_45_css_Rainbow_svelte__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! !!../../css-loader/dist/cjs.js??ruleSet[1].rules[6].oneOf[1].use[1]!../../postcss-loader/dist/cjs.js??ruleSet[1].rules[6].oneOf[1].use[2]!../../svelte-loader/index.js?cssPath=D:/www/sipro-spa/node_modules/svelte-loading-spinners/dist/Rainbow.svelte.45.css!./Rainbow.svelte */ "./node_modules/css-loader/dist/cjs.js??ruleSet[1].rules[6].oneOf[1].use[1]!./node_modules/postcss-loader/dist/cjs.js??ruleSet[1].rules[6].oneOf[1].use[2]!./node_modules/svelte-loader/index.js?cssPath=D:/www/sipro-spa/node_modules/svelte-loading-spinners/dist/Rainbow.svelte.45.css!./node_modules/svelte-loading-spinners/dist/Rainbow.svelte");
+/* harmony import */ var _css_loader_dist_cjs_js_ruleSet_1_rules_6_oneOf_1_use_1_postcss_loader_dist_cjs_js_ruleSet_1_rules_6_oneOf_1_use_2_svelte_loader_index_js_cssPath_D_www_sipro_spa_node_modules_svelte_loading_spinners_dist_Rainbow_svelte_40_css_Rainbow_svelte__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! !!../../css-loader/dist/cjs.js??ruleSet[1].rules[6].oneOf[1].use[1]!../../postcss-loader/dist/cjs.js??ruleSet[1].rules[6].oneOf[1].use[2]!../../svelte-loader/index.js?cssPath=D:/www/sipro-spa/node_modules/svelte-loading-spinners/dist/Rainbow.svelte.40.css!./Rainbow.svelte */ "./node_modules/css-loader/dist/cjs.js??ruleSet[1].rules[6].oneOf[1].use[1]!./node_modules/postcss-loader/dist/cjs.js??ruleSet[1].rules[6].oneOf[1].use[2]!./node_modules/svelte-loader/index.js?cssPath=D:/www/sipro-spa/node_modules/svelte-loading-spinners/dist/Rainbow.svelte.40.css!./node_modules/svelte-loading-spinners/dist/Rainbow.svelte");
 
             
 
@@ -31994,17 +31994,17 @@ var options = {};
 options.insert = "head";
 options.singleton = false;
 
-var update = _style_loader_dist_runtime_injectStylesIntoStyleTag_js__WEBPACK_IMPORTED_MODULE_0___default()(_css_loader_dist_cjs_js_ruleSet_1_rules_6_oneOf_1_use_1_postcss_loader_dist_cjs_js_ruleSet_1_rules_6_oneOf_1_use_2_svelte_loader_index_js_cssPath_D_www_sipro_spa_node_modules_svelte_loading_spinners_dist_Rainbow_svelte_45_css_Rainbow_svelte__WEBPACK_IMPORTED_MODULE_1__["default"], options);
+var update = _style_loader_dist_runtime_injectStylesIntoStyleTag_js__WEBPACK_IMPORTED_MODULE_0___default()(_css_loader_dist_cjs_js_ruleSet_1_rules_6_oneOf_1_use_1_postcss_loader_dist_cjs_js_ruleSet_1_rules_6_oneOf_1_use_2_svelte_loader_index_js_cssPath_D_www_sipro_spa_node_modules_svelte_loading_spinners_dist_Rainbow_svelte_40_css_Rainbow_svelte__WEBPACK_IMPORTED_MODULE_1__["default"], options);
 
 
 
-/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (_css_loader_dist_cjs_js_ruleSet_1_rules_6_oneOf_1_use_1_postcss_loader_dist_cjs_js_ruleSet_1_rules_6_oneOf_1_use_2_svelte_loader_index_js_cssPath_D_www_sipro_spa_node_modules_svelte_loading_spinners_dist_Rainbow_svelte_45_css_Rainbow_svelte__WEBPACK_IMPORTED_MODULE_1__["default"].locals || {});
+/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (_css_loader_dist_cjs_js_ruleSet_1_rules_6_oneOf_1_use_1_postcss_loader_dist_cjs_js_ruleSet_1_rules_6_oneOf_1_use_2_svelte_loader_index_js_cssPath_D_www_sipro_spa_node_modules_svelte_loading_spinners_dist_Rainbow_svelte_40_css_Rainbow_svelte__WEBPACK_IMPORTED_MODULE_1__["default"].locals || {});
 
 /***/ }),
 
-/***/ "./node_modules/svelte-loading-spinners/dist/RingLoader.svelte.47.css!=!./node_modules/svelte-loader/index.js?cssPath=D:/www/sipro-spa/node_modules/svelte-loading-spinners/dist/RingLoader.svelte.47.css!./node_modules/svelte-loading-spinners/dist/RingLoader.svelte":
+/***/ "./node_modules/svelte-loading-spinners/dist/RingLoader.svelte.41.css!=!./node_modules/svelte-loader/index.js?cssPath=D:/www/sipro-spa/node_modules/svelte-loading-spinners/dist/RingLoader.svelte.41.css!./node_modules/svelte-loading-spinners/dist/RingLoader.svelte":
 /*!******************************************************************************************************************************************************************************************************************************************************************************!*\
-  !*** ./node_modules/svelte-loading-spinners/dist/RingLoader.svelte.47.css!=!./node_modules/svelte-loader/index.js?cssPath=D:/www/sipro-spa/node_modules/svelte-loading-spinners/dist/RingLoader.svelte.47.css!./node_modules/svelte-loading-spinners/dist/RingLoader.svelte ***!
+  !*** ./node_modules/svelte-loading-spinners/dist/RingLoader.svelte.41.css!=!./node_modules/svelte-loader/index.js?cssPath=D:/www/sipro-spa/node_modules/svelte-loading-spinners/dist/RingLoader.svelte.41.css!./node_modules/svelte-loading-spinners/dist/RingLoader.svelte ***!
   \******************************************************************************************************************************************************************************************************************************************************************************/
 /***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
 
@@ -32015,7 +32015,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ });
 /* harmony import */ var _style_loader_dist_runtime_injectStylesIntoStyleTag_js__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! !../../style-loader/dist/runtime/injectStylesIntoStyleTag.js */ "./node_modules/style-loader/dist/runtime/injectStylesIntoStyleTag.js");
 /* harmony import */ var _style_loader_dist_runtime_injectStylesIntoStyleTag_js__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_style_loader_dist_runtime_injectStylesIntoStyleTag_js__WEBPACK_IMPORTED_MODULE_0__);
-/* harmony import */ var _css_loader_dist_cjs_js_ruleSet_1_rules_6_oneOf_1_use_1_postcss_loader_dist_cjs_js_ruleSet_1_rules_6_oneOf_1_use_2_svelte_loader_index_js_cssPath_D_www_sipro_spa_node_modules_svelte_loading_spinners_dist_RingLoader_svelte_47_css_RingLoader_svelte__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! !!../../css-loader/dist/cjs.js??ruleSet[1].rules[6].oneOf[1].use[1]!../../postcss-loader/dist/cjs.js??ruleSet[1].rules[6].oneOf[1].use[2]!../../svelte-loader/index.js?cssPath=D:/www/sipro-spa/node_modules/svelte-loading-spinners/dist/RingLoader.svelte.47.css!./RingLoader.svelte */ "./node_modules/css-loader/dist/cjs.js??ruleSet[1].rules[6].oneOf[1].use[1]!./node_modules/postcss-loader/dist/cjs.js??ruleSet[1].rules[6].oneOf[1].use[2]!./node_modules/svelte-loader/index.js?cssPath=D:/www/sipro-spa/node_modules/svelte-loading-spinners/dist/RingLoader.svelte.47.css!./node_modules/svelte-loading-spinners/dist/RingLoader.svelte");
+/* harmony import */ var _css_loader_dist_cjs_js_ruleSet_1_rules_6_oneOf_1_use_1_postcss_loader_dist_cjs_js_ruleSet_1_rules_6_oneOf_1_use_2_svelte_loader_index_js_cssPath_D_www_sipro_spa_node_modules_svelte_loading_spinners_dist_RingLoader_svelte_41_css_RingLoader_svelte__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! !!../../css-loader/dist/cjs.js??ruleSet[1].rules[6].oneOf[1].use[1]!../../postcss-loader/dist/cjs.js??ruleSet[1].rules[6].oneOf[1].use[2]!../../svelte-loader/index.js?cssPath=D:/www/sipro-spa/node_modules/svelte-loading-spinners/dist/RingLoader.svelte.41.css!./RingLoader.svelte */ "./node_modules/css-loader/dist/cjs.js??ruleSet[1].rules[6].oneOf[1].use[1]!./node_modules/postcss-loader/dist/cjs.js??ruleSet[1].rules[6].oneOf[1].use[2]!./node_modules/svelte-loader/index.js?cssPath=D:/www/sipro-spa/node_modules/svelte-loading-spinners/dist/RingLoader.svelte.41.css!./node_modules/svelte-loading-spinners/dist/RingLoader.svelte");
 
             
 
@@ -32024,17 +32024,17 @@ var options = {};
 options.insert = "head";
 options.singleton = false;
 
-var update = _style_loader_dist_runtime_injectStylesIntoStyleTag_js__WEBPACK_IMPORTED_MODULE_0___default()(_css_loader_dist_cjs_js_ruleSet_1_rules_6_oneOf_1_use_1_postcss_loader_dist_cjs_js_ruleSet_1_rules_6_oneOf_1_use_2_svelte_loader_index_js_cssPath_D_www_sipro_spa_node_modules_svelte_loading_spinners_dist_RingLoader_svelte_47_css_RingLoader_svelte__WEBPACK_IMPORTED_MODULE_1__["default"], options);
+var update = _style_loader_dist_runtime_injectStylesIntoStyleTag_js__WEBPACK_IMPORTED_MODULE_0___default()(_css_loader_dist_cjs_js_ruleSet_1_rules_6_oneOf_1_use_1_postcss_loader_dist_cjs_js_ruleSet_1_rules_6_oneOf_1_use_2_svelte_loader_index_js_cssPath_D_www_sipro_spa_node_modules_svelte_loading_spinners_dist_RingLoader_svelte_41_css_RingLoader_svelte__WEBPACK_IMPORTED_MODULE_1__["default"], options);
 
 
 
-/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (_css_loader_dist_cjs_js_ruleSet_1_rules_6_oneOf_1_use_1_postcss_loader_dist_cjs_js_ruleSet_1_rules_6_oneOf_1_use_2_svelte_loader_index_js_cssPath_D_www_sipro_spa_node_modules_svelte_loading_spinners_dist_RingLoader_svelte_47_css_RingLoader_svelte__WEBPACK_IMPORTED_MODULE_1__["default"].locals || {});
+/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (_css_loader_dist_cjs_js_ruleSet_1_rules_6_oneOf_1_use_1_postcss_loader_dist_cjs_js_ruleSet_1_rules_6_oneOf_1_use_2_svelte_loader_index_js_cssPath_D_www_sipro_spa_node_modules_svelte_loading_spinners_dist_RingLoader_svelte_41_css_RingLoader_svelte__WEBPACK_IMPORTED_MODULE_1__["default"].locals || {});
 
 /***/ }),
 
-/***/ "./node_modules/svelte-loading-spinners/dist/ScaleOut.svelte.34.css!=!./node_modules/svelte-loader/index.js?cssPath=D:/www/sipro-spa/node_modules/svelte-loading-spinners/dist/ScaleOut.svelte.34.css!./node_modules/svelte-loading-spinners/dist/ScaleOut.svelte":
+/***/ "./node_modules/svelte-loading-spinners/dist/ScaleOut.svelte.37.css!=!./node_modules/svelte-loader/index.js?cssPath=D:/www/sipro-spa/node_modules/svelte-loading-spinners/dist/ScaleOut.svelte.37.css!./node_modules/svelte-loading-spinners/dist/ScaleOut.svelte":
 /*!************************************************************************************************************************************************************************************************************************************************************************!*\
-  !*** ./node_modules/svelte-loading-spinners/dist/ScaleOut.svelte.34.css!=!./node_modules/svelte-loader/index.js?cssPath=D:/www/sipro-spa/node_modules/svelte-loading-spinners/dist/ScaleOut.svelte.34.css!./node_modules/svelte-loading-spinners/dist/ScaleOut.svelte ***!
+  !*** ./node_modules/svelte-loading-spinners/dist/ScaleOut.svelte.37.css!=!./node_modules/svelte-loader/index.js?cssPath=D:/www/sipro-spa/node_modules/svelte-loading-spinners/dist/ScaleOut.svelte.37.css!./node_modules/svelte-loading-spinners/dist/ScaleOut.svelte ***!
   \************************************************************************************************************************************************************************************************************************************************************************/
 /***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
 
@@ -32045,7 +32045,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ });
 /* harmony import */ var _style_loader_dist_runtime_injectStylesIntoStyleTag_js__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! !../../style-loader/dist/runtime/injectStylesIntoStyleTag.js */ "./node_modules/style-loader/dist/runtime/injectStylesIntoStyleTag.js");
 /* harmony import */ var _style_loader_dist_runtime_injectStylesIntoStyleTag_js__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_style_loader_dist_runtime_injectStylesIntoStyleTag_js__WEBPACK_IMPORTED_MODULE_0__);
-/* harmony import */ var _css_loader_dist_cjs_js_ruleSet_1_rules_6_oneOf_1_use_1_postcss_loader_dist_cjs_js_ruleSet_1_rules_6_oneOf_1_use_2_svelte_loader_index_js_cssPath_D_www_sipro_spa_node_modules_svelte_loading_spinners_dist_ScaleOut_svelte_34_css_ScaleOut_svelte__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! !!../../css-loader/dist/cjs.js??ruleSet[1].rules[6].oneOf[1].use[1]!../../postcss-loader/dist/cjs.js??ruleSet[1].rules[6].oneOf[1].use[2]!../../svelte-loader/index.js?cssPath=D:/www/sipro-spa/node_modules/svelte-loading-spinners/dist/ScaleOut.svelte.34.css!./ScaleOut.svelte */ "./node_modules/css-loader/dist/cjs.js??ruleSet[1].rules[6].oneOf[1].use[1]!./node_modules/postcss-loader/dist/cjs.js??ruleSet[1].rules[6].oneOf[1].use[2]!./node_modules/svelte-loader/index.js?cssPath=D:/www/sipro-spa/node_modules/svelte-loading-spinners/dist/ScaleOut.svelte.34.css!./node_modules/svelte-loading-spinners/dist/ScaleOut.svelte");
+/* harmony import */ var _css_loader_dist_cjs_js_ruleSet_1_rules_6_oneOf_1_use_1_postcss_loader_dist_cjs_js_ruleSet_1_rules_6_oneOf_1_use_2_svelte_loader_index_js_cssPath_D_www_sipro_spa_node_modules_svelte_loading_spinners_dist_ScaleOut_svelte_37_css_ScaleOut_svelte__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! !!../../css-loader/dist/cjs.js??ruleSet[1].rules[6].oneOf[1].use[1]!../../postcss-loader/dist/cjs.js??ruleSet[1].rules[6].oneOf[1].use[2]!../../svelte-loader/index.js?cssPath=D:/www/sipro-spa/node_modules/svelte-loading-spinners/dist/ScaleOut.svelte.37.css!./ScaleOut.svelte */ "./node_modules/css-loader/dist/cjs.js??ruleSet[1].rules[6].oneOf[1].use[1]!./node_modules/postcss-loader/dist/cjs.js??ruleSet[1].rules[6].oneOf[1].use[2]!./node_modules/svelte-loader/index.js?cssPath=D:/www/sipro-spa/node_modules/svelte-loading-spinners/dist/ScaleOut.svelte.37.css!./node_modules/svelte-loading-spinners/dist/ScaleOut.svelte");
 
             
 
@@ -32054,11 +32054,11 @@ var options = {};
 options.insert = "head";
 options.singleton = false;
 
-var update = _style_loader_dist_runtime_injectStylesIntoStyleTag_js__WEBPACK_IMPORTED_MODULE_0___default()(_css_loader_dist_cjs_js_ruleSet_1_rules_6_oneOf_1_use_1_postcss_loader_dist_cjs_js_ruleSet_1_rules_6_oneOf_1_use_2_svelte_loader_index_js_cssPath_D_www_sipro_spa_node_modules_svelte_loading_spinners_dist_ScaleOut_svelte_34_css_ScaleOut_svelte__WEBPACK_IMPORTED_MODULE_1__["default"], options);
+var update = _style_loader_dist_runtime_injectStylesIntoStyleTag_js__WEBPACK_IMPORTED_MODULE_0___default()(_css_loader_dist_cjs_js_ruleSet_1_rules_6_oneOf_1_use_1_postcss_loader_dist_cjs_js_ruleSet_1_rules_6_oneOf_1_use_2_svelte_loader_index_js_cssPath_D_www_sipro_spa_node_modules_svelte_loading_spinners_dist_ScaleOut_svelte_37_css_ScaleOut_svelte__WEBPACK_IMPORTED_MODULE_1__["default"], options);
 
 
 
-/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (_css_loader_dist_cjs_js_ruleSet_1_rules_6_oneOf_1_use_1_postcss_loader_dist_cjs_js_ruleSet_1_rules_6_oneOf_1_use_2_svelte_loader_index_js_cssPath_D_www_sipro_spa_node_modules_svelte_loading_spinners_dist_ScaleOut_svelte_34_css_ScaleOut_svelte__WEBPACK_IMPORTED_MODULE_1__["default"].locals || {});
+/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (_css_loader_dist_cjs_js_ruleSet_1_rules_6_oneOf_1_use_1_postcss_loader_dist_cjs_js_ruleSet_1_rules_6_oneOf_1_use_2_svelte_loader_index_js_cssPath_D_www_sipro_spa_node_modules_svelte_loading_spinners_dist_ScaleOut_svelte_37_css_ScaleOut_svelte__WEBPACK_IMPORTED_MODULE_1__["default"].locals || {});
 
 /***/ }),
 
@@ -32122,9 +32122,9 @@ var update = _style_loader_dist_runtime_injectStylesIntoStyleTag_js__WEBPACK_IMP
 
 /***/ }),
 
-/***/ "./node_modules/svelte-loading-spinners/dist/Square.svelte.51.css!=!./node_modules/svelte-loader/index.js?cssPath=D:/www/sipro-spa/node_modules/svelte-loading-spinners/dist/Square.svelte.51.css!./node_modules/svelte-loading-spinners/dist/Square.svelte":
+/***/ "./node_modules/svelte-loading-spinners/dist/Square.svelte.49.css!=!./node_modules/svelte-loader/index.js?cssPath=D:/www/sipro-spa/node_modules/svelte-loading-spinners/dist/Square.svelte.49.css!./node_modules/svelte-loading-spinners/dist/Square.svelte":
 /*!******************************************************************************************************************************************************************************************************************************************************************!*\
-  !*** ./node_modules/svelte-loading-spinners/dist/Square.svelte.51.css!=!./node_modules/svelte-loader/index.js?cssPath=D:/www/sipro-spa/node_modules/svelte-loading-spinners/dist/Square.svelte.51.css!./node_modules/svelte-loading-spinners/dist/Square.svelte ***!
+  !*** ./node_modules/svelte-loading-spinners/dist/Square.svelte.49.css!=!./node_modules/svelte-loader/index.js?cssPath=D:/www/sipro-spa/node_modules/svelte-loading-spinners/dist/Square.svelte.49.css!./node_modules/svelte-loading-spinners/dist/Square.svelte ***!
   \******************************************************************************************************************************************************************************************************************************************************************/
 /***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
 
@@ -32135,7 +32135,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ });
 /* harmony import */ var _style_loader_dist_runtime_injectStylesIntoStyleTag_js__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! !../../style-loader/dist/runtime/injectStylesIntoStyleTag.js */ "./node_modules/style-loader/dist/runtime/injectStylesIntoStyleTag.js");
 /* harmony import */ var _style_loader_dist_runtime_injectStylesIntoStyleTag_js__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_style_loader_dist_runtime_injectStylesIntoStyleTag_js__WEBPACK_IMPORTED_MODULE_0__);
-/* harmony import */ var _css_loader_dist_cjs_js_ruleSet_1_rules_6_oneOf_1_use_1_postcss_loader_dist_cjs_js_ruleSet_1_rules_6_oneOf_1_use_2_svelte_loader_index_js_cssPath_D_www_sipro_spa_node_modules_svelte_loading_spinners_dist_Square_svelte_51_css_Square_svelte__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! !!../../css-loader/dist/cjs.js??ruleSet[1].rules[6].oneOf[1].use[1]!../../postcss-loader/dist/cjs.js??ruleSet[1].rules[6].oneOf[1].use[2]!../../svelte-loader/index.js?cssPath=D:/www/sipro-spa/node_modules/svelte-loading-spinners/dist/Square.svelte.51.css!./Square.svelte */ "./node_modules/css-loader/dist/cjs.js??ruleSet[1].rules[6].oneOf[1].use[1]!./node_modules/postcss-loader/dist/cjs.js??ruleSet[1].rules[6].oneOf[1].use[2]!./node_modules/svelte-loader/index.js?cssPath=D:/www/sipro-spa/node_modules/svelte-loading-spinners/dist/Square.svelte.51.css!./node_modules/svelte-loading-spinners/dist/Square.svelte");
+/* harmony import */ var _css_loader_dist_cjs_js_ruleSet_1_rules_6_oneOf_1_use_1_postcss_loader_dist_cjs_js_ruleSet_1_rules_6_oneOf_1_use_2_svelte_loader_index_js_cssPath_D_www_sipro_spa_node_modules_svelte_loading_spinners_dist_Square_svelte_49_css_Square_svelte__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! !!../../css-loader/dist/cjs.js??ruleSet[1].rules[6].oneOf[1].use[1]!../../postcss-loader/dist/cjs.js??ruleSet[1].rules[6].oneOf[1].use[2]!../../svelte-loader/index.js?cssPath=D:/www/sipro-spa/node_modules/svelte-loading-spinners/dist/Square.svelte.49.css!./Square.svelte */ "./node_modules/css-loader/dist/cjs.js??ruleSet[1].rules[6].oneOf[1].use[1]!./node_modules/postcss-loader/dist/cjs.js??ruleSet[1].rules[6].oneOf[1].use[2]!./node_modules/svelte-loader/index.js?cssPath=D:/www/sipro-spa/node_modules/svelte-loading-spinners/dist/Square.svelte.49.css!./node_modules/svelte-loading-spinners/dist/Square.svelte");
 
             
 
@@ -32144,17 +32144,17 @@ var options = {};
 options.insert = "head";
 options.singleton = false;
 
-var update = _style_loader_dist_runtime_injectStylesIntoStyleTag_js__WEBPACK_IMPORTED_MODULE_0___default()(_css_loader_dist_cjs_js_ruleSet_1_rules_6_oneOf_1_use_1_postcss_loader_dist_cjs_js_ruleSet_1_rules_6_oneOf_1_use_2_svelte_loader_index_js_cssPath_D_www_sipro_spa_node_modules_svelte_loading_spinners_dist_Square_svelte_51_css_Square_svelte__WEBPACK_IMPORTED_MODULE_1__["default"], options);
+var update = _style_loader_dist_runtime_injectStylesIntoStyleTag_js__WEBPACK_IMPORTED_MODULE_0___default()(_css_loader_dist_cjs_js_ruleSet_1_rules_6_oneOf_1_use_1_postcss_loader_dist_cjs_js_ruleSet_1_rules_6_oneOf_1_use_2_svelte_loader_index_js_cssPath_D_www_sipro_spa_node_modules_svelte_loading_spinners_dist_Square_svelte_49_css_Square_svelte__WEBPACK_IMPORTED_MODULE_1__["default"], options);
 
 
 
-/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (_css_loader_dist_cjs_js_ruleSet_1_rules_6_oneOf_1_use_1_postcss_loader_dist_cjs_js_ruleSet_1_rules_6_oneOf_1_use_2_svelte_loader_index_js_cssPath_D_www_sipro_spa_node_modules_svelte_loading_spinners_dist_Square_svelte_51_css_Square_svelte__WEBPACK_IMPORTED_MODULE_1__["default"].locals || {});
+/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (_css_loader_dist_cjs_js_ruleSet_1_rules_6_oneOf_1_use_1_postcss_loader_dist_cjs_js_ruleSet_1_rules_6_oneOf_1_use_2_svelte_loader_index_js_cssPath_D_www_sipro_spa_node_modules_svelte_loading_spinners_dist_Square_svelte_49_css_Square_svelte__WEBPACK_IMPORTED_MODULE_1__["default"].locals || {});
 
 /***/ }),
 
-/***/ "./node_modules/svelte-loading-spinners/dist/Stretch.svelte.37.css!=!./node_modules/svelte-loader/index.js?cssPath=D:/www/sipro-spa/node_modules/svelte-loading-spinners/dist/Stretch.svelte.37.css!./node_modules/svelte-loading-spinners/dist/Stretch.svelte":
+/***/ "./node_modules/svelte-loading-spinners/dist/Stretch.svelte.38.css!=!./node_modules/svelte-loader/index.js?cssPath=D:/www/sipro-spa/node_modules/svelte-loading-spinners/dist/Stretch.svelte.38.css!./node_modules/svelte-loading-spinners/dist/Stretch.svelte":
 /*!*********************************************************************************************************************************************************************************************************************************************************************!*\
-  !*** ./node_modules/svelte-loading-spinners/dist/Stretch.svelte.37.css!=!./node_modules/svelte-loader/index.js?cssPath=D:/www/sipro-spa/node_modules/svelte-loading-spinners/dist/Stretch.svelte.37.css!./node_modules/svelte-loading-spinners/dist/Stretch.svelte ***!
+  !*** ./node_modules/svelte-loading-spinners/dist/Stretch.svelte.38.css!=!./node_modules/svelte-loader/index.js?cssPath=D:/www/sipro-spa/node_modules/svelte-loading-spinners/dist/Stretch.svelte.38.css!./node_modules/svelte-loading-spinners/dist/Stretch.svelte ***!
   \*********************************************************************************************************************************************************************************************************************************************************************/
 /***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
 
@@ -32165,7 +32165,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ });
 /* harmony import */ var _style_loader_dist_runtime_injectStylesIntoStyleTag_js__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! !../../style-loader/dist/runtime/injectStylesIntoStyleTag.js */ "./node_modules/style-loader/dist/runtime/injectStylesIntoStyleTag.js");
 /* harmony import */ var _style_loader_dist_runtime_injectStylesIntoStyleTag_js__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_style_loader_dist_runtime_injectStylesIntoStyleTag_js__WEBPACK_IMPORTED_MODULE_0__);
-/* harmony import */ var _css_loader_dist_cjs_js_ruleSet_1_rules_6_oneOf_1_use_1_postcss_loader_dist_cjs_js_ruleSet_1_rules_6_oneOf_1_use_2_svelte_loader_index_js_cssPath_D_www_sipro_spa_node_modules_svelte_loading_spinners_dist_Stretch_svelte_37_css_Stretch_svelte__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! !!../../css-loader/dist/cjs.js??ruleSet[1].rules[6].oneOf[1].use[1]!../../postcss-loader/dist/cjs.js??ruleSet[1].rules[6].oneOf[1].use[2]!../../svelte-loader/index.js?cssPath=D:/www/sipro-spa/node_modules/svelte-loading-spinners/dist/Stretch.svelte.37.css!./Stretch.svelte */ "./node_modules/css-loader/dist/cjs.js??ruleSet[1].rules[6].oneOf[1].use[1]!./node_modules/postcss-loader/dist/cjs.js??ruleSet[1].rules[6].oneOf[1].use[2]!./node_modules/svelte-loader/index.js?cssPath=D:/www/sipro-spa/node_modules/svelte-loading-spinners/dist/Stretch.svelte.37.css!./node_modules/svelte-loading-spinners/dist/Stretch.svelte");
+/* harmony import */ var _css_loader_dist_cjs_js_ruleSet_1_rules_6_oneOf_1_use_1_postcss_loader_dist_cjs_js_ruleSet_1_rules_6_oneOf_1_use_2_svelte_loader_index_js_cssPath_D_www_sipro_spa_node_modules_svelte_loading_spinners_dist_Stretch_svelte_38_css_Stretch_svelte__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! !!../../css-loader/dist/cjs.js??ruleSet[1].rules[6].oneOf[1].use[1]!../../postcss-loader/dist/cjs.js??ruleSet[1].rules[6].oneOf[1].use[2]!../../svelte-loader/index.js?cssPath=D:/www/sipro-spa/node_modules/svelte-loading-spinners/dist/Stretch.svelte.38.css!./Stretch.svelte */ "./node_modules/css-loader/dist/cjs.js??ruleSet[1].rules[6].oneOf[1].use[1]!./node_modules/postcss-loader/dist/cjs.js??ruleSet[1].rules[6].oneOf[1].use[2]!./node_modules/svelte-loader/index.js?cssPath=D:/www/sipro-spa/node_modules/svelte-loading-spinners/dist/Stretch.svelte.38.css!./node_modules/svelte-loading-spinners/dist/Stretch.svelte");
 
             
 
@@ -32174,17 +32174,17 @@ var options = {};
 options.insert = "head";
 options.singleton = false;
 
-var update = _style_loader_dist_runtime_injectStylesIntoStyleTag_js__WEBPACK_IMPORTED_MODULE_0___default()(_css_loader_dist_cjs_js_ruleSet_1_rules_6_oneOf_1_use_1_postcss_loader_dist_cjs_js_ruleSet_1_rules_6_oneOf_1_use_2_svelte_loader_index_js_cssPath_D_www_sipro_spa_node_modules_svelte_loading_spinners_dist_Stretch_svelte_37_css_Stretch_svelte__WEBPACK_IMPORTED_MODULE_1__["default"], options);
+var update = _style_loader_dist_runtime_injectStylesIntoStyleTag_js__WEBPACK_IMPORTED_MODULE_0___default()(_css_loader_dist_cjs_js_ruleSet_1_rules_6_oneOf_1_use_1_postcss_loader_dist_cjs_js_ruleSet_1_rules_6_oneOf_1_use_2_svelte_loader_index_js_cssPath_D_www_sipro_spa_node_modules_svelte_loading_spinners_dist_Stretch_svelte_38_css_Stretch_svelte__WEBPACK_IMPORTED_MODULE_1__["default"], options);
 
 
 
-/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (_css_loader_dist_cjs_js_ruleSet_1_rules_6_oneOf_1_use_1_postcss_loader_dist_cjs_js_ruleSet_1_rules_6_oneOf_1_use_2_svelte_loader_index_js_cssPath_D_www_sipro_spa_node_modules_svelte_loading_spinners_dist_Stretch_svelte_37_css_Stretch_svelte__WEBPACK_IMPORTED_MODULE_1__["default"].locals || {});
+/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (_css_loader_dist_cjs_js_ruleSet_1_rules_6_oneOf_1_use_1_postcss_loader_dist_cjs_js_ruleSet_1_rules_6_oneOf_1_use_2_svelte_loader_index_js_cssPath_D_www_sipro_spa_node_modules_svelte_loading_spinners_dist_Stretch_svelte_38_css_Stretch_svelte__WEBPACK_IMPORTED_MODULE_1__["default"].locals || {});
 
 /***/ }),
 
-/***/ "./node_modules/svelte-loading-spinners/dist/SyncLoader.svelte.42.css!=!./node_modules/svelte-loader/index.js?cssPath=D:/www/sipro-spa/node_modules/svelte-loading-spinners/dist/SyncLoader.svelte.42.css!./node_modules/svelte-loading-spinners/dist/SyncLoader.svelte":
+/***/ "./node_modules/svelte-loading-spinners/dist/SyncLoader.svelte.46.css!=!./node_modules/svelte-loader/index.js?cssPath=D:/www/sipro-spa/node_modules/svelte-loading-spinners/dist/SyncLoader.svelte.46.css!./node_modules/svelte-loading-spinners/dist/SyncLoader.svelte":
 /*!******************************************************************************************************************************************************************************************************************************************************************************!*\
-  !*** ./node_modules/svelte-loading-spinners/dist/SyncLoader.svelte.42.css!=!./node_modules/svelte-loader/index.js?cssPath=D:/www/sipro-spa/node_modules/svelte-loading-spinners/dist/SyncLoader.svelte.42.css!./node_modules/svelte-loading-spinners/dist/SyncLoader.svelte ***!
+  !*** ./node_modules/svelte-loading-spinners/dist/SyncLoader.svelte.46.css!=!./node_modules/svelte-loader/index.js?cssPath=D:/www/sipro-spa/node_modules/svelte-loading-spinners/dist/SyncLoader.svelte.46.css!./node_modules/svelte-loading-spinners/dist/SyncLoader.svelte ***!
   \******************************************************************************************************************************************************************************************************************************************************************************/
 /***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
 
@@ -32195,7 +32195,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ });
 /* harmony import */ var _style_loader_dist_runtime_injectStylesIntoStyleTag_js__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! !../../style-loader/dist/runtime/injectStylesIntoStyleTag.js */ "./node_modules/style-loader/dist/runtime/injectStylesIntoStyleTag.js");
 /* harmony import */ var _style_loader_dist_runtime_injectStylesIntoStyleTag_js__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_style_loader_dist_runtime_injectStylesIntoStyleTag_js__WEBPACK_IMPORTED_MODULE_0__);
-/* harmony import */ var _css_loader_dist_cjs_js_ruleSet_1_rules_6_oneOf_1_use_1_postcss_loader_dist_cjs_js_ruleSet_1_rules_6_oneOf_1_use_2_svelte_loader_index_js_cssPath_D_www_sipro_spa_node_modules_svelte_loading_spinners_dist_SyncLoader_svelte_42_css_SyncLoader_svelte__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! !!../../css-loader/dist/cjs.js??ruleSet[1].rules[6].oneOf[1].use[1]!../../postcss-loader/dist/cjs.js??ruleSet[1].rules[6].oneOf[1].use[2]!../../svelte-loader/index.js?cssPath=D:/www/sipro-spa/node_modules/svelte-loading-spinners/dist/SyncLoader.svelte.42.css!./SyncLoader.svelte */ "./node_modules/css-loader/dist/cjs.js??ruleSet[1].rules[6].oneOf[1].use[1]!./node_modules/postcss-loader/dist/cjs.js??ruleSet[1].rules[6].oneOf[1].use[2]!./node_modules/svelte-loader/index.js?cssPath=D:/www/sipro-spa/node_modules/svelte-loading-spinners/dist/SyncLoader.svelte.42.css!./node_modules/svelte-loading-spinners/dist/SyncLoader.svelte");
+/* harmony import */ var _css_loader_dist_cjs_js_ruleSet_1_rules_6_oneOf_1_use_1_postcss_loader_dist_cjs_js_ruleSet_1_rules_6_oneOf_1_use_2_svelte_loader_index_js_cssPath_D_www_sipro_spa_node_modules_svelte_loading_spinners_dist_SyncLoader_svelte_46_css_SyncLoader_svelte__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! !!../../css-loader/dist/cjs.js??ruleSet[1].rules[6].oneOf[1].use[1]!../../postcss-loader/dist/cjs.js??ruleSet[1].rules[6].oneOf[1].use[2]!../../svelte-loader/index.js?cssPath=D:/www/sipro-spa/node_modules/svelte-loading-spinners/dist/SyncLoader.svelte.46.css!./SyncLoader.svelte */ "./node_modules/css-loader/dist/cjs.js??ruleSet[1].rules[6].oneOf[1].use[1]!./node_modules/postcss-loader/dist/cjs.js??ruleSet[1].rules[6].oneOf[1].use[2]!./node_modules/svelte-loader/index.js?cssPath=D:/www/sipro-spa/node_modules/svelte-loading-spinners/dist/SyncLoader.svelte.46.css!./node_modules/svelte-loading-spinners/dist/SyncLoader.svelte");
 
             
 
@@ -32204,17 +32204,17 @@ var options = {};
 options.insert = "head";
 options.singleton = false;
 
-var update = _style_loader_dist_runtime_injectStylesIntoStyleTag_js__WEBPACK_IMPORTED_MODULE_0___default()(_css_loader_dist_cjs_js_ruleSet_1_rules_6_oneOf_1_use_1_postcss_loader_dist_cjs_js_ruleSet_1_rules_6_oneOf_1_use_2_svelte_loader_index_js_cssPath_D_www_sipro_spa_node_modules_svelte_loading_spinners_dist_SyncLoader_svelte_42_css_SyncLoader_svelte__WEBPACK_IMPORTED_MODULE_1__["default"], options);
+var update = _style_loader_dist_runtime_injectStylesIntoStyleTag_js__WEBPACK_IMPORTED_MODULE_0___default()(_css_loader_dist_cjs_js_ruleSet_1_rules_6_oneOf_1_use_1_postcss_loader_dist_cjs_js_ruleSet_1_rules_6_oneOf_1_use_2_svelte_loader_index_js_cssPath_D_www_sipro_spa_node_modules_svelte_loading_spinners_dist_SyncLoader_svelte_46_css_SyncLoader_svelte__WEBPACK_IMPORTED_MODULE_1__["default"], options);
 
 
 
-/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (_css_loader_dist_cjs_js_ruleSet_1_rules_6_oneOf_1_use_1_postcss_loader_dist_cjs_js_ruleSet_1_rules_6_oneOf_1_use_2_svelte_loader_index_js_cssPath_D_www_sipro_spa_node_modules_svelte_loading_spinners_dist_SyncLoader_svelte_42_css_SyncLoader_svelte__WEBPACK_IMPORTED_MODULE_1__["default"].locals || {});
+/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (_css_loader_dist_cjs_js_ruleSet_1_rules_6_oneOf_1_use_1_postcss_loader_dist_cjs_js_ruleSet_1_rules_6_oneOf_1_use_2_svelte_loader_index_js_cssPath_D_www_sipro_spa_node_modules_svelte_loading_spinners_dist_SyncLoader_svelte_46_css_SyncLoader_svelte__WEBPACK_IMPORTED_MODULE_1__["default"].locals || {});
 
 /***/ }),
 
-/***/ "./node_modules/svelte-loading-spinners/dist/Wave.svelte.43.css!=!./node_modules/svelte-loader/index.js?cssPath=D:/www/sipro-spa/node_modules/svelte-loading-spinners/dist/Wave.svelte.43.css!./node_modules/svelte-loading-spinners/dist/Wave.svelte":
+/***/ "./node_modules/svelte-loading-spinners/dist/Wave.svelte.45.css!=!./node_modules/svelte-loader/index.js?cssPath=D:/www/sipro-spa/node_modules/svelte-loading-spinners/dist/Wave.svelte.45.css!./node_modules/svelte-loading-spinners/dist/Wave.svelte":
 /*!************************************************************************************************************************************************************************************************************************************************************!*\
-  !*** ./node_modules/svelte-loading-spinners/dist/Wave.svelte.43.css!=!./node_modules/svelte-loader/index.js?cssPath=D:/www/sipro-spa/node_modules/svelte-loading-spinners/dist/Wave.svelte.43.css!./node_modules/svelte-loading-spinners/dist/Wave.svelte ***!
+  !*** ./node_modules/svelte-loading-spinners/dist/Wave.svelte.45.css!=!./node_modules/svelte-loader/index.js?cssPath=D:/www/sipro-spa/node_modules/svelte-loading-spinners/dist/Wave.svelte.45.css!./node_modules/svelte-loading-spinners/dist/Wave.svelte ***!
   \************************************************************************************************************************************************************************************************************************************************************/
 /***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
 
@@ -32225,7 +32225,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ });
 /* harmony import */ var _style_loader_dist_runtime_injectStylesIntoStyleTag_js__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! !../../style-loader/dist/runtime/injectStylesIntoStyleTag.js */ "./node_modules/style-loader/dist/runtime/injectStylesIntoStyleTag.js");
 /* harmony import */ var _style_loader_dist_runtime_injectStylesIntoStyleTag_js__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_style_loader_dist_runtime_injectStylesIntoStyleTag_js__WEBPACK_IMPORTED_MODULE_0__);
-/* harmony import */ var _css_loader_dist_cjs_js_ruleSet_1_rules_6_oneOf_1_use_1_postcss_loader_dist_cjs_js_ruleSet_1_rules_6_oneOf_1_use_2_svelte_loader_index_js_cssPath_D_www_sipro_spa_node_modules_svelte_loading_spinners_dist_Wave_svelte_43_css_Wave_svelte__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! !!../../css-loader/dist/cjs.js??ruleSet[1].rules[6].oneOf[1].use[1]!../../postcss-loader/dist/cjs.js??ruleSet[1].rules[6].oneOf[1].use[2]!../../svelte-loader/index.js?cssPath=D:/www/sipro-spa/node_modules/svelte-loading-spinners/dist/Wave.svelte.43.css!./Wave.svelte */ "./node_modules/css-loader/dist/cjs.js??ruleSet[1].rules[6].oneOf[1].use[1]!./node_modules/postcss-loader/dist/cjs.js??ruleSet[1].rules[6].oneOf[1].use[2]!./node_modules/svelte-loader/index.js?cssPath=D:/www/sipro-spa/node_modules/svelte-loading-spinners/dist/Wave.svelte.43.css!./node_modules/svelte-loading-spinners/dist/Wave.svelte");
+/* harmony import */ var _css_loader_dist_cjs_js_ruleSet_1_rules_6_oneOf_1_use_1_postcss_loader_dist_cjs_js_ruleSet_1_rules_6_oneOf_1_use_2_svelte_loader_index_js_cssPath_D_www_sipro_spa_node_modules_svelte_loading_spinners_dist_Wave_svelte_45_css_Wave_svelte__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! !!../../css-loader/dist/cjs.js??ruleSet[1].rules[6].oneOf[1].use[1]!../../postcss-loader/dist/cjs.js??ruleSet[1].rules[6].oneOf[1].use[2]!../../svelte-loader/index.js?cssPath=D:/www/sipro-spa/node_modules/svelte-loading-spinners/dist/Wave.svelte.45.css!./Wave.svelte */ "./node_modules/css-loader/dist/cjs.js??ruleSet[1].rules[6].oneOf[1].use[1]!./node_modules/postcss-loader/dist/cjs.js??ruleSet[1].rules[6].oneOf[1].use[2]!./node_modules/svelte-loader/index.js?cssPath=D:/www/sipro-spa/node_modules/svelte-loading-spinners/dist/Wave.svelte.45.css!./node_modules/svelte-loading-spinners/dist/Wave.svelte");
 
             
 
@@ -32234,17 +32234,17 @@ var options = {};
 options.insert = "head";
 options.singleton = false;
 
-var update = _style_loader_dist_runtime_injectStylesIntoStyleTag_js__WEBPACK_IMPORTED_MODULE_0___default()(_css_loader_dist_cjs_js_ruleSet_1_rules_6_oneOf_1_use_1_postcss_loader_dist_cjs_js_ruleSet_1_rules_6_oneOf_1_use_2_svelte_loader_index_js_cssPath_D_www_sipro_spa_node_modules_svelte_loading_spinners_dist_Wave_svelte_43_css_Wave_svelte__WEBPACK_IMPORTED_MODULE_1__["default"], options);
+var update = _style_loader_dist_runtime_injectStylesIntoStyleTag_js__WEBPACK_IMPORTED_MODULE_0___default()(_css_loader_dist_cjs_js_ruleSet_1_rules_6_oneOf_1_use_1_postcss_loader_dist_cjs_js_ruleSet_1_rules_6_oneOf_1_use_2_svelte_loader_index_js_cssPath_D_www_sipro_spa_node_modules_svelte_loading_spinners_dist_Wave_svelte_45_css_Wave_svelte__WEBPACK_IMPORTED_MODULE_1__["default"], options);
 
 
 
-/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (_css_loader_dist_cjs_js_ruleSet_1_rules_6_oneOf_1_use_1_postcss_loader_dist_cjs_js_ruleSet_1_rules_6_oneOf_1_use_2_svelte_loader_index_js_cssPath_D_www_sipro_spa_node_modules_svelte_loading_spinners_dist_Wave_svelte_43_css_Wave_svelte__WEBPACK_IMPORTED_MODULE_1__["default"].locals || {});
+/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (_css_loader_dist_cjs_js_ruleSet_1_rules_6_oneOf_1_use_1_postcss_loader_dist_cjs_js_ruleSet_1_rules_6_oneOf_1_use_2_svelte_loader_index_js_cssPath_D_www_sipro_spa_node_modules_svelte_loading_spinners_dist_Wave_svelte_45_css_Wave_svelte__WEBPACK_IMPORTED_MODULE_1__["default"].locals || {});
 
 /***/ }),
 
-/***/ "./node_modules/svelte-select/src/Item.svelte.27.css!=!./node_modules/svelte-loader/index.js?cssPath=D:/www/sipro-spa/node_modules/svelte-select/src/Item.svelte.27.css!./node_modules/svelte-select/src/Item.svelte":
+/***/ "./node_modules/svelte-select/src/Item.svelte.29.css!=!./node_modules/svelte-loader/index.js?cssPath=D:/www/sipro-spa/node_modules/svelte-select/src/Item.svelte.29.css!./node_modules/svelte-select/src/Item.svelte":
 /*!***************************************************************************************************************************************************************************************************************************!*\
-  !*** ./node_modules/svelte-select/src/Item.svelte.27.css!=!./node_modules/svelte-loader/index.js?cssPath=D:/www/sipro-spa/node_modules/svelte-select/src/Item.svelte.27.css!./node_modules/svelte-select/src/Item.svelte ***!
+  !*** ./node_modules/svelte-select/src/Item.svelte.29.css!=!./node_modules/svelte-loader/index.js?cssPath=D:/www/sipro-spa/node_modules/svelte-select/src/Item.svelte.29.css!./node_modules/svelte-select/src/Item.svelte ***!
   \***************************************************************************************************************************************************************************************************************************/
 /***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
 
@@ -32255,7 +32255,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ });
 /* harmony import */ var _style_loader_dist_runtime_injectStylesIntoStyleTag_js__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! !../../style-loader/dist/runtime/injectStylesIntoStyleTag.js */ "./node_modules/style-loader/dist/runtime/injectStylesIntoStyleTag.js");
 /* harmony import */ var _style_loader_dist_runtime_injectStylesIntoStyleTag_js__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_style_loader_dist_runtime_injectStylesIntoStyleTag_js__WEBPACK_IMPORTED_MODULE_0__);
-/* harmony import */ var _css_loader_dist_cjs_js_ruleSet_1_rules_6_oneOf_1_use_1_postcss_loader_dist_cjs_js_ruleSet_1_rules_6_oneOf_1_use_2_svelte_loader_index_js_cssPath_D_www_sipro_spa_node_modules_svelte_select_src_Item_svelte_27_css_Item_svelte__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! !!../../css-loader/dist/cjs.js??ruleSet[1].rules[6].oneOf[1].use[1]!../../postcss-loader/dist/cjs.js??ruleSet[1].rules[6].oneOf[1].use[2]!../../svelte-loader/index.js?cssPath=D:/www/sipro-spa/node_modules/svelte-select/src/Item.svelte.27.css!./Item.svelte */ "./node_modules/css-loader/dist/cjs.js??ruleSet[1].rules[6].oneOf[1].use[1]!./node_modules/postcss-loader/dist/cjs.js??ruleSet[1].rules[6].oneOf[1].use[2]!./node_modules/svelte-loader/index.js?cssPath=D:/www/sipro-spa/node_modules/svelte-select/src/Item.svelte.27.css!./node_modules/svelte-select/src/Item.svelte");
+/* harmony import */ var _css_loader_dist_cjs_js_ruleSet_1_rules_6_oneOf_1_use_1_postcss_loader_dist_cjs_js_ruleSet_1_rules_6_oneOf_1_use_2_svelte_loader_index_js_cssPath_D_www_sipro_spa_node_modules_svelte_select_src_Item_svelte_29_css_Item_svelte__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! !!../../css-loader/dist/cjs.js??ruleSet[1].rules[6].oneOf[1].use[1]!../../postcss-loader/dist/cjs.js??ruleSet[1].rules[6].oneOf[1].use[2]!../../svelte-loader/index.js?cssPath=D:/www/sipro-spa/node_modules/svelte-select/src/Item.svelte.29.css!./Item.svelte */ "./node_modules/css-loader/dist/cjs.js??ruleSet[1].rules[6].oneOf[1].use[1]!./node_modules/postcss-loader/dist/cjs.js??ruleSet[1].rules[6].oneOf[1].use[2]!./node_modules/svelte-loader/index.js?cssPath=D:/www/sipro-spa/node_modules/svelte-select/src/Item.svelte.29.css!./node_modules/svelte-select/src/Item.svelte");
 
             
 
@@ -32264,17 +32264,17 @@ var options = {};
 options.insert = "head";
 options.singleton = false;
 
-var update = _style_loader_dist_runtime_injectStylesIntoStyleTag_js__WEBPACK_IMPORTED_MODULE_0___default()(_css_loader_dist_cjs_js_ruleSet_1_rules_6_oneOf_1_use_1_postcss_loader_dist_cjs_js_ruleSet_1_rules_6_oneOf_1_use_2_svelte_loader_index_js_cssPath_D_www_sipro_spa_node_modules_svelte_select_src_Item_svelte_27_css_Item_svelte__WEBPACK_IMPORTED_MODULE_1__["default"], options);
+var update = _style_loader_dist_runtime_injectStylesIntoStyleTag_js__WEBPACK_IMPORTED_MODULE_0___default()(_css_loader_dist_cjs_js_ruleSet_1_rules_6_oneOf_1_use_1_postcss_loader_dist_cjs_js_ruleSet_1_rules_6_oneOf_1_use_2_svelte_loader_index_js_cssPath_D_www_sipro_spa_node_modules_svelte_select_src_Item_svelte_29_css_Item_svelte__WEBPACK_IMPORTED_MODULE_1__["default"], options);
 
 
 
-/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (_css_loader_dist_cjs_js_ruleSet_1_rules_6_oneOf_1_use_1_postcss_loader_dist_cjs_js_ruleSet_1_rules_6_oneOf_1_use_2_svelte_loader_index_js_cssPath_D_www_sipro_spa_node_modules_svelte_select_src_Item_svelte_27_css_Item_svelte__WEBPACK_IMPORTED_MODULE_1__["default"].locals || {});
+/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (_css_loader_dist_cjs_js_ruleSet_1_rules_6_oneOf_1_use_1_postcss_loader_dist_cjs_js_ruleSet_1_rules_6_oneOf_1_use_2_svelte_loader_index_js_cssPath_D_www_sipro_spa_node_modules_svelte_select_src_Item_svelte_29_css_Item_svelte__WEBPACK_IMPORTED_MODULE_1__["default"].locals || {});
 
 /***/ }),
 
-/***/ "./node_modules/svelte-select/src/List.svelte.30.css!=!./node_modules/svelte-loader/index.js?cssPath=D:/www/sipro-spa/node_modules/svelte-select/src/List.svelte.30.css!./node_modules/svelte-select/src/List.svelte":
+/***/ "./node_modules/svelte-select/src/List.svelte.27.css!=!./node_modules/svelte-loader/index.js?cssPath=D:/www/sipro-spa/node_modules/svelte-select/src/List.svelte.27.css!./node_modules/svelte-select/src/List.svelte":
 /*!***************************************************************************************************************************************************************************************************************************!*\
-  !*** ./node_modules/svelte-select/src/List.svelte.30.css!=!./node_modules/svelte-loader/index.js?cssPath=D:/www/sipro-spa/node_modules/svelte-select/src/List.svelte.30.css!./node_modules/svelte-select/src/List.svelte ***!
+  !*** ./node_modules/svelte-select/src/List.svelte.27.css!=!./node_modules/svelte-loader/index.js?cssPath=D:/www/sipro-spa/node_modules/svelte-select/src/List.svelte.27.css!./node_modules/svelte-select/src/List.svelte ***!
   \***************************************************************************************************************************************************************************************************************************/
 /***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
 
@@ -32285,7 +32285,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ });
 /* harmony import */ var _style_loader_dist_runtime_injectStylesIntoStyleTag_js__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! !../../style-loader/dist/runtime/injectStylesIntoStyleTag.js */ "./node_modules/style-loader/dist/runtime/injectStylesIntoStyleTag.js");
 /* harmony import */ var _style_loader_dist_runtime_injectStylesIntoStyleTag_js__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_style_loader_dist_runtime_injectStylesIntoStyleTag_js__WEBPACK_IMPORTED_MODULE_0__);
-/* harmony import */ var _css_loader_dist_cjs_js_ruleSet_1_rules_6_oneOf_1_use_1_postcss_loader_dist_cjs_js_ruleSet_1_rules_6_oneOf_1_use_2_svelte_loader_index_js_cssPath_D_www_sipro_spa_node_modules_svelte_select_src_List_svelte_30_css_List_svelte__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! !!../../css-loader/dist/cjs.js??ruleSet[1].rules[6].oneOf[1].use[1]!../../postcss-loader/dist/cjs.js??ruleSet[1].rules[6].oneOf[1].use[2]!../../svelte-loader/index.js?cssPath=D:/www/sipro-spa/node_modules/svelte-select/src/List.svelte.30.css!./List.svelte */ "./node_modules/css-loader/dist/cjs.js??ruleSet[1].rules[6].oneOf[1].use[1]!./node_modules/postcss-loader/dist/cjs.js??ruleSet[1].rules[6].oneOf[1].use[2]!./node_modules/svelte-loader/index.js?cssPath=D:/www/sipro-spa/node_modules/svelte-select/src/List.svelte.30.css!./node_modules/svelte-select/src/List.svelte");
+/* harmony import */ var _css_loader_dist_cjs_js_ruleSet_1_rules_6_oneOf_1_use_1_postcss_loader_dist_cjs_js_ruleSet_1_rules_6_oneOf_1_use_2_svelte_loader_index_js_cssPath_D_www_sipro_spa_node_modules_svelte_select_src_List_svelte_27_css_List_svelte__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! !!../../css-loader/dist/cjs.js??ruleSet[1].rules[6].oneOf[1].use[1]!../../postcss-loader/dist/cjs.js??ruleSet[1].rules[6].oneOf[1].use[2]!../../svelte-loader/index.js?cssPath=D:/www/sipro-spa/node_modules/svelte-select/src/List.svelte.27.css!./List.svelte */ "./node_modules/css-loader/dist/cjs.js??ruleSet[1].rules[6].oneOf[1].use[1]!./node_modules/postcss-loader/dist/cjs.js??ruleSet[1].rules[6].oneOf[1].use[2]!./node_modules/svelte-loader/index.js?cssPath=D:/www/sipro-spa/node_modules/svelte-select/src/List.svelte.27.css!./node_modules/svelte-select/src/List.svelte");
 
             
 
@@ -32294,11 +32294,11 @@ var options = {};
 options.insert = "head";
 options.singleton = false;
 
-var update = _style_loader_dist_runtime_injectStylesIntoStyleTag_js__WEBPACK_IMPORTED_MODULE_0___default()(_css_loader_dist_cjs_js_ruleSet_1_rules_6_oneOf_1_use_1_postcss_loader_dist_cjs_js_ruleSet_1_rules_6_oneOf_1_use_2_svelte_loader_index_js_cssPath_D_www_sipro_spa_node_modules_svelte_select_src_List_svelte_30_css_List_svelte__WEBPACK_IMPORTED_MODULE_1__["default"], options);
+var update = _style_loader_dist_runtime_injectStylesIntoStyleTag_js__WEBPACK_IMPORTED_MODULE_0___default()(_css_loader_dist_cjs_js_ruleSet_1_rules_6_oneOf_1_use_1_postcss_loader_dist_cjs_js_ruleSet_1_rules_6_oneOf_1_use_2_svelte_loader_index_js_cssPath_D_www_sipro_spa_node_modules_svelte_select_src_List_svelte_27_css_List_svelte__WEBPACK_IMPORTED_MODULE_1__["default"], options);
 
 
 
-/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (_css_loader_dist_cjs_js_ruleSet_1_rules_6_oneOf_1_use_1_postcss_loader_dist_cjs_js_ruleSet_1_rules_6_oneOf_1_use_2_svelte_loader_index_js_cssPath_D_www_sipro_spa_node_modules_svelte_select_src_List_svelte_30_css_List_svelte__WEBPACK_IMPORTED_MODULE_1__["default"].locals || {});
+/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (_css_loader_dist_cjs_js_ruleSet_1_rules_6_oneOf_1_use_1_postcss_loader_dist_cjs_js_ruleSet_1_rules_6_oneOf_1_use_2_svelte_loader_index_js_cssPath_D_www_sipro_spa_node_modules_svelte_select_src_List_svelte_27_css_List_svelte__WEBPACK_IMPORTED_MODULE_1__["default"].locals || {});
 
 /***/ }),
 
@@ -32332,9 +32332,9 @@ var update = _style_loader_dist_runtime_injectStylesIntoStyleTag_js__WEBPACK_IMP
 
 /***/ }),
 
-/***/ "./node_modules/svelte-select/src/Select.svelte.26.css!=!./node_modules/svelte-loader/index.js?cssPath=D:/www/sipro-spa/node_modules/svelte-select/src/Select.svelte.26.css!./node_modules/svelte-select/src/Select.svelte":
+/***/ "./node_modules/svelte-select/src/Select.svelte.25.css!=!./node_modules/svelte-loader/index.js?cssPath=D:/www/sipro-spa/node_modules/svelte-select/src/Select.svelte.25.css!./node_modules/svelte-select/src/Select.svelte":
 /*!*********************************************************************************************************************************************************************************************************************************!*\
-  !*** ./node_modules/svelte-select/src/Select.svelte.26.css!=!./node_modules/svelte-loader/index.js?cssPath=D:/www/sipro-spa/node_modules/svelte-select/src/Select.svelte.26.css!./node_modules/svelte-select/src/Select.svelte ***!
+  !*** ./node_modules/svelte-select/src/Select.svelte.25.css!=!./node_modules/svelte-loader/index.js?cssPath=D:/www/sipro-spa/node_modules/svelte-select/src/Select.svelte.25.css!./node_modules/svelte-select/src/Select.svelte ***!
   \*********************************************************************************************************************************************************************************************************************************/
 /***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
 
@@ -32345,7 +32345,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ });
 /* harmony import */ var _style_loader_dist_runtime_injectStylesIntoStyleTag_js__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! !../../style-loader/dist/runtime/injectStylesIntoStyleTag.js */ "./node_modules/style-loader/dist/runtime/injectStylesIntoStyleTag.js");
 /* harmony import */ var _style_loader_dist_runtime_injectStylesIntoStyleTag_js__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_style_loader_dist_runtime_injectStylesIntoStyleTag_js__WEBPACK_IMPORTED_MODULE_0__);
-/* harmony import */ var _css_loader_dist_cjs_js_ruleSet_1_rules_6_oneOf_1_use_1_postcss_loader_dist_cjs_js_ruleSet_1_rules_6_oneOf_1_use_2_svelte_loader_index_js_cssPath_D_www_sipro_spa_node_modules_svelte_select_src_Select_svelte_26_css_Select_svelte__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! !!../../css-loader/dist/cjs.js??ruleSet[1].rules[6].oneOf[1].use[1]!../../postcss-loader/dist/cjs.js??ruleSet[1].rules[6].oneOf[1].use[2]!../../svelte-loader/index.js?cssPath=D:/www/sipro-spa/node_modules/svelte-select/src/Select.svelte.26.css!./Select.svelte */ "./node_modules/css-loader/dist/cjs.js??ruleSet[1].rules[6].oneOf[1].use[1]!./node_modules/postcss-loader/dist/cjs.js??ruleSet[1].rules[6].oneOf[1].use[2]!./node_modules/svelte-loader/index.js?cssPath=D:/www/sipro-spa/node_modules/svelte-select/src/Select.svelte.26.css!./node_modules/svelte-select/src/Select.svelte");
+/* harmony import */ var _css_loader_dist_cjs_js_ruleSet_1_rules_6_oneOf_1_use_1_postcss_loader_dist_cjs_js_ruleSet_1_rules_6_oneOf_1_use_2_svelte_loader_index_js_cssPath_D_www_sipro_spa_node_modules_svelte_select_src_Select_svelte_25_css_Select_svelte__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! !!../../css-loader/dist/cjs.js??ruleSet[1].rules[6].oneOf[1].use[1]!../../postcss-loader/dist/cjs.js??ruleSet[1].rules[6].oneOf[1].use[2]!../../svelte-loader/index.js?cssPath=D:/www/sipro-spa/node_modules/svelte-select/src/Select.svelte.25.css!./Select.svelte */ "./node_modules/css-loader/dist/cjs.js??ruleSet[1].rules[6].oneOf[1].use[1]!./node_modules/postcss-loader/dist/cjs.js??ruleSet[1].rules[6].oneOf[1].use[2]!./node_modules/svelte-loader/index.js?cssPath=D:/www/sipro-spa/node_modules/svelte-select/src/Select.svelte.25.css!./node_modules/svelte-select/src/Select.svelte");
 
             
 
@@ -32354,17 +32354,17 @@ var options = {};
 options.insert = "head";
 options.singleton = false;
 
-var update = _style_loader_dist_runtime_injectStylesIntoStyleTag_js__WEBPACK_IMPORTED_MODULE_0___default()(_css_loader_dist_cjs_js_ruleSet_1_rules_6_oneOf_1_use_1_postcss_loader_dist_cjs_js_ruleSet_1_rules_6_oneOf_1_use_2_svelte_loader_index_js_cssPath_D_www_sipro_spa_node_modules_svelte_select_src_Select_svelte_26_css_Select_svelte__WEBPACK_IMPORTED_MODULE_1__["default"], options);
+var update = _style_loader_dist_runtime_injectStylesIntoStyleTag_js__WEBPACK_IMPORTED_MODULE_0___default()(_css_loader_dist_cjs_js_ruleSet_1_rules_6_oneOf_1_use_1_postcss_loader_dist_cjs_js_ruleSet_1_rules_6_oneOf_1_use_2_svelte_loader_index_js_cssPath_D_www_sipro_spa_node_modules_svelte_select_src_Select_svelte_25_css_Select_svelte__WEBPACK_IMPORTED_MODULE_1__["default"], options);
 
 
 
-/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (_css_loader_dist_cjs_js_ruleSet_1_rules_6_oneOf_1_use_1_postcss_loader_dist_cjs_js_ruleSet_1_rules_6_oneOf_1_use_2_svelte_loader_index_js_cssPath_D_www_sipro_spa_node_modules_svelte_select_src_Select_svelte_26_css_Select_svelte__WEBPACK_IMPORTED_MODULE_1__["default"].locals || {});
+/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (_css_loader_dist_cjs_js_ruleSet_1_rules_6_oneOf_1_use_1_postcss_loader_dist_cjs_js_ruleSet_1_rules_6_oneOf_1_use_2_svelte_loader_index_js_cssPath_D_www_sipro_spa_node_modules_svelte_select_src_Select_svelte_25_css_Select_svelte__WEBPACK_IMPORTED_MODULE_1__["default"].locals || {});
 
 /***/ }),
 
-/***/ "./node_modules/svelte-select/src/Selection.svelte.29.css!=!./node_modules/svelte-loader/index.js?cssPath=D:/www/sipro-spa/node_modules/svelte-select/src/Selection.svelte.29.css!./node_modules/svelte-select/src/Selection.svelte":
+/***/ "./node_modules/svelte-select/src/Selection.svelte.26.css!=!./node_modules/svelte-loader/index.js?cssPath=D:/www/sipro-spa/node_modules/svelte-select/src/Selection.svelte.26.css!./node_modules/svelte-select/src/Selection.svelte":
 /*!******************************************************************************************************************************************************************************************************************************************!*\
-  !*** ./node_modules/svelte-select/src/Selection.svelte.29.css!=!./node_modules/svelte-loader/index.js?cssPath=D:/www/sipro-spa/node_modules/svelte-select/src/Selection.svelte.29.css!./node_modules/svelte-select/src/Selection.svelte ***!
+  !*** ./node_modules/svelte-select/src/Selection.svelte.26.css!=!./node_modules/svelte-loader/index.js?cssPath=D:/www/sipro-spa/node_modules/svelte-select/src/Selection.svelte.26.css!./node_modules/svelte-select/src/Selection.svelte ***!
   \******************************************************************************************************************************************************************************************************************************************/
 /***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
 
@@ -32375,7 +32375,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ });
 /* harmony import */ var _style_loader_dist_runtime_injectStylesIntoStyleTag_js__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! !../../style-loader/dist/runtime/injectStylesIntoStyleTag.js */ "./node_modules/style-loader/dist/runtime/injectStylesIntoStyleTag.js");
 /* harmony import */ var _style_loader_dist_runtime_injectStylesIntoStyleTag_js__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_style_loader_dist_runtime_injectStylesIntoStyleTag_js__WEBPACK_IMPORTED_MODULE_0__);
-/* harmony import */ var _css_loader_dist_cjs_js_ruleSet_1_rules_6_oneOf_1_use_1_postcss_loader_dist_cjs_js_ruleSet_1_rules_6_oneOf_1_use_2_svelte_loader_index_js_cssPath_D_www_sipro_spa_node_modules_svelte_select_src_Selection_svelte_29_css_Selection_svelte__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! !!../../css-loader/dist/cjs.js??ruleSet[1].rules[6].oneOf[1].use[1]!../../postcss-loader/dist/cjs.js??ruleSet[1].rules[6].oneOf[1].use[2]!../../svelte-loader/index.js?cssPath=D:/www/sipro-spa/node_modules/svelte-select/src/Selection.svelte.29.css!./Selection.svelte */ "./node_modules/css-loader/dist/cjs.js??ruleSet[1].rules[6].oneOf[1].use[1]!./node_modules/postcss-loader/dist/cjs.js??ruleSet[1].rules[6].oneOf[1].use[2]!./node_modules/svelte-loader/index.js?cssPath=D:/www/sipro-spa/node_modules/svelte-select/src/Selection.svelte.29.css!./node_modules/svelte-select/src/Selection.svelte");
+/* harmony import */ var _css_loader_dist_cjs_js_ruleSet_1_rules_6_oneOf_1_use_1_postcss_loader_dist_cjs_js_ruleSet_1_rules_6_oneOf_1_use_2_svelte_loader_index_js_cssPath_D_www_sipro_spa_node_modules_svelte_select_src_Selection_svelte_26_css_Selection_svelte__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! !!../../css-loader/dist/cjs.js??ruleSet[1].rules[6].oneOf[1].use[1]!../../postcss-loader/dist/cjs.js??ruleSet[1].rules[6].oneOf[1].use[2]!../../svelte-loader/index.js?cssPath=D:/www/sipro-spa/node_modules/svelte-select/src/Selection.svelte.26.css!./Selection.svelte */ "./node_modules/css-loader/dist/cjs.js??ruleSet[1].rules[6].oneOf[1].use[1]!./node_modules/postcss-loader/dist/cjs.js??ruleSet[1].rules[6].oneOf[1].use[2]!./node_modules/svelte-loader/index.js?cssPath=D:/www/sipro-spa/node_modules/svelte-select/src/Selection.svelte.26.css!./node_modules/svelte-select/src/Selection.svelte");
 
             
 
@@ -32384,17 +32384,17 @@ var options = {};
 options.insert = "head";
 options.singleton = false;
 
-var update = _style_loader_dist_runtime_injectStylesIntoStyleTag_js__WEBPACK_IMPORTED_MODULE_0___default()(_css_loader_dist_cjs_js_ruleSet_1_rules_6_oneOf_1_use_1_postcss_loader_dist_cjs_js_ruleSet_1_rules_6_oneOf_1_use_2_svelte_loader_index_js_cssPath_D_www_sipro_spa_node_modules_svelte_select_src_Selection_svelte_29_css_Selection_svelte__WEBPACK_IMPORTED_MODULE_1__["default"], options);
+var update = _style_loader_dist_runtime_injectStylesIntoStyleTag_js__WEBPACK_IMPORTED_MODULE_0___default()(_css_loader_dist_cjs_js_ruleSet_1_rules_6_oneOf_1_use_1_postcss_loader_dist_cjs_js_ruleSet_1_rules_6_oneOf_1_use_2_svelte_loader_index_js_cssPath_D_www_sipro_spa_node_modules_svelte_select_src_Selection_svelte_26_css_Selection_svelte__WEBPACK_IMPORTED_MODULE_1__["default"], options);
 
 
 
-/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (_css_loader_dist_cjs_js_ruleSet_1_rules_6_oneOf_1_use_1_postcss_loader_dist_cjs_js_ruleSet_1_rules_6_oneOf_1_use_2_svelte_loader_index_js_cssPath_D_www_sipro_spa_node_modules_svelte_select_src_Selection_svelte_29_css_Selection_svelte__WEBPACK_IMPORTED_MODULE_1__["default"].locals || {});
+/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (_css_loader_dist_cjs_js_ruleSet_1_rules_6_oneOf_1_use_1_postcss_loader_dist_cjs_js_ruleSet_1_rules_6_oneOf_1_use_2_svelte_loader_index_js_cssPath_D_www_sipro_spa_node_modules_svelte_select_src_Selection_svelte_26_css_Selection_svelte__WEBPACK_IMPORTED_MODULE_1__["default"].locals || {});
 
 /***/ }),
 
-/***/ "./node_modules/svelte-select/src/VirtualList.svelte.31.css!=!./node_modules/svelte-loader/index.js?cssPath=D:/www/sipro-spa/node_modules/svelte-select/src/VirtualList.svelte.31.css!./node_modules/svelte-select/src/VirtualList.svelte":
+/***/ "./node_modules/svelte-select/src/VirtualList.svelte.30.css!=!./node_modules/svelte-loader/index.js?cssPath=D:/www/sipro-spa/node_modules/svelte-select/src/VirtualList.svelte.30.css!./node_modules/svelte-select/src/VirtualList.svelte":
 /*!************************************************************************************************************************************************************************************************************************************************!*\
-  !*** ./node_modules/svelte-select/src/VirtualList.svelte.31.css!=!./node_modules/svelte-loader/index.js?cssPath=D:/www/sipro-spa/node_modules/svelte-select/src/VirtualList.svelte.31.css!./node_modules/svelte-select/src/VirtualList.svelte ***!
+  !*** ./node_modules/svelte-select/src/VirtualList.svelte.30.css!=!./node_modules/svelte-loader/index.js?cssPath=D:/www/sipro-spa/node_modules/svelte-select/src/VirtualList.svelte.30.css!./node_modules/svelte-select/src/VirtualList.svelte ***!
   \************************************************************************************************************************************************************************************************************************************************/
 /***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
 
@@ -32405,7 +32405,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ });
 /* harmony import */ var _style_loader_dist_runtime_injectStylesIntoStyleTag_js__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! !../../style-loader/dist/runtime/injectStylesIntoStyleTag.js */ "./node_modules/style-loader/dist/runtime/injectStylesIntoStyleTag.js");
 /* harmony import */ var _style_loader_dist_runtime_injectStylesIntoStyleTag_js__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_style_loader_dist_runtime_injectStylesIntoStyleTag_js__WEBPACK_IMPORTED_MODULE_0__);
-/* harmony import */ var _css_loader_dist_cjs_js_ruleSet_1_rules_6_oneOf_1_use_1_postcss_loader_dist_cjs_js_ruleSet_1_rules_6_oneOf_1_use_2_svelte_loader_index_js_cssPath_D_www_sipro_spa_node_modules_svelte_select_src_VirtualList_svelte_31_css_VirtualList_svelte__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! !!../../css-loader/dist/cjs.js??ruleSet[1].rules[6].oneOf[1].use[1]!../../postcss-loader/dist/cjs.js??ruleSet[1].rules[6].oneOf[1].use[2]!../../svelte-loader/index.js?cssPath=D:/www/sipro-spa/node_modules/svelte-select/src/VirtualList.svelte.31.css!./VirtualList.svelte */ "./node_modules/css-loader/dist/cjs.js??ruleSet[1].rules[6].oneOf[1].use[1]!./node_modules/postcss-loader/dist/cjs.js??ruleSet[1].rules[6].oneOf[1].use[2]!./node_modules/svelte-loader/index.js?cssPath=D:/www/sipro-spa/node_modules/svelte-select/src/VirtualList.svelte.31.css!./node_modules/svelte-select/src/VirtualList.svelte");
+/* harmony import */ var _css_loader_dist_cjs_js_ruleSet_1_rules_6_oneOf_1_use_1_postcss_loader_dist_cjs_js_ruleSet_1_rules_6_oneOf_1_use_2_svelte_loader_index_js_cssPath_D_www_sipro_spa_node_modules_svelte_select_src_VirtualList_svelte_30_css_VirtualList_svelte__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! !!../../css-loader/dist/cjs.js??ruleSet[1].rules[6].oneOf[1].use[1]!../../postcss-loader/dist/cjs.js??ruleSet[1].rules[6].oneOf[1].use[2]!../../svelte-loader/index.js?cssPath=D:/www/sipro-spa/node_modules/svelte-select/src/VirtualList.svelte.30.css!./VirtualList.svelte */ "./node_modules/css-loader/dist/cjs.js??ruleSet[1].rules[6].oneOf[1].use[1]!./node_modules/postcss-loader/dist/cjs.js??ruleSet[1].rules[6].oneOf[1].use[2]!./node_modules/svelte-loader/index.js?cssPath=D:/www/sipro-spa/node_modules/svelte-select/src/VirtualList.svelte.30.css!./node_modules/svelte-select/src/VirtualList.svelte");
 
             
 
@@ -32414,17 +32414,17 @@ var options = {};
 options.insert = "head";
 options.singleton = false;
 
-var update = _style_loader_dist_runtime_injectStylesIntoStyleTag_js__WEBPACK_IMPORTED_MODULE_0___default()(_css_loader_dist_cjs_js_ruleSet_1_rules_6_oneOf_1_use_1_postcss_loader_dist_cjs_js_ruleSet_1_rules_6_oneOf_1_use_2_svelte_loader_index_js_cssPath_D_www_sipro_spa_node_modules_svelte_select_src_VirtualList_svelte_31_css_VirtualList_svelte__WEBPACK_IMPORTED_MODULE_1__["default"], options);
+var update = _style_loader_dist_runtime_injectStylesIntoStyleTag_js__WEBPACK_IMPORTED_MODULE_0___default()(_css_loader_dist_cjs_js_ruleSet_1_rules_6_oneOf_1_use_1_postcss_loader_dist_cjs_js_ruleSet_1_rules_6_oneOf_1_use_2_svelte_loader_index_js_cssPath_D_www_sipro_spa_node_modules_svelte_select_src_VirtualList_svelte_30_css_VirtualList_svelte__WEBPACK_IMPORTED_MODULE_1__["default"], options);
 
 
 
-/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (_css_loader_dist_cjs_js_ruleSet_1_rules_6_oneOf_1_use_1_postcss_loader_dist_cjs_js_ruleSet_1_rules_6_oneOf_1_use_2_svelte_loader_index_js_cssPath_D_www_sipro_spa_node_modules_svelte_select_src_VirtualList_svelte_31_css_VirtualList_svelte__WEBPACK_IMPORTED_MODULE_1__["default"].locals || {});
+/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (_css_loader_dist_cjs_js_ruleSet_1_rules_6_oneOf_1_use_1_postcss_loader_dist_cjs_js_ruleSet_1_rules_6_oneOf_1_use_2_svelte_loader_index_js_cssPath_D_www_sipro_spa_node_modules_svelte_select_src_VirtualList_svelte_30_css_VirtualList_svelte__WEBPACK_IMPORTED_MODULE_1__["default"].locals || {});
 
 /***/ }),
 
-/***/ "./resources/js/Layouts/Authenticated.svelte.13.css!=!./node_modules/svelte-loader/index.js?cssPath=D:/www/sipro-spa/resources/js/Layouts/Authenticated.svelte.13.css!./resources/js/Layouts/Authenticated.svelte":
+/***/ "./resources/js/Layouts/Authenticated.svelte.11.css!=!./node_modules/svelte-loader/index.js?cssPath=D:/www/sipro-spa/resources/js/Layouts/Authenticated.svelte.11.css!./resources/js/Layouts/Authenticated.svelte":
 /*!************************************************************************************************************************************************************************************************************************!*\
-  !*** ./resources/js/Layouts/Authenticated.svelte.13.css!=!./node_modules/svelte-loader/index.js?cssPath=D:/www/sipro-spa/resources/js/Layouts/Authenticated.svelte.13.css!./resources/js/Layouts/Authenticated.svelte ***!
+  !*** ./resources/js/Layouts/Authenticated.svelte.11.css!=!./node_modules/svelte-loader/index.js?cssPath=D:/www/sipro-spa/resources/js/Layouts/Authenticated.svelte.11.css!./resources/js/Layouts/Authenticated.svelte ***!
   \************************************************************************************************************************************************************************************************************************/
 /***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
 
@@ -32435,7 +32435,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ });
 /* harmony import */ var _node_modules_style_loader_dist_runtime_injectStylesIntoStyleTag_js__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! !../../../node_modules/style-loader/dist/runtime/injectStylesIntoStyleTag.js */ "./node_modules/style-loader/dist/runtime/injectStylesIntoStyleTag.js");
 /* harmony import */ var _node_modules_style_loader_dist_runtime_injectStylesIntoStyleTag_js__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_node_modules_style_loader_dist_runtime_injectStylesIntoStyleTag_js__WEBPACK_IMPORTED_MODULE_0__);
-/* harmony import */ var _node_modules_css_loader_dist_cjs_js_ruleSet_1_rules_6_oneOf_1_use_1_node_modules_postcss_loader_dist_cjs_js_ruleSet_1_rules_6_oneOf_1_use_2_node_modules_svelte_loader_index_js_cssPath_D_www_sipro_spa_resources_js_Layouts_Authenticated_svelte_13_css_Authenticated_svelte__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! !!../../../node_modules/css-loader/dist/cjs.js??ruleSet[1].rules[6].oneOf[1].use[1]!../../../node_modules/postcss-loader/dist/cjs.js??ruleSet[1].rules[6].oneOf[1].use[2]!../../../node_modules/svelte-loader/index.js?cssPath=D:/www/sipro-spa/resources/js/Layouts/Authenticated.svelte.13.css!./Authenticated.svelte */ "./node_modules/css-loader/dist/cjs.js??ruleSet[1].rules[6].oneOf[1].use[1]!./node_modules/postcss-loader/dist/cjs.js??ruleSet[1].rules[6].oneOf[1].use[2]!./node_modules/svelte-loader/index.js?cssPath=D:/www/sipro-spa/resources/js/Layouts/Authenticated.svelte.13.css!./resources/js/Layouts/Authenticated.svelte");
+/* harmony import */ var _node_modules_css_loader_dist_cjs_js_ruleSet_1_rules_6_oneOf_1_use_1_node_modules_postcss_loader_dist_cjs_js_ruleSet_1_rules_6_oneOf_1_use_2_node_modules_svelte_loader_index_js_cssPath_D_www_sipro_spa_resources_js_Layouts_Authenticated_svelte_11_css_Authenticated_svelte__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! !!../../../node_modules/css-loader/dist/cjs.js??ruleSet[1].rules[6].oneOf[1].use[1]!../../../node_modules/postcss-loader/dist/cjs.js??ruleSet[1].rules[6].oneOf[1].use[2]!../../../node_modules/svelte-loader/index.js?cssPath=D:/www/sipro-spa/resources/js/Layouts/Authenticated.svelte.11.css!./Authenticated.svelte */ "./node_modules/css-loader/dist/cjs.js??ruleSet[1].rules[6].oneOf[1].use[1]!./node_modules/postcss-loader/dist/cjs.js??ruleSet[1].rules[6].oneOf[1].use[2]!./node_modules/svelte-loader/index.js?cssPath=D:/www/sipro-spa/resources/js/Layouts/Authenticated.svelte.11.css!./resources/js/Layouts/Authenticated.svelte");
 
             
 
@@ -32444,17 +32444,17 @@ var options = {};
 options.insert = "head";
 options.singleton = false;
 
-var update = _node_modules_style_loader_dist_runtime_injectStylesIntoStyleTag_js__WEBPACK_IMPORTED_MODULE_0___default()(_node_modules_css_loader_dist_cjs_js_ruleSet_1_rules_6_oneOf_1_use_1_node_modules_postcss_loader_dist_cjs_js_ruleSet_1_rules_6_oneOf_1_use_2_node_modules_svelte_loader_index_js_cssPath_D_www_sipro_spa_resources_js_Layouts_Authenticated_svelte_13_css_Authenticated_svelte__WEBPACK_IMPORTED_MODULE_1__["default"], options);
+var update = _node_modules_style_loader_dist_runtime_injectStylesIntoStyleTag_js__WEBPACK_IMPORTED_MODULE_0___default()(_node_modules_css_loader_dist_cjs_js_ruleSet_1_rules_6_oneOf_1_use_1_node_modules_postcss_loader_dist_cjs_js_ruleSet_1_rules_6_oneOf_1_use_2_node_modules_svelte_loader_index_js_cssPath_D_www_sipro_spa_resources_js_Layouts_Authenticated_svelte_11_css_Authenticated_svelte__WEBPACK_IMPORTED_MODULE_1__["default"], options);
 
 
 
-/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (_node_modules_css_loader_dist_cjs_js_ruleSet_1_rules_6_oneOf_1_use_1_node_modules_postcss_loader_dist_cjs_js_ruleSet_1_rules_6_oneOf_1_use_2_node_modules_svelte_loader_index_js_cssPath_D_www_sipro_spa_resources_js_Layouts_Authenticated_svelte_13_css_Authenticated_svelte__WEBPACK_IMPORTED_MODULE_1__["default"].locals || {});
+/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (_node_modules_css_loader_dist_cjs_js_ruleSet_1_rules_6_oneOf_1_use_1_node_modules_postcss_loader_dist_cjs_js_ruleSet_1_rules_6_oneOf_1_use_2_node_modules_svelte_loader_index_js_cssPath_D_www_sipro_spa_resources_js_Layouts_Authenticated_svelte_11_css_Authenticated_svelte__WEBPACK_IMPORTED_MODULE_1__["default"].locals || {});
 
 /***/ }),
 
-/***/ "./resources/js/Shared/Button.svelte.11.css!=!./node_modules/svelte-loader/index.js?cssPath=D:/www/sipro-spa/resources/js/Shared/Button.svelte.11.css!./resources/js/Shared/Button.svelte":
+/***/ "./resources/js/Shared/Button.svelte.15.css!=!./node_modules/svelte-loader/index.js?cssPath=D:/www/sipro-spa/resources/js/Shared/Button.svelte.15.css!./resources/js/Shared/Button.svelte":
 /*!************************************************************************************************************************************************************************************************!*\
-  !*** ./resources/js/Shared/Button.svelte.11.css!=!./node_modules/svelte-loader/index.js?cssPath=D:/www/sipro-spa/resources/js/Shared/Button.svelte.11.css!./resources/js/Shared/Button.svelte ***!
+  !*** ./resources/js/Shared/Button.svelte.15.css!=!./node_modules/svelte-loader/index.js?cssPath=D:/www/sipro-spa/resources/js/Shared/Button.svelte.15.css!./resources/js/Shared/Button.svelte ***!
   \************************************************************************************************************************************************************************************************/
 /***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
 
@@ -32465,7 +32465,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ });
 /* harmony import */ var _node_modules_style_loader_dist_runtime_injectStylesIntoStyleTag_js__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! !../../../node_modules/style-loader/dist/runtime/injectStylesIntoStyleTag.js */ "./node_modules/style-loader/dist/runtime/injectStylesIntoStyleTag.js");
 /* harmony import */ var _node_modules_style_loader_dist_runtime_injectStylesIntoStyleTag_js__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_node_modules_style_loader_dist_runtime_injectStylesIntoStyleTag_js__WEBPACK_IMPORTED_MODULE_0__);
-/* harmony import */ var _node_modules_css_loader_dist_cjs_js_ruleSet_1_rules_6_oneOf_1_use_1_node_modules_postcss_loader_dist_cjs_js_ruleSet_1_rules_6_oneOf_1_use_2_node_modules_svelte_loader_index_js_cssPath_D_www_sipro_spa_resources_js_Shared_Button_svelte_11_css_Button_svelte__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! !!../../../node_modules/css-loader/dist/cjs.js??ruleSet[1].rules[6].oneOf[1].use[1]!../../../node_modules/postcss-loader/dist/cjs.js??ruleSet[1].rules[6].oneOf[1].use[2]!../../../node_modules/svelte-loader/index.js?cssPath=D:/www/sipro-spa/resources/js/Shared/Button.svelte.11.css!./Button.svelte */ "./node_modules/css-loader/dist/cjs.js??ruleSet[1].rules[6].oneOf[1].use[1]!./node_modules/postcss-loader/dist/cjs.js??ruleSet[1].rules[6].oneOf[1].use[2]!./node_modules/svelte-loader/index.js?cssPath=D:/www/sipro-spa/resources/js/Shared/Button.svelte.11.css!./resources/js/Shared/Button.svelte");
+/* harmony import */ var _node_modules_css_loader_dist_cjs_js_ruleSet_1_rules_6_oneOf_1_use_1_node_modules_postcss_loader_dist_cjs_js_ruleSet_1_rules_6_oneOf_1_use_2_node_modules_svelte_loader_index_js_cssPath_D_www_sipro_spa_resources_js_Shared_Button_svelte_15_css_Button_svelte__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! !!../../../node_modules/css-loader/dist/cjs.js??ruleSet[1].rules[6].oneOf[1].use[1]!../../../node_modules/postcss-loader/dist/cjs.js??ruleSet[1].rules[6].oneOf[1].use[2]!../../../node_modules/svelte-loader/index.js?cssPath=D:/www/sipro-spa/resources/js/Shared/Button.svelte.15.css!./Button.svelte */ "./node_modules/css-loader/dist/cjs.js??ruleSet[1].rules[6].oneOf[1].use[1]!./node_modules/postcss-loader/dist/cjs.js??ruleSet[1].rules[6].oneOf[1].use[2]!./node_modules/svelte-loader/index.js?cssPath=D:/www/sipro-spa/resources/js/Shared/Button.svelte.15.css!./resources/js/Shared/Button.svelte");
 
             
 
@@ -32474,17 +32474,17 @@ var options = {};
 options.insert = "head";
 options.singleton = false;
 
-var update = _node_modules_style_loader_dist_runtime_injectStylesIntoStyleTag_js__WEBPACK_IMPORTED_MODULE_0___default()(_node_modules_css_loader_dist_cjs_js_ruleSet_1_rules_6_oneOf_1_use_1_node_modules_postcss_loader_dist_cjs_js_ruleSet_1_rules_6_oneOf_1_use_2_node_modules_svelte_loader_index_js_cssPath_D_www_sipro_spa_resources_js_Shared_Button_svelte_11_css_Button_svelte__WEBPACK_IMPORTED_MODULE_1__["default"], options);
+var update = _node_modules_style_loader_dist_runtime_injectStylesIntoStyleTag_js__WEBPACK_IMPORTED_MODULE_0___default()(_node_modules_css_loader_dist_cjs_js_ruleSet_1_rules_6_oneOf_1_use_1_node_modules_postcss_loader_dist_cjs_js_ruleSet_1_rules_6_oneOf_1_use_2_node_modules_svelte_loader_index_js_cssPath_D_www_sipro_spa_resources_js_Shared_Button_svelte_15_css_Button_svelte__WEBPACK_IMPORTED_MODULE_1__["default"], options);
 
 
 
-/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (_node_modules_css_loader_dist_cjs_js_ruleSet_1_rules_6_oneOf_1_use_1_node_modules_postcss_loader_dist_cjs_js_ruleSet_1_rules_6_oneOf_1_use_2_node_modules_svelte_loader_index_js_cssPath_D_www_sipro_spa_resources_js_Shared_Button_svelte_11_css_Button_svelte__WEBPACK_IMPORTED_MODULE_1__["default"].locals || {});
+/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (_node_modules_css_loader_dist_cjs_js_ruleSet_1_rules_6_oneOf_1_use_1_node_modules_postcss_loader_dist_cjs_js_ruleSet_1_rules_6_oneOf_1_use_2_node_modules_svelte_loader_index_js_cssPath_D_www_sipro_spa_resources_js_Shared_Button_svelte_15_css_Button_svelte__WEBPACK_IMPORTED_MODULE_1__["default"].locals || {});
 
 /***/ }),
 
-/***/ "./resources/js/Shared/FlashMessages.svelte.23.css!=!./node_modules/svelte-loader/index.js?cssPath=D:/www/sipro-spa/resources/js/Shared/FlashMessages.svelte.23.css!./resources/js/Shared/FlashMessages.svelte":
+/***/ "./resources/js/Shared/FlashMessages.svelte.22.css!=!./node_modules/svelte-loader/index.js?cssPath=D:/www/sipro-spa/resources/js/Shared/FlashMessages.svelte.22.css!./resources/js/Shared/FlashMessages.svelte":
 /*!*********************************************************************************************************************************************************************************************************************!*\
-  !*** ./resources/js/Shared/FlashMessages.svelte.23.css!=!./node_modules/svelte-loader/index.js?cssPath=D:/www/sipro-spa/resources/js/Shared/FlashMessages.svelte.23.css!./resources/js/Shared/FlashMessages.svelte ***!
+  !*** ./resources/js/Shared/FlashMessages.svelte.22.css!=!./node_modules/svelte-loader/index.js?cssPath=D:/www/sipro-spa/resources/js/Shared/FlashMessages.svelte.22.css!./resources/js/Shared/FlashMessages.svelte ***!
   \*********************************************************************************************************************************************************************************************************************/
 /***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
 
@@ -32495,7 +32495,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ });
 /* harmony import */ var _node_modules_style_loader_dist_runtime_injectStylesIntoStyleTag_js__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! !../../../node_modules/style-loader/dist/runtime/injectStylesIntoStyleTag.js */ "./node_modules/style-loader/dist/runtime/injectStylesIntoStyleTag.js");
 /* harmony import */ var _node_modules_style_loader_dist_runtime_injectStylesIntoStyleTag_js__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_node_modules_style_loader_dist_runtime_injectStylesIntoStyleTag_js__WEBPACK_IMPORTED_MODULE_0__);
-/* harmony import */ var _node_modules_css_loader_dist_cjs_js_ruleSet_1_rules_6_oneOf_1_use_1_node_modules_postcss_loader_dist_cjs_js_ruleSet_1_rules_6_oneOf_1_use_2_node_modules_svelte_loader_index_js_cssPath_D_www_sipro_spa_resources_js_Shared_FlashMessages_svelte_23_css_FlashMessages_svelte__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! !!../../../node_modules/css-loader/dist/cjs.js??ruleSet[1].rules[6].oneOf[1].use[1]!../../../node_modules/postcss-loader/dist/cjs.js??ruleSet[1].rules[6].oneOf[1].use[2]!../../../node_modules/svelte-loader/index.js?cssPath=D:/www/sipro-spa/resources/js/Shared/FlashMessages.svelte.23.css!./FlashMessages.svelte */ "./node_modules/css-loader/dist/cjs.js??ruleSet[1].rules[6].oneOf[1].use[1]!./node_modules/postcss-loader/dist/cjs.js??ruleSet[1].rules[6].oneOf[1].use[2]!./node_modules/svelte-loader/index.js?cssPath=D:/www/sipro-spa/resources/js/Shared/FlashMessages.svelte.23.css!./resources/js/Shared/FlashMessages.svelte");
+/* harmony import */ var _node_modules_css_loader_dist_cjs_js_ruleSet_1_rules_6_oneOf_1_use_1_node_modules_postcss_loader_dist_cjs_js_ruleSet_1_rules_6_oneOf_1_use_2_node_modules_svelte_loader_index_js_cssPath_D_www_sipro_spa_resources_js_Shared_FlashMessages_svelte_22_css_FlashMessages_svelte__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! !!../../../node_modules/css-loader/dist/cjs.js??ruleSet[1].rules[6].oneOf[1].use[1]!../../../node_modules/postcss-loader/dist/cjs.js??ruleSet[1].rules[6].oneOf[1].use[2]!../../../node_modules/svelte-loader/index.js?cssPath=D:/www/sipro-spa/resources/js/Shared/FlashMessages.svelte.22.css!./FlashMessages.svelte */ "./node_modules/css-loader/dist/cjs.js??ruleSet[1].rules[6].oneOf[1].use[1]!./node_modules/postcss-loader/dist/cjs.js??ruleSet[1].rules[6].oneOf[1].use[2]!./node_modules/svelte-loader/index.js?cssPath=D:/www/sipro-spa/resources/js/Shared/FlashMessages.svelte.22.css!./resources/js/Shared/FlashMessages.svelte");
 
             
 
@@ -32504,17 +32504,17 @@ var options = {};
 options.insert = "head";
 options.singleton = false;
 
-var update = _node_modules_style_loader_dist_runtime_injectStylesIntoStyleTag_js__WEBPACK_IMPORTED_MODULE_0___default()(_node_modules_css_loader_dist_cjs_js_ruleSet_1_rules_6_oneOf_1_use_1_node_modules_postcss_loader_dist_cjs_js_ruleSet_1_rules_6_oneOf_1_use_2_node_modules_svelte_loader_index_js_cssPath_D_www_sipro_spa_resources_js_Shared_FlashMessages_svelte_23_css_FlashMessages_svelte__WEBPACK_IMPORTED_MODULE_1__["default"], options);
+var update = _node_modules_style_loader_dist_runtime_injectStylesIntoStyleTag_js__WEBPACK_IMPORTED_MODULE_0___default()(_node_modules_css_loader_dist_cjs_js_ruleSet_1_rules_6_oneOf_1_use_1_node_modules_postcss_loader_dist_cjs_js_ruleSet_1_rules_6_oneOf_1_use_2_node_modules_svelte_loader_index_js_cssPath_D_www_sipro_spa_resources_js_Shared_FlashMessages_svelte_22_css_FlashMessages_svelte__WEBPACK_IMPORTED_MODULE_1__["default"], options);
 
 
 
-/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (_node_modules_css_loader_dist_cjs_js_ruleSet_1_rules_6_oneOf_1_use_1_node_modules_postcss_loader_dist_cjs_js_ruleSet_1_rules_6_oneOf_1_use_2_node_modules_svelte_loader_index_js_cssPath_D_www_sipro_spa_resources_js_Shared_FlashMessages_svelte_23_css_FlashMessages_svelte__WEBPACK_IMPORTED_MODULE_1__["default"].locals || {});
+/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (_node_modules_css_loader_dist_cjs_js_ruleSet_1_rules_6_oneOf_1_use_1_node_modules_postcss_loader_dist_cjs_js_ruleSet_1_rules_6_oneOf_1_use_2_node_modules_svelte_loader_index_js_cssPath_D_www_sipro_spa_resources_js_Shared_FlashMessages_svelte_22_css_FlashMessages_svelte__WEBPACK_IMPORTED_MODULE_1__["default"].locals || {});
 
 /***/ }),
 
-/***/ "./resources/js/Shared/LoadingButton.svelte.14.css!=!./node_modules/svelte-loader/index.js?cssPath=D:/www/sipro-spa/resources/js/Shared/LoadingButton.svelte.14.css!./resources/js/Shared/LoadingButton.svelte":
+/***/ "./resources/js/Shared/LoadingButton.svelte.12.css!=!./node_modules/svelte-loader/index.js?cssPath=D:/www/sipro-spa/resources/js/Shared/LoadingButton.svelte.12.css!./resources/js/Shared/LoadingButton.svelte":
 /*!*********************************************************************************************************************************************************************************************************************!*\
-  !*** ./resources/js/Shared/LoadingButton.svelte.14.css!=!./node_modules/svelte-loader/index.js?cssPath=D:/www/sipro-spa/resources/js/Shared/LoadingButton.svelte.14.css!./resources/js/Shared/LoadingButton.svelte ***!
+  !*** ./resources/js/Shared/LoadingButton.svelte.12.css!=!./node_modules/svelte-loader/index.js?cssPath=D:/www/sipro-spa/resources/js/Shared/LoadingButton.svelte.12.css!./resources/js/Shared/LoadingButton.svelte ***!
   \*********************************************************************************************************************************************************************************************************************/
 /***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
 
@@ -32525,7 +32525,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ });
 /* harmony import */ var _node_modules_style_loader_dist_runtime_injectStylesIntoStyleTag_js__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! !../../../node_modules/style-loader/dist/runtime/injectStylesIntoStyleTag.js */ "./node_modules/style-loader/dist/runtime/injectStylesIntoStyleTag.js");
 /* harmony import */ var _node_modules_style_loader_dist_runtime_injectStylesIntoStyleTag_js__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_node_modules_style_loader_dist_runtime_injectStylesIntoStyleTag_js__WEBPACK_IMPORTED_MODULE_0__);
-/* harmony import */ var _node_modules_css_loader_dist_cjs_js_ruleSet_1_rules_6_oneOf_1_use_1_node_modules_postcss_loader_dist_cjs_js_ruleSet_1_rules_6_oneOf_1_use_2_node_modules_svelte_loader_index_js_cssPath_D_www_sipro_spa_resources_js_Shared_LoadingButton_svelte_14_css_LoadingButton_svelte__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! !!../../../node_modules/css-loader/dist/cjs.js??ruleSet[1].rules[6].oneOf[1].use[1]!../../../node_modules/postcss-loader/dist/cjs.js??ruleSet[1].rules[6].oneOf[1].use[2]!../../../node_modules/svelte-loader/index.js?cssPath=D:/www/sipro-spa/resources/js/Shared/LoadingButton.svelte.14.css!./LoadingButton.svelte */ "./node_modules/css-loader/dist/cjs.js??ruleSet[1].rules[6].oneOf[1].use[1]!./node_modules/postcss-loader/dist/cjs.js??ruleSet[1].rules[6].oneOf[1].use[2]!./node_modules/svelte-loader/index.js?cssPath=D:/www/sipro-spa/resources/js/Shared/LoadingButton.svelte.14.css!./resources/js/Shared/LoadingButton.svelte");
+/* harmony import */ var _node_modules_css_loader_dist_cjs_js_ruleSet_1_rules_6_oneOf_1_use_1_node_modules_postcss_loader_dist_cjs_js_ruleSet_1_rules_6_oneOf_1_use_2_node_modules_svelte_loader_index_js_cssPath_D_www_sipro_spa_resources_js_Shared_LoadingButton_svelte_12_css_LoadingButton_svelte__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! !!../../../node_modules/css-loader/dist/cjs.js??ruleSet[1].rules[6].oneOf[1].use[1]!../../../node_modules/postcss-loader/dist/cjs.js??ruleSet[1].rules[6].oneOf[1].use[2]!../../../node_modules/svelte-loader/index.js?cssPath=D:/www/sipro-spa/resources/js/Shared/LoadingButton.svelte.12.css!./LoadingButton.svelte */ "./node_modules/css-loader/dist/cjs.js??ruleSet[1].rules[6].oneOf[1].use[1]!./node_modules/postcss-loader/dist/cjs.js??ruleSet[1].rules[6].oneOf[1].use[2]!./node_modules/svelte-loader/index.js?cssPath=D:/www/sipro-spa/resources/js/Shared/LoadingButton.svelte.12.css!./resources/js/Shared/LoadingButton.svelte");
 
             
 
@@ -32534,17 +32534,17 @@ var options = {};
 options.insert = "head";
 options.singleton = false;
 
-var update = _node_modules_style_loader_dist_runtime_injectStylesIntoStyleTag_js__WEBPACK_IMPORTED_MODULE_0___default()(_node_modules_css_loader_dist_cjs_js_ruleSet_1_rules_6_oneOf_1_use_1_node_modules_postcss_loader_dist_cjs_js_ruleSet_1_rules_6_oneOf_1_use_2_node_modules_svelte_loader_index_js_cssPath_D_www_sipro_spa_resources_js_Shared_LoadingButton_svelte_14_css_LoadingButton_svelte__WEBPACK_IMPORTED_MODULE_1__["default"], options);
+var update = _node_modules_style_loader_dist_runtime_injectStylesIntoStyleTag_js__WEBPACK_IMPORTED_MODULE_0___default()(_node_modules_css_loader_dist_cjs_js_ruleSet_1_rules_6_oneOf_1_use_1_node_modules_postcss_loader_dist_cjs_js_ruleSet_1_rules_6_oneOf_1_use_2_node_modules_svelte_loader_index_js_cssPath_D_www_sipro_spa_resources_js_Shared_LoadingButton_svelte_12_css_LoadingButton_svelte__WEBPACK_IMPORTED_MODULE_1__["default"], options);
 
 
 
-/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (_node_modules_css_loader_dist_cjs_js_ruleSet_1_rules_6_oneOf_1_use_1_node_modules_postcss_loader_dist_cjs_js_ruleSet_1_rules_6_oneOf_1_use_2_node_modules_svelte_loader_index_js_cssPath_D_www_sipro_spa_resources_js_Shared_LoadingButton_svelte_14_css_LoadingButton_svelte__WEBPACK_IMPORTED_MODULE_1__["default"].locals || {});
+/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (_node_modules_css_loader_dist_cjs_js_ruleSet_1_rules_6_oneOf_1_use_1_node_modules_postcss_loader_dist_cjs_js_ruleSet_1_rules_6_oneOf_1_use_2_node_modules_svelte_loader_index_js_cssPath_D_www_sipro_spa_resources_js_Shared_LoadingButton_svelte_12_css_LoadingButton_svelte__WEBPACK_IMPORTED_MODULE_1__["default"].locals || {});
 
 /***/ }),
 
-/***/ "./resources/js/Shared/Select.svelte.15.css!=!./node_modules/svelte-loader/index.js?cssPath=D:/www/sipro-spa/resources/js/Shared/Select.svelte.15.css!./resources/js/Shared/Select.svelte":
+/***/ "./resources/js/Shared/Select.svelte.14.css!=!./node_modules/svelte-loader/index.js?cssPath=D:/www/sipro-spa/resources/js/Shared/Select.svelte.14.css!./resources/js/Shared/Select.svelte":
 /*!************************************************************************************************************************************************************************************************!*\
-  !*** ./resources/js/Shared/Select.svelte.15.css!=!./node_modules/svelte-loader/index.js?cssPath=D:/www/sipro-spa/resources/js/Shared/Select.svelte.15.css!./resources/js/Shared/Select.svelte ***!
+  !*** ./resources/js/Shared/Select.svelte.14.css!=!./node_modules/svelte-loader/index.js?cssPath=D:/www/sipro-spa/resources/js/Shared/Select.svelte.14.css!./resources/js/Shared/Select.svelte ***!
   \************************************************************************************************************************************************************************************************/
 /***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
 
@@ -32555,7 +32555,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ });
 /* harmony import */ var _node_modules_style_loader_dist_runtime_injectStylesIntoStyleTag_js__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! !../../../node_modules/style-loader/dist/runtime/injectStylesIntoStyleTag.js */ "./node_modules/style-loader/dist/runtime/injectStylesIntoStyleTag.js");
 /* harmony import */ var _node_modules_style_loader_dist_runtime_injectStylesIntoStyleTag_js__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_node_modules_style_loader_dist_runtime_injectStylesIntoStyleTag_js__WEBPACK_IMPORTED_MODULE_0__);
-/* harmony import */ var _node_modules_css_loader_dist_cjs_js_ruleSet_1_rules_6_oneOf_1_use_1_node_modules_postcss_loader_dist_cjs_js_ruleSet_1_rules_6_oneOf_1_use_2_node_modules_svelte_loader_index_js_cssPath_D_www_sipro_spa_resources_js_Shared_Select_svelte_15_css_Select_svelte__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! !!../../../node_modules/css-loader/dist/cjs.js??ruleSet[1].rules[6].oneOf[1].use[1]!../../../node_modules/postcss-loader/dist/cjs.js??ruleSet[1].rules[6].oneOf[1].use[2]!../../../node_modules/svelte-loader/index.js?cssPath=D:/www/sipro-spa/resources/js/Shared/Select.svelte.15.css!./Select.svelte */ "./node_modules/css-loader/dist/cjs.js??ruleSet[1].rules[6].oneOf[1].use[1]!./node_modules/postcss-loader/dist/cjs.js??ruleSet[1].rules[6].oneOf[1].use[2]!./node_modules/svelte-loader/index.js?cssPath=D:/www/sipro-spa/resources/js/Shared/Select.svelte.15.css!./resources/js/Shared/Select.svelte");
+/* harmony import */ var _node_modules_css_loader_dist_cjs_js_ruleSet_1_rules_6_oneOf_1_use_1_node_modules_postcss_loader_dist_cjs_js_ruleSet_1_rules_6_oneOf_1_use_2_node_modules_svelte_loader_index_js_cssPath_D_www_sipro_spa_resources_js_Shared_Select_svelte_14_css_Select_svelte__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! !!../../../node_modules/css-loader/dist/cjs.js??ruleSet[1].rules[6].oneOf[1].use[1]!../../../node_modules/postcss-loader/dist/cjs.js??ruleSet[1].rules[6].oneOf[1].use[2]!../../../node_modules/svelte-loader/index.js?cssPath=D:/www/sipro-spa/resources/js/Shared/Select.svelte.14.css!./Select.svelte */ "./node_modules/css-loader/dist/cjs.js??ruleSet[1].rules[6].oneOf[1].use[1]!./node_modules/postcss-loader/dist/cjs.js??ruleSet[1].rules[6].oneOf[1].use[2]!./node_modules/svelte-loader/index.js?cssPath=D:/www/sipro-spa/resources/js/Shared/Select.svelte.14.css!./resources/js/Shared/Select.svelte");
 
             
 
@@ -32564,17 +32564,17 @@ var options = {};
 options.insert = "head";
 options.singleton = false;
 
-var update = _node_modules_style_loader_dist_runtime_injectStylesIntoStyleTag_js__WEBPACK_IMPORTED_MODULE_0___default()(_node_modules_css_loader_dist_cjs_js_ruleSet_1_rules_6_oneOf_1_use_1_node_modules_postcss_loader_dist_cjs_js_ruleSet_1_rules_6_oneOf_1_use_2_node_modules_svelte_loader_index_js_cssPath_D_www_sipro_spa_resources_js_Shared_Select_svelte_15_css_Select_svelte__WEBPACK_IMPORTED_MODULE_1__["default"], options);
+var update = _node_modules_style_loader_dist_runtime_injectStylesIntoStyleTag_js__WEBPACK_IMPORTED_MODULE_0___default()(_node_modules_css_loader_dist_cjs_js_ruleSet_1_rules_6_oneOf_1_use_1_node_modules_postcss_loader_dist_cjs_js_ruleSet_1_rules_6_oneOf_1_use_2_node_modules_svelte_loader_index_js_cssPath_D_www_sipro_spa_resources_js_Shared_Select_svelte_14_css_Select_svelte__WEBPACK_IMPORTED_MODULE_1__["default"], options);
 
 
 
-/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (_node_modules_css_loader_dist_cjs_js_ruleSet_1_rules_6_oneOf_1_use_1_node_modules_postcss_loader_dist_cjs_js_ruleSet_1_rules_6_oneOf_1_use_2_node_modules_svelte_loader_index_js_cssPath_D_www_sipro_spa_resources_js_Shared_Select_svelte_15_css_Select_svelte__WEBPACK_IMPORTED_MODULE_1__["default"].locals || {});
+/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (_node_modules_css_loader_dist_cjs_js_ruleSet_1_rules_6_oneOf_1_use_1_node_modules_postcss_loader_dist_cjs_js_ruleSet_1_rules_6_oneOf_1_use_2_node_modules_svelte_loader_index_js_cssPath_D_www_sipro_spa_resources_js_Shared_Select_svelte_14_css_Select_svelte__WEBPACK_IMPORTED_MODULE_1__["default"].locals || {});
 
 /***/ }),
 
-/***/ "./resources/js/Shared/SelectMulti.svelte.17.css!=!./node_modules/svelte-loader/index.js?cssPath=D:/www/sipro-spa/resources/js/Shared/SelectMulti.svelte.17.css!./resources/js/Shared/SelectMulti.svelte":
+/***/ "./resources/js/Shared/SelectMulti.svelte.16.css!=!./node_modules/svelte-loader/index.js?cssPath=D:/www/sipro-spa/resources/js/Shared/SelectMulti.svelte.16.css!./resources/js/Shared/SelectMulti.svelte":
 /*!***************************************************************************************************************************************************************************************************************!*\
-  !*** ./resources/js/Shared/SelectMulti.svelte.17.css!=!./node_modules/svelte-loader/index.js?cssPath=D:/www/sipro-spa/resources/js/Shared/SelectMulti.svelte.17.css!./resources/js/Shared/SelectMulti.svelte ***!
+  !*** ./resources/js/Shared/SelectMulti.svelte.16.css!=!./node_modules/svelte-loader/index.js?cssPath=D:/www/sipro-spa/resources/js/Shared/SelectMulti.svelte.16.css!./resources/js/Shared/SelectMulti.svelte ***!
   \***************************************************************************************************************************************************************************************************************/
 /***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
 
@@ -32585,7 +32585,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ });
 /* harmony import */ var _node_modules_style_loader_dist_runtime_injectStylesIntoStyleTag_js__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! !../../../node_modules/style-loader/dist/runtime/injectStylesIntoStyleTag.js */ "./node_modules/style-loader/dist/runtime/injectStylesIntoStyleTag.js");
 /* harmony import */ var _node_modules_style_loader_dist_runtime_injectStylesIntoStyleTag_js__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_node_modules_style_loader_dist_runtime_injectStylesIntoStyleTag_js__WEBPACK_IMPORTED_MODULE_0__);
-/* harmony import */ var _node_modules_css_loader_dist_cjs_js_ruleSet_1_rules_6_oneOf_1_use_1_node_modules_postcss_loader_dist_cjs_js_ruleSet_1_rules_6_oneOf_1_use_2_node_modules_svelte_loader_index_js_cssPath_D_www_sipro_spa_resources_js_Shared_SelectMulti_svelte_17_css_SelectMulti_svelte__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! !!../../../node_modules/css-loader/dist/cjs.js??ruleSet[1].rules[6].oneOf[1].use[1]!../../../node_modules/postcss-loader/dist/cjs.js??ruleSet[1].rules[6].oneOf[1].use[2]!../../../node_modules/svelte-loader/index.js?cssPath=D:/www/sipro-spa/resources/js/Shared/SelectMulti.svelte.17.css!./SelectMulti.svelte */ "./node_modules/css-loader/dist/cjs.js??ruleSet[1].rules[6].oneOf[1].use[1]!./node_modules/postcss-loader/dist/cjs.js??ruleSet[1].rules[6].oneOf[1].use[2]!./node_modules/svelte-loader/index.js?cssPath=D:/www/sipro-spa/resources/js/Shared/SelectMulti.svelte.17.css!./resources/js/Shared/SelectMulti.svelte");
+/* harmony import */ var _node_modules_css_loader_dist_cjs_js_ruleSet_1_rules_6_oneOf_1_use_1_node_modules_postcss_loader_dist_cjs_js_ruleSet_1_rules_6_oneOf_1_use_2_node_modules_svelte_loader_index_js_cssPath_D_www_sipro_spa_resources_js_Shared_SelectMulti_svelte_16_css_SelectMulti_svelte__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! !!../../../node_modules/css-loader/dist/cjs.js??ruleSet[1].rules[6].oneOf[1].use[1]!../../../node_modules/postcss-loader/dist/cjs.js??ruleSet[1].rules[6].oneOf[1].use[2]!../../../node_modules/svelte-loader/index.js?cssPath=D:/www/sipro-spa/resources/js/Shared/SelectMulti.svelte.16.css!./SelectMulti.svelte */ "./node_modules/css-loader/dist/cjs.js??ruleSet[1].rules[6].oneOf[1].use[1]!./node_modules/postcss-loader/dist/cjs.js??ruleSet[1].rules[6].oneOf[1].use[2]!./node_modules/svelte-loader/index.js?cssPath=D:/www/sipro-spa/resources/js/Shared/SelectMulti.svelte.16.css!./resources/js/Shared/SelectMulti.svelte");
 
             
 
@@ -32594,17 +32594,17 @@ var options = {};
 options.insert = "head";
 options.singleton = false;
 
-var update = _node_modules_style_loader_dist_runtime_injectStylesIntoStyleTag_js__WEBPACK_IMPORTED_MODULE_0___default()(_node_modules_css_loader_dist_cjs_js_ruleSet_1_rules_6_oneOf_1_use_1_node_modules_postcss_loader_dist_cjs_js_ruleSet_1_rules_6_oneOf_1_use_2_node_modules_svelte_loader_index_js_cssPath_D_www_sipro_spa_resources_js_Shared_SelectMulti_svelte_17_css_SelectMulti_svelte__WEBPACK_IMPORTED_MODULE_1__["default"], options);
+var update = _node_modules_style_loader_dist_runtime_injectStylesIntoStyleTag_js__WEBPACK_IMPORTED_MODULE_0___default()(_node_modules_css_loader_dist_cjs_js_ruleSet_1_rules_6_oneOf_1_use_1_node_modules_postcss_loader_dist_cjs_js_ruleSet_1_rules_6_oneOf_1_use_2_node_modules_svelte_loader_index_js_cssPath_D_www_sipro_spa_resources_js_Shared_SelectMulti_svelte_16_css_SelectMulti_svelte__WEBPACK_IMPORTED_MODULE_1__["default"], options);
 
 
 
-/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (_node_modules_css_loader_dist_cjs_js_ruleSet_1_rules_6_oneOf_1_use_1_node_modules_postcss_loader_dist_cjs_js_ruleSet_1_rules_6_oneOf_1_use_2_node_modules_svelte_loader_index_js_cssPath_D_www_sipro_spa_resources_js_Shared_SelectMulti_svelte_17_css_SelectMulti_svelte__WEBPACK_IMPORTED_MODULE_1__["default"].locals || {});
+/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (_node_modules_css_loader_dist_cjs_js_ruleSet_1_rules_6_oneOf_1_use_1_node_modules_postcss_loader_dist_cjs_js_ruleSet_1_rules_6_oneOf_1_use_2_node_modules_svelte_loader_index_js_cssPath_D_www_sipro_spa_resources_js_Shared_SelectMulti_svelte_16_css_SelectMulti_svelte__WEBPACK_IMPORTED_MODULE_1__["default"].locals || {});
 
 /***/ }),
 
-/***/ "./resources/js/Shared/Tags.svelte.18.css!=!./node_modules/svelte-loader/index.js?cssPath=D:/www/sipro-spa/resources/js/Shared/Tags.svelte.18.css!./resources/js/Shared/Tags.svelte":
+/***/ "./resources/js/Shared/Tags.svelte.17.css!=!./node_modules/svelte-loader/index.js?cssPath=D:/www/sipro-spa/resources/js/Shared/Tags.svelte.17.css!./resources/js/Shared/Tags.svelte":
 /*!******************************************************************************************************************************************************************************************!*\
-  !*** ./resources/js/Shared/Tags.svelte.18.css!=!./node_modules/svelte-loader/index.js?cssPath=D:/www/sipro-spa/resources/js/Shared/Tags.svelte.18.css!./resources/js/Shared/Tags.svelte ***!
+  !*** ./resources/js/Shared/Tags.svelte.17.css!=!./node_modules/svelte-loader/index.js?cssPath=D:/www/sipro-spa/resources/js/Shared/Tags.svelte.17.css!./resources/js/Shared/Tags.svelte ***!
   \******************************************************************************************************************************************************************************************/
 /***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
 
@@ -32615,7 +32615,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ });
 /* harmony import */ var _node_modules_style_loader_dist_runtime_injectStylesIntoStyleTag_js__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! !../../../node_modules/style-loader/dist/runtime/injectStylesIntoStyleTag.js */ "./node_modules/style-loader/dist/runtime/injectStylesIntoStyleTag.js");
 /* harmony import */ var _node_modules_style_loader_dist_runtime_injectStylesIntoStyleTag_js__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_node_modules_style_loader_dist_runtime_injectStylesIntoStyleTag_js__WEBPACK_IMPORTED_MODULE_0__);
-/* harmony import */ var _node_modules_css_loader_dist_cjs_js_ruleSet_1_rules_6_oneOf_1_use_1_node_modules_postcss_loader_dist_cjs_js_ruleSet_1_rules_6_oneOf_1_use_2_node_modules_svelte_loader_index_js_cssPath_D_www_sipro_spa_resources_js_Shared_Tags_svelte_18_css_Tags_svelte__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! !!../../../node_modules/css-loader/dist/cjs.js??ruleSet[1].rules[6].oneOf[1].use[1]!../../../node_modules/postcss-loader/dist/cjs.js??ruleSet[1].rules[6].oneOf[1].use[2]!../../../node_modules/svelte-loader/index.js?cssPath=D:/www/sipro-spa/resources/js/Shared/Tags.svelte.18.css!./Tags.svelte */ "./node_modules/css-loader/dist/cjs.js??ruleSet[1].rules[6].oneOf[1].use[1]!./node_modules/postcss-loader/dist/cjs.js??ruleSet[1].rules[6].oneOf[1].use[2]!./node_modules/svelte-loader/index.js?cssPath=D:/www/sipro-spa/resources/js/Shared/Tags.svelte.18.css!./resources/js/Shared/Tags.svelte");
+/* harmony import */ var _node_modules_css_loader_dist_cjs_js_ruleSet_1_rules_6_oneOf_1_use_1_node_modules_postcss_loader_dist_cjs_js_ruleSet_1_rules_6_oneOf_1_use_2_node_modules_svelte_loader_index_js_cssPath_D_www_sipro_spa_resources_js_Shared_Tags_svelte_17_css_Tags_svelte__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! !!../../../node_modules/css-loader/dist/cjs.js??ruleSet[1].rules[6].oneOf[1].use[1]!../../../node_modules/postcss-loader/dist/cjs.js??ruleSet[1].rules[6].oneOf[1].use[2]!../../../node_modules/svelte-loader/index.js?cssPath=D:/www/sipro-spa/resources/js/Shared/Tags.svelte.17.css!./Tags.svelte */ "./node_modules/css-loader/dist/cjs.js??ruleSet[1].rules[6].oneOf[1].use[1]!./node_modules/postcss-loader/dist/cjs.js??ruleSet[1].rules[6].oneOf[1].use[2]!./node_modules/svelte-loader/index.js?cssPath=D:/www/sipro-spa/resources/js/Shared/Tags.svelte.17.css!./resources/js/Shared/Tags.svelte");
 
             
 
@@ -32624,11 +32624,11 @@ var options = {};
 options.insert = "head";
 options.singleton = false;
 
-var update = _node_modules_style_loader_dist_runtime_injectStylesIntoStyleTag_js__WEBPACK_IMPORTED_MODULE_0___default()(_node_modules_css_loader_dist_cjs_js_ruleSet_1_rules_6_oneOf_1_use_1_node_modules_postcss_loader_dist_cjs_js_ruleSet_1_rules_6_oneOf_1_use_2_node_modules_svelte_loader_index_js_cssPath_D_www_sipro_spa_resources_js_Shared_Tags_svelte_18_css_Tags_svelte__WEBPACK_IMPORTED_MODULE_1__["default"], options);
+var update = _node_modules_style_loader_dist_runtime_injectStylesIntoStyleTag_js__WEBPACK_IMPORTED_MODULE_0___default()(_node_modules_css_loader_dist_cjs_js_ruleSet_1_rules_6_oneOf_1_use_1_node_modules_postcss_loader_dist_cjs_js_ruleSet_1_rules_6_oneOf_1_use_2_node_modules_svelte_loader_index_js_cssPath_D_www_sipro_spa_resources_js_Shared_Tags_svelte_17_css_Tags_svelte__WEBPACK_IMPORTED_MODULE_1__["default"], options);
 
 
 
-/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (_node_modules_css_loader_dist_cjs_js_ruleSet_1_rules_6_oneOf_1_use_1_node_modules_postcss_loader_dist_cjs_js_ruleSet_1_rules_6_oneOf_1_use_2_node_modules_svelte_loader_index_js_cssPath_D_www_sipro_spa_resources_js_Shared_Tags_svelte_18_css_Tags_svelte__WEBPACK_IMPORTED_MODULE_1__["default"].locals || {});
+/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (_node_modules_css_loader_dist_cjs_js_ruleSet_1_rules_6_oneOf_1_use_1_node_modules_postcss_loader_dist_cjs_js_ruleSet_1_rules_6_oneOf_1_use_2_node_modules_svelte_loader_index_js_cssPath_D_www_sipro_spa_resources_js_Shared_Tags_svelte_17_css_Tags_svelte__WEBPACK_IMPORTED_MODULE_1__["default"].locals || {});
 
 /***/ }),
 
@@ -45930,7 +45930,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _utils__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./utils */ "./node_modules/svelte-loading-spinners/dist/utils.js");
 /* harmony import */ var D_www_sipro_spa_node_modules_svelte_loader_lib_hot_api_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./node_modules/svelte-loader/lib/hot-api.js */ "./node_modules/svelte-loader/lib/hot-api.js");
 /* harmony import */ var D_www_sipro_spa_node_modules_svelte_hmr_runtime_proxy_adapter_dom_js__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./node_modules/svelte-hmr/runtime/proxy-adapter-dom.js */ "./node_modules/svelte-hmr/runtime/proxy-adapter-dom.js");
-/* harmony import */ var D_www_sipro_spa_node_modules_svelte_loading_spinners_dist_BarLoader_svelte_40_css_svelte_loader_cssPath_D_www_sipro_spa_node_modules_svelte_loading_spinners_dist_BarLoader_svelte_40_css_D_www_sipro_spa_node_modules_svelte_loading_spinners_dist_BarLoader_svelte__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./node_modules/svelte-loading-spinners/dist/BarLoader.svelte.40.css!=!svelte-loader?cssPath=D:/www/sipro-spa/node_modules/svelte-loading-spinners/dist/BarLoader.svelte.40.css!./node_modules/svelte-loading-spinners/dist/BarLoader.svelte */ "./node_modules/svelte-loading-spinners/dist/BarLoader.svelte.40.css!=!./node_modules/svelte-loader/index.js?cssPath=D:/www/sipro-spa/node_modules/svelte-loading-spinners/dist/BarLoader.svelte.40.css!./node_modules/svelte-loading-spinners/dist/BarLoader.svelte");
+/* harmony import */ var D_www_sipro_spa_node_modules_svelte_loading_spinners_dist_BarLoader_svelte_39_css_svelte_loader_cssPath_D_www_sipro_spa_node_modules_svelte_loading_spinners_dist_BarLoader_svelte_39_css_D_www_sipro_spa_node_modules_svelte_loading_spinners_dist_BarLoader_svelte__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./node_modules/svelte-loading-spinners/dist/BarLoader.svelte.39.css!=!svelte-loader?cssPath=D:/www/sipro-spa/node_modules/svelte-loading-spinners/dist/BarLoader.svelte.39.css!./node_modules/svelte-loading-spinners/dist/BarLoader.svelte */ "./node_modules/svelte-loading-spinners/dist/BarLoader.svelte.39.css!=!./node_modules/svelte-loader/index.js?cssPath=D:/www/sipro-spa/node_modules/svelte-loading-spinners/dist/BarLoader.svelte.39.css!./node_modules/svelte-loading-spinners/dist/BarLoader.svelte");
 /* module decorator */ module = __webpack_require__.hmd(module);
 /* node_modules\svelte-loading-spinners\dist\BarLoader.svelte generated by Svelte v3.49.0 */
 
@@ -46347,7 +46347,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var svelte_internal__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! svelte/internal */ "./node_modules/svelte/internal/index.mjs");
 /* harmony import */ var D_www_sipro_spa_node_modules_svelte_loader_lib_hot_api_js__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./node_modules/svelte-loader/lib/hot-api.js */ "./node_modules/svelte-loader/lib/hot-api.js");
 /* harmony import */ var D_www_sipro_spa_node_modules_svelte_hmr_runtime_proxy_adapter_dom_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./node_modules/svelte-hmr/runtime/proxy-adapter-dom.js */ "./node_modules/svelte-hmr/runtime/proxy-adapter-dom.js");
-/* harmony import */ var D_www_sipro_spa_node_modules_svelte_loading_spinners_dist_Circle2_svelte_36_css_svelte_loader_cssPath_D_www_sipro_spa_node_modules_svelte_loading_spinners_dist_Circle2_svelte_36_css_D_www_sipro_spa_node_modules_svelte_loading_spinners_dist_Circle2_svelte__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./node_modules/svelte-loading-spinners/dist/Circle2.svelte.36.css!=!svelte-loader?cssPath=D:/www/sipro-spa/node_modules/svelte-loading-spinners/dist/Circle2.svelte.36.css!./node_modules/svelte-loading-spinners/dist/Circle2.svelte */ "./node_modules/svelte-loading-spinners/dist/Circle2.svelte.36.css!=!./node_modules/svelte-loader/index.js?cssPath=D:/www/sipro-spa/node_modules/svelte-loading-spinners/dist/Circle2.svelte.36.css!./node_modules/svelte-loading-spinners/dist/Circle2.svelte");
+/* harmony import */ var D_www_sipro_spa_node_modules_svelte_loading_spinners_dist_Circle2_svelte_31_css_svelte_loader_cssPath_D_www_sipro_spa_node_modules_svelte_loading_spinners_dist_Circle2_svelte_31_css_D_www_sipro_spa_node_modules_svelte_loading_spinners_dist_Circle2_svelte__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./node_modules/svelte-loading-spinners/dist/Circle2.svelte.31.css!=!svelte-loader?cssPath=D:/www/sipro-spa/node_modules/svelte-loading-spinners/dist/Circle2.svelte.31.css!./node_modules/svelte-loading-spinners/dist/Circle2.svelte */ "./node_modules/svelte-loading-spinners/dist/Circle2.svelte.31.css!=!./node_modules/svelte-loader/index.js?cssPath=D:/www/sipro-spa/node_modules/svelte-loading-spinners/dist/Circle2.svelte.31.css!./node_modules/svelte-loading-spinners/dist/Circle2.svelte");
 /* module decorator */ module = __webpack_require__.hmd(module);
 /* node_modules\svelte-loading-spinners\dist\Circle2.svelte generated by Svelte v3.49.0 */
 
@@ -46483,7 +46483,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var svelte_internal__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! svelte/internal */ "./node_modules/svelte/internal/index.mjs");
 /* harmony import */ var D_www_sipro_spa_node_modules_svelte_loader_lib_hot_api_js__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./node_modules/svelte-loader/lib/hot-api.js */ "./node_modules/svelte-loader/lib/hot-api.js");
 /* harmony import */ var D_www_sipro_spa_node_modules_svelte_hmr_runtime_proxy_adapter_dom_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./node_modules/svelte-hmr/runtime/proxy-adapter-dom.js */ "./node_modules/svelte-hmr/runtime/proxy-adapter-dom.js");
-/* harmony import */ var D_www_sipro_spa_node_modules_svelte_loading_spinners_dist_Circle3_svelte_33_css_svelte_loader_cssPath_D_www_sipro_spa_node_modules_svelte_loading_spinners_dist_Circle3_svelte_33_css_D_www_sipro_spa_node_modules_svelte_loading_spinners_dist_Circle3_svelte__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./node_modules/svelte-loading-spinners/dist/Circle3.svelte.33.css!=!svelte-loader?cssPath=D:/www/sipro-spa/node_modules/svelte-loading-spinners/dist/Circle3.svelte.33.css!./node_modules/svelte-loading-spinners/dist/Circle3.svelte */ "./node_modules/svelte-loading-spinners/dist/Circle3.svelte.33.css!=!./node_modules/svelte-loader/index.js?cssPath=D:/www/sipro-spa/node_modules/svelte-loading-spinners/dist/Circle3.svelte.33.css!./node_modules/svelte-loading-spinners/dist/Circle3.svelte");
+/* harmony import */ var D_www_sipro_spa_node_modules_svelte_loading_spinners_dist_Circle3_svelte_36_css_svelte_loader_cssPath_D_www_sipro_spa_node_modules_svelte_loading_spinners_dist_Circle3_svelte_36_css_D_www_sipro_spa_node_modules_svelte_loading_spinners_dist_Circle3_svelte__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./node_modules/svelte-loading-spinners/dist/Circle3.svelte.36.css!=!svelte-loader?cssPath=D:/www/sipro-spa/node_modules/svelte-loading-spinners/dist/Circle3.svelte.36.css!./node_modules/svelte-loading-spinners/dist/Circle3.svelte */ "./node_modules/svelte-loading-spinners/dist/Circle3.svelte.36.css!=!./node_modules/svelte-loader/index.js?cssPath=D:/www/sipro-spa/node_modules/svelte-loading-spinners/dist/Circle3.svelte.36.css!./node_modules/svelte-loading-spinners/dist/Circle3.svelte");
 /* module decorator */ module = __webpack_require__.hmd(module);
 /* node_modules\svelte-loading-spinners\dist\Circle3.svelte generated by Svelte v3.49.0 */
 
@@ -46621,7 +46621,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var svelte_internal__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! svelte/internal */ "./node_modules/svelte/internal/index.mjs");
 /* harmony import */ var D_www_sipro_spa_node_modules_svelte_loader_lib_hot_api_js__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./node_modules/svelte-loader/lib/hot-api.js */ "./node_modules/svelte-loader/lib/hot-api.js");
 /* harmony import */ var D_www_sipro_spa_node_modules_svelte_hmr_runtime_proxy_adapter_dom_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./node_modules/svelte-hmr/runtime/proxy-adapter-dom.js */ "./node_modules/svelte-hmr/runtime/proxy-adapter-dom.js");
-/* harmony import */ var D_www_sipro_spa_node_modules_svelte_loading_spinners_dist_Clock_svelte_52_css_svelte_loader_cssPath_D_www_sipro_spa_node_modules_svelte_loading_spinners_dist_Clock_svelte_52_css_D_www_sipro_spa_node_modules_svelte_loading_spinners_dist_Clock_svelte__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./node_modules/svelte-loading-spinners/dist/Clock.svelte.52.css!=!svelte-loader?cssPath=D:/www/sipro-spa/node_modules/svelte-loading-spinners/dist/Clock.svelte.52.css!./node_modules/svelte-loading-spinners/dist/Clock.svelte */ "./node_modules/svelte-loading-spinners/dist/Clock.svelte.52.css!=!./node_modules/svelte-loader/index.js?cssPath=D:/www/sipro-spa/node_modules/svelte-loading-spinners/dist/Clock.svelte.52.css!./node_modules/svelte-loading-spinners/dist/Clock.svelte");
+/* harmony import */ var D_www_sipro_spa_node_modules_svelte_loading_spinners_dist_Clock_svelte_53_css_svelte_loader_cssPath_D_www_sipro_spa_node_modules_svelte_loading_spinners_dist_Clock_svelte_53_css_D_www_sipro_spa_node_modules_svelte_loading_spinners_dist_Clock_svelte__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./node_modules/svelte-loading-spinners/dist/Clock.svelte.53.css!=!svelte-loader?cssPath=D:/www/sipro-spa/node_modules/svelte-loading-spinners/dist/Clock.svelte.53.css!./node_modules/svelte-loading-spinners/dist/Clock.svelte */ "./node_modules/svelte-loading-spinners/dist/Clock.svelte.53.css!=!./node_modules/svelte-loader/index.js?cssPath=D:/www/sipro-spa/node_modules/svelte-loading-spinners/dist/Clock.svelte.53.css!./node_modules/svelte-loading-spinners/dist/Clock.svelte");
 /* module decorator */ module = __webpack_require__.hmd(module);
 /* node_modules\svelte-loading-spinners\dist\Clock.svelte generated by Svelte v3.49.0 */
 
@@ -46707,7 +46707,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var svelte_internal__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! svelte/internal */ "./node_modules/svelte/internal/index.mjs");
 /* harmony import */ var D_www_sipro_spa_node_modules_svelte_loader_lib_hot_api_js__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./node_modules/svelte-loader/lib/hot-api.js */ "./node_modules/svelte-loader/lib/hot-api.js");
 /* harmony import */ var D_www_sipro_spa_node_modules_svelte_hmr_runtime_proxy_adapter_dom_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./node_modules/svelte-hmr/runtime/proxy-adapter-dom.js */ "./node_modules/svelte-hmr/runtime/proxy-adapter-dom.js");
-/* harmony import */ var D_www_sipro_spa_node_modules_svelte_loading_spinners_dist_Diamonds_svelte_55_css_svelte_loader_cssPath_D_www_sipro_spa_node_modules_svelte_loading_spinners_dist_Diamonds_svelte_55_css_D_www_sipro_spa_node_modules_svelte_loading_spinners_dist_Diamonds_svelte__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./node_modules/svelte-loading-spinners/dist/Diamonds.svelte.55.css!=!svelte-loader?cssPath=D:/www/sipro-spa/node_modules/svelte-loading-spinners/dist/Diamonds.svelte.55.css!./node_modules/svelte-loading-spinners/dist/Diamonds.svelte */ "./node_modules/svelte-loading-spinners/dist/Diamonds.svelte.55.css!=!./node_modules/svelte-loader/index.js?cssPath=D:/www/sipro-spa/node_modules/svelte-loading-spinners/dist/Diamonds.svelte.55.css!./node_modules/svelte-loading-spinners/dist/Diamonds.svelte");
+/* harmony import */ var D_www_sipro_spa_node_modules_svelte_loading_spinners_dist_Diamonds_svelte_54_css_svelte_loader_cssPath_D_www_sipro_spa_node_modules_svelte_loading_spinners_dist_Diamonds_svelte_54_css_D_www_sipro_spa_node_modules_svelte_loading_spinners_dist_Diamonds_svelte__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./node_modules/svelte-loading-spinners/dist/Diamonds.svelte.54.css!=!svelte-loader?cssPath=D:/www/sipro-spa/node_modules/svelte-loading-spinners/dist/Diamonds.svelte.54.css!./node_modules/svelte-loading-spinners/dist/Diamonds.svelte */ "./node_modules/svelte-loading-spinners/dist/Diamonds.svelte.54.css!=!./node_modules/svelte-loader/index.js?cssPath=D:/www/sipro-spa/node_modules/svelte-loading-spinners/dist/Diamonds.svelte.54.css!./node_modules/svelte-loading-spinners/dist/Diamonds.svelte");
 /* module decorator */ module = __webpack_require__.hmd(module);
 /* node_modules\svelte-loading-spinners\dist\Diamonds.svelte generated by Svelte v3.49.0 */
 
@@ -46812,7 +46812,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _utils__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./utils */ "./node_modules/svelte-loading-spinners/dist/utils.js");
 /* harmony import */ var D_www_sipro_spa_node_modules_svelte_loader_lib_hot_api_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./node_modules/svelte-loader/lib/hot-api.js */ "./node_modules/svelte-loader/lib/hot-api.js");
 /* harmony import */ var D_www_sipro_spa_node_modules_svelte_hmr_runtime_proxy_adapter_dom_js__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./node_modules/svelte-hmr/runtime/proxy-adapter-dom.js */ "./node_modules/svelte-hmr/runtime/proxy-adapter-dom.js");
-/* harmony import */ var D_www_sipro_spa_node_modules_svelte_loading_spinners_dist_DoubleBounce_svelte_38_css_svelte_loader_cssPath_D_www_sipro_spa_node_modules_svelte_loading_spinners_dist_DoubleBounce_svelte_38_css_D_www_sipro_spa_node_modules_svelte_loading_spinners_dist_DoubleBounce_svelte__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./node_modules/svelte-loading-spinners/dist/DoubleBounce.svelte.38.css!=!svelte-loader?cssPath=D:/www/sipro-spa/node_modules/svelte-loading-spinners/dist/DoubleBounce.svelte.38.css!./node_modules/svelte-loading-spinners/dist/DoubleBounce.svelte */ "./node_modules/svelte-loading-spinners/dist/DoubleBounce.svelte.38.css!=!./node_modules/svelte-loader/index.js?cssPath=D:/www/sipro-spa/node_modules/svelte-loading-spinners/dist/DoubleBounce.svelte.38.css!./node_modules/svelte-loading-spinners/dist/DoubleBounce.svelte");
+/* harmony import */ var D_www_sipro_spa_node_modules_svelte_loading_spinners_dist_DoubleBounce_svelte_34_css_svelte_loader_cssPath_D_www_sipro_spa_node_modules_svelte_loading_spinners_dist_DoubleBounce_svelte_34_css_D_www_sipro_spa_node_modules_svelte_loading_spinners_dist_DoubleBounce_svelte__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./node_modules/svelte-loading-spinners/dist/DoubleBounce.svelte.34.css!=!svelte-loader?cssPath=D:/www/sipro-spa/node_modules/svelte-loading-spinners/dist/DoubleBounce.svelte.34.css!./node_modules/svelte-loading-spinners/dist/DoubleBounce.svelte */ "./node_modules/svelte-loading-spinners/dist/DoubleBounce.svelte.34.css!=!./node_modules/svelte-loader/index.js?cssPath=D:/www/sipro-spa/node_modules/svelte-loading-spinners/dist/DoubleBounce.svelte.34.css!./node_modules/svelte-loading-spinners/dist/DoubleBounce.svelte");
 /* module decorator */ module = __webpack_require__.hmd(module);
 /* node_modules\svelte-loading-spinners\dist\DoubleBounce.svelte generated by Svelte v3.49.0 */
 
@@ -46971,7 +46971,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var svelte_internal__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! svelte/internal */ "./node_modules/svelte/internal/index.mjs");
 /* harmony import */ var D_www_sipro_spa_node_modules_svelte_loader_lib_hot_api_js__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./node_modules/svelte-loader/lib/hot-api.js */ "./node_modules/svelte-loader/lib/hot-api.js");
 /* harmony import */ var D_www_sipro_spa_node_modules_svelte_hmr_runtime_proxy_adapter_dom_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./node_modules/svelte-hmr/runtime/proxy-adapter-dom.js */ "./node_modules/svelte-hmr/runtime/proxy-adapter-dom.js");
-/* harmony import */ var D_www_sipro_spa_node_modules_svelte_loading_spinners_dist_Firework_svelte_46_css_svelte_loader_cssPath_D_www_sipro_spa_node_modules_svelte_loading_spinners_dist_Firework_svelte_46_css_D_www_sipro_spa_node_modules_svelte_loading_spinners_dist_Firework_svelte__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./node_modules/svelte-loading-spinners/dist/Firework.svelte.46.css!=!svelte-loader?cssPath=D:/www/sipro-spa/node_modules/svelte-loading-spinners/dist/Firework.svelte.46.css!./node_modules/svelte-loading-spinners/dist/Firework.svelte */ "./node_modules/svelte-loading-spinners/dist/Firework.svelte.46.css!=!./node_modules/svelte-loader/index.js?cssPath=D:/www/sipro-spa/node_modules/svelte-loading-spinners/dist/Firework.svelte.46.css!./node_modules/svelte-loading-spinners/dist/Firework.svelte");
+/* harmony import */ var D_www_sipro_spa_node_modules_svelte_loading_spinners_dist_Firework_svelte_43_css_svelte_loader_cssPath_D_www_sipro_spa_node_modules_svelte_loading_spinners_dist_Firework_svelte_43_css_D_www_sipro_spa_node_modules_svelte_loading_spinners_dist_Firework_svelte__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./node_modules/svelte-loading-spinners/dist/Firework.svelte.43.css!=!svelte-loader?cssPath=D:/www/sipro-spa/node_modules/svelte-loading-spinners/dist/Firework.svelte.43.css!./node_modules/svelte-loading-spinners/dist/Firework.svelte */ "./node_modules/svelte-loading-spinners/dist/Firework.svelte.43.css!=!./node_modules/svelte-loader/index.js?cssPath=D:/www/sipro-spa/node_modules/svelte-loading-spinners/dist/Firework.svelte.43.css!./node_modules/svelte-loading-spinners/dist/Firework.svelte");
 /* module decorator */ module = __webpack_require__.hmd(module);
 /* node_modules\svelte-loading-spinners\dist\Firework.svelte generated by Svelte v3.49.0 */
 
@@ -47061,7 +47061,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var svelte_internal__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! svelte/internal */ "./node_modules/svelte/internal/index.mjs");
 /* harmony import */ var D_www_sipro_spa_node_modules_svelte_loader_lib_hot_api_js__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./node_modules/svelte-loader/lib/hot-api.js */ "./node_modules/svelte-loader/lib/hot-api.js");
 /* harmony import */ var D_www_sipro_spa_node_modules_svelte_hmr_runtime_proxy_adapter_dom_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./node_modules/svelte-hmr/runtime/proxy-adapter-dom.js */ "./node_modules/svelte-hmr/runtime/proxy-adapter-dom.js");
-/* harmony import */ var D_www_sipro_spa_node_modules_svelte_loading_spinners_dist_GoogleSpin_svelte_41_css_svelte_loader_cssPath_D_www_sipro_spa_node_modules_svelte_loading_spinners_dist_GoogleSpin_svelte_41_css_D_www_sipro_spa_node_modules_svelte_loading_spinners_dist_GoogleSpin_svelte__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./node_modules/svelte-loading-spinners/dist/GoogleSpin.svelte.41.css!=!svelte-loader?cssPath=D:/www/sipro-spa/node_modules/svelte-loading-spinners/dist/GoogleSpin.svelte.41.css!./node_modules/svelte-loading-spinners/dist/GoogleSpin.svelte */ "./node_modules/svelte-loading-spinners/dist/GoogleSpin.svelte.41.css!=!./node_modules/svelte-loader/index.js?cssPath=D:/www/sipro-spa/node_modules/svelte-loading-spinners/dist/GoogleSpin.svelte.41.css!./node_modules/svelte-loading-spinners/dist/GoogleSpin.svelte");
+/* harmony import */ var D_www_sipro_spa_node_modules_svelte_loading_spinners_dist_GoogleSpin_svelte_33_css_svelte_loader_cssPath_D_www_sipro_spa_node_modules_svelte_loading_spinners_dist_GoogleSpin_svelte_33_css_D_www_sipro_spa_node_modules_svelte_loading_spinners_dist_GoogleSpin_svelte__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./node_modules/svelte-loading-spinners/dist/GoogleSpin.svelte.33.css!=!svelte-loader?cssPath=D:/www/sipro-spa/node_modules/svelte-loading-spinners/dist/GoogleSpin.svelte.33.css!./node_modules/svelte-loading-spinners/dist/GoogleSpin.svelte */ "./node_modules/svelte-loading-spinners/dist/GoogleSpin.svelte.33.css!=!./node_modules/svelte-loader/index.js?cssPath=D:/www/sipro-spa/node_modules/svelte-loading-spinners/dist/GoogleSpin.svelte.33.css!./node_modules/svelte-loading-spinners/dist/GoogleSpin.svelte");
 /* module decorator */ module = __webpack_require__.hmd(module);
 /* node_modules\svelte-loading-spinners\dist\GoogleSpin.svelte generated by Svelte v3.49.0 */
 
@@ -47141,7 +47141,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _utils__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./utils */ "./node_modules/svelte-loading-spinners/dist/utils.js");
 /* harmony import */ var D_www_sipro_spa_node_modules_svelte_loader_lib_hot_api_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./node_modules/svelte-loader/lib/hot-api.js */ "./node_modules/svelte-loader/lib/hot-api.js");
 /* harmony import */ var D_www_sipro_spa_node_modules_svelte_hmr_runtime_proxy_adapter_dom_js__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./node_modules/svelte-hmr/runtime/proxy-adapter-dom.js */ "./node_modules/svelte-hmr/runtime/proxy-adapter-dom.js");
-/* harmony import */ var D_www_sipro_spa_node_modules_svelte_loading_spinners_dist_Jellyfish_svelte_44_css_svelte_loader_cssPath_D_www_sipro_spa_node_modules_svelte_loading_spinners_dist_Jellyfish_svelte_44_css_D_www_sipro_spa_node_modules_svelte_loading_spinners_dist_Jellyfish_svelte__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./node_modules/svelte-loading-spinners/dist/Jellyfish.svelte.44.css!=!svelte-loader?cssPath=D:/www/sipro-spa/node_modules/svelte-loading-spinners/dist/Jellyfish.svelte.44.css!./node_modules/svelte-loading-spinners/dist/Jellyfish.svelte */ "./node_modules/svelte-loading-spinners/dist/Jellyfish.svelte.44.css!=!./node_modules/svelte-loader/index.js?cssPath=D:/www/sipro-spa/node_modules/svelte-loading-spinners/dist/Jellyfish.svelte.44.css!./node_modules/svelte-loading-spinners/dist/Jellyfish.svelte");
+/* harmony import */ var D_www_sipro_spa_node_modules_svelte_loading_spinners_dist_Jellyfish_svelte_47_css_svelte_loader_cssPath_D_www_sipro_spa_node_modules_svelte_loading_spinners_dist_Jellyfish_svelte_47_css_D_www_sipro_spa_node_modules_svelte_loading_spinners_dist_Jellyfish_svelte__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./node_modules/svelte-loading-spinners/dist/Jellyfish.svelte.47.css!=!svelte-loader?cssPath=D:/www/sipro-spa/node_modules/svelte-loading-spinners/dist/Jellyfish.svelte.47.css!./node_modules/svelte-loading-spinners/dist/Jellyfish.svelte */ "./node_modules/svelte-loading-spinners/dist/Jellyfish.svelte.47.css!=!./node_modules/svelte-loader/index.js?cssPath=D:/www/sipro-spa/node_modules/svelte-loading-spinners/dist/Jellyfish.svelte.47.css!./node_modules/svelte-loading-spinners/dist/Jellyfish.svelte");
 /* module decorator */ module = __webpack_require__.hmd(module);
 /* node_modules\svelte-loading-spinners\dist\Jellyfish.svelte generated by Svelte v3.49.0 */
 
@@ -47322,7 +47322,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _utils__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./utils */ "./node_modules/svelte-loading-spinners/dist/utils.js");
 /* harmony import */ var D_www_sipro_spa_node_modules_svelte_loader_lib_hot_api_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./node_modules/svelte-loader/lib/hot-api.js */ "./node_modules/svelte-loader/lib/hot-api.js");
 /* harmony import */ var D_www_sipro_spa_node_modules_svelte_hmr_runtime_proxy_adapter_dom_js__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./node_modules/svelte-hmr/runtime/proxy-adapter-dom.js */ "./node_modules/svelte-hmr/runtime/proxy-adapter-dom.js");
-/* harmony import */ var D_www_sipro_spa_node_modules_svelte_loading_spinners_dist_Jumper_svelte_39_css_svelte_loader_cssPath_D_www_sipro_spa_node_modules_svelte_loading_spinners_dist_Jumper_svelte_39_css_D_www_sipro_spa_node_modules_svelte_loading_spinners_dist_Jumper_svelte__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./node_modules/svelte-loading-spinners/dist/Jumper.svelte.39.css!=!svelte-loader?cssPath=D:/www/sipro-spa/node_modules/svelte-loading-spinners/dist/Jumper.svelte.39.css!./node_modules/svelte-loading-spinners/dist/Jumper.svelte */ "./node_modules/svelte-loading-spinners/dist/Jumper.svelte.39.css!=!./node_modules/svelte-loader/index.js?cssPath=D:/www/sipro-spa/node_modules/svelte-loading-spinners/dist/Jumper.svelte.39.css!./node_modules/svelte-loading-spinners/dist/Jumper.svelte");
+/* harmony import */ var D_www_sipro_spa_node_modules_svelte_loading_spinners_dist_Jumper_svelte_42_css_svelte_loader_cssPath_D_www_sipro_spa_node_modules_svelte_loading_spinners_dist_Jumper_svelte_42_css_D_www_sipro_spa_node_modules_svelte_loading_spinners_dist_Jumper_svelte__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./node_modules/svelte-loading-spinners/dist/Jumper.svelte.42.css!=!svelte-loader?cssPath=D:/www/sipro-spa/node_modules/svelte-loading-spinners/dist/Jumper.svelte.42.css!./node_modules/svelte-loading-spinners/dist/Jumper.svelte */ "./node_modules/svelte-loading-spinners/dist/Jumper.svelte.42.css!=!./node_modules/svelte-loader/index.js?cssPath=D:/www/sipro-spa/node_modules/svelte-loading-spinners/dist/Jumper.svelte.42.css!./node_modules/svelte-loading-spinners/dist/Jumper.svelte");
 /* module decorator */ module = __webpack_require__.hmd(module);
 /* node_modules\svelte-loading-spinners\dist\Jumper.svelte generated by Svelte v3.49.0 */
 
@@ -47477,7 +47477,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var svelte_internal__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! svelte/internal */ "./node_modules/svelte/internal/index.mjs");
 /* harmony import */ var D_www_sipro_spa_node_modules_svelte_loader_lib_hot_api_js__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./node_modules/svelte-loader/lib/hot-api.js */ "./node_modules/svelte-loader/lib/hot-api.js");
 /* harmony import */ var D_www_sipro_spa_node_modules_svelte_hmr_runtime_proxy_adapter_dom_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./node_modules/svelte-hmr/runtime/proxy-adapter-dom.js */ "./node_modules/svelte-hmr/runtime/proxy-adapter-dom.js");
-/* harmony import */ var D_www_sipro_spa_node_modules_svelte_loading_spinners_dist_Moon_svelte_54_css_svelte_loader_cssPath_D_www_sipro_spa_node_modules_svelte_loading_spinners_dist_Moon_svelte_54_css_D_www_sipro_spa_node_modules_svelte_loading_spinners_dist_Moon_svelte__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./node_modules/svelte-loading-spinners/dist/Moon.svelte.54.css!=!svelte-loader?cssPath=D:/www/sipro-spa/node_modules/svelte-loading-spinners/dist/Moon.svelte.54.css!./node_modules/svelte-loading-spinners/dist/Moon.svelte */ "./node_modules/svelte-loading-spinners/dist/Moon.svelte.54.css!=!./node_modules/svelte-loader/index.js?cssPath=D:/www/sipro-spa/node_modules/svelte-loading-spinners/dist/Moon.svelte.54.css!./node_modules/svelte-loading-spinners/dist/Moon.svelte");
+/* harmony import */ var D_www_sipro_spa_node_modules_svelte_loading_spinners_dist_Moon_svelte_52_css_svelte_loader_cssPath_D_www_sipro_spa_node_modules_svelte_loading_spinners_dist_Moon_svelte_52_css_D_www_sipro_spa_node_modules_svelte_loading_spinners_dist_Moon_svelte__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./node_modules/svelte-loading-spinners/dist/Moon.svelte.52.css!=!svelte-loader?cssPath=D:/www/sipro-spa/node_modules/svelte-loading-spinners/dist/Moon.svelte.52.css!./node_modules/svelte-loading-spinners/dist/Moon.svelte */ "./node_modules/svelte-loading-spinners/dist/Moon.svelte.52.css!=!./node_modules/svelte-loader/index.js?cssPath=D:/www/sipro-spa/node_modules/svelte-loading-spinners/dist/Moon.svelte.52.css!./node_modules/svelte-loading-spinners/dist/Moon.svelte");
 /* module decorator */ module = __webpack_require__.hmd(module);
 /* node_modules\svelte-loading-spinners\dist\Moon.svelte generated by Svelte v3.49.0 */
 
@@ -47582,7 +47582,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _utils__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./utils */ "./node_modules/svelte-loading-spinners/dist/utils.js");
 /* harmony import */ var D_www_sipro_spa_node_modules_svelte_loader_lib_hot_api_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./node_modules/svelte-loader/lib/hot-api.js */ "./node_modules/svelte-loader/lib/hot-api.js");
 /* harmony import */ var D_www_sipro_spa_node_modules_svelte_hmr_runtime_proxy_adapter_dom_js__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./node_modules/svelte-hmr/runtime/proxy-adapter-dom.js */ "./node_modules/svelte-hmr/runtime/proxy-adapter-dom.js");
-/* harmony import */ var D_www_sipro_spa_node_modules_svelte_loading_spinners_dist_Plane_svelte_53_css_svelte_loader_cssPath_D_www_sipro_spa_node_modules_svelte_loading_spinners_dist_Plane_svelte_53_css_D_www_sipro_spa_node_modules_svelte_loading_spinners_dist_Plane_svelte__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./node_modules/svelte-loading-spinners/dist/Plane.svelte.53.css!=!svelte-loader?cssPath=D:/www/sipro-spa/node_modules/svelte-loading-spinners/dist/Plane.svelte.53.css!./node_modules/svelte-loading-spinners/dist/Plane.svelte */ "./node_modules/svelte-loading-spinners/dist/Plane.svelte.53.css!=!./node_modules/svelte-loader/index.js?cssPath=D:/www/sipro-spa/node_modules/svelte-loading-spinners/dist/Plane.svelte.53.css!./node_modules/svelte-loading-spinners/dist/Plane.svelte");
+/* harmony import */ var D_www_sipro_spa_node_modules_svelte_loading_spinners_dist_Plane_svelte_51_css_svelte_loader_cssPath_D_www_sipro_spa_node_modules_svelte_loading_spinners_dist_Plane_svelte_51_css_D_www_sipro_spa_node_modules_svelte_loading_spinners_dist_Plane_svelte__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./node_modules/svelte-loading-spinners/dist/Plane.svelte.51.css!=!svelte-loader?cssPath=D:/www/sipro-spa/node_modules/svelte-loading-spinners/dist/Plane.svelte.51.css!./node_modules/svelte-loading-spinners/dist/Plane.svelte */ "./node_modules/svelte-loading-spinners/dist/Plane.svelte.51.css!=!./node_modules/svelte-loader/index.js?cssPath=D:/www/sipro-spa/node_modules/svelte-loading-spinners/dist/Plane.svelte.51.css!./node_modules/svelte-loading-spinners/dist/Plane.svelte");
 /* module decorator */ module = __webpack_require__.hmd(module);
 /* node_modules\svelte-loading-spinners\dist\Plane.svelte generated by Svelte v3.49.0 */
 
@@ -47692,7 +47692,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _utils__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./utils */ "./node_modules/svelte-loading-spinners/dist/utils.js");
 /* harmony import */ var D_www_sipro_spa_node_modules_svelte_loader_lib_hot_api_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./node_modules/svelte-loader/lib/hot-api.js */ "./node_modules/svelte-loader/lib/hot-api.js");
 /* harmony import */ var D_www_sipro_spa_node_modules_svelte_hmr_runtime_proxy_adapter_dom_js__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./node_modules/svelte-hmr/runtime/proxy-adapter-dom.js */ "./node_modules/svelte-hmr/runtime/proxy-adapter-dom.js");
-/* harmony import */ var D_www_sipro_spa_node_modules_svelte_loading_spinners_dist_Pulse_svelte_49_css_svelte_loader_cssPath_D_www_sipro_spa_node_modules_svelte_loading_spinners_dist_Pulse_svelte_49_css_D_www_sipro_spa_node_modules_svelte_loading_spinners_dist_Pulse_svelte__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./node_modules/svelte-loading-spinners/dist/Pulse.svelte.49.css!=!svelte-loader?cssPath=D:/www/sipro-spa/node_modules/svelte-loading-spinners/dist/Pulse.svelte.49.css!./node_modules/svelte-loading-spinners/dist/Pulse.svelte */ "./node_modules/svelte-loading-spinners/dist/Pulse.svelte.49.css!=!./node_modules/svelte-loader/index.js?cssPath=D:/www/sipro-spa/node_modules/svelte-loading-spinners/dist/Pulse.svelte.49.css!./node_modules/svelte-loading-spinners/dist/Pulse.svelte");
+/* harmony import */ var D_www_sipro_spa_node_modules_svelte_loading_spinners_dist_Pulse_svelte_44_css_svelte_loader_cssPath_D_www_sipro_spa_node_modules_svelte_loading_spinners_dist_Pulse_svelte_44_css_D_www_sipro_spa_node_modules_svelte_loading_spinners_dist_Pulse_svelte__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./node_modules/svelte-loading-spinners/dist/Pulse.svelte.44.css!=!svelte-loader?cssPath=D:/www/sipro-spa/node_modules/svelte-loading-spinners/dist/Pulse.svelte.44.css!./node_modules/svelte-loading-spinners/dist/Pulse.svelte */ "./node_modules/svelte-loading-spinners/dist/Pulse.svelte.44.css!=!./node_modules/svelte-loader/index.js?cssPath=D:/www/sipro-spa/node_modules/svelte-loading-spinners/dist/Pulse.svelte.44.css!./node_modules/svelte-loading-spinners/dist/Pulse.svelte");
 /* module decorator */ module = __webpack_require__.hmd(module);
 /* node_modules\svelte-loading-spinners\dist\Pulse.svelte generated by Svelte v3.49.0 */
 
@@ -47852,7 +47852,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var svelte_internal__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! svelte/internal */ "./node_modules/svelte/internal/index.mjs");
 /* harmony import */ var D_www_sipro_spa_node_modules_svelte_loader_lib_hot_api_js__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./node_modules/svelte-loader/lib/hot-api.js */ "./node_modules/svelte-loader/lib/hot-api.js");
 /* harmony import */ var D_www_sipro_spa_node_modules_svelte_hmr_runtime_proxy_adapter_dom_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./node_modules/svelte-hmr/runtime/proxy-adapter-dom.js */ "./node_modules/svelte-hmr/runtime/proxy-adapter-dom.js");
-/* harmony import */ var D_www_sipro_spa_node_modules_svelte_loading_spinners_dist_Rainbow_svelte_45_css_svelte_loader_cssPath_D_www_sipro_spa_node_modules_svelte_loading_spinners_dist_Rainbow_svelte_45_css_D_www_sipro_spa_node_modules_svelte_loading_spinners_dist_Rainbow_svelte__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./node_modules/svelte-loading-spinners/dist/Rainbow.svelte.45.css!=!svelte-loader?cssPath=D:/www/sipro-spa/node_modules/svelte-loading-spinners/dist/Rainbow.svelte.45.css!./node_modules/svelte-loading-spinners/dist/Rainbow.svelte */ "./node_modules/svelte-loading-spinners/dist/Rainbow.svelte.45.css!=!./node_modules/svelte-loader/index.js?cssPath=D:/www/sipro-spa/node_modules/svelte-loading-spinners/dist/Rainbow.svelte.45.css!./node_modules/svelte-loading-spinners/dist/Rainbow.svelte");
+/* harmony import */ var D_www_sipro_spa_node_modules_svelte_loading_spinners_dist_Rainbow_svelte_40_css_svelte_loader_cssPath_D_www_sipro_spa_node_modules_svelte_loading_spinners_dist_Rainbow_svelte_40_css_D_www_sipro_spa_node_modules_svelte_loading_spinners_dist_Rainbow_svelte__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./node_modules/svelte-loading-spinners/dist/Rainbow.svelte.40.css!=!svelte-loader?cssPath=D:/www/sipro-spa/node_modules/svelte-loading-spinners/dist/Rainbow.svelte.40.css!./node_modules/svelte-loading-spinners/dist/Rainbow.svelte */ "./node_modules/svelte-loading-spinners/dist/Rainbow.svelte.40.css!=!./node_modules/svelte-loader/index.js?cssPath=D:/www/sipro-spa/node_modules/svelte-loading-spinners/dist/Rainbow.svelte.40.css!./node_modules/svelte-loading-spinners/dist/Rainbow.svelte");
 /* module decorator */ module = __webpack_require__.hmd(module);
 /* node_modules\svelte-loading-spinners\dist\Rainbow.svelte generated by Svelte v3.49.0 */
 
@@ -47943,7 +47943,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _utils__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./utils */ "./node_modules/svelte-loading-spinners/dist/utils.js");
 /* harmony import */ var D_www_sipro_spa_node_modules_svelte_loader_lib_hot_api_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./node_modules/svelte-loader/lib/hot-api.js */ "./node_modules/svelte-loader/lib/hot-api.js");
 /* harmony import */ var D_www_sipro_spa_node_modules_svelte_hmr_runtime_proxy_adapter_dom_js__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./node_modules/svelte-hmr/runtime/proxy-adapter-dom.js */ "./node_modules/svelte-hmr/runtime/proxy-adapter-dom.js");
-/* harmony import */ var D_www_sipro_spa_node_modules_svelte_loading_spinners_dist_RingLoader_svelte_47_css_svelte_loader_cssPath_D_www_sipro_spa_node_modules_svelte_loading_spinners_dist_RingLoader_svelte_47_css_D_www_sipro_spa_node_modules_svelte_loading_spinners_dist_RingLoader_svelte__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./node_modules/svelte-loading-spinners/dist/RingLoader.svelte.47.css!=!svelte-loader?cssPath=D:/www/sipro-spa/node_modules/svelte-loading-spinners/dist/RingLoader.svelte.47.css!./node_modules/svelte-loading-spinners/dist/RingLoader.svelte */ "./node_modules/svelte-loading-spinners/dist/RingLoader.svelte.47.css!=!./node_modules/svelte-loader/index.js?cssPath=D:/www/sipro-spa/node_modules/svelte-loading-spinners/dist/RingLoader.svelte.47.css!./node_modules/svelte-loading-spinners/dist/RingLoader.svelte");
+/* harmony import */ var D_www_sipro_spa_node_modules_svelte_loading_spinners_dist_RingLoader_svelte_41_css_svelte_loader_cssPath_D_www_sipro_spa_node_modules_svelte_loading_spinners_dist_RingLoader_svelte_41_css_D_www_sipro_spa_node_modules_svelte_loading_spinners_dist_RingLoader_svelte__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./node_modules/svelte-loading-spinners/dist/RingLoader.svelte.41.css!=!svelte-loader?cssPath=D:/www/sipro-spa/node_modules/svelte-loading-spinners/dist/RingLoader.svelte.41.css!./node_modules/svelte-loading-spinners/dist/RingLoader.svelte */ "./node_modules/svelte-loading-spinners/dist/RingLoader.svelte.41.css!=!./node_modules/svelte-loader/index.js?cssPath=D:/www/sipro-spa/node_modules/svelte-loading-spinners/dist/RingLoader.svelte.41.css!./node_modules/svelte-loading-spinners/dist/RingLoader.svelte");
 /* module decorator */ module = __webpack_require__.hmd(module);
 /* node_modules\svelte-loading-spinners\dist\RingLoader.svelte generated by Svelte v3.49.0 */
 
@@ -48096,7 +48096,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var svelte_internal__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! svelte/internal */ "./node_modules/svelte/internal/index.mjs");
 /* harmony import */ var D_www_sipro_spa_node_modules_svelte_loader_lib_hot_api_js__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./node_modules/svelte-loader/lib/hot-api.js */ "./node_modules/svelte-loader/lib/hot-api.js");
 /* harmony import */ var D_www_sipro_spa_node_modules_svelte_hmr_runtime_proxy_adapter_dom_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./node_modules/svelte-hmr/runtime/proxy-adapter-dom.js */ "./node_modules/svelte-hmr/runtime/proxy-adapter-dom.js");
-/* harmony import */ var D_www_sipro_spa_node_modules_svelte_loading_spinners_dist_ScaleOut_svelte_34_css_svelte_loader_cssPath_D_www_sipro_spa_node_modules_svelte_loading_spinners_dist_ScaleOut_svelte_34_css_D_www_sipro_spa_node_modules_svelte_loading_spinners_dist_ScaleOut_svelte__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./node_modules/svelte-loading-spinners/dist/ScaleOut.svelte.34.css!=!svelte-loader?cssPath=D:/www/sipro-spa/node_modules/svelte-loading-spinners/dist/ScaleOut.svelte.34.css!./node_modules/svelte-loading-spinners/dist/ScaleOut.svelte */ "./node_modules/svelte-loading-spinners/dist/ScaleOut.svelte.34.css!=!./node_modules/svelte-loader/index.js?cssPath=D:/www/sipro-spa/node_modules/svelte-loading-spinners/dist/ScaleOut.svelte.34.css!./node_modules/svelte-loading-spinners/dist/ScaleOut.svelte");
+/* harmony import */ var D_www_sipro_spa_node_modules_svelte_loading_spinners_dist_ScaleOut_svelte_37_css_svelte_loader_cssPath_D_www_sipro_spa_node_modules_svelte_loading_spinners_dist_ScaleOut_svelte_37_css_D_www_sipro_spa_node_modules_svelte_loading_spinners_dist_ScaleOut_svelte__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./node_modules/svelte-loading-spinners/dist/ScaleOut.svelte.37.css!=!svelte-loader?cssPath=D:/www/sipro-spa/node_modules/svelte-loading-spinners/dist/ScaleOut.svelte.37.css!./node_modules/svelte-loading-spinners/dist/ScaleOut.svelte */ "./node_modules/svelte-loading-spinners/dist/ScaleOut.svelte.37.css!=!./node_modules/svelte-loader/index.js?cssPath=D:/www/sipro-spa/node_modules/svelte-loading-spinners/dist/ScaleOut.svelte.37.css!./node_modules/svelte-loading-spinners/dist/ScaleOut.svelte");
 /* module decorator */ module = __webpack_require__.hmd(module);
 /* node_modules\svelte-loading-spinners\dist\ScaleOut.svelte generated by Svelte v3.49.0 */
 
@@ -48390,7 +48390,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var svelte_internal__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! svelte/internal */ "./node_modules/svelte/internal/index.mjs");
 /* harmony import */ var D_www_sipro_spa_node_modules_svelte_loader_lib_hot_api_js__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./node_modules/svelte-loader/lib/hot-api.js */ "./node_modules/svelte-loader/lib/hot-api.js");
 /* harmony import */ var D_www_sipro_spa_node_modules_svelte_hmr_runtime_proxy_adapter_dom_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./node_modules/svelte-hmr/runtime/proxy-adapter-dom.js */ "./node_modules/svelte-hmr/runtime/proxy-adapter-dom.js");
-/* harmony import */ var D_www_sipro_spa_node_modules_svelte_loading_spinners_dist_Square_svelte_51_css_svelte_loader_cssPath_D_www_sipro_spa_node_modules_svelte_loading_spinners_dist_Square_svelte_51_css_D_www_sipro_spa_node_modules_svelte_loading_spinners_dist_Square_svelte__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./node_modules/svelte-loading-spinners/dist/Square.svelte.51.css!=!svelte-loader?cssPath=D:/www/sipro-spa/node_modules/svelte-loading-spinners/dist/Square.svelte.51.css!./node_modules/svelte-loading-spinners/dist/Square.svelte */ "./node_modules/svelte-loading-spinners/dist/Square.svelte.51.css!=!./node_modules/svelte-loader/index.js?cssPath=D:/www/sipro-spa/node_modules/svelte-loading-spinners/dist/Square.svelte.51.css!./node_modules/svelte-loading-spinners/dist/Square.svelte");
+/* harmony import */ var D_www_sipro_spa_node_modules_svelte_loading_spinners_dist_Square_svelte_49_css_svelte_loader_cssPath_D_www_sipro_spa_node_modules_svelte_loading_spinners_dist_Square_svelte_49_css_D_www_sipro_spa_node_modules_svelte_loading_spinners_dist_Square_svelte__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./node_modules/svelte-loading-spinners/dist/Square.svelte.49.css!=!svelte-loader?cssPath=D:/www/sipro-spa/node_modules/svelte-loading-spinners/dist/Square.svelte.49.css!./node_modules/svelte-loading-spinners/dist/Square.svelte */ "./node_modules/svelte-loading-spinners/dist/Square.svelte.49.css!=!./node_modules/svelte-loader/index.js?cssPath=D:/www/sipro-spa/node_modules/svelte-loading-spinners/dist/Square.svelte.49.css!./node_modules/svelte-loading-spinners/dist/Square.svelte");
 /* module decorator */ module = __webpack_require__.hmd(module);
 /* node_modules\svelte-loading-spinners\dist\Square.svelte generated by Svelte v3.49.0 */
 
@@ -48477,7 +48477,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _utils__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./utils */ "./node_modules/svelte-loading-spinners/dist/utils.js");
 /* harmony import */ var D_www_sipro_spa_node_modules_svelte_loader_lib_hot_api_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./node_modules/svelte-loader/lib/hot-api.js */ "./node_modules/svelte-loader/lib/hot-api.js");
 /* harmony import */ var D_www_sipro_spa_node_modules_svelte_hmr_runtime_proxy_adapter_dom_js__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./node_modules/svelte-hmr/runtime/proxy-adapter-dom.js */ "./node_modules/svelte-hmr/runtime/proxy-adapter-dom.js");
-/* harmony import */ var D_www_sipro_spa_node_modules_svelte_loading_spinners_dist_Stretch_svelte_37_css_svelte_loader_cssPath_D_www_sipro_spa_node_modules_svelte_loading_spinners_dist_Stretch_svelte_37_css_D_www_sipro_spa_node_modules_svelte_loading_spinners_dist_Stretch_svelte__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./node_modules/svelte-loading-spinners/dist/Stretch.svelte.37.css!=!svelte-loader?cssPath=D:/www/sipro-spa/node_modules/svelte-loading-spinners/dist/Stretch.svelte.37.css!./node_modules/svelte-loading-spinners/dist/Stretch.svelte */ "./node_modules/svelte-loading-spinners/dist/Stretch.svelte.37.css!=!./node_modules/svelte-loader/index.js?cssPath=D:/www/sipro-spa/node_modules/svelte-loading-spinners/dist/Stretch.svelte.37.css!./node_modules/svelte-loading-spinners/dist/Stretch.svelte");
+/* harmony import */ var D_www_sipro_spa_node_modules_svelte_loading_spinners_dist_Stretch_svelte_38_css_svelte_loader_cssPath_D_www_sipro_spa_node_modules_svelte_loading_spinners_dist_Stretch_svelte_38_css_D_www_sipro_spa_node_modules_svelte_loading_spinners_dist_Stretch_svelte__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./node_modules/svelte-loading-spinners/dist/Stretch.svelte.38.css!=!svelte-loader?cssPath=D:/www/sipro-spa/node_modules/svelte-loading-spinners/dist/Stretch.svelte.38.css!./node_modules/svelte-loading-spinners/dist/Stretch.svelte */ "./node_modules/svelte-loading-spinners/dist/Stretch.svelte.38.css!=!./node_modules/svelte-loader/index.js?cssPath=D:/www/sipro-spa/node_modules/svelte-loading-spinners/dist/Stretch.svelte.38.css!./node_modules/svelte-loading-spinners/dist/Stretch.svelte");
 /* module decorator */ module = __webpack_require__.hmd(module);
 /* node_modules\svelte-loading-spinners\dist\Stretch.svelte generated by Svelte v3.49.0 */
 
@@ -48633,7 +48633,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _utils__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./utils */ "./node_modules/svelte-loading-spinners/dist/utils.js");
 /* harmony import */ var D_www_sipro_spa_node_modules_svelte_loader_lib_hot_api_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./node_modules/svelte-loader/lib/hot-api.js */ "./node_modules/svelte-loader/lib/hot-api.js");
 /* harmony import */ var D_www_sipro_spa_node_modules_svelte_hmr_runtime_proxy_adapter_dom_js__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./node_modules/svelte-hmr/runtime/proxy-adapter-dom.js */ "./node_modules/svelte-hmr/runtime/proxy-adapter-dom.js");
-/* harmony import */ var D_www_sipro_spa_node_modules_svelte_loading_spinners_dist_SyncLoader_svelte_42_css_svelte_loader_cssPath_D_www_sipro_spa_node_modules_svelte_loading_spinners_dist_SyncLoader_svelte_42_css_D_www_sipro_spa_node_modules_svelte_loading_spinners_dist_SyncLoader_svelte__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./node_modules/svelte-loading-spinners/dist/SyncLoader.svelte.42.css!=!svelte-loader?cssPath=D:/www/sipro-spa/node_modules/svelte-loading-spinners/dist/SyncLoader.svelte.42.css!./node_modules/svelte-loading-spinners/dist/SyncLoader.svelte */ "./node_modules/svelte-loading-spinners/dist/SyncLoader.svelte.42.css!=!./node_modules/svelte-loader/index.js?cssPath=D:/www/sipro-spa/node_modules/svelte-loading-spinners/dist/SyncLoader.svelte.42.css!./node_modules/svelte-loading-spinners/dist/SyncLoader.svelte");
+/* harmony import */ var D_www_sipro_spa_node_modules_svelte_loading_spinners_dist_SyncLoader_svelte_46_css_svelte_loader_cssPath_D_www_sipro_spa_node_modules_svelte_loading_spinners_dist_SyncLoader_svelte_46_css_D_www_sipro_spa_node_modules_svelte_loading_spinners_dist_SyncLoader_svelte__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./node_modules/svelte-loading-spinners/dist/SyncLoader.svelte.46.css!=!svelte-loader?cssPath=D:/www/sipro-spa/node_modules/svelte-loading-spinners/dist/SyncLoader.svelte.46.css!./node_modules/svelte-loading-spinners/dist/SyncLoader.svelte */ "./node_modules/svelte-loading-spinners/dist/SyncLoader.svelte.46.css!=!./node_modules/svelte-loader/index.js?cssPath=D:/www/sipro-spa/node_modules/svelte-loading-spinners/dist/SyncLoader.svelte.46.css!./node_modules/svelte-loading-spinners/dist/SyncLoader.svelte");
 /* module decorator */ module = __webpack_require__.hmd(module);
 /* node_modules\svelte-loading-spinners\dist\SyncLoader.svelte generated by Svelte v3.49.0 */
 
@@ -48794,7 +48794,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _utils__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./utils */ "./node_modules/svelte-loading-spinners/dist/utils.js");
 /* harmony import */ var D_www_sipro_spa_node_modules_svelte_loader_lib_hot_api_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./node_modules/svelte-loader/lib/hot-api.js */ "./node_modules/svelte-loader/lib/hot-api.js");
 /* harmony import */ var D_www_sipro_spa_node_modules_svelte_hmr_runtime_proxy_adapter_dom_js__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./node_modules/svelte-hmr/runtime/proxy-adapter-dom.js */ "./node_modules/svelte-hmr/runtime/proxy-adapter-dom.js");
-/* harmony import */ var D_www_sipro_spa_node_modules_svelte_loading_spinners_dist_Wave_svelte_43_css_svelte_loader_cssPath_D_www_sipro_spa_node_modules_svelte_loading_spinners_dist_Wave_svelte_43_css_D_www_sipro_spa_node_modules_svelte_loading_spinners_dist_Wave_svelte__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./node_modules/svelte-loading-spinners/dist/Wave.svelte.43.css!=!svelte-loader?cssPath=D:/www/sipro-spa/node_modules/svelte-loading-spinners/dist/Wave.svelte.43.css!./node_modules/svelte-loading-spinners/dist/Wave.svelte */ "./node_modules/svelte-loading-spinners/dist/Wave.svelte.43.css!=!./node_modules/svelte-loader/index.js?cssPath=D:/www/sipro-spa/node_modules/svelte-loading-spinners/dist/Wave.svelte.43.css!./node_modules/svelte-loading-spinners/dist/Wave.svelte");
+/* harmony import */ var D_www_sipro_spa_node_modules_svelte_loading_spinners_dist_Wave_svelte_45_css_svelte_loader_cssPath_D_www_sipro_spa_node_modules_svelte_loading_spinners_dist_Wave_svelte_45_css_D_www_sipro_spa_node_modules_svelte_loading_spinners_dist_Wave_svelte__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./node_modules/svelte-loading-spinners/dist/Wave.svelte.45.css!=!svelte-loader?cssPath=D:/www/sipro-spa/node_modules/svelte-loading-spinners/dist/Wave.svelte.45.css!./node_modules/svelte-loading-spinners/dist/Wave.svelte */ "./node_modules/svelte-loading-spinners/dist/Wave.svelte.45.css!=!./node_modules/svelte-loader/index.js?cssPath=D:/www/sipro-spa/node_modules/svelte-loading-spinners/dist/Wave.svelte.45.css!./node_modules/svelte-loading-spinners/dist/Wave.svelte");
 /* module decorator */ module = __webpack_require__.hmd(module);
 /* node_modules\svelte-loading-spinners\dist\Wave.svelte generated by Svelte v3.49.0 */
 
@@ -49015,7 +49015,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var svelte_internal__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! svelte/internal */ "./node_modules/svelte/internal/index.mjs");
 /* harmony import */ var D_www_sipro_spa_node_modules_svelte_loader_lib_hot_api_js__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./node_modules/svelte-loader/lib/hot-api.js */ "./node_modules/svelte-loader/lib/hot-api.js");
 /* harmony import */ var D_www_sipro_spa_node_modules_svelte_hmr_runtime_proxy_adapter_dom_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./node_modules/svelte-hmr/runtime/proxy-adapter-dom.js */ "./node_modules/svelte-hmr/runtime/proxy-adapter-dom.js");
-/* harmony import */ var D_www_sipro_spa_node_modules_svelte_select_src_Item_svelte_27_css_svelte_loader_cssPath_D_www_sipro_spa_node_modules_svelte_select_src_Item_svelte_27_css_D_www_sipro_spa_node_modules_svelte_select_src_Item_svelte__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./node_modules/svelte-select/src/Item.svelte.27.css!=!svelte-loader?cssPath=D:/www/sipro-spa/node_modules/svelte-select/src/Item.svelte.27.css!./node_modules/svelte-select/src/Item.svelte */ "./node_modules/svelte-select/src/Item.svelte.27.css!=!./node_modules/svelte-loader/index.js?cssPath=D:/www/sipro-spa/node_modules/svelte-select/src/Item.svelte.27.css!./node_modules/svelte-select/src/Item.svelte");
+/* harmony import */ var D_www_sipro_spa_node_modules_svelte_select_src_Item_svelte_29_css_svelte_loader_cssPath_D_www_sipro_spa_node_modules_svelte_select_src_Item_svelte_29_css_D_www_sipro_spa_node_modules_svelte_select_src_Item_svelte__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./node_modules/svelte-select/src/Item.svelte.29.css!=!svelte-loader?cssPath=D:/www/sipro-spa/node_modules/svelte-select/src/Item.svelte.29.css!./node_modules/svelte-select/src/Item.svelte */ "./node_modules/svelte-select/src/Item.svelte.29.css!=!./node_modules/svelte-loader/index.js?cssPath=D:/www/sipro-spa/node_modules/svelte-select/src/Item.svelte.29.css!./node_modules/svelte-select/src/Item.svelte");
 /* module decorator */ module = __webpack_require__.hmd(module);
 /* node_modules\svelte-select\src\Item.svelte generated by Svelte v3.49.0 */
 
@@ -49140,7 +49140,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _VirtualList_svelte__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./VirtualList.svelte */ "./node_modules/svelte-select/src/VirtualList.svelte");
 /* harmony import */ var D_www_sipro_spa_node_modules_svelte_loader_lib_hot_api_js__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./node_modules/svelte-loader/lib/hot-api.js */ "./node_modules/svelte-loader/lib/hot-api.js");
 /* harmony import */ var D_www_sipro_spa_node_modules_svelte_hmr_runtime_proxy_adapter_dom_js__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ./node_modules/svelte-hmr/runtime/proxy-adapter-dom.js */ "./node_modules/svelte-hmr/runtime/proxy-adapter-dom.js");
-/* harmony import */ var D_www_sipro_spa_node_modules_svelte_select_src_List_svelte_30_css_svelte_loader_cssPath_D_www_sipro_spa_node_modules_svelte_select_src_List_svelte_30_css_D_www_sipro_spa_node_modules_svelte_select_src_List_svelte__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ./node_modules/svelte-select/src/List.svelte.30.css!=!svelte-loader?cssPath=D:/www/sipro-spa/node_modules/svelte-select/src/List.svelte.30.css!./node_modules/svelte-select/src/List.svelte */ "./node_modules/svelte-select/src/List.svelte.30.css!=!./node_modules/svelte-loader/index.js?cssPath=D:/www/sipro-spa/node_modules/svelte-select/src/List.svelte.30.css!./node_modules/svelte-select/src/List.svelte");
+/* harmony import */ var D_www_sipro_spa_node_modules_svelte_select_src_List_svelte_27_css_svelte_loader_cssPath_D_www_sipro_spa_node_modules_svelte_select_src_List_svelte_27_css_D_www_sipro_spa_node_modules_svelte_select_src_List_svelte__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ./node_modules/svelte-select/src/List.svelte.27.css!=!svelte-loader?cssPath=D:/www/sipro-spa/node_modules/svelte-select/src/List.svelte.27.css!./node_modules/svelte-select/src/List.svelte */ "./node_modules/svelte-select/src/List.svelte.27.css!=!./node_modules/svelte-loader/index.js?cssPath=D:/www/sipro-spa/node_modules/svelte-select/src/List.svelte.27.css!./node_modules/svelte-select/src/List.svelte");
 /* module decorator */ module = __webpack_require__.hmd(module);
 /* node_modules\svelte-select\src\List.svelte generated by Svelte v3.49.0 */
 
@@ -50394,7 +50394,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _ClearIcon_svelte__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! ./ClearIcon.svelte */ "./node_modules/svelte-select/src/ClearIcon.svelte");
 /* harmony import */ var D_www_sipro_spa_node_modules_svelte_loader_lib_hot_api_js__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! ./node_modules/svelte-loader/lib/hot-api.js */ "./node_modules/svelte-loader/lib/hot-api.js");
 /* harmony import */ var D_www_sipro_spa_node_modules_svelte_hmr_runtime_proxy_adapter_dom_js__WEBPACK_IMPORTED_MODULE_10__ = __webpack_require__(/*! ./node_modules/svelte-hmr/runtime/proxy-adapter-dom.js */ "./node_modules/svelte-hmr/runtime/proxy-adapter-dom.js");
-/* harmony import */ var D_www_sipro_spa_node_modules_svelte_select_src_Select_svelte_26_css_svelte_loader_cssPath_D_www_sipro_spa_node_modules_svelte_select_src_Select_svelte_26_css_D_www_sipro_spa_node_modules_svelte_select_src_Select_svelte__WEBPACK_IMPORTED_MODULE_11__ = __webpack_require__(/*! ./node_modules/svelte-select/src/Select.svelte.26.css!=!svelte-loader?cssPath=D:/www/sipro-spa/node_modules/svelte-select/src/Select.svelte.26.css!./node_modules/svelte-select/src/Select.svelte */ "./node_modules/svelte-select/src/Select.svelte.26.css!=!./node_modules/svelte-loader/index.js?cssPath=D:/www/sipro-spa/node_modules/svelte-select/src/Select.svelte.26.css!./node_modules/svelte-select/src/Select.svelte");
+/* harmony import */ var D_www_sipro_spa_node_modules_svelte_select_src_Select_svelte_25_css_svelte_loader_cssPath_D_www_sipro_spa_node_modules_svelte_select_src_Select_svelte_25_css_D_www_sipro_spa_node_modules_svelte_select_src_Select_svelte__WEBPACK_IMPORTED_MODULE_11__ = __webpack_require__(/*! ./node_modules/svelte-select/src/Select.svelte.25.css!=!svelte-loader?cssPath=D:/www/sipro-spa/node_modules/svelte-select/src/Select.svelte.25.css!./node_modules/svelte-select/src/Select.svelte */ "./node_modules/svelte-select/src/Select.svelte.25.css!=!./node_modules/svelte-loader/index.js?cssPath=D:/www/sipro-spa/node_modules/svelte-select/src/Select.svelte.25.css!./node_modules/svelte-select/src/Select.svelte");
 /* module decorator */ module = __webpack_require__.hmd(module);
 /* node_modules\svelte-select\src\Select.svelte generated by Svelte v3.49.0 */
 
@@ -52117,7 +52117,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var svelte_internal__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! svelte/internal */ "./node_modules/svelte/internal/index.mjs");
 /* harmony import */ var D_www_sipro_spa_node_modules_svelte_loader_lib_hot_api_js__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./node_modules/svelte-loader/lib/hot-api.js */ "./node_modules/svelte-loader/lib/hot-api.js");
 /* harmony import */ var D_www_sipro_spa_node_modules_svelte_hmr_runtime_proxy_adapter_dom_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./node_modules/svelte-hmr/runtime/proxy-adapter-dom.js */ "./node_modules/svelte-hmr/runtime/proxy-adapter-dom.js");
-/* harmony import */ var D_www_sipro_spa_node_modules_svelte_select_src_Selection_svelte_29_css_svelte_loader_cssPath_D_www_sipro_spa_node_modules_svelte_select_src_Selection_svelte_29_css_D_www_sipro_spa_node_modules_svelte_select_src_Selection_svelte__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./node_modules/svelte-select/src/Selection.svelte.29.css!=!svelte-loader?cssPath=D:/www/sipro-spa/node_modules/svelte-select/src/Selection.svelte.29.css!./node_modules/svelte-select/src/Selection.svelte */ "./node_modules/svelte-select/src/Selection.svelte.29.css!=!./node_modules/svelte-loader/index.js?cssPath=D:/www/sipro-spa/node_modules/svelte-select/src/Selection.svelte.29.css!./node_modules/svelte-select/src/Selection.svelte");
+/* harmony import */ var D_www_sipro_spa_node_modules_svelte_select_src_Selection_svelte_26_css_svelte_loader_cssPath_D_www_sipro_spa_node_modules_svelte_select_src_Selection_svelte_26_css_D_www_sipro_spa_node_modules_svelte_select_src_Selection_svelte__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./node_modules/svelte-select/src/Selection.svelte.26.css!=!svelte-loader?cssPath=D:/www/sipro-spa/node_modules/svelte-select/src/Selection.svelte.26.css!./node_modules/svelte-select/src/Selection.svelte */ "./node_modules/svelte-select/src/Selection.svelte.26.css!=!./node_modules/svelte-loader/index.js?cssPath=D:/www/sipro-spa/node_modules/svelte-select/src/Selection.svelte.26.css!./node_modules/svelte-select/src/Selection.svelte");
 /* module decorator */ module = __webpack_require__.hmd(module);
 /* node_modules\svelte-select\src\Selection.svelte generated by Svelte v3.49.0 */
 
@@ -52188,7 +52188,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var svelte__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! svelte */ "./node_modules/svelte/index.mjs");
 /* harmony import */ var D_www_sipro_spa_node_modules_svelte_loader_lib_hot_api_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./node_modules/svelte-loader/lib/hot-api.js */ "./node_modules/svelte-loader/lib/hot-api.js");
 /* harmony import */ var D_www_sipro_spa_node_modules_svelte_hmr_runtime_proxy_adapter_dom_js__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./node_modules/svelte-hmr/runtime/proxy-adapter-dom.js */ "./node_modules/svelte-hmr/runtime/proxy-adapter-dom.js");
-/* harmony import */ var D_www_sipro_spa_node_modules_svelte_select_src_VirtualList_svelte_31_css_svelte_loader_cssPath_D_www_sipro_spa_node_modules_svelte_select_src_VirtualList_svelte_31_css_D_www_sipro_spa_node_modules_svelte_select_src_VirtualList_svelte__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./node_modules/svelte-select/src/VirtualList.svelte.31.css!=!svelte-loader?cssPath=D:/www/sipro-spa/node_modules/svelte-select/src/VirtualList.svelte.31.css!./node_modules/svelte-select/src/VirtualList.svelte */ "./node_modules/svelte-select/src/VirtualList.svelte.31.css!=!./node_modules/svelte-loader/index.js?cssPath=D:/www/sipro-spa/node_modules/svelte-select/src/VirtualList.svelte.31.css!./node_modules/svelte-select/src/VirtualList.svelte");
+/* harmony import */ var D_www_sipro_spa_node_modules_svelte_select_src_VirtualList_svelte_30_css_svelte_loader_cssPath_D_www_sipro_spa_node_modules_svelte_select_src_VirtualList_svelte_30_css_D_www_sipro_spa_node_modules_svelte_select_src_VirtualList_svelte__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./node_modules/svelte-select/src/VirtualList.svelte.30.css!=!svelte-loader?cssPath=D:/www/sipro-spa/node_modules/svelte-select/src/VirtualList.svelte.30.css!./node_modules/svelte-select/src/VirtualList.svelte */ "./node_modules/svelte-select/src/VirtualList.svelte.30.css!=!./node_modules/svelte-loader/index.js?cssPath=D:/www/sipro-spa/node_modules/svelte-select/src/VirtualList.svelte.30.css!./node_modules/svelte-select/src/VirtualList.svelte");
 /* module decorator */ module = __webpack_require__.hmd(module);
 /* node_modules\svelte-select\src\VirtualList.svelte generated by Svelte v3.49.0 */
 
@@ -52631,7 +52631,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _smui_list__WEBPACK_IMPORTED_MODULE_17__ = __webpack_require__(/*! @smui/list */ "./node_modules/@smui/list/index.js");
 /* harmony import */ var D_www_sipro_spa_node_modules_svelte_loader_lib_hot_api_js__WEBPACK_IMPORTED_MODULE_18__ = __webpack_require__(/*! ./node_modules/svelte-loader/lib/hot-api.js */ "./node_modules/svelte-loader/lib/hot-api.js");
 /* harmony import */ var D_www_sipro_spa_node_modules_svelte_hmr_runtime_proxy_adapter_dom_js__WEBPACK_IMPORTED_MODULE_19__ = __webpack_require__(/*! ./node_modules/svelte-hmr/runtime/proxy-adapter-dom.js */ "./node_modules/svelte-hmr/runtime/proxy-adapter-dom.js");
-/* harmony import */ var D_www_sipro_spa_resources_js_Layouts_Authenticated_svelte_13_css_svelte_loader_cssPath_D_www_sipro_spa_resources_js_Layouts_Authenticated_svelte_13_css_D_www_sipro_spa_resources_js_Layouts_Authenticated_svelte__WEBPACK_IMPORTED_MODULE_20__ = __webpack_require__(/*! ./resources/js/Layouts/Authenticated.svelte.13.css!=!svelte-loader?cssPath=D:/www/sipro-spa/resources/js/Layouts/Authenticated.svelte.13.css!./resources/js/Layouts/Authenticated.svelte */ "./resources/js/Layouts/Authenticated.svelte.13.css!=!./node_modules/svelte-loader/index.js?cssPath=D:/www/sipro-spa/resources/js/Layouts/Authenticated.svelte.13.css!./resources/js/Layouts/Authenticated.svelte");
+/* harmony import */ var D_www_sipro_spa_resources_js_Layouts_Authenticated_svelte_11_css_svelte_loader_cssPath_D_www_sipro_spa_resources_js_Layouts_Authenticated_svelte_11_css_D_www_sipro_spa_resources_js_Layouts_Authenticated_svelte__WEBPACK_IMPORTED_MODULE_20__ = __webpack_require__(/*! ./resources/js/Layouts/Authenticated.svelte.11.css!=!svelte-loader?cssPath=D:/www/sipro-spa/resources/js/Layouts/Authenticated.svelte.11.css!./resources/js/Layouts/Authenticated.svelte */ "./resources/js/Layouts/Authenticated.svelte.11.css!=!./node_modules/svelte-loader/index.js?cssPath=D:/www/sipro-spa/resources/js/Layouts/Authenticated.svelte.11.css!./resources/js/Layouts/Authenticated.svelte");
 /* module decorator */ module = __webpack_require__.hmd(module);
 /* resources\js\Layouts\Authenticated.svelte generated by Svelte v3.49.0 */
 
@@ -56227,7 +56227,7 @@ function get_each_context(ctx, list, i) {
 	return child_ctx;
 }
 
-// (405:8) {#if ambienteModernizacion.allowed.to_update}
+// (345:8) {#if ambienteModernizacion.allowed.to_update}
 function create_if_block_4(ctx) {
 	let div;
 	let button;
@@ -56279,7 +56279,7 @@ function create_if_block_4(ctx) {
 	};
 }
 
-// (407:16) <Button on:click={() => ((equipoFormDialog = true), $formEquipo.reset())} variant="raised">
+// (347:16) <Button on:click={() => ((equipoFormDialog = true), $formEquipo.reset())} variant="raised">
 function create_default_slot_12(ctx) {
 	let t;
 
@@ -56296,7 +56296,7 @@ function create_default_slot_12(ctx) {
 	};
 }
 
-// (492:32) {#if ambienteModernizacion.allowed.to_update}
+// (432:32) {#if ambienteModernizacion.allowed.to_update}
 function create_if_block_3(ctx) {
 	let item0;
 	let t;
@@ -56377,7 +56377,7 @@ function create_if_block_3(ctx) {
 	};
 }
 
-// (494:40) <Text>
+// (434:40) <Text>
 function create_default_slot_11(ctx) {
 	let t;
 
@@ -56394,7 +56394,7 @@ function create_default_slot_11(ctx) {
 	};
 }
 
-// (493:36) <Item on:SMUI:action={() => configurarDialogoEquipo(equipoAmbienteModernizacion)}>
+// (433:36) <Item on:SMUI:action={() => configurarDialogoEquipo(equipoAmbienteModernizacion)}>
 function create_default_slot_10(ctx) {
 	let text_1;
 	let current;
@@ -56438,7 +56438,7 @@ function create_default_slot_10(ctx) {
 	};
 }
 
-// (497:40) <Text>
+// (437:40) <Text>
 function create_default_slot_9(ctx) {
 	let t;
 
@@ -56455,7 +56455,7 @@ function create_default_slot_9(ctx) {
 	};
 }
 
-// (496:36) <Item on:SMUI:action={() => configurarDialogoEquipoDestroy(equipoAmbienteModernizacion)}>
+// (436:36) <Item on:SMUI:action={() => configurarDialogoEquipoDestroy(equipoAmbienteModernizacion)}>
 function create_default_slot_8(ctx) {
 	let text_1;
 	let current;
@@ -56499,7 +56499,7 @@ function create_default_slot_8(ctx) {
 	};
 }
 
-// (491:28) <DataTableMenu>
+// (431:28) <DataTableMenu>
 function create_default_slot_7(ctx) {
 	let if_block_anchor;
 	let current;
@@ -56555,7 +56555,7 @@ function create_default_slot_7(ctx) {
 	};
 }
 
-// (425:16) {#each equiposAmbienteModernizacion as equipoAmbienteModernizacion}
+// (365:16) {#each equiposAmbienteModernizacion as equipoAmbienteModernizacion}
 function create_each_block(ctx) {
 	let tr;
 	let td0;
@@ -56851,7 +56851,7 @@ function create_each_block(ctx) {
 	};
 }
 
-// (504:16) {#if equiposAmbienteModernizacion.length === 0}
+// (444:16) {#if equiposAmbienteModernizacion.length === 0}
 function create_if_block_2(ctx) {
 	let tr;
 
@@ -56870,7 +56870,7 @@ function create_if_block_2(ctx) {
 	};
 }
 
-// (514:8) 
+// (454:8) 
 function create_title_slot_2(ctx) {
 	let div;
 
@@ -56891,7 +56891,7 @@ function create_title_slot_2(ctx) {
 	};
 }
 
-// (515:8) 
+// (455:8) 
 function create_content_slot_2(ctx) {
 	let div13;
 	let form_1;
@@ -57441,7 +57441,7 @@ function create_content_slot_2(ctx) {
 			(0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.attr)(h1, "class", "text-cener font-black mb-14");
 			(0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.attr)(div10, "class", "mt-4");
 			(0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.attr)(div11, "class", "mt-4");
-			(0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.attr)(div12, "class", "mt-4");
+			(0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.attr)(div12, "class", "mt-4 mb-20");
 			(0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.attr)(fieldset, "class", "p-8");
 
 			fieldset.disabled = fieldset_disabled_value = /*ambienteModernizacion*/ ctx[1].allowed.to_update
@@ -57762,7 +57762,7 @@ function create_content_slot_2(ctx) {
 	};
 }
 
-// (591:16) <Button on:click={() => (equipoFormDialog = false)} variant={null}>
+// (531:16) <Button on:click={() => (equipoFormDialog = false)} variant={null}>
 function create_default_slot_6(ctx) {
 	let t;
 
@@ -57779,7 +57779,7 @@ function create_default_slot_6(ctx) {
 	};
 }
 
-// (592:16) {#if ambienteModernizacion.allowed.to_update}
+// (532:16) {#if ambienteModernizacion.allowed.to_update}
 function create_if_block_1(ctx) {
 	let loadingbutton;
 	let current;
@@ -57827,7 +57827,7 @@ function create_if_block_1(ctx) {
 	};
 }
 
-// (593:20) <LoadingButton type="submit" loading={$formEquipo.processing} form="equipo-ambiente-modernizacion">
+// (533:20) <LoadingButton type="submit" loading={$formEquipo.processing} form="equipo-ambiente-modernizacion">
 function create_default_slot_5(ctx) {
 	let t;
 
@@ -57844,7 +57844,7 @@ function create_default_slot_5(ctx) {
 	};
 }
 
-// (589:8) 
+// (529:8) 
 function create_actions_slot_2(ctx) {
 	let div1;
 	let div0;
@@ -57932,7 +57932,7 @@ function create_actions_slot_2(ctx) {
 	};
 }
 
-// (600:8) 
+// (540:8) 
 function create_title_slot_1(ctx) {
 	let div;
 
@@ -57956,7 +57956,7 @@ function create_title_slot_1(ctx) {
 	};
 }
 
-// (606:8) 
+// (546:8) 
 function create_content_slot_1(ctx) {
 	let div;
 
@@ -57982,7 +57982,7 @@ function create_content_slot_1(ctx) {
 	};
 }
 
-// (617:16) <Button on:click={() => ((destroyEquipoDialog = false), (equipoAmbienteModernizacionId = null))} variant={null}>
+// (557:16) <Button on:click={() => ((destroyEquipoDialog = false), (equipoAmbienteModernizacionId = null))} variant={null}>
 function create_default_slot_4(ctx) {
 	let t;
 
@@ -57999,7 +57999,7 @@ function create_default_slot_4(ctx) {
 	};
 }
 
-// (618:16) <Button variant="raised" on:click={destroyEquipo}>
+// (558:16) <Button variant="raised" on:click={destroyEquipo}>
 function create_default_slot_3(ctx) {
 	let t;
 
@@ -58016,7 +58016,7 @@ function create_default_slot_3(ctx) {
 	};
 }
 
-// (615:8) 
+// (555:8) 
 function create_actions_slot_1(ctx) {
 	let div1;
 	let div0;
@@ -58098,7 +58098,7 @@ function create_actions_slot_1(ctx) {
 	};
 }
 
-// (624:8) 
+// (564:8) 
 function create_title_slot(ctx) {
 	let div;
 	let figure;
@@ -58137,7 +58137,7 @@ function create_title_slot(ctx) {
 	};
 }
 
-// (633:20) {#if ambienteModernizacion.finalizado}
+// (573:20) {#if ambienteModernizacion.finalizado}
 function create_if_block(ctx) {
 	let a;
 	let t;
@@ -58165,7 +58165,7 @@ function create_if_block(ctx) {
 	};
 }
 
-// (630:8) 
+// (570:8) 
 function create_content_slot(ctx) {
 	let div1;
 	let ul;
@@ -58215,7 +58215,7 @@ function create_content_slot(ctx) {
 	};
 }
 
-// (644:16) <Button on:click={() => (infoDialog = false)} variant={null}>
+// (584:16) <Button on:click={() => (infoDialog = false)} variant={null}>
 function create_default_slot_2(ctx) {
 	let t;
 
@@ -58232,7 +58232,7 @@ function create_default_slot_2(ctx) {
 	};
 }
 
-// (645:16) <Button variant="raised" on:click={() => (infoDialog = false)} on:click={() => Inertia.visit('#financiado_anteriormente')}>
+// (585:16) <Button variant="raised" on:click={() => (infoDialog = false)} on:click={() => Inertia.visit('#financiado_anteriormente')}>
 function create_default_slot_1(ctx) {
 	let t;
 
@@ -58249,7 +58249,7 @@ function create_default_slot_1(ctx) {
 	};
 }
 
-// (642:8) 
+// (582:8) 
 function create_actions_slot(ctx) {
 	let div1;
 	let div0;
@@ -58332,7 +58332,7 @@ function create_actions_slot(ctx) {
 	};
 }
 
-// (314:0) <AuthenticatedLayout>
+// (254:0) <AuthenticatedLayout>
 function create_default_slot(ctx) {
 	let div12;
 	let div2;
@@ -58878,7 +58878,7 @@ function create_default_slot(ctx) {
 	};
 }
 
-// (315:4) 
+// (255:4) 
 function create_header_slot(ctx) {
 	let header;
 	let div1;
@@ -59170,98 +59170,37 @@ function instance($$self, $$props, $$invalidate) {
 		cobertura_perntinencia_formacion: $formCoberturaPerntinenciaFormacion.cobertura_perntinencia_formacion,
 		observaciones_generales_ambiente: $formObservacionesGeneralesAmbiente.observaciones_generales_ambiente,
 		nombre_ambiente: ambienteModernizacion.nombre_ambiente,
-		codigo_proyecto_sgps_id: {
-			value: ambienteModernizacion.seguimiento_ambiente_modernizacion.codigo_proyecto_sgps_id,
-			label: codigosSgps.find(item => item.value == ambienteModernizacion.seguimiento_ambiente_modernizacion.codigo_proyecto_sgps_id)?.label
-		},
-		tipologia_ambiente_id: {
-			value: ambienteModernizacion.tipologia_ambiente_id,
-			label: tipologiasAmbientes.find(item => item.value == ambienteModernizacion.tipologia_ambiente_id)?.label
-		},
-		red_conocimiento_id: {
-			value: ambienteModernizacion.red_conocimiento_id,
-			label: redesConocimiento.find(item => item.value == ambienteModernizacion.red_conocimiento_id)?.label
-		},
-		linea_investigacion_id: {
-			value: ambienteModernizacion.linea_investigacion_id,
-			label: lineasInvestigacion.find(item => item.value == ambienteModernizacion.linea_investigacion_id)?.label
-		},
-		actividad_economica_id: {
-			value: ambienteModernizacion.actividad_economica_id,
-			label: actividadesEconomicas.find(item => item.value == ambienteModernizacion.actividad_economica_id)?.label
-		},
-		area_conocimiento_id: {
-			value: ambienteModernizacion.disciplina_subarea_conocimiento.subarea_conocimiento.area_conocimiento_id,
-			label: areasConocimiento.find(item => item.value == ambienteModernizacion.disciplina_subarea_conocimiento.subarea_conocimiento.area_conocimiento_id)?.label
-		},
-		subarea_conocimiento_id: {
-			value: ambienteModernizacion.disciplina_subarea_conocimiento.subarea_conocimiento_id,
-			label: subareasConocimiento.find(item => item.value == ambienteModernizacion.disciplina_subarea_conocimiento.subarea_conocimiento_id)?.label
-		},
-		disciplina_subarea_conocimiento_id: {
-			value: ambienteModernizacion.disciplina_subarea_conocimiento_id,
-			label: disciplinasSubareaConocimiento.find(item => item.value == ambienteModernizacion.disciplina_subarea_conocimiento_id)?.label
-		},
-		tematica_estrategica_id: {
-			value: ambienteModernizacion.tematica_estrategica_id,
-			label: tematicasEstrategicas.find(item => item.value == ambienteModernizacion.tematica_estrategica_id)?.label
-		},
+		codigo_proyecto_sgps_id: ambienteModernizacion.seguimiento_ambiente_modernizacion.codigo_proyecto_sgps_id,
+		tipologia_ambiente_id: ambienteModernizacion.tipologia_ambiente_id,
+		red_conocimiento_id: ambienteModernizacion.red_conocimiento_id,
+		linea_investigacion_id: ambienteModernizacion.linea_investigacion_id,
+		actividad_economica_id: ambienteModernizacion.actividad_economica_id,
+		area_conocimiento_id: ambienteModernizacion.disciplina_subarea_conocimiento.subarea_conocimiento.area_conocimiento_id,
+		subarea_conocimiento_id: ambienteModernizacion.disciplina_subarea_conocimiento.subarea_conocimiento_id,
+		disciplina_subarea_conocimiento_id: ambienteModernizacion.disciplina_subarea_conocimiento_id,
+		tematica_estrategica_id: ambienteModernizacion.tematica_estrategica_id,
 		semilleros_investigacion_id: semillerosRelacionados.length > 0
 		? semillerosRelacionados
 		: null,
-		alineado_mesas_sectoriales: {
-			value: ambienteModernizacion.alineado_mesas_sectoriales == 1
-			? 1
-			: 2,
-			label: opcionesSiNo.find(item => item.value == (ambienteModernizacion.alineado_mesas_sectoriales == 1
-			? 1
-			: 2))?.label
-		},
-		financiado_anteriormente: {
-			value: ambienteModernizacion.financiado_anteriormente == 1
-			? 1
-			: 2,
-			label: opcionesSiNo.find(item => item.value == (ambienteModernizacion.financiado_anteriormente == 1
-			? 1
-			: 2))?.label
-		},
+		alineado_mesas_sectoriales: ambienteModernizacion.alineado_mesas_sectoriales,
+		financiado_anteriormente: ambienteModernizacion.financiado_anteriormente,
 		numero_tecnicas_tecnologias: ambienteModernizacion.numero_tecnicas_tecnologias,
 		mesa_sectorial_id: mesasSectorialesRelacionadas,
 		codigos_proyectos_id: codigosProyectosRelacionados.length > 0
 		? codigosProyectosRelacionados
 		: null,
-		estado_general_maquinaria: {
-			value: ambienteModernizacion.estado_general_maquinaria,
-			label: estados.find(item => item.value == ambienteModernizacion.estado_general_maquinaria)?.label
-		},
-		ambiente_activo: {
-			value: ambienteModernizacion.ambiente_activo == 1 ? 1 : 2,
-			label: opcionesSiNo.find(item => item.value == (ambienteModernizacion.ambiente_activo == 1 ? 1 : 2))?.label
-		},
+		estado_general_maquinaria: ambienteModernizacion.estado_general_maquinaria,
+		ambiente_activo: ambienteModernizacion.ambiente_activo,
 		programas_formacion_calificados: programasFormacionCalificadosRelacionados.length > 0
 		? programasFormacionCalificadosRelacionados
 		: null,
 		programas_formacion: programasFormacionNoCalificadosRelacionados.length > 0
 		? programasFormacionNoCalificadosRelacionados
 		: null,
-		ambiente_activo_procesos_idi: {
-			value: ambienteModernizacion.ambiente_activo_procesos_idi == 1
-			? 1
-			: 2,
-			label: opcionesSiNo.find(item => item.value == (ambienteModernizacion.ambiente_activo_procesos_idi == 1
-			? 1
-			: 2))?.label
-		},
+		ambiente_activo_procesos_idi: ambienteModernizacion.ambiente_activo_procesos_idi,
 		numero_proyectos_beneficiados: ambienteModernizacion.numero_proyectos_beneficiados,
 		cod_proyectos_beneficiados: ambienteModernizacion.cod_proyectos_beneficiados,
-		ambiente_formacion_complementaria: {
-			value: ambienteModernizacion.ambiente_formacion_complementaria == 1
-			? 1
-			: 2,
-			label: opcionesSiNo.find(item => item.value == (ambienteModernizacion.ambiente_formacion_complementaria == 1
-			? 1
-			: 2))?.label
-		},
+		ambiente_formacion_complementaria: ambienteModernizacion.ambiente_formacion_complementaria,
 		numero_total_cursos_comp: ambienteModernizacion.numero_total_cursos_comp,
 		numero_cursos_empresas: ambienteModernizacion.numero_cursos_empresas,
 		numero_personas_certificadas: ambienteModernizacion.numero_personas_certificadas,
@@ -59307,59 +59246,16 @@ function instance($$self, $$props, $$invalidate) {
 		(0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.set_store_value)(formEquipo, $formEquipo.numero_inventario_equipo = equipoAmbienteModernizacion.numero_inventario_equipo, $formEquipo);
 		(0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.set_store_value)(formEquipo, $formEquipo.nombre_equipo = equipoAmbienteModernizacion.nombre_equipo, $formEquipo);
 		(0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.set_store_value)(formEquipo, $formEquipo.descripcion_tecnica_equipo = equipoAmbienteModernizacion.descripcion_tecnica_equipo, $formEquipo);
-
-		(0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.set_store_value)(
-			formEquipo,
-			$formEquipo.estado_equipo = {
-				value: equipoAmbienteModernizacion.estado_equipo,
-				label: estadosEquipo.find(item => item.value == equipoAmbienteModernizacion.estado_equipo)?.label
-			},
-			$formEquipo
-		);
-
-		(0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.set_store_value)(
-			formEquipo,
-			$formEquipo.equipo_en_funcionamiento = {
-				value: equipoAmbienteModernizacion.equipo_en_funcionamiento,
-				label: opcionesSiNo.find(item => item.value == equipoAmbienteModernizacion.equipo_en_funcionamiento)?.label
-			},
-			$formEquipo
-		);
-
+		(0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.set_store_value)(formEquipo, $formEquipo.estado_equipo = equipoAmbienteModernizacion.estado_equipo, $formEquipo);
+		(0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.set_store_value)(formEquipo, $formEquipo.equipo_en_funcionamiento = equipoAmbienteModernizacion.equipo_en_funcionamiento, $formEquipo);
 		(0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.set_store_value)(formEquipo, $formEquipo.observaciones_generales = equipoAmbienteModernizacion.observaciones_generales, $formEquipo);
 		(0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.set_store_value)(formEquipo, $formEquipo.marca = equipoAmbienteModernizacion.marca, $formEquipo);
 		(0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.set_store_value)(formEquipo, $formEquipo.horas_promedio_uso = equipoAmbienteModernizacion.horas_promedio_uso, $formEquipo);
-
-		(0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.set_store_value)(
-			formEquipo,
-			$formEquipo.frecuencia_mantenimiento = {
-				value: equipoAmbienteModernizacion.frecuencia_mantenimiento,
-				label: opcionesFrecuencia.find(item => item.value == equipoAmbienteModernizacion.frecuencia_mantenimiento)?.label
-			},
-			$formEquipo
-		);
-
-		(0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.set_store_value)(
-			formEquipo,
-			$formEquipo.year_adquisicion = {
-				value: equipoAmbienteModernizacion.year_adquisicion,
-				label: years.find(item => item.value == equipoAmbienteModernizacion.year_adquisicion)?.label
-			},
-			$formEquipo
-		);
-
+		(0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.set_store_value)(formEquipo, $formEquipo.frecuencia_mantenimiento = equipoAmbienteModernizacion.frecuencia_mantenimiento, $formEquipo);
+		(0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.set_store_value)(formEquipo, $formEquipo.year_adquisicion = equipoAmbienteModernizacion.year_adquisicion, $formEquipo);
 		(0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.set_store_value)(formEquipo, $formEquipo.nombre_cuentadante = equipoAmbienteModernizacion.nombre_cuentadante, $formEquipo);
 		(0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.set_store_value)(formEquipo, $formEquipo.cedula_cuentadante = equipoAmbienteModernizacion.cedula_cuentadante, $formEquipo);
-
-		(0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.set_store_value)(
-			formEquipo,
-			$formEquipo.rol_cuentadante = {
-				value: equipoAmbienteModernizacion.rol_cuentadante,
-				label: roles.find(item => item.label == equipoAmbienteModernizacion.rol_cuentadante)?.label
-			},
-			$formEquipo
-		);
-
+		(0,svelte_internal__WEBPACK_IMPORTED_MODULE_0__.set_store_value)(formEquipo, $formEquipo.rol_cuentadante = equipoAmbienteModernizacion.rol_cuentadante, $formEquipo);
 		$$invalidate(18, equipoFormDialog = true);
 	}
 
@@ -59775,7 +59671,7 @@ function get_each_context_9(ctx, list, i) {
 	return child_ctx;
 }
 
-// (119:8) {#if allowedToCreate}
+// (121:8) {#if allowedToCreate}
 function create_if_block_25(ctx) {
 	let div2;
 	let div0;
@@ -59804,12 +59700,13 @@ function create_if_block_25(ctx) {
 		});
 
 	function select0_selectedValue_binding(value) {
-		/*select0_selectedValue_binding*/ ctx[60](value);
+		/*select0_selectedValue_binding*/ ctx[61](value);
 	}
 
 	let select0_props = {
 		id: "centro_formacion_id",
 		items: /*centrosFormacion*/ ctx[17],
+		selectFunctions: [/*func*/ ctx[60]],
 		error: /*errors*/ ctx[1].centro_formacion_id,
 		autocomplete: "off",
 		placeholder: "Busque por el nombre del centro de formación",
@@ -59833,7 +59730,7 @@ function create_if_block_25(ctx) {
 		});
 
 	function select1_selectedValue_binding(value) {
-		/*select1_selectedValue_binding*/ ctx[61](value);
+		/*select1_selectedValue_binding*/ ctx[62](value);
 	}
 
 	let select1_props = {
@@ -59937,7 +59834,7 @@ function create_if_block_25(ctx) {
 	};
 }
 
-// (162:8) {#if $form.area_conocimiento_id}
+// (164:8) {#if $form.area_conocimiento_id}
 function create_if_block_24(ctx) {
 	let div2;
 	let div0;
@@ -59958,13 +59855,13 @@ function create_if_block_24(ctx) {
 		});
 
 	function select_selectedValue_binding(value) {
-		/*select_selectedValue_binding*/ ctx[67](value);
+		/*select_selectedValue_binding*/ ctx[68](value);
 	}
 
 	let select_props = {
 		id: "subarea_conocimiento_id",
 		items: /*arraySubareasConocimiento*/ ctx[34],
-		selectFunctions: [/*func_1*/ ctx[66]],
+		selectFunctions: [/*func_2*/ ctx[67]],
 		error: /*errors*/ ctx[1].subarea_conocimiento_id,
 		autocomplete: "off",
 		placeholder: "Busque por el nombre de la subárea de conocimiento",
@@ -60029,7 +59926,7 @@ function create_if_block_24(ctx) {
 	};
 }
 
-// (172:8) {#if $form.subarea_conocimiento_id}
+// (174:8) {#if $form.subarea_conocimiento_id}
 function create_if_block_23(ctx) {
 	let div2;
 	let div0;
@@ -60050,7 +59947,7 @@ function create_if_block_23(ctx) {
 		});
 
 	function select_selectedValue_binding_1(value) {
-		/*select_selectedValue_binding_1*/ ctx[68](value);
+		/*select_selectedValue_binding_1*/ ctx[69](value);
 	}
 
 	let select_props = {
@@ -60120,7 +60017,7 @@ function create_if_block_23(ctx) {
 	};
 }
 
-// (210:8) {#if $form.centro_formacion_id?.value}
+// (212:8) {#if $form.centro_formacion_id?.value}
 function create_if_block_22(ctx) {
 	let div2;
 	let div0;
@@ -60147,7 +60044,6 @@ function create_if_block_22(ctx) {
 	let select_props = {
 		id: "linea_investigacion_id",
 		items: /*arrayLineasInvestigacion*/ ctx[36],
-		selectFunctions: [/*func_2*/ ctx[72]],
 		error: /*errors*/ ctx[1].linea_investigacion_id,
 		autocomplete: "off",
 		placeholder: "Busque por el nombre de la línea de investigación, centro de formación, grupo de investigación o regional",
@@ -60212,7 +60108,7 @@ function create_if_block_22(ctx) {
 	};
 }
 
-// (229:8) {#if $form.alineado_mesas_sectoriales?.value == 1}
+// (231:8) {#if $form.alineado_mesas_sectoriales?.value == 1}
 function create_if_block_21(ctx) {
 	let div3;
 	let inputerror;
@@ -60337,7 +60233,7 @@ function create_if_block_21(ctx) {
 	};
 }
 
-// (241:28) <FormField>
+// (243:28) <FormField>
 function create_default_slot_13(ctx) {
 	let checkbox;
 	let updating_group;
@@ -60395,7 +60291,7 @@ function create_default_slot_13(ctx) {
 	};
 }
 
-// (243:32) 
+// (245:32) 
 function create_label_slot(ctx) {
 	let span;
 	let t_value = /*nombre*/ ctx[158] + "";
@@ -60420,7 +60316,7 @@ function create_label_slot(ctx) {
 	};
 }
 
-// (240:24) {#each mesasSectoriales as { id, nombre }
+// (242:24) {#each mesasSectoriales as { id, nombre }
 function create_each_block_9(ctx) {
 	let formfield;
 	let current;
@@ -60467,7 +60363,7 @@ function create_each_block_9(ctx) {
 	};
 }
 
-// (260:8) {#if !allowedToCreate}
+// (262:8) {#if !allowedToCreate}
 function create_if_block_14(ctx) {
 	let div2;
 	let div0;
@@ -62303,7 +62199,7 @@ function create_if_block_14(ctx) {
 	};
 }
 
-// (270:12) {#if $form.financiado_anteriormente?.value == 1}
+// (272:12) {#if $form.financiado_anteriormente?.value == 1}
 function create_if_block_20(ctx) {
 	let div2;
 	let div0;
@@ -62394,7 +62290,7 @@ function create_if_block_20(ctx) {
 	};
 }
 
-// (290:12) {#if $form.estado_general_maquinaria?.value == 2 || $form.estado_general_maquinaria?.value == 3}
+// (292:12) {#if $form.estado_general_maquinaria?.value == 2 || $form.estado_general_maquinaria?.value == 3}
 function create_if_block_19(ctx) {
 	let div2;
 	let div0;
@@ -62484,7 +62380,7 @@ function create_if_block_19(ctx) {
 	};
 }
 
-// (338:56) 
+// (340:56) 
 function create_if_block_18(ctx) {
 	let div2;
 	let div0;
@@ -62574,7 +62470,7 @@ function create_if_block_18(ctx) {
 	};
 }
 
-// (320:12) {#if $form.ambiente_activo?.value == 1}
+// (322:12) {#if $form.ambiente_activo?.value == 1}
 function create_if_block_17(ctx) {
 	let div2;
 	let div0;
@@ -62751,7 +62647,7 @@ function create_if_block_17(ctx) {
 	};
 }
 
-// (368:12) {#if $form.ambiente_activo_procesos_idi?.value == 1}
+// (370:12) {#if $form.ambiente_activo_procesos_idi?.value == 1}
 function create_if_block_16(ctx) {
 	let div2;
 	let div0;
@@ -63008,7 +62904,7 @@ function create_if_block_16(ctx) {
 	};
 }
 
-// (384:24) <InfoMessage>
+// (386:24) <InfoMessage>
 function create_default_slot_12(ctx) {
 	let t;
 
@@ -63025,7 +62921,7 @@ function create_default_slot_12(ctx) {
 	};
 }
 
-// (407:12) {#if $form.ambiente_formacion_complementaria?.value == 1}
+// (409:12) {#if $form.ambiente_formacion_complementaria?.value == 1}
 function create_if_block_15(ctx) {
 	let div2;
 	let div0;
@@ -63461,7 +63357,7 @@ function create_if_block_15(ctx) {
 	};
 }
 
-// (432:24) <InfoMessage>
+// (434:24) <InfoMessage>
 function create_default_slot_11(ctx) {
 	let t;
 
@@ -63478,7 +63374,7 @@ function create_default_slot_11(ctx) {
 	};
 }
 
-// (451:24) <InfoMessage>
+// (453:24) <InfoMessage>
 function create_default_slot_10(ctx) {
 	let t;
 
@@ -63495,7 +63391,7 @@ function create_default_slot_10(ctx) {
 	};
 }
 
-// (462:20) <InfoMessage>
+// (464:20) <InfoMessage>
 function create_default_slot_9(ctx) {
 	let t0;
 	let a;
@@ -63525,7 +63421,7 @@ function create_default_slot_9(ctx) {
 	};
 }
 
-// (472:20) <InfoMessage>
+// (474:20) <InfoMessage>
 function create_default_slot_8(ctx) {
 	let t0;
 	let a;
@@ -63555,7 +63451,7 @@ function create_default_slot_8(ctx) {
 	};
 }
 
-// (684:20) <InfoMessage>
+// (686:20) <InfoMessage>
 function create_default_slot_7(ctx) {
 	let t;
 
@@ -63572,7 +63468,7 @@ function create_default_slot_7(ctx) {
 	};
 }
 
-// (721:8) {#if ambienteModernizacion}
+// (723:8) {#if ambienteModernizacion}
 function create_if_block_13(ctx) {
 	let small;
 	let svg;
@@ -63615,7 +63511,7 @@ function create_if_block_13(ctx) {
 	};
 }
 
-// (735:8) {:else}
+// (737:8) {:else}
 function create_else_block_9(ctx) {
 	let span;
 
@@ -63637,7 +63533,7 @@ function create_else_block_9(ctx) {
 	};
 }
 
-// (732:34) 
+// (734:34) 
 function create_if_block_12(ctx) {
 	let span;
 	let t;
@@ -63692,7 +63588,7 @@ function create_if_block_12(ctx) {
 	};
 }
 
-// (730:8) {#if ambienteModernizacion?.allowed.to_update}
+// (732:8) {#if ambienteModernizacion?.allowed.to_update}
 function create_if_block_11(ctx) {
 	let button;
 	let current;
@@ -63740,7 +63636,7 @@ function create_if_block_11(ctx) {
 	};
 }
 
-// (734:12) <LoadingButton loading={$form.processing} form="semillero-investigacion-form">
+// (736:12) <LoadingButton loading={$form.processing} form="semillero-investigacion-form">
 function create_default_slot_6(ctx) {
 	let t;
 
@@ -63757,7 +63653,7 @@ function create_default_slot_6(ctx) {
 	};
 }
 
-// (731:12) <Button on:click={() => (dialogGuardar = true)} class="ml-auto" type="button">
+// (733:12) <Button on:click={() => (dialogGuardar = true)} class="ml-auto" type="button">
 function create_default_slot_5(ctx) {
 	let t;
 
@@ -63774,7 +63670,7 @@ function create_default_slot_5(ctx) {
 	};
 }
 
-// (741:0) {#if ambienteModernizacion?.allowed.to_update}
+// (743:0) {#if ambienteModernizacion?.allowed.to_update}
 function create_if_block(ctx) {
 	let dialog;
 	let updating_open;
@@ -63839,7 +63735,7 @@ function create_if_block(ctx) {
 	};
 }
 
-// (743:8) 
+// (745:8) 
 function create_title_slot(ctx) {
 	let div1;
 
@@ -63859,7 +63755,7 @@ function create_title_slot(ctx) {
 	};
 }
 
-// (751:12) <InfoMessage>
+// (753:12) <InfoMessage>
 function create_default_slot_4(ctx) {
 	let t0;
 	let strong0;
@@ -63924,7 +63820,7 @@ function create_default_slot_4(ctx) {
 	};
 }
 
-// (750:8) 
+// (752:8) 
 function create_header_info_slot(ctx) {
 	let div;
 	let infomessage;
@@ -63974,7 +63870,7 @@ function create_header_info_slot(ctx) {
 	};
 }
 
-// (827:20) {#each $form.mesa_sectorial_id as mesaSectorial}
+// (829:20) {#each $form.mesa_sectorial_id as mesaSectorial}
 function create_each_block_8(ctx) {
 	let li;
 	let t0;
@@ -64001,7 +63897,7 @@ function create_each_block_8(ctx) {
 	};
 }
 
-// (848:16) {:else}
+// (850:16) {:else}
 function create_else_block_8(ctx) {
 	let p;
 
@@ -64021,7 +63917,7 @@ function create_else_block_8(ctx) {
 	};
 }
 
-// (842:16) {#if $form.codigos_proyectos_id}
+// (844:16) {#if $form.codigos_proyectos_id}
 function create_if_block_10(ctx) {
 	let ul;
 	let each_value_7 = /*$form*/ ctx[38].codigos_proyectos_id;
@@ -64079,7 +63975,7 @@ function create_if_block_10(ctx) {
 	};
 }
 
-// (844:24) {#each $form.codigos_proyectos_id as codigoProyecto}
+// (846:24) {#each $form.codigos_proyectos_id as codigoProyecto}
 function create_each_block_7(ctx) {
 	let li;
 	let t_value = /*codigoProyecto*/ ctx[143].label + "";
@@ -64103,7 +63999,7 @@ function create_each_block_7(ctx) {
 	};
 }
 
-// (872:16) {:else}
+// (874:16) {:else}
 function create_else_block_7(ctx) {
 	let p;
 
@@ -64123,7 +64019,7 @@ function create_else_block_7(ctx) {
 	};
 }
 
-// (866:16) {#if $form.programas_formacion_calificados}
+// (868:16) {#if $form.programas_formacion_calificados}
 function create_if_block_9(ctx) {
 	let ul;
 	let each_value_6 = /*$form*/ ctx[38].programas_formacion_calificados;
@@ -64181,7 +64077,7 @@ function create_if_block_9(ctx) {
 	};
 }
 
-// (868:24) {#each $form.programas_formacion_calificados as programaFormacionCalificado}
+// (870:24) {#each $form.programas_formacion_calificados as programaFormacionCalificado}
 function create_each_block_6(ctx) {
 	let li;
 	let t_value = /*programaFormacionCalificado*/ ctx[149].label + "";
@@ -64205,7 +64101,7 @@ function create_each_block_6(ctx) {
 	};
 }
 
-// (884:16) {:else}
+// (886:16) {:else}
 function create_else_block_6(ctx) {
 	let p;
 
@@ -64225,7 +64121,7 @@ function create_else_block_6(ctx) {
 	};
 }
 
-// (878:16) {#if $form.programas_formacion}
+// (880:16) {#if $form.programas_formacion}
 function create_if_block_8(ctx) {
 	let ul;
 	let each_value_5 = /*$form*/ ctx[38].programas_formacion;
@@ -64283,7 +64179,7 @@ function create_if_block_8(ctx) {
 	};
 }
 
-// (880:24) {#each $form.programas_formacion as programaFormacion}
+// (882:24) {#each $form.programas_formacion as programaFormacion}
 function create_each_block_5(ctx) {
 	let li;
 	let t_value = /*programaFormacion*/ ctx[146].label + "";
@@ -64307,7 +64203,7 @@ function create_each_block_5(ctx) {
 	};
 }
 
-// (908:16) {:else}
+// (910:16) {:else}
 function create_else_block_5(ctx) {
 	let p;
 
@@ -64327,7 +64223,7 @@ function create_else_block_5(ctx) {
 	};
 }
 
-// (902:16) {#if JSON.parse($form.cod_proyectos_beneficiados)?.length > 0}
+// (904:16) {#if JSON.parse($form.cod_proyectos_beneficiados)?.length > 0}
 function create_if_block_7(ctx) {
 	let ul;
 	let each_value_4 = JSON.parse(/*$form*/ ctx[38].cod_proyectos_beneficiados);
@@ -64385,7 +64281,7 @@ function create_if_block_7(ctx) {
 	};
 }
 
-// (904:24) {#each JSON.parse($form.cod_proyectos_beneficiados) as codigoProyecto}
+// (906:24) {#each JSON.parse($form.cod_proyectos_beneficiados) as codigoProyecto}
 function create_each_block_4(ctx) {
 	let li;
 	let t_value = /*codigoProyecto*/ ctx[143].value + "";
@@ -64409,7 +64305,7 @@ function create_each_block_4(ctx) {
 	};
 }
 
-// (920:16) {:else}
+// (922:16) {:else}
 function create_else_block_4(ctx) {
 	let p;
 
@@ -64429,7 +64325,7 @@ function create_else_block_4(ctx) {
 	};
 }
 
-// (914:16) {#if $form.semilleros_investigacion_id}
+// (916:16) {#if $form.semilleros_investigacion_id}
 function create_if_block_6(ctx) {
 	let ul;
 	let each_value_3 = /*$form*/ ctx[38].semilleros_investigacion_id;
@@ -64487,7 +64383,7 @@ function create_if_block_6(ctx) {
 	};
 }
 
-// (916:24) {#each $form.semilleros_investigacion_id as semilleroInvestigacion}
+// (918:24) {#each $form.semilleros_investigacion_id as semilleroInvestigacion}
 function create_each_block_3(ctx) {
 	let li;
 	let t_value = /*semilleroInvestigacion*/ ctx[140].label + "";
@@ -64511,7 +64407,7 @@ function create_each_block_3(ctx) {
 	};
 }
 
-// (944:16) {:else}
+// (946:16) {:else}
 function create_else_block_3(ctx) {
 	let p;
 
@@ -64531,7 +64427,7 @@ function create_else_block_3(ctx) {
 	};
 }
 
-// (938:16) {#if JSON.parse($form.datos_empresa)?.length > 0}
+// (940:16) {#if JSON.parse($form.datos_empresa)?.length > 0}
 function create_if_block_5(ctx) {
 	let ul;
 	let each_value_2 = JSON.parse(/*$form*/ ctx[38].datos_empresa);
@@ -64589,7 +64485,7 @@ function create_if_block_5(ctx) {
 	};
 }
 
-// (940:24) {#each JSON.parse($form.datos_empresa) as empresa}
+// (942:24) {#each JSON.parse($form.datos_empresa) as empresa}
 function create_each_block_2(ctx) {
 	let li;
 	let t_value = /*empresa*/ ctx[137].value + "";
@@ -64613,7 +64509,7 @@ function create_each_block_2(ctx) {
 	};
 }
 
-// (960:16) {:else}
+// (962:16) {:else}
 function create_else_block_2(ctx) {
 	let p;
 
@@ -64633,7 +64529,7 @@ function create_else_block_2(ctx) {
 	};
 }
 
-// (954:16) {#if JSON.parse($form.cursos_complementarios)?.length > 0}
+// (956:16) {#if JSON.parse($form.cursos_complementarios)?.length > 0}
 function create_if_block_4(ctx) {
 	let ul;
 	let each_value_1 = JSON.parse(/*$form*/ ctx[38].cursos_complementarios);
@@ -64691,7 +64587,7 @@ function create_if_block_4(ctx) {
 	};
 }
 
-// (956:24) {#each JSON.parse($form.cursos_complementarios) as curso}
+// (958:24) {#each JSON.parse($form.cursos_complementarios) as curso}
 function create_each_block_1(ctx) {
 	let li;
 	let t_value = /*curso*/ ctx[134].value + "";
@@ -64715,7 +64611,7 @@ function create_each_block_1(ctx) {
 	};
 }
 
-// (1028:16) {:else}
+// (1030:16) {:else}
 function create_else_block_1(ctx) {
 	let p;
 
@@ -64735,7 +64631,7 @@ function create_else_block_1(ctx) {
 	};
 }
 
-// (1022:16) {#if JSON.parse($form.palabras_clave_ambiente)?.length > 0}
+// (1024:16) {#if JSON.parse($form.palabras_clave_ambiente)?.length > 0}
 function create_if_block_3(ctx) {
 	let ul;
 	let each_value = JSON.parse(/*$form*/ ctx[38].palabras_clave_ambiente);
@@ -64793,7 +64689,7 @@ function create_if_block_3(ctx) {
 	};
 }
 
-// (1024:24) {#each JSON.parse($form.palabras_clave_ambiente) as palabraClave}
+// (1026:24) {#each JSON.parse($form.palabras_clave_ambiente) as palabraClave}
 function create_each_block(ctx) {
 	let li;
 	let t_value = /*palabraClave*/ ctx[131].value + "";
@@ -64817,7 +64713,7 @@ function create_each_block(ctx) {
 	};
 }
 
-// (759:12) <Export2Word id="borrador" showButton={false} bind:this={exportComponent}>
+// (761:12) <Export2Word id="borrador" showButton={false} bind:this={exportComponent}>
 function create_default_slot_3(ctx) {
 	let h1;
 	let t1;
@@ -66384,7 +66280,7 @@ function create_default_slot_3(ctx) {
 	};
 }
 
-// (758:8) 
+// (760:8) 
 function create_content_slot(ctx) {
 	let div;
 	let export2word;
@@ -66437,7 +66333,7 @@ function create_content_slot(ctx) {
 	};
 }
 
-// (1039:16) <Button on:click={() => (dialogGuardar = false)} variant={null}>
+// (1041:16) <Button on:click={() => (dialogGuardar = false)} variant={null}>
 function create_default_slot_2(ctx) {
 	let t;
 
@@ -66454,7 +66350,7 @@ function create_default_slot_2(ctx) {
 	};
 }
 
-// (1040:16) {#if ambienteModernizacion}
+// (1042:16) {#if ambienteModernizacion}
 function create_if_block_1(ctx) {
 	let button;
 	let t;
@@ -66552,7 +66448,7 @@ function create_if_block_1(ctx) {
 	};
 }
 
-// (1041:20) <Button variant="raised" type="button" on:click={() => exportComponent.export2Word(ambienteModernizacion.seguimiento_ambiente_modernizacion.codigo)}>
+// (1043:20) <Button variant="raised" type="button" on:click={() => exportComponent.export2Word(ambienteModernizacion.seguimiento_ambiente_modernizacion.codigo)}>
 function create_default_slot_1(ctx) {
 	let t;
 
@@ -66569,7 +66465,7 @@ function create_default_slot_1(ctx) {
 	};
 }
 
-// (1044:20) {:else}
+// (1046:20) {:else}
 function create_else_block(ctx) {
 	let span;
 
@@ -66591,7 +66487,7 @@ function create_else_block(ctx) {
 	};
 }
 
-// (1042:20) {#if ambienteModernizacion?.allowed.to_update || allowedToCreate}
+// (1044:20) {#if ambienteModernizacion?.allowed.to_update || allowedToCreate}
 function create_if_block_2(ctx) {
 	let loadingbutton;
 	let current;
@@ -66638,7 +66534,7 @@ function create_if_block_2(ctx) {
 	};
 }
 
-// (1043:24) <LoadingButton loading={$form.processing} form="semillero-investigacion-form">
+// (1045:24) <LoadingButton loading={$form.processing} form="semillero-investigacion-form">
 function create_default_slot(ctx) {
 	let t;
 
@@ -66655,7 +66551,7 @@ function create_default_slot(ctx) {
 	};
 }
 
-// (1037:8) 
+// (1039:8) 
 function create_actions_slot(ctx) {
 	let div1;
 	let div0;
@@ -66840,7 +66736,7 @@ function create_fragment(ctx) {
 		});
 
 	function textarea_value_binding(value) {
-		/*textarea_value_binding*/ ctx[62](value);
+		/*textarea_value_binding*/ ctx[63](value);
 	}
 
 	let textarea_props = {
@@ -66871,7 +66767,7 @@ function create_fragment(ctx) {
 		});
 
 	function select0_selectedValue_binding_1(value) {
-		/*select0_selectedValue_binding_1*/ ctx[63](value);
+		/*select0_selectedValue_binding_1*/ ctx[64](value);
 	}
 
 	let select0_props = {
@@ -66900,13 +66796,13 @@ function create_fragment(ctx) {
 		});
 
 	function select1_selectedValue_binding_1(value) {
-		/*select1_selectedValue_binding_1*/ ctx[65](value);
+		/*select1_selectedValue_binding_1*/ ctx[66](value);
 	}
 
 	let select1_props = {
 		id: "area_conocimiento_id",
 		items: /*areasConocimiento*/ ctx[23],
-		selectFunctions: [/*func*/ ctx[64]],
+		selectFunctions: [/*func_1*/ ctx[65]],
 		error: /*errors*/ ctx[1].area_conocimiento_id,
 		autocomplete: "off",
 		placeholder: "Busque por el nombre de la área de conocimiento",
@@ -66932,7 +66828,7 @@ function create_fragment(ctx) {
 		});
 
 	function select2_selectedValue_binding(value) {
-		/*select2_selectedValue_binding*/ ctx[69](value);
+		/*select2_selectedValue_binding*/ ctx[70](value);
 	}
 
 	let select2_props = {
@@ -66961,7 +66857,7 @@ function create_fragment(ctx) {
 		});
 
 	function select3_selectedValue_binding(value) {
-		/*select3_selectedValue_binding*/ ctx[70](value);
+		/*select3_selectedValue_binding*/ ctx[71](value);
 	}
 
 	let select3_props = {
@@ -66990,7 +66886,7 @@ function create_fragment(ctx) {
 		});
 
 	function select4_selectedValue_binding(value) {
-		/*select4_selectedValue_binding*/ ctx[71](value);
+		/*select4_selectedValue_binding*/ ctx[72](value);
 	}
 
 	let select4_props = {
@@ -67796,7 +67692,7 @@ function instance($$self, $$props, $$invalidate) {
 	let exportComponent;
 
 	let arraySubareasConocimiento = subareasConocimiento.filter(function (obj) {
-		return obj.area_conocimiento_id == $form.area_conocimiento_id?.value;
+		return obj.area_conocimiento_id == $form.area_conocimiento_id;
 	});
 
 	function selectAreaConocimiento(event) {
@@ -67805,7 +67701,9 @@ function instance($$self, $$props, $$invalidate) {
 		}));
 	}
 
-	let arrayDisciplinasSubareaConocimiento = [];
+	let arrayDisciplinasSubareaConocimiento = disciplinasSubareaConocimiento.filter(function (obj) {
+		return obj.subarea_conocimiento_id == $form.subarea_conocimiento_id;
+	});
 
 	function selectSubreaConocimiento(event) {
 		$$invalidate(35, arrayDisciplinasSubareaConocimiento = disciplinasSubareaConocimiento.filter(function (obj) {
@@ -67813,7 +67711,7 @@ function instance($$self, $$props, $$invalidate) {
 		}));
 	}
 
-	let arrayLineasInvestigacion = lineasInvestigacion;
+	let arrayLineasInvestigacion = [];
 
 	function selectLineaInvestigacion(event) {
 		$$invalidate(36, arrayLineasInvestigacion = lineasInvestigacion.filter(function (obj) {
@@ -67843,6 +67741,8 @@ function instance($$self, $$props, $$invalidate) {
 			});
 	}
 
+	const func = event => selectLineaInvestigacion(event);
+
 	function select0_selectedValue_binding(value) {
 		if ($$self.$$.not_equal($form.centro_formacion_id, value)) {
 			$form.centro_formacion_id = value;
@@ -67871,7 +67771,7 @@ function instance($$self, $$props, $$invalidate) {
 		}
 	}
 
-	const func = event => selectAreaConocimiento(event);
+	const func_1 = event => selectAreaConocimiento(event);
 
 	function select1_selectedValue_binding_1(value) {
 		if ($$self.$$.not_equal($form.area_conocimiento_id, value)) {
@@ -67880,7 +67780,7 @@ function instance($$self, $$props, $$invalidate) {
 		}
 	}
 
-	const func_1 = event => selectSubreaConocimiento(event);
+	const func_2 = event => selectSubreaConocimiento(event);
 
 	function select_selectedValue_binding(value) {
 		if ($$self.$$.not_equal($form.subarea_conocimiento_id, value)) {
@@ -67916,8 +67816,6 @@ function instance($$self, $$props, $$invalidate) {
 			form.set($form);
 		}
 	}
-
-	const func_2 = event => selectLineaInvestigacion(event);
 
 	function select_selectedValue_binding_2(value) {
 		if ($$self.$$.not_equal($form.linea_investigacion_id, value)) {
@@ -68361,19 +68259,19 @@ function instance($$self, $$props, $$invalidate) {
 		subareasConocimiento,
 		disciplinasSubareaConocimiento,
 		lineasInvestigacion,
+		func,
 		select0_selectedValue_binding,
 		select1_selectedValue_binding,
 		textarea_value_binding,
 		select0_selectedValue_binding_1,
-		func,
-		select1_selectedValue_binding_1,
 		func_1,
+		select1_selectedValue_binding_1,
+		func_2,
 		select_selectedValue_binding,
 		select_selectedValue_binding_1,
 		select2_selectedValue_binding,
 		select3_selectedValue_binding,
 		select4_selectedValue_binding,
-		func_2,
 		select_selectedValue_binding_2,
 		select5_selectedValue_binding,
 		checkbox_group_binding,
@@ -68977,7 +68875,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _smui_button__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @smui/button */ "./node_modules/@smui/button/index.js");
 /* harmony import */ var D_www_sipro_spa_node_modules_svelte_loader_lib_hot_api_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./node_modules/svelte-loader/lib/hot-api.js */ "./node_modules/svelte-loader/lib/hot-api.js");
 /* harmony import */ var D_www_sipro_spa_node_modules_svelte_hmr_runtime_proxy_adapter_dom_js__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./node_modules/svelte-hmr/runtime/proxy-adapter-dom.js */ "./node_modules/svelte-hmr/runtime/proxy-adapter-dom.js");
-/* harmony import */ var D_www_sipro_spa_resources_js_Shared_Button_svelte_11_css_svelte_loader_cssPath_D_www_sipro_spa_resources_js_Shared_Button_svelte_11_css_D_www_sipro_spa_resources_js_Shared_Button_svelte__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./resources/js/Shared/Button.svelte.11.css!=!svelte-loader?cssPath=D:/www/sipro-spa/resources/js/Shared/Button.svelte.11.css!./resources/js/Shared/Button.svelte */ "./resources/js/Shared/Button.svelte.11.css!=!./node_modules/svelte-loader/index.js?cssPath=D:/www/sipro-spa/resources/js/Shared/Button.svelte.11.css!./resources/js/Shared/Button.svelte");
+/* harmony import */ var D_www_sipro_spa_resources_js_Shared_Button_svelte_15_css_svelte_loader_cssPath_D_www_sipro_spa_resources_js_Shared_Button_svelte_15_css_D_www_sipro_spa_resources_js_Shared_Button_svelte__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./resources/js/Shared/Button.svelte.15.css!=!svelte-loader?cssPath=D:/www/sipro-spa/resources/js/Shared/Button.svelte.15.css!./resources/js/Shared/Button.svelte */ "./resources/js/Shared/Button.svelte.15.css!=!./node_modules/svelte-loader/index.js?cssPath=D:/www/sipro-spa/resources/js/Shared/Button.svelte.15.css!./resources/js/Shared/Button.svelte");
 /* module decorator */ module = __webpack_require__.hmd(module);
 /* resources\js\Shared\Button.svelte generated by Svelte v3.49.0 */
 
@@ -71235,7 +71133,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var svelte_easing__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! svelte/easing */ "./node_modules/svelte/easing/index.mjs");
 /* harmony import */ var D_www_sipro_spa_node_modules_svelte_loader_lib_hot_api_js__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ./node_modules/svelte-loader/lib/hot-api.js */ "./node_modules/svelte-loader/lib/hot-api.js");
 /* harmony import */ var D_www_sipro_spa_node_modules_svelte_hmr_runtime_proxy_adapter_dom_js__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ./node_modules/svelte-hmr/runtime/proxy-adapter-dom.js */ "./node_modules/svelte-hmr/runtime/proxy-adapter-dom.js");
-/* harmony import */ var D_www_sipro_spa_resources_js_Shared_FlashMessages_svelte_23_css_svelte_loader_cssPath_D_www_sipro_spa_resources_js_Shared_FlashMessages_svelte_23_css_D_www_sipro_spa_resources_js_Shared_FlashMessages_svelte__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! ./resources/js/Shared/FlashMessages.svelte.23.css!=!svelte-loader?cssPath=D:/www/sipro-spa/resources/js/Shared/FlashMessages.svelte.23.css!./resources/js/Shared/FlashMessages.svelte */ "./resources/js/Shared/FlashMessages.svelte.23.css!=!./node_modules/svelte-loader/index.js?cssPath=D:/www/sipro-spa/resources/js/Shared/FlashMessages.svelte.23.css!./resources/js/Shared/FlashMessages.svelte");
+/* harmony import */ var D_www_sipro_spa_resources_js_Shared_FlashMessages_svelte_22_css_svelte_loader_cssPath_D_www_sipro_spa_resources_js_Shared_FlashMessages_svelte_22_css_D_www_sipro_spa_resources_js_Shared_FlashMessages_svelte__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! ./resources/js/Shared/FlashMessages.svelte.22.css!=!svelte-loader?cssPath=D:/www/sipro-spa/resources/js/Shared/FlashMessages.svelte.22.css!./resources/js/Shared/FlashMessages.svelte */ "./resources/js/Shared/FlashMessages.svelte.22.css!=!./node_modules/svelte-loader/index.js?cssPath=D:/www/sipro-spa/resources/js/Shared/FlashMessages.svelte.22.css!./resources/js/Shared/FlashMessages.svelte");
 /* module decorator */ module = __webpack_require__.hmd(module);
 /* resources\js\Shared\FlashMessages.svelte generated by Svelte v3.49.0 */
 
@@ -73167,7 +73065,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _smui_button__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @smui/button */ "./node_modules/@smui/button/index.js");
 /* harmony import */ var D_www_sipro_spa_node_modules_svelte_loader_lib_hot_api_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./node_modules/svelte-loader/lib/hot-api.js */ "./node_modules/svelte-loader/lib/hot-api.js");
 /* harmony import */ var D_www_sipro_spa_node_modules_svelte_hmr_runtime_proxy_adapter_dom_js__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./node_modules/svelte-hmr/runtime/proxy-adapter-dom.js */ "./node_modules/svelte-hmr/runtime/proxy-adapter-dom.js");
-/* harmony import */ var D_www_sipro_spa_resources_js_Shared_LoadingButton_svelte_14_css_svelte_loader_cssPath_D_www_sipro_spa_resources_js_Shared_LoadingButton_svelte_14_css_D_www_sipro_spa_resources_js_Shared_LoadingButton_svelte__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./resources/js/Shared/LoadingButton.svelte.14.css!=!svelte-loader?cssPath=D:/www/sipro-spa/resources/js/Shared/LoadingButton.svelte.14.css!./resources/js/Shared/LoadingButton.svelte */ "./resources/js/Shared/LoadingButton.svelte.14.css!=!./node_modules/svelte-loader/index.js?cssPath=D:/www/sipro-spa/resources/js/Shared/LoadingButton.svelte.14.css!./resources/js/Shared/LoadingButton.svelte");
+/* harmony import */ var D_www_sipro_spa_resources_js_Shared_LoadingButton_svelte_12_css_svelte_loader_cssPath_D_www_sipro_spa_resources_js_Shared_LoadingButton_svelte_12_css_D_www_sipro_spa_resources_js_Shared_LoadingButton_svelte__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./resources/js/Shared/LoadingButton.svelte.12.css!=!svelte-loader?cssPath=D:/www/sipro-spa/resources/js/Shared/LoadingButton.svelte.12.css!./resources/js/Shared/LoadingButton.svelte */ "./resources/js/Shared/LoadingButton.svelte.12.css!=!./node_modules/svelte-loader/index.js?cssPath=D:/www/sipro-spa/resources/js/Shared/LoadingButton.svelte.12.css!./resources/js/Shared/LoadingButton.svelte");
 /* module decorator */ module = __webpack_require__.hmd(module);
 /* resources\js\Shared\LoadingButton.svelte generated by Svelte v3.49.0 */
 
@@ -73556,7 +73454,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var svelte_select__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! svelte-select */ "./node_modules/svelte-select/src/Select.svelte");
 /* harmony import */ var D_www_sipro_spa_node_modules_svelte_loader_lib_hot_api_js__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ./node_modules/svelte-loader/lib/hot-api.js */ "./node_modules/svelte-loader/lib/hot-api.js");
 /* harmony import */ var D_www_sipro_spa_node_modules_svelte_hmr_runtime_proxy_adapter_dom_js__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ./node_modules/svelte-hmr/runtime/proxy-adapter-dom.js */ "./node_modules/svelte-hmr/runtime/proxy-adapter-dom.js");
-/* harmony import */ var D_www_sipro_spa_resources_js_Shared_Select_svelte_15_css_svelte_loader_cssPath_D_www_sipro_spa_resources_js_Shared_Select_svelte_15_css_D_www_sipro_spa_resources_js_Shared_Select_svelte__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! ./resources/js/Shared/Select.svelte.15.css!=!svelte-loader?cssPath=D:/www/sipro-spa/resources/js/Shared/Select.svelte.15.css!./resources/js/Shared/Select.svelte */ "./resources/js/Shared/Select.svelte.15.css!=!./node_modules/svelte-loader/index.js?cssPath=D:/www/sipro-spa/resources/js/Shared/Select.svelte.15.css!./resources/js/Shared/Select.svelte");
+/* harmony import */ var D_www_sipro_spa_resources_js_Shared_Select_svelte_14_css_svelte_loader_cssPath_D_www_sipro_spa_resources_js_Shared_Select_svelte_14_css_D_www_sipro_spa_resources_js_Shared_Select_svelte__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! ./resources/js/Shared/Select.svelte.14.css!=!svelte-loader?cssPath=D:/www/sipro-spa/resources/js/Shared/Select.svelte.14.css!./resources/js/Shared/Select.svelte */ "./resources/js/Shared/Select.svelte.14.css!=!./node_modules/svelte-loader/index.js?cssPath=D:/www/sipro-spa/resources/js/Shared/Select.svelte.14.css!./resources/js/Shared/Select.svelte");
 /* module decorator */ module = __webpack_require__.hmd(module);
 /* resources\js\Shared\Select.svelte generated by Svelte v3.49.0 */
 
@@ -73669,6 +73567,7 @@ function instance($$self, $$props, $$invalidate) {
 	let { groupBy } = $$props;
 	let { isSearchable = true } = $$props;
 	let { disabled = false } = $$props;
+	selectedValue = items.find(item => item.value == selectedValue || item.label == selectedValue);
 	let select = null;
 
 	(0,svelte__WEBPACK_IMPORTED_MODULE_1__.onMount)(() => {
@@ -73777,7 +73676,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _Shared_InputError__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! @/Shared/InputError */ "./resources/js/Shared/InputError.svelte");
 /* harmony import */ var D_www_sipro_spa_node_modules_svelte_loader_lib_hot_api_js__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ./node_modules/svelte-loader/lib/hot-api.js */ "./node_modules/svelte-loader/lib/hot-api.js");
 /* harmony import */ var D_www_sipro_spa_node_modules_svelte_hmr_runtime_proxy_adapter_dom_js__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ./node_modules/svelte-hmr/runtime/proxy-adapter-dom.js */ "./node_modules/svelte-hmr/runtime/proxy-adapter-dom.js");
-/* harmony import */ var D_www_sipro_spa_resources_js_Shared_SelectMulti_svelte_17_css_svelte_loader_cssPath_D_www_sipro_spa_resources_js_Shared_SelectMulti_svelte_17_css_D_www_sipro_spa_resources_js_Shared_SelectMulti_svelte__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! ./resources/js/Shared/SelectMulti.svelte.17.css!=!svelte-loader?cssPath=D:/www/sipro-spa/resources/js/Shared/SelectMulti.svelte.17.css!./resources/js/Shared/SelectMulti.svelte */ "./resources/js/Shared/SelectMulti.svelte.17.css!=!./node_modules/svelte-loader/index.js?cssPath=D:/www/sipro-spa/resources/js/Shared/SelectMulti.svelte.17.css!./resources/js/Shared/SelectMulti.svelte");
+/* harmony import */ var D_www_sipro_spa_resources_js_Shared_SelectMulti_svelte_16_css_svelte_loader_cssPath_D_www_sipro_spa_resources_js_Shared_SelectMulti_svelte_16_css_D_www_sipro_spa_resources_js_Shared_SelectMulti_svelte__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! ./resources/js/Shared/SelectMulti.svelte.16.css!=!svelte-loader?cssPath=D:/www/sipro-spa/resources/js/Shared/SelectMulti.svelte.16.css!./resources/js/Shared/SelectMulti.svelte */ "./resources/js/Shared/SelectMulti.svelte.16.css!=!./node_modules/svelte-loader/index.js?cssPath=D:/www/sipro-spa/resources/js/Shared/SelectMulti.svelte.16.css!./resources/js/Shared/SelectMulti.svelte");
 /* module decorator */ module = __webpack_require__.hmd(module);
 /* resources\js\Shared\SelectMulti.svelte generated by Svelte v3.49.0 */
 
@@ -73980,7 +73879,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var svelte__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! svelte */ "./node_modules/svelte/index.mjs");
 /* harmony import */ var D_www_sipro_spa_node_modules_svelte_loader_lib_hot_api_js__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ./node_modules/svelte-loader/lib/hot-api.js */ "./node_modules/svelte-loader/lib/hot-api.js");
 /* harmony import */ var D_www_sipro_spa_node_modules_svelte_hmr_runtime_proxy_adapter_dom_js__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ./node_modules/svelte-hmr/runtime/proxy-adapter-dom.js */ "./node_modules/svelte-hmr/runtime/proxy-adapter-dom.js");
-/* harmony import */ var D_www_sipro_spa_resources_js_Shared_Tags_svelte_18_css_svelte_loader_cssPath_D_www_sipro_spa_resources_js_Shared_Tags_svelte_18_css_D_www_sipro_spa_resources_js_Shared_Tags_svelte__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! ./resources/js/Shared/Tags.svelte.18.css!=!svelte-loader?cssPath=D:/www/sipro-spa/resources/js/Shared/Tags.svelte.18.css!./resources/js/Shared/Tags.svelte */ "./resources/js/Shared/Tags.svelte.18.css!=!./node_modules/svelte-loader/index.js?cssPath=D:/www/sipro-spa/resources/js/Shared/Tags.svelte.18.css!./resources/js/Shared/Tags.svelte");
+/* harmony import */ var D_www_sipro_spa_resources_js_Shared_Tags_svelte_17_css_svelte_loader_cssPath_D_www_sipro_spa_resources_js_Shared_Tags_svelte_17_css_D_www_sipro_spa_resources_js_Shared_Tags_svelte__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! ./resources/js/Shared/Tags.svelte.17.css!=!svelte-loader?cssPath=D:/www/sipro-spa/resources/js/Shared/Tags.svelte.17.css!./resources/js/Shared/Tags.svelte */ "./resources/js/Shared/Tags.svelte.17.css!=!./node_modules/svelte-loader/index.js?cssPath=D:/www/sipro-spa/resources/js/Shared/Tags.svelte.17.css!./resources/js/Shared/Tags.svelte");
 /* module decorator */ module = __webpack_require__.hmd(module);
 /* resources\js\Shared\Tags.svelte generated by Svelte v3.49.0 */
 

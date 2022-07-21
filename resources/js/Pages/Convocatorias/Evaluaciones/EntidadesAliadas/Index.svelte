@@ -35,10 +35,7 @@
     let isSuperAdmin = checkRole(authUser, [1])
 
     let taInfo = {
-        infraestructura_tecnoacademia: {
-            value: proyecto.infraestructura_tecnoacademia,
-            label: infraestructuraTecnoacademia.find((item) => item.value == proyecto.infraestructura_tecnoacademia)?.label,
-        },
+        infraestructura_tecnoacademia: proyecto.infraestructura_tecnoacademia,
     }
 
     let formEstrategiaRegionalEvaluacion = useForm({

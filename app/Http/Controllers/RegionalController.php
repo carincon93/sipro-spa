@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Helpers\SelectHelper;
 use App\Http\Requests\RegionalRequest;
 use App\Models\Regional;
 use Illuminate\Http\Request;
@@ -34,7 +35,10 @@ class RegionalController extends Controller
     {
         $this->authorize('create', [Regional::class]);
 
-        return Inertia::render('Regionales/Create');
+        return Inertia::render('Regionales/Create', [
+            'regiones'              => SelectHelper::regiones(),
+            'directoresRegionales'  => SelectHelper::usuariosPorRol('director regional')
+        ]);
     }
 
     /**
@@ -80,7 +84,9 @@ class RegionalController extends Controller
         $this->authorize('update', [Regional::class, $regional]);
 
         return Inertia::render('Regionales/Edit', [
-            'regional' => $regional
+            'regional'              => $regional,
+            'regiones'              => SelectHelper::regiones(),
+            'directoresRegionales'  => SelectHelper::usuariosPorRol('director regional')
         ]);
     }
 

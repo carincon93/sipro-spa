@@ -7,7 +7,6 @@
     import Input from '@/Shared/Input'
     import Label from '@/Shared/Label'
     import LoadingButton from '@/Shared/LoadingButton'
-    import DynamicList from '@/Shared/Dropdowns/DynamicList'
     import Textarea from '@/Shared/Textarea'
     import InputError from '@/Shared/InputError'
     import Select from '@/Shared/Select'
@@ -81,28 +80,17 @@
                 <fieldset class="p-8" disabled={proyecto.allowed.to_update ? undefined : true}>
                     <div class="mt-4">
                         <Label required labelFor="segundo_grupo_presupuestal_id" value="Homologable 2018" />
-                        <DynamicList id="segundo_grupo_presupuestal_id" bind:value={$form.segundo_grupo_presupuestal_id} routeWebApi={route('web-api.segundo-grupo-presupuestal', proyecto.linea_programatica)} placeholder="Busque por el homologable 2018" message={errors.segundo_grupo_presupuestal_id} required />
                     </div>
 
                     {#if $form.segundo_grupo_presupuestal_id}
                         <div class="mt-4">
                             <Label required labelFor="tercer_grupo_presupuestal_id" value="Rubro 2019" />
-                            <DynamicList id="tercer_grupo_presupuestal_id" bind:value={$form.tercer_grupo_presupuestal_id} routeWebApi={route('web-api.tercer-grupo-presupuestal', $form.segundo_grupo_presupuestal_id)} placeholder="Busque por el nombre del rubro 2019" message={errors.tercer_grupo_presupuestal_id} required />
                         </div>
                     {/if}
 
                     {#if $form.segundo_grupo_presupuestal_id && $form.tercer_grupo_presupuestal_id}
                         <div class="mt-4">
                             <Label required labelFor="convocatoria_presupuesto_id" value="Uso presupuestal" />
-                            <DynamicList
-                                id="convocatoria_presupuesto_id"
-                                bind:value={$form.convocatoria_presupuesto_id}
-                                routeWebApi={route('web-api.usos-presupuestales', [convocatoria, proyecto.linea_programatica, $form.segundo_grupo_presupuestal_id, $form.tercer_grupo_presupuestal_id])}
-                                placeholder="Busque por el nombre del uso presupuestal"
-                                message={errors.convocatoria_presupuesto_id}
-                                bind:recurso={presupuestoSennova}
-                                required
-                            />
                         </div>
 
                         {#if presupuestoSennova?.mensaje}

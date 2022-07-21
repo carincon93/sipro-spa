@@ -31,15 +31,9 @@
     let form = useForm({
         asignacion_mensual: convocatoriaRolSennova.asignacion_mensual,
         experiencia: convocatoriaRolSennova.experiencia,
-        nivel_academico: {
-            value: convocatoriaRolSennova.nivel_academico,
-            label: nivelesAcademicos.find((item) => item.value == convocatoriaRolSennova.nivel_academico)?.label,
-        },
+        nivel_academico: convocatoriaRolSennova.nivel_academico,
         linea_programatica_id: convocatoriaRolSennova.linea_programatica_id,
-        rol_sennova_id: {
-            value: convocatoriaRolSennova.rol_sennova_id,
-            label: rolesSennova.find((item) => item.value == convocatoriaRolSennova.rol_sennova_id)?.label,
-        },
+        rol_sennova_id: convocatoriaRolSennova.rol_sennova_id,
         perfil: convocatoriaRolSennova.perfil,
         mensaje: convocatoriaRolSennova.mensaje,
     })

@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Helpers\SelectHelper;
 use App\Models\ServicioTecnologico;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\ServicioTecnologicoLongColumnRequest;
@@ -46,34 +47,18 @@ class ServicioTecnologicoController extends Controller
         $authUser = Auth::user();
 
         if ($authUser->hasRole(13)) {
-            $tipoProyectoSt = TipoProyectoSt::selectRaw("tipos_proyecto_st.id as value, CASE subclasificacion
-                WHEN '1' THEN	concat(centros_formacion.nombre, chr(10), '∙ Automatización y TICs', chr(10), '∙ Mesa técnica: ', mesas_tecnicas.nombre)
-                WHEN '2' THEN	concat(centros_formacion.nombre, chr(10), '∙ Calibración', chr(10), '∙ Mesa técnica: ', mesas_tecnicas.nombre)
-                WHEN '3' THEN	concat(centros_formacion.nombre, chr(10), '∙ Consultoría técnica', chr(10), '∙ Mesa técnica: ', mesas_tecnicas.nombre)
-                WHEN '4' THEN	concat(centros_formacion.nombre, chr(10), '∙ Ensayo', chr(10), '∙ Mesa técnica: ', mesas_tecnicas.nombre)
-                WHEN '5' THEN	concat(centros_formacion.nombre, chr(10), '∙ Fabricación especial', chr(10), '∙ Mesa técnica: ', mesas_tecnicas.nombre)
-                WHEN '6' THEN	concat(centros_formacion.nombre, chr(10), '∙ Seguridad y salud en el trabajo', chr(10), '∙ Mesa técnica: ', mesas_tecnicas.nombre)
-                WHEN '7' THEN	concat(centros_formacion.nombre, chr(10), '∙ Servicios de salud', chr(10), '∙ Mesa técnica: ', mesas_tecnicas.nombre)
-            END as label")->join('centros_formacion', 'tipos_proyecto_st.centro_formacion_id', 'centros_formacion.id')->join('mesas_tecnicas', 'tipos_proyecto_st.mesa_tecnica_id', 'mesas_tecnicas.id')->where('centros_formacion.regional_id', $authUser->centroFormacion->regional_id)->get();
+            $tipoProyectoSt = SelectHelper::tiposProyectosSt()->where('regional_id', $authUser->centroFormacion->regional_id)->values()->all();
         } else {
-            $tipoProyectoSt = TipoProyectoSt::selectRaw("tipos_proyecto_st.id as value, CASE subclasificacion
-                WHEN '1' THEN	concat(centros_formacion.nombre, chr(10), '∙ Automatización y TICs', chr(10), '∙ Mesa técnica: ', mesas_tecnicas.nombre)
-                WHEN '2' THEN	concat(centros_formacion.nombre, chr(10), '∙ Calibración', chr(10), '∙ Mesa técnica: ', mesas_tecnicas.nombre)
-                WHEN '3' THEN	concat(centros_formacion.nombre, chr(10), '∙ Consultoría técnica', chr(10), '∙ Mesa técnica: ', mesas_tecnicas.nombre)
-                WHEN '4' THEN	concat(centros_formacion.nombre, chr(10), '∙ Ensayo', chr(10), '∙ Mesa técnica: ', mesas_tecnicas.nombre)
-                WHEN '5' THEN	concat(centros_formacion.nombre, chr(10), '∙ Fabricación especial', chr(10), '∙ Mesa técnica: ', mesas_tecnicas.nombre)
-                WHEN '6' THEN	concat(centros_formacion.nombre, chr(10), '∙ Seguridad y salud en el trabajo', chr(10), '∙ Mesa técnica: ', mesas_tecnicas.nombre)
-                WHEN '7' THEN	concat(centros_formacion.nombre, chr(10), '∙ Servicios de salud', chr(10), '∙ Mesa técnica: ', mesas_tecnicas.nombre)
-            END as label")->join('centros_formacion', 'tipos_proyecto_st.centro_formacion_id', 'centros_formacion.id')->join('mesas_tecnicas', 'tipos_proyecto_st.mesa_tecnica_id', 'mesas_tecnicas.id')->get();
+            $tipoProyectoSt = SelectHelper::tiposProyectosSt();
         }
 
         return Inertia::render('Convocatorias/Proyectos/ServiciosTecnologicos/Create', [
-            'convocatoria'          => $convocatoria->only('id', 'esta_activa', 'fase_formateada', 'fase', 'tipo_convocatoria', 'min_fecha_inicio_proyectos_st', 'max_fecha_finalizacion_proyectos_st', 'fecha_maxima_st'),
-            'roles'                 => collect(json_decode(Storage::get('json/roles-sennova-st.json'), true)),
-            'sectoresProductivos'   => collect(json_decode(Storage::get('json/sectores-productivos.json'), true)),
-            'tiposProyectoSt'       => $tipoProyectoSt,
-            'allowedToCreate'       => Gate::inspect('formular-proyecto', [10, $convocatoria])->allowed()
-
+            'convocatoria'              => $convocatoria->only('id', 'esta_activa', 'fase_formateada', 'fase', 'tipo_convocatoria', 'min_fecha_inicio_proyectos_st', 'max_fecha_finalizacion_proyectos_st', 'fecha_maxima_st'),
+            'roles'                     => collect(json_decode(Storage::get('json/roles-sennova-st.json'), true)),
+            'sectoresProductivos'       => collect(json_decode(Storage::get('json/sectores-productivos.json'), true)),
+            'tiposProyectoSt'           => $tipoProyectoSt,
+            'estadosSistemaGestion'     => SelectHelper::estadosSistemaGestion(),
+            'allowedToCreate'           => Gate::inspect('formular-proyecto', [10, $convocatoria])->allowed()
         ]);
     }
 
@@ -96,12 +81,11 @@ class ServicioTecnologicoController extends Controller
         $proyecto->save();
 
         $servicioTecnologico = new ServicioTecnologico();
-        $servicioTecnologico->titulo                        = $request->titulo;
-        $servicioTecnologico->fecha_inicio                  = $request->fecha_inicio;
-        $servicioTecnologico->fecha_finalizacion            = $request->fecha_finalizacion;
-        $servicioTecnologico->max_meses_ejecucion           = $request->max_meses_ejecucion;
-        $servicioTecnologico->sector_productivo             = $request->sector_productivo;
-
+        $servicioTecnologico->titulo                                = $request->titulo;
+        $servicioTecnologico->fecha_inicio                          = $request->fecha_inicio;
+        $servicioTecnologico->fecha_finalizacion                    = $request->fecha_finalizacion;
+        $servicioTecnologico->max_meses_ejecucion                   = $request->max_meses_ejecucion;
+        $servicioTecnologico->sector_productivo                     = $request->sector_productivo;
         $servicioTecnologico->resumen                               = '';
         $servicioTecnologico->antecedentes                          = '';
         $servicioTecnologico->objetivo_general                      = null;
@@ -157,42 +141,29 @@ class ServicioTecnologicoController extends Controller
 
         $servicioTecnologico->load('proyecto.evaluaciones.servicioTecnologicoEvaluacion');
 
-        $servicioTecnologico->codigo_linea_programatica = $servicioTecnologico->proyecto->lineaProgramatica->codigo;
-        $servicioTecnologico->precio_proyecto           = $servicioTecnologico->proyecto->precioProyecto;
+        $servicioTecnologico->codigo_linea_programatica     = $servicioTecnologico->proyecto->lineaProgramatica->codigo;
+        $servicioTecnologico->precio_proyecto               = $servicioTecnologico->proyecto->precioProyecto;
         $servicioTecnologico->proyecto->centroFormacion;
 
-        $servicioTecnologico->mostrar_recomendaciones = $servicioTecnologico->proyecto->mostrar_recomendaciones;
-        $servicioTecnologico->mostrar_requiere_subsanacion = $servicioTecnologico->proyecto->mostrar_requiere_subsanacion;
+        $servicioTecnologico->mostrar_recomendaciones       = $servicioTecnologico->proyecto->mostrar_recomendaciones;
+        $servicioTecnologico->mostrar_requiere_subsanacion  = $servicioTecnologico->proyecto->mostrar_requiere_subsanacion;
 
         if ($authUser->hasRole(13)) {
-            $tipoProyectoSt = TipoProyectoSt::selectRaw("tipos_proyecto_st.id as value, CASE subclasificacion
-                WHEN '1' THEN	concat(centros_formacion.nombre, chr(10), '∙ Automatización y TICs', chr(10), '∙ Mesa técnica: ', mesas_tecnicas.nombre)
-                WHEN '2' THEN	concat(centros_formacion.nombre, chr(10), '∙ Calibración', chr(10), '∙ Mesa técnica: ', mesas_tecnicas.nombre)
-                WHEN '3' THEN	concat(centros_formacion.nombre, chr(10), '∙ Consultoría técnica', chr(10), '∙ Mesa técnica: ', mesas_tecnicas.nombre)
-                WHEN '4' THEN	concat(centros_formacion.nombre, chr(10), '∙ Ensayo', chr(10), '∙ Mesa técnica: ', mesas_tecnicas.nombre)
-                WHEN '5' THEN	concat(centros_formacion.nombre, chr(10), '∙ Fabricación especial', chr(10), '∙ Mesa técnica: ', mesas_tecnicas.nombre)
-                WHEN '6' THEN	concat(centros_formacion.nombre, chr(10), '∙ Seguridad y salud en el trabajo', chr(10), '∙ Mesa técnica: ', mesas_tecnicas.nombre)
-                WHEN '7' THEN	concat(centros_formacion.nombre, chr(10), '∙ Servicios de salud', chr(10), '∙ Mesa técnica: ', mesas_tecnicas.nombre)
-            END as label")->join('centros_formacion', 'tipos_proyecto_st.centro_formacion_id', 'centros_formacion.id')->join('mesas_tecnicas', 'tipos_proyecto_st.mesa_tecnica_id', 'mesas_tecnicas.id')->where('centros_formacion.regional_id', $authUser->centroFormacion->regional_id)->get();
+            $tipoProyectoSt = SelectHelper::tiposProyectosSt()->where('regional_id', $authUser->centroFormacion->regional_id)->values()->all();
         } else {
-            $tipoProyectoSt = TipoProyectoSt::selectRaw("tipos_proyecto_st.id as value, CASE subclasificacion
-                WHEN '1' THEN	concat(centros_formacion.nombre, chr(10), '∙ Automatización y TICs', chr(10), '∙ Mesa técnica: ', mesas_tecnicas.nombre)
-                WHEN '2' THEN	concat(centros_formacion.nombre, chr(10), '∙ Calibración', chr(10), '∙ Mesa técnica: ', mesas_tecnicas.nombre)
-                WHEN '3' THEN	concat(centros_formacion.nombre, chr(10), '∙ Consultoría técnica', chr(10), '∙ Mesa técnica: ', mesas_tecnicas.nombre)
-                WHEN '4' THEN	concat(centros_formacion.nombre, chr(10), '∙ Ensayo', chr(10), '∙ Mesa técnica: ', mesas_tecnicas.nombre)
-                WHEN '5' THEN	concat(centros_formacion.nombre, chr(10), '∙ Fabricación especial', chr(10), '∙ Mesa técnica: ', mesas_tecnicas.nombre)
-                WHEN '6' THEN	concat(centros_formacion.nombre, chr(10), '∙ Seguridad y salud en el trabajo', chr(10), '∙ Mesa técnica: ', mesas_tecnicas.nombre)
-                WHEN '7' THEN	concat(centros_formacion.nombre, chr(10), '∙ Servicios de salud', chr(10), '∙ Mesa técnica: ', mesas_tecnicas.nombre)
-            END as label")->join('centros_formacion', 'tipos_proyecto_st.centro_formacion_id', 'centros_formacion.id')->join('mesas_tecnicas', 'tipos_proyecto_st.mesa_tecnica_id', 'mesas_tecnicas.id')->get();
+            $tipoProyectoSt = SelectHelper::tiposProyectosSt();
         }
 
         return Inertia::render('Convocatorias/Proyectos/ServiciosTecnologicos/Edit', [
-            'convocatoria'                  => $convocatoria->only('id', 'esta_activa', 'fase_formateada', 'fase', 'tipo_convocatoria', 'min_fecha_inicio_proyectos_st', 'max_fecha_finalizacion_proyectos_st', 'fecha_maxima_st', 'mostrar_recomendaciones'),
-            'servicioTecnologico'           => $servicioTecnologico,
-            'sectoresProductivos'           => collect(json_decode(Storage::get('json/sectores-productivos.json'), true)),
-            'tiposProyectoSt'               => $tipoProyectoSt,
-            'proyectoProgramasFormacion'    => $servicioTecnologico->proyecto->programasFormacion()->selectRaw('id as value, concat(programas_formacion.nombre, chr(10), \'∙ Código: \', programas_formacion.codigo) as label')->where('programas_formacion.registro_calificado', false)->get(),
-            'versiones'                     => $servicioTecnologico->proyecto->PdfVersiones,
+            'convocatoria'                              => $convocatoria->only('id', 'esta_activa', 'fase_formateada', 'fase', 'tipo_convocatoria', 'min_fecha_inicio_proyectos_st', 'max_fecha_finalizacion_proyectos_st', 'fecha_maxima_st', 'mostrar_recomendaciones'),
+            'servicioTecnologico'                       => $servicioTecnologico,
+            'lineasProgramaticas'                       => SelectHelper::lineasProgramaticas()->where('categoria_proyecto', 3)->values()->all(),
+            'estadosSistemaGestion'                     => SelectHelper::estadosSistemaGestion(),
+            'programasFormacionConRegistroCalificado'   => SelectHelper::programasFormacion()->where('registro_calificado', true)->where('centro_formacion_id', $servicioTecnologico->proyecto->centro_formacion_id)->values()->all(),
+            'sectoresProductivos'                       => collect(json_decode(Storage::get('json/sectores-productivos.json'), true)),
+            'tiposProyectoSt'                           => $tipoProyectoSt,
+            'proyectoProgramasFormacion'                => $servicioTecnologico->proyecto->programasFormacion()->selectRaw('id as value, concat(programas_formacion.nombre, chr(10), \'∙ Código: \', programas_formacion.codigo) as label')->where('programas_formacion.registro_calificado', false)->get(),
+            'versiones'                                 => $servicioTecnologico->proyecto->PdfVersiones,
         ]);
     }
 

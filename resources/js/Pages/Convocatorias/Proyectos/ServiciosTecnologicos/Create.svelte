@@ -9,7 +9,6 @@
     import LoadingButton from '@/Shared/LoadingButton'
     import Textarea from '@/Shared/Textarea'
     import Select from '@/Shared/Select'
-    import DynamicList from '@/Shared/Dropdowns/DynamicList'
     import InfoMessage from '@/Shared/InfoMessage'
 
     export let errors
@@ -17,6 +16,7 @@
     export let roles
     export let tiposProyectoSt
     export let sectoresProductivos
+    export let estadosSistemaGestion
     export let allowedToCreate
 
     $: $title = 'Crear proyecto de servicios tecnológicos'
@@ -122,7 +122,7 @@
                             <Label required class="mb-4" labelFor="estado_sistema_gestion_id" value="Estado del sistema de gestión" />
                         </div>
                         <div>
-                            <DynamicList id="estado_sistema_gestion_id" bind:value={$form.estado_sistema_gestion_id} routeWebApi={route('web-api.estados-sistema-gestion', $form.tipo_proyecto_st_id['value'])} classes="min-h" placeholder="Seleccione un estado" message={errors.estado_sistema_gestion_id} required />
+                            <Select id="estado_sistema_gestion_id" items={estadosSistemaGestion} bind:selectedValue={$form.estado_sistema_gestion_id} error={errors.estado_sistema_gestion_id} autocomplete="off" placeholder="Seleccione un estado" required />
                         </div>
                     </div>
                 </div>

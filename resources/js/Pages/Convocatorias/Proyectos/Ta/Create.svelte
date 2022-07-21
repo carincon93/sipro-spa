@@ -3,7 +3,6 @@
     import { inertia, useForm, page } from '@inertiajs/inertia-svelte'
     import { route, checkRole, checkPermission, monthDiff } from '@/Utils'
     import { _ } from 'svelte-i18n'
-    import axios from 'axios'
 
     import Label from '@/Shared/Label'
     import LoadingButton from '@/Shared/LoadingButton'
@@ -14,7 +13,8 @@
 
     export let errors
     export let convocatoria
-    export let tecnoAcademias
+    export let tecnoacademias
+    export let lineasTecnoacademia
     export let allowedToCreate
 
     $: $title = 'Crear proyecto TecnoAcademia'
@@ -24,6 +24,13 @@
      */
     let authUser = $page.props.auth.user
     let isSuperAdmin = checkRole(authUser, [1])
+
+    let arrayLineasTecnoacademia = lineasTecnoacademia
+    function selectLineasTecnoacademia(event) {
+        arrayLineasTecnoacademia = lineasTecnoacademia.filter(function (obj) {
+            return obj.tecnoacademia_id == event.detail?.value
+        })
+    }
 
     let tecnoacademia
     let form = useForm({
@@ -47,22 +54,6 @@
     function submit() {
         if (allowedToCreate) {
             $form.post(route('convocatorias.ta.store', [convocatoria.id]))
-        }
-    }
-
-    let lineasTecnoaAcademia
-    let oldTecnoAcademiaValue = null
-
-    $: if ($form.tecnoacademia_id?.value) {
-        if (oldTecnoAcademiaValue != $form.tecnoacademia_id?.value) {
-            getLineasTecnoacademia($form.tecnoacademia_id?.value)
-        }
-    }
-    async function getLineasTecnoacademia(tecnoacademiaId) {
-        let res = await axios.get(route('web-api.tecnoacademias.lineas-tecnoacademia', [tecnoacademiaId]))
-        if (res.status == '200') {
-            lineasTecnoaAcademia = res.data
-            oldTecnoAcademiaValue = $form.tecnoacademia_id?.value
         }
     }
 </script>
@@ -110,14 +101,14 @@
                 {/if}
             </div>
 
-            {#if tecnoAcademias.length > 0}
+            {#if tecnoacademias.length > 0}
                 <div class="py-24">
                     <div class="grid grid-cols-2">
                         <div>
                             <Label required class="mb-4" labelFor="tecnoacademia_id" value="TecnoAcademia" />
                         </div>
                         <div>
-                            <Select id="tecnoacademia_id" items={tecnoAcademias} bind:selectedValue={$form.tecnoacademia_id} error={errors.tecnoacademia_id} autocomplete="off" placeholder="Busque por el nombre de la TecnoAcademia" required />
+                            <Select id="tecnoacademia_id" items={tecnoacademias} bind:selectedValue={$form.tecnoacademia_id} selectFunctions={[(event) => selectLineasTecnoacademia(event)]} error={errors.tecnoacademia_id} autocomplete="off" placeholder="Busque por el nombre de la TecnoAcademia" required />
                         </div>
                     </div>
                 </div>
@@ -134,7 +125,7 @@
                             <Label required class="mb-4" labelFor="tecnoacademia_linea_tecnoacademia_id" value="Líneas temáticas a ejecutar en la vigencia del proyecto:" />
                         </div>
                         <div>
-                            <SelectMulti id="tecnoacademia_linea_tecnoacademia_id" bind:selectedValue={$form.tecnoacademia_linea_tecnoacademia_id} items={lineasTecnoaAcademia} isMulti={true} error={errors.tecnoacademia_linea_tecnoacademia_id} placeholder="Buscar por el nombre de la línea" required />
+                            <SelectMulti id="tecnoacademia_linea_tecnoacademia_id" bind:selectedValue={$form.tecnoacademia_linea_tecnoacademia_id} items={arrayLineasTecnoacademia} isMulti={true} error={errors.tecnoacademia_linea_tecnoacademia_id} placeholder="Buscar por el nombre de la línea" required />
                         </div>
                     </div>
                 </div>

@@ -7,7 +7,6 @@
     import InputError from '@/Shared/InputError'
     import Label from '@/Shared/Label'
     import LoadingButton from '@/Shared/LoadingButton'
-    import DynamicList from '@/Shared/Dropdowns/DynamicList'
     import Textarea from '@/Shared/Textarea'
     import Select from '@/Shared/Select'
     import Input from '@/Shared/Input'
@@ -17,6 +16,10 @@
     export let convocatoria
     export let roles
     export let centrosFormacion
+    export let lineasProgramaticas
+    export let areasConocimiento
+    export let actividadesEconomicas
+    export let tematicasEstrategicas
     export let allowedToCreate
 
     $: $title = 'Crear proyecto de apropiación de la cultura de la innovación'
@@ -26,6 +29,13 @@
      */
     let authUser = $page.props.auth.user
     let isSuperAdmin = checkRole(authUser, [1])
+
+    let arrayLineasInvestigacion = lineasInvestigacion
+    function selectLineaInvestigacion(event) {
+        arrayLineasInvestigacion = lineasInvestigacion.filter(function (obj) {
+            return obj.centro_formacion_id == event.detail?.value
+        })
+    }
 
     let form = useForm({
         centro_formacion_id: null,
@@ -109,7 +119,7 @@
                         <small> Nota: El Centro de Formación relacionado es el ejecutor del proyecto </small>
                     </div>
                     <div>
-                        <Select id="centro_formacion_id" items={centrosFormacion} bind:selectedValue={$form.centro_formacion_id} error={errors.centro_formacion_id} autocomplete="off" placeholder="Busque por el nombre del centro de formación" required />
+                        <Select id="centro_formacion_id" items={centrosFormacion} bind:selectedValue={$form.centro_formacion_id} selectFunctions={[(event) => selectLineaInvestigacion(event)]} error={errors.centro_formacion_id} autocomplete="off" placeholder="Busque por el nombre del centro de formación" required />
                     </div>
                 </div>
             {:else}
@@ -124,7 +134,7 @@
                         <Label required class="mb-4" labelFor="linea_investigacion_id" value="Línea de investigación" />
                     </div>
                     <div>
-                        <DynamicList id="linea_investigacion_id" bind:value={$form.linea_investigacion_id} routeWebApi={route('web-api.lineas-investigacion', $form.centro_formacion_id?.value)} classes="min-h" placeholder="Busque por el nombre de la línea de investigación, centro de formación, grupo de investigación o regional" message={errors.linea_investigacion_id} required />
+                        <Select id="linea_investigacion_id" items={arrayLineasInvestigacion} bind:selectedValue={$form.linea_investigacion_id} error={errors.linea_investigacion_id} autocomplete="off" placeholder="Busque por el nombre de la línea de investigación, centro de formación, grupo de investigación o regional" required />
                     </div>
                 </div>
             {/if}
@@ -133,7 +143,7 @@
                     <Label required class="mb-4" labelFor="linea_programatica_id" value="Código dependencia presupuestal (SIIF)" />
                 </div>
                 <div>
-                    <DynamicList id="linea_programatica_id" bind:value={$form.linea_programatica_id} routeWebApi={route('web-api.lineas-programaticas', 5)} classes="min-h" placeholder="Busque por el nombre de la línea programática" message={errors.linea_programatica_id} required />
+                    <Select id="linea_programatica_id" items={lineasProgramaticas} bind:selectedValue={$form.linea_programatica_id} error={errors.linea_programatica_id} autocomplete="off" placeholder="Seleccione una línea programática" required />
                 </div>
             </div>
             <div class="mt-44 grid grid-cols-2">
@@ -141,7 +151,7 @@
                     <Label required class="mb-4" labelFor="area_conocimiento_id" value="Área de conocimiento" />
                 </div>
                 <div>
-                    <DynamicList id="area_conocimiento_id" bind:value={$form.area_conocimiento_id} routeWebApi={route('web-api.areas-conocimiento')} classes="min-h" placeholder="Busque por el nombre de la área de conocimiento" message={errors.area_conocimiento_id} required />
+                    <Select id="area_conocimiento_id" items={areasConocimiento} bind:selectedValue={$form.area_conocimiento_id} error={errors.area_conocimiento_id} autocomplete="off" placeholder="Busque por el nombre de la área de conocimiento" required />
                 </div>
             </div>
             <div class="mt-44 grid grid-cols-2">
@@ -149,7 +159,7 @@
                     <Label required class="mb-4" labelFor="actividad_economica_id" value="¿En cuál de estas actividades económicas se puede aplicar el proyecto de investigación?" />
                 </div>
                 <div>
-                    <DynamicList id="actividad_economica_id" bind:value={$form.actividad_economica_id} routeWebApi={route('web-api.actividades-economicas')} placeholder="Busque por el nombre de la actividad económica" classes="min-h" message={errors.actividad_economica_id} required />
+                    <Select id="actividad_economica_id" items={actividadesEconomicas} bind:selectedValue={$form.actividad_economica_id} error={errors.actividad_economica_id} autocomplete="off" placeholder="Busque por el nombre de la actividad económica" required />
                 </div>
             </div>
             <div class="mt-44 grid grid-cols-2">
@@ -157,7 +167,7 @@
                     <Label required class="mb-4" labelFor="tematica_estrategica_id" value="Temática estratégica SENA" />
                 </div>
                 <div>
-                    <DynamicList id="tematica_estrategica_id" bind:value={$form.tematica_estrategica_id} routeWebApi={route('web-api.tematicas-estrategicas')} placeholder="Busque por el nombre de la temática estrategica SENA" message={errors.tematica_estrategica_id} required />
+                    <Select id="tematica_estrategica_id" items={tematicasEstrategicas} bind:selectedValue={$form.tematica_estrategica_id} error={errors.tematica_estrategica_id} autocomplete="off" placeholder="Busque por el nombre de temática estratégica" required />
                 </div>
             </div>
 

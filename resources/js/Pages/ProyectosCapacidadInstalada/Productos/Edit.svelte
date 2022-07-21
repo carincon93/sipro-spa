@@ -30,14 +30,8 @@
 
     let form = useForm({
         descripcion: producto.descripcion,
-        resultado_id: {
-            value: resultados.find((item) => item.value == producto.proyecto_capacidad_resultado_id)?.value,
-            label: resultados.find((item) => item.value == producto.proyecto_capacidad_resultado_id)?.label,
-        },
-        tipologia_minciencias: {
-            value: tipologiasMinciencias.find((item) => item.value == producto.tipologia_minciencias)?.value,
-            label: tipologiasMinciencias.find((item) => item.value == producto.tipologia_minciencias)?.label,
-        },
+        resultado_id: producto.proyecto_capacidad_resultado_id,
+        tipologia_minciencias: producto.tipologia_minciencias,
     })
 
     function submit() {

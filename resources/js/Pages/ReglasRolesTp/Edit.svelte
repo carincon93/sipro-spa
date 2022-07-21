@@ -28,14 +28,8 @@
 
     let form = useForm({
         maximo: reglaRolTp.maximo,
-        convocatoria_rol_sennova_id: {
-            value: reglaRolTp.convocatoria_rol_sennova_id,
-            label: rolesTp.find((item) => item.value == reglaRolTp.convocatoria_rol_sennova_id)?.label,
-        },
-        nodo_tecnoparque_id: {
-            value: reglaRolTp.nodo_tecnoparque_id,
-            label: nodosTecnoparque.find((item) => item.value == reglaRolTp.nodo_tecnoparque_id)?.label,
-        },
+        convocatoria_rol_sennova_id: reglaRolTp.convocatoria_rol_sennova_id,
+        nodo_tecnoparque_id: reglaRolTp.nodo_tecnoparque_id,
     })
 
     function submit() {

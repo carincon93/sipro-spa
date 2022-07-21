@@ -91,10 +91,7 @@
         if (efectoIndirecto.impacto != null) {
             $formImpacto.id = efectoIndirecto.impacto.id
             $formImpacto.descripcion = efectoIndirecto.impacto.descripcion
-            $formImpacto.tipo = {
-                value: efectoIndirecto.impacto.tipo,
-                label: tiposImpacto.find((item) => item.value == efectoIndirecto.impacto.tipo)?.label,
-            }
+            $formImpacto.tipo = efectoIndirecto.impacto.tipo
             $formImpacto.efecto_indirecto_id = efectoIndirecto.impacto.efectoIndirectoId
             $formImpacto.resultado_id = resultadoId
         } else {
@@ -267,10 +264,7 @@
         $formActividad.causa_indirecta_id = causaIndirecta.actividad.causa_indirecta_id
         $formActividad.objetivo_especifico_id = objetivoEspecifico
         $formActividad.descripcion = causaIndirecta.actividad.descripcion
-        $formActividad.resultado_id = {
-            value: causaIndirecta.actividad.resultado_id,
-            label: resultados.find((item) => item.value == causaIndirecta.actividad.resultado_id)?.label,
-        }
+        $formActividad.resultado_id = causaIndirecta.actividad.resultado_id
         actividadCausaIndirecta = causaIndirecta.descripcion ?? 'Sin información registrada'
         resultadosFiltrados = resultados.filter((item) => item.objetivo_especifico_id == objetivoEspecifico)
     }

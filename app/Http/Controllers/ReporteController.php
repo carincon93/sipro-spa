@@ -17,6 +17,7 @@ use App\Exports\InfoProyectosStExport;
 use App\Exports\InfoProyectosCulturaInnovacionExport;
 use App\Exports\InfoProyectosTaExport;
 use App\Exports\InfoProyectosTpExport;
+use App\Helpers\SelectHelper;
 use App\Models\Convocatoria;
 use App\Models\Proyecto;
 
@@ -33,8 +34,8 @@ class ReporteController extends Controller
         $this->authorize('descargar-reportes', [User::class]);
 
         return Inertia::render('Reportes/Index', [
-            'filters'   => request()->all('search'),
-            'convocatorias' => Convocatoria::select('id as value', 'descripcion as label')->get()
+            'filters'       => request()->all('search'),
+            'convocatorias' => SelectHelper::convocatorias()
         ]);
     }
 

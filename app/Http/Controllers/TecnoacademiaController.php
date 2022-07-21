@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Helpers\SelectHelper;
 use App\Http\Requests\TecnoacademiaRequest;
 use App\Models\LineaTecnoacademia;
 use App\Models\Tecnoacademia;
@@ -43,6 +44,7 @@ class TecnoacademiaController extends Controller
         return Inertia::render('Tecnoacademias/Create', [
             'lineasTecnoacademia'   => LineaTecnoacademia::orderBy('nombre', 'ASC')->get(),
             'modalidades'           => json_decode(Storage::get('json/modalidades-tecnoacademia.json'), true),
+            'centrosFormacion'      => SelectHelper::centrosFormacion()
         ]);
     }
 
@@ -103,6 +105,7 @@ class TecnoacademiaController extends Controller
             'lineasTecnoacademia'               => LineaTecnoacademia::orderBy('nombre', 'ASC')->get(),
             'lineasTecnoacademiaRelacionadas'   => $tecnoacademia->lineasTecnoacademia()->pluck('lineas_tecnoacademia.id'),
             'modalidades'                       => json_decode(Storage::get('json/modalidades-tecnoacademia.json'), true),
+            'centrosFormacion'                  => SelectHelper::centrosFormacion()
         ]);
     }
 

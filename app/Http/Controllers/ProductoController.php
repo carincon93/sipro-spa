@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Helpers\SelectHelper;
 use App\Http\Requests\ProductoRequest;
 use App\Models\Actividad;
 use App\Models\Convocatoria;
@@ -93,12 +94,13 @@ class ProductoController extends Controller
         $proyectoId = $proyecto->id;
 
         return Inertia::render('Convocatorias/Proyectos/Productos/Create', [
-            'convocatoria'      => $convocatoria->only('id', 'esta_activa', 'fase_formateada', 'fase', 'tipo_convocatoria', 'min_fecha_inicio_proyectos', 'max_fecha_finalizacion_proyectos'),
-            'proyecto'          => $proyecto,
-            'resultados'        => Resultado::select('resultados.id as value', 'resultados.descripcion as label', 'resultados.id as id')->whereHas('efectoDirecto', function ($query) use ($proyectoId) {
+            'convocatoria'              => $convocatoria->only('id', 'esta_activa', 'fase_formateada', 'fase', 'tipo_convocatoria', 'min_fecha_inicio_proyectos', 'max_fecha_finalizacion_proyectos'),
+            'proyecto'                  => $proyecto,
+            'resultados'                => Resultado::select('resultados.id as value', 'resultados.descripcion as label', 'resultados.id as id')->whereHas('efectoDirecto', function ($query) use ($proyectoId) {
                 $query->where('efectos_directos.proyecto_id', $proyectoId);
             })->where('resultados.descripcion', '!=', null)->with('actividades')->get(),
-            'tiposProducto'     => json_decode(Storage::get('json/tipos-producto.json'), true),
+            'subtipologiasMinciencias'  => SelectHelper::subtipologiasMinciencias(),
+            'tiposProducto'             => json_decode(Storage::get('json/tipos-producto.json'), true),
         ]);
     }
 
@@ -220,6 +222,7 @@ class ProductoController extends Controller
             'resultados'                => Resultado::select('resultados.id as value', 'resultados.descripcion as label', 'resultados.id as id')->whereHas('efectoDirecto', function ($query) use ($proyectoId) {
                 $query->where('efectos_directos.proyecto_id', $proyectoId);
             })->where('resultados.descripcion', '!=', null)->with('actividades')->get(),
+            'subtipologiasMinciencias'  => SelectHelper::subtipologiasMinciencias(),
             'tiposProducto'             => json_decode(Storage::get('json/tipos-producto.json'), true),
         ]);
     }
@@ -480,7 +483,8 @@ class ProductoController extends Controller
             )->orderBy('fecha_inicio', 'ASC')->get(),
             'actividadesRelacionadas'   => $producto->actividades()->pluck('id'),
             'resultados'                => $resultados->where('label', '!=', null)->flatten(),
-            'tiposProducto'     => json_decode(Storage::get('json/tipos-producto.json'), true),
+            'subtipologiasMinciencias'  => SelectHelper::subtipologiasMinciencias(),
+            'tiposProducto'             => json_decode(Storage::get('json/tipos-producto.json'), true),
         ]);
     }
 }

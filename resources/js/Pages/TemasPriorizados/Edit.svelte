@@ -28,14 +28,8 @@
 
     let form = useForm({
         nombre: temaPriorizado.nombre,
-        sector_productivo_id: {
-            value: temaPriorizado.sector_productivo_id,
-            label: sectoresProductivos.find((item) => item.value == temaPriorizado.sector_productivo_id)?.label,
-        },
-        mesa_tecnica_id: {
-            value: temaPriorizado.mesa_tecnica_id,
-            label: mesasTecnicas.find((item) => item.value == temaPriorizado.mesa_tecnica_id)?.label,
-        },
+        sector_productivo_id: temaPriorizado.sector_productivo_id,
+        mesa_tecnica_id: temaPriorizado.mesa_tecnica_id,
     })
 
     function submit() {
@@ -58,7 +52,7 @@
         <div class="flex items-center justify-between lg:px-8 max-w-7xl mx-auto px-4 py-6 sm:px-6">
             <div>
                 <h1 class="overflow-ellipsis overflow-hidden w-breadcrumb-ellipsis whitespace-nowrap">
-                        <a use:inertia href={route('temas-priorizados.index')} class="text-violet-400 hover:text-violet-600"> Temas priorizados </a>
+                    <a use:inertia href={route('temas-priorizados.index')} class="text-violet-400 hover:text-violet-600"> Temas priorizados </a>
                     <span class="text-violet-400 font-medium">/</span>
                     {temaPriorizado.nombre}
                 </h1>

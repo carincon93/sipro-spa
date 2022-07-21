@@ -45,19 +45,13 @@
         objetivos_especificos: semilleroInvestigacion.objetivos_especificos,
         link_semillero: semilleroInvestigacion.link_semillero,
 
-        linea_investigacion_id: {
-            value: lineasInvestigacion.find((item) => item.value == semilleroInvestigacion.linea_investigacion_id)?.value,
-            label: lineasInvestigacion.find((item) => item.value == semilleroInvestigacion.linea_investigacion_id)?.label,
-        },
+        linea_investigacion_id: semilleroInvestigacion.linea_investigacion_id,
         linea_investigacion: null,
         centro_formacion_id: semilleroInvestigacion.linea_investigacion?.grupo_investigacion?.centro_formacion_id,
         redes_conocimiento: redesConocimientoSemilleroInvestigacion.length > 0 ? redesConocimientoSemilleroInvestigacion : null,
         programas_formacion: programasFormacionSemilleroInvestigacion.length > 0 ? programasFormacionSemilleroInvestigacion : null,
         lineas_investigacion: lineasInvestigacionSemilleroInvestigacion.length > 0 ? lineasInvestigacionSemilleroInvestigacion : null,
-        es_semillero_tecnoacademia: {
-            value: semilleroInvestigacion.es_semillero_tecnoacademia,
-            label: opcionesSiNo.find((item) => item.value == semilleroInvestigacion.es_semillero_tecnoacademia)?.label,
-        },
+        es_semillero_tecnoacademia: semilleroInvestigacion.es_semillero_tecnoacademia,
     })
 
     function submit() {

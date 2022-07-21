@@ -30,10 +30,10 @@
     let isSuperAdmin = checkRole(authUser, [1])
 
     let entidadAliadaInfo = {
-        tipo: { value: tiposEntidadAliada.find((item) => item.label == entidadAliada.tipo)?.value, label: tiposEntidadAliada.find((item) => item.label == entidadAliada.tipo)?.label },
+        tipo: entidadAliada.tipo,
         nombre: entidadAliada.nombre,
-        naturaleza: { value: naturalezaEntidadAliada.find((item) => item.label == entidadAliada.naturaleza)?.value, label: naturalezaEntidadAliada.find((item) => item.label == entidadAliada.naturaleza)?.label },
-        tipo_empresa: { value: tiposEmpresa.find((item) => item.label == entidadAliada.tipo_empresa)?.value, label: tiposEmpresa.find((item) => item.label == entidadAliada.tipo_empresa)?.label },
+        naturaleza: entidadAliada.naturaleza,
+        tipo_empresa: entidadAliada.tipo_empresa,
         nit: entidadAliada.nit,
         tiene_convenio: entidadAliada.entidad_aliada_idi?.descripcion_convenio != null ? true : false,
         tiene_grupo_investigacion: entidadAliada.entidad_aliada_idi?.grupo_investigacion != null ? true : false,
@@ -60,7 +60,7 @@
         <div class="flex items-center justify-between lg:px-8 max-w-7xl mx-auto px-4 py-6 sm:px-6">
             <div>
                 <h1 class="overflow-ellipsis overflow-hidden w-breadcrumb-ellipsis whitespace-nowrap">
-                        <a use:inertia href={route('convocatorias.evaluaciones.entidades-aliadas', [convocatoria.id, evaluacion.id])} class="text-violet-400 hover:text-violet-600">Entidades aliadas</a>
+                    <a use:inertia href={route('convocatorias.evaluaciones.entidades-aliadas', [convocatoria.id, evaluacion.id])} class="text-violet-400 hover:text-violet-600">Entidades aliadas</a>
                     <span class="text-violet-400 font-medium">/</span>
                     {entidadAliada.nombre}
                 </h1>

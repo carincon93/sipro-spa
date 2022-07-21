@@ -7,7 +7,6 @@
     import InputError from '@/Shared/InputError'
     import Label from '@/Shared/Label'
     import LoadingButton from '@/Shared/LoadingButton'
-    import DynamicList from '@/Shared/Dropdowns/DynamicList'
     import Textarea from '@/Shared/Textarea'
     import Select from '@/Shared/Select'
     import Input from '@/Shared/Input'
@@ -17,6 +16,13 @@
     export let convocatoria
     export let roles
     export let centrosFormacion
+    export let areasConocimiento
+    export let subareasConocimiento
+    export let disciplinasSubareaConocimiento
+    export let lineasProgramaticas
+    export let actividadesEconomicas
+    export let tematicasEstrategicas
+    export let redesConocimiento
     export let allowedToCreate
 
     $: $title = 'Crear proyecto I+D+i'
@@ -26,6 +32,29 @@
      */
     let authUser = $page.props.auth.user
     let isSuperAdmin = checkRole(authUser, [1])
+
+    let arraySubareasConocimiento = subareasConocimiento.filter(function (obj) {
+        return obj.area_conocimiento_id == $form.area_conocimiento_id?.value
+    })
+    function selectAreaConocimiento(event) {
+        arraySubareasConocimiento = subareasConocimiento.filter(function (obj) {
+            return obj.area_conocimiento_id == event.detail?.value
+        })
+    }
+
+    let arrayDisciplinasSubareaConocimiento = []
+    function selectSubreaConocimiento(event) {
+        arrayDisciplinasSubareaConocimiento = disciplinasSubareaConocimiento.filter(function (obj) {
+            return obj.subarea_conocimiento_id == event.detail?.value
+        })
+    }
+
+    let arrayLineasInvestigacion = lineasInvestigacion
+    function selectLineaInvestigacion(event) {
+        arrayLineasInvestigacion = lineasInvestigacion.filter(function (obj) {
+            return obj.centro_formacion_id == event.detail?.value
+        })
+    }
 
     let form = useForm({
         centro_formacion_id: null,
@@ -109,20 +138,18 @@
                         <small> Nota: El Centro de Formación relacionado es el ejecutor del proyecto </small>
                     </div>
                     <div>
-                        <Select id="centro_formacion_id" items={centrosFormacion} bind:selectedValue={$form.centro_formacion_id} error={errors.centro_formacion_id} autocomplete="off" placeholder="Busque por el nombre del centro de formación" required />
+                        <Select id="centro_formacion_id" items={centrosFormacion} bind:selectedValue={$form.centro_formacion_id} selectFunctions={[(event) => selectLineaInvestigacion(event)]} error={errors.centro_formacion_id} autocomplete="off" placeholder="Busque por el nombre del centro de formación" required />
                     </div>
                 </div>
             </div>
 
             {#if $form.centro_formacion_id?.value}
-                <div class="py-24">
-                    <div class="grid grid-cols-2">
-                        <div>
-                            <Label required class="mb-4" labelFor="linea_investigacion_id" value="Línea de investigación" />
-                        </div>
-                        <div>
-                            <DynamicList id="linea_investigacion_id" bind:value={$form.linea_investigacion_id} routeWebApi={route('web-api.lineas-investigacion', $form.centro_formacion_id?.value)} classes="min-h" placeholder="Busque por el nombre de la línea de investigación, centro de formación, grupo de investigación o regional" message={errors.linea_investigacion_id} required />
-                        </div>
+                <div class="mt-44 grid grid-cols-2">
+                    <div>
+                        <Label required class="mb-4" labelFor="linea_investigacion_id" value="Línea de investigación" />
+                    </div>
+                    <div>
+                        <Select id="linea_investigacion_id" items={arrayLineasInvestigacion} bind:selectedValue={$form.linea_investigacion_id} error={errors.linea_investigacion_id} autocomplete="off" placeholder="Busque por el nombre de la línea de investigación, centro de formación, grupo de investigación o regional" required />
                     </div>
                 </div>
             {/if}
@@ -133,7 +160,7 @@
                         <Label required class="mb-4" labelFor="linea_programatica_id" value="Código dependencia presupuestal (SIIF)" />
                     </div>
                     <div>
-                        <DynamicList id="linea_programatica_id" bind:value={$form.linea_programatica_id} routeWebApi={route('web-api.lineas-programaticas', 2)} classes="min-h" placeholder="Busque por el nombre de la línea programática" message={errors.linea_programatica_id} required />
+                        <Select id="linea_programatica_id" items={lineasProgramaticas} bind:selectedValue={$form.linea_programatica_id} error={errors.linea_programatica_id} autocomplete="off" placeholder="Seleccione una línea programática" required />
                     </div>
                 </div>
             </div>
@@ -144,44 +171,36 @@
                         <Label required class="mb-4" labelFor="red_conocimiento_id" value="Red de conocimiento sectorial" />
                     </div>
                     <div>
-                        <DynamicList id="red_conocimiento_id" bind:value={$form.red_conocimiento_id} routeWebApi={route('web-api.redes-conocimiento')} classes="min-h" placeholder="Busque por el nombre de la red de conocimiento sectorial" message={errors.red_conocimiento_id} required />
+                        <Select id="red_conocimiento_id" items={redesConocimiento} bind:selectedValue={$form.red_conocimiento_id} error={errors.red_conocimiento_id} autocomplete="off" placeholder="Seleccione una red de conocimiento" required />
                     </div>
                 </div>
             </div>
 
-            <div class="py-24">
-                <div class="grid grid-cols-2">
-                    <div>
-                        <Label required class="mb-4" labelFor="area_conocimiento_id" value="Área de conocimiento" />
-                    </div>
-                    <div>
-                        <DynamicList id="area_conocimiento_id" bind:value={$form.area_conocimiento_id} routeWebApi={route('web-api.areas-conocimiento')} classes="min-h" placeholder="Busque por el nombre de la área de conocimiento" message={errors.area_conocimiento_id} required />
-                    </div>
+            <div class="mt-44 grid grid-cols-2">
+                <div>
+                    <Label required class="mb-4" labelFor="area_conocimiento_id" value="Área de conocimiento" />
+                </div>
+                <div>
+                    <Select id="area_conocimiento_id" items={areasConocimiento} bind:selectedValue={$form.area_conocimiento_id} selectFunctions={[(event) => selectAreaConocimiento(event)]} error={errors.area_conocimiento_id} autocomplete="off" placeholder="Busque por el nombre de la área de conocimiento" required />
                 </div>
             </div>
-
             {#if $form.area_conocimiento_id}
-                <div class="py-24">
-                    <div class="grid grid-cols-2">
-                        <div>
-                            <Label required class="mb-4" labelFor="subarea_conocimiento_id" value="Subárea de conocimiento" />
-                        </div>
-                        <div>
-                            <DynamicList id="subarea_conocimiento_id" bind:value={$form.subarea_conocimiento_id} routeWebApi={route('web-api.subareas-conocimiento', $form.area_conocimiento_id)} classes="min-h" placeholder="Busque por el nombre de la subárea de conocimiento" message={errors.subarea_conocimiento_id} required />
-                        </div>
+                <div class="mt-44 grid grid-cols-2">
+                    <div>
+                        <Label required class="mb-4" labelFor="subarea_conocimiento_id" value="Subárea de conocimiento" />
+                    </div>
+                    <div>
+                        <Select id="subarea_conocimiento_id" items={arraySubareasConocimiento} bind:selectedValue={$form.subarea_conocimiento_id} selectFunctions={[(event) => selectSubreaConocimiento(event)]} error={errors.subarea_conocimiento_id} autocomplete="off" placeholder="Busque por el nombre de la subárea de conocimiento" required />
                     </div>
                 </div>
             {/if}
-
             {#if $form.subarea_conocimiento_id}
-                <div class="py-24">
-                    <div class="grid grid-cols-2">
-                        <div>
-                            <Label required class="mb-4" labelFor="disciplina_subarea_conocimiento_id" value="Disciplina de la subárea de conocimiento" />
-                        </div>
-                        <div>
-                            <DynamicList id="disciplina_subarea_conocimiento_id" bind:value={$form.disciplina_subarea_conocimiento_id} routeWebApi={route('web-api.disciplinas-subarea-conocimiento', $form.subarea_conocimiento_id)} classes="min-h" placeholder="Busque por el nombre de la disciplina de subáreas de conocimiento" message={errors.disciplina_subarea_conocimiento_id} required />
-                        </div>
+                <div class="mt-44 grid grid-cols-2">
+                    <div>
+                        <Label required class="mb-4" labelFor="disciplina_subarea_conocimiento_id" value="Disciplina de la subárea de conocimiento" />
+                    </div>
+                    <div>
+                        <Select id="disciplina_subarea_conocimiento_id" items={arrayDisciplinasSubareaConocimiento} bind:selectedValue={$form.disciplina_subarea_conocimiento_id} error={errors.disciplina_subarea_conocimiento_id} autocomplete="off" placeholder="Busque por el nombre de la disciplina de subáreas de conocimiento" required />
                     </div>
                 </div>
             {/if}
@@ -192,7 +211,7 @@
                         <Label required class="mb-4" labelFor="actividad_economica_id" value="¿En cuál de estas actividades económicas se puede aplicar el proyecto?" />
                     </div>
                     <div>
-                        <DynamicList id="actividad_economica_id" bind:value={$form.actividad_economica_id} routeWebApi={route('web-api.actividades-economicas')} placeholder="Busque por el nombre de la actividad económica" classes="min-h" message={errors.actividad_economica_id} required />
+                        <Select id="actividad_economica_id" items={actividadesEconomicas} bind:selectedValue={$form.actividad_economica_id} error={errors.actividad_economica_id} autocomplete="off" placeholder="Busque por el nombre de la actividad económica" required />
                     </div>
                 </div>
             </div>
@@ -202,7 +221,7 @@
                         <Label required class="mb-4" labelFor="tematica_estrategica_id" value="Temática estratégica SENA" />
                     </div>
                     <div>
-                        <DynamicList id="tematica_estrategica_id" bind:value={$form.tematica_estrategica_id} routeWebApi={route('web-api.tematicas-estrategicas')} placeholder="Busque por el nombre de la temática estrategica SENA" message={errors.tematica_estrategica_id} required />
+                        <Select id="tematica_estrategica_id" items={tematicasEstrategicas} bind:selectedValue={$form.tematica_estrategica_id} error={errors.tematica_estrategica_id} autocomplete="off" placeholder="Busque por el nombre de la temática estratégica" required />
                     </div>
                 </div>
             </div>

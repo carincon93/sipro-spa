@@ -14,7 +14,6 @@
     import { Item, Text } from '@smui/list'
     import Dialog from '@/Shared/Dialog'
     import Button from '@/Shared/Button'
-    import DynamicList from '@/Shared/Dropdowns/DynamicList'
     import InfoMessage from '@/Shared/InfoMessage'
     import Checkbox from '@smui/checkbox'
     import FormField from '@smui/form-field'
@@ -24,6 +23,7 @@
     export let tiposDocumento
     export let tiposVinculacion
     export let roles
+    export let centrosFormacion
 
     let resultados = []
 
@@ -86,10 +86,7 @@
             $formParticipante._method = 'PUT'
             $formParticipante.cantidad_meses = user.pivot.cantidad_meses
             $formParticipante.cantidad_horas = user.pivot.cantidad_horas
-            $formParticipante.rol_sennova = {
-                value: user.pivot.rol_sennova,
-                label: roles.find((item) => item.value == user.pivot.rol_sennova)?.label,
-            }
+            $formParticipante.rol_sennova = user.pivot.rol_sennova
         }
     }
 
@@ -397,7 +394,7 @@
 
                     <div class="mt-8">
                         <Label required class="mb-4" labelFor="centro_formacion_id_nuevo_participante" value="Centro de formación" />
-                        <DynamicList id="centro_formacion_id_nuevo_participante" bind:reset={openNuevoParticipanteDialog} bind:value={$formNuevoIntegrante.centro_formacion_id} routeWebApi={route('web-api.centros-formacion')} placeholder="Busque por el nombre del centro de formación" message={errors.centro_formacion_id} required />
+                        <Select id="centro_formacion_id_nuevo_participante" items={centrosFormacion} bind:selectedValue={$form.centro_formacion_id_nuevo_participante} error={errors.centro_formacion_id_nuevo_participante} autocomplete="off" placeholder="Busque por el nombre del centro de formación" required />
                     </div>
 
                     <div class="mt-8">

@@ -49,7 +49,7 @@
             participanteInfo._method = 'PUT'
             participanteInfo.cantidad_meses = user.pivot.cantidad_meses
             participanteInfo.cantidad_horas = user.pivot.cantidad_horas
-            participanteInfo.rol_sennova = { value: user.pivot.rol_sennova, label: roles.find((item) => item.value == user.pivot.rol_sennova)?.label }
+            participanteInfo.rol_sennova = user.pivot.rol_sennova
         }
     }
 

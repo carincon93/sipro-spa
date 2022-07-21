@@ -32,10 +32,7 @@
     let form = useForm({
         nombre: miembroEntidadAliada.nombre,
         email: miembroEntidadAliada.email,
-        tipo_documento: {
-            value: miembroEntidadAliada.tipo_documento,
-            label: tiposDocumento.find((item) => item.value == miembroEntidadAliada.tipo_documento)?.label,
-        },
+        tipo_documento: miembroEntidadAliada.tipo_documento,
         numero_documento: miembroEntidadAliada.numero_documento,
         numero_celular: miembroEntidadAliada.numero_celular,
         autorizacion_datos: miembroEntidadAliada.autorizacion_datos,

@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Http\Requests\ProgramaFormacionRequest;
+use App\Models\CentroFormacion;
 use App\Models\ProgramaFormacion;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Storage;
@@ -35,8 +36,9 @@ class ProgramaFormacionController extends Controller
         $this->authorize('create', [ProgramaFormacion::class]);
 
         return Inertia::render('ProgramasFormacion/Create', [
-            'modalidades'       => json_decode(Storage::get('json/modalidades-estudio.json'), true),
-            'nivelesFormacion'  => json_decode(Storage::get('json/nivel-formacion.json'), true)
+            'centrosFormacion'      => CentroFormacion::selectRaw('centros_formacion.id as value, concat(centros_formacion.nombre, chr(10), \'∙ Código: \', centros_formacion.codigo, chr(10), \'∙ Regional: \', regionales.nombre) as label')->join('regionales', 'centros_formacion.regional_id', 'regionales.id')->orderBy('centros_formacion.nombre', 'ASC')->get(),
+            'modalidades'           => json_decode(Storage::get('json/modalidades-estudio.json'), true),
+            'nivelesFormacion'      => json_decode(Storage::get('json/nivel-formacion.json'), true)
         ]);
     }
 
@@ -85,6 +87,7 @@ class ProgramaFormacionController extends Controller
 
         return Inertia::render('ProgramasFormacion/Edit', [
             'programaFormacion'     => $programaFormacion->only(['id', 'nombre', 'codigo', 'modalidad', 'nivel_formacion', 'centro_formacion_id']),
+            'centrosFormacion'      => CentroFormacion::selectRaw('centros_formacion.id as value, concat(centros_formacion.nombre, chr(10), \'∙ Código: \', centros_formacion.codigo, chr(10), \'∙ Regional: \', regionales.nombre) as label')->join('regionales', 'centros_formacion.regional_id', 'regionales.id')->orderBy('centros_formacion.nombre', 'ASC')->get(),
             'modalidades'           => json_decode(Storage::get('json/modalidades-estudio.json'), true),
             'nivelesFormacion'      => json_decode(Storage::get('json/nivel-formacion.json'), true)
         ]);

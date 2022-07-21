@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Helpers\SelectHelper;
 use App\Models\Proyecto;
 use App\Models\Idi;
 use App\Models\Convocatoria;
@@ -47,16 +48,23 @@ class IdiController extends Controller
         $authUser = Auth::user();
 
         if ($authUser->hasRole(6)) {
-            $centrosFormacion = CentroFormacion::selectRaw('centros_formacion.id as value, concat(centros_formacion.nombre, chr(10), \'∙ Código: \', centros_formacion.codigo) as label')->where('centros_formacion.regional_id', $authUser->centroFormacion->regional->id)->orderBy('centros_formacion.nombre', 'ASC')->get();
+            $centrosFormacion = SelectHelper::centrosFormacion()->where('regional_id', $authUser->centroFormacion->regional->id)->values()->all();
         } else {
-            $centrosFormacion = CentroFormacion::selectRaw('centros_formacion.id as value, concat(centros_formacion.nombre, chr(10), \'∙ Código: \', centros_formacion.codigo) as label')->orderBy('centros_formacion.nombre', 'ASC')->get();
+            $centrosFormacion = SelectHelper::centrosFormacion();
         }
 
         return Inertia::render('Convocatorias/Proyectos/Idi/Create', [
-            'convocatoria'      => $convocatoria->only('id', 'esta_activa', 'fase_formateada', 'fase', 'tipo_convocatoria', 'min_fecha_inicio_proyectos_idi', 'max_fecha_finalizacion_proyectos_idi', 'fecha_maxima_idi'),
-            'roles'             => collect(json_decode(Storage::get('json/roles-sennova-idi.json'), true)),
-            'centrosFormacion'  => $centrosFormacion,
-            'allowedToCreate'   => Gate::inspect('formular-proyecto', [3, $convocatoria])->allowed()
+            'convocatoria'                      => $convocatoria->only('id', 'esta_activa', 'fase_formateada', 'fase', 'tipo_convocatoria', 'min_fecha_inicio_proyectos_idi', 'max_fecha_finalizacion_proyectos_idi', 'fecha_maxima_idi'),
+            'roles'                             => collect(json_decode(Storage::get('json/roles-sennova-idi.json'), true)),
+            'centrosFormacion'                  => $centrosFormacion,
+            'areasConocimeintos'                => SelectHelper::areasConocimiento(),
+            'subareasConocimiento'              => SelectHelper::subareasConocimiento(),
+            'disciplinasSubareaConocimiento'    => SelectHelper::disenoCurriculares(),
+            'lineasProgramaticas'               => SelectHelper::lineasProgramaticas()->where('categoria_proyecto', 2)->values()->all(),
+            'actividadesEconomicas'             => SelectHelper::actividadesEconomicas(),
+            'tematicasEstrategicas'             => SelectHelper::tematicasEstrategicas(),
+            'redesConocimiento'                 => SelectHelper::redesConocimiento(),
+            'allowedToCreate'                   => Gate::inspect('formular-proyecto', [3, $convocatoria])->allowed()
         ]);
     }
 
@@ -165,6 +173,8 @@ class IdiController extends Controller
         $idi->mostrar_recomendaciones = $idi->proyecto->mostrar_recomendaciones;
         $idi->mostrar_requiere_subsanacion = $idi->proyecto->mostrar_requiere_subsanacion;
 
+        $tecnoacademiaPrincipal = $idi->proyecto->tecnoacademiaLineasTecnoacademia()->first() ? $idi->proyecto->tecnoacademiaLineasTecnoacademia()->first()->tecnoacademia : null;
+
         return Inertia::render('Convocatorias/Proyectos/Idi/Edit', [
             'convocatoria'                              => $convocatoria->only('id', 'esta_activa', 'fase_formateada', 'fase', 'tipo_convocatoria', 'min_fecha_inicio_proyectos_idi', 'max_fecha_finalizacion_proyectos_idi', 'fecha_maxima_idi', 'mostrar_recomendaciones'),
             'idi'                                       => $idi,
@@ -172,11 +182,23 @@ class IdiController extends Controller
             'lineasTecnoacademiaRelacionadas'           => $idi->proyecto->tecnoacademiaLineasTecnoacademia()->pluck('id'),
             'tecnoacademia'                             => $idi->proyecto->tecnoacademiaLineasTecnoacademia()->first() ? $idi->proyecto->tecnoacademiaLineasTecnoacademia()->first()->tecnoacademia->only('id', 'nombre') : null,
             'mesasSectoriales'                          => MesaSectorial::select('id', 'nombre')->get('id'),
-            'tecnoacademias'                            => TecnoAcademia::select('id as value', 'nombre as label')->get(),
+            'areasConocimeintos'                        => SelectHelper::areasConocimiento(),
+            'subareasConocimiento'                      => SelectHelper::subareasConocimiento(),
+            'disciplinasSubareaConocimiento'            => SelectHelper::disenoCurriculares(),
+            'lineasProgramaticas'                       => SelectHelper::lineasProgramaticas()->where('categoria_proyecto', 2)->values()->all(),
+            'actividadesEconomicas'                     => SelectHelper::actividadesEconomicas(),
+            'tematicasEstrategicas'                     => SelectHelper::tematicasEstrategicas(),
+            'redesConocimiento'                         => SelectHelper::redesConocimiento(),
+            'lineasTecnoacademia'                       => SelectHelper::lineasTecnoacademia()->where('tecnoacademia_id', $tecnoacademiaPrincipal)->values()->all(),
+            'lineasInvestigacion'                       => SelectHelper::lineasInvestigacion()->where('centro_formacion_id', $idi->proyecto->centro_formacion_id)->values()->all(),
+            'tecnoacademias'                            => SelectHelper::tecnoacademias(),
+            'municipios'                                => SelectHelper::municipios(),
+            'programasFormacionConRegistroCalificado'   => SelectHelper::programasFormacion()->where('registro_calificado', true)->where('centro_formacion_id', $idi->proyecto->centro_formacion_id)->values()->all(),
+            'programasFormacionSinRegistroCalificado'   => SelectHelper::programasFormacion()->where('registro_calificado', false)->values()->all(),
             'opcionesIDiDropdown'                       => json_decode(Storage::get('json/opciones-aplica-no-aplica.json'), true),
             'proyectoMunicipios'                        => $idi->proyecto->municipios()->select('municipios.id as value', 'municipios.nombre as label', 'regionales.nombre as group')->join('regionales', 'regionales.id', 'municipios.regional_id')->get(),
-            'proyectoProgramasFormacion'                => $idi->proyecto->programasFormacion()->selectRaw('id as value, concat(programas_formacion.nombre, chr(10), \'∙ Código: \', programas_formacion.codigo) as label')->where('registro_calificado', true)->get(),
-            'proyectoProgramasFormacionArticulados'     => $idi->proyecto->programasFormacion()->selectRaw('id as value, concat(programas_formacion.nombre, chr(10), \'∙ Código: \', programas_formacion.codigo) as label')->where('registro_calificado', false)->get(),
+            'programasFormacionConRegistroRelacionados' => $idi->proyecto->programasFormacion()->selectRaw('id as value, concat(programas_formacion.nombre, chr(10), \'∙ Código: \', programas_formacion.codigo) as label')->where('registro_calificado', true)->get(),
+            'programasFormacionSinRegistroRelacionados' => $idi->proyecto->programasFormacion()->selectRaw('id as value, concat(programas_formacion.nombre, chr(10), \'∙ Código: \', programas_formacion.codigo) as label')->where('registro_calificado', false)->get(),
             'versiones'                                 => $idi->proyecto->PdfVersiones,
         ]);
     }

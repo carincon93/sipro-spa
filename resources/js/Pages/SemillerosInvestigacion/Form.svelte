@@ -24,15 +24,11 @@
     let dialogGuardar = false
     let exportComponent
 
-    let oldLineaInvestigacionIdValue = null
     let arrayProgramasFormacion = programasFormacion
-    $: if ($form.linea_investigacion) {
-        if (oldLineaInvestigacionIdValue != $form.linea_investigacion?.value) {
-            arrayProgramasFormacion = programasFormacion.filter(function (obj) {
-                oldLineaInvestigacionIdValue = $form.linea_investigacion?.value
-                return obj.linea_investigacion_id == $form.linea_investigacion?.value
-            })
-        }
+    function selectProgramasFormacion(event) {
+        arrayProgramasFormacion = programasFormacion.filter(function (obj) {
+            return obj.linea_investigacion_id == event.detail?.value
+        })
     }
 </script>
 
@@ -52,7 +48,7 @@
 
         <div class="mt-8">
             <Label required class="mb-4" labelFor="linea_investigacion_id" value="Línea de investigación principal" />
-            <Select id="linea_investigacion_id" items={lineasInvestigacion} bind:selectedValue={$form.linea_investigacion_id} error={errors.linea_investigacion_id} autocomplete="off" placeholder="Seleccione una línea de investigación" required />
+            <Select id="linea_investigacion_id" items={lineasInvestigacion} bind:selectedValue={$form.linea_investigacion_id} selectFunctions={[(event) => selectProgramasFormacion(event)]} error={errors.linea_investigacion_id} autocomplete="off" placeholder="Seleccione una línea de investigación" required />
         </div>
 
         <div class="mt-8">

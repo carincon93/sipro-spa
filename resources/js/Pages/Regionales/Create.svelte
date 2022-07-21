@@ -7,9 +7,11 @@
     import Input from '@/Shared/Input'
     import Label from '@/Shared/Label'
     import LoadingButton from '@/Shared/LoadingButton'
-    import DynamicList from '@/Shared/Dropdowns/DynamicList'
+    import Select from '@/Shared/Select'
 
     export let errors
+    export let regiones
+    export let directoresRegional
 
     $: $title = 'Crear regionales'
 
@@ -59,12 +61,12 @@
 
                 <div class="mt-4">
                     <Label required class="mb-4" labelFor="region_id" value="Región" />
-                    <DynamicList id="region_id" bind:value={$form.region_id} routeWebApi={route('web-api.regiones')} placeholder="Busque por el nombre de la región" message={errors.region_id} required />
+                    <Select id="region_id" items={regiones} bind:selectedValue={$form.region_id} error={errors.region_id} autocomplete="off" placeholder="Busque por el nombre de la región" required />
                 </div>
 
                 <div class="mt-4">
                     <Label required class="mb-4" labelFor="director_regional_id" value="Director(a) Regional" />
-                    <DynamicList id="director_regional_id" bind:value={$form.director_regional_id} routeWebApi={route('web-api.users', 'director regional')} placeholder="Busque por el nombre del director" message={errors.director_regional_id} required />
+                    <Select id="director_regional_id" items={directoresRegional} bind:selectedValue={$form.director_regional_id} error={errors.director_regional_id} autocomplete="off" placeholder="Busque por el nombre del director" required />
                 </div>
             </fieldset>
             <div class="shadow-inner bg-violet-200 border-violet-400 bottom-0 flex items-center justify-between mt-14 px-8 py-4 sticky">

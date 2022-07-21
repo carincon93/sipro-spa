@@ -25,10 +25,7 @@
 
     let dialogOpen = false
     let form = useForm({
-        presupuesto_sennova_id: {
-            value: convocatoriaPresupuesto.presupuesto_sennova_id,
-            label: presupuestosSennova.find((item) => item.value == convocatoriaPresupuesto.presupuesto_sennova_id)?.label,
-        },
+        presupuesto_sennova_id: convocatoriaPresupuesto.presupuesto_sennova_id,
     })
 
     function submit() {

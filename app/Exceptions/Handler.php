@@ -34,9 +34,8 @@ class Handler extends ExceptionHandler
     {
         $response = parent::render($request, $e);
 
-        Log::debug($e->getMessage() . ' / user_id: ' . auth()->user()->id);
-
         if (!app()->environment(['local', 'testing']) && in_array($response->status(), [500, 503, 404, 403, 405])) {
+            auth()->user() ? Log::debug($e->getMessage() . ' / user_id: ' . auth()->user()->id) : null;
 
             return Inertia::render('Error', ['status' => $response->status()])
                 ->toResponse($request)

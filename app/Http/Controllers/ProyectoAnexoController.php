@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Helpers\SelectHelper;
 use App\Http\Requests\ProyectoAnexoRequest;
 use App\Models\Convocatoria;
 use App\Models\Proyecto;
@@ -59,7 +60,7 @@ class ProyectoAnexoController extends Controller
         return Inertia::render('Convocatorias/Proyectos/Anexos/Create', [
             'convocatoria'  => $convocatoria->only('id', 'esta_activa', 'fase_formateada', 'fase', 'tipo_convocatoria', 'tipo_convocatoria'),
             'proyecto'      => $proyecto->only('id', 'modificable', 'mostrar_recomendaciones'),
-            'anexos'        => Anexo::select('id as value', 'nombre as label')->join('anexo_lineas_programaticas', 'anexos.id', 'anexo_lineas_programaticas.anexo_id')->where('anexo_lineas_programaticas.linea_programatica_id', $proyecto->lineaProgramatica->id)->get()
+            'anexos'        => SelectHelper::anexos()->where('linea_programatica_id', $proyecto->lineaProgramatica->id)->values()->all()
         ]);
     }
 
@@ -108,7 +109,7 @@ class ProyectoAnexoController extends Controller
             'convocatoria'  => $convocatoria,
             'proyecto'      => $proyecto,
             'proyectoAnexo' => $proyectoAnexo,
-            'anexos'        => Anexo::select('id as value', 'nombre as label')->join('anexo_lineas_programaticas', 'anexos.id', 'anexo_lineas_programaticas.anexo_id')->where('anexo_lineas_programaticas.linea_programatica_id', $proyecto->lineaProgramatica->id)->get()
+            'anexos'        => SelectHelper::anexos()->where('linea_programatica_id', $proyecto->lineaProgramatica->id)->values()->all()
         ]);
     }
 

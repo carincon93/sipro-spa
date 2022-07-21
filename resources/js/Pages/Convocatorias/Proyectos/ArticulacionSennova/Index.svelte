@@ -3,7 +3,6 @@
     import { page, useForm } from '@inertiajs/inertia-svelte'
     import { route, checkRole, checkPermission } from '@/Utils'
     import { _ } from 'svelte-i18n'
-    import axios from 'axios'
 
     import Stepper from '@/Shared/Stepper'
     import Label from '@/Shared/Label'
@@ -12,11 +11,13 @@
     import SelectMulti from '@/Shared/SelectMulti'
     import Textarea from '@/Shared/Textarea'
     import Tags from '@/Shared/Tags'
-    import DynamicList from '@/Shared/Dropdowns/DynamicList'
 
     export let errors
     export let convocatoria
     export let proyecto
+    export let areasConocimiento
+    export let subareasConocimiento
+    export let disciplinasSubareaConocimiento
     export let lineasInvestigacion
     export let gruposInvestigacion
     export let semillerosInvestigacion
@@ -44,6 +45,22 @@
         { value: 2, label: 'No' },
     ]
 
+    let arraySubareasConocimiento = subareasConocimiento.filter(function (obj) {
+        return obj.area_conocimiento_id == $form.area_conocimiento_id?.value
+    })
+    function selectAreaConocimiento(event) {
+        arraySubareasConocimiento = subareasConocimiento.filter(function (obj) {
+            return obj.area_conocimiento_id == event.detail?.value
+        })
+    }
+
+    let arrayDisciplinasSubareaConocimiento = []
+    function selectSubreaConocimiento(event) {
+        arrayDisciplinasSubareaConocimiento = disciplinasSubareaConocimiento.filter(function (obj) {
+            return obj.subarea_conocimiento_id == event.detail?.value
+        })
+    }
+
     let form = useForm({
         area_conocimiento_id: null,
         subarea_conocimiento_id: null,
@@ -56,10 +73,7 @@
         tematicas_estrategicas: tematicasEstrategicasRelacionadas.length > 0 ? tematicasEstrategicasRelacionadas : null,
         proyectos_ejecucion: proyecto.proyectos_ejecucion,
         semilleros_en_formalizacion: proyecto.semilleros_en_formalizacion,
-        articulacion_semillero: {
-            value: proyecto.articulacion_semillero,
-            label: opcionesSiNo.find((item) => item.value == proyecto.articulacion_semillero)?.label,
-        },
+        articulacion_semillero: proyecto.articulacion_semillero,
     })
 
     function submit() {
@@ -68,21 +82,6 @@
                 preserveScroll: true,
             })
         }
-    }
-
-    let disciplinasSubareaConocimiento
-    let oldDisciplinasSubareaConocimientoValue = null
-
-    $: if ($form.subarea_conocimiento_id) {
-        if (oldDisciplinasSubareaConocimientoValue != $form.subarea_conocimiento_id) {
-            getDisciplinasSubareaConocimiento($form.subarea_conocimiento_id)
-        }
-    }
-    async function getDisciplinasSubareaConocimiento(subareaConocimientoId) {
-        let res = await axios.get(route('web-api.disciplinas-subarea-conocimiento', subareaConocimientoId))
-        res.status == '200'
-        disciplinasSubareaConocimiento = res.data
-        oldDisciplinasSubareaConocimientoValue = $form.subarea_conocimiento_id
     }
 </script>
 
@@ -154,10 +153,10 @@
 
             <div class="mt-44 grid grid-cols-2">
                 <div>
-                    <Label class="mb-4" labelFor="area_conocimiento_id" value="Área de conocimiento" />
+                    <Label required class="mb-4" labelFor="area_conocimiento_id" value="Área de conocimiento" />
                 </div>
                 <div>
-                    <DynamicList id="area_conocimiento_id" bind:value={$form.area_conocimiento_id} routeWebApi={route('web-api.areas-conocimiento')} classes="min-h" placeholder="Busque por el nombre de la área de conocimiento" message={errors.area_conocimiento_id} />
+                    <Select id="area_conocimiento_id" items={areasConocimiento} bind:selectedValue={$form.area_conocimiento_id} selectFunctions={[(event) => selectAreaConocimiento(event)]} error={errors.area_conocimiento_id} autocomplete="off" placeholder="Busque por el nombre de la área de conocimiento" required />
                 </div>
             </div>
             {#if $form.area_conocimiento_id}
@@ -166,7 +165,7 @@
                         <Label required class="mb-4" labelFor="subarea_conocimiento_id" value="Subárea de conocimiento" />
                     </div>
                     <div>
-                        <DynamicList id="subarea_conocimiento_id" bind:value={$form.subarea_conocimiento_id} routeWebApi={route('web-api.subareas-conocimiento', $form.area_conocimiento_id)} classes="min-h" placeholder="Busque por el nombre de la subárea de conocimiento" message={errors.subarea_conocimiento_id} required />
+                        <Select id="subarea_conocimiento_id" items={arraySubareasConocimiento} bind:selectedValue={$form.subarea_conocimiento_id} selectFunctions={[(event) => selectSubreaConocimiento(event)]} error={errors.subarea_conocimiento_id} autocomplete="off" placeholder="Busque por el nombre de la subárea de conocimiento" required />
                     </div>
                 </div>
             {/if}
@@ -176,7 +175,7 @@
                         <Label required class="mb-4" labelFor="disciplina_subarea_conocimiento_id" value="Disciplina de la subárea de conocimiento" />
                     </div>
                     <div>
-                        <SelectMulti id="disciplinas_subarea_conocimiento_id" bind:selectedValue={$form.disciplinas_subarea_conocimiento} items={disciplinasSubareaConocimiento} isMulti={true} error={errors.disciplinas_subarea_conocimiento} placeholder="Disciplinas subárea de concimiento" required />
+                        <SelectMulti id="disciplinas_subarea_conocimiento_id" bind:selectedValue={$form.disciplinas_subarea_conocimiento} items={arrayDisciplinasSubareaConocimiento} isMulti={true} error={errors.disciplinas_subarea_conocimiento} placeholder="Disciplinas subárea de concimiento" required />
                     </div>
                 </div>
             {/if}

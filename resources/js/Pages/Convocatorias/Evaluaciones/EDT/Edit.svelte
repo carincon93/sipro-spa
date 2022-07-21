@@ -24,19 +24,13 @@
     let isSuperAdmin = checkRole(authUser, [1])
 
     let edtInfo = {
-        tipo_evento: {
-            value: edt.tipo_evento,
-            label: tiposEvento.find((item) => item.value == edt.tipo_evento)?.label,
-        },
+        tipo_evento: edt.tipo_evento,
         descripcion_evento: edt.descripcion_evento,
         descripcion_participacion_entidad: edt.descripcion_participacion_entidad,
         publico_objetivo: edt.publico_objetivo,
         numero_asistentes: edt.numero_asistentes,
         estrategia_comunicacion: edt.estrategia_comunicacion,
-        proyecto_presupuesto_id: {
-            value: edt.proyecto_presupuesto_id,
-            label: proyectoPresupuesto.find((item) => item.value == edt.proyecto_presupuesto_id)?.label,
-        },
+        proyecto_presupuesto_id: edt.proyecto_presupuesto_id,
     }
 </script>
 

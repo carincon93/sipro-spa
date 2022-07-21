@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\Evaluacion;
 
+use App\Helpers\SelectHelper;
 use App\Models\Evaluacion\IdiEvaluacion;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Evaluacion\IdiEvaluacionRequest;
@@ -90,11 +91,21 @@ class IdiEvaluacionController extends Controller
             'lineasTecnoacademiaRelacionadas'           => $idi->proyecto->tecnoacademiaLineasTecnoacademia()->pluck('id'),
             'tecnoacademia'                             => $idi->proyecto->tecnoacademiaLineasTecnoacademia()->first() ? $idi->proyecto->tecnoacademiaLineasTecnoacademia()->first()->tecnoacademia->only('id', 'nombre') : null,
             'mesasSectoriales'                          => MesaSectorial::select('id', 'nombre')->get('id'),
-            'tecnoacademias'                            => TecnoAcademia::select('id as value', 'nombre as label')->get(),
+            'tecnoacademias'                            => SelectHelper::tecnoacademias(),
+            'areasConocimiento'                         => SelectHelper::areasConocimiento(),
+            'subareasConocimiento'                      => SelectHelper::subareasConocimiento(),
+            'disciplinasSubareaConocimiento'            => SelectHelper::disciplinasSubareaConocimiento(),
+            'lineasProgramaticas'                       => SelectHelper::lineasProgramaticas(),
+            'redesConocimiento'                         => SelectHelper::redesConocimiento(),
+            'actividadesEconomicas'                     => SelectHelper::actividadesEconomicas(),
+            'tematicasEstrategicas'                     => SelectHelper::tematicasEstrategicas(),
+            'municipios'                                => SelectHelper::municipios(),
+            'programasFormacionConRegistroCalificado'   => SelectHelper::programasFormacion()->where('registro_calificado', true)->where('centro_formacion_id', $idi->proyecto->centro_formacion_id)->values()->all(),
+            'programasFormacionSinRegistroCalificado'   => SelectHelper::programasFormacion()->where('registro_calificado', false)->values()->all(),
             'opcionesIDiDropdown'                       => json_decode(Storage::get('json/opciones-aplica-no-aplica.json'), true),
             'proyectoMunicipios'                        => $idi->proyecto->municipios()->select('municipios.id as value', 'municipios.nombre as label', 'regionales.nombre as group')->join('regionales', 'regionales.id', 'municipios.regional_id')->get(),
-            'proyectoProgramasFormacion'                => $idi->proyecto->programasFormacion()->selectRaw('id as value, concat(programas_formacion.nombre, chr(10), \'∙ Código: \', programas_formacion.codigo) as label')->where('registro_calificado', true)->get(),
-            'proyectoProgramasFormacionArticulados'     => $idi->proyecto->programasFormacion()->selectRaw('id as value, concat(programas_formacion.nombre, chr(10), \'∙ Código: \', programas_formacion.codigo) as label')->where('registro_calificado', false)->get(),
+            'programasFormacionConRegistroRelacionados' => $idi->proyecto->programasFormacion()->selectRaw('id as value, concat(programas_formacion.nombre, chr(10), \'∙ Código: \', programas_formacion.codigo) as label')->where('registro_calificado', true)->get(),
+            'programasFormacionSinRegistroRelacionados' => $idi->proyecto->programasFormacion()->selectRaw('id as value, concat(programas_formacion.nombre, chr(10), \'∙ Código: \', programas_formacion.codigo) as label')->where('registro_calificado', false)->get(),
         ]);
     }
 

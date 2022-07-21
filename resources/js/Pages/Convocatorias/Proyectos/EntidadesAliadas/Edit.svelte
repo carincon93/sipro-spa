@@ -42,10 +42,10 @@
 
     let form = useForm({
         _method: 'put',
-        tipo: { value: tiposEntidadAliada.find((item) => item.label == entidadAliada.tipo)?.value, label: tiposEntidadAliada.find((item) => item.label == entidadAliada.tipo)?.label },
+        tipo: entidadAliada.tipo,
         nombre: entidadAliada.nombre,
-        naturaleza: { value: naturalezaEntidadAliada.find((item) => item.label == entidadAliada.naturaleza)?.value, label: naturalezaEntidadAliada.find((item) => item.label == entidadAliada.naturaleza)?.label },
-        tipo_empresa: { value: tiposEmpresa.find((item) => item.label == entidadAliada.tipo_empresa)?.value, label: tiposEmpresa.find((item) => item.label == entidadAliada.tipo_empresa)?.label },
+        naturaleza: entidadAliada.naturaleza,
+        tipo_empresa: entidadAliada.tipo_empresa,
         nit: entidadAliada.nit,
         tiene_convenio: entidadAliada.entidad_aliada_idi?.descripcion_convenio != null ? true : false,
         tiene_grupo_investigacion: entidadAliada.entidad_aliada_idi?.grupo_investigacion != null ? true : false,

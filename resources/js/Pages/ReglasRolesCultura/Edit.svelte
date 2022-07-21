@@ -26,10 +26,7 @@
     let dialogOpen = false
 
     let form = useForm({
-        centro_formacion_id: {
-            value: reglaRolCultura.centro_formacion_id,
-            label: centrosFormacion.find((item) => item.value == reglaRolCultura.centro_formacion_id)?.label,
-        },
+        centro_formacion_id: reglaRolCultura.centro_formacion_id,
         auxiliar_editorial: reglaRolCultura.auxiliar_editorial,
         gestor_editorial: reglaRolCultura.gestor_editorial,
         experto_tematico: reglaRolCultura.experto_tematico,

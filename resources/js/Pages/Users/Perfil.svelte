@@ -27,7 +27,6 @@
     let authUser = $page.props.auth.user
     let isSuperAdmin = checkRole(authUser, [1])
 
-     
     let formChangePassword = useForm({
         old_password: '',
         password: '',
@@ -41,16 +40,10 @@
     let form = useForm({
         nombre: user.nombre,
         email: user.email,
-        tipo_documento: {
-            value: user.tipo_documento,
-            label: tiposDocumento.find((item) => item.value == user.tipo_documento)?.label,
-        },
+        tipo_documento: user.tipo_documento,
         numero_documento: user.numero_documento,
         numero_celular: user.numero_celular,
-        tipo_vinculacion: {
-            value: user.tipo_vinculacion,
-            label: tiposVinculacion.find((item) => item.value == user.tipo_vinculacion)?.label,
-        },
+        tipo_vinculacion: user.tipo_vinculacion,
         role_id: rolesRelacionados,
     })
 

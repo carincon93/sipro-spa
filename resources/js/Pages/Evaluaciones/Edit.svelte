@@ -32,14 +32,8 @@
     let form = useForm({
         habilitado: evaluacion.habilitado,
         modificable: evaluacion.modificable,
-        proyecto_id: {
-            value: evaluacion.proyecto_id,
-            label: proyectos.find((item) => item.value == evaluacion.proyecto_id)?.label,
-        },
-        user_id: {
-            value: evaluacion.user_id,
-            label: evaluadores.find((item) => item.value == evaluacion.user_id)?.label,
-        },
+        proyecto_id: evaluacion.proyecto_id,
+        user_id: evaluacion.user_id,
     })
 
     function submit() {

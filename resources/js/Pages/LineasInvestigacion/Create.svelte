@@ -3,13 +3,11 @@
     import { inertia, useForm, page } from '@inertiajs/inertia-svelte'
     import { route, checkRole, checkPermission } from '@/Utils'
     import { _ } from 'svelte-i18n'
-    import axios from 'axios'
 
     import Input from '@/Shared/Input'
     import Label from '@/Shared/Label'
     import LoadingButton from '@/Shared/LoadingButton'
     import SelectMulti from '@/Shared/SelectMulti'
-    import DynamicList from '@/Shared/Dropdowns/DynamicList'
 
     export let errors
     export let grupoInvestigacion

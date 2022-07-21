@@ -3,22 +3,19 @@
     import { inertia, useForm, page } from '@inertiajs/inertia-svelte'
     import { route, checkRole, checkPermission } from '@/Utils'
     import { _ } from 'svelte-i18n'
-    import axios from 'axios'
 
     import Label from '@/Shared/Label'
     import InputError from '@/Shared/InputError'
     import LoadingButton from '@/Shared/LoadingButton'
     import Select from '@/Shared/Select'
-    import DynamicList from '@/Shared/Dropdowns/DynamicList'
     import Textarea from '@/Shared/Textarea'
     import InfoMessage from '@/Shared/InfoMessage'
-    import Checkbox from '@smui/checkbox'
-    import FormField from '@smui/form-field'
 
     export let errors
     export let convocatoria
     export let proyecto
     export let resultados
+    export let subtipologiasMinciencias
     export let tiposProducto
 
     $: $title = 'Crear producto'
@@ -139,11 +136,11 @@
                 {#if $form.tatp_servicio_tecnologico == false}
                     <div class="mt-8">
                         <Label required class="mb-4" labelFor="subtipologia_minciencias_id" value="Subtipología Minciencias" />
-                        <DynamicList id="subtipologia_minciencias_id" bind:value={$form.subtipologia_minciencias_id} routeWebApi={route('web-api.subtipologias-minciencias')} placeholder="Busque por el nombre de la subtipología Minciencias" message={errors.subtipologia_minciencias_id} required />
+                        <Select id="subtipologia_minciencias_id" items={subtipologiasMinciencias} bind:selectedValue={$form.subtipologia_minciencias_id} error={errors.subtipologia_minciencias_id} autocomplete="off" placeholder="Seleccione una subtipología" required />
                     </div>
 
                     <div class="mt-8">
-                        <Select id="tipo-producto" items={tiposProducto} bind:selectedValue={$form.tipo} error={errors.tipo} autocomplete="off" placeholder="Seleccione un tipo" required />
+                        <Select id="tipo" items={tiposProducto} bind:selectedValue={$form.tipo} error={errors.tipo} autocomplete="off" placeholder="Seleccione un tipo" required />
                     </div>
                 {:else if proyecto.ta || proyecto.tp}
                     <div class="mt-8">

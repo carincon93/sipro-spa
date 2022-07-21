@@ -10,7 +10,6 @@
     import Button from '@/Shared/Button'
     import LoadingButton from '@/Shared/LoadingButton'
     import Select from '@/Shared/Select'
-    import DynamicList from '@/Shared/Dropdowns/DynamicList'
     import Dialog from '@/Shared/Dialog'
     import SelectMulti from '@/Shared/SelectMulti'
 
@@ -19,6 +18,7 @@
     export let categoriasMinciencias
     export let redesConocimiento
     export let redesConocimientoGrupoInvestigacion
+    export let centrosFormacion
 
     $: $title = grupoInvestigacion ? grupoInvestigacion.nombre : null
 
@@ -38,10 +38,7 @@
         enlace_gruplac: grupoInvestigacion.enlace_gruplac,
         codigo_minciencias: grupoInvestigacion.codigo_minciencias,
         mision: grupoInvestigacion.mision,
-        categoria_minciencias: {
-            value: grupoInvestigacion.categoria_minciencias,
-            label: categoriasMinciencias.find((item) => item.value == grupoInvestigacion.categoria_minciencias)?.label,
-        },
+        categoria_minciencias: grupoInvestigacion.categoria_minciencias,
         fecha_creacion_grupo: grupoInvestigacion.fecha_creacion_grupo,
         nombre_lider_grupo: grupoInvestigacion.nombre_lider_grupo,
         email_contacto: grupoInvestigacion.email_contacto,
@@ -92,7 +89,7 @@
             <fieldset class="p-8" disabled={isSuperAdmin || (checkRole(authUser, [4]) && authUser.centro_formacion_id == grupoInvestigacion.centro_formacion_id) ? undefined : true}>
                 <div class="mt-4">
                     <Label required class="mb-4" labelFor="centro_formacion_id" value="Centro de formación" />
-                    <DynamicList id="centro_formacion_id" bind:value={$form.centro_formacion_id} routeWebApi={route('web-api.centros-formacion')} placeholder="Busque por el nombre del centro de formación" message={errors.centro_formacion_id} required />
+                    <Select id="centro_formacion_id" items={centrosFormacion} bind:selectedValue={$form.centro_formacion_id} error={errors.centro_formacion_id} autocomplete="off" placeholder="Busque por el nombre del centro de formación" required />
                 </div>
 
                 <div class="mt-4">

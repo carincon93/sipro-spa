@@ -13,7 +13,6 @@
     import InputError from '@/Shared/InputError'
     import Select from '@/Shared/Select'
     import InfoMessage from '@/Shared/InfoMessage'
-    import DynamicList from '@/Shared/Dropdowns/DynamicList'
     import Checkbox from '@smui/checkbox'
     import FormField from '@smui/form-field'
 
@@ -21,6 +20,7 @@
     export let tiposDocumento
     export let tiposVinculacion
     export let roles
+    export let centrosFormacion
 
     let form = useForm({
         nombre: '',
@@ -87,7 +87,7 @@
 
     <div class="mt-4">
         <Label required class="mb-4" labelFor="centro_formacion_id" value="Centro de formación" />
-        <DynamicList id="centro_formacion_id" bind:value={$form.centro_formacion_id} routeWebApi={route('web-api.centros-formacion')} placeholder="Busque por el nombre del centro de formación" message={errors.centro_formacion_id} required />
+        <Select id="centro_formacion_id" items={centrosFormacion} bind:selectedValue={$form.centro_formacion_id} error={errors.centro_formacion_id} autocomplete="off" placeholder="Busque por el nombre del centro de formación" required />
     </div>
 
     <div class="mt-4">
@@ -106,7 +106,7 @@
     <hr class="mt-4" />
 
     <div class="block mt-4">
-        <InfoMessage message="Los datos proporcionados serán tratados de acuerdo con la política de tratamiento de datos personales del SENA y a la ley 1581 de 2012 (Acuerdo No. 0009 del 2016)" class="mb-4" />
+        <InfoMessage class="shadow ml-4 mb-4" message="Los datos proporcionados serán tratados de acuerdo con la política de tratamiento de datos personales del SENA y a la ley 1581 de 2012 (Acuerdo No. 0009 del 2016)" />
         <FormField>
             <Checkbox bind:checked={$form.autorizacion_datos} />
             <span slot="label">Autorizo el tratamiento de mis datos personales. <a href="https://www.sena.edu.co/es-co/transparencia/Documents/proteccion_datos_personales_sena_2016.pdf" target="_blank" class="text-violet-500">Leer acuerdo No. 0009 del 2016</a></span>

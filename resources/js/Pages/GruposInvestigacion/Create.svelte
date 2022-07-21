@@ -11,11 +11,11 @@
     import Select from '@/Shared/Select'
     import InfoMessage from '@/Shared/InfoMessage'
     import SelectMulti from '@/Shared/SelectMulti'
-    import DynamicList from '@/Shared/Dropdowns/DynamicList'
 
     export let errors
     export let categoriasMinciencias
     export let redesConocimiento
+    export let centrosFormacion
 
     $: $title = 'Crear grupo de investigación'
 
@@ -74,7 +74,7 @@
             <fieldset class="p-8" disabled={isSuperAdmin || checkRole(authUser, [4]) ? undefined : true}>
                 <div class="mt-4">
                     <Label required class="mb-4" labelFor="centro_formacion_id" value="Centro de formación" />
-                    <DynamicList id="centro_formacion_id" bind:value={$form.centro_formacion_id} routeWebApi={route('web-api.centros-formacion')} placeholder="Busque por el nombre del centro de formación" message={errors.centro_formacion_id} required />
+                    <Select id="centro_formacion_id" items={centrosFormacion} bind:selectedValue={$form.centro_formacion_id} error={errors.centro_formacion_id} autocomplete="off" placeholder="Busque por el nombre del centro de formación" required />
                 </div>
 
                 <div class="mt-4">

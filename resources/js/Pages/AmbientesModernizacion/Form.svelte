@@ -63,7 +63,7 @@
     let exportComponent
 
     let arraySubareasConocimiento = subareasConocimiento.filter(function (obj) {
-        return obj.area_conocimiento_id == $form.area_conocimiento_id?.value
+        return obj.area_conocimiento_id == $form.area_conocimiento_id
     })
     function selectAreaConocimiento(event) {
         arraySubareasConocimiento = subareasConocimiento.filter(function (obj) {
@@ -71,14 +71,16 @@
         })
     }
 
-    let arrayDisciplinasSubareaConocimiento = []
+    let arrayDisciplinasSubareaConocimiento = disciplinasSubareaConocimiento.filter(function (obj) {
+        return obj.subarea_conocimiento_id == $form.subarea_conocimiento_id
+    })
     function selectSubreaConocimiento(event) {
         arrayDisciplinasSubareaConocimiento = disciplinasSubareaConocimiento.filter(function (obj) {
             return obj.subarea_conocimiento_id == event.detail?.value
         })
     }
 
-    let arrayLineasInvestigacion = lineasInvestigacion
+    let arrayLineasInvestigacion = []
     function selectLineaInvestigacion(event) {
         arrayLineasInvestigacion = lineasInvestigacion.filter(function (obj) {
             return obj.centro_formacion_id == event.detail?.value
@@ -122,7 +124,7 @@
                     <Label required class="mb-4" labelFor="centro_formacion_id" value="Centro de formación" />
                 </div>
                 <div>
-                    <Select id="centro_formacion_id" items={centrosFormacion} bind:selectedValue={$form.centro_formacion_id} error={errors.centro_formacion_id} autocomplete="off" placeholder="Busque por el nombre del centro de formación" required />
+                    <Select id="centro_formacion_id" items={centrosFormacion} bind:selectedValue={$form.centro_formacion_id} selectFunctions={[(event) => selectLineaInvestigacion(event)]} error={errors.centro_formacion_id} autocomplete="off" placeholder="Busque por el nombre del centro de formación" required />
                 </div>
             </div>
 
@@ -213,7 +215,7 @@
                     <Label required class="mb-4" labelFor="linea_investigacion_id" value="8. Línea investigación relacionada con el ambiente modernizado por Sennova" />
                 </div>
                 <div>
-                    <Select id="linea_investigacion_id" items={arrayLineasInvestigacion} bind:selectedValue={$form.linea_investigacion_id} selectFunctions={[(event) => selectLineaInvestigacion(event)]} error={errors.linea_investigacion_id} autocomplete="off" placeholder="Busque por el nombre de la línea de investigación, centro de formación, grupo de investigación o regional" required />
+                    <Select id="linea_investigacion_id" items={arrayLineasInvestigacion} bind:selectedValue={$form.linea_investigacion_id} error={errors.linea_investigacion_id} autocomplete="off" placeholder="Busque por el nombre de la línea de investigación, centro de formación, grupo de investigación o regional" required />
                 </div>
             </div>
         {/if}

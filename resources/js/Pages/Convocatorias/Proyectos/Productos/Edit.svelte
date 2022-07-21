@@ -9,7 +9,6 @@
     import Button from '@/Shared/Button'
     import LoadingButton from '@/Shared/LoadingButton'
     import Select from '@/Shared/Select'
-    import DynamicList from '@/Shared/Dropdowns/DynamicList'
     import Textarea from '@/Shared/Textarea'
     import Dialog from '@/Shared/Dialog'
     import InfoMessage from '@/Shared/InfoMessage'
@@ -20,6 +19,7 @@
     export let producto
     export let resultados
     export let actividadesRelacionadas
+    export let subtipologiasMinciencias
     export let tiposProducto
 
     $: $title = producto ? producto.nombre : null
@@ -43,10 +43,7 @@
         nombre_indicador: producto.producto_servicio_tecnologico?.nombre_indicador,
         formula_indicador: producto.producto_servicio_tecnologico?.formula_indicador,
 
-        tipo: {
-            value: producto.producto_idi ? producto.producto_idi.tipo : producto.producto_cultura_innovacion?.tipo,
-            label: tiposProducto.find((item) => item.value == (producto.producto_idi ? producto.producto_idi.tipo : producto.producto_cultura_innovacion?.tipo))?.label,
-        },
+        tipo: producto.producto_idi ? producto.producto_idi.tipo : producto.producto_cultura_innovacion?.tipo,
         subtipologia_minciencias_id: producto.producto_idi ? producto.producto_idi?.subtipologia_minciencias_id : producto.producto_cultura_innovacion?.subtipologia_minciencias_id,
 
         valor_proyectado: producto.producto_ta_tp?.valor_proyectado,
@@ -169,11 +166,11 @@
                 {#if $form.tatp_servicio_tecnologico == false}
                     <div class="mt-8">
                         <Label required class="mb-4" labelFor="subtipologia_minciencias_id" value="Subtipología Minciencias" />
-                        <DynamicList id="subtipologia_minciencias_id" bind:value={$form.subtipologia_minciencias_id} routeWebApi={route('web-api.subtipologias-minciencias')} placeholder="Busque por el nombre de la subtipología Minciencias" message={errors.subtipologia_minciencias_id} required />
+                        <Select id="subtipologia_minciencias_id" items={subtipologiasMinciencias} bind:selectedValue={$form.subtipologia_minciencias_id} error={errors.subtipologia_minciencias_id} autocomplete="off" placeholder="Seleccione una subtipología" required />
                     </div>
 
                     <div class="mt-8">
-                        <Select id="tipo-producto" items={tiposProducto} bind:selectedValue={$form.tipo} error={errors.tipo} autocomplete="off" placeholder="Seleccione un tipo" required />
+                        <Select id="tipo" items={tiposProducto} bind:selectedValue={$form.tipo} error={errors.tipo} autocomplete="off" placeholder="Seleccione un tipo" required />
                     </div>
                 {:else if proyecto.ta || proyecto.tp}
                     <div class="mt-8">

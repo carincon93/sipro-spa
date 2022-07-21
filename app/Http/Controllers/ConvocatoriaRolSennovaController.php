@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Helpers\SelectHelper;
 use App\Http\Requests\ConvocatoriaRolSennovaRequest;
 use App\Models\Convocatoria;
 use App\Models\ConvocatoriaRolSennova;
@@ -53,7 +54,7 @@ class ConvocatoriaRolSennovaController extends Controller
         return Inertia::render('Convocatorias/ConvocatoriaRolesSennova/Create', [
             'convocatoria'      => $convocatoria->only('id', 'esta_activa', 'fase_formateada', 'fase', 'tipo_convocatoria'),
             'nivelesAcademicos' => json_decode(Storage::get('json/niveles-academicos.json'), true),
-            'rolesSennova'      => RolSennova::select('id as value', 'nombre as label')->orderBy('nombre', 'ASC')->get()
+            'rolesSennova'      => SelectHelper::rolesSennova()
         ]);
     }
 
@@ -109,7 +110,7 @@ class ConvocatoriaRolSennovaController extends Controller
             'convocatoria'              => $convocatoria->only('id', 'esta_activa', 'fase_formateada', 'fase', 'tipo_convocatoria'),
             'convocatoriaRolSennova'    => $convocatoriaRolSennova,
             'nivelesAcademicos'         => json_decode(Storage::get('json/niveles-academicos.json'), true),
-            'rolesSennova'              => RolSennova::select('id as value', 'nombre as label')->orderBy('nombre', 'ASC')->get()
+            'rolesSennova'              => SelectHelper::rolesSennova()
         ]);
     }
 

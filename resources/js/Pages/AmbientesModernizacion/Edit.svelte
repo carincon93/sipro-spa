@@ -147,74 +147,29 @@
         observaciones_generales_ambiente: $formObservacionesGeneralesAmbiente.observaciones_generales_ambiente,
 
         nombre_ambiente: ambienteModernizacion.nombre_ambiente,
-        codigo_proyecto_sgps_id: {
-            value: ambienteModernizacion.seguimiento_ambiente_modernizacion.codigo_proyecto_sgps_id,
-            label: codigosSgps.find((item) => item.value == ambienteModernizacion.seguimiento_ambiente_modernizacion.codigo_proyecto_sgps_id)?.label,
-        },
-        tipologia_ambiente_id: {
-            value: ambienteModernizacion.tipologia_ambiente_id,
-            label: tipologiasAmbientes.find((item) => item.value == ambienteModernizacion.tipologia_ambiente_id)?.label,
-        },
-        red_conocimiento_id: {
-            value: ambienteModernizacion.red_conocimiento_id,
-            label: redesConocimiento.find((item) => item.value == ambienteModernizacion.red_conocimiento_id)?.label,
-        },
-        linea_investigacion_id: {
-            value: ambienteModernizacion.linea_investigacion_id,
-            label: lineasInvestigacion.find((item) => item.value == ambienteModernizacion.linea_investigacion_id)?.label,
-        },
-        actividad_economica_id: {
-            value: ambienteModernizacion.actividad_economica_id,
-            label: actividadesEconomicas.find((item) => item.value == ambienteModernizacion.actividad_economica_id)?.label,
-        },
-        area_conocimiento_id: {
-            value: ambienteModernizacion.disciplina_subarea_conocimiento.subarea_conocimiento.area_conocimiento_id,
-            label: areasConocimiento.find((item) => item.value == ambienteModernizacion.disciplina_subarea_conocimiento.subarea_conocimiento.area_conocimiento_id)?.label,
-        },
-        subarea_conocimiento_id: {
-            value: ambienteModernizacion.disciplina_subarea_conocimiento.subarea_conocimiento_id,
-            label: subareasConocimiento.find((item) => item.value == ambienteModernizacion.disciplina_subarea_conocimiento.subarea_conocimiento_id)?.label,
-        },
-        disciplina_subarea_conocimiento_id: {
-            value: ambienteModernizacion.disciplina_subarea_conocimiento_id,
-            label: disciplinasSubareaConocimiento.find((item) => item.value == ambienteModernizacion.disciplina_subarea_conocimiento_id)?.label,
-        },
-        tematica_estrategica_id: {
-            value: ambienteModernizacion.tematica_estrategica_id,
-            label: tematicasEstrategicas.find((item) => item.value == ambienteModernizacion.tematica_estrategica_id)?.label,
-        },
+        codigo_proyecto_sgps_id: ambienteModernizacion.seguimiento_ambiente_modernizacion.codigo_proyecto_sgps_id,
+        tipologia_ambiente_id: ambienteModernizacion.tipologia_ambiente_id,
+        red_conocimiento_id: ambienteModernizacion.red_conocimiento_id,
+        linea_investigacion_id: ambienteModernizacion.linea_investigacion_id,
+        actividad_economica_id: ambienteModernizacion.actividad_economica_id,
+        area_conocimiento_id: ambienteModernizacion.disciplina_subarea_conocimiento.subarea_conocimiento.area_conocimiento_id,
+        subarea_conocimiento_id: ambienteModernizacion.disciplina_subarea_conocimiento.subarea_conocimiento_id,
+        disciplina_subarea_conocimiento_id: ambienteModernizacion.disciplina_subarea_conocimiento_id,
+        tematica_estrategica_id: ambienteModernizacion.tematica_estrategica_id,
         semilleros_investigacion_id: semillerosRelacionados.length > 0 ? semillerosRelacionados : null,
-        alineado_mesas_sectoriales: {
-            value: ambienteModernizacion.alineado_mesas_sectoriales == 1 ? 1 : 2,
-            label: opcionesSiNo.find((item) => item.value == (ambienteModernizacion.alineado_mesas_sectoriales == 1 ? 1 : 2))?.label,
-        },
-        financiado_anteriormente: {
-            value: ambienteModernizacion.financiado_anteriormente == 1 ? 1 : 2,
-            label: opcionesSiNo.find((item) => item.value == (ambienteModernizacion.financiado_anteriormente == 1 ? 1 : 2))?.label,
-        },
+        alineado_mesas_sectoriales: ambienteModernizacion.alineado_mesas_sectoriales,
+        financiado_anteriormente: ambienteModernizacion.financiado_anteriormente,
         numero_tecnicas_tecnologias: ambienteModernizacion.numero_tecnicas_tecnologias,
         mesa_sectorial_id: mesasSectorialesRelacionadas,
         codigos_proyectos_id: codigosProyectosRelacionados.length > 0 ? codigosProyectosRelacionados : null,
-        estado_general_maquinaria: {
-            value: ambienteModernizacion.estado_general_maquinaria,
-            label: estados.find((item) => item.value == ambienteModernizacion.estado_general_maquinaria)?.label,
-        },
-        ambiente_activo: {
-            value: ambienteModernizacion.ambiente_activo == 1 ? 1 : 2,
-            label: opcionesSiNo.find((item) => item.value == (ambienteModernizacion.ambiente_activo == 1 ? 1 : 2))?.label,
-        },
+        estado_general_maquinaria: ambienteModernizacion.estado_general_maquinaria,
+        ambiente_activo: ambienteModernizacion.ambiente_activo,
         programas_formacion_calificados: programasFormacionCalificadosRelacionados.length > 0 ? programasFormacionCalificadosRelacionados : null,
         programas_formacion: programasFormacionNoCalificadosRelacionados.length > 0 ? programasFormacionNoCalificadosRelacionados : null,
-        ambiente_activo_procesos_idi: {
-            value: ambienteModernizacion.ambiente_activo_procesos_idi == 1 ? 1 : 2,
-            label: opcionesSiNo.find((item) => item.value == (ambienteModernizacion.ambiente_activo_procesos_idi == 1 ? 1 : 2))?.label,
-        },
+        ambiente_activo_procesos_idi: ambienteModernizacion.ambiente_activo_procesos_idi,
         numero_proyectos_beneficiados: ambienteModernizacion.numero_proyectos_beneficiados,
         cod_proyectos_beneficiados: ambienteModernizacion.cod_proyectos_beneficiados,
-        ambiente_formacion_complementaria: {
-            value: ambienteModernizacion.ambiente_formacion_complementaria == 1 ? 1 : 2,
-            label: opcionesSiNo.find((item) => item.value == (ambienteModernizacion.ambiente_formacion_complementaria == 1 ? 1 : 2))?.label,
-        },
+        ambiente_formacion_complementaria: ambienteModernizacion.ambiente_formacion_complementaria,
         numero_total_cursos_comp: ambienteModernizacion.numero_total_cursos_comp,
         numero_cursos_empresas: ambienteModernizacion.numero_cursos_empresas,
         numero_personas_certificadas: ambienteModernizacion.numero_personas_certificadas,
@@ -258,31 +213,16 @@
         $formEquipo.numero_inventario_equipo = equipoAmbienteModernizacion.numero_inventario_equipo
         $formEquipo.nombre_equipo = equipoAmbienteModernizacion.nombre_equipo
         $formEquipo.descripcion_tecnica_equipo = equipoAmbienteModernizacion.descripcion_tecnica_equipo
-        $formEquipo.estado_equipo = {
-            value: equipoAmbienteModernizacion.estado_equipo,
-            label: estadosEquipo.find((item) => item.value == equipoAmbienteModernizacion.estado_equipo)?.label,
-        }
-        $formEquipo.equipo_en_funcionamiento = {
-            value: equipoAmbienteModernizacion.equipo_en_funcionamiento,
-            label: opcionesSiNo.find((item) => item.value == equipoAmbienteModernizacion.equipo_en_funcionamiento)?.label,
-        }
+        $formEquipo.estado_equipo = equipoAmbienteModernizacion.estado_equipo
+        $formEquipo.equipo_en_funcionamiento = equipoAmbienteModernizacion.equipo_en_funcionamiento
         $formEquipo.observaciones_generales = equipoAmbienteModernizacion.observaciones_generales
         $formEquipo.marca = equipoAmbienteModernizacion.marca
         $formEquipo.horas_promedio_uso = equipoAmbienteModernizacion.horas_promedio_uso
-        $formEquipo.frecuencia_mantenimiento = {
-            value: equipoAmbienteModernizacion.frecuencia_mantenimiento,
-            label: opcionesFrecuencia.find((item) => item.value == equipoAmbienteModernizacion.frecuencia_mantenimiento)?.label,
-        }
-        $formEquipo.year_adquisicion = {
-            value: equipoAmbienteModernizacion.year_adquisicion,
-            label: years.find((item) => item.value == equipoAmbienteModernizacion.year_adquisicion)?.label,
-        }
+        $formEquipo.frecuencia_mantenimiento = equipoAmbienteModernizacion.frecuencia_mantenimiento
+        $formEquipo.year_adquisicion = equipoAmbienteModernizacion.year_adquisicion
         $formEquipo.nombre_cuentadante = equipoAmbienteModernizacion.nombre_cuentadante
         $formEquipo.cedula_cuentadante = equipoAmbienteModernizacion.cedula_cuentadante
-        $formEquipo.rol_cuentadante = {
-            value: equipoAmbienteModernizacion.rol_cuentadante,
-            label: roles.find((item) => item.label == equipoAmbienteModernizacion.rol_cuentadante)?.label,
-        }
+        $formEquipo.rol_cuentadante = equipoAmbienteModernizacion.rol_cuentadante
         equipoFormDialog = true
     }
 
@@ -579,7 +519,7 @@
                         <Input id="cedula_cuentadante" type="number" input$min="0" error={errors.cedula_cuentadante} bind:value={$formEquipo.cedula_cuentadante} required />
                     </div>
 
-                    <div class="mt-4">
+                    <div class="mt-4 mb-20">
                         <Label required class="mb-4" labelFor="rol_cuentadante" value="Rol del cuentadante" />
                         <Select id="rol_cuentadante" items={roles} bind:selectedValue={$formEquipo.rol_cuentadante} error={errors.rol_cuentadante} autocomplete="off" placeholder="Seleccione un rol SENNOVA" required />
                     </div>

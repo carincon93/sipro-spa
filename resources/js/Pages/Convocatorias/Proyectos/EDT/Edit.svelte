@@ -30,19 +30,13 @@
     let dialogOpen = false
 
     let form = useForm({
-        tipo_evento: {
-            value: edt.tipo_evento,
-            label: tiposEvento.find((item) => item.value == edt.tipo_evento)?.label,
-        },
+        tipo_evento: edt.tipo_evento,
         descripcion_evento: edt.descripcion_evento,
         descripcion_participacion_entidad: edt.descripcion_participacion_entidad,
         publico_objetivo: edt.publico_objetivo,
         numero_asistentes: edt.numero_asistentes,
         estrategia_comunicacion: edt.estrategia_comunicacion,
-        proyecto_presupuesto_id: {
-            value: edt.proyecto_presupuesto_id,
-            label: proyectoPresupuesto.find((item) => item.value == edt.proyecto_presupuesto_id)?.label,
-        },
+        proyecto_presupuesto_id: edt.proyecto_presupuesto_id,
     })
 
     function submit() {
@@ -65,7 +59,7 @@
         <div class="flex items-center justify-between lg:px-8 max-w-7xl mx-auto px-4 py-6 sm:px-6">
             <div>
                 <h1 class="overflow-ellipsis overflow-hidden w-breadcrumb-ellipsis whitespace-nowrap">
-                        <a use:inertia href={route('convocatorias.proyectos.edt.index', [convocatoria.id, proyecto.id])} class="text-violet-400 hover:text-violet-600">EDT</a>
+                    <a use:inertia href={route('convocatorias.proyectos.edt.index', [convocatoria.id, proyecto.id])} class="text-violet-400 hover:text-violet-600">EDT</a>
                     <span class="text-violet-400 font-medium">/</span>
                     Editar
                 </h1>

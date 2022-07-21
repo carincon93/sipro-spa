@@ -13,13 +13,11 @@
     import Select from '@/Shared/Select'
     import Dialog from '@/Shared/Dialog'
     import Button from '@/Shared/Button'
-    import DynamicList from '@/Shared/Dropdowns/DynamicList'
 
     export let errors
     export let convocatoria
     export let evaluacion
     export let proyectoPresupuestoEvaluacion
-    export let proyecto
     export let proyectoPresupuesto
     export let tiposLicencia
     export let tiposSoftware
@@ -49,10 +47,7 @@
         tipo_licencia: proyectoPresupuesto.software_info?.tipo_licencia,
         fecha_inicio: proyectoPresupuesto.software_info?.fecha_inicio,
         fecha_finalizacion: proyectoPresupuesto.software_info?.fecha_finalizacion,
-        servicio_edicion_info: {
-            value: opcionesServiciosEdicion.find((item) => item.label == proyectoPresupuesto.servicio_edicion_info?.info)?.value,
-            label: opcionesServiciosEdicion.find((item) => item.label == proyectoPresupuesto.servicio_edicion_info?.info)?.label,
-        },
+        servicio_edicion_info: proyectoPresupuesto.servicio_edicion_info?.info,
         formato_estudio_mercado: '',
     }
 
@@ -87,7 +82,7 @@
         <div class="flex items-center justify-between lg:px-8 max-w-7xl mx-auto px-4 py-6 sm:px-6">
             <div>
                 <h1 class="overflow-ellipsis overflow-hidden w-breadcrumb-ellipsis whitespace-nowrap">
-                        <a use:inertia href={route('convocatorias.evaluaciones.presupuesto.index', [convocatoria.id, evaluacion.id])} class="text-violet-400 hover:text-violet-600"> Presupuesto </a>
+                    <a use:inertia href={route('convocatorias.evaluaciones.presupuesto.index', [convocatoria.id, evaluacion.id])} class="text-violet-400 hover:text-violet-600"> Presupuesto </a>
                     <span class="text-violet-400 font-medium">/</span>
                     {proyectoPresupuesto.convocatoria_presupuesto.presupuesto_sennova.uso_presupuestal.descripcion}
                 </h1>
@@ -101,29 +96,17 @@
                 <div class="p-8">
                     <div class="mt-4">
                         <Label labelFor="segundo_grupo_presupuestal_id" value="Homologable 2018" />
-                        <DynamicList classes="evaluacion-select" disabled={true} id="segundo_grupo_presupuestal_id" value={presupuestoInfo.segundo_grupo_presupuestal_id} routeWebApi={route('web-api.segundo-grupo-presupuestal', proyecto.linea_programatica)} placeholder="Busque por el homologable 2018" message={errors.segundo_grupo_presupuestal_id} />
                     </div>
 
                     {#if presupuestoInfo.segundo_grupo_presupuestal_id}
                         <div class="mt-4">
                             <Label labelFor="tercer_grupo_presupuestal_id" value="Rubro 2019" />
-                            <DynamicList classes="evaluacion-select" disabled={true} id="tercer_grupo_presupuestal_id" value={presupuestoInfo.tercer_grupo_presupuestal_id} routeWebApi={route('web-api.tercer-grupo-presupuestal', presupuestoInfo.segundo_grupo_presupuestal_id)} placeholder="Busque por el nombre del rubro 2019" message={errors.tercer_grupo_presupuestal_id} />
                         </div>
                     {/if}
 
                     {#if presupuestoInfo.segundo_grupo_presupuestal_id && presupuestoInfo.tercer_grupo_presupuestal_id}
                         <div class="mt-4">
                             <Label labelFor="convocatoria_presupuesto_id" value="Uso presupuestal" />
-                            <DynamicList
-                                classes="evaluacion-select"
-                                disabled={true}
-                                id="convocatoria_presupuesto_id"
-                                value={presupuestoInfo.convocatoria_presupuesto_id}
-                                routeWebApi={route('web-api.usos-presupuestales', [convocatoria, proyecto.linea_programatica, presupuestoInfo.segundo_grupo_presupuestal_id, presupuestoInfo.tercer_grupo_presupuestal_id])}
-                                placeholder="Busque por el nombre del uso presupuestal"
-                                message={errors.convocatoria_presupuesto_id}
-                                bind:recurso={presupuestoSennova}
-                            />
                         </div>
 
                         {#if presupuestoSennova?.mensaje}

@@ -3,15 +3,12 @@
     import { useForm, page } from '@inertiajs/inertia-svelte'
     import { route, checkRole, checkPermission, monthDiff } from '@/Utils'
     import { _ } from 'svelte-i18n'
-    import { onMount } from 'svelte'
-    import axios from 'axios'
 
     import Button from '@/Shared/Button'
     import Input from '@/Shared/Input'
     import Label from '@/Shared/Label'
     import LoadingButton from '@/Shared/LoadingButton'
     import EvaluationStepper from '@/Shared/EvaluationStepper'
-    import DynamicList from '@/Shared/Dropdowns/DynamicList'
     import Textarea from '@/Shared/Textarea'
     import InfoMessage from '@/Shared/InfoMessage'
     import Select from '@/Shared/Select'
@@ -23,11 +20,12 @@
     export let convocatoria
     export let servicioTecnologico
     export let servicioTecnologicoEvaluacion
-    export let tiposProyectoSt
     export let sectoresProductivos
-    export let proyectoProgramasFormacion
-
-    let programasFormacion
+    export let estadosSistemaGestion
+    export let tiposProyectoSt
+    export let lineasProgramaticas
+    export let programasFormacionConRegistroCalificado
+    export let programasFormacionConRegistroRelacionados
 
     $: $title = servicioTecnologico ? servicioTecnologico.titulo : null
 
@@ -41,10 +39,7 @@
     let proyectoDialogOpen = servicioTecnologicoEvaluacion.evaluacion.clausula_confidencialidad == false ? true : false
 
     let servicioTecnologicoInfo = {
-        tipo_proyecto_st_id: {
-            value: servicioTecnologico.tipo_proyecto_st_id,
-            label: tiposProyectoSt.find((item) => item.value == servicioTecnologico.tipo_proyecto_st_id)?.label,
-        },
+        tipo_proyecto_st_id: servicioTecnologico.tipo_proyecto_st_id,
         linea_programatica_id: servicioTecnologico.proyecto?.linea_programatica_id,
         titulo: servicioTecnologico.titulo,
         fecha_inicio: servicioTecnologico.fecha_inicio,
@@ -59,13 +54,10 @@
         pregunta_formulacion_problema: servicioTecnologico.pregunta_formulacion_problema,
         justificacion_problema: servicioTecnologico.justificacion_problema,
 
-        programas_formacion: proyectoProgramasFormacion.length > 0 ? proyectoProgramasFormacion : null,
+        programas_formacion: programasFormacionConRegistroRelacionados.length > 0 ? programasFormacionConRegistroRelacionados : null,
 
         estado_sistema_gestion_id: servicioTecnologico.estado_sistema_gestion_id,
-        sector_productivo: {
-            value: servicioTecnologico.sector_productivo,
-            label: sectoresProductivos.find((item) => item.value == servicioTecnologico.sector_productivo)?.label,
-        },
+        sector_productivo: servicioTecnologico.sector_productivo,
     }
 
     let form = useForm({
@@ -119,17 +111,6 @@
 
     $: if (servicioTecnologicoInfo.fecha_inicio && servicioTecnologicoInfo.fecha_finalizacion) {
         servicioTecnologicoInfo.max_meses_ejecucion = monthDiff(servicioTecnologicoInfo.fecha_inicio, servicioTecnologicoInfo.fecha_finalizacion)
-    }
-
-    onMount(() => {
-        getProgramasFormacion()
-    })
-
-    async function getProgramasFormacion() {
-        let res = await axios.get(route('web-api.programas-formacion', servicioTecnologico.proyecto.centro_formacion_id))
-        if (res.status == '200') {
-            programasFormacion = res.data
-        }
     }
 </script>
 
@@ -238,7 +219,7 @@
                         <Label class="mb-4" labelFor="estado_sistema_gestion_id" value="Estado del sistema de gestión" />
                     </div>
                     <div>
-                        <DynamicList id="estado_sistema_gestion_id" bind:value={servicioTecnologicoInfo.estado_sistema_gestion_id} routeWebApi={route('web-api.estados-sistema-gestion', servicioTecnologicoInfo.tipo_proyecto_st_id['value'])} classes="evaluacion-select min-h" placeholder="Seleccione un estado" message={errors.estado_sistema_gestion_id} />
+                        <Select id="estado_sistema_gestion_id" items={estadosSistemaGestion} bind:selectedValue={servicioTecnologicoInfo.estado_sistema_gestion_id} autocomplete="off" placeholder="Seleccione un estado" />
                     </div>
                 </div>
             {/if}
@@ -257,7 +238,7 @@
                     <Label class="mb-4" labelFor="linea_programatica_id" value="Código dependencia presupuestal (SIIF)" />
                 </div>
                 <div>
-                    <DynamicList id="linea_programatica_id" bind:value={servicioTecnologicoInfo.linea_programatica_id} routeWebApi={route('web-api.lineas-programaticas', 3)} classes="evaluacion-select min-h" placeholder="Busque por el nombre de la línea programática" message={errors.linea_programatica_id} />
+                    <Select id="linea_programatica_id" items={lineasProgramaticas} bind:selectedValue={servicioTecnologicoInfo.linea_programatica_id} error={errors.linea_programatica_id} autocomplete="off" placeholder="Seleccione una línea programática" />
                 </div>
             </div>
         </fieldset>
@@ -535,18 +516,7 @@
                 <Label class="mb-4" labelFor="programas_formacion" value="Nombre de los programas de formación con los que se relaciona el proyecto" />
             </div>
             <div>
-                <SelectMulti classes="evaluacion-select-multi" id="programas_formacion" bind:selectedValue={servicioTecnologicoInfo.programas_formacion} items={programasFormacion} isMulti={true} placeholder="Buscar por el nombre del programa de formación" />
-                {#if programasFormacion?.length == 0}
-                    <div>
-                        <p>Parece que no se han encontrado elementos, por favor haga clic en <strong>Refrescar</strong></p>
-                        <button on:click={getProgramasFormacion} type="button" class="flex underline">
-                            <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 mr-2" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 4v5h.582m15.356 2A8.001 8.001 0 004.582 9m0 0H9m11 11v-5h-.581m0 0a8.003 8.003 0 01-15.357-2m15.357 2H15" />
-                            </svg>
-                            Refrescar
-                        </button>
-                    </div>
-                {/if}
+                <SelectMulti classes="evaluacion-select-multi" id="programas_formacion" bind:selectedValue={servicioTecnologicoInfo.programas_formacion} items={programasFormacionConRegistroCalificado} isMulti={true} placeholder="Buscar por el nombre del programa de formación" />
             </div>
         </div>
 

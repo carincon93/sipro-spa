@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Helpers\SelectHelper;
 use App\Http\Requests\UserProfileRequest;
 use App\Http\Requests\UserRequest;
 use App\Models\CentroFormacion;
@@ -44,7 +45,8 @@ class UserController extends Controller
         return Inertia::render('Users/Create', [
             'tiposDocumento'      => json_decode(Storage::get('json/tipos-documento.json'), true),
             'tiposVinculacion'    => json_decode(Storage::get('json/tipos-vinculacion.json'), true),
-            'roles'               => Role::select('id', 'name')->get('id')
+            'roles'               => Role::select('id', 'name')->get('id'),
+            'centrosFormacion'    => SelectHelper::centrosFormacion()
         ]);
     }
 
@@ -124,7 +126,8 @@ class UserController extends Controller
             'rolesRelacionados'     => $user->roles()->pluck('id'),
             'permisosRelacionados'  => $user->permissions()->pluck('id'),
             'roles'                 => Role::getRolesByRol(),
-            'proyectos'             => $user->proyectos->load('idi', 'tp.nodoTecnoparque', 'tecnoacademiaLineasTecnoacademia.tecnoacademia', 'culturaInnovacion', 'servicioTecnologico')
+            'proyectos'             => $user->proyectos->load('idi', 'tp.nodoTecnoparque', 'tecnoacademiaLineasTecnoacademia.tecnoacademia', 'culturaInnovacion', 'servicioTecnologico'),
+            'centrosFormacion'      => SelectHelper::centrosFormacion()
 
         ]);
     }

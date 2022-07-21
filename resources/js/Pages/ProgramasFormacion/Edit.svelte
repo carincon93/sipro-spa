@@ -10,10 +10,10 @@
     import LoadingButton from '@/Shared/LoadingButton'
     import Button from '@/Shared/Button'
     import Select from '@/Shared/Select'
-    import DynamicList from '@/Shared/Dropdowns/DynamicList'
 
     export let errors
     export let programaFormacion
+    export let centrosFormacion
     export let modalidades
     export let nivelesFormacion
 
@@ -30,14 +30,8 @@
     let form = useForm({
         nombre: programaFormacion.nombre,
         codigo: programaFormacion.codigo,
-        modalidad: {
-            value: programaFormacion.modalidad,
-            label: modalidades.find((item) => item.value == programaFormacion.modalidad)?.label,
-        },
-        nivel_formacion: {
-            value: programaFormacion.nivel_formacion,
-            label: nivelesFormacion.find((item) => item.value == programaFormacion.nivel_formacion)?.label,
-        },
+        modalidad: programaFormacion.modalidad,
+        nivel_formacion: programaFormacion.nivel_formacion,
         registro_calificado: programaFormacion.registro_calificado,
         centro_formacion_id: programaFormacion.centro_formacion_id,
     })
@@ -62,7 +56,7 @@
         <div class="flex items-center justify-between lg:px-8 max-w-7xl mx-auto px-4 py-6 sm:px-6">
             <div>
                 <h1 class="overflow-ellipsis overflow-hidden w-breadcrumb-ellipsis whitespace-nowrap">
-                        <a use:inertia href={route('programas-formacion.index')} class="text-violet-400 hover:text-violet-600"> Programas de formación </a>
+                    <a use:inertia href={route('programas-formacion.index')} class="text-violet-400 hover:text-violet-600"> Programas de formación </a>
                     <span class="text-violet-400 font-medium">/</span>
                     {programaFormacion.nombre}
                 </h1>
@@ -93,7 +87,7 @@
 
                 <div class="mt-4">
                     <Label required class="mb-4" labelFor="centro_formacion_id" value="Centro de formación" />
-                    <DynamicList id="centro_formacion_id" bind:value={$form.centro_formacion_id} routeWebApi={route('web-api.centros-formacion')} placeholder="Busque por el nombre del centro de formación" message={errors.centro_formacion_id} required />
+                    <Select id="centro_formacion_id" items={centrosFormacion} bind:selectedValue={$form.centro_formacion_id} error={errors.centro_formacion_id} autocomplete="off" placeholder="Busque por el nombre del centro de formación" required />
                 </div>
             </fieldset>
             <div class="shadow-inner bg-violet-200 border-violet-400 bottom-0 flex items-center justify-between mt-14 px-8 py-4 sticky">

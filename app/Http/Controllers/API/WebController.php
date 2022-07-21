@@ -305,7 +305,7 @@ class WebController extends Controller
      * 
      * Trae las líneas tecnoacademia
      */
-    public function líneasTecnoacademia($tecnoacademia)
+    public function lineasTecnoacademia($tecnoacademia)
     {
         return response(LineaTecnoacademia::select('tecnoacademia_linea_tecnoacademia.id as value', 'lineas_tecnoacademia.nombre as label')->join('tecnoacademia_linea_tecnoacademia', 'lineas_tecnoacademia.id', 'tecnoacademia_linea_tecnoacademia.linea_tecnoacademia_id')->where('tecnoacademia_linea_tecnoacademia.tecnoacademia_id', $tecnoacademia)->get());
     }

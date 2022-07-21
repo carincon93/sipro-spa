@@ -6,7 +6,6 @@
 
     import Label from '@/Shared/Label'
     import Select from '@/Shared/Select'
-    import DynamicList from '@/Shared/Dropdowns/DynamicList'
     import Textarea from '@/Shared/Textarea'
     import InfoMessage from '@/Shared/InfoMessage'
 
@@ -17,6 +16,7 @@
     export let resultados
     export let actividades
     export let actividadesRelacionadas
+    export let subtipologiasMinciencias
     export let tiposProducto
 
     $: $title = producto ? producto.nombre : null
@@ -29,10 +29,7 @@
 
     let productoInfo = {
         nombre: producto.nombre,
-        resultado_id: {
-            value: producto.resultado_id,
-            label: resultados.find((item) => item.value == producto.resultado_id)?.label,
-        },
+        resultado_id: producto.resultado_id,
         fecha_inicio: producto.fecha_inicio,
         fecha_finalizacion: producto.fecha_finalizacion,
         indicador: producto.indicador,
@@ -41,10 +38,7 @@
         nombre_indicador: producto.producto_servicio_tecnologico?.nombre_indicador,
         formula_indicador: producto.producto_servicio_tecnologico?.formula_indicador,
 
-        tipo: {
-            value: producto.producto_idi ? producto.producto_idi.tipo : producto.producto_cultura_innovacion?.tipo,
-            label: tiposProducto.find((item) => item.value == (producto.producto_idi ? producto.producto_idi.tipo : producto.producto_cultura_innovacion?.tipo))?.label,
-        },
+        tipo: producto.producto_idi ? producto.producto_idi.tipo : producto.producto_cultura_innovacion?.tipo,
         subtipologia_minciencias_id: producto.producto_idi ? producto.producto_idi?.subtipologia_minciencias_id : producto.producto_cultura_innovacion?.subtipologia_minciencias_id,
 
         valor_proyectado: producto.producto_ta_tp?.valor_proyectado,
@@ -121,7 +115,7 @@
                 {#if productoInfo.tatp_servicio_tecnologico == false}
                     <div class="mt-8">
                         <Label class="mb-4" labelFor="subtipologia_minciencias_id" value="Subtipología Minciencias" />
-                        <DynamicList classes="evaluacion-select" disabled={true} id="subtipologia_minciencias_id" value={productoInfo.subtipologia_minciencias_id} routeWebApi={route('web-api.subtipologias-minciencias')} placeholder="Busque por el nombre de la subtipología Minciencias" />
+                        <Select id="subtipologia_minciencias_id" items={subtipologiasMinciencias} bind:selectedValue={productoInfo.subtipologia_minciencias_id} autocomplete="off" placeholder="Seleccione una subtipología" />
                     </div>
 
                     <div class="mt-8">

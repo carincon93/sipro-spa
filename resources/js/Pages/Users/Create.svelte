@@ -13,12 +13,12 @@
     import InfoMessage from '@/Shared/InfoMessage'
     import Checkbox from '@smui/checkbox'
     import FormField from '@smui/form-field'
-    import DynamicList from '@/Shared/Dropdowns/DynamicList'
 
     export let errors
     export let tiposDocumento
     export let tiposVinculacion
     export let roles
+    export let centrosFormacion
 
     $: $title = 'Crear usuario'
 
@@ -54,7 +54,7 @@
         <div class="flex items-center justify-between lg:px-8 max-w-7xl mx-auto px-4 py-6 sm:px-6">
             <div>
                 <h1>
-                        <a use:inertia href={route('users.index')} class="text-violet-400 hover:text-violet-600"> Usuarios </a>
+                    <a use:inertia href={route('users.index')} class="text-violet-400 hover:text-violet-600"> Usuarios </a>
                     <span class="text-violet-400 font-medium">/</span>
                     Crear
                 </h1>
@@ -100,7 +100,7 @@
                 {#if isSuperAdmin}
                     <div class="mt-4">
                         <Label required class="mb-4" labelFor="centro_formacion_id" value="Centro de formación" />
-                        <DynamicList id="centro_formacion_id" bind:value={$form.centro_formacion_id} routeWebApi={route('web-api.centros-formacion')} placeholder="Busque por el nombre del centro de formación" message={errors.centro_formacion_id} required />
+                        <Select id="centro_formacion_id" items={centrosFormacion} bind:selectedValue={$form.centro_formacion_id} error={errors.centro_formacion_id} autocomplete="off" placeholder="Busque por el nombre del centro de formación" required />
                     </div>
                 {/if}
 

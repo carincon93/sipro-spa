@@ -15,7 +15,6 @@
     import FormField from '@smui/form-field'
     import Dialog from '@/Shared/Dialog'
     import InfoMessage from '@/Shared/InfoMessage'
-    import DynamicList from '@/Shared/Dropdowns/DynamicList'
     import DataTableMenu from '@/Shared/DataTableMenu'
     import { Item, Text } from '@smui/list'
     import { Inertia } from '@inertiajs/inertia'
@@ -28,6 +27,7 @@
     export let rolesRelacionados
     export let permisosRelacionados
     export let proyectos
+    export let centrosFormacion
 
     $: $title = usuario ? usuario.nombre : null
 
@@ -44,17 +44,11 @@
         nombre: usuario.nombre,
         email: usuario.email,
         password: usuario.password,
-        tipo_documento: {
-            value: usuario.tipo_documento,
-            label: tiposDocumento.find((item) => item.value == usuario.tipo_documento)?.label,
-        },
+        tipo_documento: usuario.tipo_documento,
         numero_documento: usuario.numero_documento,
         numero_celular: usuario.numero_celular,
         habilitado: usuario.habilitado,
-        tipo_vinculacion: {
-            value: usuario.tipo_vinculacion,
-            label: tiposVinculacion.find((item) => item.value == usuario.tipo_vinculacion)?.label,
-        },
+        tipo_vinculacion: usuario.tipo_vinculacion,
         centro_formacion_id: usuario.centro_formacion_id,
         role_id: rolesRelacionados,
         permission_id: permisosRelacionados,
@@ -129,7 +123,7 @@
                 {#if isSuperAdmin}
                     <div class="mt-4">
                         <Label required class="mb-4" labelFor="centro_formacion_id" value="Centro de formación" />
-                        <DynamicList id="centro_formacion_id" bind:value={$form.centro_formacion_id} routeWebApi={route('web-api.centros-formacion')} placeholder="Busque por el nombre del centro de formación" message={errors.centro_formacion_id} required />
+                        <Select id="centro_formacion_id" items={centrosFormacion} bind:selectedValue={$form.centro_formacion_id} error={errors.centro_formacion_id} autocomplete="off" placeholder="Busque por el nombre del centro de formación" required />
                     </div>
                 {/if}
 

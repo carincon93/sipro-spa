@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Helpers\SelectHelper;
 use App\Http\Requests\NuevoProponenteRequest;
 use App\Http\Requests\ProgramaFormacionRequest;
 use App\Http\Requests\ProponenteRequest;
@@ -779,6 +780,7 @@ class ProyectoController extends Controller
             'proyecto'              => $proyecto->only('id', 'codigo_linea_programatica', 'precio_proyecto', 'modificable', 'diff_meses', 'participantes', 'semillerosInvestigacion', 'mostrar_recomendaciones', 'PdfVersiones', 'all_files', 'allowed'),
             'tiposDocumento'        => json_decode(Storage::get('json/tipos-documento.json'), true),
             'tiposVinculacion'      => json_decode(Storage::get('json/tipos-vinculacion.json'), true),
+            'centrosFormacion'      => SelectHelper::centrosFormacion(),
             'roles'                 => $rolesSennova,
         ]);
     }

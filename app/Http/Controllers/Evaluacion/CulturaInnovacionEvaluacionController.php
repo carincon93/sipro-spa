@@ -2,9 +2,11 @@
 
 namespace App\Http\Controllers\Evaluacion;
 
+use App\Helpers\SelectHelper;
 use App\Models\Evaluacion\CulturaInnovacionEvaluacion;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Evaluacion\CulturaInnovacionEvaluacionRequest;
+use App\Models\AreaConocimiento;
 use App\Models\Convocatoria;
 use App\Models\MesaSectorial;
 use App\Models\Tecnoacademia;
@@ -85,11 +87,19 @@ class CulturaInnovacionEvaluacionController extends Controller
             'lineasTecnoacademiaRelacionadas'           => $culturaInnovacion->tecnoacademiaLineasTecnoacademia()->pluck('id'),
             'tecnoacademia'                             => $culturaInnovacion->tecnoacademiaLineasTecnoacademia()->first() ? $culturaInnovacion->tecnoacademiaLineasTecnoacademia()->first()->tecnoacademia->only('id', 'nombre') : null,
             'mesasSectoriales'                          => MesaSectorial::select('id', 'nombre')->get('id'),
-            'tecnoacademias'                            => Tecnoacademia::select('id as value', 'nombre as label')->get(),
+            'areasConocimiento'                         => SelectHelper::areasConocimiento(),
+            'tecnoacademias'                            => SelectHelper::tecnoacademias(),
+            'municipios'                                => SelectHelper::municipios(),
+            'lineasProgramaticas'                       => SelectHelper::lineasProgramaticas()->where('categoria_proyecto', 5)->values()->all(),
+            'actividadesEconomicas'                     => SelectHelper::actividadesEconomicas(),
+            'tematicasEstrategicas'                     => SelectHelper::tematicasEstrategicas(),
+            'lineasTecnoacademia'                       => SelectHelper::lineasTecnoacademia(),
+            'programasFormacionConRegistroCalificado'   => SelectHelper::programasFormacion()->where('registro_calificado', true)->where('centro_formacion_id', $culturaInnovacion->proyecto->centro_formacion_id)->values()->all(),
+            'programasFormacionSinRegistroCalificado'   => SelectHelper::programasFormacion()->where('registro_calificado', false)->values()->all(),
             'opcionesAplicaNoAplica'                    => json_decode(Storage::get('json/opciones-aplica-no-aplica.json'), true),
             'proyectoMunicipios'                        => $culturaInnovacion->proyecto->municipios()->select('municipios.id as value', 'municipios.nombre as label', 'regionales.nombre as group')->join('regionales', 'regionales.id', 'municipios.regional_id')->get(),
-            'proyectoProgramasFormacion'                => $culturaInnovacion->proyecto->programasFormacion()->selectRaw('id as value, concat(programas_formacion.nombre, chr(10), \'∙ Código: \', programas_formacion.codigo) as label')->where('registro_calificado', true)->get(),
-            'proyectoProgramasFormacionArticulados'     => $culturaInnovacion->proyecto->programasFormacion()->selectRaw('id as value, concat(programas_formacion.nombre, chr(10), \'∙ Código: \', programas_formacion.codigo) as label')->where('registro_calificado', false)->get(),
+            'programasFormacionConRegistroRelacionados' => $culturaInnovacion->proyecto->programasFormacion()->selectRaw('id as value, concat(programas_formacion.nombre, chr(10), \'∙ Código: \', programas_formacion.codigo) as label')->where('registro_calificado', true)->get(),
+            'programasFormacionSinRegistroRelacionados' => $culturaInnovacion->proyecto->programasFormacion()->selectRaw('id as value, concat(programas_formacion.nombre, chr(10), \'∙ Código: \', programas_formacion.codigo) as label')->where('registro_calificado', false)->get(),
         ]);
     }
 

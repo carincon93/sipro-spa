@@ -14,13 +14,13 @@
     import InputError from '@/Shared/InputError'
     import Select from '@/Shared/Select'
     import Textarea from '@/Shared/Textarea'
-    import DynamicList from '@/Shared/Dropdowns/DynamicList'
 
     export let errors
     export let tecnoacademia
     export let lineasTecnoacademia
     export let modalidades
     export let lineasTecnoacademiaRelacionadas
+    export let centrosFormacion
 
     $: $title = tecnoacademia ? tecnoacademia.nombre : null
 
@@ -34,10 +34,7 @@
 
     let form = useForm({
         nombre: tecnoacademia.nombre,
-        modalidad: {
-            value: tecnoacademia.modalidad,
-            label: modalidades.find((item) => item.value == tecnoacademia.modalidad)?.label,
-        },
+        modalidad: tecnoacademia.modalidad,
         centro_formacion_id: tecnoacademia.centro_formacion_id,
         fecha_creacion: tecnoacademia.fecha_creacion,
         foco: tecnoacademia.foco,
@@ -71,7 +68,7 @@
         <div class="flex items-center justify-between lg:px-8 max-w-7xl mx-auto px-4 py-6 sm:px-6">
             <div>
                 <h1 class="overflow-ellipsis overflow-hidden w-breadcrumb-ellipsis whitespace-nowrap">
-                        <a use:inertia href={route('tecnoacademias.index')} class="text-violet-400 hover:text-violet-600"> Tecnoacademias </a>
+                    <a use:inertia href={route('tecnoacademias.index')} class="text-violet-400 hover:text-violet-600"> Tecnoacademias </a>
                     <span class="text-violet-400 font-medium">/</span>
                     {tecnoacademia.nombre}
                 </h1>
@@ -88,7 +85,7 @@
 
                 <div class="mt-4">
                     <Label required class="mb-4" labelFor="centro_formacion_id" value="Centro de formación" />
-                    <DynamicList id="centro_formacion_id" bind:value={$form.centro_formacion_id} routeWebApi={route('web-api.centros-formacion')} placeholder="Busque por el nombre del centro de formación" message={errors.centro_formacion_id} required />
+                    <Select id="centro_formacion_id" items={centrosFormacion} bind:selectedValue={$form.centro_formacion_id} error={errors.centro_formacion_id} autocomplete="off" placeholder="Busque por el nombre del centro de formación" required />
                 </div>
 
                 <div class="mt-4">

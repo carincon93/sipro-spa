@@ -4,31 +4,32 @@
     import { route, checkRole, checkPermission, monthDiff } from '@/Utils'
     import { _ } from 'svelte-i18n'
     import axios from 'axios'
-    import { onMount } from 'svelte'
 
     import Button from '@/Shared/Button'
     import Label from '@/Shared/Label'
     import LoadingButton from '@/Shared/LoadingButton'
     import EvaluationStepper from '@/Shared/EvaluationStepper'
-    import DynamicList from '@/Shared/Dropdowns/DynamicList'
     import Textarea from '@/Shared/Textarea'
     import InfoMessage from '@/Shared/InfoMessage'
     import SelectMulti from '@/Shared/SelectMulti'
     import Dialog from '@/Shared/Dialog'
     import Switch from '@/Shared/Switch'
+    import Select from '@/Shared/Select'
 
     export let errors
     export let convocatoria
     export let tp
     export let tpEvaluacion
     export let proyectoMunicipios
+    export let lineasProgramaticas
+    export let nodosTecnoparque
+    export let municipios
 
     $: $title = tp ? tp.titulo : null
 
     let dialogSegundaEvaluacion = convocatoria.fase == 4 ? true : false
     let proyectoDialogOpen = tpEvaluacion.evaluacion.clausula_confidencialidad == false ? true : false
 
-    let municipios = []
     let codigoLineaProgramatica
 
     $: if (codigoLineaProgramatica) {
@@ -36,8 +37,6 @@
     } else {
         tpInfo.codigo_linea_programatica = tp.codigo_linea_programatica
     }
-
-    const groupBy = (item) => item.group
 
     /**
      * Validar si el usuario autenticado es SuperAdmin
@@ -87,10 +86,6 @@
             })
     }
 
-    onMount(() => {
-        getMunicipios()
-    })
-
     let form = useForm({
         clausula_confidencialidad: tpEvaluacion.evaluacion.clausula_confidencialidad,
         fecha_ejecucion_comentario: tpEvaluacion.fecha_ejecucion_comentario,
@@ -125,13 +120,6 @@
             $form.put(route('convocatorias.tp-evaluaciones.update', [convocatoria.id, tpEvaluacion.id]), {
                 preserveScroll: true,
             })
-        }
-    }
-
-    async function getMunicipios() {
-        let res = await axios.get(route('web-api.municipios'))
-        if (res.status == '200') {
-            municipios = res.data
         }
     }
 
@@ -187,7 +175,7 @@
                 <Label class="mb-4" labelFor="linea_programatica_id" value="Código dependencia presupuestal (SIIF)" />
             </div>
             <div>
-                <DynamicList disabled={true} id="linea_programatica_id" bind:value={tpInfo.linea_programatica_id} routeWebApi={route('web-api.lineas-programaticas', 1)} classes="evaluacion-select min-h" placeholder="Busque por el nombre de la línea programática" message={errors.linea_programatica_id} />
+                <Select id="linea_programatica_id" items={lineasProgramaticas} bind:selectedValue={tpInfo.linea_programatica_id} autocomplete="off" placeholder="Seleccione una línea programática" />
             </div>
         </div>
         <div class="mt-44 grid grid-cols-2">
@@ -205,7 +193,7 @@
                 <Label class="mb-4" labelFor="nodo_tecnoparque_id" value="Nodo Tecnoparque" />
             </div>
             <div>
-                <DynamicList classes="evaluacion-select" disabled={true} id="nodo_tecnoparque_id" bind:value={tpInfo.nodo_tecnoparque_id} placeholder="Seleccione un nodo Tecnoparque" routeWebApi={route('web-api.nodos-tecnoparque', tpInfo.centro_formacion_id)} message={errors.nodo_tecnoparque_id} />
+                <Select id="nodo_tecnoparque_id" items={nodosTecnoparque} bind:selectedValue={tpInfo.nodo_tecnoparque_id} autocomplete="off" placeholder="Seleccione un nodo Tecnoparque" />
             </div>
         </div>
 

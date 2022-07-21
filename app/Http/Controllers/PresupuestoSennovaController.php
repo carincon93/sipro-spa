@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Helpers\SelectHelper;
 use App\Http\Requests\PresupuestoSennovaRequest;
 use App\Models\LineaProgramatica;
 use App\Models\PresupuestoSennova;
@@ -40,11 +41,11 @@ class PresupuestoSennovaController extends Controller
         $this->authorize('create', [PresupuestoSennova::class]);
 
         return Inertia::render('Presupuesto/PresupuestoSennova/Create', [
-            'primerGrupoPresupuestal'   => PrimerGrupoPresupuestal::select('id as value', 'nombre as label')->get(),
-            'segundoGrupoPresupuestal'  => SegundoGrupoPresupuestal::select('id as value', 'nombre as label')->get(),
-            'tercerGrupoPresupuestal'   => TercerGrupoPresupuestal::select('id as value', 'nombre as label')->get(),
-            'usosPresupuestales'        => UsoPresupuestal::select('id as value', 'descripcion as label')->get(),
-            'lineasProgramaticas'       => LineaProgramatica::selectRaw('lineas_programaticas.id as value, concat(lineas_programaticas.nombre, chr(10), \'∙ Código: \', lineas_programaticas.codigo) as label')->get(),
+            'primerGrupoPresupuestal'   => SelectHelper::primerGrupoPresupuestal(),
+            'segundoGrupoPresupuestal'  => SelectHelper::segundoGrupoPresupuestal(),
+            'tercerGrupoPresupuestal'   => SelectHelper::tercerGrupoPresupuestal(),
+            'usosPresupuestales'        => SelectHelper::usosPresupuestales(),
+            'lineasProgramaticas'       => SelectHelper::lineasProgramaticas(),
         ]);
     }
 
@@ -99,11 +100,11 @@ class PresupuestoSennovaController extends Controller
 
         return Inertia::render('Presupuesto/PresupuestoSennova/Edit', [
             'presupuestoSennova'        => $presupuestoSennova,
-            'primerGrupoPresupuestal'   => PrimerGrupoPresupuestal::select('id as value', 'nombre as label')->get(),
-            'segundoGrupoPresupuestal'  => SegundoGrupoPresupuestal::select('id as value', 'nombre as label')->get(),
-            'tercerGrupoPresupuestal'   => TercerGrupoPresupuestal::select('id as value', 'nombre as label')->get(),
-            'usosPresupuestales'        => UsoPresupuestal::select('id as value', 'descripcion as label')->get(),
-            'lineasProgramaticas'       => LineaProgramatica::selectRaw('lineas_programaticas.id as value, concat(lineas_programaticas.nombre, chr(10), \'∙ Código: \', lineas_programaticas.codigo) as label')->get(),
+            'primerGrupoPresupuestal'   => SelectHelper::primerGrupoPresupuestal(),
+            'segundoGrupoPresupuestal'  => SelectHelper::segundoGrupoPresupuestal(),
+            'tercerGrupoPresupuestal'   => SelectHelper::tercerGrupoPresupuestal(),
+            'usosPresupuestales'        => SelectHelper::usosPresupuestales(),
+            'lineasProgramaticas'       => SelectHelper::lineasProgramaticas(),
         ]);
     }
 

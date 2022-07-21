@@ -2,7 +2,9 @@
 
 namespace App\Http\Controllers;
 
+use App\Helpers\SelectHelper;
 use App\Http\Requests\GrupoInvestigacionRequest;
+use App\Models\CentroFormacion;
 use App\Models\GrupoInvestigacion;
 use App\Models\RedConocimiento;
 use Illuminate\Http\Request;
@@ -43,7 +45,8 @@ class GrupoInvestigacionController extends Controller
 
         return Inertia::render('GruposInvestigacion/Create', [
             'categoriasMinciencias' => json_decode(Storage::get('json/categorias-minciencias.json'), true),
-            'redesConocimiento'     => RedConocimiento::select('id as value', 'nombre as label')->get('id'),
+            'redesConocimiento'     => SelectHelper::redesConocimiento(),
+            'centrosFormacion'      => SelectHelper::centrosFormacion(),
         ]);
     }
 
@@ -110,8 +113,9 @@ class GrupoInvestigacionController extends Controller
 
         return Inertia::render('GruposInvestigacion/Edit', [
             'grupoInvestigacion'                    => $grupoInvestigacion,
+            'redesConocimiento'                     => SelectHelper::redesConocimiento(),
+            'centrosFormacion'                      => SelectHelper::centrosFormacion(),
             'categoriasMinciencias'                 => json_decode(Storage::get('json/categorias-minciencias.json'), true),
-            'redesConocimiento'                     => RedConocimiento::select('id as value', 'nombre as label')->get('id'),
             'redesConocimientoGrupoInvestigacion'   => $grupoInvestigacion->redesConocimiento()->select('redes_conocimiento.id as value', 'redes_conocimiento.nombre as label')->get(),
         ]);
     }

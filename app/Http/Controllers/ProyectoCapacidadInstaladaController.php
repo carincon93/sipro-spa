@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Helpers\AppHelper;
+use App\Helpers\SelectHelper;
 use App\Models\ProyectoCapacidadInstalada;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\NuevoProponenteRequest;
@@ -136,16 +137,16 @@ class ProyectoCapacidadInstaladaController extends Controller
             'centrosFormacion'                          => $centrosFormacion,
             'listaBeneficiados'                         => json_decode(Storage::get('json/proyectos-capacidad-instalada-beneficiados.json'), true),
 
-            'programasFormacion'                        => ProgramaFormacion::selectRaw('programas_formacion.id as value, concat(programas_formacion.nombre, chr(10), \'∙ Código: \', programas_formacion.codigo) as label, registro_calificado, centro_formacion_id')->get(),
-            'lineasInvestigacion'                       => LineaInvestigacion::selectRaw('lineas_investigacion.id as value, concat(lineas_investigacion.nombre, chr(10), \'∙ Grupo de investigación: \', grupos_investigacion.nombre, chr(10)) as label, centros_formacion.id as centro_formacion_id')->join('grupos_investigacion', 'lineas_investigacion.grupo_investigacion_id', 'grupos_investigacion.id')->join('centros_formacion', 'grupos_investigacion.centro_formacion_id', 'centros_formacion.id')->join('regionales', 'centros_formacion.regional_id', 'regionales.id')->get(),
-            'semillerosInvestigacion'                   => SemilleroInvestigacion::select('semilleros_investigacion.id as value', 'semilleros_investigacion.nombre as label', 'linea_investigacion_id')->orderBy('nombre', 'ASC')->get(),
-            'areasConocimiento'                         => AreaConocimiento::select('areas_conocimiento.id as value', 'areas_conocimiento.nombre as label')->orderBy('nombre', 'ASC')->get(),
-            'subareasConocimiento'                      => SubareaConocimiento::select('subareas_conocimiento.id as value', 'subareas_conocimiento.nombre as label', 'area_conocimiento_id')->orderBy('nombre', 'ASC')->get(),
-            'disciplinasSubareaConocimiento'            => DisciplinaSubareaConocimiento::select('disciplinas_subarea_conocimiento.id as value', 'disciplinas_subarea_conocimiento.nombre as label', 'subarea_conocimiento_id')->orderBy('nombre', 'ASC')->get(),
-            'redesConocimiento'                         => RedConocimiento::select('redes_conocimiento.id as value', 'redes_conocimiento.nombre as label')->orderBy('nombre', 'ASC')->get(),
-            'actividadesEconomicas'                     => ActividadEconomica::select('actividades_economicas.id as value', 'actividades_economicas.nombre as label')->orderBy('nombre', 'ASC')->get(),
-            'tiposProyectoCapacidadInstalada'           => TipoProyectoCapacidadInstalada::select('id as value', 'tipo as label')->orderBy('tipo', 'ASC')->get(),
-            'subtiposProyectoCapacidadInstalada'        => SubtipoProyectoCapacidadInstalada::select('id as value', 'subtipo as label', 'tipo_proyecto_capacidad_instalada_id')->orderBy('subtipo', 'ASC')->get(),
+            'programasFormacion'                        => SelectHelper::programasFormacion(),
+            'lineasInvestigacion'                       => SelectHelper::lineasInvestigacion(),
+            'semillerosInvestigacion'                   => SelectHelper::semillerosInvestigacion(),
+            'areasConocimiento'                         => SelectHelper::areasConocimiento(),
+            'subareasConocimiento'                      => SelectHelper::subareasConocimiento(),
+            'disciplinasSubareaConocimiento'            => SelectHelper::disciplinasSubareaConocimiento(),
+            'redesConocimiento'                         => SelectHelper::redesConocimiento(),
+            'actividadesEconomicas'                     => SelectHelper::actividadesEconomicas(),
+            'tiposProyectoCapacidadInstalada'           => SelectHelper::tiposProyectoCapacidadInstalada(),
+            'subtiposProyectoCapacidadInstalada'        => SelectHelper::subtiposProyectoCapacidadInstalada(),
 
             'programasFormacionRegistroAsociados'       => $proyectoCapacidadInstalada->programasFormacion()->selectRaw('programas_formacion.id as value, concat(programas_formacion.nombre, chr(10), \'∙ Código: \', programas_formacion.codigo) as label')->where('registro_calificado', true)->get(),
             'programasFormacionSinRegistroAsociados'    => $proyectoCapacidadInstalada->programasFormacion()->selectRaw('programas_formacion.id as value, concat(programas_formacion.nombre, chr(10), \'∙ Código: \', programas_formacion.codigo) as label')->where('registro_calificado', false)->get(),
@@ -226,6 +227,7 @@ class ProyectoCapacidadInstaladaController extends Controller
 
         return Inertia::render('ProyectosCapacidadInstalada/Integrantes/Index', [
             'proyectoCapacidadInstalada'    => $proyectoCapacidadInstalada,
+            'centrosFormacion'              => CentroFormacion::selectRaw('centros_formacion.id as value, concat(centros_formacion.nombre, chr(10), \'∙ Código: \', centros_formacion.codigo, chr(10), \'∙ Regional: \', regionales.nombre) as label')->join('regionales', 'centros_formacion.regional_id', 'regionales.id')->orderBy('centros_formacion.nombre', 'ASC')->get(),
             'tiposDocumento'                => json_decode(Storage::get('json/tipos-documento.json'), true),
             'tiposVinculacion'              => json_decode(Storage::get('json/tipos-vinculacion.json'), true),
             'roles'                         => json_decode(Storage::get('json/roles-sennova-idi.json'), true),

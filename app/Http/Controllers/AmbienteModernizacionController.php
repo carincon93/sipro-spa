@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Helpers\AppHelper;
+use App\Helpers\SelectHelper;
 use App\Models\AmbienteModernizacion;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\StoreAmbienteModernizacionRequest;
@@ -51,12 +52,10 @@ class AmbienteModernizacionController extends Controller
             'filters'                   => request()->all('search'),
             'ambientesModernizacion'    => AmbienteModernizacion::distinct('seguimiento_ambiente_modernizacion_id')->with('seguimientoAmbienteModernizacion.ambientesModernizacion', 'seguimientoAmbienteModernizacion.centroFormacion.regional')->orderBy('seguimiento_ambiente_modernizacion_id', 'ASC')
                 ->filterAmbienteModernizacion(request()->only('search'))->paginate(),
-            'codigosSgpsFaltantes'      => CodigoProyectoSgps::select('seguimientos_ambiente_modernizacion.codigo_proyecto_sgps_id', 'codigos_proyectos_sgps.codigo_sgps', 'codigos_proyectos_sgps.titulo', 'codigos_proyectos_sgps.year_ejecucion')->leftJoin('seguimientos_ambiente_modernizacion', 'codigos_proyectos_sgps.id', 'seguimientos_ambiente_modernizacion.codigo_proyecto_sgps_id')
-                ->join('lineas_programaticas', 'codigos_proyectos_sgps.linea_programatica_id', 'lineas_programaticas.id')
-                ->where('lineas_programaticas.codigo', 23)
-                ->where('codigos_proyectos_sgps.centro_formacion_id', $authUser->centro_formacion_id)
-                ->where('seguimientos_ambiente_modernizacion.codigo_proyecto_sgps_id', NULL)
-                ->get(),
+            'codigosSgpsFaltantes'      => SelectHelper::codigoProyectoSgps()
+                ->where('codigo', 23)
+                ->where('centro_formacion_id', $authUser->centro_formacion_id)
+                ->where('codigo_proyecto_sgps_id', NULL)->values()->all(),
             'allowedToCreate'           => Gate::inspect('create', [AmbienteModernizacion::class])->allowed()
         ]);
     }
@@ -87,23 +86,22 @@ class AmbienteModernizacionController extends Controller
 
         return Inertia::render('AmbientesModernizacion/Create', [
             'seguimientoId'                     => $seguimientoId,
-            'centrosFormacion'                  => CentroFormacion::select('centros_formacion.id as value', 'centros_formacion.nombre as label')->orderBy('centros_formacion.nombre', 'ASC')->get(),
+            'centrosFormacion'                  => SelectHelper::centrosFormacion(),
             'codigosSgps'                       => CodigoProyectoSgps::selectRaw('codigos_proyectos_sgps.id as value, concat(codigos_proyectos_sgps.titulo, chr(10), \'∙ Código: SGPS-\', codigos_proyectos_sgps.codigo_sgps, chr(10), \'∙ Año: \', codigos_proyectos_sgps.year_ejecucion) as label')->leftJoin('seguimientos_ambiente_modernizacion', 'codigos_proyectos_sgps.id', 'seguimientos_ambiente_modernizacion.codigo_proyecto_sgps_id')
                 ->join('lineas_programaticas', 'codigos_proyectos_sgps.linea_programatica_id', 'lineas_programaticas.id')
                 ->where('lineas_programaticas.codigo', 23)
                 ->where('codigos_proyectos_sgps.centro_formacion_id', $authUser->centro_formacion_id)
                 ->where('seguimientos_ambiente_modernizacion.codigo_proyecto_sgps_id', NULL)
                 ->get(),
-            'tipologiasAmbientes'               => TipologiaAmbiente::select('tipologias_ambientes.id as value', 'tipologias_ambientes.tipo as label')->orderBy('tipologias_ambientes.tipo', 'ASC')->get(),
             'mesasSectoriales'                  => MesaSectorial::select('id', 'nombre')->get('id'),
-            'semillerosInvestigacion'           => SemilleroInvestigacion::select('semilleros_investigacion.nombre as label', 'semilleros_investigacion.id as value')->join('lineas_investigacion', 'semilleros_investigacion.linea_investigacion_id', 'lineas_investigacion.id')->join('grupos_investigacion', 'lineas_investigacion.grupo_investigacion_id', 'grupos_investigacion.id')->where('grupos_investigacion.centro_formacion_id', '=', $authUser->centroFormacion->id)->get(),
-            'areasConocimiento'                 => AreaConocimiento::select('areas_conocimiento.id as value', 'areas_conocimiento.nombre as label')->orderBy('nombre', 'ASC')->get(),
-            'subareasConocimiento'              => SubareaConocimiento::select('subareas_conocimiento.id as value', 'subareas_conocimiento.nombre as label', 'area_conocimiento_id')->orderBy('nombre', 'ASC')->get(),
-            'disciplinasSubareaConocimiento'    => DisciplinaSubareaConocimiento::select('disciplinas_subarea_conocimiento.id as value', 'disciplinas_subarea_conocimiento.nombre as label', 'subarea_conocimiento_id')->orderBy('nombre', 'ASC')->get(),
-            'redesConocimiento'                 => RedConocimiento::select('redes_conocimiento.id as value', 'redes_conocimiento.nombre as label')->orderBy('nombre', 'ASC')->get(),
-            'actividadesEconomicas'             => ActividadEconomica::select('actividades_economicas.id as value', 'actividades_economicas.nombre as label')->orderBy('nombre', 'ASC')->get(),
-            'lineasInvestigacion'               => LineaInvestigacion::selectRaw('lineas_investigacion.id as value, concat(lineas_investigacion.nombre, chr(10), \'∙ Grupo de investigación: \', grupos_investigacion.nombre, chr(10)) as label, centros_formacion.id as centro_formacion_id')->join('grupos_investigacion', 'lineas_investigacion.grupo_investigacion_id', 'grupos_investigacion.id')->join('centros_formacion', 'grupos_investigacion.centro_formacion_id', 'centros_formacion.id')->join('regionales', 'centros_formacion.regional_id', 'regionales.id')->get(),
-            'tematicasEstrategicas'             => TematicaEstrategica::select('tematicas_estrategicas.id as value', 'tematicas_estrategicas.nombre as label')->orderBy('tematicas_estrategicas.nombre', 'ASC')->get(),
+            'tipologiasAmbientes'               => SelectHelper::tipologiasAmbiente(),
+            'areasConocimiento'                 => SelectHelper::areasConocimiento(),
+            'subareasConocimiento'              => SelectHelper::subareasConocimiento(),
+            'disciplinasSubareaConocimiento'    => SelectHelper::disciplinasSubareaConocimiento(),
+            'redesConocimiento'                 => SelectHelper::redesConocimiento(),
+            'actividadesEconomicas'             => SelectHelper::actividadesEconomicas(),
+            'lineasInvestigacion'               => SelectHelper::lineasInvestigacion(),
+            'tematicasEstrategicas'             => SelectHelper::tematicasEstrategicas(),
             'allowedToCreate'                   => Gate::inspect('create', [AmbienteModernizacion::class])->allowed()
         ]);
     }
@@ -194,18 +192,19 @@ class AmbienteModernizacionController extends Controller
                     $query->where('seguimientos_ambiente_modernizacion.codigo_proyecto_sgps_id', NULL);
                 })
                 ->get(),
-            'tipologiasAmbientes'                           => TipologiaAmbiente::select('tipologias_ambientes.id as value', 'tipologias_ambientes.tipo as label')->orderBy('tipologias_ambientes.tipo', 'ASC')->get(),
+            'tipologiasAmbientes'                           => SelectHelper::tipologiasAmbiente(),
+            'areasConocimiento'                             => SelectHelper::areasConocimiento(),
+            'subareasConocimiento'                          => SelectHelper::subareasConocimiento(),
+            'disciplinasSubareaConocimiento'                => SelectHelper::disciplinasSubareaConocimiento(),
+            'redesConocimiento'                             => SelectHelper::redesConocimiento(),
+            'actividadesEconomicas'                         => SelectHelper::actividadesEconomicas(),
+            'lineasInvestigacion'                           => SelectHelper::lineasInvestigacion(),
+            'tematicasEstrategicas'                         => SelectHelper::tematicasEstrategicas(),
+
             'mesasSectoriales'                              => MesaSectorial::select('id', 'nombre')->get('id'),
-            'semillerosInvestigacion'                       => SemilleroInvestigacion::select('semilleros_investigacion.nombre as label', 'semilleros_investigacion.id as value')->join('lineas_investigacion', 'semilleros_investigacion.linea_investigacion_id', 'lineas_investigacion.id')->join('grupos_investigacion', 'lineas_investigacion.grupo_investigacion_id', 'grupos_investigacion.id')->where('grupos_investigacion.centro_formacion_id', '=', $authUser->centroFormacion->id)->get(),
-            'areasConocimiento'                             => AreaConocimiento::select('areas_conocimiento.id as value', 'areas_conocimiento.nombre as label')->orderBy('nombre', 'ASC')->get(),
-            'subareasConocimiento'                          => SubareaConocimiento::select('subareas_conocimiento.id as value', 'subareas_conocimiento.nombre as label', 'area_conocimiento_id')->orderBy('nombre', 'ASC')->get(),
-            'disciplinasSubareaConocimiento'                => DisciplinaSubareaConocimiento::select('disciplinas_subarea_conocimiento.id as value', 'disciplinas_subarea_conocimiento.nombre as label', 'subarea_conocimiento_id')->orderBy('nombre', 'ASC')->get(),
-            'redesConocimiento'                             => RedConocimiento::select('redes_conocimiento.id as value', 'redes_conocimiento.nombre as label')->orderBy('nombre', 'ASC')->get(),
-            'actividadesEconomicas'                         => ActividadEconomica::select('actividades_economicas.id as value', 'actividades_economicas.nombre as label')->orderBy('nombre', 'ASC')->get(),
-            'lineasInvestigacion'                           => LineaInvestigacion::selectRaw('lineas_investigacion.id as value, concat(lineas_investigacion.nombre, chr(10), \'∙ Grupo de investigación: \', grupos_investigacion.nombre, chr(10)) as label, centros_formacion.id as centro_formacion_id')->join('grupos_investigacion', 'lineas_investigacion.grupo_investigacion_id', 'grupos_investigacion.id')->join('centros_formacion', 'grupos_investigacion.centro_formacion_id', 'centros_formacion.id')->join('regionales', 'centros_formacion.regional_id', 'regionales.id')->get(),
-            'tematicasEstrategicas'                         => TematicaEstrategica::select('tematicas_estrategicas.id as value', 'tematicas_estrategicas.nombre as label')->orderBy('tematicas_estrategicas.nombre', 'ASC')->get(),
-            'programasFormacionConRegistro'                 => ProgramaFormacion::selectRaw('programas_formacion.id as value, concat(programas_formacion.nombre, chr(10), \'∙ Código: \', programas_formacion.codigo) as label, programas_formacion.centro_formacion_id')->where('programas_formacion.registro_calificado', true)->where('programas_formacion.centro_formacion_id', $ambienteModernizacion->seguimientoAmbienteModernizacion->centro_formacion_id)->orderBy('programas_formacion.nombre', 'ASC')->get(),
-            'programasFormacionSinRegistro'                 => ProgramaFormacion::selectRaw('programas_formacion.id as value, concat(programas_formacion.nombre, chr(10), \'∙ Código: \', programas_formacion.codigo) as label, programas_formacion.centro_formacion_id')->where('programas_formacion.registro_calificado', false)->where('programas_formacion.centro_formacion_id', $ambienteModernizacion->seguimientoAmbienteModernizacion->centro_formacion_id)->orderBy('programas_formacion.nombre', 'ASC')->get(),
+            'semillerosInvestigacion'                       => SelectHelper::semillerosInvestigacion()->where('centro_formacion_id', $authUser->centroFormacion->id)->values()->all(),
+            'programasFormacionConRegistro'                 => SelectHelper::programasFormacion()->where('registro_calificado', true)->where('centro_formacion_id', $ambienteModernizacion->seguimientoAmbienteModernizacion->centro_formacion_id)->values()->all(),
+            'programasFormacionSinRegistro'                 => SelectHelper::programasFormacion()->where('registro_calificado', false)->where('centro_formacion_id', $ambienteModernizacion->seguimientoAmbienteModernizacion->centro_formacion_id)->values()->all(),
             'codigosProyectosRelacionados'                  => $ambienteModernizacion->codigosProyectosSgps()->selectRaw('codigos_proyectos_sgps.id as value, concat(codigos_proyectos_sgps.titulo, chr(10), \'∙ Código: \', codigos_proyectos_sgps.codigo_sgps) as label')->get(),
             'programasFormacionCalificadosRelacionados'     => $ambienteModernizacion->programasFormacion()->selectRaw('programas_formacion.id as value, concat(programas_formacion.nombre, chr(10), \'∙ Código: \', programas_formacion.codigo) as label')->where('programas_formacion.registro_calificado', true)->get(),
             'programasFormacionNoCalificadosRelacionados'   => $ambienteModernizacion->programasFormacion()->selectRaw('programas_formacion.id as value, concat(programas_formacion.nombre, chr(10), \'∙ Código: \', programas_formacion.codigo) as label')->where('programas_formacion.registro_calificado', false)->get(),

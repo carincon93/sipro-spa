@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Helpers\SelectHelper;
 use App\Http\Requests\CentroFormacionRequest;
 use App\Models\Regional;
 use App\Models\CentroFormacion;
@@ -20,9 +21,9 @@ class CentroFormacionController extends Controller
         $this->authorize('viewAny', [CentroFormacion::class]);
 
         return Inertia::render('CentrosFormacion/Index', [
-            'filters'   => request()->all('search'),
-            'centrosFormacion' => CentroFormacion::select('centros_formacion.id', 'centros_formacion.nombre', 'centros_formacion.codigo', 'centros_formacion.regional_id', 'centros_formacion.dinamizador_sennova_id')
-                ->with(['regional' => function ($query) {
+            'filters'               => request()->all('search'),
+            'centrosFormacion'      => CentroFormacion::select('centros_formacion.id', 'centros_formacion.nombre', 'centros_formacion.codigo', 'centros_formacion.regional_id', 'centros_formacion.dinamizador_sennova_id')
+                ->with(['regional'  => function ($query) {
                     $query->orderBy('nombre', 'ASC');
                 }])->with('dinamizadorSennova')
                 ->filterCentroFormacion(request()->only('search'))->paginate()->appends(['search' => request()->search]),
@@ -39,7 +40,9 @@ class CentroFormacionController extends Controller
         $this->authorize('create', [CentroFormacion::class]);
 
         return Inertia::render('CentrosFormacion/Create', [
-            'regional' => Regional::orderBy('nombre', 'ASC')->select(['id as value', 'nombre as label'])->get()
+            'regionales'            => SelectHelper::regionales(),
+            'subdirectores'         => SelectHelper::usuariosPorRol('subdirector'),
+            'dinamizadoresSennova'  => SelectHelper::usuariosPorRol('dinamizador sennova'),
         ]);
     }
 
@@ -87,8 +90,10 @@ class CentroFormacionController extends Controller
         $this->authorize('update', [CentroFormacion::class, $centroFormacion]);
 
         return Inertia::render('CentrosFormacion/Edit', [
-            'centroFormacion' => $centroFormacion->only(['id', 'nombre', 'codigo', 'regional_id', 'subdirector_id', 'dinamizador_sennova_id']),
-            'regional'        => Regional::orderBy('nombre', 'ASC')->select(['id as value', 'nombre as label'])->get()
+            'centroFormacion'       => $centroFormacion->only(['id', 'nombre', 'codigo', 'regional_id', 'subdirector_id', 'dinamizador_sennova_id']),
+            'regionales'            => SelectHelper::regionales(),
+            'subdirectores'         => SelectHelper::usuariosPorRol('subdirector'),
+            'dinamizadoresSennova'  => SelectHelper::usuariosPorRol('dinamizador sennova'),
         ]);
     }
 

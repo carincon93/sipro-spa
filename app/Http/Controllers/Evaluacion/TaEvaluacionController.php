@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\Evaluacion;
 
+use App\Helpers\SelectHelper;
 use App\Models\Evaluacion\TaEvaluacion;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Evaluacion\TaEvaluacionRequest;
@@ -82,22 +83,12 @@ class TaEvaluacionController extends Controller
         $ta->proyecto->centroFormacion;
 
         if ($authUser->hasRole(12)) {
-            $tecnoAcademias = Tecnoacademia::selectRaw("tecnoacademias.id as value, CASE modalidad
-                WHEN '1' THEN	concat(tecnoacademias.nombre, chr(10), '∙ Modalidad: itinerante', chr(10), '∙ Centro de formación: ', centros_formacion.nombre)
-                WHEN '2' THEN	concat(tecnoacademias.nombre, chr(10), '∙ Modalidad: itinerante - vehículo', chr(10), '∙ Centro de formación: ', centros_formacion.nombre)
-                WHEN '3' THEN	concat(tecnoacademias.nombre, chr(10), '∙ Modalidad: fija con extensión', chr(10), '∙ Centro de formación: ', centros_formacion.nombre)
-            END as label, centros_formacion.id as centro_formacion_id")
-                ->join('centros_formacion', 'tecnoacademias.centro_formacion_id', 'centros_formacion.id')
-                ->where('tecnoacademias.centro_formacion_id', $authUser->centroFormacion->id)->get();
+            $tecnoAcademias = SelectHelper::tecnoacademias()->where('centro_formacion_id', $authUser->centroFormacion->id)->values()->all();
         } else {
-            $tecnoAcademias = $tecnoAcademias = Tecnoacademia::selectRaw("tecnoacademias.id as value, CASE modalidad
-                WHEN '1' THEN	concat(tecnoacademias.nombre, chr(10), '∙ Modalidad: itinerante', chr(10), '∙ Centro de formación: ', centros_formacion.nombre)
-                WHEN '2' THEN	concat(tecnoacademias.nombre, chr(10), '∙ Modalidad: itinerante - vehículo', chr(10), '∙ Centro de formación: ', centros_formacion.nombre)
-                WHEN '3' THEN	concat(tecnoacademias.nombre, chr(10), '∙ Modalidad: fija con extensión', chr(10), '∙ Centro de formación: ', centros_formacion.nombre)
-            END as label, centros_formacion.id as centro_formacion_id")
-                ->join('centros_formacion', 'tecnoacademias.centro_formacion_id', 'centros_formacion.id')
-                ->get();
+            $tecnoAcademias = SelectHelper::tecnoacademias();
         }
+
+        $tecnoacademiaPrincipal = $ta->proyecto->tecnoacademiaLineasTecnoacademia()->first() ? $ta->proyecto->tecnoacademiaLineasTecnoacademia()->first()->tecnoacademia : null;
 
         return Inertia::render('Convocatorias/Evaluaciones/Ta/Edit', [
             'convocatoria'                              => $convocatoria->only('id', 'esta_activa', 'fase_formateada', 'fase', 'tipo_convocatoria', 'min_fecha_inicio_proyectos_ta', 'max_fecha_finalizacion_proyectos_ta', 'fecha_maxima_ta'),
@@ -106,15 +97,20 @@ class TaEvaluacionController extends Controller
             'otrasEvaluaciones'                         => TaEvaluacion::with('evaluacion.evaluador')->whereHas('evaluacion', function ($query) use ($ta) {
                 $query->where('evaluaciones.proyecto_id', $ta->id)->where('evaluaciones.habilitado', true);
             })->where('ta_evaluaciones.id', '!=', $taEvaluacion->id)->get(),
-            'tecnoacademiaRelacionada'                  => $ta->proyecto->tecnoacademiaLineasTecnoacademia()->first() ? $ta->proyecto->tecnoacademiaLineasTecnoacademia()->first()->tecnoacademia : null,
+            'tecnoacademiaRelacionada'                  => $tecnoacademiaPrincipal,
             'lineasTecnoacademiaRelacionadas'           => $ta->proyecto->tecnoacademiaLineasTecnoacademia()->select('tecnoacademia_linea_tecnoacademia.id as value', 'lineas_tecnoacademia.nombre')->join('lineas_tecnoacademia', 'tecnoacademia_linea_tecnoacademia.linea_tecnoacademia_id', 'lineas_tecnoacademia.id')->get(),
-            'regionales'                                => Regional::select('id as value', 'nombre as label', 'codigo')->orderBy('nombre')->get(),
-            'tecnoacademias'                            => TecnoAcademia::select('id as value', 'nombre as label')->get(),
+            'regionales'                                => SelectHelper::regionales(),
+            'tecnoacademias'                            => SelectHelper::tecnoacademias(),
+            'lineasProgramaticas'                       => SelectHelper::lineasProgramaticas()->where('codigo_proyecto', 1)->values()->all(),
+            'lineasTecnoacademia'                       => SelectHelper::lineasTecnoacademia()->where('tecnoacademia_id', $tecnoacademiaPrincipal)->values()->all(),
+            'disenosCurriculares'                       => SelectHelper::disenoCurriculares(),
+            'municipios'                                => SelectHelper::municipios(),
+            'disenosCurriculares'                       => SelectHelper::disenoCurriculares(),
+            'programasFormacionSinRegistroCalificado'   => SelectHelper::programasFormacion()->where('registro_calificado', false)->values()->all(),
             'proyectoMunicipios'                        => $ta->proyecto->municipios()->select('municipios.id as value', 'municipios.nombre as label', 'regionales.nombre as group', 'regionales.codigo')->join('regionales', 'regionales.id', 'municipios.regional_id')->get(),
             'proyectoMunicipiosImpactar'                => $ta->proyecto->municipiosAImpactar()->select('municipios.id as value', 'municipios.nombre as label', 'regionales.nombre as group', 'regionales.codigo')->join('regionales', 'regionales.id', 'municipios.regional_id')->get(),
-            'proyectoProgramasFormacionArticulados'     => $ta->proyecto->taProgramasFormacion()->selectRaw('id as value, concat(programas_formacion.nombre, chr(10), \'∙ Código: \', programas_formacion.codigo) as label')->where('programas_formacion.registro_calificado', true)->get(),
-            'proyectoDisenoCurriculares'                => $ta->proyecto->disenosCurriculares()->selectRaw('id as value, concat(nombre, \' ∙ Código: \', codigo) as label')->get(),
-            'disenosCurriculares'                       => DisenoCurricular::selectRaw('id as value, concat(nombre, \' ∙ Código: \', codigo) as label')->get(),
+            'disenosCurricularesRelacionados'           => $ta->proyecto->disenosCurriculares()->selectRaw('id as value, concat(nombre, \' ∙ Código: \', codigo) as label')->get(),
+            'programasFormacionSinRegistroRelacionados' => $ta->proyecto->taProgramasFormacion()->selectRaw('id as value, concat(programas_formacion.nombre, chr(10), \'∙ Código: \', programas_formacion.codigo) as label')->where('programas_formacion.registro_calificado', true)->get(),
             'tecnoAcademias'                            => $tecnoAcademias
         ]);
     }

@@ -8,11 +8,11 @@
     import Label from '@/Shared/Label'
     import LoadingButton from '@/Shared/LoadingButton'
     import Select from '@/Shared/Select'
-    import DynamicList from '@/Shared/Dropdowns/DynamicList'
 
     export let errors
     export let modalidades
     export let nivelesFormacion
+    export let centrosFormacion
 
     $: $title = 'Crear programa de formación'
 
@@ -74,7 +74,7 @@
 
                 <div class="mt-4">
                     <Label required class="mb-4" labelFor="centro_formacion_id" value="Centro de formación" />
-                    <DynamicList id="centro_formacion_id" bind:value={$form.centro_formacion_id} routeWebApi={route('web-api.centros-formacion')} placeholder="Busque por el nombre del centro de formación" message={errors.centro_formacion_id} required />
+                    <Select id="centro_formacion_id" items={centrosFormacion} bind:selectedValue={$form.centro_formacion_id} error={errors.centro_formacion_id} autocomplete="off" placeholder="Busque por el nombre del centro de formación" required />
                 </div>
             </fieldset>
             <div class="shadow-inner bg-violet-200 border-violet-400 bottom-0 flex items-center justify-between mt-14 px-8 py-4 sticky">

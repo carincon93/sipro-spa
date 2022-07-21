@@ -28,14 +28,8 @@
 
     let form = useForm({
         maximo: reglaRolSt.maximo,
-        rol_sennova_id: {
-            value: reglaRolSt.rol_sennova_id,
-            label: rolesSt.find((item) => item.value == reglaRolSt.rol_sennova_id)?.label,
-        },
-        tipo_proyecto_st_id: {
-            value: reglaRolSt.tipo_proyecto_st_id,
-            label: tiposProyectoSt.find((item) => item.value == reglaRolSt.tipo_proyecto_st_id)?.label,
-        },
+        rol_sennova_id: reglaRolSt.rol_sennova_id,
+        tipo_proyecto_st_id: reglaRolSt.tipo_proyecto_st_id,
     })
 
     function submit() {

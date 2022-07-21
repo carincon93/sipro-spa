@@ -70,15 +70,8 @@
         $formEvaluacion.modificable = evaluacion.modificable
         $formEvaluacion.finalizado = evaluacion.finalizado
         $formEvaluacion.clausula_confidencialidad = evaluacion.clausula_confidencialidad
-        $formEvaluacion.proyecto_id = {
-            value: evaluacion.proyecto_id,
-            label: proyectos.find((item) => item.value == evaluacion.proyecto_id)?.label,
-        }
-
-        $formEvaluacion.user_id = {
-            value: evaluacion.user_id,
-            label: evaluadores.find((item) => item.value == evaluacion.user_id)?.label,
-        }
+        $formEvaluacion.proyecto_id = evaluacion.proyecto_id
+        $formEvaluacion.user_id = evaluacion.user_id
     }
 
     $: if ($formEvaluacion?.modificable) {

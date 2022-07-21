@@ -3,8 +3,8 @@
     import { useForm, page } from '@inertiajs/inertia-svelte'
     import { route, checkRole, checkPermission, checkPermissionByUser, monthDiff } from '@/Utils'
     import { _ } from 'svelte-i18n'
-    import axios from 'axios'
     import { Inertia } from '@inertiajs/inertia'
+    import axios from 'axios'
 
     import Button from '@/Shared/Button'
     import InputError from '@/Shared/InputError'
@@ -80,19 +80,13 @@
 
     let form = useForm({
         centro_formacion_id: tp.proyecto.centro_formacion_id,
-        linea_programatica_id: {
-            value: tp.proyecto.linea_programatica_id,
-            label: lineasProgramaticas.find((item) => item.value == tp.proyecto.linea_programatica_id)?.label,
-        },
+        linea_programatica_id: tp.proyecto.linea_programatica_id,
         fecha_inicio: tp.fecha_inicio,
         fecha_finalizacion: tp.fecha_finalizacion,
         max_meses_ejecucion: tp.max_meses_ejecucion,
         municipios: proyectoMunicipios.length > 0 ? proyectoMunicipios : null,
         codigo_linea_programatica: null,
-        nodo_tecnoparque_id: {
-            value: tp.nodo_tecnoparque_id,
-            label: nodosTecnoparque.find((item) => item.value == tp.nodo_tecnoparque_id)?.label,
-        },
+        nodo_tecnoparque_id: tp.nodo_tecnoparque_id,
     })
 
     let regional

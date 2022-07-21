@@ -23,10 +23,7 @@
     let isSuperAdmin = checkRole(authUser, [1])
 
     let form = useForm({
-        estado_proyecto: {
-            value: estadosProyectoCapacidadInstalada.find((item) => item.label == proyectoCapacidadInstalada.estado_proyecto)?.value,
-            label: estadosProyectoCapacidadInstalada.find((item) => item.label == proyectoCapacidadInstalada.estado_proyecto)?.label,
-        },
+        estado_proyecto: proyectoCapacidadInstalada.estado_proyecto,
     })
 
     function submit() {

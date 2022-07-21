@@ -44,10 +44,7 @@
         semilleros_investigacion: semillerosInvestigacionRelacionados.length > 0 ? semillerosInvestigacionRelacionados : null,
         proyectos_ejecucion: proyecto.proyectos_ejecucion,
         semilleros_en_formalizacion: proyecto.semilleros_en_formalizacion,
-        articulacion_semillero: {
-            value: proyecto.articulacion_semillero,
-            label: opcionesSiNo.find((item) => item.value == proyecto.articulacion_semillero)?.label,
-        },
+        articulacion_semillero: proyecto.articulacion_semillero,
     }
 
     let formTaEvaluacion = useForm({

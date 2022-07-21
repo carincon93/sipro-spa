@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Helpers\AppHelper;
+use App\Helpers\SelectHelper;
 use App\Http\Requests\ConvocatoriaRequest;
 use App\Models\CentroFormacion;
 use App\Models\Convocatoria;
@@ -41,34 +42,6 @@ class ConvocatoriaController extends Controller
     {
         $this->authorize('listar-convocatorias');
 
-        // $centrosFormacion = CentroFormacion::selectRaw('DISTINCT(codigo), id, nombre, regional_id')->whereNotIn('codigo', [1010])->get();
-
-        // foreach ($centrosFormacion as $centroFormacion) {
-        //     // Log::debug($centroFormacion->nombre_carpeta_sharepoint);
-        //     AppHelper::createFolder($centroFormacion->nombre_carpeta_sharepoint);
-
-        //     foreach ($centroFormacion->gruposInvestigacion as $grupoInvestigacion) {
-        //         // Log::debug('GRUP-' . $grupoInvestigacion->nombre_carpeta_sharepoint);
-        //         AppHelper::createFolder($centroFormacion->nombre_carpeta_sharepoint . '/' . $grupoInvestigacion->nombre_carpeta_sharepoint);
-
-        //         foreach ($grupoInvestigacion->lineasInvestigacion as $lineaInvestigacion) {
-        //             foreach ($lineaInvestigacion->semillerosInvestigacion as $semilleroInvestigacion) {
-        //                 // Log::debug('SEM-' . $semilleroInvestigacion->nombre_carpeta_sharepoint);
-        //                 AppHelper::createFolder($centroFormacion->nombre_carpeta_sharepoint . '/' . $grupoInvestigacion->nombre_carpeta_sharepoint . '/' . $semilleroInvestigacion->nombre_carpeta_sharepoint);
-        //             }
-        //         }
-        //     }
-
-        //     foreach ($centroFormacion->nodosTecnoparque as $nodoTecnoparque) {
-        //         // Log::debug('NOD-' . $nodoTecnoparque->nombre_carpeta_sharepoint);
-        //         AppHelper::createFolder($centroFormacion->nombre_carpeta_sharepoint . '/' . $nodoTecnoparque->nombre_carpeta_sharepoint);
-        //     }
-        //     foreach ($centroFormacion->tecnoacademias as $tecnoacademia) {
-        //         // Log::debug('TEC-' . $tecnoacademia->nombre_carpeta_sharepoint);
-        //         AppHelper::createFolder($centroFormacion->nombre_carpeta_sharepoint . '/' . $tecnoacademia->nombre_carpeta_sharepoint);
-        //     }
-        // }
-
         return Inertia::render('Convocatorias/Index', [
             'filters'               => request()->all('search'),
             'convocatorias'         => Convocatoria::orderBy('id', 'DESC')->filterConvocatoria(request()->only('search'))->paginate()->appends(['search' => request()->search]),
@@ -88,7 +61,7 @@ class ConvocatoriaController extends Controller
         return Inertia::render('Convocatorias/Create', [
             'fases'             => collect(json_decode(Storage::get('json/fases-convocatoria.json'), true)),
             'tiposConvocatoria' => collect(json_decode(Storage::get('json/tipos-convocatoria.json'), true)),
-            'convocatorias'     => Convocatoria::select('id as value', 'descripcion as label')->orderBy('id', 'ASC')->get(),
+            'convocatorias'     => SelectHelper::convocatorias(),
         ]);
     }
 

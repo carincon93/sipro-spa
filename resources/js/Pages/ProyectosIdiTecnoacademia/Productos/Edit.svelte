@@ -32,14 +32,8 @@
     let form = useForm({
         _method: 'put',
         descripcion: producto.descripcion,
-        tipo_producto_idi_id: {
-            value: tiposProductos.find((item) => item.value == producto.tipo_producto_idi_id)?.value,
-            label: tiposProductos.find((item) => item.value == producto.tipo_producto_idi_id)?.label,
-        },
-        estado: {
-            value: estadosProductos.find((item) => item.value == producto.estado)?.value,
-            label: estadosProductos.find((item) => item.value == producto.estado)?.label,
-        },
+        tipo_producto_idi_id: producto.tipo_producto_idi_id,
+        estado: producto.estado,
         soporte: producto.soporte,
         link: producto.link,
         lugar: producto.lugar,

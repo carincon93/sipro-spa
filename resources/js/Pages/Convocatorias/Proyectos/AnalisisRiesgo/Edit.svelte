@@ -32,23 +32,11 @@
     let dialogOpen = false
 
     let form = useForm({
-        nivel: {
-            value: nivelesRiesgo.find((item) => item.label == analisisRiesgo.nivel)?.value,
-            label: nivelesRiesgo.find((item) => item.label == analisisRiesgo.nivel)?.label,
-        },
-        tipo: {
-            value: tiposRiesgo.find((item) => item.label == analisisRiesgo.tipo)?.value,
-            label: tiposRiesgo.find((item) => item.label == analisisRiesgo.tipo)?.label,
-        },
+        nivel: analisisRiesgo.nivel,
+        tipo: analisisRiesgo.tipo,
         descripcion: analisisRiesgo.descripcion,
-        impacto: {
-            value: impactosRiesgo.find((item) => item.label == analisisRiesgo.impacto)?.value,
-            label: impactosRiesgo.find((item) => item.label == analisisRiesgo.impacto)?.label,
-        },
-        probabilidad: {
-            value: probabilidadesRiesgo.find((item) => item.label == analisisRiesgo.probabilidad)?.value,
-            label: probabilidadesRiesgo.find((item) => item.label == analisisRiesgo.probabilidad)?.label,
-        },
+        impacto: analisisRiesgo.impacto,
+        probabilidad: analisisRiesgo.probabilidad,
         efectos: analisisRiesgo.efectos,
         medidas_mitigacion: analisisRiesgo.medidas_mitigacion,
     })

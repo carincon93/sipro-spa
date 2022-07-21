@@ -38,28 +38,13 @@
         serial: inventarioEquipo.serial,
         codigo_interno: inventarioEquipo.codigo_interno,
         fecha_adquisicion: inventarioEquipo.fecha_adquisicion,
-        estado: {
-            value: inventarioEquipo.estado,
-            label: estadosInventarioEquipos.find((item) => item.value == inventarioEquipo.estado)?.label,
-        },
-        uso_st: {
-            value: inventarioEquipo.uso_st,
-            label: opcionesSiNo.find((item) => item.value == inventarioEquipo.uso_st)?.label,
-        },
-        uso_otra_dependencia: {
-            value: inventarioEquipo.uso_otra_dependencia,
-            label: opcionesSiNo.find((item) => item.value == inventarioEquipo.uso_otra_dependencia)?.label,
-        },
+        estado: inventarioEquipo.estado,
+        uso_st: inventarioEquipo.uso_st,
+        uso_otra_dependencia: inventarioEquipo.uso_otra_dependencia,
         dependencia: inventarioEquipo.dependencia,
         descripcion: inventarioEquipo.descripcion,
-        mantenimiento_prox_year: {
-            value: inventarioEquipo.mantenimiento_prox_year,
-            label: opcionesSiNo.find((item) => item.value == inventarioEquipo.mantenimiento_prox_year)?.label,
-        },
-        calibracion_prox_year: {
-            value: inventarioEquipo.calibracion_prox_year,
-            label: opcionesSiNo.find((item) => item.value == inventarioEquipo.calibracion_prox_year)?.label,
-        },
+        mantenimiento_prox_year: inventarioEquipo.mantenimiento_prox_year,
+        calibracion_prox_year: inventarioEquipo.calibracion_prox_year,
     })
 
     function submit() {
@@ -82,7 +67,7 @@
         <div class="flex items-center justify-between lg:px-8 max-w-7xl mx-auto px-4 py-6 sm:px-6">
             <div>
                 <h1 class="overflow-ellipsis overflow-hidden w-breadcrumb-ellipsis whitespace-nowrap">
-                        <a use:inertia href={route('convocatorias.proyectos.inventario-equipos.index', [convocatoria.id, proyecto.id])} class="text-violet-400 hover:text-violet-600">Inventario de equipos</a>
+                    <a use:inertia href={route('convocatorias.proyectos.inventario-equipos.index', [convocatoria.id, proyecto.id])} class="text-violet-400 hover:text-violet-600">Inventario de equipos</a>
                     <span class="text-violet-400 font-medium">/</span>
                     Editar
                 </h1>

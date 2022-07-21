@@ -19,6 +19,8 @@
     export let isSearchable = true
     export let disabled = false
 
+    selectedValue = items.find((item) => item.value == selectedValue || item.label == selectedValue)
+
     let select = null
 
     onMount(() => {

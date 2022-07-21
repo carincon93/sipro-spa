@@ -48,18 +48,15 @@
     let dialogGuardar = false
     let exportComponent
 
-    let programasFormacionConRegistro = []
     let programasFormacionSinRegistro = []
 
-    let oldCentroFormacionValue = null
-    $: if ($form.centro_formacion_id) {
-        if (oldCentroFormacionValue != $form.centro_formacion_id?.value) {
-            programasFormacionConRegistro = programasFormacion.filter(function (obj) {
-                oldCentroFormacionValue = $form.centro_formacion_id?.value
-                return obj.registro_calificado == true && obj.centro_formacion_id == $form.centro_formacion_id?.value
-            })
-        }
+    let programasFormacionConRegistro = programasFormacion
+    function selectProgramasFormacionConRegistros(event) {
+        programasFormacionConRegistro = programasFormacion.filter(function (obj) {
+            return obj.registro_calificado == true && obj.centro_formacion_id == event.detail?.value
+        })
     }
+
     programasFormacionSinRegistro = programasFormacion.filter((obj) => obj.registro_calificado == false)
 
     let formPlanteamientoProblema = useForm({
@@ -95,59 +92,23 @@
     })
 
     let form = useForm({
-        centro_formacion_id: {
-            value: centrosFormacion.find((item) => item.value == proyectoCapacidadInstalada.semillero_investigacion.linea_investigacion.grupo_investigacion.centro_formacion_id)?.value,
-            label: centrosFormacion.find((item) => item.value == proyectoCapacidadInstalada.semillero_investigacion.linea_investigacion.grupo_investigacion.centro_formacion_id)?.label,
-        },
-        linea_investigacion_id: {
-            value: proyectoCapacidadInstalada.semillero_investigacion.linea_investigacion_id,
-            label: lineasInvestigacion.find((item) => item.value == proyectoCapacidadInstalada.semillero_investigacion.linea_investigacion_id)?.label,
-        },
-        semillero_investigacion_id: {
-            value: proyectoCapacidadInstalada.semillero_investigacion_id,
-            label: semillerosInvestigacion.find((item) => item.value == proyectoCapacidadInstalada.semillero_investigacion_id)?.label,
-        },
-        area_conocimiento_id: {
-            value: proyectoCapacidadInstalada.disciplina_subarea_conocimiento.subarea_conocimiento.area_conocimiento_id,
-            label: areasConocimiento.find((item) => item.value == proyectoCapacidadInstalada.disciplina_subarea_conocimiento.subarea_conocimiento.area_conocimiento_id)?.label,
-        },
-        subarea_conocimiento_id: {
-            value: proyectoCapacidadInstalada.disciplina_subarea_conocimiento.subarea_conocimiento_id,
-            label: subareasConocimiento.find((item) => item.value == proyectoCapacidadInstalada.disciplina_subarea_conocimiento.subarea_conocimiento_id)?.label,
-        },
-        disciplina_subarea_conocimiento_id: {
-            value: proyectoCapacidadInstalada.disciplina_subarea_conocimiento_id,
-            label: disciplinasSubareaConocimiento.find((item) => item.value == proyectoCapacidadInstalada.disciplina_subarea_conocimiento_id)?.label,
-        },
-        red_conocimiento_id: {
-            value: proyectoCapacidadInstalada.red_conocimiento_id,
-            label: redesConocimiento.find((item) => item.value == proyectoCapacidadInstalada.red_conocimiento_id)?.label,
-        },
-        actividad_economica_id: {
-            value: proyectoCapacidadInstalada.actividad_economica_id,
-            label: actividadesEconomicas.find((item) => item.value == proyectoCapacidadInstalada.actividad_economica_id)?.label,
-        },
-        tipo_proyecto_capacidad_instalada_id: {
-            value: proyectoCapacidadInstalada.subtipo_proyecto_capacidad_instalada.tipo_proyecto_capacidad_instalada_id,
-            label: tiposProyectoCapacidadInstalada.find((item) => item.value == proyectoCapacidadInstalada.subtipo_proyecto_capacidad_instalada.tipo_proyecto_capacidad_instalada_id)?.label,
-        },
-        subtipo_proyecto_capacidad_instalada_id: {
-            value: proyectoCapacidadInstalada.subtipo_proyecto_capacidad_instalada_id,
-            label: subtiposProyectoCapacidadInstalada.find((item) => item.value == proyectoCapacidadInstalada.subtipo_proyecto_capacidad_instalada_id)?.label,
-        },
+        centro_formacion_id: proyectoCapacidadInstalada.semillero_investigacion.linea_investigacion.grupo_investigacion.centro_formacion_id,
+        linea_investigacion_id: proyectoCapacidadInstalada.semillero_investigacion.linea_investigacion_id,
+        semillero_investigacion_id: proyectoCapacidadInstalada.semillero_investigacion_id,
+        area_conocimiento_id: proyectoCapacidadInstalada.disciplina_subarea_conocimiento.subarea_conocimiento.area_conocimiento_id,
+        subarea_conocimiento_id: proyectoCapacidadInstalada.disciplina_subarea_conocimiento.subarea_conocimiento_id,
+        disciplina_subarea_conocimiento_id: proyectoCapacidadInstalada.disciplina_subarea_conocimiento_id,
+        red_conocimiento_id: proyectoCapacidadInstalada.red_conocimiento_id,
+        actividad_economica_id: proyectoCapacidadInstalada.actividad_economica_id,
+        tipo_proyecto_capacidad_instalada_id: proyectoCapacidadInstalada.subtipo_proyecto_capacidad_instalada.tipo_proyecto_capacidad_instalada_id,
+        subtipo_proyecto_capacidad_instalada_id: proyectoCapacidadInstalada.subtipo_proyecto_capacidad_instalada_id,
         titulo: proyectoCapacidadInstalada.titulo,
         fecha_inicio: proyectoCapacidadInstalada.fecha_inicio,
         fecha_finalizacion: proyectoCapacidadInstalada.fecha_finalizacion,
-        beneficia_a: {
-            value: listaBeneficiados.find((item) => item.value == proyectoCapacidadInstalada.beneficia_a)?.value,
-            label: listaBeneficiados.find((item) => item.value == proyectoCapacidadInstalada.beneficia_a)?.label,
-        },
+        beneficia_a: proyectoCapacidadInstalada.beneficia_a,
         programas_formacion_registro_calificado: programasFormacionRegistroAsociados.length > 0 ? programasFormacionRegistroAsociados : null,
         programas_formacion_sin_registro_calificado: programasFormacionSinRegistroAsociados.length > 0 ? programasFormacionSinRegistroAsociados : null,
-        rol_sennova: {
-            value: autorPrincipal ? roles.find((item) => item.value == autorPrincipal.pivot.rol_sennova)?.value : null,
-            label: autorPrincipal ? roles.find((item) => item.value == autorPrincipal.pivot.rol_sennova)?.label : null,
-        },
+        rol_sennova: autorPrincipal.pivot.rol_sennova,
         cantidad_meses: autorPrincipal ? autorPrincipal.pivot.cantidad_meses : null,
         cantidad_horas: autorPrincipal ? autorPrincipal.pivot.cantidad_horas : null,
     })
@@ -185,6 +146,7 @@
     <Form
         id="capacidad-instalada-form"
         {submit}
+        {selectProgramasFormacionConRegistros}
         {proyectoCapacidadInstalada}
         {errors}
         {form}

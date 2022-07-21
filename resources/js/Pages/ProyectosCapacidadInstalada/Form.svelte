@@ -25,61 +25,44 @@
     export let subtiposProyectoCapacidadInstalada = []
     export let listaBeneficiados
     export let roles
+    export let selectProgramasFormacionConRegistros
     export let allowedToCreate
 
-    let oldLineaInvestigacionIdValue = null
-    let arraySemillerosInvestigacion = semillerosInvestigacion
-    $: if ($form.linea_investigacion_id) {
-        if (oldLineaInvestigacionIdValue != $form.linea_investigacion_id?.value) {
-            arraySemillerosInvestigacion = semillerosInvestigacion.filter(function (obj) {
-                oldLineaInvestigacionIdValue = $form.linea_investigacion_id?.value
-                return obj.linea_investigacion_id == $form.linea_investigacion_id?.value
-            })
-        }
+    let arraySubareasConocimiento = subareasConocimiento.filter(function (obj) {
+        return obj.area_conocimiento_id == $form.area_conocimiento_id?.value
+    })
+    function selectAreaConocimiento(event) {
+        arraySubareasConocimiento = subareasConocimiento.filter(function (obj) {
+            return obj.area_conocimiento_id == event.detail?.value
+        })
     }
 
-    let oldAreaConocimientoIdValue = null
-    let arraySubareasConocimiento = []
-    $: if ($form.area_conocimiento_id) {
-        if (oldAreaConocimientoIdValue != $form.area_conocimiento_id?.value) {
-            arraySubareasConocimiento = subareasConocimiento.filter(function (obj) {
-                oldAreaConocimientoIdValue = $form.area_conocimiento_id?.value
-                return obj.area_conocimiento_id == $form.area_conocimiento_id?.value
-            })
-        }
-    }
-
-    let oldSubareaConocimientoIdValue = null
     let arrayDisciplinasSubareaConocimiento = []
-    $: if ($form.subarea_conocimiento_id) {
-        if (oldSubareaConocimientoIdValue != $form.subarea_conocimiento_id?.value) {
-            arrayDisciplinasSubareaConocimiento = disciplinasSubareaConocimiento.filter(function (obj) {
-                oldSubareaConocimientoIdValue = $form.subarea_conocimiento_id?.value
-                return obj.subarea_conocimiento_id == $form.subarea_conocimiento_id?.value
-            })
-        }
-    }
-
-    let oldTipoProyectoIdValue = null
-    let arraySubtiposProyectoCapacidadInstalada = []
-    $: if ($form.tipo_proyecto_capacidad_instalada_id) {
-        if (oldTipoProyectoIdValue != $form.tipo_proyecto_capacidad_instalada_id?.value) {
-            arraySubtiposProyectoCapacidadInstalada = subtiposProyectoCapacidadInstalada.filter(function (obj) {
-                oldTipoProyectoIdValue = $form.tipo_proyecto_capacidad_instalada_id?.value
-                return obj.tipo_proyecto_capacidad_instalada_id == $form.tipo_proyecto_capacidad_instalada_id?.value
-            })
-        }
+    function selectSubreaConocimiento(event) {
+        arrayDisciplinasSubareaConocimiento = disciplinasSubareaConocimiento.filter(function (obj) {
+            return obj.subarea_conocimiento_id == event.detail?.value
+        })
     }
 
     let arrayLineasInvestigacion = lineasInvestigacion
-    let oldCentroFormacionValue = null
-    $: if ($form.centro_formacion_id) {
-        if (oldCentroFormacionValue != $form.centro_formacion_id?.value) {
-            arrayLineasInvestigacion = lineasInvestigacion.filter(function (obj) {
-                oldCentroFormacionValue = $form.centro_formacion_id?.value
-                return obj.centro_formacion_id == $form.centro_formacion_id?.value
-            })
-        }
+    function selectLineaInvestigacion(event) {
+        arrayLineasInvestigacion = lineasInvestigacion.filter(function (obj) {
+            return obj.centro_formacion_id == event.detail?.value
+        })
+    }
+
+    let arraySemillerosInvestigacion = semillerosInvestigacion
+    function selectSemilleroInvestigacion(event) {
+        arraySemillerosInvestigacion = semillerosInvestigacion.filter(function (obj) {
+            return obj.linea_investigacion_id == event.detail?.value
+        })
+    }
+
+    let arraySubtiposProyectoCapacidadInstalada = semillerosInvestigacion
+    function selectTipoProyectoCapacidadInstalada(event) {
+        arraySubtiposProyectoCapacidadInstalada = subtiposProyectoCapacidadInstalada.filter(function (obj) {
+            return obj.tipo_proyecto_capacidad_instalada_id == event.detail?.value
+        })
     }
 </script>
 
@@ -121,7 +104,7 @@
                 <Label required class="mb-4" labelFor="centro_formacion_id" value="Centro de formación" />
             </div>
             <div>
-                <Select id="centro_formacion_id" items={centrosFormacion} bind:selectedValue={$form.centro_formacion_id} error={errors.centro_formacion_id} autocomplete="off" placeholder="Busque por el nombre del centro de formación" required />
+                <Select id="centro_formacion_id" items={centrosFormacion} bind:selectedValue={$form.centro_formacion_id} selectFunctions={[(event) => selectLineaInvestigacion(event), (event) => selectProgramasFormacionConRegistros(event)]} error={errors.centro_formacion_id} autocomplete="off" placeholder="Busque por el nombre del centro de formación" required />
             </div>
         </div>
 
@@ -131,7 +114,7 @@
                     <Label required class="mb-4" labelFor="linea_investigacion_id" value="Línea de investigación" />
                 </div>
                 <div>
-                    <Select id="linea_investigacion_id" items={arrayLineasInvestigacion} bind:selectedValue={$form.linea_investigacion_id} error={errors.linea_investigacion_id} autocomplete="off" placeholder="Busque por el nombre de la línea de investigación, centro de formación, grupo de investigación o regional" required />
+                    <Select id="linea_investigacion_id" items={arrayLineasInvestigacion} bind:selectedValue={$form.linea_investigacion_id} selectFunctions={[(event) => selectSemilleroInvestigacion(event)]} error={errors.linea_investigacion_id} autocomplete="off" placeholder="Busque por el nombre de la línea de investigación, centro de formación, grupo de investigación o regional" required />
                 </div>
             </div>
         {/if}
@@ -158,7 +141,7 @@
                 <Label required class="mb-4" labelFor="area_conocimiento_id" value="Área de conocimiento" />
             </div>
             <div>
-                <Select id="area_conocimiento_id" items={areasConocimiento} bind:selectedValue={$form.area_conocimiento_id} error={errors.area_conocimiento_id} autocomplete="off" placeholder="Busque por el nombre de la área de conocimiento" required />
+                <Select id="area_conocimiento_id" items={areasConocimiento} bind:selectedValue={$form.area_conocimiento_id} selectFunctions={[(event) => selectAreaConocimiento(event)]} error={errors.area_conocimiento_id} autocomplete="off" placeholder="Busque por el nombre de la área de conocimiento" required />
             </div>
         </div>
         {#if $form.area_conocimiento_id}
@@ -167,7 +150,7 @@
                     <Label required class="mb-4" labelFor="subarea_conocimiento_id" value="Subárea de conocimiento" />
                 </div>
                 <div>
-                    <Select id="subarea_conocimiento_id" items={arraySubareasConocimiento} bind:selectedValue={$form.subarea_conocimiento_id} error={errors.subarea_conocimiento_id} autocomplete="off" placeholder="Busque por el nombre de la subárea de conocimiento" required />
+                    <Select id="subarea_conocimiento_id" items={arraySubareasConocimiento} bind:selectedValue={$form.subarea_conocimiento_id} selectFunctions={[(event) => selectSubreaConocimiento(event)]} error={errors.subarea_conocimiento_id} autocomplete="off" placeholder="Busque por el nombre de la subárea de conocimiento" required />
                 </div>
             </div>
         {/if}
@@ -195,7 +178,7 @@
                 <Label required class="mb-4" labelFor="tipo_proyecto_capacidad_instalada_id" value="Tipo de proyecto" />
             </div>
             <div>
-                <Select id="tipo_proyecto_capacidad_instalada_id" items={tiposProyectoCapacidadInstalada} bind:selectedValue={$form.tipo_proyecto_capacidad_instalada_id} error={errors.tipo_proyecto_capacidad_instalada_id} autocomplete="off" placeholder="Busque por el nombre del tipo de proyecto" required />
+                <Select id="tipo_proyecto_capacidad_instalada_id" items={tiposProyectoCapacidadInstalada} bind:selectedValue={$form.tipo_proyecto_capacidad_instalada_id} selectFunctions={[(event) => selectTipoProyectoCapacidadInstalada(event)]} error={errors.tipo_proyecto_capacidad_instalada_id} autocomplete="off" placeholder="Busque por el nombre del tipo de proyecto" required />
             </div>
         </div>
         {#if $form.tipo_proyecto_capacidad_instalada_id}

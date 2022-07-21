@@ -30,10 +30,7 @@
     let dialogOpen = false
 
     let formFase = useForm({
-        fase: {
-            value: convocatoria.fase,
-            label: fases.find((item) => item.value == convocatoria.fase)?.label,
-        },
+        fase: convocatoria.fase,
     })
 
     function submitFase() {

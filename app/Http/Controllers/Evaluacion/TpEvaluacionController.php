@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\Evaluacion;
 
+use App\Helpers\SelectHelper;
 use App\Models\Evaluacion\TpEvaluacion;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Evaluacion\TpEvaluacionRequest;
@@ -70,21 +71,12 @@ class TpEvaluacionController extends Controller
     {
         $this->authorize('visualizar-evaluacion-autor', $tpEvaluacion->evaluacion);
 
-        /** @var \App\Models\User */
-        $authUser = Auth::user();
-
         $tpEvaluacion->evaluacion->proyecto;
         $tp = $tpEvaluacion->evaluacion->proyecto->tp;
         $tp->proyecto->pdfVersiones;
         $tp->codigo_linea_programatica = $tp->proyecto->lineaProgramatica->codigo;
         $tp->precio_proyecto           = $tp->proyecto->precioProyecto;
         $tp->proyecto->centroFormacion;
-
-        if ($authUser->hasRole(16)) {
-            $nodosTecnoParque = NodoTecnoparque::select('nodos_tecnoparque.id as value', 'nodos_tecnoparque.nombre as label')->join('centros_formacion', 'nodos_tecnoparque.centro_formacion_id', 'centros_formacion.id')->where('centros_formacion.regional_id', $authUser->centroFormacion->regional_id)->get();
-        } else {
-            $nodosTecnoParque = NodoTecnoparque::select('nodos_tecnoparque.id as value', 'nodos_tecnoparque.nombre as label')->join('centros_formacion', 'nodos_tecnoparque.centro_formacion_id', 'centros_formacion.id')->get();
-        }
 
         return Inertia::render('Convocatorias/Evaluaciones/Tp/Edit', [
             'convocatoria'          => $convocatoria->only('id', 'esta_activa', 'fase_formateada', 'fase', 'tipo_convocatoria', 'min_fecha_inicio_proyectos_tp', 'max_fecha_finalizacion_proyectos_tp', 'fecha_maxima_tp', 'mostrar_recomendaciones'),
@@ -93,9 +85,11 @@ class TpEvaluacionController extends Controller
             'idiSegundaEvaluacion'  => TpEvaluacion::whereHas('evaluacion', function ($query) use ($tp) {
                 $query->where('evaluaciones.proyecto_id', $tp->id)->where('evaluaciones.habilitado', true);
             })->where('tp_evaluaciones.id', '!=', $tpEvaluacion->id)->first(),
-            'regionales'            => Regional::select('id as value', 'nombre as label', 'codigo')->orderBy('nombre')->get(),
+            'regionales'            => SelectHelper::regionales(),
+            'municipios'            => SelectHelper::municipios(),
+            'lineasProgramaticaas'  => SelectHelper::lineasProgramaticas()->where('categoria_proyecto', 1)->values()->all(),
+            'nodosTecnoParque'      => SelectHelper::nodosTecnoparque()->where('centro_formacion_id', $tp->proyecto->centroFormacion->id)->values()->all(),
             'proyectoMunicipios'    => $tp->proyecto->municipios()->select('municipios.id as value', 'municipios.nombre as label', 'regionales.nombre as group', 'regionales.codigo')->join('regionales', 'regionales.id', 'municipios.regional_id')->get(),
-            'nodosTecnoParque'      => $nodosTecnoParque
         ]);
     }
 

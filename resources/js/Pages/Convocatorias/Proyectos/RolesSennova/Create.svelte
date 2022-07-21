@@ -8,12 +8,12 @@
     import Label from '@/Shared/Label'
     import LoadingButton from '@/Shared/LoadingButton'
     import Textarea from '@/Shared/Textarea'
-    import DynamicList from '@/Shared/Dropdowns/DynamicList'
+    import Select from '@/Shared/Select'
 
+    export let errors
     export let convocatoria
     export let proyecto
-    export let lineaProgramatica
-    export let errors
+    export let convocatoriaRolesSennova
 
     let infoRolSennova
 
@@ -72,7 +72,7 @@
             <fieldset class="p-8" disabled={proyecto.allowed.to_update ? undefined : true}>
                 <div class="mt-4">
                     <Label required class="mb-4" labelFor="convocatoria_rol_sennova_id" value="Rol SENNOVA" />
-                    <DynamicList id="convocatoria_rol_sennova_id" bind:value={$form.convocatoria_rol_sennova_id} routeWebApi={route('web-api.convocatorias.roles-sennova', [convocatoria.id, proyecto.id, lineaProgramatica])} bind:recurso={infoRolSennova} message={errors.convocatoria_rol_sennova_id} placeholder="Busque por el nombre del rol" required />
+                    <Select id="convocatoria_rol_sennova_id" items={convocatoriaRolesSennova} bind:selectedValue={$form.convocatoria_rol_sennova_id} error={errors.convocatoria_rol_sennova_id} autocomplete="off" placeholder="Busque por el nombre del rol" required />
                 </div>
 
                 <div class="mt-4">

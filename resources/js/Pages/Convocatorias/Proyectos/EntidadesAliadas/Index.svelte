@@ -33,10 +33,7 @@
 
     let form = useForm({
         _method: 'put',
-        infraestructura_tecnoacademia: {
-            value: proyecto.infraestructura_tecnoacademia,
-            label: infraestructuraTecnoacademia.find((item) => item.value == proyecto.infraestructura_tecnoacademia)?.label,
-        },
+        infraestructura_tecnoacademia: proyecto.infraestructura_tecnoacademia,
     })
 
     function submit() {

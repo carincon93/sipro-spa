@@ -4,7 +4,6 @@
     import { route, checkRole, checkPermission, monthDiff } from '@/Utils'
     import { _ } from 'svelte-i18n'
     import axios from 'axios'
-    import { onMount } from 'svelte'
 
     import InputError from '@/Shared/InputError'
     import Label from '@/Shared/Label'
@@ -21,16 +20,17 @@
     export let errors
     export let tecnoacademias
     export let programasSennova
-    export let roles
     export let semillerosInvestigacion
+    export let lineasTecnoacademia
     export let estadosProyectoIdiTecnoacademia
     export let beneficiados
     export let proyectos
+    export let municipios
     export let regionales
+    export let roles
 
     let hayEntidadesVinculadas = false
     let existenDocumentos = false
-    let municipios = []
 
     $: $title = 'Crear proyecto I+D+i TecnoAcademia'
 
@@ -39,6 +39,13 @@
      */
     let authUser = $page.props.auth.user
     let isSuperAdmin = checkRole(authUser, [1])
+
+    let arrayLineasTecnoacademia = lineasTecnoacademia
+    function selectLineasTecnoacademia(event) {
+        arrayLineasTecnoacademia = lineasTecnoacademia.filter(function (obj) {
+            return obj.tecnoacademia_id == event.detail?.value
+        })
+    }
 
     let form = useForm({
         tecnoacademia_id: null,
@@ -84,33 +91,6 @@
     function submit() {
         if (isSuperAdmin || checkRole(authUser, [5, 10, 12, 22])) {
             $form.post(route('proyectos-idi-tecnoacademia.store'))
-        }
-    }
-
-    onMount(() => {
-        getMunicipios()
-    })
-
-    let lineasTecnoaAcademia
-    let oldLineaTecnoacademiaValue = null
-
-    $: if ($form.tecnoacademia_id?.value) {
-        if (oldLineaTecnoacademiaValue != $form.tecnoacademia_id?.value) {
-            getLineasTecnoacademia($form.tecnoacademia_id?.value)
-        }
-    }
-    async function getLineasTecnoacademia(lineaTecnoacademiaId) {
-        let res = await axios.get(route('web-api.tecnoacademias.lineas-tecnoacademia', [lineaTecnoacademiaId]))
-        if (res.status == '200') {
-            lineasTecnoaAcademia = res.data
-            oldLineaTecnoacademiaValue = $form.tecnoacademia_id?.value
-        }
-    }
-
-    async function getMunicipios() {
-        let res = await axios.get(route('web-api.municipios'))
-        if (res.status == '200') {
-            municipios = res.data
         }
     }
 
@@ -185,28 +165,17 @@
                     <Label required class="mb-4" labelFor="tecnoacademia_id" value="TecnoAcademia" />
                 </div>
                 <div>
-                    <Select id="tecnoacademia_id" items={tecnoacademias} bind:selectedValue={$form.tecnoacademia_id} error={errors.tecnoacademia_id} autocomplete="off" placeholder="Busque por el nombre de la TecnoAcademia" required />
+                    <Select id="tecnoacademia_id" items={tecnoacademias} bind:selectedValue={$form.tecnoacademia_id} selectFunctions={[(event) => selectLineasTecnoacademia(event)]} error={errors.tecnoacademia_id} autocomplete="off" placeholder="Busque por el nombre de la TecnoAcademia" required />
                 </div>
             </div>
 
-            {#if $form.tecnoacademia_id && lineasTecnoaAcademia}
+            {#if $form.tecnoacademia_id && arrayLineasTecnoacademia}
                 <div class="mt-44 grid grid-cols-2">
                     <div>
                         <Label required class="mb-4" labelFor="tecnoacademia_linea_tecnoacademia_id" value="Líneas temáticas a ejecutar en la vigencia del proyecto:" />
                     </div>
                     <div>
-                        <SelectMulti id="tecnoacademia_linea_tecnoacademia_id" bind:selectedValue={$form.tecnoacademia_linea_tecnoacademia_id} items={lineasTecnoaAcademia} isMulti={true} error={errors.tecnoacademia_linea_tecnoacademia_id} placeholder="Buscar por el nombre de la línea" required />
-                        {#if lineasTecnoaAcademia?.length == 0}
-                            <div>
-                                <p>Parece que no se han encontrado elementos, por favor haga clic en <strong>Refrescar</strong></p>
-                                <button on:click={getLineasTecnoacademia} type="button" class="flex underline">
-                                    <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 mr-2" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 4v5h.582m15.356 2A8.001 8.001 0 004.582 9m0 0H9m11 11v-5h-.581m0 0a8.003 8.003 0 01-15.357-2m15.357 2H15" />
-                                    </svg>
-                                    Refrescar
-                                </button>
-                            </div>
-                        {/if}
+                        <SelectMulti id="tecnoacademia_linea_tecnoacademia_id" bind:selectedValue={$form.tecnoacademia_linea_tecnoacademia_id} items={arrayLineasTecnoacademia} isMulti={true} error={errors.tecnoacademia_linea_tecnoacademia_id} placeholder="Buscar por el nombre de la línea" required />
                     </div>
                 </div>
             {/if}

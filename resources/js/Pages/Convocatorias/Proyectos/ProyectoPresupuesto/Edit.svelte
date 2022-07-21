@@ -13,7 +13,6 @@
     import Dialog from '@/Shared/Dialog'
     import InfoMessage from '@/Shared/InfoMessage'
     import Select from '@/Shared/Select'
-    import DynamicList from '@/Shared/Dropdowns/DynamicList'
     import RecomendacionEvaluador from '@/Shared/RecomendacionEvaluador'
 
     export let errors
@@ -50,10 +49,7 @@
         tipo_licencia: proyectoPresupuesto.software_info?.tipo_licencia,
         fecha_inicio: proyectoPresupuesto.software_info?.fecha_inicio,
         fecha_finalizacion: proyectoPresupuesto.software_info?.fecha_finalizacion,
-        servicio_edicion_info: {
-            value: opcionesServiciosEdicion.find((item) => item.label == proyectoPresupuesto.servicio_edicion_info?.info)?.value,
-            label: opcionesServiciosEdicion.find((item) => item.label == proyectoPresupuesto.servicio_edicion_info?.info)?.label,
-        },
+        servicio_edicion_info: proyectoPresupuesto.servicio_edicion_info?.info,
         formato_estudio_mercado: proyectoPresupuesto.formato_estudio_mercado,
     })
 
@@ -121,28 +117,17 @@
                 <fieldset class="p-8" disabled={proyecto.allowed.to_update ? undefined : true}>
                     <div class="mt-4">
                         <Label required labelFor="segundo_grupo_presupuestal_id" value="Homologable 2018" />
-                        <DynamicList id="segundo_grupo_presupuestal_id" bind:value={$form.segundo_grupo_presupuestal_id} routeWebApi={route('web-api.segundo-grupo-presupuestal', proyecto.linea_programatica)} placeholder="Busque por el homologable 2018" message={errors.segundo_grupo_presupuestal_id} required />
                     </div>
 
                     {#if $form.segundo_grupo_presupuestal_id}
                         <div class="mt-4">
                             <Label required labelFor="tercer_grupo_presupuestal_id" value="Rubro 2019" />
-                            <DynamicList id="tercer_grupo_presupuestal_id" bind:value={$form.tercer_grupo_presupuestal_id} routeWebApi={route('web-api.tercer-grupo-presupuestal', $form.segundo_grupo_presupuestal_id)} placeholder="Busque por el nombre del rubro 2019" message={errors.tercer_grupo_presupuestal_id} required />
                         </div>
                     {/if}
 
                     {#if $form.segundo_grupo_presupuestal_id && $form.tercer_grupo_presupuestal_id}
                         <div class="mt-4">
                             <Label required labelFor="convocatoria_presupuesto_id" value="Uso presupuestal" />
-                            <DynamicList
-                                id="convocatoria_presupuesto_id"
-                                bind:value={$form.convocatoria_presupuesto_id}
-                                routeWebApi={route('web-api.usos-presupuestales', [convocatoria, proyecto.linea_programatica, $form.segundo_grupo_presupuestal_id, $form.tercer_grupo_presupuestal_id])}
-                                placeholder="Busque por el nombre del uso presupuestal"
-                                message={errors.convocatoria_presupuesto_id}
-                                bind:recurso={presupuestoSennova}
-                                required
-                            />
                         </div>
 
                         {#if presupuestoSennova?.mensaje}

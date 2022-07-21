@@ -3,10 +3,12 @@
 namespace App\Http\Controllers;
 
 use App\Helpers\AppHelper;
+use App\Helpers\SelectHelper;
 use App\Models\ProyectoIdiTecnoacademia;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\ProyectoIdiTecnoacademiaProductoRequest;
 use App\Http\Requests\ProyectoIdiTecnoacademiaRequest;
+use App\Models\CentroFormacion;
 use App\Models\ProgramaSennova;
 use App\Models\Proyecto;
 use App\Models\ProyectoIdiTecnoacademiaProducto;
@@ -49,14 +51,16 @@ class ProyectoIdiTecnoacademiaController extends Controller
         $this->authorize('crear-proyecto-idi-tecnoacademia');
 
         return Inertia::render('ProyectosIdiTecnoacademia/Create', [
-            'tecnoacademias'                    => Tecnoacademia::select('id as value', 'nombre as label')->orderBy('nombre', 'ASC')->get(),
-            'programasSennova'                  => ProgramaSennova::select('id as value', 'nombre as label')->orderBy('nombre', 'ASC')->get(),
-            'semillerosInvestigacion'           => SemilleroInvestigacion::selectRaw("semilleros_investigacion.id as value, CONCAT(semilleros_investigacion.nombre, chr(10), '- Grupo de investigación: ', grupos_investigacion.nombre, chr(10), '- Centro de formación: ', centros_formacion.nombre) as label")->join('lineas_investigacion', 'semilleros_investigacion.linea_investigacion_id', 'lineas_investigacion.id')->join('grupos_investigacion', 'lineas_investigacion.grupo_investigacion_id', 'grupos_investigacion.id')->join('centros_formacion', 'grupos_investigacion.centro_formacion_id', 'centros_formacion.id')->orderBy('semilleros_investigacion.nombre', 'ASC')->get(),
-            'estadosProyectoIdiTecnoacademia'   => json_decode(Storage::get('json/estados-proyecto-idi-tecnoacademia.json'), true),
-            'beneficiados'                      => TipoBeneficiadoTa::select('id as value', 'nombre as label')->orderBy('nombre', 'ASC')->get(),
-            'roles'                             => json_decode(Storage::get('json/roles-sennova-ta.json'), true),
+            'tecnoacademias'                    => SelectHelper::tecnoacademias(),
+            'programasSennova'                  => SelectHelper::programasSennova(),
+            'semillerosInvestigacion'           => SelectHelper::semillerosInvestigacion(),
             'proyectos'                         => Proyecto::selectRaw("id as value, CONCAT('SGPS-', id + 8000) as label")->orderBy('id', 'ASC')->get(),
-            'regionales'                        => Regional::select('id as value', 'nombre as label', 'codigo')->orderBy('nombre')->get(),
+            'beneficiados'                      => SelectHelper::tiposBeneficiadosTa(),
+            'regionales'                        => SelectHelper::regionales(),
+            'lineasTecnoacademia'               => SelectHelper::lineasTecnoacademia(),
+            'municipios'                        => SelectHelper::municipios(),
+            'estadosProyectoIdiTecnoacademia'   => json_decode(Storage::get('json/estados-proyecto-idi-tecnoacademia.json'), true),
+            'roles'                             => json_decode(Storage::get('json/roles-sennova-ta.json'), true),
         ]);
     }
 
@@ -170,19 +174,21 @@ class ProyectoIdiTecnoacademiaController extends Controller
 
         return Inertia::render('ProyectosIdiTecnoacademia/Edit', [
             'proyectoIdiTecnoacademia'          => $proyectoIdiTecnoacademia,
-            'tecnoacademias'                    => Tecnoacademia::select('id as value', 'nombre as label')->orderBy('nombre', 'ASC')->get(),
-            'programasSennova'                  => ProgramaSennova::select('id as value', 'nombre as label')->orderBy('nombre', 'ASC')->get(),
-            'semillerosInvestigacion'           => SemilleroInvestigacion::selectRaw("semilleros_investigacion.id as value, CONCAT(semilleros_investigacion.nombre, chr(10), '- Grupo de investigación: ', grupos_investigacion.nombre, chr(10), '- Centro de formación: ', centros_formacion.nombre) as label")->join('lineas_investigacion', 'semilleros_investigacion.linea_investigacion_id', 'lineas_investigacion.id')->join('grupos_investigacion', 'lineas_investigacion.grupo_investigacion_id', 'grupos_investigacion.id')->join('centros_formacion', 'grupos_investigacion.centro_formacion_id', 'centros_formacion.id')->orderBy('semilleros_investigacion.nombre', 'ASC')->get(),
-            'estadosProyectoIdiTecnoacademia'   => json_decode(Storage::get('json/estados-proyecto-idi-tecnoacademia.json'), true),
-            'beneficiados'                      => TipoBeneficiadoTa::select('id as value', 'nombre as label')->orderBy('nombre', 'ASC')->get(),
+            'tecnoacademias'                    => SelectHelper::tecnoacademias(),
+            'programasSennova'                  => SelectHelper::programasSennova(),
+            'semillerosInvestigacion'           => SelectHelper::semillerosInvestigacion(),
+            'beneficiados'                      => SelectHelper::tiposBeneficiadosTa(),
+            'proyectos'                         => Proyecto::selectRaw("id as value, id + 8000 as label")->orderBy('id', 'ASC')->get(),
+            'regionales'                        => SelectHelper::regionales(),
+            'lineasTecnoacademia'               => SelectHelper::lineasTecnoacademia(),
+            'municipios'                        => SelectHelper::municipios(),
             'lineasRelacionadas'                => $proyectoIdiTecnoacademia->lineas()->select('tecnoacademia_linea_tecnoacademia.id as value', 'lineas_tecnoacademia.nombre')->join('lineas_tecnoacademia', 'tecnoacademia_linea_tecnoacademia.linea_tecnoacademia_id', 'lineas_tecnoacademia.id')->get(),
             'programasRelacionados'             => $proyectoIdiTecnoacademia->programasSennova()->select('programas_sennova.id as value', 'programas_sennova.nombre as label')->get(),
             'beneficiadosRelacionados'          => $proyectoIdiTecnoacademia->beneficiados()->select('tipos_beneficiados_ta.id as value', 'tipos_beneficiados_ta.nombre as label')->get(),
             'municipiosRelacionados'            => $proyectoIdiTecnoacademia->municipios()->select('municipios.id as value', 'municipios.nombre as label', 'regionales.nombre as group', 'regionales.codigo')->join('regionales', 'regionales.id', 'municipios.regional_id')->get(),
-            'roles'                             => json_decode(Storage::get('json/roles-sennova-ta.json'), true),
             'autorPrincipal'                    => $proyectoIdiTecnoacademia->participantes()->where('proyecto_idi_tecnoacademia_participante.autor_principal', true)->first(),
-            'proyectos'                         => Proyecto::selectRaw("id as value, id + 8000 as label")->orderBy('id', 'ASC')->get(),
-            'regionales'                        => Regional::select('id as value', 'nombre as label', 'codigo')->orderBy('nombre')->get(),
+            'estadosProyectoIdiTecnoacademia'   => json_decode(Storage::get('json/estados-proyecto-idi-tecnoacademia.json'), true),
+            'roles'                             => json_decode(Storage::get('json/roles-sennova-ta.json'), true),
         ]);
     }
 
@@ -289,10 +295,11 @@ class ProyectoIdiTecnoacademiaController extends Controller
         $proyectoIdiTecnoacademia->load('participantes.centroFormacion.regional');
 
         return Inertia::render('ProyectosIdiTecnoacademia/Participantes/Index', [
-            'proyectoIdiTecnoacademia'    => $proyectoIdiTecnoacademia,
-            'tiposDocumento'              => json_decode(Storage::get('json/tipos-documento.json'), true),
-            'tiposVinculacion'            => json_decode(Storage::get('json/tipos-vinculacion.json'), true),
-            'roles'                       => json_decode(Storage::get('json/roles-sennova-ta.json'), true),
+            'proyectoIdiTecnoacademia'      => $proyectoIdiTecnoacademia,
+            'centrosFormacion'              => CentroFormacion::selectRaw('centros_formacion.id as value, concat(centros_formacion.nombre, chr(10), \'∙ Código: \', centros_formacion.codigo, chr(10), \'∙ Regional: \', regionales.nombre) as label')->join('regionales', 'centros_formacion.regional_id', 'regionales.id')->orderBy('centros_formacion.nombre', 'ASC')->get(),
+            'tiposDocumento'                => json_decode(Storage::get('json/tipos-documento.json'), true),
+            'tiposVinculacion'              => json_decode(Storage::get('json/tipos-vinculacion.json'), true),
+            'roles'                         => json_decode(Storage::get('json/roles-sennova-ta.json'), true),
         ]);
     }
 
@@ -444,7 +451,7 @@ class ProyectoIdiTecnoacademiaController extends Controller
 
         return Inertia::render('ProyectosIdiTecnoacademia/Productos/Create', [
             'proyectoIdiTecnoacademia' => $proyectoIdiTecnoacademia,
-            'tiposProductos'           => TipoProductoIdi::select('id as value', 'tipo as label')->get(),
+            'tiposProductos'           => SelectHelper::tiposProductosIdi(),
             'estadosProductos'         => json_decode(Storage::get('json/estados-productos-ta.json'), true),
         ]);
     }
@@ -478,7 +485,7 @@ class ProyectoIdiTecnoacademiaController extends Controller
         return Inertia::render('ProyectosIdiTecnoacademia/Productos/Edit', [
             'proyectoIdiTecnoacademia'  => $proyectoIdiTecnoacademia,
             'producto'                  => $producto,
-            'tiposProductos'            => TipoProductoIdi::select('id as value', 'tipo as label')->get(),
+            'tiposProductos'            => SelectHelper::tiposProductosIdi(),
             'estadosProductos'          => json_decode(Storage::get('json/estados-productos-ta.json'), true),
         ]);
     }

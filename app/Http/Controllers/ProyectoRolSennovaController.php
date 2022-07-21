@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Helpers\SelectHelper;
 use App\Http\Requests\ProyectoRolSennovaRequest;
 use App\Models\Convocatoria;
 use App\Models\Proyecto;
@@ -176,11 +177,11 @@ class ProyectoRolSennovaController extends Controller
         }
 
         return Inertia::render('Convocatorias/Proyectos/RolesSennova/Edit', [
-            'convocatoria'          => $convocatoria->only('id', 'esta_activa', 'fase_formateada', 'fase', 'tipo_convocatoria', 'mostrar_recomendaciones'),
-            'proyecto'              => $proyecto->only('id', 'diff_meses', 'modificable', 'max_meses_ejecucion', 'codigo_linea_programatica', 'en_subsanacion', 'mostrar_recomendaciones', 'allowed'),
-            'proyectoRolSennova'    => $proyectoRolSennova,
-            'rolSennova'            => $proyectoRolSennova->convocatoriaRolSennova->rolSennova->only('nombre'),
-            'lineaProgramatica'     => $proyecto->lineaProgramatica->only('id')
+            'convocatoria'                  => $convocatoria->only('id', 'esta_activa', 'fase_formateada', 'fase', 'tipo_convocatoria', 'mostrar_recomendaciones'),
+            'proyecto'                      => $proyecto->only('id', 'diff_meses', 'modificable', 'max_meses_ejecucion', 'codigo_linea_programatica', 'en_subsanacion', 'mostrar_recomendaciones', 'allowed'),
+            'proyectoRolSennova'            => $proyectoRolSennova,
+            'rolSennova'                    => $proyectoRolSennova->convocatoriaRolSennova->rolSennova->only('nombre'),
+            'convocatoriaRolesSennova'      => SelectHelper::convocatoriaRolesSennova($convocatoria->id, $proyecto->id, $proyecto->lineaProgramatica->id)
         ]);
     }
 

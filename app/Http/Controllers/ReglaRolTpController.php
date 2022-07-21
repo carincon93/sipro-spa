@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Helpers\SelectHelper;
 use App\Models\ReglaRolTp;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\ReglaRolTpRequest;
@@ -59,7 +60,7 @@ class ReglaRolTpController extends Controller
                 WHEN '8' THEN	concat(roles_sennova.nombre, ' - Nivel académico: Técnico con especialización')
                 WHEN '9' THEN	concat(roles_sennova.nombre, ' - Nivel académico: Tecnólogo con especialización')
             END as label")->join('roles_sennova', 'convocatoria_rol_sennova.rol_sennova_id', 'roles_sennova.id')->whereIn('roles_sennova.id', [3, 6, 8, 15, 16, 5, 7, 45])->where('convocatoria_rol_sennova.linea_programatica_id', 4)->get(),
-            'nodosTecnoparque'  => NodoTecnoparque::select('id as value', 'nombre as label')->get()
+            'nodosTecnoparque'  => SelectHelper::nodosTecnoparque()
         ]);
     }
 
@@ -117,7 +118,7 @@ class ReglaRolTpController extends Controller
                 WHEN '8' THEN	concat(roles_sennova.nombre, ' - Nivel académico: Técnico con especialización')
                 WHEN '9' THEN	concat(roles_sennova.nombre, ' - Nivel académico: Tecnólogo con especialización')
             END as label")->join('roles_sennova', 'convocatoria_rol_sennova.rol_sennova_id', 'roles_sennova.id')->whereIn('roles_sennova.id', [3, 6, 8, 15, 16, 5, 7, 45])->where('convocatoria_rol_sennova.linea_programatica_id', 4)->get(),
-            'nodosTecnoparque' => NodoTecnoparque::select('id as value', 'nombre as label')->get()
+            'nodosTecnoparque' => SelectHelper::nodosTecnoparque()
         ]);
     }
 

@@ -34,10 +34,7 @@
         codigo: lineaProgramatica.codigo,
         descripcion: lineaProgramatica.descripcion,
         activadores: activadoresLineaProgramatica.length > 0 ? activadoresLineaProgramatica : null,
-        categoria_proyecto: {
-            value: lineaProgramatica.categoria_proyecto,
-            label: categoriasProyectos.find((item) => item.value == lineaProgramatica.categoria_proyecto)?.label,
-        },
+        categoria_proyecto: lineaProgramatica.categoria_proyecto,
     })
 
     function submit() {

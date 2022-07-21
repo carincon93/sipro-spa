@@ -3,15 +3,12 @@
     import { useForm, page } from '@inertiajs/inertia-svelte'
     import { route, checkRole, monthDiff } from '@/Utils'
     import { _ } from 'svelte-i18n'
-    import axios from 'axios'
-    import { onMount } from 'svelte'
 
     import Button from '@/Shared/Button'
     import Input from '@/Shared/Input'
     import Label from '@/Shared/Label'
     import LoadingButton from '@/Shared/LoadingButton'
     import EvaluationStepper from '@/Shared/EvaluationStepper'
-    import DynamicList from '@/Shared/Dropdowns/DynamicList'
     import Textarea from '@/Shared/Textarea'
     import Select from '@/Shared/Select'
     import SelectMulti from '@/Shared/SelectMulti'
@@ -24,16 +21,24 @@
     export let errors
     export let convocatoria
     export let culturaInnovacion
+    export let areasConocimiento
     export let culturaInnovacionEvaluacion
     export let mesasSectoriales
-    export let mesasSectorialesRelacionadas
-    export let lineasTecnoacademiaRelacionadas
-    export let tecnoacademias
     export let tecnoacademia
+    export let tecnoacademias
+    export let lineasProgramaticas
+    export let actividadesEconomicas
+    export let tematicasEstrategicas
+    export let lineasTecnoacademia
+    export let municipios
+    export let programasFormacionConRegistroCalificado
+    export let programasFormacionSinRegistroCalificado
     export let opcionesAplicaNoAplica
     export let proyectoMunicipios
-    export let proyectoProgramasFormacion
-    export let proyectoProgramasFormacionArticulados
+    export let programasFormacionConRegistroRelacionados
+    export let programasFormacionSinRegistroRelacionados
+    export let mesasSectorialesRelacionadas
+    export let lineasTecnoacademiaRelacionadas
 
     $: $title = culturaInnovacion ? culturaInnovacion.titulo : null
 
@@ -43,9 +48,6 @@
     let authUser = $page.props.auth.user
     let isSuperAdmin = checkRole(authUser, [1])
 
-    let municipios
-    let programasFormacion
-    let programasFormacionArticular
     let dialogSegundaEvaluacion = convocatoria.fase == 4 ? true : false
     let proyectoDialogOpen = culturaInnovacionEvaluacion.evaluacion.clausula_confidencialidad == false ? true : false
     let opcionesSiNo = [
@@ -53,7 +55,13 @@
         { value: 2, label: 'No' },
     ]
 
-    let lineasTecnologicas = []
+    let arrayLineasTecnoacademia = lineasTecnoacademia
+    function selectLineasTecnoacademia(event) {
+        arrayLineasTecnoacademia = lineasTecnoacademia.filter(function (obj) {
+            return obj.tecnoacademia_id == event.detail?.value
+        })
+    }
+
     let tieneVideo = culturaInnovacion.video != null
     let requiereJustificacionIndustria4 = culturaInnovacion.justificacion_industria_4 != null
     let requiereJustificacionEconomiaNaranja = culturaInnovacion.justificacion_economia_naranja != null
@@ -82,50 +90,23 @@
         bibliografia: culturaInnovacion.bibliografia,
         numero_aprendices: culturaInnovacion.numero_aprendices,
         municipios: proyectoMunicipios.length > 0 ? proyectoMunicipios : null,
-        programas_formacion: proyectoProgramasFormacion.length > 0 ? proyectoProgramasFormacion : null,
-        programas_formacion_articulados: proyectoProgramasFormacionArticulados.length > 0 ? proyectoProgramasFormacionArticulados : null,
+        programas_formacion: programasFormacionConRegistroRelacionados.length > 0 ? programasFormacionConRegistroRelacionados : null,
+        programas_formacion_articulados: programasFormacionSinRegistroRelacionados.length > 0 ? programasFormacionSinRegistroRelacionados : null,
         impacto_municipios: culturaInnovacion.impacto_municipios,
         impacto_centro_formacion: culturaInnovacion.impacto_centro_formacion,
         muestreo: culturaInnovacion.muestreo,
         actividades_muestreo: culturaInnovacion.actividades_muestreo,
         objetivo_muestreo: culturaInnovacion.objetivo_muestreo,
-        recoleccion_especimenes: {
-            value: culturaInnovacion.recoleccion_especimenes,
-            label: opcionesSiNo.find((item) => item.value == culturaInnovacion.recoleccion_especimenes)?.label,
-        },
-        relacionado_plan_tecnologico: {
-            value: culturaInnovacion.relacionado_plan_tecnologico,
-            label: opcionesAplicaNoAplica.find((item) => item.value == culturaInnovacion.relacionado_plan_tecnologico)?.label,
-        },
-        relacionado_agendas_competitividad: {
-            value: culturaInnovacion.relacionado_agendas_competitividad,
-            label: opcionesAplicaNoAplica.find((item) => item.value == culturaInnovacion.relacionado_agendas_competitividad)?.label,
-        },
-        relacionado_mesas_sectoriales: {
-            value: culturaInnovacion.relacionado_mesas_sectoriales,
-            label: opcionesAplicaNoAplica.find((item) => item.value == culturaInnovacion.relacionado_mesas_sectoriales)?.label,
-        },
-        relacionado_tecnoacademia: {
-            value: culturaInnovacion.relacionado_tecnoacademia,
-            label: opcionesAplicaNoAplica.find((item) => item.value == culturaInnovacion.relacionado_tecnoacademia)?.label,
-        },
-        tecnoacademia_id: {
-            value: tecnoacademia?.id,
-            label: tecnoacademias.find((item) => item.value == tecnoacademia?.id)?.label,
-        },
+        recoleccion_especimenes: culturaInnovacion.recoleccion_especimenes,
+        relacionado_plan_tecnologico: culturaInnovacion.relacionado_plan_tecnologico,
+        relacionado_agendas_competitividad: culturaInnovacion.relacionado_agendas_competitividad,
+        relacionado_mesas_sectoriales: culturaInnovacion.relacionado_mesas_sectoriales,
+        relacionado_tecnoacademia: culturaInnovacion.relacionado_tecnoacademia,
+        tecnoacademia_id: tecnoacademia?.id,
 
         linea_tecnologica_id: lineasTecnoacademiaRelacionadas,
         mesa_sectorial_id: mesasSectorialesRelacionadas,
     }
-
-    onMount(() => {
-        if (tecnoacademia) {
-            getLineasTecnologicas(tecnoacademia)
-        }
-        getMunicipios()
-        getProgramasFormacion()
-        getProgramasFormacionArticular()
-    })
 
     $: if (culturaInnovacionInfo.fecha_inicio && culturaInnovacionInfo.fecha_finalizacion) {
         culturaInnovacionInfo.max_meses_ejecucion = monthDiff(culturaInnovacionInfo.fecha_inicio, culturaInnovacionInfo.fecha_finalizacion)
@@ -181,39 +162,6 @@
             $form.put(route('convocatorias.cultura-innovacion-evaluaciones.update', [convocatoria.id, culturaInnovacionEvaluacion.id]), {
                 preserveScroll: true,
             })
-        }
-    }
-
-    $: selectedTecnoacademia = culturaInnovacionInfo.tecnoacademia_id?.value
-
-    $: if (selectedTecnoacademia) {
-        getLineasTecnologicas(selectedTecnoacademia)
-    }
-
-    async function getLineasTecnologicas(tecnoacademia) {
-        let res = await axios.get(route('web-api.tecnoacademias.lineas-tecnoacademia', [tecnoacademia]))
-        res.status == '200' ? (culturaInnovacionInfo.linea_tecnologica_id = lineasTecnoacademiaRelacionadas) : null
-        lineasTecnologicas = res.data
-    }
-
-    async function getMunicipios() {
-        let res = await axios.get(route('web-api.municipios'))
-        if (res.status == '200') {
-            municipios = res.data
-        }
-    }
-
-    async function getProgramasFormacion() {
-        let res = await axios.get(route('web-api.programas-formacion', culturaInnovacionInfo.centro_formacion_id))
-        if (res.status == '200') {
-            programasFormacion = res.data
-        }
-    }
-
-    async function getProgramasFormacionArticular() {
-        let res = await axios.get(route('web-api.programas-formacion-articulados'))
-        if (res.status == '200') {
-            programasFormacionArticular = res.data
         }
     }
 </script>
@@ -278,16 +226,15 @@
                 <p class="mb-4">Código dependencia presupuestal (SIIF)</p>
             </div>
             <div>
-                <DynamicList disabled={true} id="linea_programatica_id" bind:value={culturaInnovacionInfo.linea_programatica_id} routeWebApi={route('web-api.lineas-programaticas', 5)} classes="evaluacion-select min-h" placeholder="Busque por el nombre de la línea programática" />
+                <Select id="linea_programatica_id" items={lineasProgramaticas} bind:selectedValue={culturaInnovacionInfo.linea_programatica_id} autocomplete="off" placeholder="Seleccione una línea programática" required />
             </div>
         </div>
         <div class="mt-44 grid grid-cols-2">
             <div>
-                <p class="mb-4">Área de conocimiento</p>
+                <Label required class="mb-4" labelFor="area_conocimiento_id" value="Área de conocimiento" />
             </div>
             <div>
-                <DynamicList disabled={true} id="area_conocimiento_id" bind:value={culturaInnovacionInfo.area_conocimiento_id} routeWebApi={route('web-api.areas-conocimiento')} classes="evaluacion-select min-h" placeholder="Busque por el nombre de la área de conocimiento" />
-
+                <Select id="area_conocimiento_id" items={areasConocimiento} bind:selectedValue={culturaInnovacionInfo.area_conocimiento_id} autocomplete="off" placeholder="Busque por el nombre de la área de conocimiento" required />
                 <InfoMessage>
                     <div class="mt-4">
                         <p>¿La área de conocimiento es correcto? Por favor seleccione si Cumple o No cumple.</p>
@@ -299,12 +246,13 @@
                 </InfoMessage>
             </div>
         </div>
+
         <div class="mt-44 grid grid-cols-2">
             <div>
                 <p class="mb-4">¿En cuál de estas actividades económicas se puede aplicar el proyecto de investigación?</p>
             </div>
             <div>
-                <DynamicList disabled={true} id="actividad_economica_id" bind:value={culturaInnovacionInfo.actividad_economica_id} routeWebApi={route('web-api.actividades-economicas')} placeholder="Busque por el nombre de la actividad económica" classes="evaluacion-select min-h" />
+                <Select id="actividad_economica_id" items={actividadesEconomicas} bind:selectedValue={culturaInnovacionInfo.actividad_economica_id} autocomplete="off" placeholder="Seleccione una actividad económica" />
 
                 <InfoMessage>
                     <div class="mt-4">
@@ -322,7 +270,7 @@
                 <p class="mb-4">Temática estratégica SENA</p>
             </div>
             <div>
-                <DynamicList classes="evaluacion-select" disabled={true} id="tematica_estrategica_id" bind:value={culturaInnovacionInfo.tematica_estrategica_id} routeWebApi={route('web-api.tematicas-estrategicas')} placeholder="Busque por el nombre de la temática estrategica SENA" />
+                <Select id="tematica_estrategica_id" items={tematicasEstrategicas} bind:selectedValue={culturaInnovacionInfo.tematica_estrategica_id} autocomplete="off" placeholder="Seleccione una temática estratégica" />
 
                 <InfoMessage>
                     <div class="mt-4">
@@ -647,14 +595,14 @@
             <div class="grid grid-cols-2">
                 <div>Tecnoacademia relacionada</div>
                 <div>
-                    <Select disabled={true} items={tecnoacademias} id="tecnoacademia_id" bind:selectedValue={culturaInnovacionInfo.tecnoacademia_id} autocomplete="off" placeholder="Seleccione una opción" />
+                    <Select disabled={true} items={tecnoacademias} id="tecnoacademia_id" bind:selectedValue={culturaInnovacionInfo.tecnoacademia_id} selectFunctions={[(event) => selectLineasTecnoacademia(event)]} autocomplete="off" placeholder="Seleccione una opción" />
                 </div>
             </div>
             <div class="grid grid-cols-2">
                 <div>Líneas tecnológicas relacionadas:</div>
                 <div>
                     <ul class="list-disc p-4">
-                        {#each lineasTecnologicas as { value, label }, i}
+                        {#each arrayLineasTecnoacademia as { value, label }, i}
                             {#each culturaInnovacionInfo.linea_tecnologica_id as lineaTecnologica}
                                 {#if value == lineaTecnologica}
                                     <li>{label}</li>
@@ -729,17 +677,6 @@
             </div>
             <div>
                 <SelectMulti classes="evaluacion-select-multi" disabled={true} id="municipios" bind:selectedValue={culturaInnovacionInfo.municipios} items={municipios} isMulti={true} placeholder="Buscar municipios" />
-                {#if municipios?.length == 0}
-                    <div>
-                        <p>Parece que no se han encontrado elementos, por favor haga clic en <strong>Refrescar</strong></p>
-                        <button on:click={getMunicipios} type="button" class="flex underline">
-                            <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 mr-2" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 4v5h.582m15.356 2A8.001 8.001 0 004.582 9m0 0H9m11 11v-5h-.581m0 0a8.003 8.003 0 01-15.357-2m15.357 2H15" />
-                            </svg>
-                            Refrescar
-                        </button>
-                    </div>
-                {/if}
             </div>
         </div>
 
@@ -766,18 +703,7 @@
                 <p class="mb-4">Nombre de los programas de formación con registro calificado a impactar</p>
             </div>
             <div>
-                <SelectMulti classes="evaluacion-select-multi" disabled={true} id="programas_formacion" bind:selectedValue={culturaInnovacionInfo.programas_formacion} items={programasFormacion} isMulti={true} placeholder="Buscar por el nombre del programa de formación" />
-                {#if programasFormacion?.length == 0}
-                    <div>
-                        <p>Parece que no se han encontrado elementos, por favor haga clic en <strong>Refrescar</strong></p>
-                        <button on:click={getProgramasFormacion} type="button" class="flex underline">
-                            <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 mr-2" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 4v5h.582m15.356 2A8.001 8.001 0 004.582 9m0 0H9m11 11v-5h-.581m0 0a8.003 8.003 0 01-15.357-2m15.357 2H15" />
-                            </svg>
-                            Refrescar
-                        </button>
-                    </div>
-                {/if}
+                <SelectMulti classes="evaluacion-select-multi" disabled={true} id="programas_formacion" bind:selectedValue={culturaInnovacionInfo.programas_formacion} items={programasFormacionConRegistroCalificado} isMulti={true} placeholder="Buscar por el nombre del programa de formación" />
             </div>
         </div>
 
@@ -786,18 +712,7 @@
                 <p class="mb-4">Nombre de los programas de formación articulados</p>
             </div>
             <div>
-                <SelectMulti classes="evaluacion-select-multi" disabled={true} id="programas_formacion_articulados" bind:selectedValue={culturaInnovacionInfo.programas_formacion_articulados} items={programasFormacionArticular} isMulti={true} placeholder="Buscar por el nombre del programa de formación" />
-                {#if programasFormacionArticular?.length == 0}
-                    <div>
-                        <p>Parece que no se han encontrado elementos, por favor haga clic en <strong>Refrescar</strong></p>
-                        <button on:click={getProgramasFormacion} type="button" class="flex underline">
-                            <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 mr-2" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 4v5h.582m15.356 2A8.001 8.001 0 004.582 9m0 0H9m11 11v-5h-.581m0 0a8.003 8.003 0 01-15.357-2m15.357 2H15" />
-                            </svg>
-                            Refrescar
-                        </button>
-                    </div>
-                {/if}
+                <SelectMulti classes="evaluacion-select-multi" disabled={true} id="programas_formacion_articulados" bind:selectedValue={culturaInnovacionInfo.programas_formacion_articulados} items={programasFormacionSinRegistroCalificado} isMulti={true} placeholder="Buscar por el nombre del programa de formación" />
             </div>
         </div>
 
