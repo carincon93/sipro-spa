@@ -7,9 +7,12 @@
     import Input from '@/Shared/Input'
     import Label from '@/Shared/Label'
     import LoadingButton from '@/Shared/LoadingButton'
-    import DynamicList from '@/Shared/Dropdowns/DynamicList'
+    import Select from '@/Shared/Select'
 
     export let errors
+    export let regionales
+    export let subdirectores
+    export let dinamizadoresSennova
 
     $: $title = 'Crear centro de formación'
 
@@ -60,17 +63,17 @@
 
                 <div class="mt-4">
                     <Label required class="mb-4" labelFor="regional_id" value="Regional" />
-                    <DynamicList id="regional_id" bind:value={$form.regional_id} routeWebApi={route('web-api.regionales')} placeholder="Busque por el nombre de la regional" message={errors.regional_id} required />
+                    <Select id="regional_id" items={regionales} bind:selectedValue={$form.regional_id} error={errors.regional_id} autocomplete="off" placeholder="Seleccione una regional" required />
                 </div>
 
                 <div class="mt-4">
                     <Label required class="mb-4" labelFor="subdirector_id" value="Subdirector" />
-                    <DynamicList id="subdirector_id" bind:value={$form.subdirector_id} routeWebApi={route('web-api.users', 'subdirector')} placeholder="Busque por el nombre de subdirector" message={errors.subdirector_id} required />
+                    <Select id="subdirector_id" items={subdirectores} bind:selectedValue={$form.subdirector_id} error={errors.subdirector_id} autocomplete="off" placeholder="Seleccione una subdirector" required />
                 </div>
 
                 <div class="mt-4">
                     <Label required class="mb-4" labelFor="dinamizador_sennova_id" value="Dinamizador SENNOVA" />
-                    <DynamicList id="dinamizador_sennova_id" bind:value={$form.dinamizador_sennova_id} routeWebApi={route('web-api.users', 'dinamizador')} placeholder="Busque por el nombre de subdirector" message={errors.dinamizador_sennova_id} required />
+                    <Select id="dinamizador_sennova_id" items={dinamizadoresSennova} bind:selectedValue={$form.dinamizador_sennova_id} error={errors.dinamizador_sennova_id} autocomplete="off" placeholder="Seleccione una dinamizador SENNOVA" required />
                 </div>
             </fieldset>
             <div class="shadow-inner bg-violet-200 border-violet-400 bottom-0 flex items-center justify-between mt-14 px-8 py-4 sticky">
